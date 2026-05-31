@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master Resource Guide — 135-Day AI/ML Roadmap</title>
+<meta name="description" content="Master resource guide for the 135-Day AI/ML Roadmap. Curated lists of high-quality free videos, tutorials, courses, books, papers, and docs for every week.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d0f14'/><text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'>AI</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0d0f14;
+  --bg2: #141720;
+  --bg3: #1c2030;
+  --card: #1e2235;
+  --border: #2a3050;
+  --border2: #353b65;
+  --text: #e8ecf5;
+  --muted: #7a84a0;
+  --dim: #2e3556;
+  --w1:  #4ade80;
+  --w2:  #34d399;
+  --w3:  #2dd4bf;
+  --w4:  #38bdf8;
+  --w5:  #818cf8;
+  --w6:  #a78bfa;
+  --w7:  #c084fc;
+  --w8:  #e879f9;
+  --w9:  #fb7185;
+  --w10: #f97316;
+  --w11: #facc15;
+  --w12: #a3e635;
+  --w13: #22d3ee;
+  --w14: #e56b8c;
+  --yt:    #ff4444;
+  --web:   #3b82f6;
+  --paper: #8b5cf6;
+  --book:  #f59e0b;
+  --course:#10b981;
+  --github:#9ca3af;
+  --doc:   #06b6d4;
+  --blog:  #ec4899;
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 80px 20px 60px;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 40%, rgba(99,102,241,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(236,72,153,.10) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 50% 0%, rgba(56,189,248,.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  border: 1px solid var(--border2);
+  padding: 4px 14px;
+  border-radius: 99px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #fff 30%, #a78bfa 70%, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+}
+.hero p {
+  max-width: 600px;
+  margin: 0 auto 28px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.legend {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: .5px;
+  color: var(--muted);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+.legend-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.week-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(9,9,15,.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+.week-nav::-webkit-scrollbar { display: none; }
+.nav-pills {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+.nav-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 99px;
+  border: 1px solid var(--border2);
+  background: var(--bg3);
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.nav-pill:hover { color: #fff; border-color: currentColor; }
+.week-section {
+  padding: 48px 0 20px;
+}
+.week-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.week-badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.week-title-block h2 {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -.5px;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.week-sub {
+  font-size: 12.5px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+.week-days-tag {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 99px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.day-group {
+  margin-bottom: 32px;
+}
+.day-group-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--dim);
+  text-transform: uppercase;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+.res-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
+}
+.res-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 13px 15px;
+  text-decoration: none;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+}
+.res-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.res-card:hover { border-color: var(--border2); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,.3); }
+.res-card:hover::before { opacity: 1; }
+.res-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.res-body { flex: 1; min-width: 0; }
+.res-type {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+}
+.res-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 3px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.res-desc {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.res-why {
+  font-size: 10.5px;
+  color: #4ade80;
+  margin-top: 5px;
+  font-style: italic;
+}
+.type-yt    { background: rgba(255,68,68,.15);   color: var(--yt);    }
+.type-web   { background: rgba(59,130,246,.15);  color: var(--web);   }
+.type-paper { background: rgba(139,92,246,.15);  color: var(--paper); }
+.type-book  { background: rgba(245,158,11,.15);  color: var(--book);  }
+.type-course{ background: rgba(16,185,129,.15);  color: var(--course);}
+.type-github{ background: rgba(156,163,175,.15); color: var(--github);}
+.type-doc   { background: rgba(6,182,212,.15);   color: var(--doc);   }
+.type-blog  { background: rgba(236,72,153,.15);  color: var(--blog);  }
+.type-yt-card::before    { background: linear-gradient(90deg, var(--yt), transparent); }
+.type-web-card::before   { background: linear-gradient(90deg, var(--web), transparent); }
+.type-paper-card::before { background: linear-gradient(90deg, var(--paper), transparent); }
+.type-book-card::before  { background: linear-gradient(90deg, var(--book), transparent); }
+.type-course-card::before{ background: linear-gradient(90deg, var(--course), transparent); }
+.type-github-card::before{ background: linear-gradient(90deg, var(--github), transparent); }
+.type-doc-card::before   { background: linear-gradient(90deg, var(--doc), transparent); }
+.type-blog-card::before  { background: linear-gradient(90deg, var(--blog), transparent); }
+.must-banner {
+  background: rgba(250,204,21,.04);
+  border: 1px solid rgba(250,204,21,.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: #fbbf24;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+@media(max-width: 640px) {
+  .res-grid { grid-template-columns: 1fr; }
+  .week-header { flex-wrap: wrap; }
+  .week-days-tag { margin-left: 0; }
+}
+
+/* ── FOCUS VISIBLE ── */
+:focus-visible{outline:2px solid #4fd1a5;outline-offset:2px;border-radius:4px;}
+
+/* ── DARK/LIGHT MODE ── */
+[data-theme="light"]:root,[data-theme="light"]{
+  --bg:#f5f7fa; --bg2:#eaedf3; --bg3:#dde2ee; --card:#ffffff;
+  --border:#c8cedc; --border2:#b0b7c6; --text:#1a1f35; --muted:#6b7590;
+}
+.theme-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--font-mono);font-size:11px;padding:3px 9px;border-radius:20px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.theme-btn:hover{border-color:#6c8cff;color:#6c8cff}
+
+.nav-pills-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1.5rem 2rem 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+body {
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.hero, .week-nav, .week-section, .res-card {
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+</style>
+</head>
+<body>
+
+<div class="nav-pills-header">
+  <a href="roadmap.html" class="nav-pill" aria-label="Go to Master Roadmap">🗺 Roadmap</a>
+  <a href="dashboard.html" class="nav-pill" aria-label="Open Progress Dashboard">📊 Dashboard</a>
+  <button class="theme-btn" onclick="toggleTheme()" id="theme-btn" aria-label="Toggle dark/light theme">☀️ Light</button>
+</div>
+
+<div class="hero">
+  <div class="hero-tag">135-Day AI/ML Roadmap</div>
+  <h1>Complete Resource Guide<br>All 14 Weeks</h1>
+  <p>Curated, verified, high-quality free resources for every week — YouTube, papers, docs, books, GitHub repos. No dead links, no filler.</p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--yt)"></div>YouTube Video</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--web)"></div>Website/Tutorial</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--course)"></div>Free Course</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--book)"></div>Free Book/PDF</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--paper)"></div>Research Paper</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--github)"></div>GitHub Repo</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--doc)"></div>Official Docs</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--blog)"></div>Blog Post</div>
+  </div>
+</div>
+
+<div class="week-nav">
+  <div class="nav-pills">
+    <a class="nav-pill" href="#w1"  style="color:var(--w1)">W1 Python</a>
+    <a class="nav-pill" href="#w2"  style="color:var(--w2)">W2 Pandas+SQL</a>
+    <a class="nav-pill" href="#w3"  style="color:var(--w3)">W3 Preprocessing</a>
+    <a class="nav-pill" href="#w4"  style="color:var(--w4)">W4 Math</a>
+    <a class="nav-pill" href="#w5"  style="color:var(--w5)">W5 ML Fundamentals</a>
+    <a class="nav-pill" href="#w6"  style="color:var(--w6)">W6 Regression</a>
+    <a class="nav-pill" href="#w7"  style="color:var(--w7)">W7 Classification</a>
+    <a class="nav-pill" href="#w8"  style="color:var(--w8)">W8 Neural Networks</a>
+    <a class="nav-pill" href="#w9"  style="color:var(--w9)">W9 CNNs</a>
+    <a class="nav-pill" href="#w10" style="color:var(--w10)">W10 RNNs</a>
+    <a class="nav-pill" href="#w11" style="color:var(--w11)">W11 GANs</a>
+    <a class="nav-pill" href="#w12" style="color:var(--w12)">W12 Attention</a>
+    <a class="nav-pill" href="#w13" style="color:var(--w13)">W13 NLP</a>
+    <a class="nav-pill" href="#w14" style="color:var(--w14)">W14 Transformers</a>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="week-section" id="w1">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(74,222,128,.12);color:var(--w1)">WEEK 1</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w1)">Python Foundations</h2>
+      <div class="week-sub">Days 1&#8211;7 &middot; Variables, Control Flow, Functions, OOP, File I/O, Modules</div>
+    </div>
+    <div class="week-days-tag">Days 1&#8211;7</div>
+  </div>
+  <div class="must-banner">&#9733; Must-watch first: Corey Schafer's Python Playlist &#8212; best structured Python course on YouTube, free.</div>
+  <div class="day-group">
+    <div class="day-group-label">Core Tutorials (Start Here)</div>
+    <div class="res-grid">
+      <a class="res-card type-yt-card" href="https://www.youtube.com/playlist?list=PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU" target="_blank">
+        <div class="res-icon type-yt">&#9654;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--yt)">YouTube Playlist</div>
+          <span class="res-title">Corey Schafer &#8212; Python Beginner Tutorials</span>
+          <div class="res-desc">16 videos covering variables, strings, lists, dicts, functions, OOP, file I/O. The gold standard for learning Python fundamentals.</div>
+          <div class="res-why">&#10026; Best for: Days 1&#8211;6. Watch 2&#8211;3 videos/day.</div>
+        </div>
+      </a>
+      <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=rfscVS0vtbw" target="_blank">
+        <div class="res-icon type-yt">&#9654;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--yt)">YouTube &middot; freeCodeCamp</div>
+          <span class="res-title">Learn Python &#8212; Full Course for Beginners (4.5 hrs)</span>
+          <div class="res-desc">Complete Python course in one video. Covers everything from print() to OOP. Perfect as a reference while coding along.</div>
+          <div class="res-why">&#10026; Best for: Day 1&#8211;7 side reference.</div>
+        </div>
+      </a>
+      <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=_uQrJ0TkZlc" target="_blank">
+        <div class="res-icon type-yt">&#9654;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--yt)">YouTube &middot; Programming with Mosh</div>
+          <span class="res-title">Python Tutorial for Beginners (6 hrs)</span>
+          <div class="res-desc">Professional-quality production. Excellent for visual learners. Covers real-world examples including projects.</div>
+          <div class="res-why">&#10026; Best for: Visual learners on Days 4&#8211;7.</div>
+        </div>
+      </a>
+      <a class="res-card type-doc-card" href="https://docs.python.org/3/tutorial/" target="_blank">
+        <div class="res-icon type-doc">&#128214;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--doc)">Official Docs</div>
+          <span class="res-title">Python 3 Official Tutorial</span>
+          <div class="res-desc">The authoritative, always-updated reference. Essential for understanding exact behavior of built-in functions, syntax, and modules.</div>
+          <div class="res-why">&#10026; Best for: Whenever you're unsure about exact syntax.</div>
+        </div>
+      </a>
+      <a class="res-card type-web-card" href="https://realpython.com/python-basics/" target="_blank">
+        <div class="res-icon type-web">&#127760;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--web)">Website</div>
+          <span class="res-title">Real Python &#8212; Python Basics</span>
+          <div class="res-desc">High-quality written tutorials with code examples. Excellent for topics like f-strings, list comprehensions, OOP. Each article is focused and practical.</div>
+          <div class="res-why">&#10026; Best for: Reading alongside coding. Bookmark &amp; revisit.</div>
+        </div>
+      </a>
+      <a class="res-card type-book-card" href="https://automatetheboringstuff.com/" target="_blank">
+        <div class="res-icon type-book">&#128215;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--book)">Free Book</div>
+          <span class="res-title">Automate the Boring Stuff with Python</span>
+          <div class="res-desc">Completely free online. Chapters 1&#8211;10 are perfect for Week 1. Focuses on real-world practical scripts &#8212; files, regex, web &#8212; exactly what ML engineers need.</div>
+          <div class="res-why">&#10026; Best for: Day 5&#8211;7 practical projects.</div>
+        </div>
+      </a>
+      <a class="res-card type-course-card" href="https://www.w3schools.com/python/" target="_blank">
+        <div class="res-icon type-course">&#127891;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--course)">Interactive</div>
+          <span class="res-title">W3Schools Python Tutorial</span>
+          <div class="res-desc">Interactive exercises with immediate feedback. Best quick-reference for syntax lookups. Has try-it-yourself for every concept.</div>
+          <div class="res-why">&#10026; Best for: Quick syntax checking while coding.</div>
+        </div>
+      </a>
+      <a class="res-card type-yt-card" href="https://www.youtube.com/playlist?list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc" target="_blank">
+        <div class="res-icon type-yt">&#9654;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--yt)">YouTube Playlist</div>
+          <span class="res-title">Corey Schafer &#8212; Python OOP Tutorials</span>
+          <div class="res-desc">6-video deep dive into classes, inheritance, properties, and dunder methods. The clearest OOP explanation on YouTube.</div>
+          <div class="res-why">&#10026; Best for: Day 6 (OOP). Watch all 6 videos.</div>
+        </div>
+      </a>
+      <a class="res-card type-github-card" href="https://github.com/30-seconds/30-seconds-of-python" target="_blank">
+        <div class="res-icon type-github">&#8999;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--github)">GitHub</div>
+          <span class="res-title">30 Seconds of Python</span>
+          <div class="res-desc">Short, focused Python code snippets for common operations. List flattening, dict merging, decorators. Use to see Pythonic solutions to problems.</div>
+          <div class="res-why">&#10026; Best for: Day 3&#8211;7 quick reference patterns.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="day-group">
+    <div class="day-group-label">Practice Platforms</div>
+    <div class="res-grid">
+      <a class="res-card type-course-card" href="https://www.hackerrank.com/domains/python" target="_blank">
+        <div class="res-icon type-course">&#128187;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--course)">Practice</div>
+          <span class="res-title">HackerRank &#8212; Python Practice</span>
+          <div class="res-desc">Graded Python problems from Easy to Hard. Start with "Introduction" section (Day 1&#8211;3), move to "Data Structures" (Day 2&#8211;3). Immediate feedback on correctness.</div>
+          <div class="res-why">&#10026; Best for: Daily coding exercise, 15 min/day.</div>
+        </div>
+      </a>
+      <a class="res-card type-course-card" href="https://exercism.org/tracks/python" target="_blank">
+        <div class="res-icon type-course">&#127959;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--course)">Practice</div>
+          <span class="res-title">Exercism &#8212; Python Track</span>
+          <div class="res-desc">100+ exercises with community mentoring. Unlike LeetCode, exercises are designed for language learning, not tricks. Great for building real fluency.</div>
+          <div class="res-why">&#10026; Best for: Day 4&#8211;7 deeper practice.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="week-section" id="w2">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(52,211,153,.12);color:var(--w2)">WEEK 2</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w2)">Pandas + SQL + Git</h2>
+      <div class="week-sub">Days 8&#8211;14 &middot; NumPy, Pandas, SQLite, Window Functions, Git/GitHub</div>
+    </div>
+    <div class="week-days-tag">Days 8&#8211;14</div>
+  </div>
+  <div class="day-group">
+    <div class="day-group-label">NumPy &amp; Pandas (Days 8&#8211;10)</div>
+    <div class="res-grid">
+      <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=GB9ByFAIAH4" target="_blank">
+        <div class="res-icon type-yt">&#9654;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--yt)">YouTube &middot; Keith Galli</div>
+          <span class="res-title">Complete Pandas Data Science Tutorial (2024 Updated)</span>
+          <div class="res-desc">Covers DataFrames, loc/iloc, merging, groupby, pivot tables, and integrates AI tools. Updated for Pandas 2.0. Best single Pandas video.</div>
+          <div class="res-why">&#10026; Best for: Days 8&#8211;9. Watch in full.</div>
+        </div>
+      </a>
+      <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=QUT1VHiLmmI" target="_blank">
+        <div class="res-icon type-yt">&#9654;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--yt)">YouTube &middot; freeCodeCamp</div>
+          <span class="res-title">NumPy Full Tutorial &#8212; All You Need to Know</span>
+          <div class="res-desc">Covers arrays, indexing, slicing, math operations, broadcasting. NumPy is the backbone of all ML &#8212; understanding it saves hours of debugging.</div>
+          <div class="res-why">&#10026; Best for: Day 8 (before Pandas).</div>
+        </div>
+      </a>
+      <a class="res-card type-doc-card" href="https://pandas.pydata.org/docs/user_guide/index.html" target="_blank">
+        <div class="res-icon type-doc">&#128214;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--doc)">Official Docs</div>
+          <span class="res-title">Pandas User Guide (Official)</span>
+          <div class="res-desc">The definitive reference. "10 minutes to pandas" page is a perfect quick-start. Always check here when a method behaves unexpectedly.</div>
+          <div class="res-why">&#10026; Best for: Reference while coding.</div>
+        </div>
+      </a>
+      <a class="res-card type-github-card" href="https://github.com/KeithGalli/complete-pandas-tutorial" target="_blank">
+        <div class="res-icon type-github">&#8999;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--github)">GitHub / Notebook</div>
+          <span class="res-title">Keith Galli &#8212; Complete Pandas Tutorial Notebook</span>
+          <div class="res-desc">The full Jupyter notebook from his video. Clone and run every cell locally. Best hands-on companion to his tutorial.</div>
+          <div class="res-why">&#10026; Best for: Coding along on Days 8&#8211;9.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="day-group">
+    <div class="day-group-label">SQL (Days 11&#8211;13)</div>
+    <div class="res-grid">
+      <a class="res-card type-yt-card" href="https://www.youtube.com/playlist?list=PLUaB-1hjhk8HTMlz-KcqgYD5RqKVY0m-A" target="_blank">
+        <div class="res-icon type-yt">&#9654;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--yt)">YouTube &middot; Alex The Analyst</div>
+          <span class="res-title">SQL Beginner to Advanced Full Playlist</span>
+          <div class="res-desc">Covers SELECT to window functions (ROW_NUMBER, RANK, DENSE_RANK), CTEs, temp tables, stored procedures. The most-recommended SQL course for data analysts.</div>
+          <div class="res-why">&#10026; Best for: Days 11&#8211;13. The complete SQL bootcamp.</div>
+        </div>
+      </a>
+      <a class="res-card type-course-card" href="https://sqlzoo.net/wiki/SQL_Tutorial" target="_blank">
+        <div class="res-icon type-course">&#128187;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--course)">Interactive Practice</div>
+          <span class="res-title">SQLZoo &#8212; Interactive SQL Tutorial</span>
+          <div class="res-desc">Practice SQL in the browser with real data. Progresses from SELECT to JOINs to aggregations. Immediate feedback. The best interactive SQL practice.</div>
+          <div class="res-why">&#10026; Best for: 20 min practice after each SQL video.</div>
+        </div>
+      </a>
+      <a class="res-card type-web-card" href="https://www.w3schools.com/sql/" target="_blank">
+        <div class="res-icon type-web">&#127760;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--web)">Reference</div>
+          <span class="res-title">W3Schools SQL Reference</span>
+          <div class="res-desc">Quick syntax lookup for any SQL function. HAVING vs WHERE, GROUP BY, JOINs with examples. Fastest reference while writing queries.</div>
+          <div class="res-why">&#10026; Best for: Quick lookups during Day 11&#8211;13 tasks.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="day-group">
+    <div class="day-group-label">Git &amp; GitHub (Day 13 onwards &#8212; use all week)</div>
+    <div class="res-grid">
+      <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=RGOj5yH7evk" target="_blank">
+        <div class="res-icon type-yt">&#9654;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--yt)">YouTube &middot; freeCodeCamp</div>
+          <span class="res-title">Git and GitHub Crash Course (1 hr)</span>
+          <div class="res-desc">Covers init, add, commit, push, pull, branching, merging, GitHub PRs. The only Git video you need to start. Covers exactly what beginners need.</div>
+          <div class="res-why">&#10026; Best for: Day 13. Watch once, then commit daily.</div>
+        </div>
+      </a>
+      <a class="res-card type-web-card" href="https://learngitbranching.js.org/" target="_blank">
+        <div class="res-icon type-web">&#127760;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--web)">Interactive Visual</div>
+          <span class="res-title">Learn Git Branching &#8212; Visual &amp; Interactive</span>
+          <div class="res-desc">The best way to understand branching, rebasing, cherry-pick. Visualizes what each Git command does to the commit tree. No other tool comes close for this.</div>
+          <div class="res-why">&#10026; Best for: Day 13 after the crash course.</div>
+        </div>
+      </a>
+      <a class="res-card type-doc-card" href="https://git-scm.com/book/en/v2" target="_blank">
+        <div class="res-icon type-doc">&#128214;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--doc)">Free Book</div>
+          <span class="res-title">Pro Git Book (Free Online)</span>
+          <div class="res-desc">The definitive Git book, free online. Read Ch 1&#8211;3 for the concepts you'll use daily. Ch 6 covers GitHub workflows for collaborative projects.</div>
+          <div class="res-why">&#10026; Best for: Week 2 onward, read Ch 1&#8211;3 over time.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="week-section" id="w3">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(45,212,191,.12);color:var(--w3)">WEEK 3</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w3)">Preprocessing + Visualization</h2>
+      <div class="week-sub">Days 15&#8211;21 &middot; Missing values, Scaling, Encoding, EDA, Matplotlib, Seaborn</div>
+    </div>
+    <div class="week-days-tag">Days 15&#8211;21</div>
+  </div>
+  <div class="res-grid">
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=ysF3K0JVWtk" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Krish Naik</div>
+        <span class="res-title">Complete EDA Exploratory Data Analysis</span>
+        <div class="res-desc">Comprehensive walkthrough of EDA &#8212; missing values, distributions, outlier detection, correlation heatmaps &#8212; with Pandas &amp; Seaborn.</div>
+        <div class="res-why">&#10026; Best for: Day 15&#8211;16 EDA foundation.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/playlist?list=PL-osiE80TeTvipOqomVEeZ1HRrcEvtZB_" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Corey Schafer</div>
+        <span class="res-title">Matplotlib Tutorial Series (Full Playlist)</span>
+        <div class="res-desc">9-video playlist. Covers figure/axes hierarchy, bar/line/scatter/pie charts, subplots, style sheets, saving figures. Best Matplotlib tutorial on YouTube.</div>
+        <div class="res-why">&#10026; Best for: Day 19. Watch videos 1&#8211;5.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=6GUZXDef2U0" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Kimberly Fessel</div>
+        <span class="res-title">Seaborn Tutorial &#8212; Full Beginner to Intermediate</span>
+        <div class="res-desc">Covers all Seaborn plot types: distplot, pairplot, heatmap, boxplot, violinplot with real datasets. Clear explanations of when to use each type.</div>
+        <div class="res-why">&#10026; Best for: Day 20. Complete reference.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://seaborn.pydata.org/tutorial.html" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Docs</div>
+        <span class="res-title">Seaborn Official Tutorial &amp; Gallery</span>
+        <div class="res-desc">Seaborn's own tutorial is exceptionally well-written. The gallery shows 50+ chart types with code. Start with "Statistical data visualization" overview.</div>
+        <div class="res-why">&#10026; Best for: Day 20 reference &amp; code snippets.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://scikit-learn.org/stable/modules/preprocessing.html" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Docs</div>
+        <span class="res-title">Scikit-learn Preprocessing Guide</span>
+        <div class="res-desc">Covers StandardScaler, MinMaxScaler, RobustScaler, LabelEncoder, OneHotEncoder with examples. The authoritative reference for all sklearn preprocessing APIs.</div>
+        <div class="res-why">&#10026; Best for: Days 16&#8211;17. Read alongside coding.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://pandas.pydata.org/docs/user_guide/missing_data.html" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Guide</div>
+        <span class="res-title">Pandas Missing Data User Guide</span>
+        <div class="res-desc">Official guide for dropna(), fillna(), interpolate(). Explains NA propagation rules which trip up many beginners with unexpected NaN results.</div>
+        <div class="res-why">&#10026; Best for: Day 15 missing values.</div>
+      </div>
+    </a>
+    <a class="res-card type-github-card" href="https://github.com/rougier/matplotlib-cheatsheet" target="_blank">
+      <div class="res-icon type-github">&#8999;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--github)">Cheatsheet</div>
+        <span class="res-title">Matplotlib Cheatsheet (printable PDF)</span>
+        <div class="res-desc">Single-page visual reference for all major Matplotlib elements &#8212; axes, ticks, labels, legend, colorbar, figure size. Print and keep at your desk.</div>
+        <div class="res-why">&#10026; Best for: Day 19 quick reference.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="week-section" id="w4">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(56,189,248,.12);color:var(--w4)">WEEK 4</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w4)">Math for AI/ML</h2>
+      <div class="week-sub">Days 22&#8211;30 &middot; Statistics, Probability, Linear Algebra, Calculus, Optimization</div>
+    </div>
+    <div class="week-days-tag">Days 22&#8211;30</div>
+  </div>
+  <div class="must-banner">&#9733; This week is foundational. Do NOT skip 3Blue1Brown videos &#8212; they create visual intuition that prevents months of confusion later.</div>
+  <div class="res-grid">
+    <a class="res-card type-yt-card" href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; 3Blue1Brown</div>
+        <span class="res-title">Essence of Linear Algebra (16 videos)</span>
+        <div class="res-desc">The best explanation of vectors, matrices, determinants, eigenvalues ever created. Visual animations make abstract concepts click permanently. Watch before any ML.</div>
+        <div class="res-why">&#10026; Best for: Day 26 (Linear Algebra). Essential watching.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; 3Blue1Brown</div>
+        <span class="res-title">Essence of Calculus (11 videos)</span>
+        <div class="res-desc">Visual intuition for derivatives, chain rule, integrals. Chain rule video is critical for understanding backpropagation. Watch Chapter 4 (chain rule) multiple times.</div>
+        <div class="res-why">&#10026; Best for: Day 28 (Calculus). Watch Ch 1&#8211;5 at minimum.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/playlist?list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; StatQuest (Josh Starmer)</div>
+        <span class="res-title">StatQuest &#8212; Statistics Fundamentals Playlist</span>
+        <div class="res-desc">Covers probability distributions, p-values, hypothesis testing, Bayes theorem, correlation. Josh Starmer's "BAM!" teaching style makes stats click for everyone.</div>
+        <div class="res-why">&#10026; Best for: Days 22&#8211;25 (Stats &amp; Probability).</div>
+      </div>
+    </a>
+    <a class="res-card type-course-card" href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/" target="_blank">
+      <div class="res-icon type-course">&#127891;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--course)">MIT OCW Free Course</div>
+        <span class="res-title">MIT 18.06 Linear Algebra &#8212; Gilbert Strang</span>
+        <div class="res-desc">The legendary Gilbert Strang lectures. 35 video lectures + problem sets. Most popular OCW course ever (10M+ views). Watch Lecture 1 before anything else.</div>
+        <div class="res-why">&#10026; Best for: Deep dives on Day 26&#8211;27. Bookmark and return to.</div>
+      </div>
+    </a>
+    <a class="res-card type-course-card" href="https://www.khanacademy.org/math/statistics-probability" target="_blank">
+      <div class="res-icon type-course">&#127891;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--course)">Khan Academy (Free)</div>
+        <span class="res-title">Statistics and Probability &#8212; Khan Academy</span>
+        <div class="res-desc">Complete interactive course with exercises. Great for probability basics (Day 23), conditional probability, Bayes theorem. Exercises give immediate correctness feedback.</div>
+        <div class="res-why">&#10026; Best for: Days 22&#8211;24 practice exercises.</div>
+      </div>
+    </a>
+    <a class="res-card type-book-card" href="https://mml-book.github.io/" target="_blank">
+      <div class="res-icon type-book">&#128215;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--book)">Free PDF Book</div>
+        <span class="res-title">Mathematics for Machine Learning (Deisenroth et al.)</span>
+        <div class="res-desc">Free PDF from Cambridge. Best book that ties linear algebra, calculus, and probability directly to ML algorithms. Ch 2 (Linear Algebra) and Ch 5 (Vector Calculus) are essential.</div>
+        <div class="res-why">&#10026; Best for: Week 4 companion reading, reference throughout course.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=IHZwWFHWa-w" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; 3Blue1Brown</div>
+        <span class="res-title">Gradient Descent &#8212; How Neural Networks Learn</span>
+        <div class="res-desc">Visual explanation of gradient descent in the context of neural networks. Shows loss landscape, saddle points, learning rate. Links calculus to ML.</div>
+        <div class="res-why">&#10026; Best for: Day 29 (Optimization). Watch before gradient descent code.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; 3Blue1Brown</div>
+        <span class="res-title">But What is a Neural Network? (4-part series)</span>
+        <div class="res-desc">The famous 4-video series: neurons, gradient descent, backpropagation. The #1 resource to watch before Week 8 deep learning. Watch now for early intuition.</div>
+        <div class="res-why">&#10026; Best for: End of Week 4 preview. Build intuition early.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="week-section" id="w5">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(129,140,248,.12);color:var(--w5)">WEEK 5</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w5)">ML Fundamentals</h2>
+      <div class="week-sub">Days 31&#8211;37 &middot; Supervised/Unsupervised, Train/Test Split, Metrics, Cross-validation, Pipelines</div>
+    </div>
+    <div class="week-days-tag">Days 31&#8211;37</div>
+  </div>
+  <div class="res-grid">
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=Gv9_4yMHFhI&list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; StatQuest</div>
+        <span class="res-title">StatQuest Machine Learning Playlist</span>
+        <div class="res-desc">Covers bias-variance tradeoff, cross-validation, confusion matrix, ROC/AUC, precision-recall with visual BAM moments. Essential complement to sklearn code.</div>
+        <div class="res-why">&#10026; Best for: Days 31&#8211;36 concept reinforcement.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://scikit-learn.org/stable/getting_started.html" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Tutorial</div>
+        <span class="res-title">Scikit-learn Getting Started + User Guide</span>
+        <div class="res-desc">Official sklearn tutorials covering estimators, transformers, pipelines, model selection. The "Choose the right estimator" flowchart is bookmarkable for the entire course.</div>
+        <div class="res-why">&#10026; Best for: Days 31&#8211;37, permanent reference.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=fwY9Qv96DJY" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Codebasics</div>
+        <span class="res-title">Train Test Split &amp; Cross Validation in Python</span>
+        <div class="res-desc">Clear practical tutorial on train/test/validation splits, stratification, and k-fold. Shows the data leakage mistake and how to avoid it with pipelines.</div>
+        <div class="res-why">&#10026; Best for: Day 31&#8211;35 validation strategy.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=85dtiMz9tSo" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; StatQuest</div>
+        <span class="res-title">ROC and AUC, Clearly Explained!</span>
+        <div class="res-desc">The clearest explanation of ROC curves, AUC, and when to use them vs precision-recall. Josh's visual approach makes this permanently memorable.</div>
+        <div class="res-why">&#10026; Best for: Day 33 classification metrics.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=Yw3D5fTCGk4" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Codebasics</div>
+        <span class="res-title">Sklearn Pipeline Tutorial</span>
+        <div class="res-desc">Builds a full sklearn Pipeline with ColumnTransformer, StandardScaler, OneHotEncoder, and a model. Shows how to prevent data leakage with pipelines properly.</div>
+        <div class="res-why">&#10026; Best for: Day 36 Pipeline mastery.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=TJveOYsK6MY" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Codebasics</div>
+        <span class="res-title">Hyperparameter Tuning GridSearchCV vs RandomizedSearchCV</span>
+        <div class="res-desc">Practical comparison of both tuning strategies with code. Shows how to read results and pick the best model. Real dataset example.</div>
+        <div class="res-why">&#10026; Best for: Day 37 capstone optimization.</div>
+      </div>
+    </a>
+    <a class="res-card type-book-card" href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/" target="_blank">
+      <div class="res-icon type-book">&#128215;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--book)">Book (Notebooks Free)</div>
+        <span class="res-title">Hands-On ML with Scikit-Learn, Keras &amp; TensorFlow (Geron)</span>
+        <div class="res-desc">The #1 ML book. Chapters 1&#8211;4 are directly relevant to Week 5. All code notebooks are free on GitHub. Even without the book, the notebooks are gold.</div>
+        <div class="res-why">&#10026; Best for: Weeks 5&#8211;8 companion, notebooks always free.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="week-section" id="w6">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(167,139,250,.12);color:var(--w6)">WEEK 6</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w6)">Linear &amp; Polynomial Regression, Regularization, Metrics, SVR</h2>
+      <div class="week-sub">Days 38&#8211;44 &middot; OLS, Ridge/Lasso, Log Loss, GaussianNB, K-Nearest Neighbours</div>
+    </div>
+    <div class="week-days-tag">Days 38&#8211;44</div>
+  </div>
+  <div class="res-grid">
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=nk2CQITm_eo" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; StatQuest</div>
+        <span class="res-title">Linear Regression, Clearly Explained!</span>
+        <div class="res-desc">Visual derivation of OLS from scratch. Why we minimize sum of squared residuals, how R&sup2; works, and what assumptions are being made. Best intro before coding.</div>
+        <div class="res-why">&#10026; Best for: Day 38 theory foundation.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=yIYKR4sgzI8" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; StatQuest</div>
+        <span class="res-title">Logistic Regression, Clearly Explained!</span>
+        <div class="res-desc">Explains sigmoid, log-odds, log-loss from first principles. Separate video on logistic regression in sklearn. The most-cited statistics YouTube video for logistic regression.</div>
+        <div class="res-why">&#10026; Best for: Day 39&#8211;40 Logistic Regression theory.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=H3EjBqoLk4I" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; StatQuest</div>
+        <span class="res-title">Regularization Part 1 &#8212; Ridge Regression</span>
+        <div class="res-desc">Ridge vs Lasso from a pure statistics perspective. Shows exactly how L2 penalty shrinks coefficients and why it doesn't do feature selection.</div>
+        <div class="res-why">&#10026; Best for: Day 41 Ridge/Lasso.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=NGf0voTMlcs" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; StatQuest</div>
+        <span class="res-title">Naive Bayes, Clearly Explained!</span>
+        <div class="res-desc">Explains how Bayes theorem applies to spam classification. Covers GaussianNB for continuous features, MultinomialNB for text. Extremely clear.</div>
+        <div class="res-why">&#10026; Best for: Day 40 Naive Bayes.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=HVXime0nQeI" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; StatQuest</div>
+        <span class="res-title">K-Nearest Neighbours, Clearly Explained</span>
+        <div class="res-desc">Visual explanation of KNN for classification and regression. Covers how to choose K, distance metrics, curse of dimensionality, when KNN fails.</div>
+        <div class="res-why">&#10026; Best for: Day 40 KNN.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=sDv4f4s2SB8" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Codebasics</div>
+        <span class="res-title">Linear Regression with Sklearn (Project-based)</span>
+        <div class="res-desc">Full project coding session: loading data, training sklearn LinearRegression, interpreting coefficients, evaluating with MSE/R&sup2;. Follow along and code.</div>
+        <div class="res-why">&#10026; Best for: Day 38&#8211;39 implementation.</div>
+      </div>
+    </a>
+    <a class="res-card type-blog-card" href="https://towardsdatascience.com/understanding-l1-and-l2-regularization-93918a5ac8d0" target="_blank">
+      <div class="res-icon type-blog">&#9997;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--blog)">Blog Post</div>
+        <span class="res-title">Understanding L1 and L2 Regularization (Towards DS)</span>
+        <div class="res-desc">Goes deeper than basic tutorials. Explains geometric interpretation of Ridge (circle constraint) and Lasso (diamond constraint) penalty regions with plots.</div>
+        <div class="res-why">&#10026; Best for: Day 41 advanced understanding.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="week-section" id="w7">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(192,132,252,.12);color:var(--w7)">WEEK 7</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w7)">Classification &#8212; SVM, Trees, Ensembles</h2>
+      <div class="week-sub">Days 45&#8211;51 &middot; SVM, Decision Trees, Random Forests, Gradient Boosting, XGBoost, SHAP</div>
+    </div>
+    <div class="week-days-tag">Days 45&#8211;51</div>
+  </div>
+  <div class="res-grid">
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=efR1C6CvhmE" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; StatQuest</div>
+        <span class="res-title">Support Vector Machines (SVM) &#8212; Main Ideas</span>
+        <div class="res-desc">Explains maximum margin, support vectors, soft margin, and the kernel trick visually. Includes a follow-up video on polynomial and RBF kernels &#8212; both essential.</div>
+        <div class="res-why">&#10026; Best for: Day 45 SVM. Watch all 3 SVM videos.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=_L39rN6gz7Y" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; StatQuest</div>
+        <span class="res-title">Decision Trees, Clearly Explained!</span>
+        <div class="res-desc">Visual derivation of Gini impurity, information gain, how splits are chosen. Shows the overfitting problem and why trees need pruning. Best DT explanation.</div>
+        <div class="res-why">&#10026; Best for: Day 46 Decision Trees.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=J4Wdy0Wc_xQ" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; StatQuest</div>
+        <span class="res-title">Random Forests, Clearly Explained!</span>
+        <div class="res-desc">Explains bagging, feature sampling, how RF reduces variance. Companion video on Random Forest feature importance is equally important for understanding how RF works.</div>
+        <div class="res-why">&#10026; Best for: Day 47 Random Forests.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=OtD8wVaFm6E" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; StatQuest</div>
+        <span class="res-title">Gradient Boosting, Clearly Explained! (Parts 1&#8211;4)</span>
+        <div class="res-desc">4-part series explaining gradient boosting from residuals to shrinkage to pruning. The most mathematical but clearest explanation on YouTube.</div>
+        <div class="res-why">&#10026; Best for: Day 48. Watch all 4 parts.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=GrJP9FLV3FE" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Codebasics</div>
+        <span class="res-title">XGBoost with Python scikit-learn &#8212; Full Tutorial</span>
+        <div class="res-desc">Practical XGBoost implementation with early stopping, feature importance, hyperparameter tuning on a real dataset. Includes Kaggle submission demo.</div>
+        <div class="res-why">&#10026; Best for: Day 48 XGBoost implementation.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=sMXZCUuuaKc" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Krish Naik</div>
+        <span class="res-title">SHAP Values &#8212; Explainability for ML Models</span>
+        <div class="res-desc">Practical guide to interpreting ML models with SHAP &#8212; waterfall plots, summary plots, feature importance. Real-world examples with sklearn models.</div>
+        <div class="res-why">&#10026; Best for: Day 50 SHAP explainability.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://xgboost.readthedocs.io/en/stable/tutorials/index.html" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Docs</div>
+        <span class="res-title">XGBoost Official Tutorials</span>
+        <div class="res-desc">Official XGBoost tutorials including "Introduction to Boosted Trees", parameters guide, and Python API. The intro tutorial explains reg_lambda, subsample, and colsample.</div>
+        <div class="res-why">&#10026; Best for: Day 48 parameter understanding.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="week-section" id="w8">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(232,121,249,.12);color:var(--w8)">WEEK 8</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w8)">Neural Networks &amp; Deep Learning</h2>
+      <div class="week-sub">Days 52&#8211;58 &middot; Perceptrons, Backpropagation, Activation Functions, Keras, TensorFlow</div>
+    </div>
+    <div class="week-days-tag">Days 52&#8211;58</div>
+  </div>
+  <div class="must-banner">&#9733; Watch 3Blue1Brown's Neural Network series (linked in Week 4) BEFORE coding anything in Week 8. It will save you hours of confusion.</div>
+  <div class="res-grid">
+    <a class="res-card type-yt-card" href="https://www.youtube.com/playlist?list=PLkDaE6sCZn6Ec-XTbcX1uRg2_u4xOEky0" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Andrew Ng / DeepLearning.AI</div>
+        <span class="res-title">Deep Learning Specialization &#8212; Neural Networks (free videos)</span>
+        <div class="res-desc">Andrew Ng's complete neural network course. Week 1 videos on forward/backward propagation are the clearest mathematical derivation of backprop anywhere.</div>
+        <div class="res-why">&#10026; Best for: Days 52&#8211;54 theory. Audit for free on YouTube.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=Ilg3gGewQ5U" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; 3Blue1Brown</div>
+        <span class="res-title">Backpropagation Calculus (Video 4 of NN series)</span>
+        <div class="res-desc">The chain rule applied to a neural network, visualized. Shows exactly how gradients flow backward through layers with actual calculus. Watch this 3x.</div>
+        <div class="res-why">&#10026; Best for: Day 54 backpropagation deep dive.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=pAkos7t9-gA" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Andrej Karpathy</div>
+        <span class="res-title">The Spelled-Out Intro to Neural Networks &amp; Backprop: MicroGrad</span>
+        <div class="res-desc">Builds a neural network and autograd engine from scratch in 2.5 hours. The most thorough single video for truly understanding what PyTorch does under the hood.</div>
+        <div class="res-why">&#10026; Best for: Day 53&#8211;54 deep implementation understanding.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/playlist?list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Patrick Loeber</div>
+        <span class="res-title">PyTorch Tutorials &#8212; Complete Beginner Course</span>
+        <div class="res-desc">22 clean videos: Tensors &#8594; autograd &#8594; training loop &#8594; CNN &#8594; RNN &#8594; save/load models. Best structured PyTorch beginner course. No fluff.</div>
+        <div class="res-why">&#10026; Best for: Days 55&#8211;58 PyTorch implementation.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://www.tensorflow.org/tutorials" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Docs</div>
+        <span class="res-title">TensorFlow Official Tutorials</span>
+        <div class="res-desc">Official TF2/Keras tutorials. "Basic image classification" and "Basic text classification" are the exact projects for Days 56&#8211;57. All runnable in Colab.</div>
+        <div class="res-why">&#10026; Best for: Days 55&#8211;57 TF/Keras implementation.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://pytorch.org/tutorials/beginner/basics/intro.html" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Docs</div>
+        <span class="res-title">PyTorch &#8212; Learn the Basics (Official Tutorial)</span>
+        <div class="res-desc">Official 7-part walkthrough: Tensors, Datasets, DataLoader, Transforms, Building Models, Autograd, Training Loop. Each part has runnable code.</div>
+        <div class="res-why">&#10026; Best for: Day 55+ PyTorch foundation.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=VMj-3S1tku0" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Andrej Karpathy</div>
+        <span class="res-title">Neural Networks: Zero to Hero &#8212; Full Playlist</span>
+        <div class="res-desc">7-video series building GPT from scratch. Start with MicroGrad (video 1) and makemore (video 2). The most rigorous free deep learning course ever recorded.</div>
+        <div class="res-why">&#10026; Best for: Day 57&#8211;58 and as a reference through Weeks 9&#8211;14.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="week-section" id="w9">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(251,113,133,.12);color:var(--w9)">WEEK 9</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w9)">CNNs &amp; Computer Vision</h2>
+      <div class="week-sub">Days 59&#8211;65 &middot; Convolution, Pooling, BatchNorm, ResNet, Transfer Learning, Object Detection</div>
+    </div>
+    <div class="week-days-tag">Days 59&#8211;65</div>
+  </div>
+  <div class="must-banner">&#9733; Stanford CS231n notes are the gold standard. Read the notes alongside videos &#8212; the written explanations are exceptional.</div>
+  <div class="res-grid">
+    <a class="res-card type-course-card" href="https://cs231n.github.io/" target="_blank">
+      <div class="res-icon type-course">&#127891;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--course)">Stanford Course Notes (Free)</div>
+        <span class="res-title">Stanford CS231n &#8212; CNN Notes (Full Course Notes)</span>
+        <div class="res-desc">Complete written course notes with images, math, and code. Convolutional layers, pooling, BatchNorm, training tips, architectures. The definitive CV reference. Free online.</div>
+        <div class="res-why">&#10026; Best for: All of Week 9. Read alongside videos.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/playlist?list=PLoROMvodv4rOmsNzYBMe0gJY2XS8AQg16" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Stanford CS231n</div>
+        <span class="res-title">Stanford CS231n 2025 &#8212; Deep Learning for Computer Vision</span>
+        <div class="res-desc">Official Stanford lectures on YouTube. Lectures 5&#8211;9 cover ConvNets, training, architectures. Taught by world experts including Fei-Fei Li. Free full course.</div>
+        <div class="res-why">&#10026; Best for: Days 59&#8211;64 theoretical grounding.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=dXB-KQYkzNU" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Aladdin Persson</div>
+        <span class="res-title">Pytorch CNN Implementation from Scratch</span>
+        <div class="res-desc">Implements a CNN on MNIST from scratch in PyTorch with detailed explanations. Aladdin Persson's channel has the best practical PyTorch CNN implementations.</div>
+        <div class="res-why">&#10026; Best for: Day 59&#8211;60 CNN implementation.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=ACmydtFDTGs" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Aladdin Persson</div>
+        <span class="res-title">Transfer Learning &amp; Fine-Tuning in PyTorch (VGG/ResNet)</span>
+        <div class="res-desc">Practical guide to loading pretrained models, freezing layers, replacing the classifier head, and fine-tuning. Shows both feature extraction and fine-tuning strategies.</div>
+        <div class="res-why">&#10026; Best for: Day 63 Transfer Learning.</div>
+      </div>
+    </a>
+    <a class="res-card type-blog-card" href="https://distill.pub/2019/computing-receptive-fields/" target="_blank">
+      <div class="res-icon type-blog">&#9997;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--blog)">Distill.pub</div>
+        <span class="res-title">Computing Receptive Fields of CNNs &#8212; Distill</span>
+        <div class="res-desc">Beautiful interactive article explaining receptive fields &#8212; how large an input region each neuron "sees". Critical for understanding why deep CNNs can capture global structure.</div>
+        <div class="res-why">&#10026; Best for: Day 60 deeper understanding.</div>
+      </div>
+    </a>
+    <a class="res-card type-paper-card" href="https://arxiv.org/abs/1512.03385" target="_blank">
+      <div class="res-icon type-paper">&#128196;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--paper)">Research Paper</div>
+        <span class="res-title">Deep Residual Learning for Image Recognition (ResNet)</span>
+        <div class="res-desc">The original ResNet paper by He et al. Read sections 1&#8211;3 for the motivation and architecture. Understanding skip connections from the source paper is foundational.</div>
+        <div class="res-why">&#10026; Best for: Day 62 ResNet architecture.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Tutorial</div>
+        <span class="res-title">PyTorch Transfer Learning Tutorial (Official)</span>
+        <div class="res-desc">Official step-by-step guide for fine-tuning ResNet-18 and using it as a fixed feature extractor. Shows visualization of predictions and class activations.</div>
+        <div class="res-why">&#10026; Best for: Day 63 coding implementation.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="week-section" id="w10">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(249,115,22,.12);color:var(--w10)">WEEK 10</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w10)">RNNs, LSTMs &amp; Sequence Modeling</h2>
+      <div class="week-sub">Days 66&#8211;72 &middot; Vanishing Gradients, LSTM Gates, GRU, Time Series, Text Embedding</div>
+    </div>
+    <div class="week-days-tag">Days 66&#8211;72</div>
+  </div>
+  <div class="res-grid">
+    <a class="res-card type-blog-card" href="https://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank">
+      <div class="res-icon type-blog">&#9997;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--blog)">Andrej Karpathy Blog</div>
+        <span class="res-title">The Unreasonable Effectiveness of RNNs</span>
+        <div class="res-desc">Legendary blog post showing character-level RNNs generating Shakespeare, code, and Wikipedia text. The motivation for why we study RNNs. Essential reading.</div>
+        <div class="res-why">&#10026; Best for: Day 66 &#8212; read this FIRST for motivation.</div>
+      </div>
+    </a>
+    <a class="res-card type-blog-card" href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank">
+      <div class="res-icon type-blog">&#9997;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--blog)">Chris Olah Blog</div>
+        <span class="res-title">Understanding LSTMs &#8212; Christopher Olah</span>
+        <div class="res-desc">The most-read LSTM explanation ever written. Beautiful diagrams of cell state, forget gate, input gate, output gate. More than 2M readers. This is the definitive LSTM reference.</div>
+        <div class="res-why">&#10026; Best for: Day 67 LSTM. Read before writing any LSTM code.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=YCzL96nL7j0" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Andrej Karpathy</div>
+        <span class="res-title">Building makemore Part 3: Activations, Gradients, BatchNorm</span>
+        <div class="res-desc">From his Zero to Hero series &#8212; shows vanishing gradients in action with numerical experiments. Best practical demonstration of the gradient vanishing problem.</div>
+        <div class="res-why">&#10026; Best for: Day 66 vanishing gradients.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=AsNTP8Kwu80" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Aladdin Persson</div>
+        <span class="res-title">LSTM for Time Series in PyTorch (Full Tutorial)</span>
+        <div class="res-desc">Implements an LSTM for time series prediction from scratch in PyTorch. Covers data preparation, hidden state management, and multi-step forecasting.</div>
+        <div class="res-why">&#10026; Best for: Day 69 LSTM for time series.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=UNmqTiOnRfg" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Aladdin Persson</div>
+        <span class="res-title">GRU Implementation in PyTorch</span>
+        <div class="res-desc">Clean GRU implementation comparing it to LSTM. Shows when GRU outperforms LSTM (shorter sequences, less data) with code and results.</div>
+        <div class="res-why">&#10026; Best for: Day 68 GRU.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=jGwO_UgTS7I" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Stanford CS224n</div>
+        <span class="res-title">Stanford CS224n &#8212; NLP with Deep Learning: RNNs &amp; LSTMs</span>
+        <div class="res-desc">Stanford NLP lecture covering RNNs, LSTMs, GRUs mathematically. Better theoretical depth than typical tutorials. Watch after coding to reinforce understanding.</div>
+        <div class="res-why">&#10026; Best for: Day 67&#8211;68 theoretical depth.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://pytorch.org/docs/stable/generated/torch.nn.LSTM.html" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Docs</div>
+        <span class="res-title">PyTorch nn.LSTM Official Documentation</span>
+        <div class="res-desc">Essential reference for understanding input_size, hidden_size, num_layers, bidirectional, batch_first parameters and output shapes. Bookmark this for every LSTM project.</div>
+        <div class="res-why">&#10026; Best for: Days 67&#8211;72 implementation reference.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="week-section" id="w11">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(250,204,21,.12);color:var(--w11)">WEEK 11</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w11)">GANs &amp; Advanced PyTorch</h2>
+      <div class="week-sub">Days 73&#8211;79 &middot; Minimax, DCGAN, Training stability, Mode collapse, FID, GPU optimization</div>
+    </div>
+    <div class="week-days-tag">Days 73&#8211;79</div>
+  </div>
+  <div class="res-grid">
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=OljTVUVzPpM" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Aladdin Persson</div>
+        <span class="res-title">GAN Implementation from Scratch in PyTorch</span>
+        <div class="res-desc">Builds a vanilla GAN on MNIST step-by-step. Covers generator and discriminator architecture, minimax loss, training loop, visualization. Best first GAN tutorial.</div>
+        <div class="res-why">&#10026; Best for: Day 73 first GAN implementation.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=D_Kn5p1FzTI" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Aladdin Persson</div>
+        <span class="res-title">DCGAN Implementation from Scratch (PyTorch)</span>
+        <div class="res-desc">Complete DCGAN implementation covering all paper details: strided convolutions, BatchNorm placement, LeakyReLU, weight initialization. Trains on CelebA.</div>
+        <div class="res-why">&#10026; Best for: Day 75 DCGAN.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Tutorial</div>
+        <span class="res-title">PyTorch Official DCGAN Faces Tutorial</span>
+        <div class="res-desc">Official PyTorch DCGAN tutorial using CelebA dataset. Thoroughly commented code with explanation of each architectural decision. The standard reference implementation.</div>
+        <div class="res-why">&#10026; Best for: Day 75 alongside Aladdin Persson video.</div>
+      </div>
+    </a>
+    <a class="res-card type-paper-card" href="https://arxiv.org/abs/1511.06434" target="_blank">
+      <div class="res-icon type-paper">&#128196;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--paper)">Original Paper</div>
+        <span class="res-title">DCGAN Paper &#8212; Radford et al. (2015)</span>
+        <div class="res-desc">The original DCGAN paper. Read Section 3 (architecture guidelines) and Section 4 (empirical evaluation). Understanding the paper helps you know which changes matter.</div>
+        <div class="res-why">&#10026; Best for: Day 75 architecture understanding.</div>
+      </div>
+    </a>
+    <a class="res-card type-blog-card" href="https://machinelearningmastery.com/practical-guide-to-gan-failure-modes/" target="_blank">
+      <div class="res-icon type-blog">&#9997;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--blog)">ML Mastery</div>
+        <span class="res-title">How to Identify and Diagnose GAN Failure Modes</span>
+        <div class="res-desc">Mode collapse, discriminator failure, generator convergence failure &#8212; with examples and diagnosis strategies. Essential practical reference when your GAN stops learning.</div>
+        <div class="res-why">&#10026; Best for: Day 74 + Day 79 debugging your GAN.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=5rNeu-Tq8Hg" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Aladdin Persson</div>
+        <span class="res-title">WGAN &#8212; Wasserstein GAN to Fix Training Stability</span>
+        <div class="res-desc">Explains why vanilla GANs have training instability and how Wasserstein distance fixes it. Implements WGAN-GP with gradient penalty. Modern standard for stable GAN training.</div>
+        <div class="res-why">&#10026; Best for: Day 76 training stability.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Docs</div>
+        <span class="res-title">PyTorch Profiler Tutorial (GPU Optimization)</span>
+        <div class="res-desc">Official tutorial on using PyTorch profiler to find bottlenecks, measure CUDA time, optimize GPU utilization. Covers torch.compile(), mixed precision training.</div>
+        <div class="res-why">&#10026; Best for: Day 78 GPU optimization.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="week-section" id="w12">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(163,230,53,.12);color:var(--w12)">WEEK 12</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w12)">Attention Mechanisms &amp; Image Captioning</h2>
+      <div class="week-sub">Days 80&#8211;86 &middot; Bahdanau/Luong Attention, Seq2Seq, BLEU, CNN+RNN captioning, Beam Search</div>
+    </div>
+    <div class="week-days-tag">Days 80&#8211;86</div>
+  </div>
+  <div class="res-grid">
+    <a class="res-card type-blog-card" href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/" target="_blank">
+      <div class="res-icon type-blog">&#9997;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--blog)">Jay Alammar Blog</div>
+        <span class="res-title">Visualizing Neural Machine Translation &#8212; Attention</span>
+        <div class="res-desc">Step-by-step animated visualization of how attention works in seq2seq translation. Every diagram is interactive. The best possible introduction to Bahdanau attention.</div>
+        <div class="res-why">&#10026; Best for: Day 80 &#8212; read this before any code.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=1TvLgVi71AY" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Aladdin Persson</div>
+        <span class="res-title">Sequence to Sequence (Encoder-Decoder) in PyTorch</span>
+        <div class="res-desc">Builds a seq2seq model with LSTM encoder-decoder for machine translation. Clean PyTorch implementation following Sutskever et al. paper closely.</div>
+        <div class="res-why">&#10026; Best for: Day 81 Seq2Seq implementation.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=EoGUlvhRYpk" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Aladdin Persson</div>
+        <span class="res-title">Attention in Seq2Seq PyTorch &#8212; Bahdanau &amp; Luong</span>
+        <div class="res-desc">Implements both Bahdanau (additive) and Luong (multiplicative/dot) attention mechanisms side by side. Shows how attention weights visualize what the model focuses on.</div>
+        <div class="res-why">&#10026; Best for: Day 80 attention implementation.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=SZorAJ4I-sA" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Andrej Karpathy</div>
+        <span class="res-title">Image Captioning Deep Visual-Semantic Alignments (Talk)</span>
+        <div class="res-desc">Karpathy's original talk on his image captioning research. Explains how CNN features align with RNN text generation. Foundational for understanding the CNN+RNN architecture.</div>
+        <div class="res-why">&#10026; Best for: Day 82 image captioning architecture.</div>
+      </div>
+    </a>
+    <a class="res-card type-github-card" href="https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning" target="_blank">
+      <div class="res-icon type-github">&#8999;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--github)">GitHub Tutorial</div>
+        <span class="res-title">PyTorch Image Captioning Tutorial (sgrvinod)</span>
+        <div class="res-desc">The most complete image captioning implementation on GitHub. Covers Show, Attend, and Tell with soft attention. Includes beam search, BLEU evaluation, full training code.</div>
+        <div class="res-why">&#10026; Best for: Days 82&#8211;85 capstone implementation guide.</div>
+      </div>
+    </a>
+    <a class="res-card type-paper-card" href="https://arxiv.org/abs/1409.0473" target="_blank">
+      <div class="res-icon type-paper">&#128196;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--paper)">Paper</div>
+        <span class="res-title">Neural Machine Translation by Jointly Learning to Align (Bahdanau)</span>
+        <div class="res-desc">The original Bahdanau attention paper. Section 3 (architecture) and Appendix A (full model description) are the most important. Read alongside Alammar's visualization.</div>
+        <div class="res-why">&#10026; Best for: Day 80 primary source.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://www.nltk.org/api/nltk.translate.bleu_score.html" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Docs</div>
+        <span class="res-title">NLTK BLEU Score Documentation</span>
+        <div class="res-desc">Official NLTK BLEU implementation docs. Explains corpus_bleu vs sentence_bleu, smoothing methods, and brevity penalty. Use alongside HuggingFace evaluate library.</div>
+        <div class="res-why">&#10026; Best for: Day 83 BLEU metric implementation.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="week-section" id="w13">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(34,211,238,.12);color:var(--w13)">WEEK 13</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w13)">Natural Language Processing</h2>
+      <div class="week-sub">Days 87&#8211;93 &middot; Tokenization, TF-IDF, LSA, Word2Vec, GloVe, spaCy, Sentiment Analysis</div>
+    </div>
+    <div class="week-days-tag">Days 87&#8211;93</div>
+  </div>
+  <div class="res-grid">
+    <a class="res-card type-course-card" href="https://huggingface.co/learn/nlp-course/chapter1/1" target="_blank">
+      <div class="res-icon type-course">&#127891;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--course)">Free Course</div>
+        <span class="res-title">HuggingFace NLP Course (Official, Free)</span>
+        <div class="res-desc">Chapters 1&#8211;3 cover tokenization, pipelines, and models. The best free NLP course &#8212; teaches you the pipeline approach used in production. Interactive exercises in browser.</div>
+        <div class="res-why">&#10026; Best for: Days 87&#8211;93 complete coverage.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=xvqsFTUsOmc" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Sentdex</div>
+        <span class="res-title">NLTK with Python &#8212; Natural Language Toolkit Tutorial</span>
+        <div class="res-desc">Comprehensive NLTK tutorial: tokenization, stopwords, stemming, lemmatization, POS tagging, named entity recognition. Covers every preprocessing step in Week 13.</div>
+        <div class="res-why">&#10026; Best for: Day 87&#8211;88 text preprocessing.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://spacy.io/usage/linguistic-features" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Docs</div>
+        <span class="res-title">spaCy Official Documentation &amp; Course</span>
+        <div class="res-desc">spaCy is faster and more production-ready than NLTK. Covers dependency parsing, NER, rule-based matching. The "spaCy 101" page is excellent. Free interactive course at spacy.io.</div>
+        <div class="res-why">&#10026; Best for: Days 87&#8211;88 production-level NLP.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=FLZvOKSCkxY&list=PLQVvvaa0QuDf2JswnfiGkliBInZnIC4HL" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Sentdex</div>
+        <span class="res-title">Word2Vec with Gensim &#8212; Word Embeddings Tutorial</span>
+        <div class="res-desc">Hands-on Word2Vec training with Gensim: similarity queries, analogy arithmetic (king - man + woman), visualizing embeddings with t-SNE. Best practical Word2Vec tutorial.</div>
+        <div class="res-why">&#10026; Best for: Day 90 Word2Vec.</div>
+      </div>
+    </a>
+    <a class="res-card type-blog-card" href="https://jalammar.github.io/illustrated-word2vec/" target="_blank">
+      <div class="res-icon type-blog">&#9997;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--blog)">Jay Alammar Blog</div>
+        <span class="res-title">The Illustrated Word2Vec</span>
+        <div class="res-desc">Animated visual walkthrough of Word2Vec skip-gram and CBOW, negative sampling, and why word vectors capture meaning. Read before writing any Word2Vec code.</div>
+        <div class="res-why">&#10026; Best for: Day 90 intuition before implementation.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=viZrOnJclY0" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Codebasics</div>
+        <span class="res-title">TF-IDF in Python &#8212; Complete Tutorial with sklearn</span>
+        <div class="res-desc">Clear explanation of TF-IDF with sklearn TfidfVectorizer. Covers IDF smoothing, n-grams, sublinear_tf. Shows TF-IDF for document classification.</div>
+        <div class="res-why">&#10026; Best for: Day 88 TF-IDF.</div>
+      </div>
+    </a>
+    <a class="res-card type-course-card" href="https://course.spacy.io/" target="_blank">
+      <div class="res-icon type-course">&#127891;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--course)">Free Interactive Course</div>
+        <span class="res-title">spaCy Advanced NLP (free interactive course)</span>
+        <div class="res-desc">Free browser-based course by Ines Montani (spaCy creator). 5 chapters covering pipelines, NER, rule-based matching, training custom models. No setup needed.</div>
+        <div class="res-why">&#10026; Best for: Days 91&#8211;93 production NLP skills.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="week-section" id="w14">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(229,107,140,.12);color:var(--w14)">WEEK 14</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w14)">Transformers, BERT, HuggingFace</h2>
+      <div class="week-sub">Days 94&#8211;100 &middot; Attention math, QKV, Multi-Head, BERT, Tokenizers, LoRA, RAG</div>
+    </div>
+    <div class="week-days-tag">Days 94&#8211;100</div>
+  </div>
+  <div class="must-banner">&#9733; Week 14 is the most important week. These resources will make the difference between surface understanding and deep mastery.</div>
+  <div class="res-grid">
+    <a class="res-card type-blog-card" href="https://jalammar.github.io/illustrated-transformer/" target="_blank">
+      <div class="res-icon type-blog">&#9997;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--blog)">Jay Alammar Blog</div>
+        <span class="res-title">The Illustrated Transformer</span>
+        <div class="res-desc">The most-read explanation of transformers ever written. Every component (attention, positional encoding, encoder-decoder) animated. Read this FIRST before any video.</div>
+        <div class="res-why">&#10026; Best for: Day 94&#8211;95. Read before anything else this week.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=kCc8FmEb1nY" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; Andrej Karpathy</div>
+        <span class="res-title">Let's build GPT: from scratch, in code, spelled out.</span>
+        <div class="res-desc">2-hour masterclass building a GPT from the mathematical foundation up. Covers attention, masking, multi-head, positional encoding, layer norm. The single best transformer tutorial.</div>
+        <div class="res-why">&#10026; Best for: Days 94&#8211;96. Watch this twice.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=wjZofJX0v4M" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; 3Blue1Brown</div>
+        <span class="res-title">But What is a GPT? Visual Intro to Transformers</span>
+        <div class="res-desc">15-minute visual explanation of transformers with 3B1B's signature animations. Best overview for building intuition before diving into the math.</div>
+        <div class="res-why">&#10026; Best for: Day 94 opening intuition.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=eMlx5fFNoYc" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; 3Blue1Brown</div>
+        <span class="res-title">Attention in Transformers &#8212; Visually Explained</span>
+        <div class="res-desc">Deep dive into the Query-Key-Value mechanism with animations showing how attention scores are calculated. Essential companion video for Week 14.</div>
+        <div class="res-why">&#10026; Best for: Day 94 attention math visual.</div>
+      </div>
+    </a>
+    <a class="res-card type-blog-card" href="https://jalammar.github.io/illustrated-bert/" target="_blank">
+      <div class="res-icon type-blog">&#9997;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--blog)">Jay Alammar Blog</div>
+        <span class="res-title">The Illustrated BERT, ELMo, and Co.</span>
+        <div class="res-desc">Explains BERT's bidirectional architecture, MLM pre-training, NSP, and fine-tuning with clear diagrams. Read after the Illustrated Transformer.</div>
+        <div class="res-why">&#10026; Best for: Day 96 BERT theory.</div>
+      </div>
+    </a>
+    <a class="res-card type-course-card" href="https://huggingface.co/learn/nlp-course" target="_blank">
+      <div class="res-icon type-course">&#127891;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--course)">Free Course (HuggingFace)</div>
+        <span class="res-title">HuggingFace NLP Course &#8212; Chapters 1&#8211;7</span>
+        <div class="res-desc">Official HuggingFace course covering tokenizers, BERT fine-tuning, sequence classification, token classification, Q&A, summarization, translation. Free with interactive notebooks.</div>
+        <div class="res-why">&#10026; Best for: Days 97&#8211;100 practical HuggingFace skills.</div>
+      </div>
+    </a>
+    <a class="res-card type-paper-card" href="https://arxiv.org/abs/1706.03762" target="_blank">
+      <div class="res-icon type-paper">&#128196;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--paper)">Original Paper</div>
+        <span class="res-title">Attention Is All You Need (Vaswani et al., 2017)</span>
+        <div class="res-desc">The paper that changed AI. Read the abstract, Section 3 (model architecture), and Section 3.2 (scaled dot-product attention). Knowing this paper is an interview expectation.</div>
+        <div class="res-why">&#10026; Best for: Day 94&#8211;95 primary source.</div>
+      </div>
+    </a>
+    <a class="res-card type-blog-card" href="https://nlp.seas.harvard.edu/annotated-transformer/" target="_blank">
+      <div class="res-icon type-blog">&#9997;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--blog)">Harvard NLP</div>
+        <span class="res-title">The Annotated Transformer (Harvard NLP)</span>
+        <div class="res-desc">The full "Attention Is All You Need" paper annotated line-by-line with PyTorch implementation. Every equation has working code next to it. Best paper-to-code bridge available.</div>
+        <div class="res-why">&#10026; Best for: Day 95&#8211;96 implementation understanding.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=t509sv5MT0w" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; StatQuest</div>
+        <span class="res-title">LoRA (Low-Rank Adaptation) Clearly Explained!</span>
+        <div class="res-desc">Visual intuition for why low-rank matrices can approximate weight updates. Shows the math with clear diagrams. Essential before implementing LoRA.</div>
+        <div class="res-why">&#10026; Best for: Day 98 LoRA before implementation.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://huggingface.co/docs/peft/index" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Docs</div>
+        <span class="res-title">HuggingFace PEFT Library &#8212; Official Docs</span>
+        <div class="res-desc">Complete LoRA, QLoRA, prefix tuning documentation. LoraConfig parameters, get_peft_model, merge_and_unload &#8212; everything needed for Day 98 tasks.</div>
+        <div class="res-why">&#10026; Best for: Day 98 PEFT implementation.</div>
+      </div>
+    </a>
+    <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=tcqEUSNCn8I" target="_blank">
+      <div class="res-icon type-yt">&#9654;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--yt)">YouTube &middot; freeCodeCamp</div>
+        <span class="res-title">RAG from Scratch &#8212; Full Tutorial (LangChain + FAISS)</span>
+        <div class="res-desc">Builds a complete RAG system: document chunking, embedding with sentence-transformers, FAISS indexing, retrieval, and LLM answer generation.</div>
+        <div class="res-why">&#10026; Best for: Day 99 RAG pipeline.</div>
+      </div>
+    </a>
+    <a class="res-card type-doc-card" href="https://huggingface.co/docs/tokenizers/index" target="_blank">
+      <div class="res-icon type-doc">&#128214;</div>
+      <div class="res-body">
+        <div class="res-type" style="color:var(--doc)">Official Docs</div>
+        <span class="res-title">HuggingFace Tokenizers Library &#8212; Complete Guide</span>
+        <div class="res-desc">BPE, WordPiece, SentencePiece implementation guide. Training custom tokenizers, fast tokenizer API, adding special tokens. Direct reference for Day 97 tasks.</div>
+        <div class="res-why">&#10026; Best for: Day 97 tokenizer mechanics.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div style="height:80px"></div>
+</div>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (!el) return;
+    const offset = el.getBoundingClientRect().top + window.scrollY - 60;
+    window.scrollTo({ top: offset, behavior: 'smooth' });
+  });
+});
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') !== 'light';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  const btn = document.getElementById('theme-btn');
+  if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
+}
+(function() {
+  const saved = localStorage.getItem('theme');
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+})();
+
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('theme');
+  const btn = document.getElementById('theme-btn');
+  if (btn && saved === 'light') btn.textContent = '🌙 Dark';
+});
+</script>
+</body>
+</html>

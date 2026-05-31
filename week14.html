@@ -3204,8 +3204,9 @@ function checkPredict(id, answer) {
   
   // Normalize whitespace, casing, quotes, brackets, and punctuation
   const normalize = (str) => {
-    return str.replace(/\s+/g, ' ')
-              .replace(/['"()\['\]]/g, '')
+    return str.replace(/\\n/g, ' ')
+              .replace(/\s+/g, ' ')
+              .replace(/['"()\[\]]/g, '')
               .replace(/[,;]/g, ' ')
               .replace(/\s+/g, ' ')
               .trim()

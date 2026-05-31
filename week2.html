@@ -282,7 +282,7 @@ code{font-family:var(--font-mono);font-size:12px;background:var(--bg3);border:1p
 </style>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
-  mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
+  if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
 </script>
 </head>
 <body>
@@ -3074,18 +3074,28 @@ function toggleTheme() {
 
 function renderMermaid(dayId) {
   const run = () => {
+    if (typeof mermaid === 'undefined') {
+      setTimeout(run, 100);
+      return;
+    }
+    if (!window.mermaidInitialized) {
+      mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
+      window.mermaidInitialized = true;
+    }
     const sec = document.getElementById(dayId);
     if (!sec) return;
     const nodes = sec.querySelectorAll('.mermaid:not([data-rendered])');
     if (!nodes.length) return;
-    if (typeof mermaid !== 'undefined' && mermaid.run) {
+    if (mermaid.run) {
       mermaid.run({ nodes }).then(() => {
         nodes.forEach(n => n.setAttribute('data-rendered','1'));
-      }).catch(() => {});
+      }).catch((err) => { console.error('Mermaid render error:', err); });
+    } else if (mermaid.init) {
+      mermaid.init(undefined, nodes);
+      nodes.forEach(n => n.setAttribute('data-rendered','1'));
     }
   };
-  if (typeof mermaid !== 'undefined') { run(); }
-  else { window.addEventListener('load', run, { once: true }); }
+  run();
 }
 
 function toggleCheck(lbl) {

@@ -3773,8 +3773,8 @@ function checkPredict(id, answer) {
   
   // Normalize whitespace, casing, quotes, brackets, and punctuation
   const normalize = (str) => {
-    return str.replace(/\\n/g, ' ')
-              .replace(/\s+/g, ' ')
+    return String(str).replace(/\\n/g, ' ')
+              .replace(/\n/g, ' ')
               .replace(/['"()\[\]]/g, '')
               .replace(/[,;]/g, ' ')
               .replace(/\s+/g, ' ')
@@ -3818,6 +3818,19 @@ function toggleTheme() {
   if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
 }
 (function() {
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
 })();
@@ -3858,6 +3871,19 @@ window.addEventListener('DOMContentLoaded', () => {
   
   renderMermaid('day-' + DAYS[0]);
   
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   const btn = document.getElementById('theme-btn');
   if (btn && saved === 'light') btn.textContent = '🌙 Dark';

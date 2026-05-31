@@ -399,11 +399,11 @@ ul.prose-list li{font-size:14px;margin:.25rem 0;color:var(--text)}
 <h3 class="sh3">1. The Maximum Margin Classifier</h3>
 <div class="analogy">Do localities ko separate karna hai — Sharma ji ki colony aur Verma ji ki colony. Agar tum ek road banao jo dono colonies ke beech mein maximum distance rakhti ho, toh woh road SVM ka <em>decision boundary</em> hai. Aur us road ke sabse paas wale ghar — woh "support vectors" hain. Sirf woh ghar decision boundary decide karte hain — baaki sab irrelevant hain.</div>
 <div class="math-block">
-<span class="formula">Decision boundary: w·x + b = 0</span>
+<span class="formula">$$Decision boundary: w·x + b = 0$$</span>
 <span class="desc">w = weight vector (perpendicular to boundary), b = bias. Points above boundary: w·x + b &gt; 0 (class +1). Below: class -1.</span>
-<span class="formula">Margin = 2 / ||w||</span>
+<span class="formula">$$Margin = 2 / ||w||$$</span>
 <span class="desc">We maximise margin ↔ minimise ||w||². Constrained: yᵢ(w·xᵢ + b) ≥ 1 for all points.</span>
-<span class="formula">Objective: min ½||w||² subject to yᵢ(w·xᵢ + b) ≥ 1</span>
+<span class="formula">$$Objective: min ½||w||² subject to yᵢ(w·xᵢ + b) ≥ 1$$</span>
 <span class="desc">This is a quadratic programming problem. Solved via Lagrange duality → support vectors are points where constraint is active (= 1).</span>
 </div>
 <div class="mermaid">
@@ -640,12 +640,7 @@ grid.fit(X_tr, y_train)
 <div class="rc-sub">Stanford's deep treatment of SVM loss (hinge loss) with visuals.</div>
 </a>
 </div>
-</div>
-<button class="complete-btn" id="btn-day-45" onclick="completeDay(45,150)">✓ Mark Day 45 Complete — Earn 150 XP</button>
-</div><!-- /day-45 -->
-<!-- ═══════════════════════════════════════════════
-     DAY 46 — Decision Trees
-════════════════════════════════════════════════ -->
+
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🚨 What if you got this wrong? (Common Error):</strong>
 <br/><code style="background:rgba(0,0,0,0.15); padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:12px; color:var(--pink); display:inline-block; margin-top:0.4rem;">ConvergenceWarning: Liblinear failed to converge, increase max_iter (status=1): STOP: TOTAL NO. of ITERATIONS REACHED</code>
@@ -659,6 +654,12 @@ grid.fit(X_tr, y_train)
 <strong>🎤 Asked in interviews at: Paytm</strong>
 <p style="margin-top:0.4rem;">Why does Logistic Regression use the Sigmoid function? Why is it trained using Cross-Entropy instead of MSE?</p>
 </div>
+</div>
+<button class="complete-btn" id="btn-day-45" onclick="completeDay(45,150)">✓ Mark Day 45 Complete — Earn 150 XP</button>
+</div><!-- /day-45 -->
+<!-- ═══════════════════════════════════════════════
+     DAY 46 — Decision Trees
+════════════════════════════════════════════════ -->
 <div class="day-section" id="day-46">
 <div class="day-header">
 <div class="day-tag">WEEK 7 · DAY 46 · MONTH 2 — CLASSIFICATION</div>
@@ -693,11 +694,11 @@ grid.fit(X_tr, y_train)
 <h3 class="sh3">1. How Trees Split — The Math</h3>
 <div class="analogy">Ek doctor ko decide karna hai ki patient ko diabetes hai ya nahi. Woh puchhe: "Kya glucose &gt; 140?" Agar haan → ek branch. Agar nahi → dusra branch. Phir us branch mein: "Kya BMI &gt; 30?" — aur aise aage. Yahi decision tree hai: ek series of if-else questions jo data ko pure subsets mein divide karte hain.</div>
 <div class="math-block">
-<span class="formula">Gini Impurity: G = 1 − Σ pₖ²</span>
+<span class="formula">$$Gini Impurity: G = 1 − Σ pₖ²$$</span>
 <span class="desc">pₖ = fraction of class k in node. G=0 means perfectly pure (all one class). G=0.5 = maximum impurity (50/50 split for binary classification).</span>
-<span class="formula">Information Gain (Entropy): H = −Σ pₖ log₂(pₖ)</span>
+<span class="formula">$$Information Gain (Entropy): H = −Σ pₖ log₂(pₖ)$$</span>
 <span class="desc">Entropy of a node. Split gain = H(parent) − [weighted avg of H(children)]. Pick the split with highest gain.</span>
-<span class="formula">Best split = argmax over all features/thresholds of Information Gain</span>
+<span class="formula">$$Best split = argmax over all features/thresholds of Information Gain$$</span>
 <span class="desc">For each feature, try every unique value as a threshold. O(n log n) per feature per node. Repeated recursively until stopping criteria.</span>
 </div>
 <div class="cb">
@@ -906,12 +907,7 @@ importances = dt.feature_importances_
 <li><strong>Pruning</strong> with max_depth, min_samples_leaf, min_samples_split prevents overfitting. Always constrain tree growth.</li>
 <li><strong>Decision boundaries</strong> are axis-aligned — trees can only split on one feature at a time. This limits expressiveness vs SVM/RF.</li>
 </ol>
-</div>
-<button class="complete-btn" id="btn-day-46" onclick="completeDay(46,150)">✓ Mark Day 46 Complete — Earn 150 XP</button>
-</div><!-- /day-46 -->
-<!-- ═══════════════════════════════════════════════
-     DAY 47 — Random Forests + Bagging
-════════════════════════════════════════════════ -->
+
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🚨 What if you got this wrong? (Common Error):</strong>
 <br/><code style="background:rgba(0,0,0,0.15); padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:12px; color:var(--pink); display:inline-block; margin-top:0.4rem;">ValueError: The number of features in the input samples does not match...</code>
@@ -925,6 +921,12 @@ importances = dt.feature_importances_
 <strong>🎤 Asked in interviews at: Razorpay</strong>
 <p style="margin-top:0.4rem;">How do SVM kernels work? Explain the Kernel Trick and the role of Support Vectors.</p>
 </div>
+</div>
+<button class="complete-btn" id="btn-day-46" onclick="completeDay(46,150)">✓ Mark Day 46 Complete — Earn 150 XP</button>
+</div><!-- /day-46 -->
+<!-- ═══════════════════════════════════════════════
+     DAY 47 — Random Forests + Bagging
+════════════════════════════════════════════════ -->
 <div class="day-section" id="day-47">
 <div class="day-header">
 <div class="day-tag">WEEK 7 · DAY 47 · MONTH 2 — CLASSIFICATION</div>
@@ -1170,12 +1172,7 @@ plt.show()</pre>
 <li><strong>OOB error</strong> is free validation — each tree uses ~63% of data, the remaining 37% serve as validation. No need for a separate validation set.</li>
 <li><strong>Feature importance</strong> from RF is computed as total impurity reduction across all splits for each feature. Use it for feature selection.</li>
 </ol>
-</div>
-<button class="complete-btn" id="btn-day-47" onclick="completeDay(47,150)">✓ Mark Day 47 Complete — Earn 150 XP</button>
-</div><!-- /day-47 -->
-<!-- ═══════════════════════════════════════════════
-     DAY 48 — Gradient Boosting + XGBoost
-════════════════════════════════════════════════ -->
+
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🚨 What if you got this wrong? (Common Error):</strong>
 <br/><code style="background:rgba(0,0,0,0.15); padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:12px; color:var(--pink); display:inline-block; margin-top:0.4rem;">Overfitting / Decision Tree grows extremely deep with 100% train accuracy but very low test accuracy</code>
@@ -1189,6 +1186,12 @@ plt.show()</pre>
 <strong>🎤 Asked in interviews at: Flipkart</strong>
 <p style="margin-top:0.4rem;">How does a Decision Tree select feature splits? Explain Entropy, Gini Impurity, and Information Gain.</p>
 </div>
+</div>
+<button class="complete-btn" id="btn-day-47" onclick="completeDay(47,150)">✓ Mark Day 47 Complete — Earn 150 XP</button>
+</div><!-- /day-47 -->
+<!-- ═══════════════════════════════════════════════
+     DAY 48 — Gradient Boosting + XGBoost
+════════════════════════════════════════════════ -->
 <div class="day-section" id="day-48">
 <div class="day-header">
 <div class="day-tag">WEEK 7 · DAY 48 · MONTH 2 — CLASSIFICATION</div>
@@ -1223,11 +1226,11 @@ plt.show()</pre>
 <h3 class="sh3">1. Gradient Boosting — Learning from Mistakes</h3>
 <div class="analogy">Ek school mein 3 teachers hain. Pehla teacher basics padhata hai lekin kuch students ke marks galat hote hain. Doosra teacher sirf woh topics cover karta hai jahan pehle teacher galat tha. Teesra teacher phir bache hue mistakes fix karta hai. Final score = teeno teachers ka combined prediction. Yahi gradient boosting hai — har tree pichhle trees ki mistakes fix karta hai.</div>
 <div class="math-block">
-<span class="formula">F₀(x) = argmin_γ Σ L(yᵢ, γ)  (initial prediction: usually mean of y)</span>
+<span class="formula">$$F₀(x) = argmin_γ Σ L(yᵢ, γ)  (initial prediction: usually mean of y)$$</span>
 <span class="desc">Step 1: Start with a constant prediction.</span>
-<span class="formula">rᵢₘ = −[∂L(yᵢ, F(xᵢ)) / ∂F(xᵢ)]  (pseudo-residuals)</span>
+<span class="formula">$$rᵢₘ = −[∂L(yᵢ, F(xᵢ)) / ∂F(xᵢ)]  (pseudo-residuals)$$</span>
 <span class="desc">Step 2: Compute "pseudo-residuals" — the negative gradient of loss w.r.t. predictions.</span>
-<span class="formula">Fₘ(x) = Fₘ₋₁(x) + η · hₘ(x)</span>
+<span class="formula">$$Fₘ(x) = Fₘ₋₁(x) + η · hₘ(x)$$</span>
 <span class="desc">Step 3: Fit tree hₘ to pseudo-residuals. Add to ensemble scaled by learning_rate η. Repeat M times.</span>
 </div>
 <div class="cb">
@@ -1440,11 +1443,7 @@ imp_types = [<span class="str">'weight'</span>, <span class="str">'gain'</span>,
 <li><strong>Early stopping</strong> prevents overfitting: monitor validation loss and stop when it stops improving for n rounds. Set early_stopping_rounds.</li>
 <li><strong>Key hyperparameters:</strong> learning_rate (lower = more trees needed), max_depth (3-6 typical), subsample (row sampling), colsample_bytree (feature sampling).</li>
 </ol>
-</div>
-<button button="" class="complete-btn" id="btn-day-48" onclick="completeDay(48,200)" p0="" xp!<="">✓ Mark Day 48 Complete — Earn 200 XP</button></div><!-- /day-48 -->
-<!-- ═══════════════════════════════════════════════
-     DAY 49 — Churn Project: EDA + Feature Engineering
-════════════════════════════════════════════════ -->
+
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🚨 What if you got this wrong? (Common Error):</strong>
 <br/><code style="background:rgba(0,0,0,0.15); padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:12px; color:var(--pink); display:inline-block; margin-top:0.4rem;">Performance bottleneck: Random Forest training takes extremely long time</code>
@@ -1458,6 +1457,11 @@ imp_types = [<span class="str">'weight'</span>, <span class="str">'gain'</span>,
 <strong>🎤 Asked in interviews at: PhonePe</strong>
 <p style="margin-top:0.4rem;">Why doesn't a Random Forest overfit as you add more trees? Explain Bagging.</p>
 </div>
+</div>
+<button class="complete-btn" id="btn-day-48" onclick="completeDay(48,200)">✓ Mark Day 48 Complete — Earn 200 XP</button></div><!-- /day-48 -->
+<!-- ═══════════════════════════════════════════════
+     DAY 49 — Churn Project: EDA + Feature Engineering
+════════════════════════════════════════════════ -->
 <div class="day-section" id="day-49">
 <div class="day-header">
 <div class="day-tag">WEEK 7 · DAY 49 · MONTH 2 — PROJECT START</div>
@@ -1677,7 +1681,7 @@ df[<span class="str">'IsMonthToMonth'</span>] = (df[<span class="str">'Contract'
 <div class="quiz-feedback wrong-fb" id="q49-5-wrong">❌ Incorrect. Review the material and try again.</div>
 </div>
 </div>
-<div <div="" class="callout" style="background:rgba(108,140,255,.05);border-left:3px solid var(--blue);padding:1rem;margin:1rem 0;font-size:13.5px;">
+<div class="" class="callout" style="background:rgba(108,140,255,.05);border-left:3px solid var(--blue);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>💡 Why does this work? (Math Intuition):</strong>
 <p style="margin-top:0.4rem;">Gradient Boosting works by training trees sequentially to predict the <strong>residuals</strong> (errors) of the preceding trees. Mathematically, it performs gradient descent in the function space. Each new tree fits the negative gradient of the loss function with respect to the current predictions: $r_{im} = -\left[\frac{\partial L(y_i, f(x_i))}{\partial f(x_i)}\right]_{f=f_{m-1}}$. Summing these weak learners creates an extremely robust model.</p>
 </div>
@@ -1700,11 +1704,7 @@ df[<span class="str">'IsMonthToMonth'</span>] = (df[<span class="str">'Contract'
 <li><strong>Class imbalance</strong> detection is critical — check target distribution early. Plan for class_weight='balanced' or SMOTE before model training.</li>
 <li><strong>Document everything</strong> in a notebook with markdown cells. A well-documented EDA is as impressive as a good model in interviews.</li>
 </ol>
-</div>
-<button button="" class="complete-btn" id="btn-day-49" onclick="completeDay(49,200)" p0="" xp!<="">✓ Mark Day 49 Complete — Earn 200 XP</button></div><!-- /day-49 -->
-<!-- ═══════════════════════════════════════════════
-     DAY 50 — Churn: Modeling + SHAP Explainability
-════════════════════════════════════════════════ -->
+
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🚨 What if you got this wrong? (Common Error):</strong>
 <br/><code style="background:rgba(0,0,0,0.15); padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:12px; color:var(--pink); display:inline-block; margin-top:0.4rem;">XGBoostError: Clean your column names! Graphic characters like [ or ] are not allowed.</code>
@@ -1721,6 +1721,11 @@ df[<span class="str">'IsMonthToMonth'</span>] = (df[<span class="str">'Contract'
 <strong>🎤 Asked in interviews at: Groww</strong>
 <p style="margin-top:0.4rem;">What is Gradient Boosting? How does XGBoost differ from vanilla Gradient Boosting?</p>
 </div>
+</div>
+<button class="complete-btn" id="btn-day-49" onclick="completeDay(49,200)">✓ Mark Day 49 Complete — Earn 200 XP</button></div><!-- /day-49 -->
+<!-- ═══════════════════════════════════════════════
+     DAY 50 — Churn: Modeling + SHAP Explainability
+════════════════════════════════════════════════ -->
 <div class="day-section" id="day-50">
 <div class="day-header">
 <div class="day-tag">WEEK 7 · DAY 50 · MONTH 2 — PROJECT DAY 2</div>
@@ -1746,6 +1751,7 @@ df[<span class="str">'IsMonthToMonth'</span>] = (df[<span class="str">'Contract'
 <ul style="margin-left: 1.25rem; margin-top: 0.4rem;">
 <li>Do you understand the core concepts of Day 49?</li>
 <li>Are you comfortable with Python programming syntax for Classification, SVMs, Decision Trees, Random Forests, XGBoost?</li>
+</ul>
 </div>
 </div>
 <div id="day-50-theory">
@@ -1927,7 +1933,7 @@ shap.waterfall_plot(shap.Explanation(
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">
     🔍 <strong>Search terms:</strong> <code>gridsearchcv best_params_ raise error_score, hyperparameter tuning tree based models</code>
 </div>
-<div <div="" class="misconception">
+<div class="" class="misconception">
 <strong>⚠️ Common Misconception:</strong> Tuning tree models only requires finding the best number of estimators.
     <br/><br/>
 <strong>Fact:</strong> max_depth and min_samples_leaf are much more critical tree constraints than simple estimator counts.
@@ -1947,14 +1953,15 @@ shap.waterfall_plot(shap.Explanation(
 <li><strong>Pipeline</strong> bundles preprocessing + model into one object. This prevents data leakage and makes deployment trivial.</li>
 </ol>
 </div>
-<button button="" class="complete-btn" id="btn-day-50" onclick="completeDay(50,200)" p0="" xp!<="">✓ Mark Day 50 Complete — Earn 200 XP</button></div><!-- /day-50 -->
-<!-- ═══════════════════════════════════════════════
-     DAY 51 — Churn: Flask Deployment + Portfolio Polish
-════════════════════════════════════════════════ -->
+<button class="complete-btn" id="btn-day-50" onclick="completeDay(50,200)">✓ Mark Day 50 Complete — Earn 200 XP</button>
 <div class="callout" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green);padding:0.8rem 1.1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🎤 Asked in interviews at: Urban Company</strong>
 <p style="margin-top:0.4rem;">How do you handle severe class imbalance in tree-based models?</p>
-</div>
+</div></div><!-- /day-50 -->
+<!-- ═══════════════════════════════════════════════
+     DAY 51 — Churn: Flask Deployment + Portfolio Polish
+════════════════════════════════════════════════ -->
+
 <div class="day-section" id="day-51">
 <div class="day-header">
 <div class="day-tag">WEEK 7 · DAY 51 · MONTH 2 — PROJECT FINALE</div>
@@ -2237,7 +2244,7 @@ curl -X POST http://localhost:5000/predict \
 <div class="quiz-feedback wrong-fb" id="q51-5-wrong">❌ Incorrect. Review the material and try again.</div>
 </div>
 </div>
-<div <div="" class="debug-block">
+<div class="" class="debug-block">
 <div class="debug-label">🛠️ WEEKLY DEBUGGING CHALLENGE</div>
 <h4 style="font-family:var(--font-head); font-size:14px; margin-bottom:0.5rem; color:var(--pink);">Debug: Decision Tree Categorical crash</h4>
 <p style="font-size:13px; margin-bottom:0.8rem; line-height:1.6;">The classifier crashes when passing categorical values directly during training.</p>
@@ -2325,7 +2332,7 @@ clf = DecisionTreeClassifier().fit(X_encoded, y)</code></pre>
       Next week, we transition into Deep Learning! We will write multi-layer perceptrons, backpropagation, and explore PyTorch tensors. Make sure you are comfortable with basic optimization concepts!
     </p>
 </div>
-<button button="" class="complete-btn" id="btn-day-51" onclick="completeDay(51,300)" x0="" xp!="" 🎉<="">🏆 Complete Week 7 Capstone — Earn 300 XP! 🎉</button></div><!-- /day-51 -->
+<button class="complete-btn" id="btn-day-51" onclick="completeDay(51,300)">🏆 Complete Week 7 Capstone — Earn 300 XP! 🎉</button></div><!-- /day-51 -->
 <div class="week-summary">
 <div class="ws-icon">🎉</div>
 <div class="ws-content">
@@ -2338,8 +2345,8 @@ clf = DecisionTreeClassifier().fit(X_encoded, y)</code></pre>
 </div>
 <a class="ws-btn" href="roadmap.html">View Full Roadmap →</a>
 </div>
-</div>
-</div></main>
+ </div>
+</main>
 </div><!-- /layout -->
 <script>
 // ═══════════════════════════════════════════

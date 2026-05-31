@@ -467,7 +467,7 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
         \text{lev}_{a,b}(i-1, j-1) + [a_i \neq b_j]
       \end{cases} &amp; \text{otherwise.}
     \end{cases}</span>
-<span class="desc">Where $[a_i \neq b_j]$ is 0 if characters match, and 1 if they differ. This covers insertion, deletion, and substitution operations.</span>
+<span class="desc">$Where $[a_i \neq b_j]$ is 0 if characters match, and 1 if they differ. This covers insertion, deletion, and substitution operations.$</span>
 </div>
 <h3 class="sh3">5. Production Python Preprocessing Pipeline</h3>
 <p>
@@ -784,15 +784,15 @@ final_corpus = spacy_preprocess_pipeline(cleaned_step)
     The exact equations are formulated as follows:
   </p>
 <div class="math-block">
-<span class="formula">\text{TF}(t, d) = \frac{f_{t,d}}{\sum_{t' \in d} f_{t',d}}</span>
+<span class="formula">$$\text{TF}(t, d) = \frac{f_{t,d}}{\sum_{t' \in d} f_{t',d}}$$</span>
 <span class="desc">Term Frequency: occurrence of term $t$ in document $d$ relative to document size.</span>
 </div>
 <div class="math-block">
-<span class="formula">\text{IDF}(t, D) = \log\left( \frac{1 + N}{1 + \text{DF}(t)} \right) + 1</span>
-<span class="desc">Inverse Document Frequency: where $N$ is total documents, and $\text{DF}(t)$ is number of documents containing term $t$. Adding 1 avoids division-by-zero.</span>
+<span class="formula">$$\text{IDF}(t, D) = \log\left( \frac{1 + N}{1 + \text{DF}(t)} \right) + 1$$</span>
+<span class="desc">$Inverse Document Frequency: where $N$ is total documents, and $\text{DF}(t)$ is number of documents containing term $t$. Adding 1 avoids division-by-zero.$</span>
 </div>
 <div class="math-block">
-<span class="formula">\text{TF-IDF}(t, d, D) = \text{TF}(t, d) \times \text{IDF}(t, D)</span>
+<span class="formula">$$\text{TF-IDF}(t, d, D) = \text{TF}(t, d) \times \text{IDF}(t, D)$$</span>
 <span class="desc">Final TF-IDF weight balances term specificity and local occurrence.</span>
 </div>
 <h3 class="sh3">3. Dimensionality Reduction: Latent Semantic Analysis (LSA)</h3>
@@ -800,8 +800,8 @@ final_corpus = spacy_preprocess_pipeline(cleaned_step)
     To resolve BoW sparsity and synonymy issues, we apply **Latent Semantic Analysis (LSA)**. LSA takes our sparse term-document matrix $X$ of size $V \times N$ and decomposes it into three matrices using **Singular Value Decomposition (SVD)**:
   </p>
 <div class="math-block">
-<span class="formula">X = U \Sigma V^T</span>
-<span class="desc">Where $U$ ($V \times k$) represents term concepts, $\Sigma$ ($k \times k$) contains concept strengths, and $V^T$ ($k \times N$) holds document concepts, reducing variables to $k \ll V$ dense features.</span>
+<span class="formula">$$X = U \Sigma V^T$$</span>
+<span class="desc">$Where $U$ ($V \times k$) represents term concepts, $\Sigma$ ($k \times k$) contains concept strengths, and $V^T$ ($k \times N$) holds document concepts, reducing variables to $k \ll V$ dense features.$</span>
 </div>
 <h3 class="sh3">4. N-grams Context Extraction</h3>
 <p>
@@ -1085,6 +1085,11 @@ X_dense = U_k.dot(S_k).dot(VT_k)
       Today, we master **Dense Word Embeddings**.
       We will dissect the mathematical architectures of **Word2Vec (CBOW vs Skip-gram)**, learn **Negative Sampling** optimizations, examine the global matrix formulations of **GloVe (Global Vectors)**, and implement custom cosine similarity checks.
     </p>
+<div class="meta-row">
+<span class="meta-badge g">⏱ 5 hours</span>
+<span class="meta-badge o">📊 Intermediate</span>
+<span class="meta-badge p">⚡ +150 XP</span>
+</div>
 <div class="mermaid">
     graph TD
       subgraph CBOW["CBOW"]
@@ -1149,16 +1154,16 @@ X_dense = U_k.dot(S_k).dot(VT_k)
     The SGNS loss function is formulated as:
   </p>
 <div class="math-block">
-<span class="formula">\mathcal{L}_{\text{SGNS}} = -\log \sigma(v'_{w_O}^\top v_{w_I}) - \sum_{i=1}^k \mathbb{E}_{w_i \sim P_n(w)} \left[ \log \sigma(-v'_{w_i}^\top v_{w_I}) \right]</span>
-<span class="desc">Where $v_{w_I}$ is the input vector of center word $w_I$, $v'$ is the output representation, and $P_n(w)$ is the noise distribution (vocabulary frequencies raised to the power of $\frac{3}{4}$ to boost rare word selection).</span>
+<span class="formula">$$\mathcal{L}_{\text{SGNS}} = -\log \sigma(v'_{w_O}^\top v_{w_I}) - \sum_{i=1}^k \mathbb{E}_{w_i \sim P_n(w)} \left[ \log \sigma(-v'_{w_i}^\top v_{w_I}) \right]$$</span>
+<span class="desc">$Where $v_{w_I}$ is the input vector of center word $w_I$, $v'$ is the output representation, and $P_n(w)$ is the noise distribution (vocabulary frequencies raised to the power of $\frac{3}{4}$ to boost rare word selection).$</span>
 </div>
 <h3 class="sh3">3. Hierarchical Softmax Huffman Coding Tree</h3>
 <p>
     Hierarchical Softmax structures vocabulary as a leaf-node binary **Huffman Tree**, where frequent words reside near the root and rare words deeper down. The probability of choosing a word $w$ is defined as path traversal multiplications:
   </p>
 <div class="math-block">
-<span class="formula">P(w \mid w_I) = \prod_{j=1}^{L(w)-1} \sigma\left( \text{ch}(n(w, j)) \cdot \theta_{n(w, j)}^\top v_{w_I} \right)</span>
-<span class="desc">Where $L(w)$ is path length, $n(w, j)$ is node $j$ on the path, and $\text{ch}(n)$ maps left (+1) or right (-1) tree step choices. This scales search time logarithmically to $O(\log_2 V)$.</span>
+<span class="formula">$$P(w \mid w_I) = \prod_{j=1}^{L(w)-1} \sigma\left( \text{ch}(n(w, j)) \cdot \theta_{n(w, j)}^\top v_{w_I} \right)$$</span>
+<span class="desc">$Where $L(w)$ is path length, $n(w, j)$ is node $j$ on the path, and $\text{ch}(n)$ maps left (+1) or right (-1) tree step choices. This scales search time logarithmically to $O(\log_2 V)$.$</span>
 </div>
 <h3 class="sh3">4. GloVe: Global Vectors Formulation</h3>
 <p>
@@ -1166,8 +1171,8 @@ X_dense = U_k.dot(S_k).dot(VT_k)
     The GloVe loss function is defined as:
   </p>
 <div class="math-block">
-<span class="formula">\mathcal{L}_{\text{GloVe}} = \sum_{i,j=1}^V f(X_{i,j}) \left( w_i^\top \tilde{w}_j + b_i + \tilde{b}_j - \log X_{i,j} \right)^2</span>
-<span class="desc">Where $w_i, \tilde{w}_j$ are word vectors, $b_i, \tilde{b}_j$ are biases, and $f(x)$ is a weighted scaling function limiting the impact of extremely common co-occurrences.</span>
+<span class="formula">$$\mathcal{L}_{\text{GloVe}} = \sum_{i,j=1}^V f(X_{i,j}) \left( w_i^\top \tilde{w}_j + b_i + \tilde{b}_j - \log X_{i,j} \right)^2$$</span>
+<span class="desc">$Where $w_i, \tilde{w}_j$ are word vectors, $b_i, \tilde{b}_j$ are biases, and $f(x)$ is a weighted scaling function limiting the impact of extremely common co-occurrences.$</span>
 </div>
 <h3 class="sh3">5. Training Word2Vec using Gensim</h3>
 <p>
@@ -1881,14 +1886,14 @@ matches = matcher(doc)
     For an input sequence $x$ and a predicted label sequence $y$, the CRF score is calculated as:
   </p>
 <div class="math-block">
-<span class="formula">S(x, y) = \sum_{i=0}^T A_{y_i, y_{i+1}} + \sum_{i=1}^T P_{i, y_i}</span>
+<span class="formula">$$S(x, y) = \sum_{i=0}^T A_{y_i, y_{i+1}} + \sum_{i=1}^T P_{i, y_i}$$</span>
 <span class="desc">Where $P_{i, y_i}$ is the emission score of token $i$ output by the BiLSTM, and $A_{y_i, y_{i+1}}$ is the transition score of moving from label $y_i$ to $y_{i+1}$.</span>
 </div>
 <p>
     The conditional probability of the label sequence $y$ is:
   </p>
 <div class="math-block">
-<span class="formula">P(y \mid x) = \frac{\exp(S(x, y))}{\sum_{y'} \exp(S(x, y'))}</span>
+<span class="formula">$$P(y \mid x) = \frac{\exp(S(x, y))}{\sum_{y'} \exp(S(x, y'))}$$</span>
 <span class="desc">Where the denominator sums over all possible label sequences (solved using the Viterbi dynamic programming algorithm).</span>
 </div>
 <h3 class="sh3">3. Numerical Stability: Log-Sum-Exp Trick</h3>
@@ -1897,7 +1902,7 @@ matches = matcher(doc)
     To ensure stable updates, we apply the **Log-Sum-Exp Trick**:
   </p>
 <div class="math-block">
-<span class="formula">\log \sum_i \exp(v_i) = m + \log \sum_i \exp(v_i - m) \quad \text{where } m = \max(v)</span>
+<span class="formula">$$\log \sum_i \exp(v_i) = m + \log \sum_i \exp(v_i - m) \quad \text{where } m = \max(v)$$</span>
 <span class="desc">By pulling out the maximum value $m$, we shift exponents down, bounding values within secure numerical precision ranges.</span>
 </div>
 <h3 class="sh3">4. Classification Evaluation Metrics: Macro &amp; Micro F1</h3>
@@ -1905,7 +1910,7 @@ matches = matcher(doc)
     For imbalanced text datasets, simple accuracy is a misleading metric. We must calculate Precision ($P$), Recall ($R$), and the **F1-Score**:
   </p>
 <div class="math-block">
-<span class="formula">F_1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}} = \frac{2 \text{TP}}{2 \text{TP} + \text{FP} + \text{FN}}</span>
+<span class="formula">$$F_1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}} = \frac{2 \text{TP}}{2 \text{TP} + \text{FP} + \text{FN}}$$</span>
 </div>
 <ul class="prose-list">
 <li><strong>Macro F1:</strong> Computes the F1-score independently for each class and averages them. Treats all classes equally, highlighting performance on rare labels.</li>
@@ -2238,15 +2243,15 @@ loss.backward()
     The dynamic PageRank centrality score for sentence $S_i$ is iteratively computed as:
   </p>
 <div class="math-block">
-<span class="formula">\text{Score}(S_i) = (1 - d) + d \sum_{j \in \text{In}(S_i)} \frac{\text{Similarity}(S_i, S_j)}{\sum_{k \in \text{Out}(S_j)} \text{Similarity}(S_k, S_j)}</span>
-<span class="desc">Where $d$ is the damping factor (typically set to 0.85) representing the probability of a reader randomly jumping to another sentence, and $\text{Similarity}(S_i, S_j)$ is the edge weight.</span>
+<span class="formula">$$\text{Score}(S_i) = (1 - d) + d \sum_{j \in \text{In}(S_i)} \frac{\text{Similarity}(S_i, S_j)}{\sum_{k \in \text{Out}(S_j)} \text{Similarity}(S_k, S_j)}$$</span>
+<span class="desc">$Where $d$ is the damping factor (typically set to 0.85) representing the probability of a reader randomly jumping to another sentence, and $\text{Similarity}(S_i, S_j)$ is the edge weight.$</span>
 </div>
 <h3 class="sh3">3. Sentence Similarity Adjacency Formulation</h3>
 <p>
     The similarity score between two sentences $S_i$ and $S_j$ is calculated based on the overlap of their token vocabularies, normalized by length to prevent bias toward long sentences:
   </p>
 <div class="math-block">
-<span class="formula">\text{Similarity}(S_i, S_j) = \frac{|\{w \mid w \in S_i \ \&amp; \ w \in S_j\}|}{\log(|S_i|) + \log(|S_j|)}</span>
+<span class="formula">$$\text{Similarity}(S_i, S_j) = \frac{|\{w \mid w \in S_i \ \&amp; \ w \in S_j\}|}{\log(|S_i|) + \log(|S_j|)}$$</span>
 <span class="desc">Word overlap similarity. Alternatively, we can use the cosine similarity of their dense sentence embeddings.</span>
 </div>
 <h3 class="sh3">4. TextRank Summariser from Scratch</h3>
@@ -2885,7 +2890,7 @@ X = vectorizer.fit_transform(docs_joined)</code></pre>
 </a>
 </div>
 </div>
-<button button="" class="complete-btn" id="btn-day-93" onclick="completeDay(93,300)" x0="" xp!<="">🏆 Complete Week 13 Capstone — Earn 300 XP! 🎉</button></div><!-- /day-93 -->
+<button class="complete-btn" id="btn-day-93" onclick="completeDay(93,300)">🏆 Complete Week 13 Capstone — Earn 300 XP! 🎉</button></div><!-- /day-93 -->
 <div class="day-section" id="day-toolkit">
 <div class="day-header">
 <div class="day-tag">WEEK 13 · TOOLKIT · MONTH 4 — NATURAL LANGUAGE PROCESSING</div>
@@ -3381,8 +3386,8 @@ function checkPredict(id, answer) {
   
   // Normalize whitespace, casing, quotes, brackets, and punctuation
   const normalize = (str) => {
-    return str.replace(/\\n/g, ' ')
-              .replace(/\s+/g, ' ')
+    return String(str).replace(/\\n/g, ' ')
+              .replace(/\n/g, ' ')
               .replace(/['"()\[\]]/g, '')
               .replace(/[,;]/g, ' ')
               .replace(/\s+/g, ' ')
@@ -3426,6 +3431,19 @@ function toggleTheme() {
   if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
 }
 (function() {
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
 })();
@@ -3466,6 +3484,19 @@ window.addEventListener('DOMContentLoaded', () => {
   
   renderMermaid('day-' + DAYS[0]);
   
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   const btn = document.getElementById('theme-btn');
   if (btn && saved === 'light') btn.textContent = '🌙 Dark';

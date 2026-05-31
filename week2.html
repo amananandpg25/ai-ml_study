@@ -1161,6 +1161,10 @@ df_all = pd.concat([students, students], ignore_index=<span class="kw">True</spa
      DAY 10 — GroupBy + Aggregation
 ═══════════════════════════════════ -->
 <div class="day-section" id="day-10">
+<div class="day-header">
+<div class="day-tag">WEEK 2 · DAY 10 · MONTH 1 — FOUNDATIONS</div>
+<h1>Pandas — GroupBy &amp; Aggregation</h1>
+<p>Data ko groups mein baant ke statistics nikalna — yahi GroupBy ka kaam hai. Aaj seekhenge how to split-apply-combine, pivot tables, string ops, datetime ops, aur memory-efficient chunked processing.</p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 4 hours</span>
 <span class="meta-badge o">📊 Intermediate</span>
@@ -1727,6 +1731,11 @@ df_filtered = pd.concat(results, ignore_index=<span class="kw">True</span>)</pre
 <div id="day-11-resources-section">
 <h2 class="sh2">📚 Day 11 Resources</h2>
 <div class="resources-grid">
+<a class="resource-card" href="https://www.youtube.com/watch?v=hlGoQC332VM" target="_blank">
+<div class="rc-type">🎬 INDIAN YOUTUBE — HINGLISH</div>
+<div class="rc-title">SQL - Complete Course in 3 Hours — Apna College</div>
+<div class="rc-sub">Apna College · Excellent one-shot SQL using MySQL</div>
+</a>
 <a class="resource-card" href="https://www.thoughtspot.com/sql-tutorial" target="_blank">
 <div class="rc-type">INTERACTIVE TUTORIAL</div>
 <div class="rc-title">ThoughtSpot/Mode SQL Tutorial</div>
@@ -2420,6 +2429,11 @@ pre-commit install  <span class="cm"># now runs on every git commit automaticall
 <div id="day-13-resources-section">
 <h2 class="sh2">📚 Day 13 Resources</h2>
 <div class="resources-grid">
+<a class="resource-card" href="https://www.youtube.com/watch?v=Ez8F0nW6S-w" target="_blank">
+<div class="rc-type">🎬 INDIAN YOUTUBE — HINGLISH</div>
+<div class="rc-title">Complete Git and GitHub Tutorial for Beginners — Apna College</div>
+<div class="rc-sub">Apna College · Excellent practical guide to Git/GitHub</div>
+</a>
 <a class="resource-card" href="https://git-scm.com/book/en/v2" target="_blank">
 <div class="rc-type">OFFICIAL BOOK</div>
 <div class="rc-title">Pro Git Book (Free Online)</div>
@@ -2514,7 +2528,7 @@ df.describe()
 <h3 class="sh3">Step 2 — Clean the Data (45 min)</h3>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — step2_clean.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
-<pre"><span class="cm"># Document every cleaning decision with a comment explaining WHY</span>
+<pre><span class="cm"># Document every cleaning decision with a comment explaining WHY</span>
 df[<span class="str">"Age"</span>] = df[<span class="str">"Age"</span>].fillna(df[<span class="str">"Age"</span>].median())   <span class="cm"># median: robust to outliers</span>
 df = df.drop(columns=[<span class="str">"Cabin"</span>])          <span class="cm"># 77% null — unusable</span>
 df = df.drop_duplicates()
@@ -2522,7 +2536,7 @@ df[<span class="str">"Embarked"</span>] = df[<span class="str">"Embarked"</span>
 
 <span class="cm"># Verify cleaning worked</span>
 <span class="bi">print</span>(<span class="str">"Nulls after cleaning:\n"</span>, df.isnull().sum())
-</pre"></div>
+</pre></div>
 <h3 class="sh3">Step 3 — Analysis + Visualisation (3 hours)</h3>
 <div class="callout ci">
 <strong>📊 Visualization Foundations:</strong> Choose the right chart!<br/>
@@ -2534,7 +2548,7 @@ df[<span class="str">"Embarked"</span>] = df[<span class="str">"Embarked"</span>
 <p>Write at least 10 analysis cells, each answering one question. Add a markdown cell above each with the question and a markdown cell below with the finding in plain English. Think deeply: <em>Why use median instead of mean? Why is dropping nulls dangerous?</em> Add these <strong>Thinking Questions</strong> to your notebook.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — step3_analysis_example.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
-<pre"><span class="cm"># Question: Does gender affect survival?</span>
+<pre><span class="cm"># Question: Does gender affect survival?</span>
 survival_by_gender = df.groupby(<span class="str">"Sex"</span>)[<span class="str">"Survived"</span>].mean() * <span class="num">100</span>
 
 plt.figure(figsize=(<span class="num">8</span>, <span class="num">5</span>))
@@ -2546,7 +2560,7 @@ plt.show()
 
 <span class="cm"># Finding: Women survived at 74% vs men at 19% — 3x difference.
 # "Women and children first" was clearly enforced on Titanic.</span>
-</pre"></div>
+</pre></div>
 <h3 class="sh3">Step 4 — Write Your README (45 min)</h3>
 <div class="callout ct">
 <strong>Your README must include:</strong><br/>
@@ -2590,6 +2604,11 @@ plt.show()
 <div class="rc-type">FREE COURSE · KAGGLE</div>
 <div class="rc-title">Kaggle Pandas Course</div>
 <div class="rc-sub">Interactive exercises with datasets. 4 hours.</div>
+</a>
+<a class="resource-card" href="https://www.youtube.com/watch?v=hlGoQC332VM" target="_blank">
+<div class="rc-type">🎬 INDIAN YOUTUBE — HINGLISH</div>
+<div class="rc-title">SQL - Complete Course in 3 Hours — Apna College</div>
+<div class="rc-sub">Apna College · Excellent one-shot SQL using MySQL</div>
 </a>
 <a class="resource-card" href="https://www.thoughtspot.com/sql-tutorial" target="_blank">
 <div class="rc-type">SQL · INTERACTIVE</div>
@@ -2656,9 +2675,10 @@ GROUP BY customer_id;</code></pre>
       Next week, we will transition into data analysis and visualization using Pandas, Matplotlib, and Seaborn. Make sure you are comfortable writing SQL JOIN statements and basic Git commits!
     </p>
 </div>
+<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Git version control operations, making commits, and staging changes.</li></ul></div>
 <button class="complete-btn" id="btn-day-14" onclick="completeDay(14,300)">🏆 Complete Week 2 Capstone — Earn 300 XP! 🎉</button>
-</div><div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Git version control operations, making commits, and staging changes.</li></ul></div>
-</div></div></div></div></main>
+</div>
+</main>
 </div>
 <script>
 // ═══════════════════════════════════════════
@@ -2990,8 +3010,8 @@ function checkPredict(id, answer) {
   
   // Normalize whitespace, casing, quotes, brackets, and punctuation
   const normalize = (str) => {
-    return str.replace(/\\n/g, ' ')
-              .replace(/\s+/g, ' ')
+    return String(str).replace(/\\n/g, ' ')
+              .replace(/\n/g, ' ')
               .replace(/['"()\[\]]/g, '')
               .replace(/[,;]/g, ' ')
               .replace(/\s+/g, ' ')
@@ -3035,6 +3055,19 @@ function toggleTheme() {
   if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
 }
 (function() {
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
 })();
@@ -3075,6 +3108,19 @@ window.addEventListener('DOMContentLoaded', () => {
   
   renderMermaid('day-' + DAYS[0]);
   
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   const btn = document.getElementById('theme-btn');
   if (btn && saved === 'light') btn.textContent = '🌙 Dark';

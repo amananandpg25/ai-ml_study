@@ -1662,12 +1662,12 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]</pre>
 <div class="res-desc">Free online chapters detailing engineering, systems design, and theory interview loops.</div>
 </div>
 </a>
-<a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=N5P5z2bTqQ4" target="_blank">
+<a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=whUAQe5nhmc" target="_blank">
 <div class="res-icon type-yt">📺</div>
 <div class="res-body">
 <div class="res-type">YT</div>
-<span class="res-title">ML Coding Interview Prep Tips</span>
-<div class="res-desc">Video walking through common python coding drills, array operations, and algorithm implementations.</div>
+<span class="res-title">ML Coding Interviews Explained — Exponent</span>
+<div class="res-desc">Exponent · Detailed visual walkthrough of mock ML system design coding rounds and strategies</div>
 </div>
 </a></div>
 <button class="complete-btn" id="btn-day-134" onclick="completeDay(134,150)">✓ Mark Day 134 Complete — Earn 150 XP</button>
@@ -1857,7 +1857,7 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]</code></pre>
       Congratulations! You have completed the entire 135-day roadmap and are now ready to tackle real-world AI and ML engineering challenges! 🎉
     </p>
 </div>
-<button button="" class="complete-btn" id="btn-day-135" onclick="completeDay(135,300)" x0="" xp!<="">🏆 Complete Week 18 Capstone — Earn 300 XP! 🎉</button></div>
+<button class="complete-btn" id="btn-day-135" onclick="completeDay(135,300)">🏆 Complete Week 18 Capstone — Earn 300 XP! 🎉</button></div>
 <div class="week-summary">
 <div class="ws-icon">🎉</div>
 <div class="ws-content">
@@ -2190,8 +2190,8 @@ function checkPredict(id, answer) {
   
   // Normalize whitespace, casing, quotes, brackets, and punctuation
   const normalize = (str) => {
-    return str.replace(/\\n/g, ' ')
-              .replace(/\s+/g, ' ')
+    return String(str).replace(/\\n/g, ' ')
+              .replace(/\n/g, ' ')
               .replace(/['"()\[\]]/g, '')
               .replace(/[,;]/g, ' ')
               .replace(/\s+/g, ' ')
@@ -2235,6 +2235,19 @@ function toggleTheme() {
   if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
 }
 (function() {
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
 })();
@@ -2275,6 +2288,19 @@ window.addEventListener('DOMContentLoaded', () => {
   
   renderMermaid('day-' + DAYS[0]);
   
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   const btn = document.getElementById('theme-btn');
   if (btn && saved === 'light') btn.textContent = '🌙 Dark';

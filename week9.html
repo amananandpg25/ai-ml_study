@@ -313,7 +313,7 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
 <!-- =======================================================
      DAY 59 — Intro to Computer Vision & Convolutions
 ======================================================== -->
-<div class="day-section active" data-xp="180" id="day-59" data-xp="180" data-xp="180">
+<div class="day-section active" id="day-59" data-xp="180">
 <div class="day-header">
 <div class="day-tag">WEEK 9 · DAY 59 · MONTH 3 — COMPUTER VISION</div>
 <h1>Day 59 — Introduction to Convolutional Neural Networks (CNNs)</h1>
@@ -365,15 +365,15 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
 <h3 class="sh3">1. The Parameter Explosion Problem</h3>
 <p>Consider a modest $256 \times 256$ RGB color image. This represents $256 \times 256 \times 3 = 196,608$ input pixels. If we connect this directly to a fully-connected (dense) layer with just $1,024$ hidden neurons, we instantly create:</p>
 <div class="math-block">
-<span class="formula">196,608 \times 1,024 = 201,326,592 \text{ weight variables!}</span>
+<span class="formula">$$196,608 \times 1,024 = 201,326,592 \text{ weight variables!}$$</span>
 </div>
 <p>Over 200 million weights in a single layer! This triggers massive overfitting, high memory bottlenecks, and demands astronomical amounts of training data.
   <br/>Furthermore, flattening the image into a 1D vector completely discards the spatial coordinates—the network doesn't know if pixel A was above, below, or next to pixel B. CNNs solve this using two key principles: **Local Connectivity** (neurons only look at a small window) and **Weight Sharing** (the same filter slides across the entire image).</p>
 <h3 class="sh3">2. Spatial Dimension Output Mathematics</h3>
 <p>When convolving an input image of shape $I \times I$ with a kernel of size $K \times K$, using padding $P$ and stride $S$, the spatial dimension of the output $O \times O$ is determined by the following formal mathematical formula:</p>
 <div class="math-block">
-<span class="formula">O = \left\lfloor \frac{I - K + 2P}{S} \right\rfloor + 1</span>
-<span class="desc">Where \lfloor \cdot \rfloor represents the floor function (ignoring fractional remaining pixels).</span>
+<span class="formula">$$O = \left\lfloor \frac{I - K + 2P}{S} \right\rfloor + 1$$</span>
+<span class="desc">$Where \lfloor \cdot \rfloor represents the floor function (ignoring fractional remaining pixels).$</span>
 </div>
 <p>Let's trace the physical impact of padding types:</p>
 <ul class="prose-list">
@@ -381,7 +381,7 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
 <li><strong>Same Padding:</strong> Padding is dynamically added so that the output spatial size matches the input spatial size ($O = I$ for $S=1$). The required padding size $P$ is calculated as:</li>
 </ul>
 <div class="math-block">
-<span class="formula">P = \frac{K - 1}{2}</span>
+<span class="formula">$$P = \frac{K - 1}{2}$$</span>
 <span class="desc">Assuming an odd kernel size. For a 3x3 kernel, P = 1; for a 5x5 kernel, P = 2.</span>
 </div>
 <h3 class="sh3">3. Convolution Shape Tracing Reference</h3>
@@ -592,7 +592,7 @@ conv_out = conv2d_forward(test_img, test_filter, test_bias, stride=<span class="
 <div class="quiz-feedback wrong-fb" id="q59c-wrong">❌ Recall early visual feature extractions. Does a Sobel filter blur an image, or does it highlight boundaries where pixel colors change rapidly?</div>
 </div>
 </div>
-<div <div="" class="callout" style="background:rgba(108,140,255,.05);border-left:3px solid var(--blue);padding:1rem;margin:1rem 0;font-size:13.5px;">
+<div class="" class="callout" style="background:rgba(108,140,255,.05);border-left:3px solid var(--blue);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>💡 Why does this work? (Math Intuition):</strong>
 <p style="margin-top:0.4rem;">CNNs work because they exploit spatial structures in images using <strong>weight sharing</strong> and <strong>local receptive fields</strong>. Mathematically, a convolution operation slides a small filter over the image, computing dot products at each position: $S(i,j) = (I * K)(i,j) = \sum \sum I(i-m, j-n) K(m,n)$. This detects local patterns (edges, textures) regardless of their position in the image, dramatically reducing parameter count compared to fully-connected layers.</p>
 </div>
@@ -649,11 +649,7 @@ conv_out = conv2d_forward(test_img, test_filter, test_bias, stride=<span class="
 <div class="rc-sub">Play with convolutions in your browser</div>
 </a>
 </div>
-</div>
-</div><!-- /day-59 -->
-<!-- =======================================================
-     DAY 60 — Pooling Layers & CNN Architecture
-======================================================== -->
+
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🚨 What if you got this wrong? (Common Error):</strong>
 <br/><code style="background:rgba(0,0,0,0.15); padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:12px; color:var(--pink); display:inline-block; margin-top:0.4rem;">RuntimeError: Given groups=1, weight of size [16, 3, 3, 3] expected input [32, 1, 28, 28] to have 3 channels...</code>
@@ -667,7 +663,12 @@ conv_out = conv2d_forward(test_img, test_filter, test_bias, stride=<span class="
 <strong>🎤 Asked in interviews at: Ola</strong>
 <p style="margin-top:0.4rem;">Why are CNNs preferred over Fully Connected networks for image tasks? Explain weight sharing and local receptive fields.</p>
 </div>
-<div class="day-section" data-xp="180" id="day-60" data-xp="180" data-xp="180">
+</div>
+</div><!-- /day-59 -->
+<!-- =======================================================
+     DAY 60 — Pooling Layers & CNN Architecture
+======================================================== -->
+<div class="day-section" id="day-60" data-xp="180">
 <div class="day-header">
 <div class="day-tag">WEEK 9 · DAY 60 · MONTH 3 — COMPUTER VISION</div>
 <h1>Downsampling &amp; Pooling Layers</h1>
@@ -738,13 +739,13 @@ conv_out = conv2d_forward(test_img, test_filter, test_bias, stride=<span class="
 <h4 class="sh3">A. Max Pooling Gradient Flow</h4>
 <p>During the forward pass, Max Pooling selects the single maximum value in each window. Therefore, in the backward pass, the entire gradient $\frac{\partial L}{\partial y}$ is routed **exclusively** to the coordinate index of that maximum value. All other coordinates receive a gradient of 0:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial x_i} = \frac{\partial L}{\partial y} \cdot \mathbb{I}(x_i == \max(X))</span>
-<span class="desc">Where \mathbb{I} is the indicator function. If there is a tie, the gradient is typically split or routed to the first index.</span>
+<span class="formula">$$\frac{\partial L}{\partial x_i} = \frac{\partial L}{\partial y} \cdot \mathbb{I}(x_i == \max(X))$$</span>
+<span class="desc">$Where \mathbb{I} is the indicator function. If there is a tie, the gradient is typically split or routed to the first index.$</span>
 </div>
 <h4 class="sh3">B. Average Pooling Gradient Flow</h4>
 <p>Since the forward pass averages all inputs, every input $x_i$ inside the window contributed equally to the output. Thus, in the backward pass, the gradient $\frac{\partial L}{\partial y}$ is **distributed evenly** across all $N$ elements in the window:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial x_i} = \frac{1}{N} \frac{\partial L}{\partial y}</span>
+<span class="formula">$$\frac{\partial L}{\partial x_i} = \frac{1}{N} \frac{\partial L}{\partial y}$$</span>
 </div>
 <h3 class="sh3">4. Pooling from Scratch in NumPy</h3>
 <p>Let's implement a production-grade 2D Max and Average Pooling layer from scratch using NumPy, demonstrating exactly how the stride and window parameters downsample spatial tensors.</p>
@@ -896,7 +897,7 @@ pooled_max = pool2d_forward(dummy_img, pool_size=<span class="num">2</span>, str
 <div class="quiz-feedback wrong-fb" id="q60c-wrong">❌ Think about signs. In average pooling, if you have two activations, +5 and -5, what is their average? Do they cancel out? What happens in L2 pooling?</div>
 </div>
 </div>
-<div <div="" class="callout" style="background:rgba(108,140,255,.05);border-left:3px solid var(--blue);padding:1rem;margin:1rem 0;font-size:13.5px;">
+<div class="" class="callout" style="background:rgba(108,140,255,.05);border-left:3px solid var(--blue);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>💡 Why does this work? (Math Intuition):</strong>
 <p style="margin-top:0.4rem;">Pooling works by introducing <strong>translation invariance</strong> and reducing spatial dimensionality. Max pooling extracts the maximum value within a window: $P(i,j) = \max(x_{m,n})$. This keeps the most dominant features (e.g. active edges) while discarding exact spatial coordinates, making the network robust to small translations and rotations of the input, while lowering computational memory requirements.</p>
 </div>
@@ -932,10 +933,10 @@ pooled_max = pool2d_forward(dummy_img, pool_size=<span class="num">2</span>, str
 <div class="rc-title">Backpropagation Calculus — 3Blue1Brown</div>
 <div class="rc-sub">Deep intuitive explanation of chain rule through a network</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=qrkR9Q1fFPE" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=IN2XmBhILt4" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">Backprop in CNNs — DeepLearning.ai</div>
-<div class="rc-sub">Andrew Ng explains backprop through conv layers</div>
+<div class="rc-title">Backpropagation Main Ideas — StatQuest</div>
+<div class="rc-sub">Clear visual walkthrough of how backprop works through a network</div>
 </a>
 <a class="resource-card" href="https://brilliant.org/wiki/backpropagation/" target="_blank">
 <div class="rc-type">📝 ARTICLE</div>
@@ -953,11 +954,7 @@ pooled_max = pool2d_forward(dummy_img, pool_size=<span class="num">2</span>, str
 <div class="rc-sub">NumPy implementation of CNN training loop</div>
 </a>
 </div>
-</div>
-</div><!-- /day-60 -->
-<!-- =======================================================
-     DAY 61 — Building Your First CNN in Keras
-======================================================== -->
+
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🚨 What if you got this wrong? (Common Error):</strong>
 <br/><code style="background:rgba(0,0,0,0.15); padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:12px; color:var(--pink); display:inline-block; margin-top:0.4rem;">RuntimeError: Negative spatial dimensions after MaxPool2d</code>
@@ -971,7 +968,12 @@ pooled_max = pool2d_forward(dummy_img, pool_size=<span class="num">2</span>, str
 <strong>🎤 Asked in interviews at: Flipkart</strong>
 <p style="margin-top:0.4rem;">What is the role of Pooling in CNNs? Does it reduce spatial dimensions or channel counts?</p>
 </div>
-<div class="day-section" data-xp="180" id="day-61" data-xp="180" data-xp="180">
+</div>
+</div><!-- /day-60 -->
+<!-- =======================================================
+     DAY 61 — Building Your First CNN in Keras
+======================================================== -->
+<div class="day-section" id="day-61" data-xp="180">
 <div class="day-header">
 <div class="day-tag">WEEK 9 · DAY 61 · MONTH 3 — COMPUTER VISION</div>
 <h1>Building Custom CNNs in Keras &amp; TensorFlow</h1>
@@ -1048,7 +1050,7 @@ pooled_max = pool2d_forward(dummy_img, pool_size=<span class="num">2</span>, str
     </li>
 </ul>
 <div class="math-block">
-<span class="formula">\text{GAP}(F_c) = \frac{1}{H \times W} \sum_{i=1}^H \sum_{j=1}^W F_c(i, j)</span>
+<span class="formula">$$\text{GAP}(F_c) = \frac{1}{H \times W} \sum_{i=1}^H \sum_{j=1}^W F_c(i, j)$$</span>
 <span class="desc">Where F_c is the 2D feature map for channel c, and H, W are its spatial dimensions.</span>
 </div>
 <p>
@@ -1244,7 +1246,7 @@ profile_model_latency(model)</pre>
 <div class="callout" style="background:rgba(180,124,252,.05);border-left:3px solid var(--purple);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🇮🇳 Localised Connection (real usage):</strong> Ajio builds custom PyTorch CNNs to extract edge, texture, and style feature representations from uploaded fashion images.
   </div>
-<div <div="" class="misconception">
+<div class="" class="misconception">
 <strong>⚠️ Common Misconception:</strong> Padding changes the channel count of feature maps.
     <br/><br/>
 <strong>Fact:</strong> Padding only adds border pixels to control spatial dimensions. Channels are determined by the number of conv filters.
@@ -1270,10 +1272,10 @@ profile_model_latency(model)</pre>
 <div id="day-61-resources-section">
 <h2 class="sh2">📚 Day 61 Resources — ResNet &amp; Norm</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=QIVpF30pIKQ" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=DkNIBBBvcPs" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">ResNet Explained — DeepLearning.ai</div>
-<div class="rc-sub">Understanding skip connections and residual blocks</div>
+<div class="rc-title">ResNet from Scratch — Aladdin Persson</div>
+<div class="rc-sub">Implementation and explanation of skip connections & bottleneck blocks</div>
 </a>
 <a class="resource-card" href="https://www.youtube.com/watch?v=nUUqwaxLnWs" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
@@ -1297,15 +1299,16 @@ profile_model_latency(model)</pre>
 </a>
 </div>
 </div>
-</div><!-- /day-61 -->
-<!-- =======================================================
-     DAY 62 — Advanced Architectures (Intuition)
-======================================================== -->
+
 <div class="callout" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green);padding:0.8rem 1.1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🎤 Asked in interviews at: Ajio</strong>
 <p style="margin-top:0.4rem;">How do you calculate the output shape of a convolutional layer given input size, stride, padding, and kernel size?</p>
-</div>
-<div class="day-section" data-xp="180" id="day-62" data-xp="180" data-xp="180">
+</div></div><!-- /day-61 -->
+<!-- =======================================================
+     DAY 62 — Advanced Architectures (Intuition)
+======================================================== -->
+
+<div class="day-section" id="day-62" data-xp="180">
 <div class="day-header">
 <div class="day-tag">WEEK 9 · DAY 62 · MONTH 3 — COMPUTER VISION</div>
 <h1>Advanced CNN Architectures: ResNet &amp; MobileNet Deep Dive</h1>
@@ -1355,7 +1358,7 @@ profile_model_latency(model)</pre>
     ResNet (He et al., 2015) reformulates the goal: instead of trying to fit $H(x)$, we force the layers to fit a residual mapping:
   </p>
 <div class="math-block">
-<span class="formula">F(x) = H(x) - x \implies H(x) = F(x) + x</span>
+<span class="formula">$$F(x) = H(x) - x \implies H(x) = F(x) + x$$</span>
 </div>
 <p>
     This is implemented via **Residual Shortcuts** (or skip connections).
@@ -1366,7 +1369,7 @@ profile_model_latency(model)</pre>
     for gradients to flow backward without being shrunk by matrix multiplications:
   </p>
 <div class="math-block">
-<span class="formula">\frac{\partial H}{\partial x} = \frac{\partial F(x)}{\partial x} + 1</span>
+<span class="formula">$$\frac{\partial H}{\partial x} = \frac{\partial F(x)}{\partial x} + 1$$</span>
 </div>
 <p>
     Even if the gradient of the residual block $\frac{\partial F(x)}{\partial x}$ vanishes,
@@ -1383,7 +1386,7 @@ profile_model_latency(model)</pre>
     We must apply a **Projection Shortcut** using a $1 \times 1$ convolution to match the shapes:
   </p>
 <div class="math-block">
-<span class="formula">H(x) = F(x) + W_s(x)</span>
+<span class="formula">$$H(x) = F(x) + W_s(x)$$</span>
 <span class="desc">Where W_s is a 1x1 convolution with stride matching the block's spatial downsampling.</span>
 </div>
 <h3 class="sh3">3. MobileNet &amp; Depthwise Separable Convolutions</h3>
@@ -1601,7 +1604,7 @@ profile_model_latency(model)</pre>
 <div class="callout" style="background:rgba(180,124,252,.05);border-left:3px solid var(--purple);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🇮🇳 Localised Connection (real usage):</strong> Nikaa uses deep residual networks (ResNets) to classify skin types and textures from user selfies for personalized makeup matches.
   </div>
-<div <div="" class="misconception">
+<div class="" class="misconception">
 <strong>⚠️ Common Misconception:</strong> Skip connections add computational parameters.
     <br/><br/>
 <strong>Fact:</strong> Skip connections simply perform identity mapping additions, adding zero parameters to the network weights.
@@ -1628,15 +1631,15 @@ profile_model_latency(model)</pre>
 <div id="day-62-resources-section">
 <h2 class="sh2">📚 Day 62 Resources — Advanced Architectures</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=jVf0g8f2_vA" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=XHT2c8jT3Bc" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">YOLOv9 Explained — InsideAI</div>
-<div class="rc-sub">Complete breakdown of YOLO object detection</div>
+<div class="rc-title">YOLOv9 Tutorial — Roboflow</div>
+<div class="rc-sub">Complete breakdown of YOLO object detection — train and deploy</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=R9K69E_1n3k" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=aPu6a5htRXM" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">Pretrained Models & MobileNet — CampusX</div>
-<div class="rc-sub">CampusX · Hinglish, use transfer learning and MobileNet in Keras</div>
+<div class="rc-title">Transfer Learning — CampusX</div>
+<div class="rc-sub">CampusX · Hinglish, transfer learning with PyTorch and pretrained models</div>
 </a>
 <a class="resource-card" href="https://docs.ultralytics.com/" target="_blank">
 <div class="rc-type">📝 ARTICLE</div>
@@ -1655,15 +1658,16 @@ profile_model_latency(model)</pre>
 </a>
 </div>
 </div>
-</div><!-- /day-62 -->
-<!-- =======================================================
-     DAY 63 — Transfer Learning & Fine-Tuning
-======================================================== -->
+
 <div class="callout" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green);padding:0.8rem 1.1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🎤 Asked in interviews at: Nykaa</strong>
 <p style="margin-top:0.4rem;">Why do deep ResNets solve the vanishing gradient problem? Explain skip connections.</p>
-</div>
-<div class="day-section" data-xp="180" id="day-63" data-xp="180" data-xp="180">
+</div></div><!-- /day-62 -->
+<!-- =======================================================
+     DAY 63 — Transfer Learning & Fine-Tuning
+======================================================== -->
+
+<div class="day-section" id="day-63" data-xp="180">
 <div class="day-header">
 <div class="day-tag">WEEK 9 · DAY 63 · MONTH 3 — COMPUTER VISION</div>
 <h1>Object Detection: YOLO &amp; R-CNN Families</h1>
@@ -1735,15 +1739,15 @@ profile_model_latency(model)</pre>
     we calculate the **Intersection over Union (IoU)** metric:
   </p>
 <div class="math-block">
-<span class="formula">\text{IoU} = \frac{\text{Area of Overlap}}{\text{Area of Union}} = \frac{\text{Area}(A \cap B)}{\text{Area}(A \cup B)}</span>
+<span class="formula">$$\text{IoU} = \frac{\text{Area of Overlap}}{\text{Area of Union}} = \frac{\text{Area}(A \cap B)}{\text{Area}(A \cup B)}$$</span>
 </div>
 <p>
     Where bounding boxes are defined by coordinate corners $[x_1, y_1, x_2, y_2]$.
     The intersection coordinates are:
   </p>
 <div class="math-block">
-<span class="formula">x_1^{int} = \max(x_1^A, x_1^B), \quad y_1^{int} = \max(y_1^A, y_1^B)</span>
-<span class="formula">x_2^{int} = \min(x_2^A, x_2^B), \quad y_2^{int} = \min(y_2^A, y_2^B)</span>
+<span class="formula">$$x_1^{int} = \max(x_1^A, x_1^B), \quad y_1^{int} = \max(y_1^A, y_1^B)$$</span>
+<span class="formula">$$x_2^{int} = \min(x_2^A, x_2^B), \quad y_2^{int} = \min(y_2^A, y_2^B)$$</span>
 </div>
 <p>
     If $x_2^{int} &lt; x_1^{int}$ or $y_2^{int} &lt; y_1^{int}$, the boxes do not overlap, and the IoU is 0.
@@ -1757,11 +1761,11 @@ profile_model_latency(model)</pre>
     The network is trained using a massive multi-part loss function that balances coordinates, object confidence, and class probabilities:
   </p>
 <div class="math-block">
-<span class="formula">\mathcal{L}_{\text{YOLO}} = \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^B \mathbb{I}_{ij}^{\text{obj}} \left[ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2 \right]</span>
-<span class="formula">{} + \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^B \mathbb{I}_{ij}^{\text{obj}} \left[ (\sqrt{w_i} - \sqrt{\hat{w}_i})^2 + (\sqrt{h_i} - \sqrt{\hat{h}_i})^2 \right]</span>
-<span class="formula">{} + \sum_{i=0}^{S^2} \sum_{j=0}^B \mathbb{I}_{ij}^{\text{obj}} (C_{ij} - \hat{C}_{ij})^2</span>
-<span class="formula">{} + \lambda_{\text{noobj}} \sum_{i=0}^{S^2} \sum_{j=0}^B \mathbb{I}_{ij}^{\text{noobj}} (C_{ij} - \hat{C}_{ij})^2</span>
-<span class="formula">{} + \sum_{i=0}^{S^2} \mathbb{I}_{i}^{\text{obj}} \sum_{c \in \text{classes}} (p_i(c) - \hat{p}_i(c))^2</span>
+<span class="formula">$$\mathcal{L}_{\text{YOLO}} = \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^B \mathbb{I}_{ij}^{\text{obj}} \left[ (x_i - \hat{x}_i)^2 + (y_i - \hat{y}_i)^2 \right]$$</span>
+<span class="formula">$${} + \lambda_{\text{coord}} \sum_{i=0}^{S^2} \sum_{j=0}^B \mathbb{I}_{ij}^{\text{obj}} \left[ (\sqrt{w_i} - \sqrt{\hat{w}_i})^2 + (\sqrt{h_i} - \sqrt{\hat{h}_i})^2 \right]$$</span>
+<span class="formula">$${} + \sum_{i=0}^{S^2} \sum_{j=0}^B \mathbb{I}_{ij}^{\text{obj}} (C_{ij} - \hat{C}_{ij})^2$$</span>
+<span class="formula">$${} + \lambda_{\text{noobj}} \sum_{i=0}^{S^2} \sum_{j=0}^B \mathbb{I}_{ij}^{\text{noobj}} (C_{ij} - \hat{C}_{ij})^2$$</span>
+<span class="formula">$${} + \sum_{i=0}^{S^2} \mathbb{I}_{i}^{\text{obj}} \sum_{c \in \text{classes}} (p_i(c) - \hat{p}_i(c))^2$$</span>
 </div>
 <p>
     Let's unpack the terms of this equation:
@@ -1971,7 +1975,7 @@ indices_to_keep = nms(test_boxes, test_scores, iou_threshold=<span class="num">0
 <div class="callout" style="background:rgba(180,124,252,.05);border-left:3px solid var(--purple);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🇮🇳 Localised Connection (real usage):</strong> Ola Cabs uses YOLO object detection models to capture street sign coordinates and speed limits from dashcam video feeds.
   </div>
-<div <div="" class="misconception">
+<div class="" class="misconception">
 <strong>⚠️ Common Misconception:</strong> YOLO predicts classification labels for bounding boxes in a second stage.
     <br/><br/>
 <strong>Fact:</strong> YOLO predicts coordinates and classes simultaneously in a single forward pass, making it extremely fast.
@@ -2003,10 +2007,10 @@ indices_to_keep = nms(test_boxes, test_scores, iou_threshold=<span class="num">0
 <div class="rc-title">Transfer Learning — DeepLearning.ai</div>
 <div class="rc-sub">When and how to fine-tune pre-trained models</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=24e1h1UJGnk" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=qaDe0qQZ5AQ" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">Fine-tuning CNNs — freeCodeCamp</div>
-<div class="rc-sub">Hands-on PyTorch transfer learning tutorial</div>
+<div class="rc-title">Transfer Learning & Fine-Tuning — Aladdin Persson</div>
+<div class="rc-sub">Hands-on PyTorch transfer learning tutorial with VGG16 on CIFAR10</div>
 </a>
 <a class="resource-card" href="https://www.geeksforgeeks.org/ml-transfer-learning/" target="_blank">
 <div class="rc-type">📝 ARTICLE</div>
@@ -2025,15 +2029,16 @@ indices_to_keep = nms(test_boxes, test_scores, iou_threshold=<span class="num">0
 </a>
 </div>
 </div>
-</div><!-- /day-63 -->
-<!-- =======================================================
-     DAY 64 — Data Augmentation
-======================================================== -->
+
 <div class="callout" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green);padding:0.8rem 1.1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🎤 Asked in interviews at: Ola Cabs</strong>
 <p style="margin-top:0.4rem;">How does YOLO object detection work? Explain the difference between one-stage and two-stage detectors.</p>
-</div>
-<div class="day-section" data-xp="180" id="day-64" data-xp="180" data-xp="180">
+</div></div><!-- /day-63 -->
+<!-- =======================================================
+     DAY 64 — Data Augmentation
+======================================================== -->
+
+<div class="day-section" id="day-64" data-xp="180">
 <div class="day-header">
 <div class="day-tag">WEEK 9 · DAY 64 · MONTH 3 — COMPUTER VISION</div>
 <h1>Image Segmentation: U-Net &amp; Mask R-CNN Deep Dive</h1>
@@ -2105,7 +2110,7 @@ indices_to_keep = nms(test_boxes, test_scores, iou_threshold=<span class="num">0
     the spatial dimension of the output $O \times O$ is determined by the following formal mathematical formula:
   </p>
 <div class="math-block">
-<span class="formula">O = (I - 1) \times S - 2P + K + OP</span>
+<span class="formula">$$O = (I - 1) \times S - 2P + K + OP$$</span>
 </div>
 <p>
     Let's trace a physical example:
@@ -2134,7 +2139,7 @@ indices_to_keep = nms(test_boxes, test_scores, iou_threshold=<span class="num">0
     it measures overlap directly and is completely independent of background pixel dominance:
   </p>
 <div class="math-block">
-<span class="formula">\text{Dice Loss} = 1 - \frac{2 \sum_{i} p_i g_i}{\sum_{i} p_i^2 + \sum_{i} g_i^2}</span>
+<span class="formula">$$\text{Dice Loss} = 1 - \frac{2 \sum_{i} p_i g_i}{\sum_{i} p_i^2 + \sum_{i} g_i^2}$$</span>
 <span class="desc">Where p_i is the predicted probability for pixel i, and g_i is the ground truth label (0 or 1).</span>
 </div>
 <p>
@@ -2324,7 +2329,7 @@ model.summary()</pre>
 <div class="callout" style="background:rgba(180,124,252,.05);border-left:3px solid var(--purple);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🇮🇳 Localised Connection (real usage):</strong> Netmeds uses U-Net models for semantic segmentation, isolating lung areas in chest X-ray scans to help spot infection sites.
   </div>
-<div <div="" class="misconception">
+<div class="" class="misconception">
 <strong>⚠️ Common Misconception:</strong> U-Net skip connections add encoder features directly.
     <br/><br/>
 <strong>Fact:</strong> U-Net concatenates encoder features along the channel dimension, whereas ResNet adds them element-wise.
@@ -2351,15 +2356,15 @@ model.summary()</pre>
 <div id="day-64-resources-section">
 <h2 class="sh2">📚 Day 64 Resources — Data Augmentation</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=cxWg88AJf3E" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=E_d7xuY4hEk" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">Data Augmentation Guide — Roboflow</div>
-<div class="rc-sub">Practical augmentation strategies for vision</div>
+<div class="rc-title">Data Augmentation — Ultralytics</div>
+<div class="rc-sub">Practical augmentation strategies: resize, normalize, flip, crop in vision pipelines</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=9WtY26tK8Xk" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=rAdLwKJBvPM" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">Albumentations Library — PyImageSearch</div>
-<div class="rc-sub">State-of-the-art image augmentation in Python</div>
+<div class="rc-title">Albumentations Tutorial — Aladdin Persson</div>
+<div class="rc-sub">State-of-the-art image augmentation in Python with PyTorch integration</div>
 </a>
 <a class="resource-card" href="https://albumentations.ai/docs/" target="_blank">
 <div class="rc-type">📖 OFFICIAL</div>
@@ -2378,15 +2383,16 @@ model.summary()</pre>
 </a>
 </div>
 </div>
-</div><!-- /day-64 -->
-<!-- =======================================================
-     DAY 65 — Vision Capstone
-======================================================== -->
+
 <div class="callout" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green);padding:0.8rem 1.1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🎤 Asked in interviews at: Netmeds</strong>
 <p style="margin-top:0.4rem;">Explain the U-Net architecture. Why are skip connections concatenated instead of added?</p>
-</div>
-<div class="day-section" data-xp="400" id="day-65" data-xp="400" data-xp="400">
+</div></div><!-- /day-64 -->
+<!-- =======================================================
+     DAY 65 — Vision Capstone
+======================================================== -->
+
+<div class="day-section" id="day-65" data-xp="400">
 <div class="day-header">
 <div class="day-tag">WEEK 9 · DAY 65 · MONTH 3 — COMPUTER VISION</div>
 <h1>Day 65 — Week 9 Capstone Project: End-to-End Image Classification Pipeline</h1>
@@ -2624,7 +2630,7 @@ CLASS_NAMES = [<span class="str">'airplane'</span>, <span class="str">'automobil
 <div class="callout" style="background:rgba(180,124,252,.05);border-left:3px solid var(--purple);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🇮🇳 Localised Connection (real usage):</strong> Myntra uses Transfer Learning from ImageNet pre-trained ResNets to build custom catalog classification models for new clothing seasons.
   </div>
-<div <div="" class="debug-block">
+<div class="" class="debug-block">
 <div class="debug-label">🛠️ WEEKLY DEBUGGING CHALLENGE</div>
 <h4 style="font-family:var(--font-head); font-size:14px; margin-bottom:0.5rem; color:var(--pink);">Debug: Fully-Connected Input Shape Mismatch</h4>
 <p style="font-size:13px; margin-bottom:0.8rem; line-height:1.6;">A custom CNN model crashes on the first forward pass when transitioning from convolutional layers to linear layers.</p>
@@ -2705,10 +2711,10 @@ class SimpleCNN(nn.Module):
 <div class="resources-grid">
 <a class="resource-card" href="https://www.youtube.com/watch?v=oXlwWbU8l2o" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">End-to-End Vision Project — Patrick Loeber</div>
+<div class="rc-title">End-to-End Vision Project — freeCodeCamp</div>
 <div class="rc-sub">Build a complete image classifier pipeline</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=cr7J3Z7L1Xk" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=Rv6UFGNmNZg" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
 <div class="rc-title">ML Project Workflow — Krish Naik</div>
 <div class="rc-sub">End-to-end ML project structure and deployment</div>
@@ -2753,52 +2759,52 @@ class SimpleCNN(nn.Module):
 <p>In Day 61, we reviewed the forward pass equations for a Batch Normalization layer. Here, we derive the exact backward pass gradients, tracing the flow of error signals through the normalization transformation. This is a classic elite technical question in top-tier research organizations.</p>
 <p>Let $L$ be the scalar loss, and let the forward pass be defined for a mini-batch of size $m$ as:</p>
 <div class="math-block">
-<span class="formula">μ_B = \frac{1}{m} \sum_{i=1}^m x_i</span>
-<span class="formula">\sigma_B^2 = \frac{1}{m} \sum_{i=1}^m (x_i - \mu_B)^2</span>
-<span class="formula">\hat{x}_i = \frac{x_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}</span>
-<span class="formula">y_i = \gamma \hat{x}_i + \beta</span>
+<span class="formula">$$μ_B = \frac{1}{m} \sum_{i=1}^m x_i$$</span>
+<span class="formula">$$\sigma_B^2 = \frac{1}{m} \sum_{i=1}^m (x_i - \mu_B)^2$$</span>
+<span class="formula">$$\hat{x}_i = \frac{x_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}$$</span>
+<span class="formula">$$y_i = \gamma \hat{x}_i + \beta$$</span>
 </div>
 <p>We are given the incoming gradient of the loss with respect to the output, $\frac{\partial L}{\partial y_i}$. We must compute the gradients with respect to the learnable parameters ($\gamma, \beta$) and the input features ($x_i$).</p>
 <h4 class="sh3">A. Gradients for Learnable Parameters</h4>
 <p>Using the multivariate chain rule:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial \beta} = \sum_{i=1}^m \frac{\partial L}{\partial y_i} \cdot \frac{\partial y_i}{\partial \beta} = \sum_{i=1}^m \frac{\partial L}{\partial y_i}</span>
-<span class="desc">Since \frac{\partial y_i}{\partial \beta} = 1.</span>
+<span class="formula">$$\frac{\partial L}{\partial \beta} = \sum_{i=1}^m \frac{\partial L}{\partial y_i} \cdot \frac{\partial y_i}{\partial \beta} = \sum_{i=1}^m \frac{\partial L}{\partial y_i}$$</span>
+<span class="desc">$Since \frac{\partial y_i}{\partial \beta} = 1.$</span>
 </div>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial \gamma} = \sum_{i=1}^m \frac{\partial L}{\partial y_i} \cdot \frac{\partial y_i}{\partial \gamma} = \sum_{i=1}^m \frac{\partial L}{\partial y_i} \hat{x}_i</span>
-<span class="desc">Since \frac{\partial y_i}{\partial \gamma} = \hat{x}_i.</span>
+<span class="formula">$$\frac{\partial L}{\partial \gamma} = \sum_{i=1}^m \frac{\partial L}{\partial y_i} \cdot \frac{\partial y_i}{\partial \gamma} = \sum_{i=1}^m \frac{\partial L}{\partial y_i} \hat{x}_i$$</span>
+<span class="desc">$Since \frac{\partial y_i}{\partial \gamma} = \hat{x}_i.$</span>
 </div>
 <h4 class="sh3">B. Gradients for Input Features (x_i)</h4>
 <p>To compute $\frac{\partial L}{\partial x_i}$, we must trace how $x_i$ affects the loss through three distinct pathways: directly via the normalized term $\hat{x}_i$, indirectly via the batch mean $\mu_B$, and indirectly via the batch variance $\sigma_B^2$.</p>
 <p>First, we define the intermediate gradient with respect to the normalized inputs $\hat{x}_i$:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial \hat{x}_i} = \frac{\partial L}{\partial y_i} \gamma</span>
+<span class="formula">$$\frac{\partial L}{\partial \hat{x}_i} = \frac{\partial L}{\partial y_i} \gamma$$</span>
 </div>
 <p>Second, we compute the gradient with respect to the batch variance $\sigma_B^2$:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial \sigma_B^2} = \sum_{i=1}^m \frac{\partial L}{\partial \hat{x}_i} \cdot \frac{\partial \hat{x}_i}{\partial \sigma_B^2} = \sum_{i=1}^m \frac{\partial L}{\partial \hat{x}_i} \cdot (x_i - \mu_B) \cdot \left( -\frac{1}{2} \right) (\sigma_B^2 + \epsilon)^{-3/2}</span>
+<span class="formula">$$\frac{\partial L}{\partial \sigma_B^2} = \sum_{i=1}^m \frac{\partial L}{\partial \hat{x}_i} \cdot \frac{\partial \hat{x}_i}{\partial \sigma_B^2} = \sum_{i=1}^m \frac{\partial L}{\partial \hat{x}_i} \cdot (x_i - \mu_B) \cdot \left( -\frac{1}{2} \right) (\sigma_B^2 + \epsilon)^{-3/2}$$</span>
 </div>
 <p>Third, we compute the gradient with respect to the batch mean $\mu_B$:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial \mu_B} = \sum_{i=1}^m \frac{\partial L}{\partial \hat{x}_i} \cdot \frac{\partial \hat{x}_i}{\partial \mu_B} + \frac{\partial L}{\partial \sigma_B^2} \cdot \frac{\partial \sigma_B^2}{\partial \mu_B}</span>
-<span class="formula">\frac{\partial L}{\partial \mu_B} = \left( \sum_{i=1}^m \frac{\partial L}{\partial \hat{x}_i} \cdot \frac{-1}{\sqrt{\sigma_B^2 + \epsilon}} \right) + \frac{\partial L}{\partial \sigma_B^2} \cdot \frac{1}{m} \sum_{i=1}^m -2(x_i - \mu_B)</span>
+<span class="formula">$$\frac{\partial L}{\partial \mu_B} = \sum_{i=1}^m \frac{\partial L}{\partial \hat{x}_i} \cdot \frac{\partial \hat{x}_i}{\partial \mu_B} + \frac{\partial L}{\partial \sigma_B^2} \cdot \frac{\partial \sigma_B^2}{\partial \mu_B}$$</span>
+<span class="formula">$$\frac{\partial L}{\partial \mu_B} = \left( \sum_{i=1}^m \frac{\partial L}{\partial \hat{x}_i} \cdot \frac{-1}{\sqrt{\sigma_B^2 + \epsilon}} \right) + \frac{\partial L}{\partial \sigma_B^2} \cdot \frac{1}{m} \sum_{i=1}^m -2(x_i - \mu_B)$$</span>
 </div>
 <p>Combining these three pathways yields the final complete gradient for the input vector $x_i$:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial x_i} = \frac{\partial L}{\partial \hat{x}_i} \cdot \frac{1}{\sqrt{\sigma_B^2 + \epsilon}} + \frac{\partial L}{\partial \sigma_B^2} \cdot \frac{2(x_i - \mu_B)}{m} + \frac{\partial L}{\partial \mu_B} \cdot \frac{1}{m}</span>
+<span class="formula">$$\frac{\partial L}{\partial x_i} = \frac{\partial L}{\partial \hat{x}_i} \cdot \frac{1}{\sqrt{\sigma_B^2 + \epsilon}} + \frac{\partial L}{\partial \sigma_B^2} \cdot \frac{2(x_i - \mu_B)}{m} + \frac{\partial L}{\partial \mu_B} \cdot \frac{1}{m}$$</span>
 </div>
 <p>This closed-form formulation stabilizes backpropagation and guarantees smooth gradient flows through deeply stacked multi-channel networks.</p>
 <h3 class="sh3">2. Recursive Receptive Field Calculation Formula</h3>
 <p>The Receptive Field (RF) of a neuron is the spatial region of the input image that can affect its activation. When stacking multiple convolutional and pooling layers, calculating the receptive field size is critical to ensure your model has sufficient spatial context to detect target structures (e.g. complete faces or roads).</p>
 <p>We can compute the receptive field size recursively from the final layer back to the input layer. Let $RF_{out}$ be the receptive field size of the output layer, and let $RF_{in}$ be the receptive field size of the input layer. The recursive formula is:</p>
 <div class="math-block">
-<span class="formula">RF_{in} = RF_{out} + (K - 1) \cdot J_{prev}</span>
+<span class="formula">$$RF_{in} = RF_{out} + (K - 1) \cdot J_{prev}$$</span>
 <span class="desc">Where K is the kernel size of the current layer, and J_prev is the cumulative jump/stride up to the previous layer.</span>
 </div>
 <p>The jump $J$ is updated at each layer as:</p>
 <div class="math-block">
-<span class="formula">J_{curr} = J_{prev} \cdot S</span>
+<span class="formula">$$J_{curr} = J_{prev} \cdot S$$</span>
 <span class="desc">Where S is the stride of the current layer. (Initial value: RF = 1, J = 1).</span>
 </div>
 <h3 class="sh3">3. Hand-Worked Analytical Backpropagation Worked Trace</h3>
@@ -2806,11 +2812,11 @@ class SimpleCNN(nn.Module):
 <h4 class="sh3">A. Forward Pass Specifications</h4>
 <p>Let's define the input image $X$ of size $3 \times 3$ (single channel, batch size = 1):</p>
 <div class="math-block">
-<span class="formula">X = \begin{bmatrix} 1.0 &amp; 2.0 &amp; 0.0 \\ 0.0 &amp; 3.0 &amp; 1.0 \\ 2.0 &amp; 1.0 &amp; 1.0 \end{bmatrix}</span>
+<span class="formula">$$X = \begin{bmatrix} 1.0 &amp; 2.0 &amp; 0.0 \\ 0.0 &amp; 3.0 &amp; 1.0 \\ 2.0 &amp; 1.0 &amp; 1.0 \end{bmatrix}$$</span>
 </div>
 <p>Let's convolve it with a $2 \times 2$ kernel $W$ (stride = 1, padding = 0):</p>
 <div class="math-block">
-<span class="formula">W = \begin{bmatrix} 1.0 &amp; -1.0 \\ 2.0 &amp; 0.0 \end{bmatrix}</span>
+<span class="formula">$$W = \begin{bmatrix} 1.0 &amp; -1.0 \\ 2.0 &amp; 0.0 \end{bmatrix}$$</span>
 </div>
 <p>Let the bias be $b = -0.5$.</p>
 <h4 class="sh3">Step 1: Compute Linear Output (Z = X * W + b)</h4>
@@ -2827,12 +2833,12 @@ class SimpleCNN(nn.Module):
 </ul>
 <p>Thus, the linear pre-activation feature map is:</p>
 <div class="math-block">
-<span class="formula">Z = \begin{bmatrix} -1.5 &amp; 7.5 \\ 0.5 &amp; 3.5 \end{bmatrix}</span>
+<span class="formula">$$Z = \begin{bmatrix} -1.5 &amp; 7.5 \\ 0.5 &amp; 3.5 \end{bmatrix}$$</span>
 </div>
 <h4 class="sh3">Step 2: Apply ReLU Activation (A = max(0, Z))</h4>
 <p>Applying the rectified linear function element-wise drops the negative value $z_{11} = -1.5$ to zero, leaving the rest unchanged:</p>
 <div class="math-block">
-<span class="formula">A = \begin{bmatrix} 0.0 &amp; 7.5 \\ 0.5 &amp; 3.5 \end{bmatrix}</span>
+<span class="formula">$$A = \begin{bmatrix} 0.0 &amp; 7.5 \\ 0.5 &amp; 3.5 \end{bmatrix}$$</span>
 </div>
 <h4 class="sh3">Step 3: Apply Max Pooling (Y = MaxPool(A))</h4>
 <p>We apply a $2 \times 2$ Max Pooling layer with stride = 1 over our $2 \times 2$ input $A$. The pooling region covers the entire matrix $A$.
@@ -2844,29 +2850,29 @@ class SimpleCNN(nn.Module):
 <h4 class="sh3">Step 1: Gradient with respect to Output (dY = dL / dY)</h4>
 <p>Using basic calculus:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial Y} = Y - T = 7.5 - 8.5 = -1.0</span>
+<span class="formula">$$\frac{\partial L}{\partial Y} = Y - T = 7.5 - 8.5 = -1.0$$</span>
 </div>
 <h4 class="sh3">Step 2: Backpropagation through Max Pooling to Activation A (dA = dL / dA)</h4>
 <p>The pooling layer routes the incoming gradient **only** to the coordinates that held the maximum value in the forward pass.
   <br/>The max mask recorded the peak at coordinate $(0, 1)$. All other inputs in the window receive a gradient of 0:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial A} = \begin{bmatrix} 0.0 &amp; -1.0 \\ 0.0 &amp; 0.0 \end{bmatrix}</span>
+<span class="formula">$$\frac{\partial L}{\partial A} = \begin{bmatrix} 0.0 &amp; -1.0 \\ 0.0 &amp; 0.0 \end{bmatrix}$$</span>
 </div>
 <h4 class="sh3">Step 3: Backpropagation through ReLU to Linear output Z (dZ = dL / dZ)</h4>
 <p>We multiply the activation gradient $\frac{\partial L}{\partial A}$ element-wise by the derivative of the ReLU function, $\mathbb{I}(Z &gt; 0)$:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial Z} = \frac{\partial L}{\partial A} \odot \mathbb{I}(Z &gt; 0) = \begin{bmatrix} 0.0 &amp; -1.0 \\ 0.0 &amp; 0.0 \end{bmatrix} \odot \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 1 \end{bmatrix} = \begin{bmatrix} 0.0 &amp; -1.0 \\ 0.0 &amp; 0.0 \end{bmatrix}</span>
+<span class="formula">$$\frac{\partial L}{\partial Z} = \frac{\partial L}{\partial A} \odot \mathbb{I}(Z &gt; 0) = \begin{bmatrix} 0.0 &amp; -1.0 \\ 0.0 &amp; 0.0 \end{bmatrix} \odot \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 1 \end{bmatrix} = \begin{bmatrix} 0.0 &amp; -1.0 \\ 0.0 &amp; 0.0 \end{bmatrix}$$</span>
 <span class="desc">Since z_{11} was negative (-1.5), its derivative was 0, but its active gradient was already 0.</span>
 </div>
 <h4 class="sh3">Step 4: Gradient with respect to Bias (db = dL / db)</h4>
 <p>The derivative of $Z$ with respect to $b$ is 1. Summing the gradients of $\frac{\partial L}{\partial Z}$ across all spatial coordinates:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial b} = \sum_{i,j} \frac{\partial L}{\partial z_{ij}} = 0.0 + (-1.0) + 0.0 + 0.0 = -1.0</span>
+<span class="formula">$$\frac{\partial L}{\partial b} = \sum_{i,j} \frac{\partial L}{\partial z_{ij}} = 0.0 + (-1.0) + 0.0 + 0.0 = -1.0$$</span>
 </div>
 <h4 class="sh3">Step 5: Gradient with respect to Kernel Weights (dW = dL / dW)</h4>
 <p>The gradient of the weights is computed by convolving the input image patches with the incoming spatial gradient $\frac{\partial L}{\partial Z}$:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial W_{k,l}} = \sum_{i=0}^1 \sum_{j=0}^1 \frac{\partial L}{\partial z_{i,j}} \cdot X_{i+k, j+l}</span>
+<span class="formula">$$\frac{\partial L}{\partial W_{k,l}} = \sum_{i=0}^1 \sum_{j=0}^1 \frac{\partial L}{\partial z_{i,j}} \cdot X_{i+k, j+l}$$</span>
 </div>
 <p>Let's calculate each element of the $2 \times 2$ gradient matrix $\frac{\partial L}{\partial W}$:</p>
 <ul class="prose-list">
@@ -2881,12 +2887,12 @@ class SimpleCNN(nn.Module):
 </ul>
 <p>Therefore, the weight update gradient is:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial W} = \begin{bmatrix} -2.0 &amp; 0.0 \\ -3.0 &amp; -1.0 \end{bmatrix}</span>
+<span class="formula">$$\frac{\partial L}{\partial W} = \begin{bmatrix} -2.0 &amp; 0.0 \\ -3.0 &amp; -1.0 \end{bmatrix}$$</span>
 </div>
 <h4 class="sh3">Step 6: Gradient with respect to Input Pixel Grid X (dX = dL / dX)</h4>
 <p>To pass gradients back to earlier layers, we compute the derivative with respect to each pixel of $X$. This is achieved by convolving the flipped kernel weights with the padded gradient map $\frac{\partial L}{\partial Z}$:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial x_{r,s}} = \sum_{i,j} \frac{\partial L}{\partial z_{i,j}} \cdot W_{r-i, s-j}</span>
+<span class="formula">$$\frac{\partial L}{\partial x_{r,s}} = \sum_{i,j} \frac{\partial L}{\partial z_{i,j}} \cdot W_{r-i, s-j}$$</span>
 </div>
 <p>For example, for the central input pixel $x_{11} = 3.0$ (located at index (1,1)):
   <br/>The relevant linear terms that depended on $x_{11}$ in the forward pass are:
@@ -2896,8 +2902,8 @@ class SimpleCNN(nn.Module):
   <br/>- $z_{22}$ (bottom-right, multiplied by $W_{11} = 1.0$).
   <br/>Summing these up with their spatial gradients:</p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial x_{11}} = \left( \frac{\partial L}{\partial z_{11}} \cdot 0.0 \right) + \left( \frac{\partial L}{\partial z_{12}} \cdot 2.0 \right) + \left( \frac{\partial L}{\partial z_{21}} \cdot -1.0 \right) + \left( \frac{\partial L}{\partial z_{22}} \cdot 1.0 \right)</span>
-<span class="formula">\frac{\partial L}{\partial x_{11}} = (0.0 \cdot 0.0) + (-1.0 \cdot 2.0) + (0.0 \cdot -1.0) + (0.0 \cdot 1.0) = -2.0</span>
+<span class="formula">$$\frac{\partial L}{\partial x_{11}} = \left( \frac{\partial L}{\partial z_{11}} \cdot 0.0 \right) + \left( \frac{\partial L}{\partial z_{12}} \cdot 2.0 \right) + \left( \frac{\partial L}{\partial z_{21}} \cdot -1.0 \right) + \left( \frac{\partial L}{\partial z_{22}} \cdot 1.0 \right)$$</span>
+<span class="formula">$$\frac{\partial L}{\partial x_{11}} = (0.0 \cdot 0.0) + (-1.0 \cdot 2.0) + (0.0 \cdot -1.0) + (0.0 \cdot 1.0) = -2.0$$</span>
 </div>
 <p>This reveals the mathematical precision of backpropagation in deep spatial neural networks!</p>
 </div>

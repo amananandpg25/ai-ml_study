@@ -309,7 +309,7 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
 </div>
 </aside>
 <main class="main">
-<div class="day-section active" data-xp="190" id="day-66" data-xp="190" data-xp="190">
+<div class="day-section active" id="day-66" data-xp="190">
 <div class="day-header">
 <div class="day-tag">WEEK 10 · DAY 66 · MONTH 3 — SEQUENCE MODELING</div>
 <h1>RNN Hidden States &amp; Vanishing Gradients</h1>
@@ -374,14 +374,14 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
     RNNs solve this by incorporating a **recurrent hidden state** ($h_t$) that acts as a memory track, passing information forward through time:
   </p>
 <div class="math-block">
-<span class="formula">h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t + b_h)</span>
+<span class="formula">$$h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t + b_h)$$</span>
 <span class="desc">Where h_t is the hidden state at step t, W_{hh} is the recurrent weight matrix, and W_{xh} is the input weight matrix.</span>
 </div>
 <p>
     The output projection at each step is calculated as:
   </p>
 <div class="math-block">
-<span class="formula">\hat{y}_t = \text{softmax}(W_{hy} h_t + b_y)</span>
+<span class="formula">$$\hat{y}_t = \text{softmax}(W_{hy} h_t + b_y)$$</span>
 </div>
 <h3 class="sh3">2. Recurrent Unrolling through Time</h3>
 <p>
@@ -404,19 +404,19 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
     Using the chain rule across $T$ steps:
   </p>
 <div class="math-block">
-<span class="formula">\frac{\partial L}{\partial W_{hh}} = \sum_{t=1}^T \frac{\partial L_t}{\partial W_{hh}}</span>
+<span class="formula">$$\frac{\partial L}{\partial W_{hh}} = \sum_{t=1}^T \frac{\partial L_t}{\partial W_{hh}}$$</span>
 </div>
 <p>
     For any step $t$, the derivative depends on the historical hidden state transitions:
   </p>
 <div class="math-block">
-<span class="formula">\frac{\partial L_t}{\partial W_{hh}} = \sum_{k=1}^t \frac{\partial L_t}{\partial h_t} \frac{\partial h_t}{\partial h_k} \frac{\partial h_k}{\partial W_{hh}}</span>
+<span class="formula">$$\frac{\partial L_t}{\partial W_{hh}} = \sum_{k=1}^t \frac{\partial L_t}{\partial h_t} \frac{\partial h_t}{\partial h_k} \frac{\partial h_k}{\partial W_{hh}}$$</span>
 </div>
 <p>
     The middle term $\frac{\partial h_t}{\partial h_k}$ is computed as a chain of single-step Jacobian matrices:
   </p>
 <div class="math-block">
-<span class="formula">\frac{\partial h_t}{\partial h_k} = \prod_{j=k+1}^t \frac{\partial h_j}{\partial h_{j-1}} = \prod_{j=k+1}^t \text{diag}(1 - h_j^2) \cdot W_{hh}^T</span>
+<span class="formula">$$\frac{\partial h_t}{\partial h_k} = \prod_{j=k+1}^t \frac{\partial h_j}{\partial h_{j-1}} = \prod_{j=k+1}^t \text{diag}(1 - h_j^2) \cdot W_{hh}^T$$</span>
 </div>
 <p>
     &gt; [!IMPORTANT]
@@ -574,7 +574,7 @@ h = np.zeros((h_dim, <span class="num">1</span>))
 <div class="callout" style="background:rgba(180,124,252,.05);border-left:3px solid var(--purple);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🇮🇳 Localised Connection (real usage):</strong> MakeMyTrip utilizes Recurrent Neural Networks (RNNs) to parse sequential flight search queries and recommend dynamic package deals.
   </div>
-<div <div="" class="misconception">
+<div class="misconception">
 <strong>⚠️ Common Misconception:</strong> Vanilla RNNs can store sequence histories indefinitely.
     <br/><br/>
 <strong>Fact:</strong> Vanilla RNNs suffer from vanishing gradients, losing context after 10-15 sequence steps.
@@ -601,15 +601,15 @@ h = np.zeros((h_dim, <span class="num">1</span>))
 <div id="day-66-resources-section">
 <h2 class="sh2">📚 Day 66 Resources — RNNs</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=WMN5qC1eOXA" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=AsNTP8Kwu80" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">RNNs Explained — 3Blue1Brown</div>
-<div class="rc-sub">Neural networks and sequence processing</div>
+<div class="rc-title">RNNs Explained — StatQuest</div>
+<div class="rc-sub">StatQuest · Clear and visual recurrent neural networks explanation</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=2E65LDnMfVU" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=AsNTP8Kwu80" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">Recurrent Neural Networks — DeepLearning.ai</div>
-<div class="rc-sub">Andrew Ng's RNN lecture from the deep learning specialization</div>
+<div class="rc-title">RNNs Explained — StatQuest</div>
+<div class="rc-sub">StatQuest · Clear and visual recurrent neural networks explanation</div>
 </a>
 <a class="resource-card" href="https://pytorch.org/docs/stable/generated/torch.nn.RNN.html" target="_blank">
 <div class="rc-type">📖 OFFICIAL</div>
@@ -628,12 +628,13 @@ h = np.zeros((h_dim, <span class="num">1</span>))
 </a>
 </div>
 </div>
-</div><!-- /day-66 -->
+
 <div class="callout" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green);padding:0.8rem 1.1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🎤 Asked in interviews at: MakeMyTrip</strong>
 <p style="margin-top:0.4rem;">Why do standard RNNs struggle with long-term dependencies? Explain vanishing gradients over time.</p>
-</div>
-<div class="day-section" data-xp="190" id="day-67" data-xp="190" data-xp="190">
+</div></div><!-- /day-66 -->
+
+<div class="day-section" id="day-67" data-xp="190">
 <div class="day-header">
 <div class="day-tag">WEEK 10 · DAY 67 · MONTH 3 — SEQUENCE MODELING</div>
 <h1>LSTM &amp; GRU Cells</h1>
@@ -677,22 +678,22 @@ h = np.zeros((h_dim, <span class="num">1</span>))
     The flow is regulated by three sigmoid-activated **gates**:
   </p>
 <div class="math-block">
-<span class="formula">f_t = \sigma(W_f x_t + U_f h_{t-1} + b_f) \quad \text{[Forget Gate]}</span>
-<span class="formula">i_t = \sigma(W_i x_t + U_i h_{t-1} + b_i) \quad \text{[Input Gate]}</span>
-<span class="formula">\tilde{C}_t = \tanh(W_c x_t + U_c h_{t-1} + b_c) \quad \text{[Candidate State]}</span>
+<span class="formula">$$f_t = \sigma(W_f x_t + U_f h_{t-1} + b_f) \quad \text{[Forget Gate]}$$</span>
+<span class="formula">$$i_t = \sigma(W_i x_t + U_i h_{t-1} + b_i) \quad \text{[Input Gate]}$$</span>
+<span class="formula">$$\tilde{C}_t = \tanh(W_c x_t + U_c h_{t-1} + b_c) \quad \text{[Candidate State]}$$</span>
 </div>
 <p>
     The Cell State is updated by multiplying the past cell state by the Forget Gate, and adding the new Candidate State scaled by the Input Gate:
   </p>
 <div class="math-block">
-<span class="formula">C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t</span>
-<span class="desc">Where \odot is the Hadamard (element-wise) product.</span>
+<span class="formula">$$C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t$$</span>
+<span class="desc">$Where \odot is the Hadamard (element-wise) product.$</span>
 </div>
 <p>
     Finally, the Output Gate determines what to project from the cell state to the new hidden state:
   </p>
 <div class="math-block">
-<span class="formula">o_t = \sigma(W_o x_t + U_o h_{t-1} + b_o), \quad h_t = o_t \odot \tanh(C_t)</span>
+<span class="formula">$$o_t = \sigma(W_o x_t + U_o h_{t-1} + b_o), \quad h_t = o_t \odot \tanh(C_t)$$</span>
 </div>
 <h3 class="sh3">2. Gated Recurrent Unit (GRU) Mechanics</h3>
 <p>
@@ -702,19 +703,19 @@ h = np.zeros((h_dim, <span class="num">1</span>))
 <ul class="prose-list">
 <li>
 <strong>Update Gate ($z_t$):</strong> Decides how much of the past hidden state is copied to the current state (acts as forget and input gate combined).
-      <div class="math-block"><span class="formula">z_t = \sigma(W_z x_t + U_z h_{t-1} + b_z)</span></div>
+      <div class="math-block"><span class="formula">$$z_t = \sigma(W_z x_t + U_z h_{t-1} + b_z)$$</span></div>
 </li>
 <li>
 <strong>Reset Gate ($r_t$):</strong> Decides how much of the past hidden state is ignored when computing the candidate state.
-      <div class="math-block"><span class="formula">r_t = \sigma(W_r x_t + U_r h_{t-1} + b_r)</span></div>
+      <div class="math-block"><span class="formula">$$r_t = \sigma(W_r x_t + U_r h_{t-1} + b_r)$$</span></div>
 </li>
 </ul>
 <p>
     The Candidate State and final Hidden State updates are formulated as:
   </p>
 <div class="math-block">
-<span class="formula">\tilde{h}_t = \tanh(W_h x_t + U_h (r_t \odot h_{t-1}) + b_h)</span>
-<span class="formula">h_t = (1 - z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t</span>
+<span class="formula">$$\tilde{h}_t = \tanh(W_h x_t + U_h (r_t \odot h_{t-1}) + b_h)$$</span>
+<span class="formula">$$h_t = (1 - z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t$$</span>
 </div>
 <h3 class="sh3">3. Mathematical Gating &amp; Blending Dry-Run</h3>
 <p>
@@ -879,7 +880,7 @@ model.fit(X, y, epochs=<span class="num">2</span>, batch_size=<span class="num">
 <div class="callout" style="background:rgba(180,124,252,.05);border-left:3px solid var(--purple);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🇮🇳 Localised Connection (real usage):</strong> Flipkart sentiment analyzer parses raw product reviews character-by-character using recurrent networks to identify negative reviews early.
   </div>
-<div <div="" class="misconception">
+<div class="misconception">
 <strong>⚠️ Common Misconception:</strong> Backpropagation Through Time hamesha baseline parameters ke sath bina tuning ke perfectly kaam karega.
     <br/><br/>
 <strong>Fact:</strong> Har dataset ki characteristics alag hoti hain, isliye hyperparameter tuning aur proper features scaling model performance ke liye zaroori hain.
@@ -911,10 +912,10 @@ model.fit(X, y, epochs=<span class="num">2</span>, batch_size=<span class="num">
 <div class="rc-title">LSTM Explained — StatQuest</div>
 <div class="rc-sub">Long Short-Term Memory networks — the clearest explanation</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=Z_j-MjBv4CE" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=QQfZAoNGQmE" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">GRU Explained — DeepLearning.ai</div>
-<div class="rc-sub">Gated Recurrent Units — simpler alternative to LSTM</div>
+<div class="rc-title">Gated Recurrent Unit (GRU) — CampusX</div>
+<div class="rc-sub">CampusX · Hinglish, intuitive gate-by-gate visual explanation</div>
 </a>
 <a class="resource-card" href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank">
 <div class="rc-type">📝 ARTICLE</div>
@@ -933,12 +934,13 @@ model.fit(X, y, epochs=<span class="num">2</span>, batch_size=<span class="num">
 </a>
 </div>
 </div>
-</div><!-- /day-67 -->
+
 <div class="callout" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green);padding:0.8rem 1.1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🎤 Asked in interviews at: Flipkart</strong>
 <p style="margin-top:0.4rem;">How does Backpropagation Through Time (BPTT) work? What is the role of gradient clipping?</p>
-</div>
-<div class="day-section" data-xp="190" id="day-68" data-xp="190" data-xp="190">
+</div></div><!-- /day-67 -->
+
+<div class="day-section" id="day-68" data-xp="190">
 <div class="day-header">
 <div class="day-tag">WEEK 10 · DAY 68 · MONTH 3 — SEQUENCE MODELING</div>
 <h1>Deep Stacked LSTMs &amp; Overfitting</h1>
@@ -981,8 +983,8 @@ model.fit(X, y, epochs=<span class="num">2</span>, batch_size=<span class="num">
     In a **Stacked LSTM**, the hidden state vectors computed by the first layer act as the input vectors for the second layer:
   </p>
 <div class="math-block">
-<span class="formula">h_t^{(1)} = \text{LSTM}^{(1)}(x_t, h_{t-1}^{(1)})</span>
-<span class="formula">h_t^{(2)} = \text{LSTM}^{(2)}(h_t^{(1)}, h_{t-1}^{(2)})</span>
+<span class="formula">$$h_t^{(1)} = \text{LSTM}^{(1)}(x_t, h_{t-1}^{(1)})$$</span>
+<span class="formula">$$h_t^{(2)} = \text{LSTM}^{(2)}(h_t^{(1)}, h_{t-1}^{(2)})$$</span>
 </div>
 <p>
     This allows the model to learn hierarchical temporal representations.
@@ -1038,8 +1040,8 @@ model.fit(X, y, epochs=<span class="num">2</span>, batch_size=<span class="num">
     This protects the temporal memory track while preventing co-adaptation of weights:
   </p>
 <div class="math-block">
-<span class="formula">g_t = \text{sigm}(W_g x_t + U_g (h_{t-1} \odot \mathbf{m}) + b_g)</span>
-<span class="desc">Where \mathbf{m} is the constant recurrent dropout mask vector applied element-wise.</span>
+<span class="formula">$$g_t = \text{sigm}(W_g x_t + U_g (h_{t-1} \odot \mathbf{m}) + b_g)$$</span>
+<span class="desc">$Where \mathbf{m} is the constant recurrent dropout mask vector applied element-wise.$</span>
 </div>
 <h3 class="sh3">5. Stacked LSTM Implementation in Keras</h3>
 <p>
@@ -1194,7 +1196,7 @@ model.fit(X, y, epochs=<span class="num">2</span>, batch_size=<span class="num">
 <div class="callout" style="background:rgba(180,124,252,.05);border-left:3px solid var(--purple);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🇮🇳 Localised Connection (real usage):</strong> Swiggy uses LSTMs to model weekly sequence dynamics of kitchen inventory demands, avoiding food wastage.
   </div>
-<div <div="" class="misconception">
+<div class="misconception">
 <strong>⚠️ Common Misconception:</strong> LSTM cells gates do not require activation limits.
     <br/><br/>
 <strong>Fact:</strong> LSTM gates use sigmoid activations (range 0 to 1) to act as valves, controlling exact information flow.
@@ -1221,15 +1223,15 @@ model.fit(X, y, epochs=<span class="num">2</span>, batch_size=<span class="num">
 <div id="day-68-resources-section">
 <h2 class="sh2">📚 Day 68 Resources — Bidirectional RNNs &amp; Seq2Seq</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=4a2qP1e7fyQ" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=k2NSm3MNdYg" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">Bidirectional RNNs — DeepLearning.ai</div>
-<div class="rc-sub">Processing sequences in both directions</div>
+<div class="rc-title">Bidirectional RNNs &amp; LSTMs — CampusX</div>
+<div class="rc-sub">CampusX · Hinglish, bidirectional sequence processing</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=gTx1w3xQwSQ" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=L8HKweZIOmg" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">Seq2Seq Models — DeepLearning.ai</div>
-<div class="rc-sub">Encoder-decoder architecture for sequence transduction</div>
+<div class="rc-title">Seq2Seq Models — StatQuest</div>
+<div class="rc-sub">StatQuest · Visual explanation of encoder-decoder sequence networks</div>
 </a>
 <a class="resource-card" href="https://distill.pub/2016/augmented-rnns/" target="_blank">
 <div class="rc-type">📝 ARTICLE</div>
@@ -1248,12 +1250,13 @@ model.fit(X, y, epochs=<span class="num">2</span>, batch_size=<span class="num">
 </a>
 </div>
 </div>
-</div><!-- /day-68 -->
+
 <div class="callout" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green);padding:0.8rem 1.1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🎤 Asked in interviews at: Swiggy</strong>
 <p style="margin-top:0.4rem;">How do the gates in an LSTM cell manage memory? Explain forget, input, and output gates.</p>
-</div>
-<div class="day-section" data-xp="190" id="day-69" data-xp="190" data-xp="190">
+</div></div><!-- /day-68 -->
+
+<div class="day-section" id="day-69" data-xp="190">
 <div class="day-header">
 <div class="day-tag">WEEK 10 · DAY 69 · MONTH 3 — SEQUENCE MODELING</div>
 <h1>Time Series Forecasting with LSTMs</h1>
@@ -1301,7 +1304,7 @@ model.fit(X, y, epochs=<span class="num">2</span>, batch_size=<span class="num">
     and the subsequent value $s_{t+W}$ as our target ($y$):
   </p>
 <div class="math-block">
-<span class="formula">X_t = [s_t, s_{t+1}, \dots, s_{t+W-1}], \quad y_t = s_{t+W}</span>
+<span class="formula">$$X_t = [s_t, s_{t+1}, \dots, s_{t+W-1}], \quad y_t = s_{t+W}$$</span>
 </div>
 <p>
     For a window size $W=4$, the sequence $S = [10, 11, 12, 13, 14, 15]$ is transformed into:
@@ -1335,8 +1338,8 @@ model.fit(X, y, epochs=<span class="num">2</span>, batch_size=<span class="num">
     Any minor prediction error at step $t+1$ is treated as absolute ground-truth fact during the next step, causing errors to compound exponentially over the forecast horizon:
   </p>
 <div class="math-block">
-<span class="formula">e_{t+H} \propto (1 + \lambda)^H \cdot e_{t+1}</span>
-<span class="desc">Where \lambda is the error propagation constant. Error increases exponentially over the horizon.</span>
+<span class="formula">$$e_{t+H} \propto (1 + \lambda)^H \cdot e_{t+1}$$</span>
+<span class="desc">$Where \lambda is the error propagation constant. Error increases exponentially over the horizon.$</span>
 </div>
 <p>
     Let's trace this decay with a concrete decimal matrix dry-run.
@@ -1518,7 +1521,7 @@ model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=<span class="
 <div class="callout" style="background:rgba(180,124,252,.05);border-left:3px solid var(--purple);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🇮🇳 Localised Connection (real usage):</strong> BookMyShow uses GRUs to analyze real-time sequence patterns of seat selections, flagging automated ticket-booking bots.
   </div>
-<div <div="" class="misconception">
+<div class="misconception">
 <strong>⚠️ Common Misconception:</strong> GRU cells are always more accurate than LSTM cells.
     <br/><br/>
 <strong>Fact:</strong> GRUs are computationally faster and use fewer parameters, but LSTMs can outperform them on long, complex sequence datasets.
@@ -1572,12 +1575,13 @@ model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=<span class="
 </a>
 </div>
 </div>
-</div><!-- /day-69 -->
+
 <div class="callout" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green);padding:0.8rem 1.1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🎤 Asked in interviews at: BookMyShow</strong>
 <p style="margin-top:0.4rem;">Compare GRU vs LSTM architectures. Which one is computationally lighter and why?</p>
-</div>
-<div class="day-section" data-xp="190" id="day-70" data-xp="190" data-xp="190">
+</div></div><!-- /day-69 -->
+
+<div class="day-section" id="day-70" data-xp="190">
 <div class="day-header">
 <div class="day-tag">WEEK 10 · DAY 70 · MONTH 3 — SEQUENCE MODELING</div>
 <h1>Tokenization &amp; Word Embeddings</h1>
@@ -1650,7 +1654,7 @@ model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=<span class="
     Instead of hardcoding these values, we initialize a **trainable embedding matrix** $E$:
   </p>
 <div class="math-block">
-<span class="formula">E \in \mathbb{R}^{V \times D}</span>
+<span class="formula">$$E \in \mathbb{R}^{V \times D}$$</span>
 <span class="desc">Where V is the vocabulary size and D is the embedding dimension. Each row represents a learnable vector for a specific word.</span>
 </div>
 <p>
@@ -1659,7 +1663,7 @@ model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=<span class="
     Mathematically, this is equivalent to multiplying the one-hot vector $v_i \in \mathbb{R}^{1 \times V}$ by the embedding projection matrix $E$:
   </p>
 <div class="math-block">
-<span class="formula">e_i = v_i \cdot E</span>
+<span class="formula">$$e_i = v_i \cdot E$$</span>
 </div>
 <p>
     During training, the weights of $E$ are updated via backpropagation.
@@ -1687,14 +1691,14 @@ model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=<span class="
     The hidden state recurrent step equation simplifies to:
   </p>
 <div class="math-block">
-<span class="formula">h_t = \tanh(W_{hh} h_{t-1} + W_{xh} \mathbf{0} + b_h) = \tanh(W_{hh} h_{t-1} + b_h)</span>
+<span class="formula">$$h_t = \tanh(W_{hh} h_{t-1} + W_{xh} \mathbf{0} + b_h) = \tanh(W_{hh} h_{t-1} + b_h)$$</span>
 </div>
 <p>
     Since $\tanh$ is a contracting mapping (with a derivative $\le 1.0$),
     applying this step repeatedly over $M$ padding steps causes the hidden state to decay exponentially towards the activation of the bias vector:
   </p>
 <div class="math-block">
-<span class="formula">\lim_{M \to \infty} h_{t+M} = \tanh(b_h)</span>
+<span class="formula">$$\lim_{M \to \infty} h_{t+M} = \tanh(b_h)$$</span>
 </div>
 <p>
     Let's trace this decay with a concrete decimal matrix dry-run.
@@ -1865,7 +1869,7 @@ embedded_tensors = embedding_layer(padded)
 <div class="callout" style="background:rgba(180,124,252,.05);border-left:3px solid var(--purple);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🇮🇳 Localised Connection (real usage):</strong> Paytm uses Bidirectional LSTMs to process transaction histories forward and backward, spotting suspicious cash-out sequences.
   </div>
-<div <div="" class="misconception">
+<div class="misconception">
 <strong>⚠️ Common Misconception:</strong> Bidirectional sequence models hamesha baseline parameters ke sath bina tuning ke perfectly kaam karega.
     <br/><br/>
 <strong>Fact:</strong> Har dataset ki characteristics alag hoti hain, isliye hyperparameter tuning aur proper features scaling model performance ke liye zaroori hain.
@@ -1892,15 +1896,15 @@ embedded_tensors = embedding_layer(padded)
 <div id="day-70-resources-section">
 <h2 class="sh2">📚 Day 70 Resources — BERT &amp; Pretrained Models</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=1I3K9RSd6tI" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=GDN649X_acE" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">BERT Explained — DeepLearning.ai</div>
-<div class="rc-sub">Pre-training and fine-tuning BERT for NLP tasks</div>
+<div class="rc-title">BERT &amp; Encoder-Only Transformers — StatQuest</div>
+<div class="rc-sub">StatQuest · Visual explanation of BERT pre-training and RAG utility</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=3VBVfMIm8yA" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=QEaBAZQCtwE" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">Hugging Face Transformers — CodeEmporium</div>
-<div class="rc-sub">Using the transformers library for NLP</div>
+<div class="rc-title">Hugging Face Transformers — AssemblyAI</div>
+<div class="rc-sub">AssemblyAI · Getting started with pipeline, tokenizer, and model APIs in 15 mins</div>
 </a>
 <a class="resource-card" href="https://arxiv.org/abs/1810.04805" target="_blank">
 <div class="rc-type">📖 OFFICIAL</div>
@@ -1919,12 +1923,13 @@ embedded_tensors = embedding_layer(padded)
 </a>
 </div>
 </div>
-</div><!-- /day-70 -->
+
 <div class="callout" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green);padding:0.8rem 1.1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🎤 Asked in interviews at: Paytm</strong>
 <p style="margin-top:0.4rem;">Explain Bidirectional sequence models. When are they useful, and when can they NOT be used?</p>
-</div>
-<div class="day-section" data-xp="190" id="day-71" data-xp="190" data-xp="190">
+</div></div><!-- /day-70 -->
+
+<div class="day-section" id="day-71" data-xp="190">
 <div class="day-header">
 <div class="day-tag">WEEK 10 · DAY 71 · MONTH 3 — SEQUENCE MODELING</div>
 <h1>Project: Movie Review Sentiment Classifier</h1>
@@ -1976,10 +1981,10 @@ embedded_tensors = embedding_layer(padded)
   </p>
 <div class="mermaid">
       graph TD
-      subgraph Std [""Standard Dropout""]
+      subgraph Std ["Standard Dropout"]
       S1["Drop individual random elements in sequence embedding tensor"]
       end
-      subgraph Spat [""Spatial Dropout 1D""]
+      subgraph Spat ["Spatial Dropout 1D"]
       S2["Drop entire channels/feature columns across all timesteps"]
       end
     </div>
@@ -2223,7 +2228,7 @@ Epoch 00004: early stopping</pre>
 <div class="callout" style="background:rgba(180,124,252,.05);border-left:3px solid var(--purple);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🇮🇳 Localised Connection (real usage):</strong> Zomato analyzes customer chat transcripts using sequence models to automate instant refund approvals for missing orders.
   </div>
-<div <div="" class="misconception">
+<div class="misconception">
 <strong>⚠️ Common Misconception:</strong> Tokenization splits text by spaces only.
     <br/><br/>
 <strong>Fact:</strong> Tokenizers handle punctuation, contractions, and subword parts, mapping raw sequences to vocabulary integer IDs.
@@ -2250,12 +2255,12 @@ Epoch 00004: early stopping</pre>
 <div id="day-71-resources-section">
 <h2 class="sh2">📚 Day 71 Resources — NLP Preprocessing</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=BNJdtYOYipE" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=ENLEjGozrio" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
 <div class="rc-title">NLP Preprocessing — Krish Naik</div>
 <div class="rc-sub">Complete text preprocessing pipeline for Hindi/English</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=aG-0V1Q1U0E" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=JgnbwKnHMZQ" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
 <div class="rc-title">Sentiment Analysis using LSTM — CampusX</div>
 <div class="rc-sub">CampusX · Hinglish, build a sentiment classifier from scratch</div>
@@ -2277,12 +2282,13 @@ Epoch 00004: early stopping</pre>
 </a>
 </div>
 </div>
-</div><!-- /day-71 -->
+
 <div class="callout" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green);padding:0.8rem 1.1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🎤 Asked in interviews at: Zomato</strong>
 <p style="margin-top:0.4rem;">How do Word Embeddings work? Explain the difference between static embeddings (Word2Vec) and contextual embeddings (BERT).</p>
-</div>
-<div class="day-section" data-xp="450" id="day-72" data-xp="450" data-xp="450">
+</div></div><!-- /day-71 -->
+
+<div class="day-section" id="day-72" data-xp="450">
 <div class="day-header">
 <div class="day-tag">WEEK 10 · DAY 72 · MONTH 3 — SEQUENCE MODELING</div>
 <h1>Capstone Validation &amp; Edge Deployment</h1>
@@ -2329,8 +2335,8 @@ Epoch 00004: early stopping</pre>
     If it exceeds a maximum threshold $c$, we scale the gradient down proportionally:
   </p>
 <div class="math-block">
-<span class="formula">g = \begin{cases} g &amp; \text{if } \|g\|_2 \le c \\ c \cdot \frac{g}{\|g\|_2} &amp; \text{if } \|g\|_2 &gt; c \end{cases}</span>
-<span class="desc">Where \|g\|_2 is the Euclidean L2 norm of the entire model gradient vector.</span>
+<span class="formula">$$g = \begin{cases} g &amp; \text{if } \|g\|_2 \le c \\ c \cdot \frac{g}{\|g\|_2} &amp; \text{if } \|g\|_2 &gt; c \end{cases}$$</span>
+<span class="desc">$Where \|g\|_2 is the Euclidean L2 norm of the entire model gradient vector.$</span>
 </div>
 <p>
     This keeps the gradient direction unchanged but bounds its step size, ensuring training remains stable.
@@ -2345,8 +2351,8 @@ Epoch 00004: early stopping</pre>
     LN calculates the mean and variance across the **feature dimension** for a single sequence element at the current step:
   </p>
 <div class="math-block">
-<span class="formula">\mu = \frac{1}{H} \sum_{i=1}^H h_i, \quad \sigma^2 = \frac{1}{H} \sum_{i=1}^H (h_i - \mu)^2</span>
-<span class="formula">\hat{h}_i = \gamma \cdot \frac{h_i - \mu}{\sqrt{\sigma^2 + \epsilon}} + \beta</span>
+<span class="formula">$$\mu = \frac{1}{H} \sum_{i=1}^H h_i, \quad \sigma^2 = \frac{1}{H} \sum_{i=1}^H (h_i - \mu)^2$$</span>
+<span class="formula">$$\hat{h}_i = \gamma \cdot \frac{h_i - \mu}{\sqrt{\sigma^2 + \epsilon}} + \beta$$</span>
 </div>
 <p>
     This normalizes the activations of each hidden layer independently of the batch size, making it highly effective for variable-length recurrent networks.
@@ -2590,7 +2596,7 @@ sentiment, prob, latency = pipeline.predict_with_latency(review, mock_lstm_model
 <div class="callout" style="background:rgba(180,124,252,.05);border-left:3px solid var(--purple);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🇮🇳 Localised Connection (real usage):</strong> Tata 1mg uses sequence-to-sequence models to translate medical jargon in doctor prescriptions into simple patient advice summaries.
   </div>
-<div <div="" class="debug-block">
+<div class="debug-block">
 <div class="debug-label">🛠️ WEEKLY DEBUGGING CHALLENGE</div>
 <h4 style="font-family:var(--font-head); font-size:14px; margin-bottom:0.5rem; color:var(--pink);">Debug: Leaking Recurrent State Gradients</h4>
 <p style="font-size:13px; margin-bottom:0.8rem; line-height:1.6;">Training RNN on sequences throws a graph backward error when moving from one batch to the next.</p>
@@ -2660,12 +2666,12 @@ for x_batch in batches:
 <div id="day-72-resources-section">
 <h2 class="sh2">📚 Day 72 Resources — Edge Deployment</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=6c2Nq5hy5Y4" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=eyfnp06x_tQ" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
 <div class="rc-title">ONNX Runtime — Edge Deployment Guide</div>
 <div class="rc-sub">Deploying models to edge devices with ONNX</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=2o0R2B7X6Zo" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=rYMbnW7y-A0" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
 <div class="rc-title">TensorFlow Lite for Mobile — TensorFlow</div>
 <div class="rc-sub">Convert and deploy models on Android/iOS</div>
@@ -2692,342 +2698,6 @@ for x_batch in batches:
 <p style="margin-top:0.4rem;">What is Seq2Seq? Explain the Encoder-Decoder information bottleneck problem.</p>
 </div>
 </div><!-- /day-72 -->
-<div class="day-section" id="day-toolkit">
-<div class="day-header">
-<div class="day-tag">WEEK 10 · TOOLKIT · MONTH 3 — RNNs &amp; SEQUENTIAL DATA</div>
-<h1>Deep Vision Master Resource Kit &amp; Interview Catalog</h1>
-<p>Welcome to the ultimate repository of advanced Computer Vision engineering resources. This dedicated module compiles the core mathematical formulations, advanced theoretical derivations, Grad-CAM interpretability code, and a comprehensive master-level technical interview catalog to prepare you for senior ML research and quantitative visual engineering positions.</p>
-<div class="meta-row">
-<span class="meta-badge g">⏱ Reference</span>
-<span class="meta-badge o">🧠 Senior Master</span>
-<span class="meta-badge p">⚡ Specialized</span>
-<span class="meta-badge b">🔬 Graduate Mathematics</span>
-</div>
-</div>
-<div id="day-72-math">
-<h2 class="sh2">🔬 Graduate Mathematics &amp; Derivations</h2>
-<h3 class="sh3">1. Formal Backpropagation Derivation: Batch Normalization</h3>
-<p>In Day 61, we reviewed the forward pass equations for a Batch Normalization layer. Here, we derive the exact backward pass gradients, tracing the flow of error signals through the normalization transformation. This is a classic elite technical question in top-tier research organizations.</p>
-<p>Let $L$ be the scalar loss, and let the forward pass be defined for a mini-batch of size $m$ as:</p>
-<div class="math-block">
-<span class="formula">μ_B = \frac{1}{m} \sum_{i=1}^m x_i</span>
-<span class="formula">\sigma_B^2 = \frac{1}{m} \sum_{i=1}^m (x_i - \mu_B)^2</span>
-<span class="formula">\hat{x}_i = \frac{x_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}</span>
-<span class="formula">y_i = \gamma \hat{x}_i + \beta</span>
-</div>
-<p>We are given the incoming gradient of the loss with respect to the output, $\frac{\partial L}{\partial y_i}$. We must compute the gradients with respect to the learnable parameters ($\gamma, \beta$) and the input features ($x_i$).</p>
-<h4 class="sh3">A. Gradients for Learnable Parameters</h4>
-<p>Using the multivariate chain rule:</p>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial \beta} = \sum_{i=1}^m \frac{\partial L}{\partial y_i} \cdot \frac{\partial y_i}{\partial \beta} = \sum_{i=1}^m \frac{\partial L}{\partial y_i}</span>
-<span class="desc">Since \frac{\partial y_i}{\partial \beta} = 1.</span>
-</div>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial \gamma} = \sum_{i=1}^m \frac{\partial L}{\partial y_i} \cdot \frac{\partial y_i}{\partial \gamma} = \sum_{i=1}^m \frac{\partial L}{\partial y_i} \hat{x}_i</span>
-<span class="desc">Since \frac{\partial y_i}{\partial \gamma} = \hat{x}_i.</span>
-</div>
-<h4 class="sh3">B. Gradients for Input Features (x_i)</h4>
-<p>To compute $\frac{\partial L}{\partial x_i}$, we must trace how $x_i$ affects the loss through three distinct pathways: directly via the normalized term $\hat{x}_i$, indirectly via the batch mean $\mu_B$, and indirectly via the batch variance $\sigma_B^2$.</p>
-<p>First, we define the intermediate gradient with respect to the normalized inputs $\hat{x}_i$:</p>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial \hat{x}_i} = \frac{\partial L}{\partial y_i} \gamma</span>
-</div>
-<p>Second, we compute the gradient with respect to the batch variance $\sigma_B^2$:</p>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial \sigma_B^2} = \sum_{i=1}^m \frac{\partial L}{\partial \hat{x}_i} \cdot \frac{\partial \hat{x}_i}{\partial \sigma_B^2} = \sum_{i=1}^m \frac{\partial L}{\partial \hat{x}_i} \cdot (x_i - \mu_B) \cdot \left( -\frac{1}{2} \right) (\sigma_B^2 + \epsilon)^{-3/2}</span>
-</div>
-<p>Third, we compute the gradient with respect to the batch mean $\mu_B$:</p>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial \mu_B} = \sum_{i=1}^m \frac{\partial L}{\partial \hat{x}_i} \cdot \frac{\partial \hat{x}_i}{\partial \mu_B} + \frac{\partial L}{\partial \sigma_B^2} \cdot \frac{\partial \sigma_B^2}{\partial \mu_B}</span>
-<span class="formula">\frac{\partial L}{\partial \mu_B} = \left( \sum_{i=1}^m \frac{\partial L}{\partial \hat{x}_i} \cdot \frac{-1}{\sqrt{\sigma_B^2 + \epsilon}} \right) + \frac{\partial L}{\partial \sigma_B^2} \cdot \frac{1}{m} \sum_{i=1}^m -2(x_i - \mu_B)</span>
-</div>
-<p>Combining these three pathways yields the final complete gradient for the input vector $x_i$:</p>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial x_i} = \frac{\partial L}{\partial \hat{x}_i} \cdot \frac{1}{\sqrt{\sigma_B^2 + \epsilon}} + \frac{\partial L}{\partial \sigma_B^2} \cdot \frac{2(x_i - \mu_B)}{m} + \frac{\partial L}{\partial \mu_B} \cdot \frac{1}{m}</span>
-</div>
-<p>This closed-form formulation stabilizes backpropagation and guarantees smooth gradient flows through deeply stacked multi-channel networks.</p>
-<h3 class="sh3">2. Recursive Receptive Field Calculation Formula</h3>
-<p>The Receptive Field (RF) of a neuron is the spatial region of the input image that can affect its activation. When stacking multiple convolutional and pooling layers, calculating the receptive field size is critical to ensure your model has sufficient spatial context to detect target structures (e.g. complete faces or roads).</p>
-<p>We can compute the receptive field size recursively from the final layer back to the input layer. Let $RF_{out}$ be the receptive field size of the output layer, and let $RF_{in}$ be the receptive field size of the input layer. The recursive formula is:</p>
-<div class="math-block">
-<span class="formula">RF_{in} = RF_{out} + (K - 1) \cdot J_{prev}</span>
-<span class="desc">Where K is the kernel size of the current layer, and J_prev is the cumulative jump/stride up to the previous layer.</span>
-</div>
-<p>The jump $J$ is updated at each layer as:</p>
-<div class="math-block">
-<span class="formula">J_{curr} = J_{prev} \cdot S</span>
-<span class="desc">Where S is the stride of the current layer. (Initial value: RF = 1, J = 1).</span>
-</div>
-<h3 class="sh3">3. Hand-Worked Analytical Backpropagation Worked Trace</h3>
-<p>To demystify backpropagation through convolutional structures, let's step through a complete mathematical forward and backward pass by hand with explicit numbers. We stack a 2D Convolution, a ReLU activation, and a 2x2 Max Pooling layer.</p>
-<h4 class="sh3">A. Forward Pass Specifications</h4>
-<p>Let's define the input image $X$ of size $3 \times 3$ (single channel, batch size = 1):</p>
-<div class="math-block">
-<span class="formula">X = \begin{bmatrix} 1.0 &amp; 2.0 &amp; 0.0 \\ 0.0 &amp; 3.0 &amp; 1.0 \\ 2.0 &amp; 1.0 &amp; 1.0 \end{bmatrix}</span>
-</div>
-<p>Let's convolve it with a $2 \times 2$ kernel $W$ (stride = 1, padding = 0):</p>
-<div class="math-block">
-<span class="formula">W = \begin{bmatrix} 1.0 &amp; -1.0 \\ 2.0 &amp; 0.0 \end{bmatrix}</span>
-</div>
-<p>Let the bias be $b = -0.5$.</p>
-<h4 class="sh3">Step 1: Compute Linear Output (Z = X * W + b)</h4>
-<p>The sliding window covers four locations to form a $2 \times 2$ matrix $Z$:</p>
-<ul class="prose-list">
-<li><strong>Top-Left z_{11}:</strong> convolving $X[0:2, 0:2]$:
-    <br/>$(1.0 \cdot 1.0) + (2.0 \cdot -1.0) + (0.0 \cdot 2.0) + (3.0 \cdot 0.0) + b = 1.0 - 2.0 + 0.0 + 0.0 - 0.5 = -1.5$.</li>
-<li><strong>Top-Right z_{12}:</strong> convolving $X[0:2, 1:3]$:
-    <br/>$(2.0 \cdot 1.0) + (0.0 \cdot -1.0) + (3.0 \cdot 2.0) + (1.0 \cdot 0.0) + b = 2.0 + 0.0 + 6.0 + 0.0 - 0.5 = 7.5$.</li>
-<li><strong>Bottom-Left z_{21}:</strong> convolving $X[1:3, 0:2]$:
-    <br/>$(0.0 \cdot 1.0) + (3.0 \cdot -1.0) + (2.0 \cdot 2.0) + (1.0 \cdot 0.0) + b = 0.0 - 3.0 + 4.0 + 0.0 - 0.5 = 0.5$.</li>
-<li><strong>Bottom-Right z_{22}:</strong> convolving $X[1:3, 1:3]$:
-    <br/>$(3.0 \cdot 1.0) + (1.0 \cdot -1.0) + (1.0 \cdot 2.0) + (1.0 \cdot 0.0) + b = 3.0 - 1.0 + 2.0 + 0.0 - 0.5 = 3.5$.</li>
-</ul>
-<p>Thus, the linear pre-activation feature map is:</p>
-<div class="math-block">
-<span class="formula">Z = \begin{bmatrix} -1.5 &amp; 7.5 \\ 0.5 &amp; 3.5 \end{bmatrix}</span>
-</div>
-<h4 class="sh3">Step 2: Apply ReLU Activation (A = max(0, Z))</h4>
-<p>Applying the rectified linear function element-wise drops the negative value $z_{11} = -1.5$ to zero, leaving the rest unchanged:</p>
-<div class="math-block">
-<span class="formula">A = \begin{bmatrix} 0.0 &amp; 7.5 \\ 0.5 &amp; 3.5 \end{bmatrix}</span>
-</div>
-<h4 class="sh3">Step 3: Apply Max Pooling (Y = MaxPool(A))</h4>
-<p>We apply a $2 \times 2$ Max Pooling layer with stride = 1 over our $2 \times 2$ input $A$. The pooling region covers the entire matrix $A$.
-  <br/>The maximum value in $A$ is $7.5$, located at coordinate index $(0, 1)$ (or top-right corner).
-  <br/>Therefore, the output is a single scalar: $Y = [7.5]$.</p>
-<h4 class="sh3">B. Backward Pass Specifications</h4>
-<p>Suppose our target ground truth was $T = [8.5]$, and we evaluate performance using **Mean Squared Error (MSE) Loss**: $L = \frac{1}{2}(Y - T)^2$.
-  <br/>The loss is $L = \frac{1}{2}(7.5 - 8.5)^2 = 0.5$.</p>
-<h4 class="sh3">Step 1: Gradient with respect to Output (dY = dL / dY)</h4>
-<p>Using basic calculus:</p>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial Y} = Y - T = 7.5 - 8.5 = -1.0</span>
-</div>
-<h4 class="sh3">Step 2: Backpropagation through Max Pooling to Activation A (dA = dL / dA)</h4>
-<p>The pooling layer routes the incoming gradient **only** to the coordinates that held the maximum value in the forward pass.
-  <br/>The max mask recorded the peak at coordinate $(0, 1)$. All other inputs in the window receive a gradient of 0:</p>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial A} = \begin{bmatrix} 0.0 &amp; -1.0 \\ 0.0 &amp; 0.0 \end{bmatrix}</span>
-</div>
-<h4 class="sh3">Step 3: Backpropagation through ReLU to Linear output Z (dZ = dL / dZ)</h4>
-<p>We multiply the activation gradient $\frac{\partial L}{\partial A}$ element-wise by the derivative of the ReLU function, $\mathbb{I}(Z &gt; 0)$:</p>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial Z} = \frac{\partial L}{\partial A} \odot \mathbb{I}(Z &gt; 0) = \begin{bmatrix} 0.0 &amp; -1.0 \\ 0.0 &amp; 0.0 \end{bmatrix} \odot \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 1 \end{bmatrix} = \begin{bmatrix} 0.0 &amp; -1.0 \\ 0.0 &amp; 0.0 \end{bmatrix}</span>
-<span class="desc">Since z_{11} was negative (-1.5), its derivative was 0, but its active gradient was already 0.</span>
-</div>
-<h4 class="sh3">Step 4: Gradient with respect to Bias (db = dL / db)</h4>
-<p>The derivative of $Z$ with respect to $b$ is 1. Summing the gradients of $\frac{\partial L}{\partial Z}$ across all spatial coordinates:</p>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial b} = \sum_{i,j} \frac{\partial L}{\partial z_{ij}} = 0.0 + (-1.0) + 0.0 + 0.0 = -1.0</span>
-</div>
-<h4 class="sh3">Step 5: Gradient with respect to Kernel Weights (dW = dL / dW)</h4>
-<p>The gradient of the weights is computed by convolving the input image patches with the incoming spatial gradient $\frac{\partial L}{\partial Z}$:</p>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial W_{k,l}} = \sum_{i=0}^1 \sum_{j=0}^1 \frac{\partial L}{\partial z_{i,j}} \cdot X_{i+k, j+l}</span>
-</div>
-<p>Let's calculate each element of the $2 \times 2$ gradient matrix $\frac{\partial L}{\partial W}$:</p>
-<ul class="prose-list">
-<li><strong>dW_{11} (top-left weight):</strong>
-<br/>$\sum \frac{\partial L}{\partial z_{i,j}} \cdot X_{i,j} = (0.0 \cdot 1.0) + (-1.0 \cdot 2.0) + (0.0 \cdot 0.0) + (0.0 \cdot 3.0) = -2.0$.</li>
-<li><strong>dW_{12} (top-right weight):</strong>
-<br/>$\sum \frac{\partial L}{\partial z_{i,j}} \cdot X_{i, j+1} = (0.0 \cdot 2.0) + (-1.0 \cdot 0.0) + (0.0 \cdot 3.0) + (0.0 \cdot 1.0) = 0.0$.</li>
-<li><strong>dW_{21} (bottom-left weight):</strong>
-<br/>$\sum \frac{\partial L}{\partial z_{i,j}} \cdot X_{i+1, j} = (0.0 \cdot 0.0) + (-1.0 \cdot 3.0) + (0.0 \cdot 2.0) + (0.0 \cdot 1.0) = -3.0$.</li>
-<li><strong>dW_{22} (bottom-right weight):</strong>
-<br/>$\sum \frac{\partial L}{\partial z_{i,j}} \cdot X_{i+1, j+1} = (0.0 \cdot 3.0) + (-1.0 \cdot 1.0) + (0.0 \cdot 1.0) + (0.0 \cdot 1.0) = -1.0$.</li>
-</ul>
-<p>Therefore, the weight update gradient is:</p>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial W} = \begin{bmatrix} -2.0 &amp; 0.0 \\ -3.0 &amp; -1.0 \end{bmatrix}</span>
-</div>
-<h4 class="sh3">Step 6: Gradient with respect to Input Pixel Grid X (dX = dL / dX)</h4>
-<p>To pass gradients back to earlier layers, we compute the derivative with respect to each pixel of $X$. This is achieved by convolving the flipped kernel weights with the padded gradient map $\frac{\partial L}{\partial Z}$:</p>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial x_{r,s}} = \sum_{i,j} \frac{\partial L}{\partial z_{i,j}} \cdot W_{r-i, s-j}</span>
-</div>
-<p>For example, for the central input pixel $x_{11} = 3.0$ (located at index (1,1)):
-  <br/>The relevant linear terms that depended on $x_{11}$ in the forward pass are:
-  <br/>- $z_{11}$ (top-left, multiplied by $W_{22} = 0.0$)
-  <br/>- $z_{12}$ (top-right, multiplied by $W_{21} = 2.0$)
-  <br/>- $z_{21}$ (bottom-left, multiplied by $W_{12} = -1.0$)
-  <br/>- $z_{22}$ (bottom-right, multiplied by $W_{11} = 1.0$).
-  <br/>Summing these up with their spatial gradients:</p>
-<div class="math-block">
-<span class="formula">\frac{\partial L}{\partial x_{11}} = \left( \frac{\partial L}{\partial z_{11}} \cdot 0.0 \right) + \left( \frac{\partial L}{\partial z_{12}} \cdot 2.0 \right) + \left( \frac{\partial L}{\partial z_{21}} \cdot -1.0 \right) + \left( \frac{\partial L}{\partial z_{22}} \cdot 1.0 \right)</span>
-<span class="formula">\frac{\partial L}{\partial x_{11}} = (0.0 \cdot 0.0) + (-1.0 \cdot 2.0) + (0.0 \cdot -1.0) + (0.0 \cdot 1.0) = -2.0</span>
-</div>
-<p>This reveals the mathematical precision of backpropagation in deep spatial neural networks!</p>
-</div>
-<h2 class="sh2">💼 Master Vision Interview &amp; Scenario Catalog</h2>
-<div class="task-block">
-<div class="task-header" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green)">
-<span class="task-badge tb-hard">Scenario Q1</span>
-<span class="task-title">He Normal vs. Glorot Initialization Mechanics</span>
-</div>
-<div class="task-body" style="display:block">
-<p><strong>Question:</strong> Why do standard Deep Learning networks use He (Kaiming) initialization for ReLU layers and Glorot (Xavier) initialization for Tanh layers? What happens mathematically if you swap them?</p>
-<p><strong>Answer:</strong>
-<br/>1. **Glorot (Xavier) Initialization:** Designed under the assumption of linear activation functions. It scales weights to maintain variance across layers: $Var(W) = \frac{2}{n_{in} + n_{out}}$. For a Tanh activation (which is symmetric and active around zero), this prevents activations from saturating or collapsing.
-      <br/>2. **He (Kaiming) Initialization:** ReLU activations clip all negative values to zero, effectively silencing half of the neurons at any step. This halves the variance of outputs. To compensate and keep variance constant, He initialization doubles the variance of the initial weights: $Var(W) = \frac{2}{n_{in}}$.
-      <br/>3. **Swapping:** If you use Glorot on ReLU layers, the variance of activations will shrink by half at each layer, leading to vanishing activations in deep networks. If you use He on Tanh layers, variance grows, causing gradients to saturate (explode) at extreme values.</p>
-</div>
-</div>
-<div class="task-block">
-<div class="task-header" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange)">
-<span class="task-badge tb-hard">Scenario Q2</span>
-<span class="task-title">FLOPs &amp; Parameter Math: Depthwise Separable Convolutions</span>
-</div>
-<div class="task-body" style="display:block">
-<p><strong>Question:</strong> Derive the exact parameter count and computational complexity (FLOPs) comparison between a standard 2D convolution and a Depthwise Separable Convolution (as used in MobileNets) for an input of shape $H \times W \times C$ and $N$ filters of size $K \times K$.</p>
-<p><strong>Answer:</strong>
-<br/>1. **Standard Convolution:**
-      <br/>- **Parameters:** $K^2 \times C \times N$ (plus $N$ biases).
-      <br/>- **Complexity (FLOPs):** $H \times W \times K^2 \times C \times N$.
-      <br/>2. **Depthwise Separable Convolution:** Consists of a Depthwise Conv (one $K \times K$ filter per input channel) followed by a Pointwise Conv ($1 \times 1$ conv to mix channels):
-      <br/>- **Parameters:** $(K^2 \times C) + (1 \times 1 \times C \times N) = C(K^2 + N)$.
-      <br/>- **Complexity (FLOPs):** $(H \times W \times K^2 \times C) + (H \times W \times C \times N) = H \times W \times C(K^2 + N)$.
-      <br/>3. **Relative Ratio:**
-      <br/>$$\text{Ratio} = \frac{C(K^2 + N)}{K^2 \cdot C \cdot N} = \frac{1}{N} + \frac{1}{K^2}$$
-      <br/>For a typical layer with $K=3$ and $N=256$, the Depthwise Separable Convolution uses **approx. 11%** of the parameters and FLOPs of a standard convolution, making it incredibly fast on mobile CPUs!</p>
-</div>
-</div>
-<div class="task-block">
-<div class="task-header" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink)">
-<span class="task-badge tb-hard">Scenario Q3</span>
-<span class="task-title">When Global Average Pooling (GAP) Fails</span>
-</div>
-<div class="task-body" style="display:block">
-<p><strong>Question:</strong> While Global Average Pooling is excellent for generic classification regularizations, under what specific Computer Vision tasks does it perform worse than a flattened dense head? Explain the physical reason.</p>
-<p><strong>Answer:</strong> GAP collapses the entire spatial dimension of a channel ($H \times W$) into a single average value ($1 \times 1$). This **erases all spatial coordinate information**. 
-      <br/>Therefore, GAP performs poorly in:
-      <br/>1. **Object Detection / Localization:** Where you must regress exact coordinate boundaries (bounding boxes).
-      <br/>2. **Image Segmentation / Keypoint Detection:** Where pixel-level coordinates are the target.
-      <br/>3. **Fine-Grained Classification with Positional Cues:** Where the relationship between specific quadrants matters (e.g. left vs right eye structure).
-      <br/>For these spatial-dependent applications, maintaining spatial grids via flattening, pooling, or transposed convolutions is mandatory.</p>
-</div>
-</div>
-<div class="task-block">
-<div class="task-header" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green)">
-<span class="task-badge tb-hard">Scenario Q4</span>
-<span class="task-title">Receptive Field Bottleneck &amp; Vision Transformers (ViTs)</span>
-</div>
-<div class="task-body" style="display:block">
-<p><strong>Question:</strong> What is the "receptive field bottleneck" in deep CNNs? How do modern Vision Transformers (ViTs) resolve this bottleneck, and what are the trade-offs involved?</p>
-<p><strong>Answer:</strong>
-<br/>1. **The Bottleneck:** In CNNs, the receptive field grows linearly with depth. In early layers, neurons only see tiny, highly localized patches. If the network needs to capture global context (e.g. relation between objects on opposite sides of an image), it must go extremely deep, losing spatial resolution and suffering from gradient dilution.
-      <br/>2. **ViTs Resolution:** Vision Transformers divide the image into patches (e.g. 16x16) and treat them as sequence tokens. By applying **Self-Attention** across all tokens, every pixel patch can communicate with *every other pixel patch* immediately in the very first layer. Receptive field size is effectively infinite from layer 1!
-      <br/>3. **Trade-offs:** ViTs lack the "inductive bias" of CNNs (translation invariance and local connectivity). Therefore, ViTs require massive datasets (e.g. JFT-300M) or heavy data augmentation to converge, and have quadratic computational complexity with respect to image resolution.</p>
-</div>
-</div>
-<div class="task-block">
-<div class="task-header" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange)">
-<span class="task-badge tb-hard">Scenario Q5</span>
-<span class="task-title">Translation Invariance vs. Equivariance</span>
-</div>
-<div class="task-body" style="display:block">
-<p><strong>Question:</strong> Define the difference between Translation Invariance and Translation Equivariance in CNNs. Which layers introduce each property?</p>
-<p><strong>Answer:</strong>
-<br/>1. **Translation Equivariance:** If you shift the input image, the output of the layer shifts by the same amount: $f(Shift(x)) = Shift(f(x))$. **Convolutional layers** are equivariant. If an edge detector slides over an image, moving the edge 2 pixels to the right shifts the high activation coordinate in the feature map 2 pixels to the right.
-      <br/>2. **Translation Invariance:** If you shift the input image, the output remains completely unchanged: $f(Shift(x)) = f(x)$. **Pooling layers (especially Global Average Pooling)** and final classification heads introduce invariance. By pooling activations (taking the max or mean over a window), the network doesn't care *where* the activation occurred, only *that* it occurred somewhere in the image.</p>
-</div>
-</div>
-<h3 class="sh3">Additional Advanced Vision Q&amp;A (Interview Excellence)</h3>
-<div class="task-block">
-<div class="task-header" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink)">
-<span class="task-badge tb-hard">Scenario Q6</span>
-<span class="task-title">Batch Normalization vs. Group Normalization</span>
-</div>
-<div class="task-body" style="display:block">
-<p><strong>Question:</strong> What are the limitations of Batch Normalization when training under extremely small batch sizes (e.g., batch size = 2 for high-resolution segmentation)? How does Group Normalization (GN) solve this?</p>
-<p><strong>Answer:</strong> Batch Normalization calculates running mean and variance statistics across the batch dimension. If batch size is tiny, these statistical estimates are highly inaccurate and noisy. This results in unstable gradient directions, destroying performance.
-      <br/>**Group Normalization (GN)** divides the channels of a single input tensor into $G$ groups, and calculates mean and variance statistics *within* each channel group across the spatial dimensions. Because GN's calculations are independent of batch size, its accuracy is completely unaffected by tiny batch sizes, making it the industry standard for high-resolution medical imaging and large 3D object detection.</p>
-</div>
-</div>
-<h2 class="sh2">📖 Complete Visual Engineering Glossary (25 Key Terms)</h2>
-<div style="background:rgba(255,255,255,0.03);padding:1.5rem;border-radius:8px;border:1px solid rgba(255,255,255,0.05)">
-<p><strong>1. Receptive Field:</strong> The localized spatial pixel window of the input image that directly influences the activation of a specific deep network neuron.</p>
-<p><strong>2. Translation Invariance:</strong> A property where shifting the input image does not affect the final output prediction of the model (e.g. classifying a cat correctly regardless of its position).</p>
-<p><strong>3. Translation Equivariance:</strong> A property where shifting the input image shifts the localized activations in the resulting convolutional feature map by an identical spatial offset.</p>
-<p><strong>4. Spatial Collapse:</strong> The structural compression of a multi-dimensional spatial grid (e.g., $7 \times 7 \times 512$) into a flat vector (e.g., $1 \times 1 \times 512$) using Global Pooling.</p>
-<p><strong>5. Skip Connection:</strong> An additive bypass route that skips one or more weight layers to propagate activations forward and error gradients backward completely untouched.</p>
-<p><strong>6. Projection Shortcut:</strong> A bypass route using a 1x1 Convolution to downsample or channel-expand an input tensor so it can be added to the main residual block output.</p>
-<p><strong>7. Identity Block:</strong> A standard ResNet block where the skip connection directly adds the block input to the output without any convolutional modification.</p>
-<p><strong>8. Depthwise Convolution:</strong> A lightweight convolution stage that filters each input channel independently using distinct spatial kernels without channel mixing.</p>
-<p><strong>9. Pointwise Convolution:</strong> A $1 \times 1$ convolution that mixes channel information across a spatial feature grid, serving as the second stage of depthwise separable convolutions.</p>
-<p><strong>10. Squeeze-and-Excitation:</strong> A channel-attention mechanism that globally squeezes spatial grids to excite and recalibrate relevant channel features dynamically.</p>
-<p><strong>11. Inverted Residual Block:</strong> A MobileNetV2 block that projects features to a high-dimensional space first, applies depthwise convolution, and projects back to a linear bottleneck.</p>
-<p><strong>12. Batch Normalization:</strong> A technique that normalizes activation distributions within a mini-batch during training to stabilize convergence and accelerate speeds.</p>
-<p><strong>13. Group Normalization:</strong> An alternative normalization that calculates statistics within grouped subsets of channels per image, making it completely independent of batch size.</p>
-<p><strong>14. Layer Normalization:</strong> A normalization technique that computes statistics across all channels of a single input sample, heavily used in recurrent nets and Transformers.</p>
-<p><strong>15. Global Average Pooling:</strong> An operation that averages all spatial pixels of each channel, reducing feature maps to a single vector of channel size.</p>
-<p><strong>16. Global Max Pooling:</strong> An operation that selects the single maximum pixel activation from each channel, highlighting highly prominent local visual indicators.</p>
-<p><strong>17. Focal Loss:</strong> A dynamically scaled cross-entropy loss that dampens the loss assigned to easy-to-classify background pixels, forcing focus on hard, sparse objects.</p>
-<p><strong>18. Sobel Filter:</strong> A handcrafted 3x3 convolution operator that computes first-order spatial derivatives to extract horizontal or vertical edge boundaries.</p>
-<p><strong>19. Gabor Filter:</strong> A linear electronic filter whose impulse response is defined by a harmonic function multiplied by a Gaussian, widely used to model early biological edges.</p>
-<p><strong>20. Catastrophic Forgetting:</strong> The phenomenon where a pre-trained model completely overwrites its previously learned knowledge when trained immediately on a new target task.</p>
-<p><strong>21. Feature Extraction:</strong> A transfer learning strategy where a pre-trained core is frozen, and only a newly initialized linear classification head is trained on target data.</p>
-<p><strong>22. Fine-Tuning:</strong> A transfer learning strategy where early base layers are kept frozen while late convolutional layers are unfrozen and trained using micro learning rates.</p>
-<p><strong>23. Online Data Augmentation:</strong> Random synthetic transformations applied dynamically to training batches on-the-fly, generating endless variations with no disk usage.</p>
-<p><strong>24. Offline Data Augmentation:</strong> Pre-saved visual alterations applied to a static dataset, multiplying storage overhead without generating dynamic training variation.</p>
-<p><strong>25. Semantic Safety:</strong> The requirement that an applied data augmentation transformation must not alter the underlying classification label of the image.</p>
-</div>
-<h2 class="sh2">💻 Advanced Interpretability: Grad-CAM Utility Library</h2>
-<p>To deploy computer vision systems in highly regulated domains (e.g. finance, medical diagnostics, or autonomous vehicles), explaining *why* a model made a prediction is crucial. **Grad-CAM (Gradient-weighted Class Activation Mapping)** uses the gradients of any target class flowing into the final convolutional layer to produce a coarse 2D heatmap highlighting the exact discriminative regions in the image. Here is the production utility script:</p>
-<div class="cb">
-<div class="cb-head"><span class="cb-lang">python — gradcam.py</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
-<pre><span class="kw">import</span> tensorflow <span class="kw">as</span> tf
-<span class="kw">import</span> numpy <span class="kw">as</span> np
-<span class="kw">import</span> cv2
-<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
-
-<span class="kw">def</span> <span class="fn">generate_gradcam_heatmap</span>(model, img_array, last_conv_layer_name, pred_index=<span class="kw">None</span>):
-    <span class="cm"># 1. Create a model that outputs the activations of the target conv layer</span>
-    <span class="cm"># and the final softmax predictions</span>
-    grad_model = tf.keras.models.Model(
-        inputs=[model.inputs],
-        outputs=[model.get_layer(last_conv_layer_name).output, model.output]
-    )
-    
-    <span class="cm"># 2. Record operations using GradientTape</span>
-    <span class="kw">with</span> tf.GradientTape() <span class="kw">as</span> tape:
-        conv_outputs, predictions = grad_model(img_array)
-        <span class="kw">if</span> pred_index <span class="kw">is</span> <span class="kw">None</span>:
-            pred_index = tf.argmax(predictions[<span class="num">0</span>])
-        class_channel = predictions[:, pred_index]
-        
-    <span class="cm"># 3. Calculate gradients of the target class with respect to target conv activations</span>
-    grads = tape.gradient(class_channel, conv_outputs)
-    
-    <span class="cm"># 4. Compute channel-wise average of gradients (Global Average Pooling)</span>
-    pooled_grads = tf.reduce_mean(grads, axis=(<span class="num">0</span>, <span class="num">1</span>, <span class="num">2</span>))
-    
-    <span class="cm"># 5. Multiply conv activations by their corresponding gradient weights</span>
-    conv_outputs = conv_outputs[<span class="num">0</span>]
-    heatmap = conv_outputs @ pooled_grads[..., tf.newaxis]
-    heatmap = tf.squeeze(heatmap)
-    
-    <span class="cm"># 6. Apply ReLU to isolate positively contributing features, then normalize</span>
-    heatmap = tf.maximum(heatmap, <span class="num">0</span>) / tf.reduce_max(heatmap)
-    <span class="kw">return</span> heatmap.numpy()
-
-<span class="kw">def</span> <span class="fn">overlay_gradcam</span>(img_path, heatmap, alpha=<span class="num">0.4</span>, colormap=cv2.COLORMAP_JET):
-    <span class="cm"># Load original image</span>
-    img = cv2.imread(img_path)
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    
-    <span class="cm"># Resize heatmap to match image dimensions</span>
-    heatmap = cv2.resize(heatmap, (img.shape[<span class="num">1</span>], img.shape[<span class="num">0</span>]))
-    
-    <span class="cm"># Convert heatmap to uint8 and apply colormap</span>
-    heatmap = np.uint8(<span class="num">255</span> * heatmap)
-    heatmap_colored = cv2.applyColorMap(heatmap, colormap)
-    heatmap_colored = cv2.cvtColor(heatmap_colored, cv2.COLOR_BGR2RGB)
-    
-    <span class="cm"># Superimpose the colored heatmap onto the original image</span>
-    overlayed = cv2.addWeighted(heatmap_colored, alpha, img, <span class="num">1</span> - alpha, <span class="num">0</span>)
-    <span class="kw">return</span> overlayed</pre>
-</div>
-</div><!-- /day-toolkit -->
 <div class="week-summary">
 <div class="ws-icon">🎉</div>
 <div class="ws-content">
@@ -3360,8 +3030,8 @@ function checkPredict(id, answer) {
   
   // Normalize whitespace, casing, quotes, brackets, and punctuation
   const normalize = (str) => {
-    return str.replace(/\\n/g, ' ')
-              .replace(/\s+/g, ' ')
+    return String(str).replace(/\\n/g, ' ')
+              .replace(/\n/g, ' ')
               .replace(/['"()\[\]]/g, '')
               .replace(/[,;]/g, ' ')
               .replace(/\s+/g, ' ')
@@ -3405,6 +3075,19 @@ function toggleTheme() {
   if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
 }
 (function() {
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
 })();
@@ -3445,6 +3128,19 @@ window.addEventListener('DOMContentLoaded', () => {
   
   renderMermaid('day-' + DAYS[0]);
   
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   const btn = document.getElementById('theme-btn');
   if (btn && saved === 'light') btn.textContent = '🌙 Dark';

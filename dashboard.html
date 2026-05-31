@@ -482,13 +482,39 @@
   }
 
   (function() {
-    const saved = localStorage.getItem('theme');
+    
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
+  const saved = localStorage.getItem('theme');
     if (saved) document.documentElement.setAttribute('data-theme', saved);
   })();
 
   window.addEventListener('DOMContentLoaded', () => {
     // 1. Sync Theme Button
-    const saved = localStorage.getItem('theme');
+    
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
+  const saved = localStorage.getItem('theme');
     const btn = document.getElementById('theme-btn');
     if (btn && saved === 'light') btn.textContent = '🌙 Dark';
 

@@ -1658,7 +1658,7 @@ result = full_pipeline.invoke({<span class="str">"topic"</span>: <span class="st
 </a>
 <a class="resource-card" href="https://www.youtube.com/watch?v=mrjq3lFz23s" target="_blank">
 <div class="rc-type">▶ YOUTUBE</div>
-<div class="rc-title">LangChain LCEL — Full Tutorial (James Briggs)</div>
+<div class="rc-title">LangChain LCEL — Full Tutorial (Tech With Tim)</div>
 <div class="rc-sub">Best video tutorial for LCEL. Covers all major concepts with real coding examples. Clear and practical.</div>
 </a>
 </div>
@@ -2818,6 +2818,11 @@ llm = ChatOpenAI(temperature=<span class="num">0</span>)
 <div class="day-tag">WEEK 15 · DAY 107 · MONTH 4 — LLMs + Generative AI + OpenAI APIs</div>
 <h1>Capstone — Agentic Systems</h1>
 <p>Wrap-up: build a small agentic pipeline combining retrieval, tools, and safe execution policies.</p>
+<div class="meta-row">
+<span class="meta-badge g">⏱ 6 hours</span>
+<span class="meta-badge o">🧠 Advanced</span>
+<span class="meta-badge p">⚡ +300 XP</span>
+</div>
 </div>
 <div class="objectives">
 <h3>🎯 By End of Day 107 You Will:</h3>
@@ -2902,7 +2907,7 @@ retriever = db.as_retriever()</code></pre>
       Next week, we look at MLOps and Deployment: packaging models inside Flask APIs, Docker containers, and creating Gradio interfaces. Make sure you are comfortable handling environment variables and APIs!
     </p>
 </div>
-<button button="" class="complete-btn" id="btn-day-107" onclick="completeDay(107,300)" x0="" xp="" ⚡<="">🏆 Complete Week 15 Capstone — Earn 300 XP! 🎉</button></div>
+<button class="complete-btn" id="btn-day-107" onclick="completeDay(107,300)">🏆 Complete Week 15 Capstone — Earn 300 XP! 🎉</button></div>
 <div class="week-summary">
 <div class="ws-icon">🎉</div>
 <div class="ws-content">
@@ -3235,8 +3240,8 @@ function checkPredict(id, answer) {
   
   // Normalize whitespace, casing, quotes, brackets, and punctuation
   const normalize = (str) => {
-    return str.replace(/\\n/g, ' ')
-              .replace(/\s+/g, ' ')
+    return String(str).replace(/\\n/g, ' ')
+              .replace(/\n/g, ' ')
               .replace(/['"()\[\]]/g, '')
               .replace(/[,;]/g, ' ')
               .replace(/\s+/g, ' ')
@@ -3280,6 +3285,19 @@ function toggleTheme() {
   if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
 }
 (function() {
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
 })();
@@ -3320,6 +3338,19 @@ window.addEventListener('DOMContentLoaded', () => {
   
   renderMermaid('day-' + DAYS[0]);
   
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   const btn = document.getElementById('theme-btn');
   if (btn && saved === 'light') btn.textContent = '🌙 Dark';

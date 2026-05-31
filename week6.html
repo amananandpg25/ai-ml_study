@@ -427,11 +427,11 @@ ul.prose-list li{font-size:14px;margin:.25rem 0;color:var(--text)}
 <h3 class="sh3">1. The Full Linear Regression Story</h3>
 <div class="analogy">Ghar ka rent predict karna: Size (sq ft) ≥ Area ≥ Floor se. Agar hum ek line draw karein jo saare observed rents ke "as close as possible" ho, woh line Linear Regression hai. "As close as possible" = minimize the sum of squared vertical distances between actual and predicted — yahi Ordinary Least Squares (OLS) hai.</div>
 <div class="math-block">
-<span class="formula">ŷ = β₀ + β₁x₁ + β₂x₂ + ... + βₙxₙ = Xβ</span>
+<span class="formula">$$ŷ = β₀ + β₁x₁ + β₂x₂ + ... + βₙxₙ = Xβ$$</span>
 <span class="desc">Matrix form: X is (n×p) design matrix (with 1s column for intercept), β is (p×1) weight vector</span>
-<span class="formula">Loss (MSE) = (1/n) Σ(yᵢ − ŷᵢ)² = (1/n)||y − Xβ||²</span>
+<span class="formula">$$Loss (MSE) = (1/n) Σ(yᵢ − ŷᵢ)² = (1/n)||y − Xβ||²$$</span>
 <span class="desc">We minimize this. Set derivative to zero → closed-form OLS solution:</span>
-<span class="formula">β* = (XᵀX)⁻¹ Xᵀy</span>
+<span class="formula">$$β* = (XᵀX)⁻¹ Xᵀy$$</span>
 <span class="desc">The Normal Equation. Direct, exact, no iteration needed — but expensive for large n.</span>
 </div>
 <div class="cb">
@@ -852,7 +852,6 @@ resid = y_te - model.predict(Xte)
 </ul>
 </div>
 </div>
-</div>
 <div id="day-39-theory">
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. Polynomial Features — Bending the Line</h3>
@@ -911,10 +910,10 @@ plt.savefig(<span class="str">'poly_degrees.png'</span>, dpi=<span class="num">1
 </div>
 <h3 class="sh3">2. Bias-Variance Tradeoff — The Central Tension of ML</h3>
 <div class="math-block">
-<span class="formula">Expected Test Error = Bias² + Variance + Irreducible Noise</span>
+<span class="formula">$$Expected Test Error = Bias² + Variance + Irreducible Noise$$</span>
 <span class="desc">Three separate sources of error. Only bias and variance are controllable.</span>
-<span class="formula">Bias: error from wrong assumptions (e.g., fitting a line to a curve)</span>
-<span class="formula">Variance: sensitivity to small fluctuations in training data</span>
+<span class="formula">$$Bias: error from wrong assumptions (e.g., fitting a line to a curve)$$</span>
+<span class="formula">$$Variance: sensitivity to small fluctuations in training data$$</span>
 </div>
 <table class="concept-table">
 <tr><th>MODEL STATE</th><th>TRAIN ERROR</th><th>TEST ERROR</th><th>BIAS</th><th>VARIANCE</th><th>FIX</th></tr>
@@ -1189,7 +1188,7 @@ best_deg, best_mse = <span class="num">0</span>, <span class="bi">float</span>(<
 <li><strong>More data fixes variance:</strong> Adding training data reduces overfitting. It cannot fix underfitting — only a more flexible model can do that.</li>
 </ol>
 </div>
-<button button="" class="complete-btn" id="btn-day-39" onclick="completeDay(39,200)" p0="" xp<="">✓ Mark Day 39 Complete — Earn 200 XP</button></div><!-- /day-39 -->
+<button class="complete-btn" id="btn-day-39" onclick="completeDay(39,200)">✓ Mark Day 39 Complete — Earn 200 XP</button></div><!-- /day-39 -->
 <!-- ═══════════════════════════════════════
      DAY 40 — Ridge & Lasso Regularisation
 ════════════════════════════════════════ -->
@@ -1226,9 +1225,9 @@ best_deg, best_mse = <span class="num">0</span>, <span class="bi">float</span>(<
 <h3 class="sh3">1. Why Regularise? The Shrinkage Intuition</h3>
 <div class="analogy">Ek student exam mein sab kuch ratta maar leta hai (overfitting). Regularisation aise hai jaise teacher bol de: "Short answer mein explain karo, 10 point baad marks kat jayenge" — student ko forced kiya jaata hai ki sirf important cheezein likhein, saari details nahi. Ridge bolti hai: "Long answers penalty mein hain." Lasso bolti hai: "Kuch points bilkul mat likho — ek hi best concept pe focus karo."</div>
 <div class="math-block">
-<span class="formula">OLS Loss = Σ(yᵢ − ŷᵢ)²</span>
-<span class="formula">Ridge Loss = Σ(yᵢ − ŷᵢ)² + α × Σβⱼ²          [L2 penalty — squared coefficients]</span>
-<span class="formula">Lasso Loss = Σ(yᵢ − ŷᵢ)² + α × Σ|βⱼ|         [L1 penalty — absolute coefficients]</span>
+<span class="formula">$$OLS Loss = Σ(yᵢ − ŷᵢ)²$$</span>
+<span class="formula">$$Ridge Loss = Σ(yᵢ − ŷᵢ)² + α × Σβⱼ²          [L2 penalty — squared coefficients]$$</span>
+<span class="formula">$$Lasso Loss = Σ(yᵢ − ŷᵢ)² + α × Σ|βⱼ|         [L1 penalty — absolute coefficients]$$</span>
 <span class="desc">α (alpha) = regularisation strength. α=0 → pure OLS. α→∞ → all coefficients → 0.</span>
 </div>
 <div class="cb">
@@ -1523,8 +1522,8 @@ beta_cf = np.linalg.inv(Xtr_b.T @ Xtr_b + alpha_val * I_reg) @ Xtr_b.T @ y_tr</p
 <div class="rc-sub">Clear intuition for why shrinkage helps and how to tune alpha</div>
 </a>
 <a class="resource-card" href="https://www.youtube.com/watch?v=jbwSCwoT51M" target="_blank">
-<div class="rc-type">📺 VIDEO · STATQUEST</div>
-<div class="rc-title">StatQuest — Lasso Regression</div>
+<div class="rc-type">📺 VIDEO · RITVIKMATH</div>
+<div class="rc-title">ritvikmath — Lasso Regression</div>
 <div class="rc-sub">The geometry of why L1 creates zero coefficients — essential watch</div>
 </a>
 <a class="resource-card" href="https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification" target="_blank">
@@ -1598,13 +1597,12 @@ beta_cf = np.linalg.inv(Xtr_b.T @ Xtr_b + alpha_val * I_reg) @ Xtr_b.T @ y_tr</p
 </ul>
 </div>
 </div>
-</div>
 <div id="day-41-theory">
 <div class="analogy">Gradient descent is like hiking down a foggy mountain (loss landscape) with zero visibility. You check the slope under your feet (gradient), take a step downhill (learning rate), and repeat.</div>
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. ElasticNet — Best of Both Worlds</h3>
 <div class="math-block">
-<span class="formula">ElasticNet Loss = Σ(yᵢ − ŷᵢ)² + α × [l1_ratio × Σ|βⱼ| + (1−l1_ratio) × Σβⱼ²]</span>
+<span class="formula">$$ElasticNet Loss = Σ(yᵢ − ŷᵢ)² + α × [l1_ratio × Σ|βⱼ| + (1−l1_ratio) × Σβⱼ²]$$</span>
 <span class="desc">l1_ratio=0 → Ridge only. l1_ratio=1 → Lasso only. 0 &lt; l1_ratio &lt; 1 → mix.</span>
 <span class="desc">Typical range: l1_ratio ∈ [0.1, 0.9]. Default in sklearn: 0.5.</span>
 </div>
@@ -1899,7 +1897,7 @@ param_grid = {<span class="str">'ridge__alpha'</span>: [<span class="num">0.1</s
 <li><strong>Nested CV:</strong> Inner loop tunes hyperparameters; outer loop estimates generalisation. This is the only unbiased way to evaluate a model that required hyperparameter tuning.</li>
 </ol>
 </div>
-<button button="" class="complete-btn" id="btn-day-41" onclick="completeDay(41,200)" p0="" xp<="">✓ Mark Day 41 Complete — Earn 200 XP</button></div><!-- /day-41 -->
+<button class="complete-btn" id="btn-day-41" onclick="completeDay(41,200)">✓ Mark Day 41 Complete — Earn 200 XP</button></div><!-- /day-41 -->
 <!-- ═══════════════════════════════════════
      DAY 42 — Regression Metrics Mastery
 ════════════════════════════════════════ -->
@@ -1943,7 +1941,6 @@ param_grid = {<span class="str">'ridge__alpha'</span>: [<span class="num">0.1</s
 <li>Do you understand the core concepts of Day 41?</li>
 <li>Are you comfortable with Python programming syntax for Matrix Operations, Dot Products, and basic calculus derivatives?</li>
 </ul>
-</div>
 </div>
 </div>
 <div id="day-42-theory">
@@ -1992,12 +1989,12 @@ r2_adj = <span class="num">1</span> - (<span class="num">1</span> - r2) * (n - <
 </div>
 <h3 class="sh3">2. R² — The Most Misunderstood Metric</h3>
 <div class="math-block">
-<span class="formula">R² = 1 − SS_res / SS_tot</span>
+<span class="formula">$$R² = 1 − SS_res / SS_tot$$</span>
 <span class="desc">SS_res = Σ(yᵢ − ŷᵢ)² (residual sum of squares — model error)</span>
 <span class="desc">SS_tot = Σ(yᵢ − ȳ)² (total sum of squares — variance in data)</span>
-<span class="formula">R² = 0: model no better than predicting the mean</span>
-<span class="formula">R² &lt; 0: model WORSE than predicting the mean! (always possible with wrong model)</span>
-<span class="formula">R² = 1: perfect predictions</span>
+<span class="formula">$$R² = 0: model no better than predicting the mean$$</span>
+<span class="formula">$$R² &lt; 0: model WORSE than predicting the mean! (always possible with wrong model)$$</span>
+<span class="formula">$$R² = 1: perfect predictions$$</span>
 </div>
 <table class="concept-table">
 <tr><th>METRIC</th><th>FORMULA</th><th>UNIT</th><th>OUTLIER SENSITIVITY</th><th>BEST FOR</th></tr>
@@ -2233,7 +2230,7 @@ smape = np.mean(<span class="num">2</span> * np.abs(y_true - y_pred) / (np.abs(y
 <li><strong>Huber Loss:</strong> MSE behaviour for small errors (smooth gradient), MAE behaviour for large errors (doesn't blow up). Use when you have outliers but need a differentiable loss.</li>
 </ol>
 </div>
-<button button="" class="complete-btn" id="btn-day-42" m0="" onclick="completeDay(42,150)" xp<="">✓ Mark Day 42 Complete — Earn 150 XP</button></div><!-- /day-42 -->
+<button class="complete-btn" id="btn-day-42" onclick="completeDay(42,150)">✓ Mark Day 42 Complete — Earn 150 XP</button></div><!-- /day-42 -->
 <!-- ═══════════════════════════════════════
      DAY 43 — SVR + Tree-Based Regression
 ════════════════════════════════════════ -->
@@ -2270,7 +2267,7 @@ smape = np.mean(<span class="num">2</span> * np.abs(y_true - y_pred) / (np.abs(y
 <h3 class="sh3">1. Support Vector Regression (SVR)</h3>
 <div class="analogy">Socho ek pipe se guzarna. SVR ek "tube" banata hai data ke around — tube ki width ε (epsilon) hai. Jo points tube ke andar hain unhe model ignore karta hai (zero loss). Sirf jo points tube ke bahar hain unhe penalise karta hai. Yahi SVR ka magic hai — small errors ko bilkul tolerate karna, sirf large errors pe dhyan dena.</div>
 <div class="math-block">
-<span class="formula">SVR minimizes: ||w||²/2 + C × Σ(ξᵢ + ξᵢ*)</span>
+<span class="formula">$$SVR minimizes: ||w||²/2 + C × Σ(ξᵢ + ξᵢ*)$$</span>
 <span class="desc">Subject to: |yᵢ − ŷᵢ| ≤ ε + slack (ξ ≥ 0)</span>
 <span class="desc">ε = tube width (tolerance), C = regularisation (smaller C = more tolerance), kernel = non-linear transformation</span>
 </div>
@@ -2417,11 +2414,7 @@ print(fi)</pre>
 <div class="quiz-opt" onclick="quiz(this,'wrong','q43-3')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span> It requires fewer hyperparameters to tune</div>
 <div class="quiz-feedback correct-fb" id="q43-3-correct">✅ Correct! Boosting builds trees sequentially, where each new tree tries to fix the errors (residuals) of the previous ones. This leads to much lower bias and typically better predictive performance.</div>
 <div class="quiz-feedback wrong-fb" id="q43-3-wrong">❌ Gradient boosting reduces bias iteratively by fitting new trees to the residuals of the old trees. It is slower to train than RF and has MORE hyperparameters to tune, but usually wins in performance.</div>
-</div>
-<button button="" class="complete-btn" id="btn-day-43" onclick="completeDay(43,200)" p0="" xp<="">✓ Mark Day 43 Complete — Earn 200 XP</button></div><!-- /day-43 -->
-<!-- ═══════════════════════════════════════
-     DAY 44 — CAPSTONE PROJECT
-════════════════════════════════════════ -->
+
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🚨 What if you got this wrong? (Common Error):</strong>
 <br/><code style="background:rgba(0,0,0,0.15); padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:12px; color:var(--pink); display:inline-block; margin-top:0.4rem;">ValueError: Polynomial features contain extremely large numbers leading to overflow</code>
@@ -2441,6 +2434,11 @@ print(fi)</pre>
 <strong>🎤 Asked in interviews at: Swiggy Instamart</strong>
 <p style="margin-top:0.4rem;">What is Polynomial Regression? How do you control its complexity?</p>
 </div>
+</div>
+<button class="complete-btn" id="btn-day-43" onclick="completeDay(43,200)">✓ Mark Day 43 Complete — Earn 200 XP</button></div><!-- /day-43 -->
+<!-- ═══════════════════════════════════════
+     DAY 44 — CAPSTONE PROJECT
+════════════════════════════════════════ -->
 <div class="day-section" id="day-44">
 <div class="analogy">A Capstone regression pipeline is like setting up an automated drip irrigation system in a farm. Once configured, water flows from the source (data) through filters (scalers) to crops (model predictions) automatically.</div>
 <div class="day-header">
@@ -2567,7 +2565,7 @@ model = LinearRegression().fit(X, df['price'])</code></pre>
       Next week, we explore tree-based models and classification: Support Vector Machines, Decision Trees, and Random Forests. Make sure you understand the difference between Ridge (L2) and Lasso (L1) regularization!
     </p>
 </div>
-<button button="" class="complete-btn" id="btn-day-44" onclick="completeDay(44,300)" x0="" xp!<="">🏆 Complete Week 6 Capstone — Earn 300 XP! 🎉</button></div><!-- /day-44 -->
+<button class="complete-btn" id="btn-day-44" onclick="completeDay(44,300)">🏆 Complete Week 6 Capstone — Earn 300 XP! 🎉</button></div><!-- /day-44 -->
 <div class="week-summary">
 <div class="ws-icon">🎉</div>
 <div class="ws-content">
@@ -2581,7 +2579,7 @@ model = LinearRegression().fit(X, df['price'])</code></pre>
 <a class="ws-btn" href="roadmap.html">View Full Roadmap →</a>
 </div>
 </div>
-</div></div></div></div></main>
+</main>
 </div><!-- /layout -->
 <script>
 // ═══════════════════════════════════════════

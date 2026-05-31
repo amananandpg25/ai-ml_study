@@ -366,6 +366,11 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
       Today, we master the **Attention Mechanism**, which solves this by allowing the Decoder to dynamically inspect all historical hidden states of the Encoder at each decoding step.
       We will dissect the mathematics of **Additive (Bahdanau) vs. Dot-Product (Luong) Attention**, calculate attention weights, derive context vectors, and understand the **BLEU** evaluation metric.
     </p>
+<div class="meta-row">
+<span class="meta-badge g">⏱ 6 hours</span>
+<span class="meta-badge o">🧠 Advanced</span>
+<span class="meta-badge p">⚡ +150 XP</span>
+</div>
 <div class="mermaid">
     graph TD
       subgraph Encoder["Encoder RNN"]
@@ -434,7 +439,7 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
     In classic Encoder-Decoder networks (like GRUs or LSTMs), the final hidden state of the Encoder $h_T$ serves as the sole context vector $c$ passed to initialize the Decoder:
   </p>
 <div class="math-block">
-<span class="formula">c = h_T</span>
+<span class="formula">$$c = h_T$$</span>
 <span class="desc">Where h_T summarizes the entire input sequence regardless of its length.</span>
 </div>
 <p>
@@ -448,12 +453,12 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
 <ul class="prose-list">
 <li>
 <strong>Bahdanau (Additive) Attention:</strong> Employs a single hidden-layer feedforward network where the alignment score is calculated as:
-      <div class="math-block"><span class="formula">e_{t,i} = v_a^{\top} \tanh(W_a s_{t-1} + U_a h_i)</span></div>
+      <div class="math-block"><span class="formula">$$e_{t,i} = v_a^{\top} \tanh(W_a s_{t-1} + U_a h_i)$$</span></div>
       where $s_{t-1}$ is the previous decoder hidden state, $h_i$ is the $i$-th encoder hidden state, and $v_a, W_a, U_a$ are learnable projection weights.
     </li>
 <li>
 <strong>Luong (Dot-Product) Attention:</strong> Utilizes simpler, computationally efficient dot-product formulations:
-      <div class="math-block"><span class="formula">e_{t,i} = s_t^{\top} W_a h_i</span></div>
+      <div class="math-block"><span class="formula">$$e_{t,i} = s_t^{\top} W_a h_i$$</span></div>
       where $s_t$ is the current decoder hidden state. If $W_a = I$ (identity matrix), this simplifies to the basic dot-product: $e_{t,i} = s_t \cdot h_i$.
     </li>
 </ul>
@@ -462,14 +467,14 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
     Once alignment scores $e_{t,i}$ are calculated, we apply a softmax function over all input sequence positions to compute the **attention weights** $\alpha_{t,i}$:
   </p>
 <div class="math-block">
-<span class="formula">\alpha_{t,i} = \frac{\exp(e_{t,i})}{\sum_{j=1}^T \exp(e_{t,j})}</span>
+<span class="formula">$$\alpha_{t,i} = \frac{\exp(e_{t,i})}{\sum_{j=1}^T \exp(e_{t,j})}$$</span>
 <span class="desc">Softmax normalizes scores such that they form a valid probability distribution over input steps.</span>
 </div>
 <p>
     The dynamic context vector $c_t$ is then calculated as the weighted sum of encoder hidden states:
   </p>
 <div class="math-block">
-<span class="formula">c_t = \sum_{i=1}^T \alpha_{t,i} h_i</span>
+<span class="formula">$$c_t = \sum_{i=1}^T \alpha_{t,i} h_i$$</span>
 </div>
 <p>
     This context vector is concatenated with the decoder hidden state $s_t$ (or input) to produce the final attentional vector used to predict the next word token.
@@ -774,7 +779,7 @@ context = np.sum([w * h <span class="kw">for</span> w, h <span class="kw">in</sp
     The visual features from deep layers reside in a spatial grid of shape $(B, H \times W, C)$. To pass these as context into our text decoder, we must project their channels to match the word embedding dimensions $D_{\text{embed}}$:
   </p>
 <div class="math-block">
-<span class="formula">V_{\text{proj}} = \text{Linear}(V_{\text{raw}})</span>
+<span class="formula">$$V_{\text{proj}} = \text{Linear}(V_{\text{raw}})$$</span>
 <span class="desc">Where raw shape (Batch, 49, 2048) projects to aligned shape (Batch, 49, EmbedDim).</span>
 </div>
 <p>
@@ -1395,7 +1400,7 @@ output_features = encoder(mock_imgs)
     Our Decoder generates text captions token-by-token. At each step $t$, the decoder hidden state $h_t$ is used as a "query" to check where the model should look in the spatial visual grid "keys" $V_{\text{proj}}$:
   </p>
 <div class="math-block">
-<span class="formula">e_{t,i} = v_a^{\top} \tanh(W_a h_{t-1} + U_a V_{\text{proj},i})</span>
+<span class="formula">$$e_{t,i} = v_a^{\top} \tanh(W_a h_{t-1} + U_a V_{\text{proj},i})$$</span>
 <span class="desc">Where alignment scores are calculated for each of the 49 visual region features.</span>
 </div>
 <p>
@@ -1673,6 +1678,11 @@ out = decoder(mock_feats, mock_caps, init_states)
       In Phase 3 of our Major Capstone, we orchestrate the complete **Training &amp; Validation Loop** for our multi-modal attention captioner.
       Today, we master the engineering of stable sequence backpropagation, implement a padding-aware cross-entropy loss function to ignore non-semantic tokens, protect our LSTM gradients from exploding via gradient clipping, and build a validation metrics pipeline to compute real-time **BLEU-1 to BLEU-4** scores.
     </p>
+<div class="meta-row">
+<span class="meta-badge g">⏱ 6 hours</span>
+<span class="meta-badge o">🧠 Advanced</span>
+<span class="meta-badge p">⚡ +150 XP</span>
+</div>
 <div class="mermaid">
     graph TD
       Start["START &lt;SOS&gt;"] --&gt;|"k=2 beams"| L1A["the (0.6)"]
@@ -1716,7 +1726,7 @@ out = decoder(mock_feats, mock_caps, init_states)
     We configure our loss function using PyTorch's <code>ignore_index</code> parameter:
   </p>
 <div class="math-block">
-<span class="formula">\mathcal{L}_{\text{seq}} = \text{CrossEntropyLoss}(\text{ignore\_index} = \text{pad\_idx})</span>
+<span class="formula">$$\mathcal{L}_{\text{seq}} = \text{CrossEntropyLoss}(\text{ignore\_index} = \text{pad\_idx})$$</span>
 <span class="desc">Where pad_idx corresponds to the &lt;pad&gt; token in our Vocabulary.</span>
 </div>
 <p>
@@ -1728,7 +1738,7 @@ out = decoder(mock_feats, mock_caps, init_states)
     We enforce gradient clipping by capping the global norm of all trainable parameters:
   </p>
 <div class="math-block">
-<span class="formula">g \leftarrow \min\left(1, \frac{\delta}{\|g\|_2}\right) g</span>
+<span class="formula">$$g \leftarrow \min\left(1, \frac{\delta}{\|g\|_2}\right) g$$</span>
 <span class="desc">Where delta is a specified threshold parameter (typically 1.0 or 5.0).</span>
 </div>
 <h3 class="sh3">3. Dynamic Early Stopping &amp; Model Checkpointing</h3>
@@ -2032,7 +2042,7 @@ b1, b4 = evaluate_bleu(ref_str, cand_str)
     At each sequence step, we expand all $K$ candidates into all possible vocabulary words (yielding $K \times |\mathcal{V}|$ total paths). We calculate their joint cumulative probabilities by adding log-likelihoods:
   </p>
 <div class="math-block">
-<span class="formula">\log P(w_1, w_2, \dots, w_t) = \sum_{\tau=1}^t \log P(w_{\tau} \mid w_{&lt;\tau})</span>
+<span class="formula">$$\log P(w_1, w_2, \dots, w_t) = \sum_{\tau=1}^t \log P(w_{\tau} \mid w_{&lt;\tau})$$</span>
 <span class="desc">Using logs preserves numerical stability and prevents floating point underflow.</span>
 </div>
 <p>
@@ -2744,14 +2754,14 @@ attn_weights = torch.softmax(scores, dim=-1)</code></pre>
     The alignment network maps a query state $s_{t-1} \in \mathbb{R}^{d_s}$ and key vectors $h_i \in \mathbb{R}^{d_h}$ to a scalar representation. Let's write down the complete vector derivatives of Bahdanau Additive Attention:
   </p>
 <div class="math-block">
-<span class="formula">e_{t,i} = v_a^{\top} \tanh(W_a s_{t-1} + U_a h_i)</span>
+<span class="formula">$$e_{t,i} = v_a^{\top} \tanh(W_a s_{t-1} + U_a h_i)$$</span>
 <span class="desc">Where alignment parameters are updated via backpropagation.</span>
 </div>
 <p>
     The derivative of the alignment score with respect to the query projection weight $W_a$ is:
   </p>
 <div class="math-block">
-<span class="formula">\frac{\partial e_{t,i}}{\partial W_a} = \left[ v_a \odot \left( 1 - \tanh^2(W_a s_{t-1} + U_a h_i) \right) \right] s_{t-1}^{\top}</span>
+<span class="formula">$$\frac{\partial e_{t,i}}{\partial W_a} = \left[ v_a \odot \left( 1 - \tanh^2(W_a s_{t-1} + U_a h_i) \right) \right] s_{t-1}^{\top}$$</span>
 <span class="desc">This gradient trace highlights how error signals propagate through the additive layers during BPTT.</span>
 </div>
 <h3 class="sh3">2. The BLEU Formulation &amp; Brevity Penalty</h3>
@@ -2759,13 +2769,13 @@ attn_weights = torch.softmax(scores, dim=-1)</code></pre>
     The Bilingual Evaluation Understudy (BLEU) score measures matching $n$-grams. Given candidate length $c$ and reference length $r$, the geometric average of modified $n$-gram precisions $p_n$ is computed up to size $N$:
   </p>
 <div class="math-block">
-<span class="formula">\text{BLEU} = \text{BP} \cdot \exp\left( \sum_{n=1}^N w_n \log p_n \right)</span>
+<span class="formula">$$\text{BLEU} = \text{BP} \cdot \exp\left( \sum_{n=1}^N w_n \log p_n \right)$$</span>
 </div>
 <p>
     The **Brevity Penalty (BP)** is formulated to prevent short candidate sequences from inflating their precision metrics:
   </p>
 <div class="math-block">
-<span class="formula">\text{BP} = \begin{cases} 1 &amp; \text{if } c &gt; r \\ \exp\left(1 - \frac{r}{c}\right) &amp; \text{if } c \leq r \end{cases}</span>
+<span class="formula">$$\text{BP} = \begin{cases} 1 &amp; \text{if } c &gt; r \\ \exp\left(1 - \frac{r}{c}\right) &amp; \text{if } c \leq r \end{cases}$$</span>
 <span class="desc">The exponential decay penalizes short translations heavily.</span>
 </div>
 <h2 class="sh2">⚡ Production Performance Optimization Blueprints</h2>
@@ -3371,8 +3381,8 @@ function checkPredict(id, answer) {
   
   // Normalize whitespace, casing, quotes, brackets, and punctuation
   const normalize = (str) => {
-    return str.replace(/\\n/g, ' ')
-              .replace(/\s+/g, ' ')
+    return String(str).replace(/\\n/g, ' ')
+              .replace(/\n/g, ' ')
               .replace(/['"()\[\]]/g, '')
               .replace(/[,;]/g, ' ')
               .replace(/\s+/g, ' ')
@@ -3416,6 +3426,19 @@ function toggleTheme() {
   if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
 }
 (function() {
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
 })();
@@ -3456,6 +3479,19 @@ window.addEventListener('DOMContentLoaded', () => {
   
   renderMermaid('day-' + DAYS[0]);
   
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   const btn = document.getElementById('theme-btn');
   if (btn && saved === 'light') btn.textContent = '🌙 Dark';

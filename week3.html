@@ -1293,7 +1293,7 @@ X_test_scaled = scaler.transform(X_test)          <span class="cm"># only transf
 <li>Always fit scaler on train only — never on the full dataset</li>
 </ol>
 </div>
-<button button="" class="complete-btn" id="btn-day-17" m0="" onclick="completeDay(17,150)" xp<="">✓ Mark Day 17 Complete — Earn 150 XP</button></div><!-- /day-17 -->
+<button class="complete-btn" id="btn-day-17" onclick="completeDay(17,150)">✓ Mark Day 17 Complete — Earn 150 XP</button></div><!-- /day-17 -->
 <!-- ════════════════════════════════
      DAY 18 — Matplotlib Core Plotting
 ═══════════════════════════════════ -->
@@ -1576,7 +1576,7 @@ plt.savefig(<span class="str">'output.png'</span>, dpi=<span class="num">150</sp
 <li>alpha for transparency, figsize for size, dpi for quality when saving</li>
 </ol>
 </div>
-<button button="" class="complete-btn" id="btn-day-18" m0="" onclick="completeDay(18,150)" xp<="">✓ Mark Day 18 Complete — Earn 150 XP</button></div><!-- /day-18 -->
+<button class="complete-btn" id="btn-day-18" onclick="completeDay(18,150)">✓ Mark Day 18 Complete — Earn 150 XP</button></div><!-- /day-18 -->
 <!-- ════════════════════════════════
      DAY 19 — Seaborn + Advanced Visualisation
 ═══════════════════════════════════ -->
@@ -2186,7 +2186,7 @@ df[<span class="str">'age_group'</span>] = pd.cut(df[<span class="str">'Age'</sp
 <li>Random Forest feature importances are more powerful than correlation for identifying predictive features</li>
 </ol>
 </div>
-<button button="" class="complete-btn" id="btn-day-20" onclick="completeDay(20,200)" p0="" xp<="">✓ Mark Day 20 Complete — Earn 200 XP</button></div><div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Advanced statistical plotting with Seaborn (heatmaps, violinplots, pairplots) and style customisations.</li></ul></div><!-- /day-20 -->
+<button class="complete-btn" id="btn-day-20" onclick="completeDay(20,200)">✓ Mark Day 20 Complete — Earn 200 XP</button></div><div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Advanced statistical plotting with Seaborn (heatmaps, violinplots, pairplots) and style customisations.</li></ul></div><!-- /day-20 -->
 <!-- ════════════════════════════════
      DAY 21 — Week 3 Project Day
 ═══════════════════════════════════ -->
@@ -2491,8 +2491,10 @@ scaler.fit(data)
       Next week, we will dive deep into the essential mathematics of machine learning: Linear Algebra and Calculus. Make sure you are comfortable indexing and slicing Pandas DataFrames!
     </p>
 </div>
-<button &amp;="" 3!="" button="" class="complete-btn" complete="" id="btn-day-21" onclick="completeDay(21,300)" week="" x0="" xp="" 🎉<="">🏆 Complete Week 3 Capstone — Earn 300 XP! 🎉</button></div><div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Feature engineering (interactions, binning, log transforms) and constructing data preprocessing pipelines.</li></ul></div><!-- /day-21 -->
-</div></div></div></div></main>
+<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Feature engineering (interactions, binning, log transforms) and constructing data preprocessing pipelines.</li></ul></div><!-- /day-21 -->
+<button class="complete-btn" id="btn-day-21" onclick="completeDay(21,300)">🏆 Complete Week 3 Capstone — Earn 300 XP! 🎉</button>
+</div>
+</main>
 </div><!-- /layout -->
 <script>
 // ═══════════════════════════════════════════
@@ -2811,8 +2813,8 @@ function checkPredict(id, answer) {
   
   // Normalize whitespace, casing, quotes, brackets, and punctuation
   const normalize = (str) => {
-    return str.replace(/\\n/g, ' ')
-              .replace(/\s+/g, ' ')
+    return String(str).replace(/\\n/g, ' ')
+              .replace(/\n/g, ' ')
               .replace(/['"()\[\]]/g, '')
               .replace(/[,;]/g, ' ')
               .replace(/\s+/g, ' ')
@@ -2856,6 +2858,19 @@ function toggleTheme() {
   if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
 }
 (function() {
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
 })();
@@ -2896,6 +2911,19 @@ window.addEventListener('DOMContentLoaded', () => {
   
   renderMermaid('day-' + DAYS[0]);
   
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   const btn = document.getElementById('theme-btn');
   if (btn && saved === 'light') btn.textContent = '🌙 Dark';

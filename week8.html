@@ -362,10 +362,10 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
 <div class="analogy">Socho apne dimaag mein ek neuron hai — Sharma ji ki tarah. Sharma ji sirf tab react karte hain jab kaafi logon ne unhe bol diya ho (signals aayi ho threshold se zyada). Warna woh chup rehte hain. Yahi kaam karta hai ek artificial neuron: inputs le, unhe weights se multiply karo, sum karo, aur agar woh sum ek threshold cross kare toh "fire" karo (output = 1), warna chup raho (output = 0).</div>
 <div class="mermaid">
       graph LR
-      subgraph BiologicalNeuron [""Biological Neuron""]
+      subgraph BiologicalNeuron ["Biological Neuron"]
       Dend["Dendrites / Inputs"] --&gt; Cell["Cell Body / Summation"] --&gt; Axon["Axon / Output"]
       end
-      subgraph ArtificialNeuron [""Artificial Neuron""]
+      subgraph ArtificialNeuron ["Artificial Neuron"]
       X["Inputs x_i"] --&gt; Sum["Weighted Sum z = w.x + b"] --&gt; Act["Activation f_z"] --&gt; Out["Output y_hat"]
       end
     </div>
@@ -373,11 +373,11 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
 <h3 class="sh3">2. The Perceptron</h3>
 <p>Frank Rosenblatt's Perceptron (1957) was the first trainable neural model. It uses a <strong>step function</strong> as activation: output is 1 if the weighted sum ≥ 0, else 0.</p>
 <div class="math-block">
-<span class="formula">z = w₁x₁ + w₂x₂ + ... + wₙxₙ + b = wᵀx + b</span>
+<span class="formula">$$z = w₁x₁ + w₂x₂ + ... + wₙxₙ + b = wᵀx + b$$</span>
 <span class="desc">Weighted sum of inputs plus bias term</span>
-<span class="formula">ŷ = step(z) = 1 if z ≥ 0, else 0</span>
+<span class="formula">$$ŷ = step(z) = 1 if z ≥ 0, else 0$$</span>
 <span class="desc">Step function activation — hard threshold</span>
-<span class="formula">Perceptron update rule: wᵢ ← wᵢ + η(y − ŷ)xᵢ</span>
+<span class="formula">$$Perceptron update rule: wᵢ ← wᵢ + η(y − ŷ)xᵢ$$</span>
 <span class="desc">η = learning rate, y = true label, ŷ = predicted. Update only on error — correct predictions leave weights unchanged.</span>
 </div>
 <div class="cb">
@@ -442,10 +442,10 @@ p_xor.<span class="fn">fit</span>(X_xor, y_xor)
   </div>
 <div class="mermaid">
       graph TD
-      subgraph AND [""AND: Linearly Separable""]
+      subgraph AND ["AND: Linearly Separable"]
       A1["Inputs 0,0 0,1 1,0"] --- L1["Decision Boundary Line"] --- A2["Input 1,1"]
       end
-      subgraph XOR [""XOR: Non-Separable""]
+      subgraph XOR ["XOR: Non-Separable"]
       X1["Inputs 0,0 1,1"] --&gt; MLP["Requires Hidden Layer / Multi-Layer Perceptron"]
       X2["Inputs 0,1 1,0"] --&gt; MLP
       end
@@ -681,11 +681,11 @@ p_xor.<span class="fn">fit</span>(X_xor, y_xor)
 </table>
 <h3 class="sh3">3. Forward Propagation — Layer by Layer</h3>
 <div class="math-block">
-<span class="formula">Layer l: Zˡ = Wˡ Aˡ⁻¹ + bˡ</span>
+<span class="formula">$$Layer l: Zˡ = Wˡ Aˡ⁻¹ + bˡ$$</span>
 <span class="desc">Linear transformation: weight matrix Wˡ (shape: [nˡ, nˡ⁻¹]) times previous activations Aˡ⁻¹, plus bias bˡ</span>
-<span class="formula">Aˡ = g(Zˡ)</span>
+<span class="formula">$$Aˡ = g(Zˡ)$$</span>
 <span class="desc">Apply activation function g element-wise to get layer l's activations</span>
-<span class="formula">Example (3-layer net): A⁰→Z¹=W¹A⁰+b¹→A¹=ReLU(Z¹)→Z²=W²A¹+b²→A²=σ(Z²)</span>
+<span class="formula">$$Example (3-layer net): A⁰→Z¹=W¹A⁰+b¹→A¹=ReLU(Z¹)→Z²=W²A¹+b²→A²=σ(Z²)$$</span>
 <span class="desc">Input → hidden layer (ReLU) → output layer (sigmoid for binary classification)</span>
 </div>
 <div class="cb">
@@ -949,21 +949,21 @@ output, cache = <span class="fn">forward</span>(X_test)
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. Loss Functions First</h3>
 <div class="math-block">
-<span class="formula">Binary Cross-Entropy: L = −(y log(ŷ) + (1−y) log(1−ŷ))</span>
+<span class="formula">$$Binary Cross-Entropy: L = −(y log(ŷ) + (1−y) log(1−ŷ))$$</span>
 <span class="desc">Use with sigmoid output for binary classification. Penalises confident wrong predictions heavily.</span>
-<span class="formula">Categorical Cross-Entropy: L = −Σ yₖ log(ŷₖ)</span>
+<span class="formula">$$Categorical Cross-Entropy: L = −Σ yₖ log(ŷₖ)$$</span>
 <span class="desc">Use with softmax output for multi-class classification.</span>
-<span class="formula">MSE: L = (1/n) Σ(y − ŷ)²</span>
+<span class="formula">$$MSE: L = (1/n) Σ(y − ŷ)²$$</span>
 <span class="desc">Use for regression problems.</span>
 </div>
 <h3 class="sh3">2. The Chain Rule — Backprop's Foundation</h3>
 <div class="analogy">Socho ek factory hai jahan input kaccha maal hai aur output final product. Agar output ki quality kharaab hai, toh factory manager puchega: "Kaun sa machine responsible hai?" Woh trace karta hai backwards — assembly se welding tak, welding se cutting tak. Yahi karta hai backprop: "Loss kyu hua?" — aur ek ek layer mein jaake samajhta hai kiske weights ne contribution diya. Chain rule is backwards tracing ka mathematical version hai.</div>
 <div class="math-block">
-<span class="formula">Chain rule: if L = f(g(x)), then dL/dx = (dL/dg)(dg/dx)</span>
+<span class="formula">$$Chain rule: if L = f(g(x)), then dL/dx = (dL/dg)(dg/dx)$$</span>
 <span class="desc">The fundamental rule. Applied recursively through every layer.</span>
-<span class="formula">∂L/∂W³ = ∂L/∂A³ · ∂A³/∂Z³ · ∂Z³/∂W³</span>
+<span class="formula">$$∂L/∂W³ = ∂L/∂A³ · ∂A³/∂Z³ · ∂Z³/∂W³$$</span>
 <span class="desc">Gradient of loss w.r.t. output layer weights = (dL/dA3) × (activation derivative) × A2</span>
-<span class="formula">∂L/∂W² = ∂L/∂A³ · ∂A³/∂Z³ · ∂Z³/∂A² · ∂A²/∂Z² · ∂Z²/∂W²</span>
+<span class="formula">$$∂L/∂W² = ∂L/∂A³ · ∂A³/∂Z³ · ∂Z³/∂A² · ∂A²/∂Z² · ∂Z²/∂W²$$</span>
 <span class="desc">Each layer adds another chain rule term. Cached intermediate values make this O(n).</span>
 </div>
 <div class="cb">
@@ -975,7 +975,7 @@ output, cache = <span class="fn">forward</span>(X_test)
 
 <span class="cm"># ── Data prep ─────────────────────────────────────────────</span>
 X, y = make_moons(n_samples=<span class="num">1000</span>, noise=<span class="num">0.2</span>, random_state=<span class="num">42</span>)
-X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=<span class="num">0.2</span>)
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=<span class="num">0.2</span>, random_state=<span class="num">42</span>)
 X_tr, X_te = StandardScaler().fit_transform(X_tr), StandardScaler().fit_transform(X_te)
 X_tr, X_te = X_tr.T, X_te.T        <span class="cm"># shape: [2, n_samples]</span>
 y_tr, y_te = y_tr.reshape(<span class="num">1</span>, -<span class="num">1</span>), y_te.reshape(<span class="num">1</span>, -<span class="num">1</span>)
@@ -1248,7 +1248,7 @@ w2_new = w2 - η * dL/dw2 = 1.5 - 0.1 * 0.5 = 1.45.</pre>
 <li><strong>Vanishing gradient:</strong> Deep networks with sigmoid/tanh suffer as gradients shrink exponentially through layers. ReLU + proper init mitigate this.</li>
 </ol>
 </div>
-<button button="" class="complete-btn" id="btn-day-54" onclick="completeDay(54,200)" p0="" xp!<="">✓ Mark Day 54 Complete — Earn 200 XP</button></div><!-- /day-54 -->
+<button class="complete-btn" id="btn-day-54" onclick="completeDay(54,200)">✓ Mark Day 54 Complete — Earn 200 XP</button></div><!-- /day-54 -->
 <!-- ═══════════════════════════════════════════════════════
      DAY 55 — Keras & TensorFlow: Build Real Networks Fast
 ════════════════════════════════════════════════════════ -->
@@ -1523,7 +1523,7 @@ model = keras.Model(inputs=inputs, outputs=outputs, name=<span class="str">'mnis
 </a>
 <a class="resource-card" href="https://www.youtube.com/watch?v=qFJeN9V1ZsI" target="_blank">
 <div class="rc-type">YOUTUBE · 1 HR</div>
-<div class="rc-title">Sentdex — Neural Networks from Scratch in Python</div>
+<div class="rc-title">freeCodeCamp — Neural Networks from Scratch in Python</div>
 <div class="rc-sub">Ties your NumPy work to Keras. Great bridge between Days 54 and 55.</div>
 </a>
 </div>
@@ -1597,21 +1597,21 @@ model = keras.Model(inputs=inputs, outputs=outputs, name=<span class="str">'mnis
 <h3 class="sh3">1. Dropout — Ensemble Learning for Free</h3>
 <div class="analogy">Socho ek cricket team hai jahan practice mein random random players ko rest dete hain. Isse kya hoga? Koi bhi ek player "star" nahi ban sakta jo team akele jeetaye — har player ko independent hona padega. Yahi karta hai Dropout: training mein randomly neurons ko "off" karta hai (p=0.2 means 20% neurons off), taaki baaki neurons independently useful features sikhein.</div>
 <div class="math-block">
-<span class="formula">Dropout mask: rⁱ ~ Bernoulli(1−p) where p = dropout rate</span>
+<span class="formula">$$Dropout mask: rⁱ ~ Bernoulli(1−p) where p = dropout rate$$</span>
 <span class="desc">Each neuron is kept with probability (1−p). Dropped neurons output 0 and receive no gradient.</span>
-<span class="formula">Training: Ãˡ = (rˡ ⊙ Aˡ) / (1−p)</span>
+<span class="formula">$$Training: Ãˡ = (rˡ ⊙ Aˡ) / (1−p)$$</span>
 <span class="desc">Scale kept neurons up by 1/(1-p) to keep expected output the same (inverted dropout).</span>
-<span class="formula">Inference: No dropout — all neurons active, no scaling needed</span>
+<span class="formula">$$Inference: No dropout — all neurons active, no scaling needed$$</span>
 <span class="desc">The scaling during training ensures the inference path requires no changes.</span>
 </div>
 <h3 class="sh3">2. Batch Normalisation — Fixing the "Covariate Shift" Problem</h3>
 <p>As training progresses, the distribution of each layer's inputs changes because the previous layer's weights change. This is called <strong>internal covariate shift</strong>. BatchNorm fixes this by normalising the layer's input to zero mean and unit variance, then learning a scale (γ) and shift (β).</p>
 <div class="math-block">
-<span class="formula">μ_B = (1/m) Σ zᵢ,  σ²_B = (1/m) Σ(zᵢ − μ_B)²</span>
+<span class="formula">$$μ_B = (1/m) Σ zᵢ,  σ²_B = (1/m) Σ(zᵢ − μ_B)²$$</span>
 <span class="desc">Compute batch mean and variance for each feature</span>
-<span class="formula">ẑᵢ = (zᵢ − μ_B) / √(σ²_B + ε)</span>
+<span class="formula">$$ẑᵢ = (zᵢ − μ_B) / √(σ²_B + ε)$$</span>
 <span class="desc">Normalise. ε=1e-5 for numerical stability.</span>
-<span class="formula">yᵢ = γ ẑᵢ + β   (γ and β are learnable parameters)</span>
+<span class="formula">$$yᵢ = γ ẑᵢ + β   (γ and β are learnable parameters)$$</span>
 <span class="desc">Scale and shift — the network can "undo" normalisation if needed. γ and β are learned via backprop.</span>
 </div>
 <div class="cb">
@@ -1804,9 +1804,9 @@ results = {}
 <div class="rc-title">Improving Neural Networks by Preventing Co-Adaptation (Dropout)</div>
 <div class="rc-sub">The original Dropout paper. Surprisingly readable — only 18 pages.</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=NyKSz5jqVmU" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=D8PJAL-MZv8" target="_blank">
 <div class="rc-type">YOUTUBE · 12 MIN</div>
-<div class="rc-title">Andrew Ng — Dropout Regularisation (Coursera DeepLearning.AI)</div>
+<div class="rc-title">Andrew Ng — Dropout Regularisation (DeepLearning.ai)</div>
 <div class="rc-sub">Best intuition for why Dropout works. The "ensemble of networks" explanation.</div>
 </a>
 <a class="resource-card" href="https://arxiv.org/abs/1502.03167" target="_blank">
@@ -1884,15 +1884,15 @@ results = {}
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. The Optimizer Zoo</h3>
 <div class="math-block">
-<span class="formula">Vanilla SGD: w ← w − η ∇L(w)</span>
+<span class="formula">$$Vanilla SGD: w ← w − η ∇L(w)$$</span>
 <span class="desc">Same learning rate for all parameters. No memory of previous gradients.</span>
-<span class="formula">SGD + Momentum: v ← β·v + (1−β)·∇L; w ← w − η·v</span>
+<span class="formula">$$SGD + Momentum: v ← β·v + (1−β)·∇L; w ← w − η·v$$</span>
 <span class="desc">β≈0.9. Accumulates velocity in consistent gradient directions. Dampens oscillations.</span>
-<span class="formula">RMSProp: s ← β·s + (1−β)·(∇L)²; w ← w − η·∇L / (√s + ε)</span>
+<span class="formula">$$RMSProp: s ← β·s + (1−β)·(∇L)²; w ← w − η·∇L / (√s + ε)$$</span>
 <span class="desc">Adapts LR per parameter — divides by RMS of recent gradients. Good for non-stationary problems.</span>
-<span class="formula">Adam: m ← β₁m + (1−β₁)∇L; v ← β₂v + (1−β₂)(∇L)²</span>
+<span class="formula">$$Adam: m ← β₁m + (1−β₁)∇L; v ← β₂v + (1−β₂)(∇L)²$$</span>
 <span class="desc">First moment (momentum) + second moment (RMSProp). With bias correction: m̂=m/(1−β₁ᵗ), v̂=v/(1−β₂ᵗ)</span>
-<span class="formula">Adam update: w ← w − η · m̂ / (√v̂ + ε)</span>
+<span class="formula">$$Adam update: w ← w − η · m̂ / (√v̂ + ε)$$</span>
 <span class="desc">Defaults: β₁=0.9, β₂=0.999, ε=1e-8, η=0.001. Rarely needs tuning — the "it just works" optimizer.</span>
 </div>
 <div class="analogy">Socho tum ek ball ko pahaad se neeche roll kar rahe ho (gradient descent). Vanilla SGD: har step mein tum ball ko push karte ho, chahe koi bhi direction ho. Momentum: ball apni velocity maintain karta hai — consistent direction mein tezi se jaata hai, fluctuating directions mein slow. Adam: ek smart ball jo har direction mein alag speed maintain karta hai — jo direction mein consistent gradient hai, wahan tez; jo mein noisy hai, wahan slow.</div>
@@ -2534,7 +2534,7 @@ print(a.shape)</code></pre>
       Next week, we enter the world of Computer Vision! We will work with Convolutional Neural Networks (CNNs), kernels, and image tensors. Make sure you understand the chain rule and forward/backward passes!
     </p>
 </div>
-<button button="" class="complete-btn" id="btn-day-58" onclick="completeDay(58,300)" x0="" xp!<="">🏆 Complete Week 8 Capstone — Earn 300 XP! 🎉</button></div><!-- /day-58 -->
+<button class="complete-btn" id="btn-day-58" onclick="completeDay(58,300)">🏆 Complete Week 8 Capstone — Earn 300 XP! 🎉</button></div><!-- /day-58 -->
 <div class="week-summary">
 <div class="ws-icon">🎉</div>
 <div class="ws-content">
@@ -2867,8 +2867,8 @@ function checkPredict(id, answer) {
   
   // Normalize whitespace, casing, quotes, brackets, and punctuation
   const normalize = (str) => {
-    return str.replace(/\\n/g, ' ')
-              .replace(/\s+/g, ' ')
+    return String(str).replace(/\\n/g, ' ')
+              .replace(/\n/g, ' ')
               .replace(/['"()\[\]]/g, '')
               .replace(/[,;]/g, ' ')
               .replace(/\s+/g, ' ')
@@ -2912,6 +2912,19 @@ function toggleTheme() {
   if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
 }
 (function() {
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
 })();
@@ -2952,6 +2965,19 @@ window.addEventListener('DOMContentLoaded', () => {
   
   renderMermaid('day-' + DAYS[0]);
   
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   const btn = document.getElementById('theme-btn');
   if (btn && saved === 'light') btn.textContent = '🌙 Dark';

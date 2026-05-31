@@ -402,7 +402,7 @@ ul.prose-list li{font-size:14px;margin-bottom:.3rem;color:var(--text)}
 <p>The unscaled attention scores are given by <em>S = $Q$ $K$^T</em>. If components of $Q$ and $K$ are independent random variables with mean 0 and variance 1, the dot product will have mean 0 and variance <em>$d_k$</em>. For a large <em>$d_k$</em> (e.g., 64), the variance is 64.</p>
 <p>Passing a vector with high variance into the Softmax function pushes the values to the tails of the exponential curve, where the derivative of softmax approaches zero. This causes <strong>gradient saturation</strong> and halts learning. To solve this, we scale by the standard deviation <em>√$d_k$</em>.</p>
 <div class="math-block">
-<span class="formula">Attention($Q$, $K$, $V$) = Softmax( ($Q$ $K$^T) / √$d_k$ ) $V$</span>
+<span class="formula">$$Attention($Q$, $K$, $V$) = Softmax( ($Q$ $K$^T) / √$d_k$ ) $V$$$</span>
 </div>
 <div class="mermaid">
       graph TD
@@ -854,7 +854,7 @@ Attention Output = [6.7 + 0.66, 13.4 + 1.32] = [7.36, 14.72].</pre>
 <h3 class="sh3">3. Rotary Positional Embeddings (RoPE)</h3>
 <p>The original Transformer used Absolute Positional Encodings (adding sine/cosine waves to token vectors). Modern LLMs (like LLaMA and Mistral) use <strong>RoPE</strong>, which encodes relative position by rotating the query and key representations in a 2D plane by an angle proportional to their absolute position.</p>
 <div class="math-block">
-<span class="formula">RoPE(x_m) = x_m * cos(mθ) + [-x_m(2), x_m(1)] * sin(mθ)</span>
+<span class="formula">$$RoPE(x_m) = x_m * cos(mθ) + [-x_m(2), x_m(1)] * sin(mθ)$$</span>
 <span class="desc">Where m is the absolute position. The inner product between two rotated vectors naturally decays relative to their distance (m - n), giving strong relative position bias.</span>
 </div>
 <h3 class="sh3">4. Pre-LN vs Post-LN</h3>
@@ -1119,7 +1119,7 @@ x_final <span class="op">=</span> x_split.<span class="fn">transpose</span>(<spa
 <div id="day-95-resources-section">
 <h2 class="sh2">📚 Resources</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=SZcrT8F5tU4" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=eMlx5fFNoYc" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
 <div class="rc-title">3Blue1Brown — Attention in Transformers</div>
 <div class="rc-sub">Superb visual explanation of how attention vectors interact dynamically inside layers.</div>
@@ -1177,7 +1177,7 @@ x_final <span class="op">=</span> x_split.<span class="fn">transpose</span>(<spa
 <p>GPT (OpenAI, 2018) used a Decoder-only Transformer — trained left-to-right, predicting the next token. This creates representations where each token can only "see" the tokens before it. For a word like "bank" in "I went to the bank to deposit money", a left-to-right model has only seen "I went to the" — not enough context to disambiguate financial vs. river bank.</p>
 <p>BERT uses only the Encoder stack, which applies <strong>fully bidirectional</strong> self-attention — each token attends to every other token in both directions simultaneously. The representation of "bank" is computed using the full context including "deposit money" which follows it. This produces dramatically richer contextual representations, especially for tasks requiring deep understanding like QA, NLI, and coreference resolution.</p>
 <div class="math-block">
-<span class="formula">h_i^{(l)} = \\text{TransformerEncoder}\\!\\left(h_1^{(l-1)}, \\ldots, h_n^{(l-1)}\\right)_i</span>
+<span class="formula">$$h_i^{(l)} = \\text{TransformerEncoder}\\!\\left(h_1^{(l-1)}, \\ldots, h_n^{(l-1)}\\right)_i$$</span>
 <span class="desc">Each token representation at layer l is a function of ALL tokens at layer l-1. Contrast with GPT where h_i^(l) depends only on h_1...h_i^(l-1).</span>
 </div>
 <div class="mermaid">
@@ -1849,10 +1849,10 @@ fast_tokenizer <span class="op">=</span> <span class="fn">PreTrainedTokenizerFas
 <div id="day-97-resources-section">
 <h2 class="sh2">📚 Resources</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=zju7M_V24WY" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=00GKzGyWFEs" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">Hugging Face — Tokenizers Course</div>
-<div class="rc-sub">Excellent visual breakdown of subword algorithms (BPE, WordPiece, and SentencePiece).</div>
+<div class="rc-title">Hugging Face NLP &amp; Tokenizers Course</div>
+<div class="rc-sub">Official Hugging Face course covering NLP pipelines and subword tokenizer algorithms</div>
 </a>
 <a class="resource-card" href="https://www.geeksforgeeks.org/byte-pair-encoding-bpe-in-nlp/" target="_blank">
 <div class="rc-type">🌐 WEBSITE</div>
@@ -1937,7 +1937,7 @@ fast_tokenizer <span class="op">=</span> <span class="fn">PreTrainedTokenizerFas
 <h3 class="sh3">2. LoRA (Low-Rank Adaptation)</h3>
 <p>LoRA hypothesizes that the change in weights (ΔW) during fine-tuning has a low "intrinsic rank". Instead of updating the massive weight matrix <em>$W$ ∈ ℝ^(d × k)</em> directly, we freeze <em>$W$</em> and inject trainable rank decomposition matrices <em>A ∈ ℝ^(d × r)</em> and <em>B ∈ ℝ^(r × k)</em>, where <em>r ≪ min(d, k)</em>.</p>
 <div class="math-block">
-<span class="formula">h = Wx + ΔWx = Wx + B(Ax)</span>
+<span class="formula">$$h = Wx + ΔWx = Wx + B(Ax)$$</span>
 <span class="desc">During inference, B and A can be multiplied together and explicitly added to $W$, resulting in zero added latency.</span>
 </div>
 <div class="mermaid">
@@ -2199,7 +2199,7 @@ loss.<span class="fn">backward</span>()
 <div class="resources-grid">
 <a class="resource-card" href="https://www.youtube.com/watch?v=t509sv5MT0w" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">StatQuest — Low-Rank Adaptation (LoRA)</div>
+<div class="rc-title">DeepFindr — Low-Rank Adaptation (LoRA)</div>
 <div class="rc-sub">Fabulous intuitive visual guide to LoRA concepts and mathematical decomposition.</div>
 </a>
 <a class="resource-card" href="https://www.geeksforgeeks.org/parameter-efficient-fine-tuning-peft/" target="_blank">
@@ -2782,10 +2782,10 @@ demo <span class="op">=</span> gr.<span class="fn">Interface</span>(fn<span clas
 <div id="day-100-resources-section">
 <h2 class="sh2">📚 Resources</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=33a5Gf4d0mY" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=WJKsPchji0Q" target="_blank">
 <div class="rc-type">🎥 YOUTUBE</div>
-<div class="rc-title">FastAPI Course — ML Model APIs in 30 Mins</div>
-<div class="rc-sub">Video tutorial showing how to expose models using Pydantic, async routes, and FastAPI.</div>
+<div class="rc-title">FAST API for Machine Learning — CampusX</div>
+<div class="rc-sub">CampusX · Hinglish, build and deploy ML API endpoints using FastAPI and Pydantic</div>
 </a>
 <a class="resource-card" href="https://www.geeksforgeeks.org/introduction-to-fastapi/" target="_blank">
 <div class="rc-type">🌐 WEBSITE</div>
@@ -3204,8 +3204,8 @@ function checkPredict(id, answer) {
   
   // Normalize whitespace, casing, quotes, brackets, and punctuation
   const normalize = (str) => {
-    return str.replace(/\\n/g, ' ')
-              .replace(/\s+/g, ' ')
+    return String(str).replace(/\\n/g, ' ')
+              .replace(/\n/g, ' ')
               .replace(/['"()\[\]]/g, '')
               .replace(/[,;]/g, ' ')
               .replace(/\s+/g, ' ')
@@ -3249,6 +3249,19 @@ function toggleTheme() {
   if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
 }
 (function() {
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
 })();
@@ -3289,6 +3302,19 @@ window.addEventListener('DOMContentLoaded', () => {
   
   renderMermaid('day-' + DAYS[0]);
   
+  
+  document.querySelectorAll('.predict-input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const btn = input.nextElementSibling;
+        if (btn && btn.classList.contains('predict-btn')) {
+          btn.click();
+        }
+      }
+    });
+  });
+
   const saved = localStorage.getItem('theme');
   const btn = document.getElementById('theme-btn');
   if (btn && saved === 'light') btn.textContent = '🌙 Dark';

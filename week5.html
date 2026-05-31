@@ -435,7 +435,7 @@ ul.prose-list li{font-size:14px;margin:.25rem 0;color:var(--text)}
 <h3 class="sh3">4. Train-Test Split: Why and How</h3>
 <p>Agar aap kisi student ka test usi questions se loge jo class mein solve karwaye the, toh ho sakta hai usne concepts samjhe na ho, sirf answers ratta maar liye ho. Generalization check karne ke liye, humesha test un-seen questions (test set) par hona chahiye.</p>
 <div class="math-block">
-<span class="formula">Dataset = Train Set (80%) + Test Set (20%)</span>
+<span class="formula">$$Dataset = Train Set (80%) + Test Set (20%)$$</span>
 <span class="desc">Train set is used to learn weights. Test set is strictly reserved for final evaluation.</span>
 </div>
 <div class="cb">
@@ -647,17 +647,17 @@ train, test = train_test_split(data, test_size=<span class="num">0.4</span>, ran
 <p>MAE calculates the average magnitude of absolute errors. MSE squares the errors before averaging them. Because of the squaring operation, MSE penalizes large errors disproportionately more than small errors.</p>
 <div class="analogy">Ghar ki price predict karte waqt, agar aap Rs. 10k off ho, toh normal baat hai. Par agar aap Rs. 10 Lakhs off ho, toh bohot bada failure hai. MSE is failure ko bohot heavy fine karta hai (squaring the 10 Lakhs error), jabki MAE simple proportion mein penalty lagata hai.</div>
 <div class="math-block">
-<span class="formula">MAE = (1/n) * Σ |y_i - ŷ_i|</span>
+<span class="formula">$$MAE = (1/n) * Σ |y_i - ŷ_i|$$</span>
 <span class="desc">L1 Loss. Robust to outliers, but gradient is constant (not smooth at zero).</span>
-<span class="formula">MSE = (1/n) * Σ (y_i - ŷ_i)²</span>
+<span class="formula">$$MSE = (1/n) * Σ (y_i - ŷ_i)²$$</span>
 <span class="desc">L2 Loss. Penalizes larger errors heavily, smooth gradient, easy to differentiate.</span>
-<span class="formula">RMSE = √[MSE]</span>
+<span class="formula">$$RMSE = √[MSE]$$</span>
 <span class="desc">Root Mean Squared Error. Converts units back to original y scale.</span>
 </div>
 <h3 class="sh3">2. Coefficient of Determination (R² Score)</h3>
 <p>R² compares your model's predictions to a baseline model that always predicts the mean of target variables (ŷ = mean(y)). It represents the proportion of variance in the dependent variable that is predictable from the independent variables.</p>
 <div class="math-block">
-<span class="formula">R² = 1 - (SS_res / SS_tot)</span>
+<span class="formula">$$R² = 1 - (SS_res / SS_tot)$$</span>
 <span class="desc">Where SS_res = Σ(y_i - ŷ_i)² [sum of squared residuals], and SS_tot = Σ(y_i - y_mean)² [total sum of squares]</span>
 </div>
 <div class="callout ci">
@@ -792,7 +792,7 @@ y_pred = np.array([<span class="num">3</span>, <span class="num">3</span>, <span
 <div id="day-32-resources-section">
 <h2 class="sh2">📚 Day 32 Resources</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=2AQK51DgQIA" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=bMccdk8EdGo" target="_blank">
 <div class="rc-type">📺 VIDEO · STATQUEST</div>
 <div class="rc-title">R-squared, Clearly Explained</div>
 <div class="rc-sub">Fabulous visual intuition of what R² represents and how it measures variance.</div>
@@ -887,11 +887,11 @@ J(w_1) = (4.4 - 2)² = 5.76 (reduced from J(5.0) = 9.0).</pre>
 <p>Confusion Matrix is a tabular representation of the model's classification performance, comparing actual values with predicted values.</p>
 <div class="mermaid">
       graph TD
-      subgraph ActualPositive [""Actual Positive""]
+      subgraph ActualPositive ["Actual Positive"]
       P_TP["Predicted Positive: TP"]
       P_FN["Predicted Negative: FN"]
       end
-      subgraph ActualNegative [""Actual Negative""]
+      subgraph ActualNegative ["Actual Negative"]
       P_FP["Predicted Positive: FP"]
       P_TN["Predicted Negative: TN"]
       end
@@ -905,11 +905,11 @@ J(w_1) = (4.4 - 2)² = 5.76 (reduced from J(5.0) = 9.0).</pre>
 <strong>🛡️ Fraud Alert (High Precision):</strong> If a bank blocks a UPI card on every false alarm, customer experience will be terrible. We want to be absolutely sure when marking a transaction as fraud (minimizing false positives/FP), so we prioritize High Precision.
     </div>
 <div class="math-block">
-<span class="formula">Precision = TP / (TP + FP)</span>
+<span class="formula">$$Precision = TP / (TP + FP)$$</span>
 <span class="desc">What fraction of predictions were correct?</span>
-<span class="formula">Recall = TP / (TP + FN)</span>
+<span class="formula">$$Recall = TP / (TP + FN)$$</span>
 <span class="desc">What fraction of positive cases did we capture?</span>
-<span class="formula">F1-Score = 2 * (Precision * Recall) / (Precision + Recall)</span>
+<span class="formula">$$F1-Score = 2 * (Precision * Recall) / (Precision + Recall)$$</span>
 <span class="desc">Harmonic mean. Penalizes extreme values of either precision or recall.</span>
 </div>
 <h3 class="sh3">3. ROC Curve and AUC</h3>
@@ -1045,7 +1045,7 @@ print(f"P: {precision:.1f}, R: {recall:.1f}")</pre></div>
 <div id="day-33-resources-section">
 <h2 class="sh2">📚 Day 33 Resources</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=4jR1xsF88uy" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=4jRBRDbJemM" target="_blank">
 <div class="rc-type">📺 VIDEO · STATQUEST</div>
 <div class="rc-title">ROC and AUC, Clearly Explained</div>
 <div class="rc-sub">Intuitive, step-by-step visual description of ROC curve construction.</div>
@@ -1124,7 +1124,7 @@ print(f"P: {precision:.1f}, R: {recall:.1f}")</pre></div>
 <h3 class="sh3">1. Bias-Variance Decomposition</h3>
 <p>The total expected prediction error of any ML model can be decomposed into three mathematically separate parts:</p>
 <div class="math-block">
-<span class="formula">Total Error = Bias² + Variance + Irreducible Error</span>
+<span class="formula">$$Total Error = Bias² + Variance + Irreducible Error$$</span>
 <span class="desc"><strong>Bias:</strong> Error from erroneous assumptions (e.g., fitting a line to circular data). High bias → Underfitting.</span>
 <span class="desc"><strong>Variance:</strong> Sensitivity to small fluctuations in training set. High variance → Overfitting.</span>
 <span class="desc"><strong>Irreducible Error (noise):</strong> Noise in data generation. Cannot be reduced regardless of algorithm.</span>
@@ -1237,7 +1237,7 @@ print("High Variance Model:", "A" if 0.95 - 0.01 &gt; 0.17 - 0.15 else "B")</pre
 <div id="day-34-resources-section">
 <h2 class="sh2">📚 Day 34 Resources</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=EuBBz3bI-z8" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=EuBBz3bI-aA" target="_blank">
 <div class="rc-type">📺 VIDEO · STATQUEST</div>
 <div class="rc-title">Bias-Variance Tradeoff</div>
 <div class="rc-sub">The classic StatQuest visual description of the bias and variance tradeoff.</div>
@@ -1291,12 +1291,7 @@ print("High Variance Model:", "A" if 0.95 - 0.01 &gt; 0.17 - 0.15 else "B")</pre
 <li><strong>Learning Curves:</strong> Plot training vs validation scores against training size to diagnose data and complexity requirements.</li>
 <li><strong>Overfitting fixes:</strong> Regularization, prune parameters, drop features, or get more training data.</li>
 </ol>
-</div>
-<button class="complete-btn" id="btn-day-34" onclick="completeDay(34,150)">✓ Mark Day 34 Complete — Earn 150 XP</button>
-</div><!-- /day-34 -->
-<!-- ═══════════════════════════════════════
-     DAY 35 — Hyperparameter Tuning
-     ════════════════════════════════════════ -->
+
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🚨 What if you got this wrong? (Common Error):</strong>
 <br/><code style="background:rgba(0,0,0,0.15); padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:12px; color:var(--pink); display:inline-block; margin-top:0.4rem;">Overfitting / validation loss going up while train loss goes down</code>
@@ -1310,6 +1305,12 @@ print("High Variance Model:", "A" if 0.95 - 0.01 &gt; 0.17 - 0.15 else "B")</pre
 <strong>🎤 Asked in interviews at: Groww</strong>
 <p style="margin-top:0.4rem;">What is the Bias-Variance tradeoff? How does model complexity affect these parameters?</p>
 </div>
+</div>
+<button class="complete-btn" id="btn-day-34" onclick="completeDay(34,150)">✓ Mark Day 34 Complete — Earn 150 XP</button>
+</div><!-- /day-34 -->
+<!-- ═══════════════════════════════════════
+     DAY 35 — Hyperparameter Tuning
+     ════════════════════════════════════════ -->
 <div class="day-section" id="day-35">
 <div class="day-header">
 <div class="day-tag">WEEK 5 · DAY 35 · MONTH 2 — ML FUNDAMENTALS</div>
@@ -1470,7 +1471,7 @@ print("Total fits:", fits)</pre></div>
 <div class="rc-title">Scikit-learn Pipelines Documentation</div>
 <div class="rc-sub">Detailed API reference and architectural guides for building pipelines.</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=fSytzLHepco" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=fSytzGwwBVw" target="_blank">
 <div class="rc-type">📺 VIDEO · STATQUEST</div>
 <div class="rc-title">Cross Validation, Clearly Explained</div>
 <div class="rc-sub">Superb visual explanation of how K-Fold splits data and averages validation scores.</div>
@@ -1519,12 +1520,7 @@ print("Total fits:", fits)</pre></div>
 <li><strong>Data Leakage:</strong> Avoid leakage by scaling/preprocessing strictly inside cross-validation splits.</li>
 <li><strong>Pipelines:</strong> The standard way to chain scaling, preprocessing, and model execution together in scikit-learn.</li>
 </ol>
-</div>
-<button class="complete-btn" id="btn-day-35" onclick="completeDay(35,150)">✓ Mark Day 35 Complete — Earn 150 XP</button>
-</div><!-- /day-35 -->
-<!-- ═══════════════════════════════════════
-     DAY 36 — KNN & Naive Bayes
-     ════════════════════════════════════════ -->
+
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🚨 What if you got this wrong? (Common Error):</strong>
 <br/><code style="background:rgba(0,0,0,0.15); padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:12px; color:var(--pink); display:inline-block; margin-top:0.4rem;">ValueError: Parameter grid is empty or invalid key</code>
@@ -1538,6 +1534,12 @@ print("Total fits:", fits)</pre></div>
 <strong>🎤 Asked in interviews at: MakeMyTrip</strong>
 <p style="margin-top:0.4rem;">What is the difference between Grid Search and Random Search? Why does Random Search run faster?</p>
 </div>
+</div>
+<button class="complete-btn" id="btn-day-35" onclick="completeDay(35,150)">✓ Mark Day 35 Complete — Earn 150 XP</button>
+</div><!-- /day-35 -->
+<!-- ═══════════════════════════════════════
+     DAY 36 — KNN & Naive Bayes
+     ════════════════════════════════════════ -->
 <div class="day-section" id="day-36">
 <div class="day-header">
 <div class="day-tag">WEEK 5 · DAY 36 · MONTH 2 — ML FUNDAMENTALS</div>
@@ -1572,9 +1574,9 @@ print("Total fits:", fits)</pre></div>
 <p>KNN classifies a new data point based on the majority vote of its $k$ closest neighbors in the feature space. It is a lazy learner (no training phase; it stores the dataset in memory and does all calculations during prediction).</p>
 <div class="analogy">"Sangat ka asar." Agar aapke 5 sabse close friends software engineers hain, toh probability hai ki aap bhi tech/code mein interest rakhte hain. Yahi KNN hai.</div>
 <div class="math-block">
-<span class="formula">Euclidean Distance = √[ Σ (x_i - y_i)² ]</span>
+<span class="formula">$$Euclidean Distance = √[ Σ (x_i - y_i)² ]$$</span>
 <span class="desc">Straight-line distance. Sensitive to variable scales (requires normalization!).</span>
-<span class="formula">Manhattan Distance = Σ |x_i - y_i|</span>
+<span class="formula">$$Manhattan Distance = Σ |x_i - y_i|$$</span>
 <span class="desc">Grid-like taxi cab distance. Useful in high dimensional spaces.</span>
 </div>
 <div class="callout cw">
@@ -1585,7 +1587,7 @@ print("Total fits:", fits)</pre></div>
 <h3 class="sh3">2. Naive Bayes Classifier</h3>
 <p>Naive Bayes uses probability formulas derived from Bayes' Theorem to classify instances. It calculates the conditional probability of each class given the input features, choosing the class with highest probability.</p>
 <div class="math-block">
-<span class="formula">P(C | X) = [ P(X | C) * P(C) ] / P(X)</span>
+<span class="formula">$$P(C | X) = [ P(X | C) * P(C) ] / P(X)$$</span>
 <span class="desc">Where C is class, X is features vector [x₁, x₂, ..., xₙ].</span>
 </div>
 <p>Why is it called <strong>"Naive"</strong>? Because it assumes all input features are independent of each other given the class label. Even though this is almost never true in real life, the classifier performs surprisingly well on text classification (spam detection, sentiment analysis).</p>
@@ -1694,12 +1696,12 @@ print("Distance:", dist)</pre></div>
 <div id="day-36-resources-section">
 <h2 class="sh2">📚 Day 36 Resources</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=HVXCtWYgHPw" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=HVXime0nQeI" target="_blank">
 <div class="rc-type">📺 VIDEO · STATQUEST</div>
 <div class="rc-title">K-Nearest Neighbors, Clearly Explained</div>
 <div class="rc-sub">Excellent visual breakdown of distance-based classification and choosing K.</div>
 </a>
-<a class="resource-card" href="https://www.youtube.com/watch?v=O2L2ps0yvM4" target="_blank">
+<a class="resource-card" href="https://www.youtube.com/watch?v=O2L2Uv9pdDA" target="_blank">
 <div class="rc-type">📺 VIDEO · STATQUEST</div>
 <div class="rc-title">Naive Bayes, Clearly Explained</div>
 <div class="rc-sub">Excellent explanation of probability-based classification and the naive independence rule.</div>
@@ -1748,12 +1750,7 @@ print("Distance:", dist)</pre></div>
 <li><strong>Naive Bayes:</strong> Uses conditional probabilities. Assumes predictor independence. Super fast and effective for texts.</li>
 <li><strong>K choice:</strong> Small $k$ values lead to overfitting (high variance); large $k$ values smooth boundaries and lead to underfitting.</li>
 </ol>
-</div>
-<button class="complete-btn" id="btn-day-36" onclick="completeDay(36,150)">✓ Mark Day 36 Complete — Earn 150 XP</button>
-</div><!-- /day-36 -->
-<!-- ═══════════════════════════════════════
-     DAY 37 — Week 5 Capstone
-     ════════════════════════════════════════ -->
+
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🚨 What if you got this wrong? (Common Error):</strong>
 <br/><code style="background:rgba(0,0,0,0.15); padding:2px 6px; border-radius:4px; font-family:var(--font-mono); font-size:12px; color:var(--pink); display:inline-block; margin-top:0.4rem;">ValueError: Expected 2D array, got 1D array instead</code>
@@ -1767,6 +1764,12 @@ print("Distance:", dist)</pre></div>
 <strong>🎤 Asked in interviews at: Lenskart</strong>
 <p style="margin-top:0.4rem;">Does KNN perform well on high-dimensional datasets? What is the Curse of Dimensionality?</p>
 </div>
+</div>
+<button class="complete-btn" id="btn-day-36" onclick="completeDay(36,150)">✓ Mark Day 36 Complete — Earn 150 XP</button>
+</div><!-- /day-36 -->
+<!-- ═══════════════════════════════════════
+     DAY 37 — Week 5 Capstone
+     ════════════════════════════════════════ -->
 <div class="day-section" id="day-37">
 <div class="day-header">
 <div class="day-tag">WEEK 5 · DAY 37 · MONTH 2 — ML FUNDAMENTALS</div>
@@ -2051,7 +2054,7 @@ print(knn.predict(X_test)) # Correctly yields [0]</code></pre>
       Next week, we study Linear and Regularized Regressions under the hood. Make sure you understand the bias-variance tradeoff and how classification metrics differ from regression metrics!
     </p>
 </div>
-<button button="" class="complete-btn" id="btn-day-37" onclick="completeDay(37,300)" x0="" xp!<="">🏆 Complete Week 5 Capstone — Earn 300 XP! 🎉</button></div><!-- /day-37 -->
+<button class="complete-btn" id="btn-day-37" onclick="completeDay(37,300)">🏆 Complete Week 5 Capstone — Earn 300 XP! 🎉</button></div><!-- /day-37 -->
 <div class="week-summary">
 <div class="ws-icon">🎉</div>
 <div class="ws-content">

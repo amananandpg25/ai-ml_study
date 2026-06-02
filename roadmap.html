@@ -46,7 +46,9 @@
   #sidebar {
     width: 260px;
     min-width: 260px;
-    background: var(--bg2);
+    background: rgba(20, 23, 32, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-right: 1px solid var(--border);
     height: 100vh;
     position: sticky;
@@ -56,6 +58,7 @@
     z-index: 100;
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
+    transition: background 0.3s ease, border-color 0.3s ease;
   }
 
   .sidebar-logo {
@@ -99,11 +102,11 @@
     color: var(--muted);
     cursor: pointer;
     border-left: 2px solid transparent;
-    transition: all 0.15s;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     font-family: var(--font-body);
     font-weight: 400;
   }
-  .nav-item:hover { color: var(--text); background: var(--bg3); }
+  .nav-item:hover { color: var(--text); background: rgba(255, 255, 255, 0.02); transform: translateX(4px); }
   .nav-item.active { color: var(--text); border-left-color: var(--accent1); background: rgba(108,140,255,0.07); }
   .nav-item .dot {
     width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;

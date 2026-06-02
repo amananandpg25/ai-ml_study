@@ -747,23 +747,23 @@ df_all = pd.concat([students, students], ignore_index=<span class="kw">True</spa
 </div>
 <div class="mermaid">
 graph TD
-    subgraph Left_DF [Left DataFrame]
+    subgraph Left_DF ["Left DataFrame"]
         L1["ID 1: Rahul"]
         L2["ID 2: Priya"]
         L3["ID 3: Arjun"]
     end
-    subgraph Right_DF [Right DataFrame]
+    subgraph Right_DF ["Right DataFrame"]
         R1["ID 1: 85"]
         R2["ID 2: 92"]
         R4["ID 4: 78"]
     end
     
-    subgraph Inner_Join [Inner Join (Matches only)]
+    subgraph Inner_Join ["Inner Join (Matches only)"]
         IJ1["ID 1: Rahul | 85"]
         IJ2["ID 2: Priya | 92"]
     end
     
-    subgraph Left_Join [Left Join (All Left + Matches)]
+    subgraph Left_Join ["Left Join (All Left + Matches)"]
         LJ1["ID 1: Rahul | 85"]
         LJ2["ID 2: Priya | 92"]
         LJ3["ID 3: Arjun | NaN"]
@@ -984,24 +984,24 @@ graph TD
 <div class="analogy">Socho tumhare school ke sab students ka data hai. "Class ke hisaab se average marks nikalo" — yahi groupby hai. Pehle data ko groups mein baanto (class A, B, C), phir har group pe operation karo (mean lao), phir results combine karo.</div>
 <div class="mermaid">
 graph TD
-    subgraph Input [1. Input DataFrame]
+    subgraph Input ["1. Input DataFrame"]
         Row0["Phone  | 15000"]
         Row1["Laptop | 80000"]
         Row2["Phone  | 12000"]
         Row3["Laptop | 75000"]
     end
     
-    subgraph Split [2. Split by Product]
-        G1["Phone Group:<br/>- 15000<br/>- 12000"]
-        G2["Laptop Group:<br/>- 80000<br/>- 75000"]
+    subgraph Split ["2. Split by Product"]
+        G1["Phone Group \n - 15000 \n - 12000"]
+        G2["Laptop Group \n - 80000 \n - 75000"]
     end
     
-    subgraph Apply [3. Apply Aggregation (SUM)]
-        A1["Phone Sum:<br/>15000 + 12000 = 27000"]
-        A2["Laptop Sum:<br/>80000 + 75000 = 155000"]
+    subgraph Apply ["3. Apply Aggregation (SUM)"]
+        A1["Phone Sum \n 15000 + 12000 = 27000"]
+        A2["Laptop Sum \n 80000 + 75000 = 155000"]
     end
     
-    subgraph Combine [4. Combine Result]
+    subgraph Combine ["4. Combine Result"]
         Res0["Laptop | 155000"]
         Res1["Phone  | 27000"]
     end
@@ -1319,15 +1319,15 @@ df_filtered = pd.concat(results, ignore_index=<span class="kw">True</span>)</pre
 </ul>
 <div class="mermaid">
 graph TD
-    subgraph OneToOne [1:1 Relationship]
-        User["users (user_id PK)"] ---|1:1| Profile["user_profiles (user_id FK, UNIQUE)"]
+    subgraph OneToOne ["1:1 Relationship"]
+        User["users (user_id PK)"] -->|1:1| Profile["user_profiles (user_id FK, UNIQUE)"]
     end
-    subgraph OneToMany [1:N Relationship]
-        Dept["departments (dept_id PK)"] ---|1:N| Emp["employees (dept_id FK)"]
+    subgraph OneToMany ["1:N Relationship"]
+        Dept["departments (dept_id PK)"] -->|1:N| Emp["employees (dept_id FK)"]
     end
-    subgraph ManyToMany [M:N Relationship]
-        Student["students (student_id PK)"] ---|1:N| Enrollment["student_courses (Junction Table: student_id FK, course_id FK)"]
-        Course["courses (course_id PK)"] ---|1:N| Enrollment
+    subgraph ManyToMany ["M:N Relationship"]
+        Student["students (student_id PK)"] -->|1:N| Enrollment["student_courses (Junction Table: student_id FK, course_id FK)"]
+        Course["courses (course_id PK)"] -->|1:N| Enrollment
     end
 </div>
 <div class="diagram-cap">RDBMS Relationship Cardinalities and Junction Table implementation.</div>
@@ -1781,14 +1781,14 @@ A recursive CTE contains three core parts connected via <code>UNION ALL</code>:
 <h3 class="sh3">3. Window Functions — Aggregates Without Collapsing</h3>
 <div class="mermaid">
 graph LR
-    subgraph GroupBy [GROUP BY - Collapses Rows]
-        G_In["Name | Dept | Sal <br> A | HR | 100 <br> B | HR | 200"] --> G_Proc["Collapse by Dept"]
-        G_Proc --> G_Out["Dept | AvgSal <br> HR | 150"]
+    subgraph GroupBy ["GROUP BY - Collapses Rows"]
+        G_In["Name | Dept | Sal \n A | HR | 100 \n B | HR | 200"] --> G_Proc["Collapse by Dept"]
+        G_Proc --> G_Out["Dept | AvgSal \n HR | 150"]
     end
     
-    subgraph WindowFunc [Window Function - Retains Row Identity]
-        W_In["Name | Dept | Sal <br> A | HR | 100 <br> B | HR | 200"] --> W_Proc["Calculate window partition avg"]
-        W_Proc --> W_Out["Name | Dept | Sal | AvgSal <br> A | HR | 100 | 150 <br> B | HR | 200 | 150"]
+    subgraph WindowFunc ["Window Function - Retains Row Identity"]
+        W_In["Name | Dept | Sal \n A | HR | 100 \n B | HR | 200"] --> W_Proc["Calculate window partition avg"]
+        W_Proc --> W_Out["Name | Dept | Sal | AvgSal \n A | HR | 100 | 150 \n B | HR | 200 | 150"]
     end
 </div>
 <div class="diagram-cap">GROUP BY (collapsing rows into a single group result) vs. Window functions (retaining all rows and attaching the calculation to each record).</div>
@@ -2326,9 +2326,9 @@ df = pd.read_sql(query, engine)
 <div class="analogy">Git ek "save checkpoint" system hai game ki tarah. Jab game mein save karte ho — woh ek commit hai. Agar kuch galat ho jaye toh us checkpoint pe wapas aa sakte ho. Branch = game ka naya level try karna bina main save delete kiye.</div>
 <div class="mermaid">
       graph LR
-      WD["Working Directory <br/> Untracked / Modified"] -->|git add| SA["Staging Area <br/> Staged"]
-      SA -->|git commit| LR["Local Repo <br/> Committed"]
-      LR -->|git push| RR["Remote Repo / GitHub <br/> Pushed"]
+      WD["Working Directory \n Untracked / Modified"] -->|git add| SA["Staging Area \n Staged"]
+      SA -->|git commit| LR["Local Repo \n Committed"]
+      LR -->|git push| RR["Remote Repo / GitHub \n Pushed"]
     </div>
 <div class="diagram-cap">Git's 4 zones — understand this and Git makes sense</div>
 <h3 class="sh3">2. Core Git Commands</h3>

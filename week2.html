@@ -769,8 +769,16 @@ graph TD
         LJ3["ID 3: Arjun | NaN"]
     end
 
-    Left_DF & Right_DF --> Inner_Join
-    Left_DF & Right_DF --> Left_Join
+    L1 --> IJ1
+    R1 --> IJ1
+    L2 --> IJ2
+    R2 --> IJ2
+
+    L1 --> LJ1
+    R1 --> LJ1
+    L2 --> LJ2
+    R2 --> LJ2
+    L3 --> LJ3
 </div>
 <div class="diagram-cap">Conceptual visualization of Left vs. Inner merges.</div>
 <div class="diagram">
@@ -998,9 +1006,14 @@ graph TD
         Res1["Phone  | 27000"]
     end
     
-    Input -->|groupby| Split
-    Split -->|sum| Apply
-    Apply -->|combine| Combine
+    Row0 -->|groupby| G1
+    Row2 -->|groupby| G1
+    Row1 -->|groupby| G2
+    Row3 -->|groupby| G2
+    G1 -->|sum| A1
+    G2 -->|sum| A2
+    A1 -->|combine| Res1
+    A2 -->|combine| Res0
 </div>
 <div class="diagram-cap">Split-Apply-Combine execution process in Pandas groupby operations.</div>
 <div class="cb">
@@ -1307,14 +1320,14 @@ df_filtered = pd.concat(results, ignore_index=<span class="kw">True</span>)</pre
 <div class="mermaid">
 graph TD
     subgraph OneToOne [1:1 Relationship]
-        User["users (user_id PK)"] ---|1 --- 1| Profile["user_profiles (user_id FK, UNIQUE)"]
+        User["users (user_id PK)"] ---|1:1| Profile["user_profiles (user_id FK, UNIQUE)"]
     end
     subgraph OneToMany [1:N Relationship]
-        Dept["departments (dept_id PK)"] ---|1 --- N| Emp["employees (dept_id FK)"]
+        Dept["departments (dept_id PK)"] ---|1:N| Emp["employees (dept_id FK)"]
     end
     subgraph ManyToMany [M:N Relationship]
-        Student["students (student_id PK)"] ---|1 --- N| Enrollment["student_courses (Junction Table: student_id FK, course_id FK)"]
-        Course["courses (course_id PK)"] ---|1 --- N| Enrollment
+        Student["students (student_id PK)"] ---|1:N| Enrollment["student_courses (Junction Table: student_id FK, course_id FK)"]
+        Course["courses (course_id PK)"] ---|1:N| Enrollment
     end
 </div>
 <div class="diagram-cap">RDBMS Relationship Cardinalities and Junction Table implementation.</div>
@@ -1768,14 +1781,14 @@ A recursive CTE contains three core parts connected via <code>UNION ALL</code>:
 <h3 class="sh3">3. Window Functions — Aggregates Without Collapsing</h3>
 <div class="mermaid">
 graph LR
-    subgraph "GROUP BY (Collapses Rows)"
-        G_In["Name | Dept | Sal<br/>--------------<br/>A    | HR   | 100<br/>B    | HR   | 200"] --> G_Proc["Collapse by Dept"]
-        G_Proc --> G_Out["Dept | AvgSal<br/>------------<br/>HR   | 150"]
+    subgraph GroupBy [GROUP BY - Collapses Rows]
+        G_In["Name | Dept | Sal <br> A | HR | 100 <br> B | HR | 200"] --> G_Proc["Collapse by Dept"]
+        G_Proc --> G_Out["Dept | AvgSal <br> HR | 150"]
     end
     
-    subgraph "Window Function OVER() (Retains Row Identity)"
-        W_In["Name | Dept | Sal<br/>--------------<br/>A    | HR   | 100<br/>B    | HR   | 200"] --> W_Proc["Calculate window partition avg"]
-        W_Proc --> W_Out["Name | Dept | Sal | AvgSal<br/>--------------------------<br/>A    | HR   | 100 | 150<br/>B    | HR   | 200 | 150"]
+    subgraph WindowFunc [Window Function - Retains Row Identity]
+        W_In["Name | Dept | Sal <br> A | HR | 100 <br> B | HR | 200"] --> W_Proc["Calculate window partition avg"]
+        W_Proc --> W_Out["Name | Dept | Sal | AvgSal <br> A | HR | 100 | 150 <br> B | HR | 200 | 150"]
     end
 </div>
 <div class="diagram-cap">GROUP BY (collapsing rows into a single group result) vs. Window functions (retaining all rows and attaching the calculation to each record).</div>

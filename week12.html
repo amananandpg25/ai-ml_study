@@ -117,21 +117,21 @@ All materials are verified to build real, robust, and industry-standard SDE capa
 <div class="mermaid">
     graph TD
       subgraph Encoder["Encoder RNN"]
-        h1["h₁"] --&gt; h2["h₂"]
-        h2 --&gt; h3["h₃"]
-        h3 --&gt; h4["h₄"]
+        h1["h₁"] --> h2["h₂"]
+        h2 --> h3["h₃"]
+        h3 --> h4["h₄"]
       end
       subgraph Attention["Bahdanau Attention"]
-        s["sₜ₋₁"] --&gt; a["aₜ = score(sₜ₋₁, h)"]
-        a --&gt; alpha["αₜ = softmax(aₜ)"]
-        h1 --&gt; a
-        h2 --&gt; a
-        h3 --&gt; a
-        h4 --&gt; a
-        alpha --&gt; c["cₜ = Σαₜh"]
+        s["sₜ₋₁"] --> a["aₜ = score(sₜ₋₁, h)"]
+        a --> alpha["αₜ = softmax(aₜ)"]
+        h1 --> a
+        h2 --> a
+        h3 --> a
+        h4 --> a
+        alpha --> c["cₜ = Σαₜh"]
       end
-      c --&gt; s_new["sₜ"]
-      s_new --&gt; y["yₜ (output)"]
+      c --> s_new["sₜ"]
+      s_new --> y["yₜ (output)"]
   </div>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 5.5 hours</span>
@@ -1428,15 +1428,15 @@ out = decoder(mock_feats, mock_caps, init_states)
 </div>
 <div class="mermaid">
     graph TD
-      Start["START &lt;SOS&gt;"] --&gt;|"k=2 beams"| L1A["the (0.6)"]
-      Start --&gt; L1B["a (0.3)"]
-      L1A --&gt; L2A["the cat (0.4)"]
-      L1A --&gt; L2B["the dog (0.3)"]
-      L1B --&gt; L2C["a cat (0.15)"]
-      L2A --&gt; L3A["the cat sat (0.25)"]
-      L2B --&gt; L3B["the dog ran (0.18)"]
-      L3A --&gt;|"&lt;EOS&gt;"| Final1["✓ the cat sat"]
-      L3B --&gt;|"&lt;EOS&gt;"| Final2["✗ the dog ran"]
+      Start["START <SOS>"] -->|"k=2 beams"| L1A["the (0.6)"]
+      Start --> L1B["a (0.3)"]
+      L1A --> L2A["the cat (0.4)"]
+      L1A --> L2B["the dog (0.3)"]
+      L1B --> L2C["a cat (0.15)"]
+      L2A --> L3A["the cat sat (0.25)"]
+      L2B --> L3B["the dog ran (0.18)"]
+      L3A -->|"<EOS>"| Final1["✓ the cat sat"]
+      L3B -->|"<EOS>"| Final2["✗ the dog ran"]
   </div>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 6 hours</span>

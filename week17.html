@@ -1645,11 +1645,11 @@ graph LR
     Model["ML Model (joblib pipeline)"]
     DockerHub["Docker Hub Registry"]
 
-    Client --&gt;|HTTP| Nginx
-    Nginx --&gt;|proxy_pass| Flask
-    Flask --&gt;|cache| Redis
-    Flask --&gt;|predict| Model
-    Flask -.-&gt;|push| DockerHub
+    Client -->|HTTP| Nginx
+    Nginx -->|proxy_pass| Flask
+    Flask -->|cache| Redis
+    Flask -->|predict| Model
+    Flask -.->|push| DockerHub
 
     style Nginx fill:#2a3050,stroke:#6c8cff
     style Flask fill:#2a3050,stroke:#4fd1a5

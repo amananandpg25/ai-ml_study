@@ -142,8 +142,8 @@
 <h3 class="sh3">3. The Machine Learning Workflow</h3>
 <div class="mermaid">
       graph LR
-      Raw["Raw Data"] --&gt; Prep["Preprocessing"] --&gt; Feat["Feature Eng"] --&gt; Train["Model Training &amp; Tuning"] --&gt; Eval["Final Evaluation"] --&gt; Deploy["Deploy / Monitor"]
-      Deploy --&gt;|Feedback Loop| Raw
+      Raw["Raw Data"] --> Prep["Preprocessing"] --> Feat["Feature Eng"] --> Train["Model Training & Tuning"] --> Eval["Final Evaluation"] --> Deploy["Deploy / Monitor"]
+      Deploy -->|Feedback Loop| Raw
     </div>
 <div class="diagram-cap">The iterative cycle of building and deploying ML models.</div>
 <h3 class="sh3">4. Train-Test Split: Why and How</h3>
@@ -850,8 +850,8 @@ print(f"P: {precision:.1f}, R: {recall:.1f}")</pre></div>
 <h3 class="sh3">2. Visualizing the Tradeoff</h3>
 <div class="mermaid">
       graph TD
-      Low["Low Complexity <br/> Underfitting / High Bias"] --&gt; Opt["Optimal Fit <br/> Low Generalization Error"]
-      Opt --&gt; High["High Complexity <br/> Overfitting / High Variance"]
+      Low["Low Complexity <br/> Underfitting / High Bias"] --> Opt["Optimal Fit <br/> Low Generalization Error"]
+      Opt --> High["High Complexity <br/> Overfitting / High Variance"]
     </div>
 <div class="diagram-cap">As model complexity increases, training error drops, but validation error curves back up.</div>
 <h3 class="sh3">3. Diagnostics: What to Do</h3>
@@ -1063,10 +1063,10 @@ print("High Variance Model:", "A" if 0.95 - 0.01 &gt; 0.17 - 0.15 else "B")</pre
 <p>Simple train/test split has high variance depending on where the split occurred. K-Fold splits the dataset into $K$ blocks, training on $K-1$ and validating on the remaining block, repeating $K$ times. Stratified K-Fold ensures each fold maintains the same percentage of target class labels as the complete dataset.</p>
 <div class="mermaid">
       graph TD
-      F1["Fold 1"] --&gt; V1["Val"] &amp; T1["Train"] &amp; T2["Train"] &amp; T3["Train"]
-      F2["Fold 2"] --&gt; T4["Train"] &amp; V2["Val"] &amp; T5["Train"] &amp; T6["Train"]
-      F3["Fold 3"] --&gt; T7["Train"] &amp; T8["Train"] &amp; V3["Val"] &amp; T9["Train"]
-      F4["Fold 4"] --&gt; T10["Train"] &amp; T11["Train"] &amp; T12["Train"] &amp; V4["Val"]
+      F1["Fold 1"] --> V1["Val"] & T1["Train"] & T2["Train"] & T3["Train"]
+      F2["Fold 2"] --> T4["Train"] & V2["Val"] & T5["Train"] & T6["Train"]
+      F3["Fold 3"] --> T7["Train"] & T8["Train"] & V3["Val"] & T9["Train"]
+      F4["Fold 4"] --> T10["Train"] & T11["Train"] & T12["Train"] & V4["Val"]
     </div>
 <div class="diagram-cap">4-Fold Cross Validation. We average validation scores across all 4 iterations.</div>
 <h3 class="sh3">3. GridSearchCV vs RandomizedSearchCV</h3>
@@ -1519,14 +1519,14 @@ print("Distance:", dist)</pre></div>
 <p>Production environments require reproducibility. If you scaling numbers or fill missing entries during data preprocessing, those exact formulas and statistics must be packaged together with the model to prevent train/serving skew.</p>
 <div class="mermaid">
       graph TD
-      Raw["Raw Input Row"] --&gt; CT["ColumnTransformer"]
-      CT --&gt; Num["Numerical Features"]
-      CT --&gt; Cat["Categorical Features"]
-      Num --&gt; ImputeNum["Imputer"] --&gt; Scale["Scaler"]
-      Cat --&gt; ImputeCat["Imputer"] --&gt; OHE["One-Hot Encoder"]
-      Scale --&gt; Model["KNN / Naive Bayes Classifier"]
-      OHE --&gt; Model
-      Model --&gt; Out["Class Probabilities / Predictions"]
+      Raw["Raw Input Row"] --> CT["ColumnTransformer"]
+      CT --> Num["Numerical Features"]
+      CT --> Cat["Categorical Features"]
+      Num --> ImputeNum["Imputer"] --> Scale["Scaler"]
+      Cat --> ImputeCat["Imputer"] --> OHE["One-Hot Encoder"]
+      Scale --> Model["KNN / Naive Bayes Classifier"]
+      OHE --> Model
+      Model --> Out["Class Probabilities / Predictions"]
     </div>
 <div class="diagram-cap">End-to-End Pipeline architecture encapsulating processing and model state.</div>
 <div class="cb">

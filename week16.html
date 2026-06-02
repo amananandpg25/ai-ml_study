@@ -1061,11 +1061,11 @@ monitor = TokenBudgetMonitor(budget_usd=<span class="num">0.005</span>)
 <p>LangGraph models an agent as a <strong>directed graph</strong> where nodes are functions (LLM calls, tool calls, conditions) and edges define what runs next. State is explicitly passed between nodes — no hidden globals.</p>
 <div class="mermaid">
 graph TD
-    A["START"] --&gt; B["Agent Node"]
-    B --&gt; C["Tool Needed?"]
-    C --&gt;|Yes| D["Tool Node"]
-    D --&gt; B
-    C --&gt;|No| E["END"]
+    A["START"] --> B["Agent Node"]
+    B --> C["Tool Needed?"]
+    C -->|Yes| D["Tool Node"]
+    D --> B
+    C -->|No| E["END"]
     style A fill:#1c2030,stroke:#b47cfc,color:#dde2f0
     style E fill:#1c2030,stroke:#4fd1a5,color:#dde2f0
     style B fill:#1c2030,stroke:#38bdf8,color:#dde2f0
@@ -1509,10 +1509,10 @@ app = graph.compile(checkpointer=MemorySaver(), interrupt_before=[<span class="s
 <p>Before MCP: every AI app had to write custom integrations for every tool. A coding assistant that wants to read files, run tests, and query a database needed three separate bespoke implementations. With MCP: any MCP-compatible client (Claude, Cursor, VS Code Copilot) can use any MCP server — one standard, unlimited integrations.</p>
 <div class="mermaid">
 graph LR
-    A["Claude / Cursor / IDE"] --&gt;|MCP Protocol| B["MCP Server: Files"]
-    A --&gt;|MCP Protocol| C["MCP Server: Database"]
-    A --&gt;|MCP Protocol| D["MCP Server: GitHub"]
-    A --&gt;|MCP Protocol| E["Your Custom MCP Server"]
+    A["Claude / Cursor / IDE"] -->|MCP Protocol| B["MCP Server: Files"]
+    A -->|MCP Protocol| C["MCP Server: Database"]
+    A -->|MCP Protocol| D["MCP Server: GitHub"]
+    A -->|MCP Protocol| E["Your Custom MCP Server"]
     style A fill:#1c2030,stroke:#b47cfc,color:#dde2f0
     style B fill:#1c2030,stroke:#38bdf8,color:#dde2f0
     style C fill:#1c2030,stroke:#4fd1a5,color:#dde2f0

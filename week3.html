@@ -212,14 +212,14 @@ df[<span class="str">'cabin_missing'</span>] = df_num[<span class="str">'age'</s
 <h3 class="sh3">5. Drop vs Impute — Decision Framework</h3>
 <div class="mermaid">
       graph TD
-      Q1["Missing % &gt; 70%?"] --&gt;|Yes| Drop["Drop Column"]
-      Q1 --&gt;|No| Q2["Is MNAR?"]
-      Q2 --&gt;|Yes| Ind["Create Indicator + Impute"]
-      Q2 --&gt;|No| Q3["Is Numeric?"]
-      Q3 --&gt;|Yes| Q4["Skewed?"]
-      Q4 --&gt;|Yes| Med["Median Imputation"]
-      Q4 --&gt;|No| Mean["Mean / KNNImputer"]
-      Q3 --&gt;|No| Mode["Mode Imputation / most_frequent"]
+      Q1["Missing % > 70%?"] -->|Yes| Drop["Drop Column"]
+      Q1 -->|No| Q2["Is MNAR?"]
+      Q2 -->|Yes| Ind["Create Indicator + Impute"]
+      Q2 -->|No| Q3["Is Numeric?"]
+      Q3 -->|Yes| Q4["Skewed?"]
+      Q4 -->|Yes| Med["Median Imputation"]
+      Q4 -->|No| Mean["Mean / KNNImputer"]
+      Q3 -->|No| Mode["Mode Imputation / most_frequent"]
     </div>
 <div class="diagram-cap">Decision tree for handling missing values — memorise this</div>
 <div class="callout cw">

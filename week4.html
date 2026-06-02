@@ -137,14 +137,14 @@
 <h2 class="sh2">🧠 Theory</h2>
 <div class="mermaid">
       graph TD
-      Stats["Descriptive Statistics"] --&gt; CT["Central Tendency"]
-      Stats --&gt; Disp["Dispersion"]
-      CT --&gt; Mean["Mean (Sensitive to Outliers)"]
-      CT --&gt; Median["Median (Robust to Outliers)"]
-      CT --&gt; Mode["Mode"]
-      Disp --&gt; Var["Variance (σ²)"]
-      Disp --&gt; SD["Standard Deviation (σ)"]
-      Disp --&gt; IQR["Interquartile Range"]
+      Stats["Descriptive Statistics"] --> CT["Central Tendency"]
+      Stats --> Disp["Dispersion"]
+      CT --> Mean["Mean (Sensitive to Outliers)"]
+      CT --> Median["Median (Robust to Outliers)"]
+      CT --> Mode["Mode"]
+      Disp --> Var["Variance (σ²)"]
+      Disp --> SD["Standard Deviation (σ)"]
+      Disp --> IQR["Interquartile Range"]
   </div>
 <h3 class="sh3">1. Measures of Central Tendency</h3>
 <div class="analogy">GATE exam mein agar class ke marks hain: zyada log 60–70 range mein hain, lekin ek topper ne 99 score kiya. Mean toh 70 ho gaya topper ki wajah se — lekin median 65 hai jo "typical" student represent karta hai. Salary data mein bhi yahi hota hai — median always better tells the "typical" story.</div>
@@ -434,10 +434,10 @@ variance = sum([(x - mean)**<span class="num">2</span> <span class="kw">for</spa
 <h2 class="sh2">🧠 Theory</h2>
 <div class="mermaid">
       graph LR
-      P["Probability P(A)"] --&gt; Value["Range: [0, 1]"]
-      P --&gt; Cond["Conditional: P(A|B) = P(A∩B)/P(B)"]
-      P --&gt; Ind["Independent: P(A∩B) = P(A) × P(B)"]
-      P --&gt; Dep["Dependent: P(A∩B) = P(A) × P(B|A)"]
+      P["Probability P(A)"] --> Value["Range: [0, 1]"]
+      P --> Cond["Conditional: P(A|B) = P(A∩B)/P(B)"]
+      P --> Ind["Independent: P(A∩B) = P(A) × P(B)"]
+      P --> Dep["Dependent: P(A∩B) = P(A) × P(B|A)"]
   </div>
 <h3 class="sh3">1. Probability Basics</h3>
 <div class="analogy">Imagine ek cricket match — agar team A 100 matches mein se 60 jeeti hai, toh P(A wins) = 60/100 = 0.6. Probability = favorable outcomes / total outcomes. Simple! Lekin jab conditions add hote hain — "A wins given it's a day-night match" — tab conditional probability aata hai.</div>
@@ -686,9 +686,9 @@ P_A_given_B = (P_B_given_A * P_A) / P_B   <span class="cm"># correct: 0.7 × 0.3
 <h2 class="sh2">🧠 Theory</h2>
 <div class="mermaid">
       graph TD
-      Prior["Prior: P(A) <br/> Initial belief"] --&gt; Posterior["Posterior: P(A|B) <br/> Updated belief"]
-      Likelihood["Likelihood: P(B|A) <br/> Evidence probability"] --&gt; Posterior
-      Normalizer["Normalizer: P(B) <br/> Total probability"] --&gt; Posterior
+      Prior["Prior: P(A) <br/> Initial belief"] --> Posterior["Posterior: P(A|B) <br/> Updated belief"]
+      Likelihood["Likelihood: P(B|A) <br/> Evidence probability"] --> Posterior
+      Normalizer["Normalizer: P(B) <br/> Total probability"] --> Posterior
   </div>
 <h3 class="sh3">1. The Normal (Gaussian) Distribution — Queen of Distributions</h3>
 <div class="analogy">GATE exam marks, heights of students, measurement errors — sab normal distribution follow karte hain. Iska matlab hai zyada log average ke paas hain, kam log extremes pe hain. Bell curve shape mein. Yahi distribution Nature khud prefer karti hai kyunki CLT iska reason batata hai.</div>
@@ -981,12 +981,12 @@ result = stats.norm.cdf(<span class="num">80</span>, <span class="num">70</span>
 <h2 class="sh2">🧠 Theory</h2>
 <div class="mermaid">
       graph TD
-      Dist["Probability Distributions"] --&gt; Disc["Discrete (PMF / CDF)"]
-      Dist --&gt; Cont["Continuous (PDF / CDF)"]
-      Disc --&gt; Bin["Binomial (n trials, success prob p)"]
-      Disc --&gt; Pois["Poisson (count of events in interval)"]
-      Cont --&gt; Norm["Normal / Gaussian (Bell curve, μ &amp; σ)"]
-      Cont --&gt; Unif["Uniform (Equal probability everywhere)"]
+      Dist["Probability Distributions"] --> Disc["Discrete (PMF / CDF)"]
+      Dist --> Cont["Continuous (PDF / CDF)"]
+      Disc --> Bin["Binomial (n trials, success prob p)"]
+      Disc --> Pois["Poisson (count of events in interval)"]
+      Cont --> Norm["Normal / Gaussian (Bell curve, μ & σ)"]
+      Cont --> Unif["Uniform (Equal probability everywhere)"]
   </div>
 <h3 class="sh3">1. Hypothesis Testing Framework</h3>
 <div class="analogy">Court mein judge kehta hai: "innocent until proven guilty." Hypothesis testing mein: null hypothesis (H₀) kehta hai "koi effect nahi" — aur tum court mein lawyer ki tarah try karte ho isko disprove karne ki. Agar evidence bahut strong hai (p-value &lt; 0.05), tab H₀ reject karo.</div>
@@ -1270,8 +1270,8 @@ t, p = stats.ttest_ind(a, b)
 <h2 class="sh2">🧠 Theory</h2>
 <div class="mermaid">
       graph LR
-      Vec["Vector x"] --&gt; Mat["Matrix A"]
-      Mat --&gt; Out["Transformed Vector Ax"]
+      Vec["Vector x"] --> Mat["Matrix A"]
+      Mat --> Out["Transformed Vector Ax"]
       style Mat fill:#6c8cff,stroke:#2a3050,color:#fff
   </div>
 <h3 class="sh3">1. Vectors — The Building Blocks</h3>
@@ -1911,10 +1911,10 @@ x = <span class="num">1.0</span>; lr = <span class="num">0.1</span>   <span clas
 <h2 class="sh2">🧠 Theory</h2>
 <div class="mermaid">
       graph LR
-      High["High-Dim Data"] --&gt; Cov["Covariance Matrix"]
-      Cov --&gt; Eigen["Eigenvalues / Eigenvectors"]
-      Eigen --&gt; Proj["Project onto Top Components"]
-      Proj --&gt; Low["Low-Dim PCA Space"]
+      High["High-Dim Data"] --> Cov["Covariance Matrix"]
+      Cov --> Eigen["Eigenvalues / Eigenvectors"]
+      Eigen --> Proj["Project onto Top Components"]
+      Proj --> Low["Low-Dim PCA Space"]
   </div>
 <h3 class="sh3">1. Entropy — Measuring Uncertainty</h3>
 <div class="analogy">Ek fair coin flip ka entropy maximum hai — pure uncertainty (head ya tail? 50-50, you never know). Ek biased coin jo 99% time head aata hai — almost no uncertainty — low entropy. Ek news headline jo hamesha "Dog bites man" hai (expected) — low entropy. "Man bites dog!" — high surprise = high information = high entropy. Information = surprise.</div>
@@ -2111,10 +2111,10 @@ bce(1, 0.0)</pre></div>
 <h2 class="sh2">🧠 Theory</h2>
 <div class="mermaid">
       graph TD
-      Loss["Loss Function J(w)"] --&gt; Grad["Compute Gradient ∇J"]
-      Grad --&gt; Dir["Gradient Points UPHILL"]
-      Dir --&gt; Update["Update: w = w - η × ∇J"]
-      Update --&gt; Loop["Repeat to Convergence"]
+      Loss["Loss Function J(w)"] --> Grad["Compute Gradient ∇J"]
+      Grad --> Dir["Gradient Points UPHILL"]
+      Dir --> Update["Update: w = w - η × ∇J"]
+      Update --> Loop["Repeat to Convergence"]
   </div>
 <h3 class="sh3">1. The Curse of Dimensionality</h3>
 <div class="analogy">Imagine searching for a lost coin on a 1D line (10 meters long) — easy. Now search in a 2D square (10x10 = 100 sq meters) — harder. Now a 3D cube (10x10x10 = 1000 cubic meters) — very hard! Every time you add a feature (dimension) to your ML dataset, the "volume" of the space grows exponentially, making your data points seem extremely sparse. Models struggle to find patterns in sparse high-dimensional space.</div>

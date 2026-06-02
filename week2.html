@@ -2326,9 +2326,9 @@ df = pd.read_sql(query, engine)
 <div class="analogy">Git ek "save checkpoint" system hai game ki tarah. Jab game mein save karte ho — woh ek commit hai. Agar kuch galat ho jaye toh us checkpoint pe wapas aa sakte ho. Branch = game ka naya level try karna bina main save delete kiye.</div>
 <div class="mermaid">
       graph LR
-      WD["Working Directory <br/> Untracked / Modified"] --&gt;|git add| SA["Staging Area <br/> Staged"]
-      SA --&gt;|git commit| LR["Local Repo <br/> Committed"]
-      LR --&gt;|git push| RR["Remote Repo / GitHub <br/> Pushed"]
+      WD["Working Directory <br/> Untracked / Modified"] -->|git add| SA["Staging Area <br/> Staged"]
+      SA -->|git commit| LR["Local Repo <br/> Committed"]
+      LR -->|git push| RR["Remote Repo / GitHub <br/> Pushed"]
     </div>
 <div class="diagram-cap">Git's 4 zones — understand this and Git makes sense</div>
 <h3 class="sh3">2. Core Git Commands</h3>
@@ -2696,7 +2696,7 @@ pre-commit install  <span class="cm"># now runs on every git commit automaticall
 <h2 class="sh2">📋 EDA Project Framework — Follow This Structure</h2>
 <div class="mermaid">
       graph LR
-      Acq["Acquire"] --&gt; Insp["Inspect"] --&gt; Val["Validate"] --&gt; Cln["Clean"] --&gt; Trans["Transform"] --&gt; Ana["Analyze"] --&gt; Vis["Visualize"] --&gt; Feat["Feature Eng"] --&gt; Model["Model"]
+      Acq["Acquire"] --> Insp["Inspect"] --> Val["Validate"] --> Cln["Clean"] --> Trans["Transform"] --> Ana["Analyze"] --> Vis["Visualize"] --> Feat["Feature Eng"] --> Model["Model"]
     </div>
 <div class="diagram-cap">End-to-End Workflow Mindset: You don't just "do Pandas". You build a pipeline.</div>
 <h3 class="sh3">0. Project Architecture Thinking</h3>

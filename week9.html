@@ -2203,10 +2203,10 @@ model.summary()</pre>
 </ul>
 <div class="mermaid">
       graph LR
-      Stream["Raw Image Stream"] --&gt; tfdata["tf.data Resize, Cache, Prefetch"]
-      tfdata --&gt; Core["MobileNetV2 Frozen Core"]
-      Core --&gt; Head["Dense Classifier Head"]
-      Head --&gt; Pred["Prediction Output"]
+      Stream["Raw Image Stream"] --> tfdata["tf.data Resize, Cache, Prefetch"]
+      tfdata --> Core["MobileNetV2 Frozen Core"]
+      Core --> Head["Dense Classifier Head"]
+      Head --> Pred["Prediction Output"]
     </div>
 <div class="diagram-cap">End-to-end Capstone System Architecture Flow.</div>
 <h3 class="sh3">1. Production Training Script</h3>

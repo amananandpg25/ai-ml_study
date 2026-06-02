@@ -87,14 +87,14 @@
 <p>Week 4 mein tumne linear regression use kiya. Aaj hum iske andar jaayenge — OLS derivation, gradient descent implementation, assumptions check, and residual analysis. Ek model use karna alag hai, ek model <em>samajhna</em> alag hai.</p>
 <div class="mermaid">
     graph TD
-      A["Training Data X, y"] --&gt; B["Fit Linear Model"]
-      B --&gt; C["Compute β = XᵀX⁻¹Xᵀy"]
-      C --&gt; D["Predict ŷ = Xβ"]
-      D --&gt; E["Evaluate: MSE, R²"]
-      E --&gt; F{Good Enough?}
-      F --&gt;|Yes| G["Deploy Model"]
-      F --&gt;|No| H["Feature Engineering"]
-      H --&gt; A
+      A["Training Data X, y"] --> B["Fit Linear Model"]
+      B --> C["Compute β = XᵀX⁻¹Xᵀy"]
+      C --> D["Predict ŷ = Xβ"]
+      D --> E["Evaluate: MSE, R²"]
+      E --> F{Good Enough?}
+      F -->|Yes| G["Deploy Model"]
+      F -->|No| H["Feature Engineering"]
+      H --> A
   </div>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 5 hours</span>
@@ -1632,10 +1632,10 @@ param_grid = {<span class="str">'ridge__alpha'</span>: [<span class="num">0.1</s
         MAPE["MAPE\nMean Absolute % Error"]
         R2["R²\nVariance Explained"]
       end
-      MAE --&gt;|"Robust to outliers"| RMSE
-      MSE --&gt;|"Penalizes large errors"| RMSE
-      RMSE --&gt;|"Same units as y"| R2
-      MAPE --&gt;|"Scale-independent"| R2
+      MAE -->|"Robust to outliers"| RMSE
+      MSE -->|"Penalizes large errors"| RMSE
+      RMSE -->|"Same units as y"| R2
+      MAPE -->|"Scale-independent"| R2
   </div>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 4 hours</span>

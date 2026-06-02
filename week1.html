@@ -166,11 +166,11 @@ total_price = <span class="num">499.99</span>    <span class="cm"># ✅ correct<
 <div class="mermaid">
       graph LR
       subgraph RAM ["RAM / Memory Allocation"]
-      age["box: age"] --&gt; V1["21"]
-      gpa["box: gpa"] --&gt; V2["8.7"]
-      name["box: name"] --&gt; V3["Priya"]
+      age["box: age"] --> V1["21"]
+      gpa["box: gpa"] --> V2["8.7"]
+      name["box: name"] --> V3["Priya"]
       end
-      Code["Code Assignment: <br/> age = 21 <br/> gpa = 8.7 <br/> name = 'Priya'"] --&gt; RAM
+      Code["Code Assignment: <br/> age = 21 <br/> gpa = 8.7 <br/> name = 'Priya'"] --> RAM
     </div>
 <div class="diagram-cap">How variables live in computer memory</div>
 <h3 class="sh3">3. The 4 Core Data Types</h3>
@@ -610,12 +610,12 @@ git commit -m "Day 1: EMI calculator — float arithmetic, ** operator, f-string
 <div class="analogy">Ek school ka example: List = attendance register (ordered, can add/remove names, duplicates allowed). Tuple = exam timetable (fixed, nobody changes it). Set = unique toppers across all classes (no duplicates). Dictionary = student ID card system (roll number → student details, instant lookup).</div>
 <div class="mermaid">
       graph TD
-      Q1["Key-Value lookup needed?"] --&gt;|Yes| Dict["Dictionary <br/> O1 constant lookup"]
-      Q1 --&gt;|No| Q2["Unique values only?"]
-      Q2 --&gt;|Yes| Set["Set <br/> O1 membership check"]
-      Q2 --&gt;|No| Q3["Mutable / Can change?"]
-      Q3 --&gt;|Yes| List["List <br/> On linear lookup"]
-      Q3 --&gt;|No| Tuple["Tuple <br/> On lookup / Immutable"]
+      Q1["Key-Value lookup needed?"] -->|Yes| Dict["Dictionary <br/> O1 constant lookup"]
+      Q1 -->|No| Q2["Unique values only?"]
+      Q2 -->|Yes| Set["Set <br/> O1 membership check"]
+      Q2 -->|No| Q3["Mutable / Can change?"]
+      Q3 -->|Yes| List["List <br/> On linear lookup"]
+      Q3 -->|No| Tuple["Tuple <br/> On lookup / Immutable"]
     </div>
 <div class="diagram-cap">Use this decision tree every time you pick a data structure</div>
 <h3 class="sh3">1. Lists — Ordered, Mutable Collections</h3>
@@ -1625,10 +1625,10 @@ arjun = MLStudent(<span class="str">"Arjun"</span>, <span class="num">23</span>,
 <div class="mermaid">
       graph TD
       Base["BaseModel <br/> fit X, y <br/> predict X <br/> score X, y"]
-      Base --&gt; LR["LinearRegression"]
-      Base --&gt; RF["RandomForest"]
-      Base --&gt; SVM["SVM"]
-      Base --&gt; NN["NeuralNet"]
+      Base --> LR["LinearRegression"]
+      Base --> RF["RandomForest"]
+      Base --> SVM["SVM"]
+      Base --> NN["NeuralNet"]
     </div>
 <div class="diagram-cap">This is the exact sklearn inheritance pattern you'll use from Week 5 onwards</div>
 <h2 class="sh2">✅ Quiz</h2>

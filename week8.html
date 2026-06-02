@@ -135,10 +135,10 @@
 <div class="mermaid">
       graph LR
       subgraph BiologicalNeuron ["Biological Neuron"]
-      Dend["Dendrites / Inputs"] --&gt; Cell["Cell Body / Summation"] --&gt; Axon["Axon / Output"]
+      Dend["Dendrites / Inputs"] --> Cell["Cell Body / Summation"] --> Axon["Axon / Output"]
       end
       subgraph ArtificialNeuron ["Artificial Neuron"]
-      X["Inputs x_i"] --&gt; Sum["Weighted Sum z = w.x + b"] --&gt; Act["Activation f_z"] --&gt; Out["Output y_hat"]
+      X["Inputs x_i"] --> Sum["Weighted Sum z = w.x + b"] --> Act["Activation f_z"] --> Out["Output y_hat"]
       end
     </div>
 <div class="diagram-cap">Biological inspiration → mathematical model</div>
@@ -218,8 +218,8 @@ p_xor.<span class="fn">fit</span>(X_xor, y_xor)
       A1["Inputs 0,0 0,1 1,0"] --- L1["Decision Boundary Line"] --- A2["Input 1,1"]
       end
       subgraph XOR ["XOR: Non-Separable"]
-      X1["Inputs 0,0 1,1"] --&gt; MLP["Requires Hidden Layer / Multi-Layer Perceptron"]
-      X2["Inputs 0,1 1,0"] --&gt; MLP
+      X1["Inputs 0,0 1,1"] --> MLP["Requires Hidden Layer / Multi-Layer Perceptron"]
+      X2["Inputs 0,1 1,0"] --> MLP
       end
     </div>
 <div class="diagram-cap">The XOR problem — the original motivation for multi-layer networks</div>
@@ -1155,10 +1155,10 @@ model = keras.Model(inputs=inputs, outputs=outputs, name=<span class="str">'mnis
 <h3 class="sh3">3. Understanding model.summary() Output</h3>
 <div class="mermaid">
       graph TD
-      Flat["Flatten <br/> shape: 784"] --&gt;|784 x 256 weights + 256 biases| D1["Dense 1 <br/> units: 256"]
-      D1 --&gt;|256 x 128 weights + 128 biases| D2["Dense 2 <br/> units: 128"]
-      D2 --&gt;|128 x 64 weights + 64 biases| D3["Dense 3 <br/> units: 64"]
-      D3 --&gt;|64 x 10 weights + 10 biases| D4["Dense 4 / Output <br/> units: 10"]
+      Flat["Flatten <br/> shape: 784"] -->|784 x 256 weights + 256 biases| D1["Dense 1 <br/> units: 256"]
+      D1 -->|256 x 128 weights + 128 biases| D2["Dense 2 <br/> units: 128"]
+      D2 -->|128 x 64 weights + 64 biases| D3["Dense 3 <br/> units: 64"]
+      D3 -->|64 x 10 weights + 10 biases| D4["Dense 4 / Output <br/> units: 10"]
     </div>
 <div class="diagram-cap">Reading model.summary() — every row tells you the shape and parameter cost</div>
 <div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:1rem;margin:1rem 0;font-size:13.5px;">
@@ -1944,8 +1944,8 @@ model.<span class="fn">compile</span>(optimizer=optimizer, loss=<span class="str
 <h3 class="sh3">2. Convolutional Layers — The Key Idea</h3>
 <div class="mermaid">
       graph TD
-      Img["Input Image <br/> 32x32x3"] --&gt;|3x3x3 filter stride=1| Map["Feature Map <br/> 30x30x1"]
-      Map --&gt;|32 Filters| Out["Output Activation <br/> 30x30x32"]
+      Img["Input Image <br/> 32x32x3"] -->|3x3x3 filter stride=1| Map["Feature Map <br/> 30x30x1"]
+      Map -->|32 Filters| Out["Output Activation <br/> 30x30x32"]
     </div>
 <div class="diagram-cap">Convolution = sliding dot product. 896 params replaces 2.7M Dense params</div>
 <h3 class="sh3">3. Full CNN Architecture &amp; Capstone Code</h3>

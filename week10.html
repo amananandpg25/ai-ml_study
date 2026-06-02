@@ -163,12 +163,12 @@
   </p>
 <div class="mermaid">
       graph TD
-      x1["x_1"] --&gt; h1["h_1"] --&gt; y1["y_1"]
-      x2["x_2"] --&gt; h2["h_2"] --&gt; y2["y_2"]
-      x3["x_3"] --&gt; h3["h_3"] --&gt; y3["y_3"]
-      x4["x_4"] --&gt; h4["h_4"] --&gt; y4["y_4"]
-      h1 --&gt; h2 --&gt; h3 --&gt; h4
-      h4 -.-&gt;|BPTT Gradient Flow| h1
+      x1["x_1"] --> h1["h_1"] --> y1["y_1"]
+      x2["x_2"] --> h2["h_2"] --> y2["y_2"]
+      x3["x_3"] --> h3["h_3"] --> y3["y_3"]
+      x4["x_4"] --> h4["h_4"] --> y4["y_4"]
+      h1 --> h2 --> h3 --> h4
+      h4 -.->|BPTT Gradient Flow| h1
     </div>
 <div class="diagram-cap">Recurrent Neural Network unrolled over 4 discrete temporal timesteps, tracing BPTT gradient flows.</div>
 <h3 class="sh3">3. The Mathematics of Vanishing Gradients</h3>

@@ -1748,11 +1748,11 @@ preds = netD(fake_img)
 <h3 class="sh3">2. Detailed Training Flow diagram</h3>
 <div class="mermaid">
       graph TD
-      z["Noise Vector z"] --&gt; G["Generator G"] --&gt; Gz["Synthetic Image G_z"]
-      x["Real Image x"] --&gt; D["Discriminator D"]
-      Gz --&gt; D
-      D --&gt;|Step 1| UpD["Update Discriminator <br/> Loss: Real=1, Fake=0"]
-      Gz --&gt;|Step 2| UpG["Update Generator <br/> Loss: Fake=1"]
+      z["Noise Vector z"] --> G["Generator G"] --> Gz["Synthetic Image G_z"]
+      x["Real Image x"] --> D["Discriminator D"]
+      Gz --> D
+      D -->|Step 1| UpD["Update Discriminator <br/> Loss: Real=1, Fake=0"]
+      Gz -->|Step 2| UpG["Update Generator <br/> Loss: Fake=1"]
     </div>
 <div class="diagram-cap">Alternating training sequence: Step 1 updates the Discriminator, Step 2 updates the Generator using updated Discriminator evaluations.</div>
 <h3 class="sh3">3. Complete Executable DCGAN Training Loop</h3>

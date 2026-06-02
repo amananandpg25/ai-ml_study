@@ -175,12 +175,12 @@ Sentiment:"""</span>
 <p>ReAct is the foundation of all modern AI agents. The model interleaves <strong>Thought</strong> (reasoning), <strong>Action</strong> (tool use), and <strong>Observation</strong> (tool result) in a loop until the task is complete.</p>
 <div class="mermaid">
 graph LR
-    A["Question"] --&gt; B["Thought: Reason about what to do"]
-    B --&gt; C["Action: Call a tool or API"]
-    C --&gt; D["Observation: Get tool result"]
-    D --&gt; E{Task done?}
-    E --&gt;|No| B
-    E --&gt;|Yes| F["Final Answer"]
+    A["Question"] --> B["Thought: Reason about what to do"]
+    B --> C["Action: Call a tool or API"]
+    C --> D["Observation: Get tool result"]
+    D --> E{Task done?}
+    E -->|No| B
+    E -->|Yes| F["Final Answer"]
     style A fill:#1c2030,stroke:#38bdf8,color:#dde2f0
     style F fill:#1c2030,stroke:#4fd1a5,color:#dde2f0
     </div>
@@ -1039,9 +1039,9 @@ MAX_HISTORY = <span class="num">10</span>  <span class="cm"># keep last 10 turns
 <p>LangChain ek <strong>orchestration framework</strong> hai — ye khud koi LLM nahi hai. Ye alag-alag building blocks ko connect karta hai: prompts, models, parsers, memory, retrieval systems, tools. Jaise LEGO bricks — har piece standard interface follow karta hai, isliye freely combine kar sakte hain.</p>
 <div class="mermaid">
 graph LR
-    A["PromptTemplate"] --&gt; B["LLM / Chat Model"]
-    B --&gt; C["Output Parser"]
-    C --&gt; D["Next Chain Step"]
+    A["PromptTemplate"] --> B["LLM / Chat Model"]
+    B --> C["Output Parser"]
+    C --> D["Next Chain Step"]
     style A fill:#1c2030,stroke:#38bdf8,color:#dde2f0
     style B fill:#1c2030,stroke:#b47cfc,color:#dde2f0
     style C fill:#1c2030,stroke:#f7a94b,color:#dde2f0
@@ -1889,15 +1889,15 @@ search(<span class="str">"what is attention mechanism"</span>, level=<span class
 <h3 class="sh3">1. The RAG Pipeline — Naive vs Advanced</h3>
 <div class="mermaid">
 graph TD
-    A["📄 Document"] --&gt; B["Split into Chunks"]
-    B --&gt; C["Embed Chunks"]
-    C --&gt; D["Store in Vector DB"]
-    E["❓ User Query"] --&gt; F["Embed Query"]
-    F --&gt; G["Semantic Search Top-K"]
-    D --&gt; G
-    G --&gt; H["Reranker"]
-    H --&gt; I["LLM + Context"]
-    I --&gt; J["✅ Answer"]
+    A["📄 Document"] --> B["Split into Chunks"]
+    B --> C["Embed Chunks"]
+    C --> D["Store in Vector DB"]
+    E["❓ User Query"] --> F["Embed Query"]
+    F --> G["Semantic Search Top-K"]
+    D --> G
+    G --> H["Reranker"]
+    H --> I["LLM + Context"]
+    I --> J["✅ Answer"]
     style A fill:#1c2030,stroke:#38bdf8,color:#dde2f0
     style J fill:#1c2030,stroke:#4fd1a5,color:#dde2f0
     style H fill:#1c2030,stroke:#f7a94b,color:#dde2f0

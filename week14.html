@@ -153,15 +153,15 @@
 </div>
 <div class="mermaid">
       graph TD
-      Q["Query Q"] --&gt; M1["MatMul"]
-      K["Key K"] --&gt; T["Transpose K^T"]
-      T --&gt; M1
-      M1 --&gt; S["Scale by 1/sqrt(d_k)"]
-      S --&gt; Mask["Mask optional"]
-      Mask --&gt; Softmax["Softmax"]
-      Softmax --&gt; M2["MatMul"]
-      V["Value V"] --&gt; M2
-      M2 --&gt; Out["Output Vector"]
+      Q["Query Q"] --> M1["MatMul"]
+      K["Key K"] --> T["Transpose K^T"]
+      T --> M1
+      M1 --> S["Scale by 1/sqrt(d_k)"]
+      S --> Mask["Mask optional"]
+      Mask --> Softmax["Softmax"]
+      Softmax --> M2["MatMul"]
+      V["Value V"] --> M2
+      M2 --> Out["Output Vector"]
     </div>
 <table class="concept-table">
 <thead>
@@ -578,22 +578,22 @@ Attention Output = [6.7 + 0.66, 13.4 + 1.32] = [7.36, 14.72].</pre>
 <div class="mermaid">
       graph TD
       subgraph Encoder ["Encoder"]
-      E1["Input Embeddings"] --&gt; E2["Add Positional Encoding"]
-      E2 --&gt; E3["Multi-Head Self Attention"]
-      E3 --&gt; E4["Add and Norm"]
-      E4 --&gt; E5["Feed Forward Network"]
-      E5 --&gt; E6["Add and Norm"]
+      E1["Input Embeddings"] --> E2["Add Positional Encoding"]
+      E2 --> E3["Multi-Head Self Attention"]
+      E3 --> E4["Add and Norm"]
+      E4 --> E5["Feed Forward Network"]
+      E5 --> E6["Add and Norm"]
       end
       
       subgraph Decoder ["Decoder"]
-      D1["Target Embeddings"] --&gt; D2["Add Positional Encoding"]
-      D2 --&gt; D3["Masked Multi-Head Attention"]
-      D3 --&gt; D4["Add and Norm"]
-      E6 --&gt; D5["Cross-Attention"]
-      D4 --&gt; D5
-      D5 --&gt; D6["Add and Norm"]
-      D6 --&gt; D7["Feed Forward Network"]
-      D7 --&gt; D8["Add and Norm"]
+      D1["Target Embeddings"] --> D2["Add Positional Encoding"]
+      D2 --> D3["Masked Multi-Head Attention"]
+      D3 --> D4["Add and Norm"]
+      E6 --> D5["Cross-Attention"]
+      D4 --> D5
+      D5 --> D6["Add and Norm"]
+      D6 --> D7["Feed Forward Network"]
+      D7 --> D8["Add and Norm"]
       end
     </div>
 <h3 class="sh3">2. Multi-Head Attention</h3>
@@ -935,9 +935,9 @@ x_final <span class="op">=</span> x_split.<span class="fn">transpose</span>(<spa
     B1 --- B3
     end
     subgraph GPT ["GPT: Causal Masked Attention"]
-    G1["Token 1"] --&gt; G2["Token 2"]
-    G1 --&gt; G3["Token 3"]
-    G2 --&gt; G3
+    G1["Token 1"] --> G2["Token 2"]
+    G1 --> G3["Token 3"]
+    G2 --> G3
     end
   </div>
 <h3 class="sh3">2. Masked Language Modeling — The 80/10/10 Strategy</h3>
@@ -1365,11 +1365,11 @@ ref <span class="op">=</span> <span class="str">"the patient was admitted to hos
 </ul>
 <div class="mermaid">
       graph TD
-      Raw["Raw Input Text"] --&gt; Norm["Normalizer\nLowercase, Strip Accents, Unicode NFC"]
-      Norm --&gt; PreT["Pre-Tokenizer\nWhitespace &amp; Punctuation Splitting"]
-      PreT --&gt; Mod["Model\nBPE / WordPiece Subword Fitting"]
-      Mod --&gt; PostP["Post-Processor\nAdd CLS, SEP Special Tokens"]
-      PostP --&gt; Out["Encoded Output\nToken IDs &amp; Attention Mask"]
+      Raw["Raw Input Text"] --> Norm["Normalizer\nLowercase, Strip Accents, Unicode NFC"]
+      Norm --> PreT["Pre-Tokenizer\nWhitespace & Punctuation Splitting"]
+      PreT --> Mod["Model\nBPE / WordPiece Subword Fitting"]
+      Mod --> PostP["Post-Processor\nAdd CLS, SEP Special Tokens"]
+      PostP --> Out["Encoded Output\nToken IDs & Attention Mask"]
     </div>
 <div class="analogy">Tokenizer banana matlab ek LEGO set banane jaisa hai. Normalizer plastic ko clean karta hai (raw text cleaning), Pre-tokenizer use bade raw blocks mein cut karta hai (whitespace splitting), Model un blocks ko standard LEGO bricks ka shape deta hai (subword vocabulary mapping), aur Post-processor special instructions ke blocks add karta hai (CLS/SEP tags).</div>
 <div class="cb">
@@ -1689,13 +1689,13 @@ fast_tokenizer <span class="op">=</span> <span class="fn">PreTrainedTokenizerFas
 </div>
 <div class="mermaid">
       graph LR
-      X["Input vector x"] --&gt; W["Frozen Base Weight W_0\nshape: d x k"]
-      X --&gt; A["Trainable Matrix A\nshape: d x r\nRandom Gaussian Init"]
-      A --&gt; B["Trainable Matrix B\nshape: r x k\nZero Init"]
-      W --&gt; Add["Summation Node +"]
-      B --&gt; Scale["Scale by alpha/r"]
-      Scale --&gt; Add
-      Add --&gt; Out["Output vector h"]
+      X["Input vector x"] --> W["Frozen Base Weight W_0\nshape: d x k"]
+      X --> A["Trainable Matrix A\nshape: d x r\nRandom Gaussian Init"]
+      A --> B["Trainable Matrix B\nshape: r x k\nZero Init"]
+      W --> Add["Summation Node +"]
+      B --> Scale["Scale by alpha/r"]
+      Scale --> Add
+      Add --> Out["Output vector h"]
     </div>
 <div class="analogy">Maan lo aapke paas ek badi, sundar wall painting hai (Pre-trained model). Uski ek choti detail change karne ke liye poori painting ko fir se paint karne (Full Fine-tuning) ki jagah, aap us detail ke upar ek transparent cello-tape chipka dete ho aur sirf tape par likhte ho (LoRA). Jab koi door se dekhega (inference), toh tape poori painting ke sath mix hokar ek hi lagegi, bina extra space ya time liye.</div>
 <h3 class="sh3">3. QLoRA (Quantized LoRA)</h3>
@@ -2032,18 +2032,18 @@ loss.<span class="fn">backward</span>()
 <div class="mermaid">
       graph TD
       subgraph Ingestion ["1. Document Ingestion"]
-      Doc["Raw Documents"] --&gt; Chunk["Document Chunker"]
-      Chunk --&gt; Embed["Embedding Model\nSentence-Transformers"]
-      Embed --&gt; DB["(\"FAISS Vector DB\")"]
+      Doc["Raw Documents"] --> Chunk["Document Chunker"]
+      Chunk --> Embed["Embedding Model\nSentence-Transformers"]
+      Embed --> DB["(\"FAISS Vector DB\")"]
       end
-      subgraph Retrieval ["2. Retrieval &amp; Generation"]
-      UserQ["User Query"] --&gt; QEmbed["Query Embedding"]
-      QEmbed --&gt; Search["FAISS Semantic Search"]
-      DB --&gt; Search
-      Search --&gt; Context["Retrieve Top-K Chunks"]
-      Context --&gt; Prompt["Build Prompt: Context + Query"]
-      Prompt --&gt; LLM["Language Model"]
-      LLM --&gt; Response["Final Answer"]
+      subgraph Retrieval ["2. Retrieval & Generation"]
+      UserQ["User Query"] --> QEmbed["Query Embedding"]
+      QEmbed --> Search["FAISS Semantic Search"]
+      DB --> Search
+      Search --> Context["Retrieve Top-K Chunks"]
+      Context --> Prompt["Build Prompt: Context + Query"]
+      Prompt --> LLM["Language Model"]
+      LLM --> Response["Final Answer"]
       end
     </div>
 <h3 class="sh3">2. Vector Search (FAISS)</h3>
@@ -2374,16 +2374,16 @@ inputs <span class="op">=</span> <span class="fn">tokenizer</span>(prompt, retur
 </div>
 <div class="mermaid">
       graph TD
-      User["User / Client Browser"] --&gt;|1. Submit Query| Gradio["Gradio Web UI Frontend"]
-      Gradio --&gt;|2. Async HTTP POST /query| API["FastAPI Application Server"]
+      User["User / Client Browser"] -->|1. Submit Query| Gradio["Gradio Web UI Frontend"]
+      Gradio -->|2. Async HTTP POST /query| API["FastAPI Application Server"]
       subgraph Docker ["Docker Container Sandbox"]
-      API --&gt;|3. Query Embeddings| DB["(FAISS Vector Index)"]
-      DB --&gt;|4. Retrieve Context Chunks| API
-      API --&gt;|5. Context + Prompt| Model["Local PyTorch LLM"]
-      Model --&gt;|6. Streamed Text Output| API
+      API -->|3. Query Embeddings| DB["(FAISS Vector Index)"]
+      DB -->|4. Retrieve Context Chunks| API
+      API -->|5. Context + Prompt| Model["Local PyTorch LLM"]
+      Model -->|6. Streamed Text Output| API
       end
-      API --&gt;|7. JSON Response| Gradio
-      Gradio --&gt;|8. Render Output| User
+      API -->|7. JSON Response| Gradio
+      Gradio -->|8. Render Output| User
     </div>
 </div>
 <div id="day-100-quiz-section">

@@ -167,10 +167,10 @@
     </div>
 <div class="mermaid">
     graph TD
-      Client["Client Request"] --&gt; Service["K8s Service (LoadBalancer)"]
-      Service --&gt; Pod1["Pod 1 (ML API Container)"]
-      Service --&gt; Pod2["Pod 2 (ML API Container)"]
-      Service --&gt; Pod3["Pod 3 (ML API Container)"]
+      Client["Client Request"] --> Service["K8s Service (LoadBalancer)"]
+      Service --> Pod1["Pod 1 (ML API Container)"]
+      Service --> Pod2["Pod 2 (ML API Container)"]
+      Service --> Pod3["Pod 3 (ML API Container)"]
     </div>
 <h3 class="sh3">2. Declarative K8s Manifest YAML Example</h3>
 <p>Let's define a <code>deployment.yaml</code> to serve our Flask ML API container across 3 replicas:</p>

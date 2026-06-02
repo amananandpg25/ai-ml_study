@@ -105,12 +105,12 @@ This study portal delivers deep, production-grade training guides covering:
     </p>
 <div class="mermaid">
     graph LR
-      Raw["Raw Text"] --&gt; Token["Tokenization"]
-      Token --&gt; Norm["Normalization\nlowercase, accents"]
-      Norm --&gt; Stop["Stop Word Removal"]
-      Stop --&gt; Stem["Stemming / Lemmatization"]
-      Stem --&gt; Vec["Vectorization\nBoW / TF-IDF"]
-      Vec --&gt; Model["ML Model"]
+      Raw["Raw Text"] --> Token["Tokenization"]
+      Token --> Norm["Normalization\nlowercase, accents"]
+      Norm --> Stop["Stop Word Removal"]
+      Stop --> Stem["Stemming / Lemmatization"]
+      Stem --> Vec["Vectorization\nBoW / TF-IDF"]
+      Vec --> Model["ML Model"]
   </div>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 5 hours</span>
@@ -854,17 +854,17 @@ X_dense = U_k.dot(S_k).dot(VT_k)
 <div class="mermaid">
     graph TD
       subgraph CBOW["CBOW"]
-        C1["wₜ₋₂"] --&gt; Sum["SUM / AVG"]
-        C2["wₜ₋₁"] --&gt; Sum
-        C3["wₜ₊₁"] --&gt; Sum
-        C4["wₜ₊₂"] --&gt; Sum
-        Sum --&gt; Out["wₜ (target)"]
+        C1["wₜ₋₂"] --> Sum["SUM / AVG"]
+        C2["wₜ₋₁"] --> Sum
+        C3["wₜ₊₁"] --> Sum
+        C4["wₜ₊₂"] --> Sum
+        Sum --> Out["wₜ (target)"]
       end
       subgraph SkipGram["Skip-Gram"]
-        Center["wₜ"] --&gt; SG1["wₜ₋₂"]
-        Center --&gt; SG2["wₜ₋₁"]
-        Center --&gt; SG3["wₜ₊₁"]
-        Center --&gt; SG4["wₜ₊₂"]
+        Center["wₜ"] --> SG1["wₜ₋₂"]
+        Center --> SG2["wₜ₋₁"]
+        Center --> SG3["wₜ₊₁"]
+        Center --> SG4["wₜ₊₂"]
       end
   </div>
 <div class="meta-row">

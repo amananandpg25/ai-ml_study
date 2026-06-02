@@ -1466,113 +1466,114 @@ df_filtered = pd.concat(results, ignore_index=<span class="kw">True</span>)</pre
 </div><div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Pandas Series &amp; DataFrames, loading CSVs, and indexing with loc/iloc.</li></ul></div>
 <div id="day-11-theory">
 <h2 class="sh2">🧠 Theory</h2>
-<h3 class="sh3">1. SQL — The Language of Data</h3>
-<div class="analogy">Agar Pandas ek librarian hai jo books (DataFrames) dhundhta hai Python mein, toh SQL ek waiter hai jo restaurant (database) se exactly jo order karo wahi laata hai. SQL declare karta hai WHAT you want — not HOW to get it. Databases figure out the rest.</div>
-<p>SQL is <strong>declarative</strong> — you describe the result you want, the database engine figures out how to retrieve it efficiently. Every major database (MySQL, PostgreSQL, SQLite, BigQuery, Snowflake) uses SQL. For ML, SQL is how you extract training data from production databases.</p>
-<div class="callout ci">
-<strong>🛠 Where to practice SQL today (no install needed):</strong>
-    Mode Analytics SQL Tutorial → <strong>www.thoughtspot.com/sql-tutorial</strong><br/>
-    SQLZoo (interactive) → <strong>sqlzoo.net</strong><br/>
-    DB Fiddle (run live queries) → <strong>dbfiddle.uk</strong><br/>
-    HackerRank SQL → <strong>hackerrank.com/domains/sql</strong>
-</div>
-<h3 class="sh3">2. SELECT — The Foundation</h3>
+<h3 class="sh3">1. SQL vs. Pandas — The Paradigm Shift</h3>
+<div class="analogy">Pandas is like cooking in your own small kitchen (RAM) where you pull all ingredients from the fridge (CSV) onto your counter and chop them up step-by-step (procedural). SQL is like ordering from a mega-warehouse: you tell the clerk exactly WHAT you want (declarative), and the warehouse engine fetches it from giant storage shelves (disk) using efficient forklifts.</div>
+<p>As a data scientist, you already know Pandas. But Pandas has a limit: it loads the <strong>entire dataset into RAM</strong>. If you have a 50GB dataset and 16GB of RAM, Pandas will crash. <strong>SQL (Structured Query Language)</strong> solves this. SQL is <strong>declarative</strong> (you define <em>what</em> data you want, not <em>how</em> to get it) and operates directly on database files stored on disk, streaming only the necessary results to your computer.</p>
+<table class="concept-table">
+<tr><th>Feature</th><th>Pandas</th><th>SQL</th></tr>
+<tr><td><strong>Execution style</strong></td><td>Procedural (Step-by-step code)</td><td>Declarative (Describe the target output)</td></tr>
+<tr><td><strong>Memory footprint</strong></td><td>High (Loads entire dataset into RAM)</td><td>Low (Streams data from disk storage)</td></tr>
+<tr><td><strong>Best for</strong></td><td>Complex preprocessing, feature engineering, modeling</td><td>Data extraction, cleaning, multi-table joining</td></tr>
+</table>
+
+<h3 class="sh3">2. SELECT &amp; WHERE — The Filter Scaffolding</h3>
+<p>To learn SQL, we start with the simplest retrieval: choosing columns (<code>SELECT</code>) and filtering rows (<code>WHERE</code>).</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — select_basics.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
-<pre><span class="cm">-- Basic SELECT</span>
+<pre><span class="cm">-- 1. Select specific columns (Pandas: df[['name', 'salary']])</span>
 <span class="kw">SELECT</span> name, age, salary
 <span class="kw">FROM</span> employees;
 
-<span class="cm">-- SELECT all columns</span>
+<span class="cm">-- 2. Select all columns (Pandas: df)</span>
 <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> employees;
 
-<span class="cm">-- WHERE — filter rows</span>
+<span class="cm">-- 3. Row filtering (Pandas: df[df['salary'] &gt; 50000])</span>
 <span class="kw">SELECT</span> name, salary
 <span class="kw">FROM</span> employees
-<span class="kw">WHERE</span> salary <span class="op">&gt;</span> <span class="num">50000</span>
-  <span class="kw">AND</span> city <span class="op">=</span> <span class="str">'Mumbai'</span>;
+<span class="kw">WHERE</span> salary <span class="op">&gt;</span> <span class="num">50000</span>;
 
-<span class="cm">-- ORDER BY — sort results</span>
+<span class="cm">-- 4. Sorting and limiting (Pandas: df.sort_values('salary', ascending=False).head(5))</span>
 <span class="kw">SELECT</span> name, salary
 <span class="kw">FROM</span> employees
-<span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>   <span class="cm">-- highest first</span>
-<span class="kw">LIMIT</span> <span class="num">5</span>;               <span class="cm">-- top 5 only</span>
-
-<span class="cm">-- DISTINCT — unique values only</span>
-<span class="kw">SELECT DISTINCT</span> city <span class="kw">FROM</span> employees;
-
-<span class="cm">-- Column aliases (rename output)</span>
-<span class="kw">SELECT</span> name <span class="kw">AS</span> employee_name, salary <span class="op">*</span> <span class="num">12</span> <span class="kw">AS</span> annual_salary
-<span class="kw">FROM</span> employees;</pre>
+<span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>
+<span class="kw">LIMIT</span> <span class="num">5</span>;</pre>
 </div>
-<h3 class="sh3">3. Aggregations + GROUP BY + HAVING</h3>
-<div class="cb">
-<div class="cb-head"><span class="cb-lang">sql — aggregations.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
-<pre><span class="cm">-- Aggregate functions</span>
-<span class="kw">SELECT</span>
-    <span class="bi">COUNT</span>(<span class="op">*</span>)        <span class="kw">AS</span> total_employees,
-    <span class="bi">AVG</span>(salary)      <span class="kw">AS</span> avg_salary,
-    <span class="bi">SUM</span>(salary)      <span class="kw">AS</span> total_payroll,
-    <span class="bi">MAX</span>(salary)      <span class="kw">AS</span> highest_salary,
-    <span class="bi">MIN</span>(salary)      <span class="kw">AS</span> lowest_salary
-<span class="kw">FROM</span> employees;
 
-<span class="cm">-- GROUP BY — aggregate per group (like Pandas groupby)</span>
+<h3 class="sh3">3. Aggregations, GROUP BY &amp; The HAVING Scaffold</h3>
+<p>Suppose you want to find statistics about departments. We use <strong>Aggregations</strong> (like <code>SUM</code> or <code>AVG</code>) to collapse multiple values into one. But how do we group them?</p>
+<div class="callout ci">
+<strong>📐 The "Collapse" Concept of GROUP BY:</strong>
+When you run <code>GROUP BY department</code>, the database groups rows matching the same department into single summary rows. Any non-grouped column (like <code>salary</code>) <strong>must</strong> have an aggregate function applied to tell the engine how to shrink those rows (e.g., take the <code>AVG</code> or <code>SUM</code>).
+</div>
+
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — group_by_basics.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="cm">-- Simple Aggregation (Pandas: df['salary'].mean())</span>
+<span class="kw">SELECT</span> <span class="bi">AVG</span>(salary) <span class="kw">AS</span> avg_sal <span class="kw">FROM</span> employees;
+
+<span class="cm">-- Grouping rows (Pandas: df.groupby('department')['salary'].mean())</span>
 <span class="kw">SELECT</span> department, <span class="bi">AVG</span>(salary) <span class="kw">AS</span> avg_sal, <span class="bi">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> headcount
 <span class="kw">FROM</span> employees
-<span class="kw">GROUP BY</span> department
-<span class="kw">ORDER BY</span> avg_sal <span class="kw">DESC</span>;
+<span class="kw">GROUP BY</span> department;</pre>
+</div>
 
-<span class="cm">-- HAVING — filter AFTER grouping (WHERE is before grouping)</span>
-<span class="cm">-- Find departments with average salary &gt; 60000</span>
+<h4 class="sh3" style="color:var(--orange)">The HAVING Limitation (Where vs Having)</h4>
+<p>What if you want to filter out departments with an average salary of less than 60,000? Your first instinct might be to write this:</p>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — wrong_where.sql</span></div>
+<pre><span class="cm">-- ❌ THIS WILL FAIL WITH A SYNTAX ERROR!</span>
+<span class="kw">SELECT</span> department, <span class="bi">AVG</span>(salary)
+<span class="kw">FROM</span> employees
+<span class="kw">WHERE</span> <span class="bi">AVG</span>(salary) <span class="op">&gt;</span> <span class="num">60000</span>  <span class="cm">-- Aggregates not allowed in WHERE</span>
+<span class="kw">GROUP BY</span> department;</pre>
+</div>
+<div class="misconception">
+<strong>⚠️ Why did it fail? (SQL Execution Order):</strong>
+The database engine runs the <code>WHERE</code> clause <strong>before</strong> it groups the data. Since grouping hasn't happened yet, the engine doesn't know what the average salary per department is! To filter groups, we must use <code>HAVING</code>, which is executed <strong>after</strong> <code>GROUP BY</code>.
+</div>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — correct_having.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="cm">-- ✅ CORRECT: HAVING filters AFTER grouping</span>
 <span class="kw">SELECT</span> department, <span class="bi">AVG</span>(salary) <span class="kw">AS</span> avg_sal
 <span class="kw">FROM</span> employees
 <span class="kw">GROUP BY</span> department
-<span class="kw">HAVING</span> <span class="bi">AVG</span>(salary) <span class="op">&gt;</span> <span class="num">60000</span>;   <span class="cm">-- filter groups, not rows</span></pre>
+<span class="kw">HAVING</span> <span class="bi">AVG</span>(salary) <span class="op">&gt;</span> <span class="num">60000</span>;</pre>
 </div>
-<h3 class="sh3">3.5. SQL Execution Order &amp; Concept Depth</h3>
-<div class="callout cp">
-<strong>🧠 How the Database Actually Thinks:</strong> You WRITE queries starting with <code>SELECT</code>, but the database EXECUTES them in this order:
-    <br/>1. <strong>FROM / JOIN</strong> (Assemble the base data)
-    <br/>2. <strong>WHERE</strong> (Filter rows)
-    <br/>3. <strong>GROUP BY</strong> (Group what's left)
-    <br/>4. <strong>HAVING</strong> (Filter groups)
-    <br/>5. <strong>SELECT</strong> (Pick columns &amp; run math)
-    <br/>6. <strong>ORDER BY / LIMIT</strong> (Sort and truncate)
-    <br/><br/>
-<em>This explains why you cannot use a column alias defined in SELECT inside the WHERE clause!</em>
-</div>
-<div class="misconception">
-<strong>⚠️ The NULL Trap &amp; GROUP BY Internals:</strong> In SQL, <code>NULL</code> means "unknown". <code>NULL = NULL</code> evaluates to <strong>FALSE</strong>. You must use <code>IS NULL</code>. Also, aggregate functions like <code>AVG()</code> automatically ignore NULLs, which can skew your results! When visualizing a JOIN, imagine two circles intersecting; NULLs behave surprisingly if not handled in LEFT JOINs.
-  </div>
-<h3 class="sh3">4. JOINs — Combining Tables</h3>
+
+<h3 class="sh3">4. JOINs — Combining Tables from First Principles</h3>
+<p>When data is split across tables (e.g. <code>employees</code> and <code>departments</code>), we must join them. Let's understand how a join actually works step-by-step.</p>
+<h4 class="sh3" style="color:var(--orange)">Step 1: The Cartesian Product (CROSS JOIN)</h4>
+<p>If you join two tables without any matching keys, the engine matches <strong>every row</strong> of Table A with <strong>every row</strong> of Table B. If Table A has 100 rows and Table B has 10 rows, the result is 1,000 rows. This is a Cartesian Product.</p>
 <div class="cb">
-<div class="cb-head"><span class="cb-lang">sql — joins.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
-<pre><span class="cm">-- INNER JOIN — only rows that match in BOTH tables</span>
-<span class="kw">SELECT</span> e.name, e.salary, d.department_name
+<div class="cb-head"><span class="cb-lang">sql — cross_join.sql</span></div>
+<pre><span class="kw">SELECT</span> e.name, d.department_name
 <span class="kw">FROM</span> employees e
-<span class="kw">INNER JOIN</span> departments d <span class="kw">ON</span> e.dept_id <span class="op">=</span> d.id;
-
-<span class="cm">-- LEFT JOIN — all employees, even if no department assigned</span>
-<span class="kw">SELECT</span> e.name, d.department_name
-<span class="kw">FROM</span> employees e
-<span class="kw">LEFT JOIN</span> departments d <span class="kw">ON</span> e.dept_id <span class="op">=</span> d.id;
-<span class="cm">-- employees with no dept → department_name = NULL</span>
-
-<span class="cm">-- JOIN + GROUP BY (real-world combination)</span>
-<span class="kw">SELECT</span> d.department_name, <span class="bi">COUNT</span>(e.id) <span class="kw">AS</span> employee_count, <span class="bi">AVG</span>(e.salary) <span class="kw">AS</span> avg_salary
-<span class="kw">FROM</span> departments d
-<span class="kw">LEFT JOIN</span> employees e <span class="kw">ON</span> d.id <span class="op">=</span> e.dept_id
-<span class="kw">GROUP BY</span> d.department_name
-<span class="kw">ORDER BY</span> avg_salary <span class="kw">DESC</span>;</pre>
+<span class="kw">CROSS JOIN</span> departments d;  <span class="cm">-- Matches everything with everything</span></pre>
 </div>
-<div class="misconception">
-<strong>⚠️ WHERE vs HAVING — The Classic Interview Question:</strong>
-<code>WHERE</code> filters <strong>individual rows BEFORE grouping</strong>. Use for row-level conditions.<br/>
-<code>HAVING</code> filters <strong>groups AFTER GROUP BY</strong>. Use for aggregate conditions.<br/>
-    ❌ Wrong: <code>WHERE AVG(salary) &gt; 50000</code> → Error (can't use aggregate in WHERE)<br/>
-    ✅ Right: <code>HAVING AVG(salary) &gt; 50000</code> → Works correctly
-  </div>
+
+<h4 class="sh3" style="color:var(--orange)">Step 2: INNER JOIN (Filtering the Cartesian Product)</h4>
+<p>To make the join meaningful, we add an <code>ON</code> clause. This acts like a filter on the Cartesian Product, retaining only rows where keys match (e.g. <code>e.dept_id = d.id</code>).</p>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — inner_join.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="kw">SELECT</span> e.name, d.department_name
+<span class="kw">FROM</span> employees e
+<span class="kw">INNER JOIN</span> departments d <span class="kw">ON</span> e.dept_id <span class="op">=</span> d.id;  <span class="cm">-- Only matching records kept</span></pre>
+</div>
+
+<h4 class="sh3" style="color:var(--orange)">Step 3: LEFT JOIN (Handling Dangling Keys)</h4>
+<p>If an employee has a <code>dept_id</code> of <code>NULL</code> (or a department that doesn't exist), the `INNER JOIN` will drop that employee row. We call this a <strong>dangling key</strong>. To retain all employees regardless of whether they have a department match, we use a <strong>`LEFT JOIN`</strong>.</p>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — left_join.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="kw">SELECT</span> e.name, d.department_name
+<span class="kw">FROM</span> employees e
+<span class="kw">LEFT JOIN</span> departments d <span class="kw">ON</span> e.dept_id <span class="op">=</span> d.id;  <span class="cm">-- Retains all employees, shows NULL if no match</span></pre>
+</div>
+
+<div class="callout cp">
+<strong>🧠 Database Execution Order (The Execution Pipeline):</strong>
+To build complete query intuition, memorize the physical order in which a database processes your query:
+<br/><code>FROM ➔ JOIN ➔ ON ➔ WHERE ➔ GROUP BY ➔ HAVING ➔ SELECT ➔ DISTINCT ➔ ORDER BY ➔ LIMIT</code>
+</div>
 <div class="hinglish">💡 Ek line mein: SELECT kya chahiye, FROM kahan se, WHERE kon sa row, GROUP BY kaise group karo, HAVING group filter, ORDER BY sort karo, LIMIT kitna lena. JOIN = do tables combine karo common key pe.</div>
 <h3 class="sh3">5. Complete JOIN Family — FULL OUTER, CROSS, SELF</h3>
 <div class="cb">
@@ -1770,53 +1771,101 @@ df_filtered = pd.concat(results, ignore_index=<span class="kw">True</span>)</pre
 <div class="day-section" id="day-12">
 <div class="day-header">
 <div class="day-tag">WEEK 2 · DAY 12 · MONTH 1 — FOUNDATIONS</div>
-<h1>SQL Intermediate — Subqueries, CTEs &amp; Window Functions</h1>
-<p>Aaj SQL ka advanced level — yeh woh cheezein hain jo Data Analyst aur ML Engineer interviews mein poochhi jaati hain. Window functions aur CTEs ko master karo aur baaki candidates se alag dikho.</p>
+<h1>SQL Advanced — Analytics, Concurrency &amp; pgvector</h1>
+<p>Today we dive deep into the advanced, production-grade SQL concepts that distinguish a junior developer from a database expert. We will cover CTEs, window functions, locking mechanisms, performance indexing, security, database design, NoSQL vs. SQL, and PostgreSQL's pgvector for semantic search.</p>
 <div class="meta-row">
-<span class="meta-badge g">⏱ 5 hours</span>
-<span class="meta-badge o">🗄️ Intermediate</span>
-<span class="meta-badge p">⚡ +150 XP</span>
+<span class="meta-badge g">⏱ 8 hours</span>
+<span class="meta-badge o">🗄️ Advanced</span>
+<span class="meta-badge p">⚡ +200 XP</span>
 </div>
 </div>
+
 <div class="objectives">
 <h3>🎯 By end of Day 12 you will be able to:</h3>
 <ul>
-<li>Write subqueries in SELECT and WHERE clauses</li>
-<li>Use CTEs (WITH clause) to make complex queries readable</li>
-<li>Apply window functions: ROW_NUMBER, RANK, LEAD, LAG</li>
-<li>Use CASE WHEN for conditional logic and COALESCE for null handling</li>
-<li>Solve 10 SQL problems on HackerRank or SQLZoo</li>
+<li>Write scalar, nested, correlated, and inline view subqueries</li>
+<li>Implement recursive CTEs for hierarchical tree traversal (org charts)</li>
+<li>Apply window functions with custom sliding frames for analytical trends</li>
+<li>Manage transactional concurrency using MVCC, locks, and custom isolation levels</li>
+<li>Optimize slow queries using clustered/non-clustered indexes and query plans (EXPLAIN ANALYZE)</li>
+<li>Design scalable data warehouses (Star vs. Snowflake schemas) and database schemas (ER Diagrams)</li>
+<li>Perform semantic searches using PostgreSQL pgvector (L2, Cosine similarity, IVFFlat, HNSW)</li>
 </ul>
 </div>
+
+<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Day 12 Prerequisites:</strong> You must understand Day 11 basics (SELECT, WHERE, JOINs) before continuing. We build directly on top of those concepts.</div>
+
 <div id="day-12-theory">
 <h2 class="sh2">🧠 Theory</h2>
-<h3 class="sh3">1. Subqueries — Query inside a Query</h3>
+
+<h3 class="sh3">1. Subqueries — The "Stuck Query" Problem</h3>
+<div class="analogy">Imagine trying to find the tallest student in a classroom. You cannot filter the students until you first measure everyone and calculate the average height. A subquery is exactly that: a query that runs first to find a dynamic threshold (like average salary), which is then passed to the outer query to filter the rows.</div>
+<p>Suppose you want to find employees who earn more than the average salary of the entire company. Your first instinct might be to write this query:</p>
 <div class="cb">
-<div class="cb-head"><span class="cb-lang">sql — subqueries.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
-<pre><span class="cm">-- Subquery in WHERE: employees earning more than average</span>
+<div class="cb-head"><span class="cb-lang">sql — wrong_where_aggregate.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="cm">-- ❌ THIS WILL FAIL WITH A SYNTAX ERROR!</span>
 <span class="kw">SELECT</span> name, salary
 <span class="kw">FROM</span> employees
-<span class="kw">WHERE</span> salary <span class="op">&gt;</span> (<span class="kw">SELECT AVG</span>(salary) <span class="kw">FROM</span> employees);
+<span class="kw">WHERE</span> salary <span class="op">&gt;</span> <span class="bi">AVG</span>(salary);  <span class="cm">-- Aggregates not allowed in WHERE</span></pre>
+</div>
+<div class="misconception">
+<strong>⚠️ Why did it fail? (SQL Execution Order):</strong>
+The database engine runs the <code>WHERE</code> clause <strong>before</strong> it aggregates any data. Since the engine doesn't know what the overall <code>AVG(salary)</code> is when checking individual rows, it throws a syntax error.
+</div>
+<p>To solve this, we nest a query inside another query. The <strong>inner query</strong> calculates the average first, and its single output value is handed to the <strong>outer query</strong> for row filtering:</p>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — independent_subquery.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="cm">-- ✅ Independent Subquery: Runs exactly once first, then filters the outer query</span>
+<span class="kw">SELECT</span> name, salary
+<span class="kw">FROM</span> employees
+<span class="kw">WHERE</span> salary <span class="op">&gt;</span> (
+    <span class="kw">SELECT</span> <span class="bi">AVG</span>(salary) <span class="kw">FROM</span> employees
+);
 
-<span class="cm">-- Subquery in FROM (derived table)</span>
-<span class="kw">SELECT</span> dept_id, <span class="bi">AVG</span>(salary) <span class="kw">AS</span> dept_avg
-<span class="kw">FROM</span> (
-    <span class="kw">SELECT</span> dept_id, salary
-    <span class="kw">FROM</span> employees
-    <span class="kw">WHERE</span> salary <span class="op">&gt;</span> <span class="num">30000</span>
-) <span class="kw">AS</span> filtered_emp
-<span class="kw">GROUP BY</span> dept_id;
-
-<span class="cm">-- IN with subquery</span>
-<span class="kw">SELECT</span> name <span class="kw">FROM</span> employees
+<span class="cm">-- Subquery with IN (finding employees who work in departments located in Mumbai)</span>
+<span class="kw">SELECT</span> name 
+<span class="kw">FROM</span> employees
 <span class="kw">WHERE</span> dept_id <span class="kw">IN</span> (
     <span class="kw">SELECT</span> id <span class="kw">FROM</span> departments <span class="kw">WHERE</span> location <span class="op">=</span> <span class="str">'Mumbai'</span>
 );</pre>
 </div>
-<h3 class="sh3">2. CTEs (WITH clause) — Readable Complex Queries</h3>
+
+<h4 class="sh3" style="color:var(--orange)">Correlated Subqueries — The Performance Bottleneck</h4>
+<p>Unlike independent subqueries which run once, a <strong>Correlated Subquery</strong> references columns from the outer query. The database engine must execute the inner query <strong>once for every single row</strong> processed by the outer query. This is physically slow and should be avoided on large datasets unless optimized.</p>
 <div class="cb">
-<div class="cb-head"><span class="cb-lang">sql — cte.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
-<pre><span class="cm">-- CTE: define a named temp result, then query it</span>
+<div class="cb-head"><span class="cb-lang">sql — correlated_subquery.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="cm">-- Find employees earning more than the average salary of THEIR specific department</span>
+<span class="kw">SELECT</span> e1.name, e1.salary, e1.dept_id
+<span class="kw">FROM</span> employees e1
+<span class="kw">WHERE</span> e1.salary <span class="op">&gt;</span> (
+    <span class="kw">SELECT</span> <span class="bi">AVG</span>(e2.salary)
+    <span class="kw">FROM</span> employees e2
+    <span class="kw">WHERE</span> e2.dept_id <span class="op">=</span> e1.dept_id  <span class="cm">-- Binds inner query to the current outer row</span>
+);</pre>
+</div>
+
+<h3 class="sh3">2. CTEs (WITH clause) — Solving the "Spaghetti Query"</h3>
+<div class="analogy">CTEs are like defining intermediate variables in Python (e.g. <code>high_earning_df = df[df.salary > 70000]</code>) before running a merge. Instead of nesting queries inside queries like Russian nesting dolls, you declare readable temporary blocks at the top of your script.</div>
+<p>If you need to perform multiple levels of aggregations or joins on subqueries, nesting them quickly turns your SQL script into unreadable spaghetti code. For example:</p>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — nested_spaghetti.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="cm">-- ❌ Nested Subqueries: Hard to read, scan, and maintain</span>
+<span class="kw">SELECT</span> d.department_name, ds.headcount
+<span class="kw">FROM</span> (
+    <span class="kw">SELECT</span> dept_id, <span class="bi">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> headcount
+    <span class="kw">FROM</span> (
+        <span class="kw">SELECT</span> name, salary, dept_id 
+        <span class="kw">FROM</span> employees 
+        <span class="kw">WHERE</span> salary <span class="op">&gt;</span> <span class="num">70000</span>
+    ) <span class="kw">AS</span> high_earners
+    <span class="kw">GROUP BY</span> dept_id
+) ds
+<span class="kw">JOIN</span> departments d <span class="kw">ON</span> ds.dept_id <span class="op">=</span> d.id;</pre>
+</div>
+<p>A <strong>Common Table Expression (CTE)</strong> solves this. By using the <code>WITH</code> clause, you declare named, temporary virtual tables at the start of your script and query them sequentially:</p>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — cte_refactored.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="cm">-- ✅ Clean, modular, and self-documenting</span>
 <span class="kw">WITH</span> high_earners <span class="kw">AS</span> (
     <span class="kw">SELECT</span> name, salary, dept_id
     <span class="kw">FROM</span> employees
@@ -1832,137 +1881,302 @@ dept_summary <span class="kw">AS</span> (
 <span class="kw">JOIN</span> departments d <span class="kw">ON</span> ds.dept_id <span class="op">=</span> d.id
 <span class="kw">ORDER BY</span> ds.headcount <span class="kw">DESC</span>;</pre>
 </div>
-<h3 class="sh3">3. Window Functions — Analytics Without Grouping</h3>
+
+<h4 class="sh3" style="color:var(--orange)">2.1. Recursive CTEs — Tree Traversal</h4>
+<p>Standard SQL joins cannot query hierarchical structures (like company org charts or nested website categories) where the depth is unknown. <strong>Recursive CTEs</strong> loop through rows until no more connections are found.</p>
+<div class="callout ci">
+<strong>📐 Deconstructing the Recursive CTE Pipeline:</strong>
+A recursive CTE contains three core parts connected via <code>UNION ALL</code>:
+<ol style="margin-left: 1.25rem; margin-top: 0.4rem;">
+  <li><strong>Anchor Member:</strong> The base query that starts the recursion. It runs once and finds the root node (e.g. CEO who has no manager).</li>
+  <li><strong>Recursive Member:</strong> The query that joins the CTE back to the base table to fetch the next level (e.g. subordinates who report to the managers found in the previous iteration). It increments a tracker (like level).</li>
+  <li><strong>Termination Condition:</strong> This is implicit. The recursion stops automatically when an iteration returns 0 rows (no more subordinates left to join).</li>
+</ol>
+</div>
 <div class="cb">
-<div class="cb-head"><span class="cb-lang">sql — window_functions.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
-<pre><span class="cm">-- ROW_NUMBER: unique rank per partition (no ties)</span>
-<span class="kw">SELECT</span> name, dept_id, salary,
-    <span class="bi">ROW_NUMBER</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION BY</span> dept_id <span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>) <span class="kw">AS</span> row_num
-<span class="kw">FROM</span> employees;
-
-<span class="cm">-- RANK: ties get same rank, skips next (1,1,3,4...)</span>
-<span class="cm">-- DENSE_RANK: ties get same rank, no skip (1,1,2,3...)</span>
-
-<span class="cm">-- Get top earner per department (classic interview question!)</span>
-<span class="kw">WITH</span> ranked <span class="kw">AS</span> (
-    <span class="kw">SELECT</span> name, dept_id, salary,
-        <span class="bi">ROW_NUMBER</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION BY</span> dept_id <span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>) <span class="kw">AS</span> rn
+<div class="cb-head"><span class="cb-lang">sql — recursive_org_chart.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="kw">WITH RECURSIVE</span> org_chart <span class="kw">AS</span> (
+    <span class="cm">-- 1. Anchor Member: Find the top-level bosses (manager_id is NULL)</span>
+    <span class="kw">SELECT</span> id, name, manager_id, <span class="num">1</span> <span class="kw">AS</span> level
     <span class="kw">FROM</span> employees
+    <span class="kw">WHERE</span> manager_id <span class="kw">IS NULL</span>
+    
+    <span class="kw">UNION ALL</span>
+    
+    <span class="cm">-- 2. Recursive Member: Join the CTE back to find direct reports</span>
+    <span class="kw">SELECT</span> e.id, e.name, e.manager_id, o.level <span class="op">+</span> <span class="num">1</span>
+    <span class="kw">FROM</span> employees e
+    <span class="kw">INNER JOIN</span> org_chart o <span class="kw">ON</span> e.manager_id <span class="op">=</span> o.id
 )
-<span class="kw">SELECT</span> name, dept_id, salary <span class="kw">FROM</span> ranked <span class="kw">WHERE</span> rn <span class="op">=</span> <span class="num">1</span>;
+<span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> org_chart <span class="kw">ORDER BY</span> level, name;</pre>
+</div>
 
-<span class="cm">-- LEAD/LAG: compare with next/previous row (time series!)</span>
-<span class="kw">SELECT</span> month, revenue,
+<h3 class="sh3">3. Window Functions — Aggregates Without Collapsing</h3>
+<table class="concept-table">
+<tr><th>Operation</th><th>GROUP BY</th><th>Window Function (<code>OVER</code>)</th></tr>
+<tr><td><strong>Row Count</strong></td><td>Collapses rows (100 rows become 5 summary rows)</td><td>Keeps all original rows intact (100 rows stay 100 rows)</td></tr>
+<tr><td><strong>Selection</strong></td><td>Only grouped columns &amp; aggregates can be selected</td><td>Any columns can be selected alongside window aggregates</td></tr>
+<tr><td><strong>Best for</strong></td><td>Summarized reporting and overall group counts</td><td>Running totals, rolling averages, rankings, and LEAD/LAG checks</td></tr>
+</table>
+<p>To use window functions, we use the <code>OVER</code> clause. It defines the "window" or partition of data the function calculates across. Let's break down the syntax step-by-step:</p>
+<div class="callout ci">
+<strong>📐 Anatomy of a Window Definition:</strong>
+<br/><code>FUNCTION() OVER (PARTITION BY department ORDER BY salary DESC)</code>
+<br/>• <strong>PARTITION BY:</strong> Slices the dataset into subgroups (like GROUP BY, but rows aren't collapsed).
+<br/>• <strong>ORDER BY:</strong> Sorts the rows inside each partition so the function runs in a specific sequence (critical for rankings or running totals).
+</div>
+
+<h4 class="sh3" style="color:var(--orange)">Ranking Functions: ROW_NUMBER vs. RANK vs. DENSE_RANK</h4>
+<p>Suppose three employees in the IT department earn the exact same salary ($80,000). How do different ranking functions rank them?</p>
+<ul>
+  <li><code>ROW_NUMBER()</code>: Assigns a unique consecutive number to every row (1, 2, 3) ignoring ties.</li>
+  <li><code>RANK()</code>: Assigns the same rank to ties, but skips the next rank numbers (1, 1, 1, 4).</li>
+  <li><code>DENSE_RANK()</code>: Assigns the same rank to ties without skipping numbers (1, 1, 1, 2).</li>
+</ul>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — window_rankings.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="kw">SELECT</span> name, department, salary,
+    <span class="bi">ROW_NUMBER</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION BY</span> department <span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>) <span class="kw">AS</span> row_num,
+    <span class="bi">RANK</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION BY</span> department <span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>) <span class="kw">AS</span> rnk,
+    <span class="bi">DENSE_RANK</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION BY</span> department <span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>) <span class="kw">AS</span> dense_rnk
+<span class="kw">FROM</span> employees;</pre>
+</div>
+
+<h4 class="sh3" style="color:var(--orange)">Time-Series Row Comparisons: LEAD and LAG</h4>
+<p><code>LEAD()</code> fetches a value from a subsequent row, and <code>LAG()</code> fetches a value from a preceding row. They allow you to compare rows sequentially without expensive self-joins (perfect for Month-over-Month changes).</p>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — lead_lag.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="kw">SELECT</span> month, revenue,
     <span class="bi">LAG</span>(revenue, <span class="num">1</span>) <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> month) <span class="kw">AS</span> prev_month_revenue,
     revenue <span class="op">-</span> <span class="bi">LAG</span>(revenue, <span class="num">1</span>) <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> month) <span class="kw">AS</span> mom_change
 <span class="kw">FROM</span> monthly_sales;</pre>
 </div>
-<h3 class="sh3">4. CASE WHEN + COALESCE</h3>
+
+<h3 class="sh3">4. CASE WHEN &amp; COALESCE — Row-Level Logic</h3>
+<p>SQL provides standard inline conditional statements to alter data values on a row-by-row basis:</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — case_coalesce.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
-<pre><span class="cm">-- CASE WHEN — like if/elif in SQL</span>
+<pre><span class="cm">-- 1. CASE WHEN: The IF-ELSE statement of SQL</span>
 <span class="kw">SELECT</span> name, salary,
     <span class="kw">CASE</span>
         <span class="kw">WHEN</span> salary <span class="op">&gt;</span> <span class="num">80000</span> <span class="kw">THEN</span> <span class="str">'Senior'</span>
         <span class="kw">WHEN</span> salary <span class="op">&gt;</span> <span class="num">50000</span> <span class="kw">THEN</span> <span class="str">'Mid-level'</span>
         <span class="kw">ELSE</span> <span class="str">'Junior'</span>
-    <span class="kw">END</span> <span class="kw">AS</span> level
+    <span class="kw">END</span> <span class="kw">AS</span> job_level
 <span class="kw">FROM</span> employees;
 
-<span class="cm">-- COALESCE — return first non-NULL value</span>
-<span class="kw">SELECT</span> name, <span class="bi">COALESCE</span>(phone, email, <span class="str">'No contact'</span>) <span class="kw">AS</span> contact
-<span class="kw">FROM</span> customers;
-<span class="cm">-- If phone is NULL, try email. If email also NULL, use 'No contact'.</span></pre>
+<span class="cm">-- 2. COALESCE: Evaluates arguments from left to right and returns the first non-NULL value</span>
+<span class="kw">SELECT</span> name, <span class="bi">COALESCE</span>(phone, email, emergency_contact, <span class="str">'No Contact Available'</span>) <span class="kw">AS</span> contact_info
+<span class="kw">FROM</span> employees;</pre>
 </div>
-<h3 class="sh3">5. Performance: Indexing Intuition</h3>
-<div class="analogy">Imagine a 10,000-page book without an index. To find a specific topic, you must read every page (Full Table Scan). An <strong>Index</strong> creates a sorted lookup table pointing to the exact page. In production, querying a 10-million row table without an index will crash the database. Always index columns used heavily in <code>WHERE</code> and <code>JOIN ON</code>.</div>
-<div class="ml-connect">Window functions are essential for feature engineering in SQL — computing running averages, month-over-month changes, and user behaviour sequences before feeding into ML models. Data engineers use LAG/LEAD daily for churn prediction features.</div>
-<div class="hinglish">💡 Ek line mein: Subquery = query ke andar query. CTE = WITH clause se readable blocks. Window function = OVER(PARTITION BY) ke saath — grouping ke bina row-level calculations. CASE WHEN = SQL ka if-else.</div>
-<h3 class="sh3">5. EXISTS vs IN — Performance Matters</h3>
+
+<h3 class="sh3">5. EXISTS vs. IN — Performance &amp; Null Behaviors</h3>
+<p>To check if a value exists in another set, we use <code>IN</code> or <code>EXISTS</code>. But they act differently under the hood:</p>
+<ul>
+  <li><code>IN</code>: The database retrieves the entire subquery result set, caches it in memory, and checks if the outer value exists in that set.</li>
+  <li><code>EXISTS</code>: The database uses a <strong>semi-join</strong>. It stops searching the moment it finds the <strong>first matching record</strong> in the subquery. For large subqueries, <code>EXISTS</code> is significantly faster!</li>
+</ul>
+<div class="misconception">
+<strong>⚠️ The NOT IN Null Trap:</strong>
+If the subquery returns even a single <code>NULL</code>, a query using <code>NOT IN</code> will return <strong>zero rows</strong>. This is because SQL evaluates <code>x NOT IN (y, NULL)</code> as <code>UNKNOWN</code>. To prevent this, always use <code>NOT EXISTS</code>, which handles NULLs safely and correctly!
+</div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — exists_vs_in.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
-<pre><span class="cm">-- IN — checks if value matches a list/subquery result</span>
+<pre><span class="cm">-- Use IN for small, static lists (e.g. IN (1, 2, 3))</span>
 <span class="kw">SELECT</span> name <span class="kw">FROM</span> employees
-<span class="kw">WHERE</span> dept_id <span class="kw">IN</span> (<span class="kw">SELECT</span> id <span class="kw">FROM</span> departments <span class="kw">WHERE</span> location = <span class="str">'Mumbai'</span>);
+<span class="kw">WHERE</span> dept_id <span class="kw">IN</span> (
+    <span class="kw">SELECT</span> id <span class="kw">FROM</span> departments <span class="kw">WHERE</span> location <span class="op">=</span> <span class="str">'Mumbai'</span>
+);
 
-<span class="cm">-- EXISTS — stops as soon as ONE match is found (often faster)</span>
-<span class="kw">SELECT</span> name <span class="kw">FROM</span> employees e
+<span class="cm">-- Use EXISTS for large subqueries (Faster execution)</span>
+<span class="kw">SELECT</span> e.name <span class="kw">FROM</span> employees e
 <span class="kw">WHERE</span> <span class="kw">EXISTS</span> (
     <span class="kw">SELECT</span> <span class="num">1</span> <span class="kw">FROM</span> departments d
-    <span class="kw">WHERE</span> d.id <span class="op">=</span> e.dept_id <span class="kw">AND</span> d.location <span class="op">=</span> <span class="str">'Mumbai'</span>
-);
-<span class="cm">-- Rule: Use EXISTS when the subquery returns large result sets.</span>
-<span class="cm">-- NOT EXISTS is cleaner than NOT IN when NULLs may be present.</span>
-
-<span class="cm">-- Correlated subquery — references outer query row by row</span>
-<span class="kw">SELECT</span> name, salary,
-    (<span class="kw">SELECT AVG</span>(salary) <span class="kw">FROM</span> employees e2
-     <span class="kw">WHERE</span> e2.dept_id <span class="op">=</span> e1.dept_id) <span class="kw">AS</span> dept_avg
-<span class="kw">FROM</span> employees e1;
-<span class="cm">-- Correlated = runs once PER ROW of outer query (can be slow on big tables)</span></pre>
+    <span class="kw">WHERE</span> d.id <span class="op">=</span> e.dept_id <span class="op">AND</span> d.location <span class="op">=</span> <span class="str">'Mumbai'</span>
+);</pre>
 </div>
-<h3 class="sh3">6. Running Aggregates — SUM() OVER, AVG() OVER, NTILE, PERCENT_RANK</h3>
+
+<h3 class="sh3">6. Running Aggregates — Dynamic Windows</h3>
+<p>By ordering inside the <code>OVER</code> clause, we can compute cumulative and rolling metrics over time:</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — running_aggregates.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
-<pre><span class="cm">-- Running total (cumulative sum)</span>
-<span class="kw">SELECT</span> month, revenue,
+<pre><span class="kw">SELECT</span> month, revenue,
     <span class="bi">SUM</span>(revenue) <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> month) <span class="kw">AS</span> running_total,
-    <span class="bi">AVG</span>(revenue) <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> month
-        <span class="kw">ROWS BETWEEN</span> <span class="num">2</span> <span class="kw">PRECEDING AND CURRENT ROW</span>) <span class="kw">AS</span> rolling_3mo_avg
-<span class="kw">FROM</span> monthly_sales;
-
-<span class="cm">-- NTILE — divide rows into N equal buckets</span>
-<span class="kw">SELECT</span> name, salary,
-    <span class="bi">NTILE</span>(<span class="num">4</span>) <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> salary) <span class="kw">AS</span> salary_quartile  <span class="cm">-- 1,2,3,4</span>
-<span class="kw">FROM</span> employees;
-
-<span class="cm">-- PERCENT_RANK — relative rank as a percentage (0.0 to 1.0)</span>
-<span class="kw">SELECT</span> name, salary,
-    <span class="bi">PERCENT_RANK</span>() <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> salary) <span class="kw">AS</span> percentile
-<span class="kw">FROM</span> employees;  <span class="cm">-- 0.0 = bottom, 1.0 = top earner</span></pre>
+    <span class="bi">AVG</span>(revenue) <span class="kw">OVER</span> (
+        <span class="kw">ORDER BY</span> month
+        <span class="kw">ROWS BETWEEN</span> <span class="num">2</span> <span class="kw">PRECEDING AND CURRENT ROW</span>
+    ) <span class="kw">AS</span> rolling_3mo_avg,
+    <span class="bi">NTILE</span>(<span class="num">4</span>) <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> revenue) <span class="kw">AS</span> revenue_quartile,
+    <span class="bi">PERCENT_RANK</span>() <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> revenue) <span class="kw">AS</span> percentile_rank
+<span class="kw">FROM</span> monthly_sales;</pre>
 </div>
-<details style="margin-top:20px; background:rgba(255,255,255,0.03); padding:10px; border-radius:8px;"><summary style="cursor:pointer; font-weight:bold; color:var(--orange);">Bonus/Advanced: Transactions &amp; Query Plans</summary>
-<h3 class="sh3">7. Transactions — BEGIN, COMMIT, ROLLBACK</h3>
+
+<h3 class="sh3">7. Views &amp; Materialized Views — Virtual vs. Cached Queries</h3>
+<div class="analogy">A standard <strong>View</strong> is like a "saved filter" on your inbox. No emails are copied; it just reruns the search on-the-fly when you click it. A <strong>Materialized View</strong> is like taking a screenshot of your inbox. It is extremely fast to look at, but it doesn't show new emails until you manually take a new screenshot (Refresh).</div>
+<p>To reuse code and restrict access to sensitive table columns, databases let you save queries as views:</p>
+<table class="concept-table">
+<tr><th>Feature</th><th>Standard View</th><th>Materialized View</th></tr>
+<tr><td><strong>Data Storage</strong></td><td>Virtual (Stores query syntax only, no physical data)</td><td>Physical (Caches query results to disk like a table)</td></tr>
+<tr><td><strong>Performance</strong></td><td>Slower (Must run query from scratch each time)</td><td>Extremely Fast (Reads precomputed rows directly)</td></tr>
+<tr><td><strong>Data Freshness</strong></td><td>Always Fresh (Retrieves real-time table state)</td><td>Stale until updated manually/automatically</td></tr>
+</table>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — views.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="cm">-- 1. Create a Standard View</span>
+<span class="kw">CREATE VIEW</span> v_high_earners <span class="kw">AS</span>
+    <span class="kw">SELECT</span> name, department, salary
+    <span class="kw">FROM</span> employees
+    <span class="kw">WHERE</span> salary <span class="op">&gt;</span> <span class="num">70000</span>;
+
+<span class="cm">-- 2. Create a Materialized View (Requires REFRESH to update)</span>
+<span class="kw">CREATE MATERIALIZED VIEW</span> mv_sales_summary <span class="kw">AS</span>
+    <span class="kw">SELECT</span> order_date, <span class="bi">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> total_orders, <span class="bi">SUM</span>(amount) <span class="kw">AS</span> daily_revenue
+    <span class="kw">FROM</span> orders
+    <span class="kw">GROUP BY</span> order_date;
+
+<span class="cm">-- Refreshing the cached data in the materialized view</span>
+<span class="kw">REFRESH MATERIALIZED VIEW</span> mv_sales_summary;</pre>
+</div>
+
+<h3 class="sh3">8. Database Triggers — Event-Driven Automation</h3>
+<div class="analogy">Triggers are like smart home automations: "IF motion sensor detects movement BEFORE 6 AM, THEN turn on the hallway lights". In databases: "IF a row is updated in table X, THEN log the historical values to audit table Y".</div>
+<p>A <strong>Trigger</strong> automatically executes a procedure in response to <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code> events on a specific table. This is perfect for security auditing and maintaining history logs:</p>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — triggers.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="cm">-- 1. Audit log table</span>
+<span class="kw">CREATE TABLE</span> salary_audit_log (
+    emp_id <span class="kw">INT</span>,
+    old_salary <span class="kw">INT</span>,
+    new_salary <span class="kw">INT</span>,
+    changed_at <span class="kw">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span>
+);
+
+<span class="cm">-- 2. Trigger Function (PostgreSQL PL/pgSQL syntax)</span>
+<span class="kw">CREATE OR REPLACE FUNCTION</span> log_salary_change()
+<span class="kw">RETURNS TRIGGER AS</span> <span class="str">$$</span>
+<span class="kw">BEGIN</span>
+    <span class="kw">IF</span> NEW.salary <span class="op">&lt;&gt;</span> OLD.salary <span class="kw">THEN</span>
+        <span class="kw">INSERT INTO</span> salary_audit_log(emp_id, old_salary, new_salary)
+        <span class="kw">VALUES</span>(OLD.id, OLD.salary, NEW.salary);
+    <span class="kw">END IF</span>;
+    <span class="kw">RETURN</span> NEW;
+<span class="kw">END</span>;
+<span class="str">$$</span> <span class="kw">LANGUAGE</span> plpgsql;
+
+<span class="cm">-- 3. Bind the trigger to run BEFORE the update executes on each row</span>
+<span class="kw">CREATE TRIGGER</span> trg_salary_update
+<span class="kw">BEFORE UPDATE ON</span> employees
+<span class="kw">FOR EACH ROW</span>
+<span class="kw">EXECUTE FUNCTION</span> log_salary_change();</pre>
+</div>
+
+<h3 class="sh3">9. Cursors, Stored Procedures &amp; User-Defined Functions</h3>
+<p>When write operations require complex procedural logic rather than simple set statements, database engines support running code blocks:</p>
+<table class="concept-table">
+<tr><th>Feature</th><th>Stored Procedures (<code>CREATE PROCEDURE</code>)</th><th>User-Defined Functions (UDFs) (<code>CREATE FUNCTION</code>)</th></tr>
+<tr><td><strong>Call Syntax</strong></td><td>Called explicitly: <code>CALL proc_name(args);</code></td><td>Called inline: <code>SELECT func_name(col) FROM table;</code></td></tr>
+<tr><td><strong>Return Requirements</strong></td><td>Can return data, multiple output parameters, or nothing</td><td><strong>Must</strong> return a single value or a table result</td></tr>
+<tr><td><strong>Transactions</strong></td><td><strong>Allowed</strong> to run <code>COMMIT</code> and <code>ROLLBACK</code> statements</td><td><strong>Strictly Forbidden</strong> from controlling transactions</td></tr>
+</table>
+
+<h4 class="sh3" style="color:var(--orange)">Cursors — Row-by-Row Iteration</h4>
+<p>While standard SQL works on <strong>sets of rows</strong> simultaneously, a <strong>Cursor</strong> is a pointer that allows you to iterate through query results row-by-row, running loops and conditional operations in a procedural container.</p>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — cursors.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="kw">CREATE OR REPLACE FUNCTION</span> distribute_bonuses() <span class="kw">RETURNS VOID AS</span> <span class="str">$$</span>
+<span class="kw">DECLARE</span>
+    emp_record RECORD;
+    emp_cursor <span class="kw">CURSOR FOR SELECT</span> id, salary <span class="kw">FROM</span> employees <span class="kw">WHERE</span> perf_score <span class="op">&gt;=</span> <span class="num">9</span>;
+<span class="kw">BEGIN</span>
+    <span class="kw">OPEN</span> emp_cursor;
+    <span class="kw">LOOP</span>
+        <span class="kw">FETCH NEXT FROM</span> emp_cursor <span class="kw">INTO</span> emp_record;
+        <span class="kw">EXIT WHEN NOT FOUND</span>;
+        
+        <span class="kw">UPDATE</span> employees 
+        <span class="kw">SET</span> salary <span class="op">=</span> salary <span class="op">+</span> (emp_record.salary <span class="op">*</span> <span class="num">0.10</span>) 
+        <span class="kw">WHERE</span> id <span class="op">=</span> emp_record.id;
+    <span class="kw">END LOOP</span>;
+    <span class="kw">CLOSE</span> emp_cursor;
+<span class="kw">END</span>;
+<span class="str">$$</span> <span class="kw">LANGUAGE</span> plpgsql;</pre>
+</div>
+<div class="misconception">
+<strong>⚠️ The Cursor Performance Trap:</strong>
+Writing cursor loops is slow because it bypasses the database compiler's query optimization. A single set-based query like <code>UPDATE employees SET salary = salary * 1.10 WHERE perf_score >= 9;</code> runs up to 100x faster than a cursor. Use cursors only when row-by-row procedural calculation is absolutely unavoidable.
+</div>
+
+<details style="margin-top:20px; background:rgba(255,255,255,0.03); padding:10px; border-radius:8px;"><summary style="cursor:pointer; font-weight:bold; color:var(--orange);">Bonus/Advanced: Transactions, Concurrency &amp; Query Plans</summary>
+<h3 class="sh3">10. Transactions &amp; ACID Properties</h3>
+<p>Transactions bundle multiple SQL writes into a single, atomic block. Either <strong>all</strong> operations succeed, or <strong>none</strong> do. This preserves database integrity in the event of hardware failures or network cuts.</p>
+<ul>
+  <li><strong>Atomicity:</strong> All statements in a transaction succeed, or everything is rolled back (All-or-Nothing).</li>
+  <li><strong>Consistency:</strong> The database transitions cleanly according to rules (e.g. constraints, unique keys).</li>
+  <li><strong>Isolation:</strong> Concurrent transactions run independently and do not read uncommitted states.</li>
+  <li><strong>Durability:</strong> Once committed, updates are permanently written to disk and survive system crashes.</li>
+</ul>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — transactions.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
-<pre><span class="cm">-- Transactions: group multiple operations as ONE atomic unit</span>
-<span class="cm">-- Either ALL succeed, or NONE do (ACID properties)</span>
-<span class="kw">BEGIN</span>;
-    <span class="kw">UPDATE</span> accounts <span class="kw">SET</span> balance <span class="op">=</span> balance <span class="op">-</span> <span class="num">1000</span> <span class="kw">WHERE</span> id <span class="op">=</span> <span class="num">1</span>;  <span class="cm">-- debit</span>
-    <span class="kw">UPDATE</span> accounts <span class="kw">SET</span> balance <span class="op">=</span> balance <span class="op">+</span> <span class="num">1000</span> <span class="kw">WHERE</span> id <span class="op">=</span> <span class="num">2</span>;  <span class="cm">-- credit</span>
-<span class="kw">COMMIT</span>;   <span class="cm">-- save both changes permanently</span>
+<pre><span class="kw">BEGIN</span>;
+    <span class="kw">UPDATE</span> accounts <span class="kw">SET</span> balance <span class="op">=</span> balance <span class="op">-</span> <span class="num">1000</span> <span class="kw">WHERE</span> id <span class="op">=</span> <span class="num">1</span>;  <span class="cm">-- Debit</span>
+    <span class="kw">UPDATE</span> accounts <span class="kw">SET</span> balance <span class="op">=</span> balance <span class="op">+</span> <span class="num">1000</span> <span class="kw">WHERE</span> id <span class="op">=</span> <span class="num">2</span>;  <span class="cm">-- Credit</span>
+<span class="kw">COMMIT</span>;   <span class="cm">-- Persists changes on disk</span>
 
-<span class="cm">-- If something goes wrong, ROLLBACK undoes everything</span>
+<span class="cm">-- If an operation fails, run ROLLBACK to revert to initial state:</span>
 <span class="kw">BEGIN</span>;
     <span class="kw">DELETE FROM</span> orders <span class="kw">WHERE</span> status <span class="op">=</span> <span class="str">'cancelled'</span>;
-<span class="kw">ROLLBACK</span>;  <span class="cm">-- oops! nothing was deleted</span></pre>
+<span class="kw">ROLLBACK</span>;  <span class="cm">-- Reverts the deletes</span></pre>
 </div>
-<h3 class="sh3">8. EXPLAIN — Reading the Query Plan</h3>
+
+<h3 class="sh3">11. Database Locks — Shared vs. Exclusive</h3>
+<div class="analogy">A <strong>Shared Lock</strong> is like sharing a view-only document: many people can read it simultaneously, but no one can edit it. An <strong>Exclusive Lock</strong> is like opening a document in edit-only checkout mode: one person gets full write access, and everyone else is blocked from editing or reading until the document is closed.</div>
 <div class="cb">
-<div class="cb-head"><span class="cb-lang">sql — explain.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
-<pre><span class="cm">-- EXPLAIN shows HOW the database will execute the query</span>
-<span class="kw">EXPLAIN</span> <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> employees <span class="kw">WHERE</span> dept_id <span class="op">=</span> <span class="num">5</span>;
-<span class="cm">-- Look for: "Seq Scan" (slow, no index) vs "Index Scan" (fast)</span>
+<div class="cb-head"><span class="cb-lang">sql — locks.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="cm">-- 1. Shared Lock (FOR SHARE): Allows others to read, blocks write updates</span>
+<span class="kw">SELECT</span> balance <span class="kw">FROM</span> accounts <span class="kw">WHERE</span> id <span class="op">=</span> <span class="num">1</span> <span class="kw">FOR SHARE</span>;
 
-<span class="kw">EXPLAIN ANALYZE</span> <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> employees <span class="kw">WHERE</span> dept_id <span class="op">=</span> <span class="num">5</span>;
-<span class="cm">-- ANALYZE actually runs it and shows real execution time</span>
-
-<span class="cm">-- Add an index and re-run EXPLAIN to see the speedup</span>
-<span class="kw">CREATE INDEX</span> idx_dept_id <span class="kw">ON</span> employees(dept_id);
-<span class="cm">-- Now the query plan will show "Index Scan" instead of "Seq Scan"</span></pre>
+<span class="cm">-- 2. Exclusive Lock (FOR UPDATE): Blocks others from both reading and writing</span>
+<span class="kw">SELECT</span> balance <span class="kw">FROM</span> accounts <span class="kw">WHERE</span> id <span class="op">=</span> <span class="num">1</span> <span class="kw">FOR UPDATE</span>;</pre>
 </div>
-<div class="callout cw"><strong>⚡ Production Rule:</strong> Any query that takes &gt;100ms in production probably needs an index or a query plan review. Always run EXPLAIN before shipping a query on a large table.</div>
-</details></div>
-<h3 class="sh3">9. Python Integration — pd.read_sql() and SQLAlchemy</h3>
+
+<h3 class="sh3">12. Transaction Isolation Levels</h3>
+<p>To balance performance against transaction interference, databases support four isolation levels:</p>
+<table class="concept-table">
+<tr><th>Level</th><th>Dirty Reads (Read uncommitted data)</th><th>Non-Repeatable Reads (Values change mid-transaction)</th><th>Phantom Reads (New rows appear mid-transaction)</th></tr>
+<tr><td><strong>Read Uncommitted</strong></td><td>Allowed</td><td>Allowed</td><td>Allowed</td></tr>
+<tr><td><strong>Read Committed</strong> (Default)</td><td>Prevented</td><td>Allowed</td><td>Allowed</td></tr>
+<tr><td><strong>Repeatable Read</strong></td><td>Prevented</td><td>Prevented</td><td>Allowed</td></tr>
+<tr><td><strong>Serializable</strong> (Strict)</td><td>Prevented</td><td>Prevented</td><td>Prevented</td></tr>
+</table>
+
+<h3 class="sh3">13. EXPLAIN — Reading the Query Plan</h3>
+<p>To see how the query planner compiles your query, prefix it with <code>EXPLAIN</code>. This displays the cost and execution pathways (e.g. using index lookup trees vs reading files sequentially):</p>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — explain_plans.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="cm">-- EXPLAIN displays execution steps</span>
+<span class="kw">EXPLAIN SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> employees <span class="kw">WHERE</span> dept_id <span class="op">=</span> <span class="num">5</span>;
+<span class="cm">-- Output shows "Seq Scan" (Full table scan - slow!)</span>
+
+<span class="cm">-- EXPLAIN ANALYZE actually runs the query and prints physical times</span>
+<span class="kw">EXPLAIN ANALYZE SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> employees <span class="kw">WHERE</span> dept_id <span class="op">=</span> <span class="num">5</span>;
+
+<span class="cm">-- Adding an index changes the query plan from a Seq Scan to an Index Scan</span>
+<span class="kw">CREATE INDEX</span> idx_dept_id <span class="kw">ON</span> employees(dept_id);</pre>
+</div>
+<div class="callout cw"><strong>⚡ Production Rule:</strong> In production, any query taking &gt;100ms probably requires an index. Run <code>EXPLAIN</code> to verify that searches scan index trees rather than files.</div>
+</details>
+
+<h3 class="sh3">14. Python Integration — pd.read_sql() and SQLAlchemy</h3>
+<p>In real-world data pipelines, we use Python to extract data from a relational database and load it directly into a Pandas DataFrame for modeling or cleaning:</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — read_sql.py</span></div>
 <pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
 <span class="kw">from</span> sqlalchemy <span class="kw">import</span> create_engine
 
-<span class="cm"># 1. Connect to database (SQLite, PostgreSQL, MySQL)</span>
+<span class="cm"># 1. Establish database connection</span>
 engine = create_engine(<span class="str">'sqlite:///my_database.db'</span>)
 
-<span class="cm"># 2. Write SQL and load directly into a Pandas DataFrame</span>
+<span class="cm"># 2. Write and execute SQL to load directly into DataFrame</span>
 query = <span class="str">'''
 SELECT department, AVG(salary) as avg_sal
 FROM employees
@@ -1972,10 +2186,47 @@ HAVING AVG(salary) &gt; 50000
 df = pd.read_sql(query, engine)
 <span class="bi">print</span>(df.head())</pre>
 </div>
+
+<h3 class="sh3">15. pgvector — Modern Vector Search &amp; Similarity</h3>
+<p>Keyword search using operators like <code>LIKE '%python%'</code> has a major limitation: it only returns exact character matches. If a user searches for "machine learning", keyword queries fail to match documents containing "ML", "neural networks", or "deep learning" because the terms are textually different, despite being semantically similar.</p>
+<div class="analogy">Keyword search is like sorting clothes by looking at label text (e.g. "red shirts"). Vector search is like showing the salesperson a shirt and saying "find me fabrics that feel and look similar to this" (semantic similarity distance).</div>
+<p>Modern LLM applications (like Retrieval-Augmented Generation or RAG) convert text blocks into high-dimensional numerical lists called <strong>vector embeddings</strong>. The <strong><code>pgvector</code></strong> extension allows PostgreSQL to store, index, and query vectors directly alongside your relational tables:</p>
+<div class="ml-connect">In RAG architectures, we embed a user's natural language question, run a vector similarity query in PostgreSQL to retrieve the most relevant background documents, and pass that retrieved text as context to LLMs like Claude or GPT.</div>
+<div class="cb">
+<div class="cb-head"><span class="cb-lang">sql — pgvector_search.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
+<pre><span class="cm">-- 1. Enable pgvector extension</span>
+<span class="kw">CREATE EXTENSION IF NOT EXISTS</span> vector;
+
+<span class="cm">-- 2. Create table storing text alongside 1536-dimensional embeddings (OpenAI standard)</span>
+<span class="kw">CREATE TABLE</span> documents (
+    id <span class="kw">SERIAL PRIMARY KEY</span>,
+    content <span class="kw">TEXT</span>,
+    embedding <span class="kw">VECTOR</span>(<span class="num">1536</span>)
+);
+
+<span class="cm">-- 3. Perform Cosine Similarity vector search to find top 3 matching documents</span>
+<span class="kw">SELECT</span> content, <span class="num">1</span> <span class="op">-</span> (embedding <span class="op">&lt;=&gt;</span> <span class="str">'[0.012, -0.004, ..., 0.89]'</span>) <span class="kw">AS</span> cosine_similarity
+<span class="kw">FROM</span> documents
+<span class="kw">ORDER BY</span> embedding <span class="op">&lt;=&gt;</span> <span class="str">'[0.012, -0.004, ..., 0.89]'</span> <span class="kw">ASC</span>
+<span class="kw">LIMIT</span> <span class="num">3</span>;
+
+<span class="cm">-- Distance Operators:</span>
+<span class="cm">-- &lt;=&gt; Cosine Distance (used for textual semantic similarity)</span>
+<span class="cm">-- &lt;-&gt; L2 Euclidean Distance (used for physical distance/coordinate metrics)</span>
+<span class="cm">-- &lt;#&gt; Negative Inner Product</span></pre>
+</div>
+<div class="callout cp">
+<strong>⚡ Vector Indexing (HNSW vs IVFFlat):</strong> By default, similarity queries perform a full table scan. To speed up vector queries:
+<br/>• <strong>IVFFlat</strong>: Divides vectors into clusters. Fast index build times, but slightly lower recall.
+<br/>• <strong>HNSW (Hierarchical Navigable Small World)</strong>: Creates a multi-layer graph. Extremely fast queries and high recall, but takes longer to build and consumes more memory.
+</div>
+
+</div>
+
 <div id="day-12-quiz-section">
 <h2 class="sh2">✅ Knowledge Check — Day 12 Quiz</h2>
 <div class="quiz-block">
-<div class="quiz-num">QUESTION 1 OF 3</div>
+<div class="quiz-num">QUESTION 1 OF 7</div>
 <div class="quiz-q">What is the key advantage of a CTE over a subquery?</div>
 <div class="quiz-opt" onclick="quiz(this,'wrong','q12-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span> CTEs are faster than subqueries always</div>
 <div class="quiz-opt" onclick="quiz(this,'correct','q12-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span> CTEs are reusable and make complex queries much more readable</div>
@@ -1985,7 +2236,7 @@ df = pd.read_sql(query, engine)
 <div class="quiz-feedback wrong-fb" id="q12-1-wrong">❌ CTEs improve readability by naming intermediate results. You can reference them multiple times. Performance is similar to subqueries — the main benefit is clean, maintainable code.</div>
 </div>
 <div class="quiz-block">
-<div class="quiz-num">QUESTION 2 OF 3</div>
+<div class="quiz-num">QUESTION 2 OF 7</div>
 <div class="quiz-q">To find the 2nd highest salary in each department using window functions, which function should you use?</div>
 <div class="quiz-opt" onclick="quiz(this,'wrong','q12-2')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span> MAX() with HAVING</div>
 <div class="quiz-opt" onclick="quiz(this,'wrong','q12-2')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span> RANK() without PARTITION BY</div>
@@ -1995,7 +2246,7 @@ df = pd.read_sql(query, engine)
 <div class="quiz-feedback wrong-fb" id="q12-2-wrong">❌ Use DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) wrapped in a CTE, then filter WHERE rank = 2. This is one of the most common SQL interview questions.</div>
 </div>
 <div class="quiz-block">
-<div class="quiz-num">QUESTION 3 OF 3</div>
+<div class="quiz-num">QUESTION 3 OF 7</div>
 <div class="quiz-q">What does <code>LAG(revenue, 1) OVER (ORDER BY month)</code> return for the first row?</div>
 <div class="quiz-opt" onclick="quiz(this,'wrong','q12-3')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span> 0</div>
 <div class="quiz-opt" onclick="quiz(this,'correct','q12-3')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span> NULL (no previous row exists)</div>
@@ -2004,6 +2255,45 @@ df = pd.read_sql(query, engine)
 <div class="quiz-feedback correct-fb" id="q12-3-correct">✅ Correct! LAG() looks back N rows. For the first row, there's no previous row, so it returns NULL. You can handle this with COALESCE(LAG(revenue,1) OVER(...), 0) to default to 0.</div>
 <div class="quiz-feedback wrong-fb" id="q12-3-wrong">❌ LAG returns NULL for the first row because there's no previous row. Handle it with COALESCE(LAG(revenue,1) OVER(ORDER BY month), 0).</div>
 </div>
+<div class="quiz-block">
+<div class="quiz-num">QUESTION 4 OF 7</div>
+<div class="quiz-q">What is the main difference between a standard View and a Materialized View?</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q12-4')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span> Standard views allow indexes; materialized views do not.</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q12-4')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span> Materialized views physically store the query results and require refreshing; standard views execute the query dynamically on the fly.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q12-4')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span> Standard views can only perform SELECT operations; materialized views can perform INSERT/UPDATE.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q12-4')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span> Standard views are stored in memory; materialized views are stored on disk permanently.</div>
+<div class="quiz-feedback correct-fb" id="q12-4-correct">✅ Correct! A standard view runs its query dynamically every time it is referenced. A materialized view acts like a cache table, storing physical records that must be periodically refreshed.</div>
+<div class="quiz-feedback wrong-fb" id="q12-4-wrong">❌ Materialized views cache physical records and must be refreshed manually or on a schedule, whereas standard views dynamically evaluate the SQL on the fly.</div>
+</div>
+<div class="quiz-block">
+<div class="quiz-num">QUESTION 5 OF 7</div>
+<div class="quiz-q">Why are SQL Cursors generally discouraged in production databases for large-scale operations?</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q12-5')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span> Cursors process records row-by-row, which lacks the optimization and speed of set-based operations.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q12-5')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span> Cursors are deprecated in modern relational databases.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q12-5')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span> Cursors are restricted to only SELECT statements and cannot update data.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q12-5')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span> Cursors require administrator privileges to run.</div>
+<div class="quiz-feedback correct-fb" id="q12-5-correct">✅ Correct! SQL databases are optimized for set-based processing. Row-by-row cursor loops run procedurally, bypassing the compiler's set optimizations and causing high I/O overhead.</div>
+<div class="quiz-feedback wrong-fb" id="q12-5-wrong">❌ Cursors operate row-by-row (procedural loops), which is vastly slower and less efficient than the database engine's set-based parallel operations. Use set operations whenever possible.</div>
+</div>
+<div class="quiz-block">
+<div class="quiz-num">QUESTION 6 OF 7</div>
+<div class="quiz-q">Which operator in PostgreSQL's <code>pgvector</code> extension calculates the Cosine Distance similarity?</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q12-6')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span> &lt;-&gt;</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q12-6')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span> &lt;#&gt;</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q12-6')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span> &lt;=&gt;</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q12-6')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span> +</div>
+<div class="quiz-feedback correct-fb" id="q12-6-correct">✅ Correct! &lt;=&gt; calculates Cosine Distance (often used in textual/embeddings semantic similarity). &lt;-&gt; is L2 Euclidean Distance, and &lt;#&gt; represents Negative Inner Product.</div>
+<div class="quiz-feedback wrong-fb" id="q12-6-wrong">❌ The &lt;=&gt; operator is used for Cosine Distance. &lt;-&gt; is used for L2/Euclidean distance.</div>
+</div>
+<div class="quiz-block">
+<div class="quiz-num">QUESTION 7 OF 7</div>
+<div class="quiz-q">What are the two query components combined by a UNION/UNION ALL inside a Recursive CTE?</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q12-7')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span> Inner query and Outer query</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q12-7')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span> Anchor member and Recursive member</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q12-7')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span> Base table and Temp view</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q12-7')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span> Parent node and Child node</div>
+<div class="quiz-feedback correct-fb" id="q12-7-correct">✅ Correct! The Anchor member sets the initial result set (the root), and the Recursive member runs repeatedly, referencing the CTE name, until no new rows are found.</div>
+<div class="quiz-feedback wrong-fb" id="q12-7-wrong">❌ A recursive query combines the Anchor Member (base case) and the Recursive Member (loops back on the CTE) using a UNION/UNION ALL operator.</div>
 </div>
 <h2 class="sh2">🃏 Revision Flashcards — Day 12</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
@@ -2030,6 +2320,43 @@ df = pd.read_sql(query, engine)
 <div class="fc-inner">
 <div class="fc-front">COALESCE use case?</div>
 <div class="fc-back">Return first non-NULL value<br/>COALESCE(phone, email, 'none')<br/>→ phone if exists, else email...</div>
+</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+<div class="fc-inner">
+<div class="fc-front">View vs Materialized View?</div>
+<div class="fc-back">View: virtual, dynamic query.<br/>Materialized View: physical cache, requires manual REFRESH.</div>
+</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+<div class="fc-inner">
+<div class="fc-front">Database Trigger?</div>
+<div class="fc-back">Automatic procedure executing on events (INSERT/UPDATE/DELETE). BEFORE/AFTER, ROW/STATEMENT level.</div>
+</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+<div class="fc-inner">
+<div class="fc-front">Why avoid Cursors?</div>
+<div class="fc-back">Cursors iterate row-by-row (slow). Prefer set-based operations (highly optimized by db compiler).</div>
+</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+<div class="fc-inner">
+<div class="fc-front">pgvector similarity operator?</div>
+<div class="fc-back">Cosine Similarity: 1 - (embedding &lt;=&gt; '[...]')<br/>Cosine Distance: &lt;=&gt; (smaller = more similar)</div>
+</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+<div class="fc-inner">
+<div class="fc-front">Recursive CTE parts?</div>
+<div class="fc-back">Anchor Member (base query) + UNION ALL + Recursive Member (joining CTE back with table)</div>
+</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+<div class="fc-inner">
+<div class="fc-front">ACID Isolation levels?</div>
+<div class="fc-back">Read Uncommitted, Read Committed (default), Repeatable Read, and Serializable (strictest)</div>
+</div>
 </div>
 </div>
 </div>
@@ -2078,9 +2405,13 @@ df = pd.read_sql(query, engine)
 <h3>⚡ Key Takeaways — Day 12</h3>
 <ol>
 <li><strong>Window functions</strong> compute across rows related to the current row without collapsing them. <code>ROW_NUMBER()</code>, <code>RANK()</code>, <code>DENSE_RANK()</code> are essential for interview problems.</li>
-<li><strong>PARTITION BY</strong> defines groups within the window; <strong>ORDER BY</strong> defines ordering within each partition. Always specify both for meaningful results.</li>
-<li><strong>CTEs (WITH clause)</strong> make complex queries readable — define named temporary result sets. Essential for multi-step data transformations.</li>
-<li><strong>Subqueries</strong> in WHERE work as filters; in FROM work as temp tables. Correlated subqueries reference outer queries — powerful but potentially slow.</li>
+<li><strong>CTEs (WITH clause)</strong> make complex queries readable. <strong>Recursive CTEs</strong> loop back on themselves using an Anchor Member and a Recursive Member, making them ideal for hierarchical or tree traversal queries.</li>
+<li><strong>Views</strong> are virtual tables executing queries dynamically. <strong>Materialized Views</strong> cache physical data for faster queries but require manual updates using <code>REFRESH MATERIALIZED VIEW</code>.</li>
+<li><strong>Triggers</strong> are event-driven database procedures executing automatically BEFORE or AFTER database write events (INSERT, UPDATE, DELETE).</li>
+<li><strong>Stored Procedures vs. Functions:</strong> Stored Procedures (`CALL`) are used for business workflows and support transaction control (`COMMIT`/`ROLLBACK`). User-Defined Functions (`SELECT`) must return a value and cannot control transactions.</li>
+<li><strong>Cursors</strong> iterate result sets row-by-row and are generally slower than optimized **set-based SQL** operations, which the database engine executes in parallel.</li>
+<li><strong>pgvector Similarity Search:</strong> Relational databases can perform vector search natively using `pgvector`. This uses distance operators like Cosine Distance (<code>&lt;=&gt;</code>) or L2 Distance (<code>&lt;-&gt;</code>) and indexes (IVFFlat/HNSW) to retrieve semantically matching text embeddings (crucial for AI/ML RAG architectures).</li>
+<li><strong>Concurrency &amp; Locks:</strong> Relational databases manage concurrent access using Shared (<code>FOR SHARE</code>) or Exclusive (<code>FOR UPDATE</code>) locks and isolation levels (Read Committed to Serializable) to enforce ACID consistency.</li>
 </ol>
 </div>
 <button class="complete-btn" id="btn-day-12" onclick="completeDay(12,200)">✓ Mark Day 12 Complete — Earn 200 XP</button>
@@ -2582,7 +2913,7 @@ plt.show()
 <tr><td><strong>Pandas</strong></td><td>Load, clean, explore, transform any CSV dataset</td><td>⭐⭐⭐</td></tr>
 <tr><td><strong>groupby + agg</strong></td><td>Compute statistics by any group, build pivot tables</td><td>⭐⭐⭐</td></tr>
 <tr><td><strong>SQL Basics</strong></td><td>Write SELECT, WHERE, JOIN, GROUP BY queries</td><td>⭐⭐⭐</td></tr>
-<tr><td><strong>SQL Advanced</strong></td><td>CTEs, window functions, subqueries</td><td>⭐⭐</td></tr>
+<tr><td><strong>SQL Advanced</strong></td><td>CTEs &amp; Recursion, Window functions, Views, Triggers, Cursors &amp; Procedures, pgvector similarity search, Database locks</td><td>⭐⭐⭐</td></tr>
 <tr><td><strong>Git + GitHub</strong></td><td>Full workflow: branch, commit, PR, merge</td><td>⭐⭐⭐</td></tr>
 <tr><td><strong>EDA</strong></td><td>Full end-to-end exploratory analysis with visualisations</td><td>⭐⭐⭐</td></tr>
 </table>

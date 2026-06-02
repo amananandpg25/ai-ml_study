@@ -397,6 +397,33 @@ code{font-family:var(--font-mono);font-size:12px;background:var(--bg3);border:1p
 <h3 class="sh3">1. Why Pandas? The Data Science Workhorse</h3>
 <div class="analogy">Excel toh sab jaante hain — rows aur columns mein data. Pandas bilkul wahi hai, lekin code se control karo. Ek click ki jagah ek line Python — aur millions of rows handle karo bina hangs ke. Bade companies ka data terabytes mein hota hai — Excel toh crash ho jata hai, Pandas nahi.</div>
 <p>Pandas has two core data structures: <strong>Series</strong> (1D — like a single column) and <strong>DataFrame</strong> (2D — like a full spreadsheet). Almost all ML workflows start with loading a DataFrame from a CSV file.</p>
+<div class="mermaid">
+graph LR
+    subgraph "Series (1D Labeled Array)"
+        S_Idx["Index"] --- S_Val["Values"]
+        S_Idx0["0"] --> S_Val0["85"]
+        S_Idx1["1"] --> S_Val1["92"]
+        S_Idx2["2"] --> S_Val2["78"]
+    end
+    
+    subgraph "DataFrame (2D Tabular Structure)"
+        DF_Index["Index"]
+        DF_Col1["Name"]
+        DF_Col2["Age"]
+        DF_Col3["City"]
+        
+        DF_Index --> DF_Row0["0"]
+        DF_Row0 --> DF_R0C1["Rahul"]
+        DF_Row0 --> DF_R0C2["22"]
+        DF_Row0 --> DF_R0C3["Mumbai"]
+        
+        DF_Index --> DF_Row1["1"]
+        DF_Row1 --> DF_R1C1["Priya"]
+        DF_Row1 --> DF_R1C2["24"]
+        DF_Row1 --> DF_R1C3["Delhi"]
+    end
+</div>
+<div class="diagram-cap">Series (1D column representation) vs. DataFrame (2D table structure with multiple columns).</div>
 <div class="ml-connect">In ML, your dataset IS a DataFrame. Features (columns) go into X, target (label column) goes into y. Understanding DataFrame operations like iloc, loc, and boolean indexing is essential before you can split data for training.</div>
 <h3 class="sh3">2. Series — A Labeled 1D Array</h3>
 <div class="cb">
@@ -984,6 +1011,34 @@ left = pd.merge(students, scores, on=<span class="str">"id"</span>, how=<span cl
 <span class="cm"># Concatenate (stack DataFrames vertically)</span>
 df_all = pd.concat([students, students], ignore_index=<span class="kw">True</span>)</pre>
 </div>
+<div class="mermaid">
+graph TD
+    subgraph Left_DF [Left DataFrame]
+        L1["ID 1: Rahul"]
+        L2["ID 2: Priya"]
+        L3["ID 3: Arjun"]
+    end
+    subgraph Right_DF [Right DataFrame]
+        R1["ID 1: 85"]
+        R2["ID 2: 92"]
+        R4["ID 4: 78"]
+    end
+    
+    subgraph Inner_Join [Inner Join (Matches only)]
+        IJ1["ID 1: Rahul | 85"]
+        IJ2["ID 2: Priya | 92"]
+    end
+    
+    subgraph Left_Join [Left Join (All Left + Matches)]
+        LJ1["ID 1: Rahul | 85"]
+        LJ2["ID 2: Priya | 92"]
+        LJ3["ID 3: Arjun | NaN"]
+    end
+
+    Left_DF & Right_DF --> Inner_Join
+    Left_DF & Right_DF --> Left_Join
+</div>
+<div class="diagram-cap">Conceptual visualization of Left vs. Inner merges.</div>
 <div class="diagram">
 <pre>
     Merge Types Diagram (how = ...)
@@ -1185,6 +1240,35 @@ df_all = pd.concat([students, students], ignore_index=<span class="kw">True</spa
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. groupby() — Split, Apply, Combine</h3>
 <div class="analogy">Socho tumhare school ke sab students ka data hai. "Class ke hisaab se average marks nikalo" — yahi groupby hai. Pehle data ko groups mein baanto (class A, B, C), phir har group pe operation karo (mean lao), phir results combine karo.</div>
+<div class="mermaid">
+graph TD
+    subgraph Input [1. Input DataFrame]
+        Row0["Phone  | 15000"]
+        Row1["Laptop | 80000"]
+        Row2["Phone  | 12000"]
+        Row3["Laptop | 75000"]
+    end
+    
+    subgraph Split [2. Split by Product]
+        G1["Phone Group:<br/>- 15000<br/>- 12000"]
+        G2["Laptop Group:<br/>- 80000<br/>- 75000"]
+    end
+    
+    subgraph Apply [3. Apply Aggregation (SUM)]
+        A1["Phone Sum:<br/>15000 + 12000 = 27000"]
+        A2["Laptop Sum:<br/>80000 + 75000 = 155000"]
+    end
+    
+    subgraph Combine [4. Combine Result]
+        Res0["Laptop | 155000"]
+        Res1["Phone  | 27000"]
+    end
+    
+    Input -->|groupby| Split
+    Split -->|sum| Apply
+    Apply -->|combine| Combine
+</div>
+<div class="diagram-cap">Split-Apply-Combine execution process in Pandas groupby operations.</div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — groupby_basics.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
@@ -1466,7 +1550,42 @@ df_filtered = pd.concat(results, ignore_index=<span class="kw">True</span>)</pre
 </div><div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Pandas Series &amp; DataFrames, loading CSVs, and indexing with loc/iloc.</li></ul></div>
 <div id="day-11-theory">
 <h2 class="sh2">🧠 Theory</h2>
-<h3 class="sh3">1. SQL vs. Pandas — The Paradigm Shift</h3>
+<h3 class="sh3">1. Database &amp; RDBMS Fundamentals</h3>
+<div class="analogy">School registry register ki tarah relational database ko socho. Ek page pe student detail, doosre page pe attendance, teesre page pe library books. In sabko link karne ke liye standard columns hote hain (jaise Roll Number). Yahi Relational Database hai jahan multi-tables mein data linked rehta hai.</div>
+<p>
+    A <strong>Database</strong> is an organized collection of structured information or data, typically stored electronically in a computer system. 
+    A <strong>Relational Database Management System (RDBMS)</strong> is a type of database management system (DBMS) that stores data in tables (relations) of rows (tuples) and columns (attributes), and manages data based on the relational model.
+</p>
+<div class="callout cw">
+    <strong>🔑 Keys &amp; Table Structures:</strong>
+    <ul style="margin-left:1.25rem;">
+        <li><strong>Primary Key (PK):</strong> A column (or set of columns) that uniquely identifies each row in a table. It cannot be NULL and must be unique (e.g., <code>student_id</code>).</li>
+        <li><strong>Foreign Key (FK):</strong> A column in one table that links to the Primary Key of another table. It enforces referential integrity between tables (e.g., <code>dept_id</code> in the employees table).</li>
+    </ul>
+</div>
+<h4 class="sh3" style="color:var(--orange)">Entity Relationships &amp; Junction Tables</h4>
+<p>Databases model the real world via three primary relationship types:</p>
+<ul style="margin-left:1.25rem; margin-bottom:1rem;">
+    <li><strong>One-to-One (1:1):</strong> A row in Table A is linked to exactly one row in Table B. E.g., A <code>user</code> has exactly one <code>user_profile</code>.</li>
+    <li><strong>One-to-Many (1:N):</strong> A row in Table A can be linked to multiple rows in Table B. E.g., A <code>department</code> has multiple <code>employees</code>, but each employee belongs to only one department.</li>
+    <li><strong>Many-to-Many (M:N):</strong> Multiple rows in Table A can relate to multiple rows in Table B. E.g., <code>students</code> can enroll in multiple <code>courses</code>, and each course has multiple students. This is resolved in databases using a <strong>Junction Table</strong> (also called Join or Bridge table) that stores pairs of foreign keys.</li>
+</ul>
+<div class="mermaid">
+graph TD
+    subgraph OneToOne [1:1 Relationship]
+        User["users (user_id PK)"] ---|1 --- 1| Profile["user_profiles (user_id FK, UNIQUE)"]
+    end
+    subgraph OneToMany [1:N Relationship]
+        Dept["departments (dept_id PK)"] ---|1 --- N| Emp["employees (dept_id FK)"]
+    end
+    subgraph ManyToMany [M:N Relationship]
+        Student["students (student_id PK)"] ---|1 --- N| Enrollment["student_courses (Junction Table: student_id FK, course_id FK)"]
+        Course["courses (course_id PK)"] ---|1 --- N| Enrollment
+    end
+</div>
+<div class="diagram-cap">RDBMS Relationship Cardinalities and Junction Table implementation.</div>
+
+<h3 class="sh3">2. SQL vs. Pandas — The Paradigm Shift</h3>
 <div class="analogy">Pandas is like cooking in your own small kitchen (RAM) where you pull all ingredients from the fridge (CSV) onto your counter and chop them up step-by-step (procedural). SQL is like ordering from a mega-warehouse: you tell the clerk exactly WHAT you want (declarative), and the warehouse engine fetches it from giant storage shelves (disk) using efficient forklifts.</div>
 <p>As a data scientist, you already know Pandas. But Pandas has a limit: it loads the <strong>entire dataset into RAM</strong>. If you have a 50GB dataset and 16GB of RAM, Pandas will crash. <strong>SQL (Structured Query Language)</strong> solves this. SQL is <strong>declarative</strong> (you define <em>what</em> data you want, not <em>how</em> to get it) and operates directly on database files stored on disk, streaming only the necessary results to your computer.</p>
 <table class="concept-table">
@@ -1476,7 +1595,7 @@ df_filtered = pd.concat(results, ignore_index=<span class="kw">True</span>)</pre
 <tr><td><strong>Best for</strong></td><td>Complex preprocessing, feature engineering, modeling</td><td>Data extraction, cleaning, multi-table joining</td></tr>
 </table>
 
-<h3 class="sh3">2. SELECT &amp; WHERE — The Filter Scaffolding</h3>
+<h3 class="sh3">3. SELECT &amp; WHERE — The Filter Scaffolding</h3>
 <p>To learn SQL, we start with the simplest retrieval: choosing columns (<code>SELECT</code>) and filtering rows (<code>WHERE</code>).</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — select_basics.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
@@ -1499,7 +1618,7 @@ df_filtered = pd.concat(results, ignore_index=<span class="kw">True</span>)</pre
 <span class="kw">LIMIT</span> <span class="num">5</span>;</pre>
 </div>
 
-<h3 class="sh3">3. Aggregations, GROUP BY &amp; The HAVING Scaffold</h3>
+<h3 class="sh3">4. Aggregations, GROUP BY &amp; The HAVING Scaffold</h3>
 <p>Suppose you want to find statistics about departments. We use <strong>Aggregations</strong> (like <code>SUM</code> or <code>AVG</code>) to collapse multiple values into one. But how do we group them?</p>
 <div class="callout ci">
 <strong>📐 The "Collapse" Concept of GROUP BY:</strong>
@@ -1540,7 +1659,7 @@ The database engine runs the <code>WHERE</code> clause <strong>before</strong> i
 <span class="kw">HAVING</span> <span class="bi">AVG</span>(salary) <span class="op">&gt;</span> <span class="num">60000</span>;</pre>
 </div>
 
-<h3 class="sh3">4. JOINs — Combining Tables from First Principles</h3>
+<h3 class="sh3">5. JOINs — Combining Tables from First Principles</h3>
 <p>When data is split across tables (e.g. <code>employees</code> and <code>departments</code>), we must join them. Let's understand how a join actually works step-by-step.</p>
 <h4 class="sh3" style="color:var(--orange)">Step 1: The Cartesian Product (CROSS JOIN)</h4>
 <p>If you join two tables without any matching keys, the engine matches <strong>every row</strong> of Table A with <strong>every row</strong> of Table B. If Table A has 100 rows and Table B has 10 rows, the result is 1,000 rows. This is a Cartesian Product.</p>
@@ -1575,7 +1694,7 @@ To build complete query intuition, memorize the physical order in which a databa
 <br/><code>FROM ➔ JOIN ➔ ON ➔ WHERE ➔ GROUP BY ➔ HAVING ➔ SELECT ➔ DISTINCT ➔ ORDER BY ➔ LIMIT</code>
 </div>
 <div class="hinglish">💡 Ek line mein: SELECT kya chahiye, FROM kahan se, WHERE kon sa row, GROUP BY kaise group karo, HAVING group filter, ORDER BY sort karo, LIMIT kitna lena. JOIN = do tables combine karo common key pe.</div>
-<h3 class="sh3">5. Complete JOIN Family — FULL OUTER, CROSS, SELF</h3>
+<h3 class="sh3">6. Complete JOIN Family — FULL OUTER, CROSS, SELF</h3>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — all_joins.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- RIGHT JOIN — all from right table (mirror of LEFT JOIN)</span>
@@ -1594,7 +1713,7 @@ To build complete query intuition, memorize the physical order in which a databa
 <span class="kw">FROM</span> employees e
 <span class="kw">LEFT JOIN</span> employees m <span class="kw">ON</span> e.manager_id <span class="op">=</span> m.id;</pre>
 </div>
-<h3 class="sh3">6. UNION vs UNION ALL + String &amp; Date Functions</h3>
+<h3 class="sh3">7. UNION vs UNION ALL + String &amp; Date Functions</h3>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — union_strings_dates.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- UNION — combine rows from 2 queries, removes duplicates</span>
@@ -1623,12 +1742,13 @@ To build complete query intuition, memorize the physical order in which a databa
        <span class="bi">SUM</span>(revenue) <span class="kw">AS</span> monthly_revenue
 <span class="kw">FROM</span> orders <span class="kw">GROUP BY</span> <span class="num">1</span>;</pre>
 </div>
-<h3 class="sh3">7. Database Normalization — 1NF, 2NF, 3NF</h3>
+<h3 class="sh3">8. Database Normalization — 1NF, 2NF, 3NF, BCNF</h3>
 <div class="callout cp">
 <strong>🧠 Why Normalization Matters:</strong> Normalization removes data redundancy and prevents update anomalies.<br/>
 <strong>1NF</strong> — Each cell has one atomic value. No repeating groups. (No comma-separated lists in a column!)<br/>
 <strong>2NF</strong> — 1NF + every non-key column depends on the <em>whole</em> primary key (not just part of it).<br/>
-<strong>3NF</strong> — 2NF + no transitive dependencies (non-key column must depend <em>only</em> on the primary key, not on another non-key column).<br/><br/>
+<strong>3NF</strong> — 2NF + no transitive dependencies (non-key column must depend <em>only</em> on the primary key, not on another non-key column).<br/>
+<strong>BCNF (Boyce-Codd Normal Form)</strong> — A stronger version of 3NF. For every functional dependency X ➔ Y, X must be a superkey. It resolves anomalies when a table has overlapping candidate keys.<br/><br/>
 <em>Example: Storing "city" and "state" in an orders table where city already determines state — that's a 3NF violation. Move city→state mapping to a separate lookup table.</em>
 </div>
 </div>
@@ -1912,6 +2032,19 @@ A recursive CTE contains three core parts connected via <code>UNION ALL</code>:
 </div>
 
 <h3 class="sh3">3. Window Functions — Aggregates Without Collapsing</h3>
+<div class="mermaid">
+graph LR
+    subgraph "GROUP BY (Collapses Rows)"
+        G_In["Name | Dept | Sal<br/>--------------<br/>A    | HR   | 100<br/>B    | HR   | 200"] --> G_Proc["Collapse by Dept"]
+        G_Proc --> G_Out["Dept | AvgSal<br/>------------<br/>HR   | 150"]
+    end
+    
+    subgraph "Window Function OVER() (Retains Row Identity)"
+        W_In["Name | Dept | Sal<br/>--------------<br/>A    | HR   | 100<br/>B    | HR   | 200"] --> W_Proc["Calculate window partition avg"]
+        W_Proc --> W_Out["Name | Dept | Sal | AvgSal<br/>--------------------------<br/>A    | HR   | 100 | 150<br/>B    | HR   | 200 | 150"]
+    end
+</div>
+<div class="diagram-cap">GROUP BY (collapsing rows into a single group result) vs. Window functions (retaining all rows and attaching the calculation to each record).</div>
 <table class="concept-table">
 <tr><th>Operation</th><th>GROUP BY</th><th>Window Function (<code>OVER</code>)</th></tr>
 <tr><td><strong>Row Count</strong></td><td>Collapses rows (100 rows become 5 summary rows)</td><td>Keeps all original rows intact (100 rows stay 100 rows)</td></tr>

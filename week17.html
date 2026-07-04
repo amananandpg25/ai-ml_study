@@ -10,13 +10,15 @@
 <link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
 <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 <script defer="" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="course.css">
 <style>
 :root {
   --accent-rgb: 79, 209, 165;
   --accent-sec-rgb: 56, 189, 248;
 }
 </style>
-<link rel="stylesheet" href="course.css">
+
+
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>if (typeof mermaid !== 'undefined') { mermaid.initialize({startOnLoad:false,theme:'dark',securityLevel:'loose'}); }</script>
 </head>
@@ -527,6 +529,7 @@ predict_bp = Blueprint(<span class="str">'predict'</span>, __name__)   <span cla
 <tr><td><code>/health/ready</code></td><td>GET</td><td>Readiness check (model loaded?)</td><td>200 or 503</td></tr>
 </table>
 <h3 class="sh3">2. Consistent JSON Response Envelope</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Standardizing API output structures ensures clients receive consistent success, error, and metadata envelopes across endpoints.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">PYTHON — RESPONSE ENVELOPE PATTERN</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre><span class="kw">from</span> flask <span class="kw">import</span> jsonify
@@ -566,6 +569,7 @@ predict_bp = Blueprint(<span class="str">'predict'</span>, __name__)   <span cla
     })</pre>
 </div>
 <h3 class="sh3">3. Logging Middleware &amp; Rate Limiting</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">FastAPI middleware intercepts requests to log latency and block abusive traffic before reaching business logic controllers.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">PYTHON — MIDDLEWARE + RATE LIMITING</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre><span class="kw">from</span> flask <span class="kw">import</span> Flask, request, g
@@ -692,6 +696,36 @@ limiter = Limiter(key_func=get_remote_address, default_limits=[<span class="str"
 <li>Rate-limit expensive ML endpoints (inference can be costly) — flask-limiter makes this trivial.</li>
 </ul>
 </div>
+
+<div id="quiz-section-119">
+<h2 class="sh2">🧪 Quiz — Day 119</h2>
+<div class="quiz-block">
+<div class="quiz-num">Q1 OF 2</div>
+<div class="quiz-q">Why should REST APIs use plural nouns (e.g., /predictions) rather than verbs in endpoints?</div>
+<div class="quiz-opts" id="q119-1-opts">
+<div class="quiz-opt" onclick="quiz(this,'wrong','q119-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Verbs cause network failures on client-side requests</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q119-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>REST is resources-centric; actions are represented by HTTP methods (GET, POST), not endpoint paths</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q119-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It is a routing requirement enforced by Gunicorn and nginx</div>
+</div>
+</div>
+</div>
+<div id="day-119-resources-section">
+<h2 class="sh2">📚 Day 119 Resources</h2>
+<div class="res-grid">
+<a class="res-card type-doc-card" href="https://restfulapi.net/" target="_blank">
+<div class="res-icon type-doc">📖</div>
+<div class="res-body">
+<div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:5px;">
+<div class="res-type">Tutorial</div>
+<span class="res-difficulty" style="font-family:var(--font-mono); font-size:8.5px; border:1px solid var(--green); color:var(--green); padding:1px 6px; border-radius:10px; font-weight:bold; flex-shrink:0;">Beginner</span>
+</div>
+<span class="res-title">REST API Design Best Practices</span>
+<div class="res-desc">Detailed guidelines on HTTP verbs, resource naming, and REST architecture constraints.</div>
+</div>
+</a>
+</div>
+</div>
+
 <button class="complete-btn" id="btn-day-119" onclick="completeDay(119,150)">✓ Mark Day 119 Complete — Earn 150 XP</button>
 </div>
 <!-- ═══════════ DAY 120 ═══════════ -->
@@ -738,6 +772,7 @@ limiter = Limiter(key_func=get_remote_address, default_limits=[<span class="str"
 <div id="theory-120">
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. Serializing &amp; Loading Models</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Production environments serialize weights using optimized formats (like Joblib or ONNX) to ensure secure, cross-platform compatibility.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">PYTHON — SAVE + LOAD SKLEARN MODEL</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre><span class="kw">import</span> joblib
@@ -822,6 +857,7 @@ metadata = <span class="bi">None</span>
 </div>
 <div class="callout cw"><strong>⚠️ Concurrency Warning:</strong> sklearn's <code>predict()</code> releases the GIL — Gunicorn sync workers are safe for sklearn. But PyTorch models are NOT thread-safe by default. For PyTorch in production, either: (1) use Gunicorn with <code>--worker-class gthread</code> and a lock, (2) use TorchServe, (3) deploy as an async service with a request queue.</div>
 <h3 class="sh3">2. Gunicorn Configuration</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Gunicorn manages multiple ASGI worker processes, increasing concurrency and preventing endpoint bottlenecks under high request loads.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">BASH — GUNICORN PRODUCTION COMMAND</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre><span class="cm"># Rule of thumb: workers = (2 × CPU_cores) + 1</span>
@@ -924,6 +960,36 @@ gunicorn \
 <li>PyTorch models need thread safety — use a lock or move to an async architecture for production.</li>
 </ul>
 </div>
+
+<div id="quiz-section-120">
+<h2 class="sh2">🧪 Quiz — Day 120</h2>
+<div class="quiz-block">
+<div class="quiz-num">Q1 OF 2</div>
+<div class="quiz-q">Why should ML models be loaded at server startup rather than inside the request route?</div>
+<div class="quiz-opts" id="q120-1-opts">
+<div class="quiz-opt" onclick="quiz(this,'correct','q120-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Loading inside the route will cause huge latency spikes on every prediction request</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q120-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>FastAPI/Flask will crash if a model file is read inside a route function</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q120-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Production networks block external disk operations inside endpoints</div>
+</div>
+</div>
+</div>
+<div id="day-120-resources-section">
+<h2 class="sh2">📚 Day 120 Resources</h2>
+<div class="res-grid">
+<a class="res-card type-blog-card" href="https://fastapi.tiangolo.com/advanced/events/" target="_blank">
+<div class="res-icon type-blog">✍</div>
+<div class="res-body">
+<div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:5px;">
+<div class="res-type">Official docs</div>
+<span class="res-difficulty" style="font-family:var(--font-mono); font-size:8.5px; border:1px solid var(--orange); color:var(--orange); padding:1px 6px; border-radius:10px; font-weight:bold; flex-shrink:0;">Intermediate</span>
+</div>
+<span class="res-title">FastAPI Lifespan Events</span>
+<div class="res-desc">Learn how to load models and setup db pools once during server startup and tear them down gracefully.</div>
+</div>
+</a>
+</div>
+</div>
+
 <button class="complete-btn" id="btn-day-120" onclick="completeDay(120,200)">✓ Mark Day 120 Complete — Earn 200 XP</button></div>
 <!-- ═══════════ DAY 121 ═══════════ -->
 <div class="day-section" id="day-121">
@@ -966,7 +1032,13 @@ gunicorn \
 <tr><td><strong>Layer</strong></td><td>Git commit</td><td>Each Dockerfile instruction creates an immutable layer. Layers are cached and reused.</td></tr>
 </table>
 <div class="analogy">Docker image is like a Python class — khud kuch nahi karta. Container is like us class ka object (instance) — actual kaam karta hai. Registry (Docker Hub) is like PyPI — images store karo aur share karo. Ek hi image se hazaro containers bana sakte ho simultaneously.</div>
+<div class="intuition-box">
+<strong>💡 Intuition: Why Docker Layer Caching Matters</strong>
+Docker builds images as stacked layers — each <code>RUN</code>, <code>COPY</code>, or <code>ADD</code> command creates a new layer. Docker caches each layer and only rebuilds from the first changed layer downward. This means: put things that change rarely (like <code>pip install requirements.txt</code>) BEFORE things that change often (like <code>COPY . .</code>). A well-ordered Dockerfile rebuilds in seconds; a poorly-ordered one rebuilds everything from scratch every time.
+</div>
+
 <h3 class="sh3">2. Essential Docker CLI</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Docker CLI commands manage image construction, container initialization, network routing, and volume bindings across hosts.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">BASH — DOCKER CORE COMMANDS</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre><span class="cm"># --- Images ---</span>
@@ -1005,6 +1077,7 @@ docker push youruser/my-image:v1.0.0   <span class="cm"># requires: docker login
 docker pull youruser/my-image:v1.0.0</pre>
 </div>
 <h3 class="sh3">3. Volumes &amp; Networking</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Docker volumes persist application state across container restarts, while custom networks enable secure communication between isolated containers.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">BASH — VOLUMES &amp; PORT MAPPING</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre><span class="cm"># Named volume (Docker manages the path) — survives container deletion</span>
@@ -1124,6 +1197,36 @@ docker run --network ml-network --name redis redis:alpine
 <li><code>docker stop</code> sends SIGTERM (graceful). <code>docker kill</code> sends SIGKILL (immediate). Always prefer stop for ML workloads.</li>
 </ul>
 </div>
+
+<div id="quiz-section-121">
+<h2 class="sh2">🧪 Quiz — Day 121</h2>
+<div class="quiz-block">
+<div class="quiz-num">Q1 OF 2</div>
+<div class="quiz-q">What is the primary difference between a Docker Image and a Docker Container?</div>
+<div class="quiz-opts" id="q121-1-opts">
+<div class="quiz-opt" onclick="quiz(this,'wrong','q121-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Images run on GPUs; Containers run on CPUs</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q121-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>An image is a static read-only blueprint template; a container is a running, writable instance of that image</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q121-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Containers are stored on Docker Hub; images only exist locally</div>
+</div>
+</div>
+</div>
+<div id="day-121-resources-section">
+<h2 class="sh2">📚 Day 121 Resources</h2>
+<div class="res-grid">
+<a class="res-card type-doc-card" href="https://docs.docker.com/get-started/" target="_blank">
+<div class="res-icon type-doc">📖</div>
+<div class="res-body">
+<div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:5px;">
+<div class="res-type">Official Tutorial</div>
+<span class="res-difficulty" style="font-family:var(--font-mono); font-size:8.5px; border:1px solid var(--green); color:var(--green); padding:1px 6px; border-radius:10px; font-weight:bold; flex-shrink:0;">Beginner</span>
+</div>
+<span class="res-title">Docker Get Started Overview</span>
+<div class="res-desc">Official walk-through on containerizing apps, managing repositories, and basic registry concepts.</div>
+</div>
+</a>
+</div>
+</div>
+
 <button class="complete-btn" id="btn-day-121" onclick="completeDay(121,150)">✓ Mark Day 121 Complete — Earn 150 XP</button></div>
 <!-- ═══════════ DAY 122 ═══════════ -->
 <div class="day-section" id="day-122">
@@ -1200,6 +1303,7 @@ EXPOSE 5000
 CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:5000", "--timeout", "120", "app:create_app()"]</pre>
 </div>
 <h3 class="sh3">2. Multi-Stage Builds for ML Images</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Multi-stage configurations build CUDA/C++ libraries in dedicated stages, copying only the final build binaries to keep runtime images compact.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">DOCKERFILE — MULTI-STAGE (small prod image)</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre><span class="cm"># Stage 1: Builder — install deps + compile anything needed</span>
@@ -1234,6 +1338,7 @@ CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:create_app()"]
 <span class="cm"># Result: ~200MB instead of ~800MB for the same app</span></pre>
 </div>
 <h3 class="sh3">3. .dockerignore</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">The <code>.dockerignore</code> file prevents massive dataset files, git histories, and local virtual environments from bloat-copying to the Docker build context.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">.dockerignore — EXCLUDE FROM BUILD CONTEXT</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre>__pycache__
@@ -1357,6 +1462,36 @@ mlruns/</pre>
 <li>Never bake secrets into images — use runtime environment variables or Docker secrets.</li>
 </ul>
 </div>
+
+<div id="quiz-section-122">
+<h2 class="sh2">🧪 Quiz — Day 122</h2>
+<div class="quiz-block">
+<div class="quiz-num">Q1 OF 2</div>
+<div class="quiz-q">How does Docker layer caching optimize container builds?</div>
+<div class="quiz-opts" id="q122-1-opts">
+<div class="quiz-opt" onclick="quiz(this,'correct','q122-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>It skips execution of layers that have no code changes since the last build</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q122-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It compresses libraries to reduce network usage</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q122-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It runs multi-stage builds in parallel across multiple machines</div>
+</div>
+</div>
+</div>
+<div id="day-122-resources-section">
+<h2 class="sh2">📚 Day 122 Resources</h2>
+<div class="res-grid">
+<a class="res-card type-doc-card" href="https://docs.docker.com/build/cache/" target="_blank">
+<div class="res-icon type-doc">📖</div>
+<div class="res-body">
+<div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:5px;">
+<div class="res-type">Official Docs</div>
+<span class="res-difficulty" style="font-family:var(--font-mono); font-size:8.5px; border:1px solid var(--orange); color:var(--orange); padding:1px 6px; border-radius:10px; font-weight:bold; flex-shrink:0;">Intermediate</span>
+</div>
+<span class="res-title">Docker Build Cache Guide</span>
+<div class="res-desc">In-depth reference explaining how cache invalidation occurs and how to optimize COPY statements.</div>
+</div>
+</a>
+</div>
+</div>
+
 <button class="complete-btn" id="btn-day-122" onclick="completeDay(122,200)">✓ Mark Day 122 Complete — Earn 200 XP</button></div>
 <!-- ═══════════ DAY 123 ═══════════ -->
 <div class="day-section" id="day-123">
@@ -1392,6 +1527,7 @@ mlruns/</pre>
 <div id="theory-123">
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. docker-compose.yml Structure</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">The Compose file structures container dependencies, network bridging, volume linkages, and environment configurations in declarative YAML.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">YAML — ML STACK: FLASK + REDIS + NGINX</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre>version: "3.9"
@@ -1465,6 +1601,7 @@ networks:
     driver: bridge</pre>
 </div>
 <h3 class="sh3">2. Prediction Caching with Redis</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Caching prediction responses in Redis avoids redundant inference loops on identical inputs, reducing latencies from 200ms to under 5ms.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">PYTHON — REDIS CACHE IN FLASK</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre><span class="kw">import</span> redis, json, hashlib, os
@@ -1601,6 +1738,36 @@ redis_client = redis.from_url(
 <li>Redis caching for identical ML predictions can reduce compute cost by 90%+ for repetitive inputs.</li>
 </ul>
 </div>
+
+<div id="quiz-section-123">
+<h2 class="sh2">🧪 Quiz — Day 123</h2>
+<div class="quiz-block">
+<div class="quiz-num">Q1 OF 2</div>
+<div class="quiz-q">What does `depends_on` do in a docker-compose.yml configuration?</div>
+<div class="quiz-opts" id="q123-1-opts">
+<div class="quiz-opt" onclick="quiz(this,'wrong','q123-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>It bridges virtual network adapters between remote hosts</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q123-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It defines dependency boot order, starting specified containers before launching the current container</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q123-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It mounts local host paths inside database containers</div>
+</div>
+</div>
+</div>
+<div id="day-123-resources-section">
+<h2 class="sh2">📚 Day 123 Resources</h2>
+<div class="res-grid">
+<a class="res-card type-doc-card" href="https://docs.docker.com/compose/" target="_blank">
+<div class="res-icon type-doc">📖</div>
+<div class="res-body">
+<div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:5px;">
+<div class="res-type">Official Docs</div>
+<span class="res-difficulty" style="font-family:var(--font-mono); font-size:8.5px; border:1px solid var(--green); color:var(--green); padding:1px 6px; border-radius:10px; font-weight:bold; flex-shrink:0;">Beginner</span>
+</div>
+<span class="res-title">Docker Compose Overview</span>
+<div class="res-desc">General guide explaining multi-container applications and command line setups for compose.</div>
+</div>
+</a>
+</div>
+</div>
+
 <button class="complete-btn" id="btn-day-123" onclick="completeDay(123,200)">✓ Mark Day 123 Complete — Earn 200 XP</button></div>
 <!-- ═══════════ DAY 124 ═══════════ -->
 <div class="day-section" id="day-124">
@@ -1668,6 +1835,7 @@ graph LR
 <tr><td>Docker Hub</td><td>Image pushed, README with pull command</td><td>docker pull youruser/image:v1</td></tr>
 </table>
 <h3 class="sh3">Quick Deployment Reference</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">This reference table summarizes the essential bash commands needed for fast container building, stack starting, and log monitoring in staging.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">BASH — FULL DEPLOY COMMANDS</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre><span class="cm"># 1. Build and tag</span>
@@ -1967,447 +2135,9 @@ DB_URL = "postgresql://user:pass@db:5432/dbname"</code></pre>
 </main>
 </div>
 <script>
-// ═══════════════════════════════════════════
-//  WEEK 17 — STATE & GAMIFICATION ENGINE
-// ═══════════════════════════════════════════
-const WEEK = 17;
-const DAYS = [118,119,120,121,122,123,124];
-
-
-
-
-
-let state = JSON.parse(localStorage.getItem(`w${WEEK}-state`) || '{}');
-state.xp     = state.xp     || 0;
-state.streak = state.streak || 0;
-state.done   = state.done   || [];
-state.lastDate= state.lastDate || '';
-
-function saveState() { localStorage.setItem(`w${WEEK}-state`, JSON.stringify(state)); }
-
-const LEVELS = [
-  { min:0,    label:'🌱 Beginner' },
-  { min:500,  label:'🔍 Explorer' },
-  { min:1500, label:'⚙️ Practitioner' },
-  { min:3000, label:'🤖 Engineer' },
-  { min:6000, label:'🧠 Expert' },
-  { min:10000,label:'🚀 Master' }
-];
-function getLevel(xp) {
-  for (let i = LEVELS.length - 1; i >= 0; i--) {
-    if (xp >= LEVELS[i].min) return LEVELS[i].label;
-  }
-  return LEVELS[0].label;
-}
-
-function syncUI() {
-  document.getElementById('xp-show').textContent   = `⚡ ${state.xp} XP`;
-  document.getElementById('streak-show').textContent = `🔥 ${state.streak} day streak`;
-  document.getElementById('sb-xp').textContent     = `${state.xp} XP earned`;
-  document.getElementById('sb-streak').textContent  = `${state.streak} day streak`;
-  const lvlEl = document.getElementById('level-show');
-  if (lvlEl) lvlEl.textContent = getLevel(state.xp || 0);
-
-  const pct = Math.round((state.done.length / DAYS.length) * 100);
-  const progBar = document.getElementById('prog-bar');
-  if (progBar) {
-    progBar.style.width = pct + '%';
-    progBar.parentElement.setAttribute('aria-valuenow', pct);
-  }
-  const progText = document.getElementById('prog-text');
-  if (progText) progText.textContent = `${state.done.length}/${DAYS.length} days`;
-
-  DAYS.forEach(d => {
-    const pill = document.getElementById('pill-' + d);
-    const sb   = document.getElementById('sb-' + d);
-    const btn  = document.getElementById('btn-day-' + d);
-    if (state.done.includes(d)) {
-      pill && pill.classList.add('done');
-      sb && sb.classList.add('done');
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-}
-
-function completeDay(day, xp) {
-  if (state.done.includes(day)) return;
-  state.done.push(day);
-  state.xp += xp;
-  const today = new Date().toDateString();
-  const yesterday = new Date(Date.now() - 86400000).toDateString();
-  if (state.lastDate !== today) {
-    if (state.lastDate === yesterday) { state.streak++; }
-    else { state.streak = 1; }
-    state.lastDate = today;
-  }
-  saveState();
-  syncUI();
-  showXPToast(xp, day);
-  const btn = document.getElementById('btn-day-' + day);
-  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + day + ' Complete'; }
-}
-
-function showXPToast(xp, day) {
-  const t = document.getElementById('xp-toast');
-  if (t) {
-    t.textContent = `+${xp} XP ⚡ — Day ${day} Complete!`;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
-}
-
-function goDay(n) {
-  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
-  document.querySelectorAll('.day-pill').forEach(p => { p.classList.remove('active'); p.setAttribute('aria-selected','false'); });
-  const section = document.getElementById('day-' + n);
-  if (section) { section.classList.add('active'); }
-  const sbItem = document.getElementById('sb-' + n);
-  if (sbItem) { sbItem.classList.add('active'); }
-  const pill = document.getElementById('pill-' + n);
-  if (pill) { pill.classList.add('active'); pill.setAttribute('aria-selected','true'); }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  renderMermaid('day-' + n);
-}
-
-function jumpTo(id) {
-  const day = document.querySelector('.day-section.active');
-  if (!day) return;
-  const dayNum = day.id.replace('day-', '');
-  const target = day.querySelector('#day-' + dayNum + '-' + id) || day.querySelector('#' + id);
-  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function toggleSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (!sb) return;
-  const open = sb.classList.toggle('open');
-  if (btn) btn.setAttribute('aria-expanded', String(open));
-}
-function closeSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (sb) sb.classList.remove('open');
-  if (btn) btn.setAttribute('aria-expanded', 'false');
-}
-
-function quiz(optEl, result, qid) {
-  const block = optEl.closest('.quiz-block');
-  if (!block) return;
-  block.querySelectorAll('.quiz-opt').forEach(o => {
-    o.style.pointerEvents = 'none';
-    if (o !== optEl) o.classList.add('dimmed');
-  });
-  optEl.classList.add(result === 'correct' ? 'correct' : 'wrong');
-  const letter = optEl.querySelector('.quiz-letter');
-  if (letter) letter.textContent = result === 'correct' ? '✓' : '✗';
-  const correctFb = block.querySelector('.correct-fb') || block.querySelector('#' + qid + '-correct');
-  const wrongFb   = block.querySelector('.wrong-fb') || block.querySelector('#' + qid + '-wrong');
-  if (result === 'correct') {
-    if (correctFb) {
-      correctFb.style.display = 'block';
-    }
-    state.xp += 10;
-    saveState();
-    syncUI();
-    showXPToast(10, 'quiz');
-  } else {
-    if (wrongFb) {
-      wrongFb.style.display = 'block';
-    }
-  }
-}
-
-function toggleTask(header) {
-  const body = header.nextElementSibling;
-  if (!body) return;
-  const isOpen = body.style.display === 'block';
-  body.style.display = isOpen ? 'none' : 'block';
-  header.setAttribute('aria-expanded', String(!isOpen));
-}
-
-// Add simple style fix for task header content if needed, but keeping toggleTask correct
-function toggleSolution(id) {
-  const box = document.getElementById(id);
-  if (!box) return;
-  const isOpen = box.style.display === 'block';
-  box.style.display = isOpen ? 'none' : 'block';
-}
-
-function copyCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (pre) {
-    navigator.clipboard.writeText(pre.innerText).then(() => {
-      btn.textContent = 'copied!';
-      setTimeout(() => btn.textContent = 'copy', 1500);
-    });
-  }
-}
-
-function runCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (!pre) return;
-  
-  // Copy code to clipboard
-  navigator.clipboard.writeText(pre.innerText);
-  
-  // Visual feedback on the button
-  btn.textContent = 'Copied!';
-  setTimeout(() => btn.textContent = 'Run', 2000);
-  
-  // Show compiler instructions modal
-  showCompilerModal();
-}
-
-function showCompilerModal() {
-  let modal = document.getElementById('compiler-modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'compiler-modal';
-    modal.style.cssText = `
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(13, 15, 20, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 10000;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    `;
-    
-    const card = document.createElement('div');
-    card.style.cssText = `
-      background: var(--bg2, #141720);
-      border: 1px solid var(--border, #252a40);
-      border-radius: 16px;
-      padding: 2.2rem;
-      max-width: 440px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.55);
-      text-align: center;
-      transform: scale(0.9);
-      transition: transform 0.25s ease;
-      color: var(--text, #dde2f0);
-      font-family: var(--font-body, system-ui, sans-serif);
-    `;
-    
-    card.innerHTML = `
-      <div style="font-size: 2.8rem; margin-bottom: 0.8rem;">🚀</div>
-      <h3 style="margin: 0 0 1rem 0; font-size: 1.35rem; color: var(--green, #4fd1a5); font-family: var(--font-head, sans-serif); font-weight: 800; letter-spacing: 0.5px;">Code Copied! Ready to Run</h3>
-      <p style="margin: 0 0 1.8rem 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted, #6b7590);">
-        The code is now copied to your clipboard.
-        <br><br>
-        1. Click below to open the online compiler in a new tab.
-        <br>
-        2. <strong>Paste (Ctrl+V or Cmd+V)</strong> the code into the editor.
-        <br>
-        3. Click the <strong>Run</strong> button in the compiler tab to execute.
-      </p>
-      <div style="display: flex; gap: 12px; justify-content: center;">
-        <button id="compiler-cancel" style="
-          background: transparent;
-          border: 1px solid var(--border, #252a40);
-          color: var(--text, #dde2f0);
-          padding: 10px 20px;
-          border-radius: 8px;
-          font-weight: 500;
-          cursor: pointer;
-          font-size: 0.9rem;
-          transition: background var(--transition, 0.2s);
-        ">Cancel</button>
-        <button id="compiler-go" style="
-          background: var(--green, #4fd1a5);
-          border: none;
-          color: var(--bg, #0d0f14);
-          padding: 10px 24px;
-          border-radius: 8px;
-          font-weight: 700;
-          cursor: pointer;
-          font-size: 0.9rem;
-          box-shadow: 0 4px 12px rgba(79, 209, 165, 0.2);
-          transition: transform var(--transition, 0.2s), opacity var(--transition, 0.2s);
-        ">Open Compiler</button>
-      </div>
-    `;
-    
-    modal.appendChild(card);
-    document.body.appendChild(modal);
-    
-    // Add hover styles
-    const style = document.createElement('style');
-    style.textContent = `
-      #compiler-cancel:hover { background: var(--bg3, #1c2030); }
-      #compiler-go:hover { transform: translateY(-1px); opacity: 0.95; }
-    `;
-    document.head.appendChild(style);
-
-    // Event listeners
-    document.getElementById('compiler-cancel').onclick = () => hide();
-    document.getElementById('compiler-go').onclick = () => {
-      window.open('https://www.programiz.com/python-programming/online-compiler/', '_blank');
-      hide();
-    };
-    
-    modal.onclick = (e) => {
-      if (e.target === modal) hide();
-    };
-  }
-
-  const modalElement = document.getElementById('compiler-modal');
-  function show() {
-    modalElement.style.display = 'flex';
-    modalElement.offsetHeight; // force reflow
-    modalElement.style.opacity = '1';
-    modalElement.querySelector('div').style.transform = 'scale(1)';
-  }
-
-  function hide() {
-    modalElement.style.opacity = '0';
-    modalElement.querySelector('div').style.transform = 'scale(0.9)';
-    setTimeout(() => {
-      modalElement.style.display = 'none';
-    }, 250);
-  }
-
-  show();
-}
-
-function checkPredict(id, answer) {
-  const input = document.getElementById(id + '-input');
-  const result = document.getElementById(id + '-result');
-  if (!input || !result) return;
-  
-  // Normalize whitespace, casing, quotes, brackets, and punctuation
-  const normalize = (str) => {
-    return String(str).replace(/\\n/g, ' ')
-              .replace(/\n/g, ' ')
-              .replace(/['"()\[\]]/g, '')
-              .replace(/[,;]/g, ' ')
-              .replace(/\s+/g, ' ')
-              .trim()
-              .toLowerCase();
-  };
-  
-  const userVal = normalize(input.value);
-  const correctVal = normalize(answer);
-  const isCorrect = userVal === correctVal || userVal.includes(correctVal);
-  
-  result.style.display = 'block';
-  if (isCorrect) {
-    result.style.background = 'rgba(79,209,165,.1)';
-    result.style.border = '1px solid rgba(79,209,165,.3)';
-    result.style.color = 'var(--green)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '✅ Correct! ' + answer.replace(/\n/g, ' ');
-    state.xp += 10; saveState(); syncUI();
-  } else {
-    result.style.background = 'rgba(229,107,140,.08)';
-    result.style.border = '1px solid rgba(229,107,140,.3)';
-    result.style.color = 'var(--pink)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '❌ Expected: ' + answer.replace(/\n/g, ' ') + ' — try again';
-  }
-}
-
-function openRepl() {
-  window.open('https://replit.com/languages/python3', '_blank');
-}
-
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') !== 'light';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  const btn = document.getElementById('theme-btn');
-  if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
-}
-(function() {
-  
-  document.querySelectorAll('.predict-input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const btn = input.nextElementSibling;
-        if (btn && btn.classList.contains('predict-btn')) {
-          btn.click();
-        }
-      }
-    });
-  });
-
-  const saved = localStorage.getItem('theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-})();
-
-function renderMermaid(dayId) {
-  const run = () => {
-    if (typeof mermaid === 'undefined') {
-      setTimeout(run, 100);
-      return;
-    }
-    if (!window.mermaidInitialized) {
-      mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
-      window.mermaidInitialized = true;
-    }
-    const sec = document.getElementById(dayId);
-    if (!sec) return;
-    const nodes = sec.querySelectorAll('.mermaid:not([data-rendered])');
-    if (!nodes.length) return;
-    if (mermaid.run) {
-      mermaid.run({ nodes }).then(() => {
-        nodes.forEach(n => n.setAttribute('data-rendered','1'));
-      }).catch((err) => { console.error('Mermaid render error:', err); });
-    } else if (mermaid.init) {
-      mermaid.init(undefined, nodes);
-      nodes.forEach(n => n.setAttribute('data-rendered','1'));
-    }
-  };
-  run();
-}
-
-function toggleCheck(lbl) {
-  let box = lbl.querySelector('.chk-box');
-  if (!box) return;
-  box.classList.toggle('checked');
-  lbl.classList.toggle('done-item');
-  if(box.classList.contains('checked')) box.innerText = '✓';
-  else box.innerText = '';
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  syncUI();
-  DAYS.forEach(d => {
-    if (state.done.includes(d)) {
-      const btn = document.getElementById('btn-day-' + d);
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-  
-  renderMermaid('day-' + DAYS[0]);
-  
-  
-  document.querySelectorAll('.predict-input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const btn = input.nextElementSibling;
-        if (btn && btn.classList.contains('predict-btn')) {
-          btn.click();
-        }
-      }
-    });
-  });
-
-  const saved = localStorage.getItem('theme');
-  const btn = document.getElementById('theme-btn');
-  if (btn && saved === 'light') btn.textContent = '🌙 Dark';
-});
+  const WEEK = 17;
+  const DAYS = [118,119,120,121,122,123,124];
 </script>
+<script src="course.js"></script>
 </body>
 </html>

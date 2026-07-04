@@ -7,13 +7,15 @@
 <title>Week 4 — Math for AI/ML | 135-Day AI/ML Roadmap</title>
 <meta content="Week 4 — Math for AI/ML — Complete coursework, tasks, quizzes, and resources for Week 4 of the 135-Day AI/ML Roadmap." name="description"/>
 <link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%230d0f14'/&gt;&lt;text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'&gt;AI&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link rel="stylesheet" href="course.css">
 <style>
 :root {
   --accent-rgb: 108, 140, 255;
   --accent-sec-rgb: 180, 124, 252;
 }
 </style>
-<link rel="stylesheet" href="course.css">
+
+
 <link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
 <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 <script defer="" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
@@ -177,6 +179,7 @@ mode = counts.most_common(<span class="num">1</span>)[<span class="num">0</span>
 <span class="cm"># KEY RULE: Use mean when data is symmetric. Use median when data is skewed or has outliers.</span></pre>
 </div>
 <h3 class="sh3">2. Variance and Standard Deviation — From Scratch</h3>
+<p style="margin:0.5rem 0 0.8rem;">Mean and median tell you where the middle of your data is. Variance (σ²) and Standard Deviation (σ) tell you how <strong>spread out</strong> the data is around that middle. Variance is calculated in squared units (to prevent negative distances from canceling out); taking the square root gives us the standard deviation, returning the metric to the original data's units.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — variance_std.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">import</span> numpy <span class="kw">as</span> np
@@ -208,6 +211,53 @@ std_sample = variance_sample ** <span class="num">0.5</span>
 <span class="cm"># ML Link: StandardScaler uses (x - mean) / std — now you know EXACTLY what it does!</span></pre>
 </div>
 <h3 class="sh3">3. Percentiles, Quartiles, IQR</h3>
+<p style="margin:0.5rem 0 0.8rem;">Percentiles divide your sorted data into 100 equal parts. Quartiles divide it into four quarters (Q1 = 25th percentile, Q2 = 50th/median, Q3 = 75th). The Interquartile Range (IQR = Q3 − Q1) captures the middle 50% of your data and is the foundation of robust outlier detection.</p>
+
+<!-- SVG: Box Plot and IQR Outliers -->
+<figure class="svg-diagram">
+  <svg viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg" width="600" height="160" role="img" aria-label="Box and whisker plot diagram showing Q1, median, Q3, IQR and outlier bounds">
+    <!-- horizontal whisker line -->
+    <line x1="100" y1="80" x2="500" y2="80" stroke="#6b7590" stroke-width="1.5"/>
+    
+    <!-- outlier point -->
+    <circle cx="540" cy="80" r="4" fill="#e56b8c" stroke="#dde2f0" stroke-width="1"/>
+    <text x="540" y="65" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#e56b8c">Outlier (&gt; Upper Fence)</text>
+    
+    <!-- Q1 to Q3 box -->
+    <rect x="200" y="40" width="200" height="80" rx="4" fill="rgba(108,140,255,0.08)" stroke="#6c8cff" stroke-width="2"/>
+    
+    <!-- Median line -->
+    <line x1="280" y1="40" x2="280" y2="120" stroke="#4fd1a5" stroke-width="2"/>
+    
+    <!-- Whisker caps -->
+    <line x1="100" y1="60" x2="100" y2="100" stroke="#6b7590" stroke-width="1.5"/>
+    <line x1="500" y1="60" x2="500" y2="100" stroke="#6b7590" stroke-width="1.5"/>
+    
+    <!-- Annotations -->
+    <!-- Minimum / Lower Fence cap -->
+    <text x="100" y="135" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#6b7590">Lower Fence</text>
+    <text x="100" y="147" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#6b7590">Q1 - 1.5×IQR</text>
+    
+    <!-- Q1 -->
+    <text x="200" y="32" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#6c8cff" font-weight="600">Q1 (25th %)</text>
+    
+    <!-- Median -->
+    <text x="280" y="135" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#4fd1a5" font-weight="600">Median (50th %)</text>
+    
+    <!-- Q3 -->
+    <text x="400" y="32" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#6c8cff" font-weight="600">Q3 (75th %)</text>
+    
+    <!-- Maximum / Upper Fence cap -->
+    <text x="500" y="135" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#6b7590">Upper Fence</text>
+    <text x="500" y="147" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#6b7590">Q3 + 1.5×IQR</text>
+    
+    <!-- IQR bracket -->
+    <path d="M200,45 L200,38 L400,38 L400,45" fill="none" stroke="#f7a94b" stroke-width="1.2"/>
+    <text x="300" y="30" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#f7a94b" font-weight="600">Interquartile Range (IQR = Q3 − Q1)</text>
+  </svg>
+  <figcaption>Standard box plot and IQR outlier detection rule. Data points falling beyond the lower/upper fences are flagged as anomalies.</figcaption>
+</figure>
+
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — percentiles_iqr.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">import</span> numpy <span class="kw">as</span> np
@@ -231,6 +281,7 @@ outliers = salaries[(salaries &lt; lower_fence) | (salaries &gt; upper_fence)]
 # So if your salary is at the 90th percentile, you earn MORE than 90% of people.</span></pre>
 </div>
 <h3 class="sh3">4. Skewness and Kurtosis</h3>
+<p style="margin:0.5rem 0 0.8rem;">Real-world data is rarely symmetric. <strong>Skewness</strong> measures the asymmetry of the distribution (positive/right-skewed means a long tail to the right, negative/left-skewed means a long tail to the left). <strong>Kurtosis</strong> measures tail-heaviness or "peakedness" — leptokurtic distributions have fat tails, meaning outliers are highly likely.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — skewness_kurtosis.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">import</span> numpy <span class="kw">as</span> np
@@ -254,13 +305,14 @@ left_skewed = -np.random.exponential(<span class="num">10</span>, <span class="n
 <span class="cm"># ML Rule: |skew| &gt; 1 → apply log transform before modelling</span></pre>
 </div>
 <div class="math-box">
-<strong>KEY FORMULAS — MEMORISE THESE</strong>
-    Mean: μ = Σxᵢ / n
-    Variance: σ² = Σ(xᵢ - μ)² / n  (population)  |  s² = Σ(xᵢ - x̄)² / (n-1)  (sample)
-    Std Dev: σ = √variance
-    Z-score: z = (x - μ) / σ  → "how many std devs from the mean?"
-    IQR: Q3 - Q1  →  Outlier bounds: [Q1 - 1.5×IQR,  Q3 + 1.5×IQR]
-  </div>
+  <strong>Key Formulas — Memorise These</strong>
+  <div class="mb-rule"><span class="mb-cond">Mean</span><span class="mb-arrow">μ =</span><span class="mb-desc">Σxᵢ / n</span></div>
+  <div class="mb-rule"><span class="mb-cond">Variance (Pop)</span><span class="mb-arrow">σ² =</span><span class="mb-desc">Σ(xᵢ - μ)² / n</span></div>
+  <div class="mb-rule"><span class="mb-cond">Variance (Sample)</span><span class="mb-arrow">s² =</span><span class="mb-desc">Σ(xᵢ - x̄)² / (n − 1)</span></div>
+  <div class="mb-rule"><span class="mb-cond">Std Dev</span><span class="mb-arrow">σ =</span><span class="mb-desc">√variance</span></div>
+  <div class="mb-rule"><span class="mb-cond">Z-score</span><span class="mb-arrow">z =</span><span class="mb-desc">(x − μ) / σ &nbsp;<span style="color:var(--muted); font-size:11.5px;">(standard deviations from the mean)</span></span></div>
+  <div class="mb-rule"><span class="mb-cond">IQR / Fences</span><span class="mb-arrow">IQR =</span><span class="mb-desc">Q3 − Q1 &nbsp;·&nbsp; Outlier bounds: [Q1 − 1.5×IQR, &nbsp;Q3 + 1.5×IQR]</span></div>
+</div>
 <div class="ml-connect">StandardScaler literally computes Z-score: (x − mean) / std. Understanding variance means you understand WHY features with high variance aren't automatically better predictors — high variance can also mean high noise. PCA selects directions of maximum variance (Week 4, Day 29). All of ML is built on these foundations.</div>
 <div class="misconception">
 <strong>⚠️ np.std() default is ddof=0 (population), but Pandas uses ddof=1 (sample)!</strong>
@@ -475,15 +527,14 @@ p_heart_given_red = (<span class="num">13</span>/<span class="num">52</span>) / 
 </div>
 <h3 class="sh3">2. Bayes' Theorem — The Core of Probabilistic ML</h3>
 <div class="math-box">
-<strong>BAYES' THEOREM</strong>
-    P(A | B) = [ P(B | A) × P(A) ] / P(B)
-
-    Where:
-    P(A)      = Prior probability (before seeing evidence B)
-    P(B | A)  = Likelihood (how likely is B given A is true)
-    P(B)      = Marginal probability (normalising constant)
-    P(A | B)  = Posterior probability (updated belief after seeing B)
-  </div>
+  <strong>Bayes' Theorem</strong>
+  <div class="mb-formula">P(A | B) = [ P(B | A) × P(A) ] / P(B)</div>
+  <div style="margin-top:0.7rem; margin-bottom:0.3rem; color:var(--muted); font-size:11px; letter-spacing:0.5px;">COMPONENTS</div>
+  <div class="mb-rule"><span class="mb-cond">P(A | B)</span><span class="mb-arrow">→</span><span class="mb-desc">Posterior probability (updated belief after seeing evidence B)</span></div>
+  <div class="mb-rule"><span class="mb-cond">P(B | A)</span><span class="mb-arrow">→</span><span class="mb-desc">Likelihood (how likely is evidence B given A is true)</span></div>
+  <div class="mb-rule"><span class="mb-cond">P(A)</span><span class="mb-arrow">→</span><span class="mb-desc">Prior probability (our initial belief before seeing evidence B)</span></div>
+  <div class="mb-rule"><span class="mb-cond">P(B)</span><span class="mb-arrow">→</span><span class="mb-desc">Marginal probability (total probability of evidence B, normalizing constant)</span></div>
+</div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — bayes_theorem.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># CLASSIC PROBLEM: Medical Test
@@ -990,6 +1041,61 @@ result = stats.norm.cdf(<span class="num">80</span>, <span class="num">70</span>
   </div>
 <h3 class="sh3">1. Hypothesis Testing Framework</h3>
 <div class="analogy">Court mein judge kehta hai: "innocent until proven guilty." Hypothesis testing mein: null hypothesis (H₀) kehta hai "koi effect nahi" — aur tum court mein lawyer ki tarah try karte ho isko disprove karne ki. Agar evidence bahut strong hai (p-value &lt; 0.05), tab H₀ reject karo.</div>
+
+<p style="margin:0.8rem 0 0.4rem;">Before coding, let's build the intuition. A hypothesis test follows a rigid logical pipeline — you always start with <em>no effect</em>, collect evidence, compute a test statistic, look up its probability under the null, and only then decide:</p>
+
+<!-- SVG: Hypothesis Testing Flow -->
+<figure class="svg-diagram">
+  <svg viewBox="0 0 720 160" xmlns="http://www.w3.org/2000/svg" width="720" height="160" role="img" aria-label="Hypothesis testing pipeline">
+    <defs>
+      <marker id="arrowHT" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L8,3 z" fill="#6b7590"/>
+      </marker>
+    </defs>
+    <!-- Step boxes -->
+    <!-- 1: Define H0 -->
+    <rect x="10" y="55" width="110" height="50" rx="8" fill="#1c2030" stroke="#252a40" stroke-width="1.2"/>
+    <text x="65" y="77" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#4fd1a5" font-weight="700">STEP 1</text>
+    <text x="65" y="92" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#dde2f0">Define H₀ &amp; H₁</text>
+    <text x="65" y="104" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6b7590">e.g. H₀: μ_A = μ_B</text>
+    <!-- arrow -->
+    <line x1="120" y1="80" x2="148" y2="80" stroke="#6b7590" stroke-width="1.3" marker-end="url(#arrowHT)"/>
+    <!-- 2: Collect Data -->
+    <rect x="150" y="55" width="110" height="50" rx="8" fill="#1c2030" stroke="#252a40" stroke-width="1.2"/>
+    <text x="205" y="77" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6c8cff" font-weight="700">STEP 2</text>
+    <text x="205" y="92" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#dde2f0">Collect Data</text>
+    <text x="205" y="104" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6b7590">n ≥ 30 preferred</text>
+    <!-- arrow -->
+    <line x1="260" y1="80" x2="288" y2="80" stroke="#6b7590" stroke-width="1.3" marker-end="url(#arrowHT)"/>
+    <!-- 3: Test Statistic -->
+    <rect x="290" y="55" width="120" height="50" rx="8" fill="#1c2030" stroke="#252a40" stroke-width="1.2"/>
+    <text x="350" y="77" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#f7a94b" font-weight="700">STEP 3</text>
+    <text x="350" y="92" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#dde2f0">Compute t-stat / χ²</text>
+    <text x="350" y="104" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6b7590">signal / noise ratio</text>
+    <!-- arrow -->
+    <line x1="410" y1="80" x2="438" y2="80" stroke="#6b7590" stroke-width="1.3" marker-end="url(#arrowHT)"/>
+    <!-- 4: p-value -->
+    <rect x="440" y="55" width="110" height="50" rx="8" fill="#1c2030" stroke="#252a40" stroke-width="1.2"/>
+    <text x="495" y="77" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#b47cfc" font-weight="700">STEP 4</text>
+    <text x="495" y="92" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#dde2f0">Get p-value</text>
+    <text x="495" y="104" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="#6b7590">P(data | H₀ true)</text>
+    <!-- arrow -->
+    <line x1="550" y1="80" x2="578" y2="80" stroke="#6b7590" stroke-width="1.3" marker-end="url(#arrowHT)"/>
+    <!-- 5: Decision -->
+    <rect x="580" y="55" width="130" height="50" rx="8" fill="#1c2030" stroke="#252a40" stroke-width="1.2"/>
+    <text x="645" y="77" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#e56b8c" font-weight="700">STEP 5</text>
+    <text x="645" y="89" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#4fd1a5">p &lt; α → Reject H₀ ✓</text>
+    <text x="645" y="101" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#e56b8c">p ≥ α → Fail to reject</text>
+    <!-- Labels below -->
+    <text x="65" y="140" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#4a5568">Null hypothesis</text>
+    <text x="205" y="140" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#4a5568">Sample / experiment</text>
+    <text x="350" y="140" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#4a5568">scipy.stats.*</text>
+    <text x="495" y="140" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#4a5568">Conditional prob</text>
+    <text x="645" y="140" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#4a5568">α = 0.05 typically</text>
+  </svg>
+  <figcaption>The 5-step hypothesis testing pipeline — from defining H₀ to making the decision. Every statistical test follows this exact flow.</figcaption>
+</figure>
+
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — hypothesis_testing.py</span><div class="cb-btns"><button class="run-btn" onclick="openRepl()">▶ try online</button><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre><span class="kw">import</span> numpy <span class="kw">as</span> np
@@ -1025,6 +1131,7 @@ t_stat, p_val = stats.ttest_1samp(accuracies, popmean=<span class="num">0.5</spa
 <span class="bi">print</span>(<span class="str">f"\nModel vs random guessing: p={p_val:.6f}"</span>)  <span class="cm"># very small → yes, it works!</span></pre>
 </div>
 <h3 class="sh3">2. Chi-Square Test — For Categorical Variables</h3>
+<p style="margin:0.5rem 0 0.8rem;">The chi-square test answers: <em>"Are two categorical variables independent, or do they influence each other?"</em> It compares <strong>observed counts</strong> in a contingency table to what you'd <strong>expect if they were independent</strong>. Large discrepancy → small p-value → reject independence.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — chi_square.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">import</span> numpy <span class="kw">as</span> np
@@ -1054,6 +1161,78 @@ chi2, p_value, dof, expected = stats.chi2_contingency(contingency_table)
 # sklearn.feature_selection.chi2 does exactly this!</span></pre>
 </div>
 <h3 class="sh3">3. Pearson Correlation Coefficient</h3>
+<p style="margin:0.5rem 0 0.8rem;">Pearson r measures the <em>strength and direction</em> of the <strong>linear relationship</strong> between two continuous variables. It's always between −1 and +1. A common intuition failure: r = 0 does NOT mean no relationship — it only means no <em>linear</em> relationship.</p>
+
+<!-- SVG: Correlation Spectrum -->
+<figure class="svg-diagram">
+  <svg viewBox="0 0 680 140" xmlns="http://www.w3.org/2000/svg" width="680" height="140" role="img" aria-label="Pearson correlation spectrum">
+    <!-- backgrounds for 5 panels -->
+    <!-- r = -1 -->
+    <rect x="10" y="10" width="118" height="100" rx="8" fill="#1c2030" stroke="#252a40" stroke-width="1"/>
+    <text x="69" y="28" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="13" fill="#e56b8c" font-weight="700">r = −1</text>
+    <!-- dots: perfect negative line -->
+    <circle cx="25" cy="95" r="2.5" fill="#e56b8c" opacity="0.8"/>
+    <circle cx="40" cy="85" r="2.5" fill="#e56b8c" opacity="0.8"/>
+    <circle cx="55" cy="75" r="2.5" fill="#e56b8c" opacity="0.8"/>
+    <circle cx="70" cy="65" r="2.5" fill="#e56b8c" opacity="0.8"/>
+    <circle cx="85" cy="55" r="2.5" fill="#e56b8c" opacity="0.8"/>
+    <circle cx="100" cy="45" r="2.5" fill="#e56b8c" opacity="0.8"/>
+    <circle cx="115" cy="35" r="2.5" fill="#e56b8c" opacity="0.8"/>
+    <line x1="22" y1="97" x2="117" y2="33" stroke="#e56b8c" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+    <text x="69" y="118" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6b7590">Perfect negative</text>
+    <!-- r ≈ -0.7 -->
+    <rect x="138" y="10" width="118" height="100" rx="8" fill="#1c2030" stroke="#252a40" stroke-width="1"/>
+    <text x="197" y="28" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="13" fill="#f7a94b" font-weight="700">r ≈ −0.7</text>
+    <circle cx="150" cy="90" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="162" cy="78" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="170" cy="85" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="182" cy="72" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="195" cy="65" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="205" cy="60" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="218" cy="50" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="230" cy="45" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="245" cy="38" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <text x="197" y="118" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6b7590">Strong negative</text>
+    <!-- r ≈ 0 -->
+    <rect x="266" y="10" width="118" height="100" rx="8" fill="#1c2030" stroke="#252a40" stroke-width="1"/>
+    <text x="325" y="28" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="13" fill="#6b7590" font-weight="700">r ≈ 0</text>
+    <circle cx="278" cy="75" r="2.5" fill="#6b7590" opacity="0.75"/>
+    <circle cx="290" cy="45" r="2.5" fill="#6b7590" opacity="0.75"/>
+    <circle cx="302" cy="90" r="2.5" fill="#6b7590" opacity="0.75"/>
+    <circle cx="315" cy="55" r="2.5" fill="#6b7590" opacity="0.75"/>
+    <circle cx="328" cy="80" r="2.5" fill="#6b7590" opacity="0.75"/>
+    <circle cx="340" cy="42" r="2.5" fill="#6b7590" opacity="0.75"/>
+    <circle cx="353" cy="68" r="2.5" fill="#6b7590" opacity="0.75"/>
+    <circle cx="365" cy="92" r="2.5" fill="#6b7590" opacity="0.75"/>
+    <circle cx="375" cy="50" r="2.5" fill="#6b7590" opacity="0.75"/>
+    <text x="325" y="118" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6b7590">No linear relationship</text>
+    <!-- r ≈ +0.7 -->
+    <rect x="394" y="10" width="118" height="100" rx="8" fill="#1c2030" stroke="#252a40" stroke-width="1"/>
+    <text x="453" y="28" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="13" fill="#f7a94b" font-weight="700">r ≈ +0.7</text>
+    <circle cx="406" cy="90" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="418" cy="85" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="430" cy="72" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="443" cy="65" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="456" cy="60" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="466" cy="50" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="479" cy="45" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <circle cx="493" cy="36" r="2.5" fill="#f7a94b" opacity="0.75"/>
+    <text x="453" y="118" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6b7590">Strong positive</text>
+    <!-- r = +1 -->
+    <rect x="522" y="10" width="118" height="100" rx="8" fill="#1c2030" stroke="#252a40" stroke-width="1"/>
+    <text x="581" y="28" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="13" fill="#4fd1a5" font-weight="700">r = +1</text>
+    <circle cx="534" cy="95" r="2.5" fill="#4fd1a5" opacity="0.8"/>
+    <circle cx="548" cy="83" r="2.5" fill="#4fd1a5" opacity="0.8"/>
+    <circle cx="562" cy="71" r="2.5" fill="#4fd1a5" opacity="0.8"/>
+    <circle cx="576" cy="59" r="2.5" fill="#4fd1a5" opacity="0.8"/>
+    <circle cx="590" cy="47" r="2.5" fill="#4fd1a5" opacity="0.8"/>
+    <circle cx="604" cy="35" r="2.5" fill="#4fd1a5" opacity="0.8"/>
+    <line x1="532" y1="97" x2="607" y2="33" stroke="#4fd1a5" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+    <text x="581" y="118" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6b7590">Perfect positive</text>
+  </svg>
+  <figcaption>Pearson correlation spectrum — from r = −1 (perfect inverse) through r = 0 (no linear pattern) to r = +1 (perfect direct). Note: r = 0 can still have a strong <em>nonlinear</em> relationship.</figcaption>
+</figure>
+
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — correlation.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">import</span> numpy <span class="kw">as</span> np
@@ -1078,19 +1257,64 @@ r_uncorr, p2 = stats.pearsonr(x, y_uncorr)
 # "Ice cream sales correlate with drowning rates" — both caused by summer heat.
 # Always look for confounding variables.</span></pre>
 </div>
+<!-- SVG: p-value visual on normal distribution -->
+<figure class="svg-diagram">
+  <svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" width="640" height="190" role="img" aria-label="P-value visualization on a normal distribution">
+    <defs>
+      <linearGradient id="tailGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#e56b8c" stop-opacity="0.7"/>
+        <stop offset="100%" stop-color="#e56b8c" stop-opacity="0.1"/>
+      </linearGradient>
+      <linearGradient id="tailGradR" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#e56b8c" stop-opacity="0.1"/>
+        <stop offset="100%" stop-color="#e56b8c" stop-opacity="0.7"/>
+      </linearGradient>
+      <marker id="arrowPV" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L7,3 z" fill="#6c8cff"/>
+      </marker>
+    </defs>
+    <!-- Bell curve fill (middle, bulk of distribution) -->
+    <path d="M60,155 C90,155 110,40 160,22 C200,8 240,5 320,5 C400,5 440,8 480,22 C530,40 550,155 580,155 Z" fill="rgba(108,140,255,0.07)" stroke="none"/>
+    <!-- Bell curve stroke -->
+    <path d="M60,155 C90,155 110,40 160,22 C200,8 240,5 320,5 C400,5 440,8 480,22 C530,40 550,155 580,155 Z" fill="none" stroke="#6c8cff" stroke-width="2"/>
+    <!-- Left tail shading (p/2 area) -->
+    <path d="M60,155 C90,155 110,40 140,26 L130,155 Z" fill="url(#tailGrad)"/>
+    <!-- Right tail shading (p/2 area) -->
+    <path d="M510,26 C540,40 560,155 580,155 L500,155 Z" fill="url(#tailGradR)"/>
+    <!-- Baseline -->
+    <line x1="50" y1="155" x2="590" y2="155" stroke="#252a40" stroke-width="1"/>
+    <!-- Observed statistic markers -->
+    <line x1="130" y1="30" x2="130" y2="155" stroke="#e56b8c" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="510" y1="30" x2="510" y2="155" stroke="#e56b8c" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <!-- Labels: tail areas = p-value -->
+    <text x="80" y="145" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#e56b8c">p/2</text>
+    <text x="548" y="145" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#e56b8c">p/2</text>
+    <!-- Center label -->
+    <text x="320" y="170" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6b7590">Null distribution (if H₀ is true)</text>
+    <!-- Observed value labels -->
+    <text x="130" y="22" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#e56b8c">−t_obs</text>
+    <text x="510" y="22" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#e56b8c">+t_obs</text>
+    <!-- Arrow from annotation to tail -->
+    <line x1="320" y1="50" x2="140" y2="85" stroke="#6c8cff" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrowPV)"/>
+    <text x="330" y="47" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6c8cff">p-value = shaded area</text>
+    <text x="330" y="60" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#6b7590">(probability of this extreme or more, given H₀)</text>
+    <!-- alpha thresholds annotation -->
+    <text x="320" y="178" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="#4fd1a5">If shaded area &lt; α (0.05) → Reject H₀</text>
+  </svg>
+  <figcaption>P-value = the shaded red tail area. If this area is less than your significance level α = 0.05, the observed result is too rare under H₀ — so you reject it. The p-value never tells you P(H₀ is true).</figcaption>
+</figure>
+
 <div class="math-box">
-<strong>P-VALUE INTERPRETATION — MOST MISUNDERSTOOD CONCEPT IN STATS</strong>
-    p-value = P(observing this data or more extreme | H₀ is TRUE)
-    p-value is NOT: "the probability that H₀ is true"
-    p-value is NOT: "the probability your result is due to chance"
-
-    Rules:
-    p &lt; 0.05  → Reject H₀ (statistically significant at 5% level)
-    p &lt; 0.01  → Reject H₀ (significant at 1% level — more stringent)
-    p ≥ 0.05  → Fail to reject H₀ (not enough evidence)
-
-    "Fail to reject" ≠ "Accept H₀". Absence of evidence ≠ evidence of absence.
-  </div>
+  <strong>P-Value Interpretation — Most Misunderstood Concept in Stats</strong>
+  <div class="mb-formula">p-value = P(observing this data or more extreme | H₀ is TRUE)</div>
+  <div class="mb-not">✗ p-value is NOT: "the probability that H₀ is true"</div>
+  <div class="mb-not">✗ p-value is NOT: "the probability your result is due to chance"</div>
+  <div style="margin-top:0.7rem; margin-bottom:0.3rem; color:var(--muted); font-size:11px; letter-spacing:0.5px;">DECISION RULES</div>
+  <div class="mb-rule"><span class="mb-cond">p &lt; 0.05</span><span class="mb-arrow">→</span><span class="mb-desc">Reject H₀ — statistically significant at 5% level</span></div>
+  <div class="mb-rule"><span class="mb-cond">p &lt; 0.01</span><span class="mb-arrow">→</span><span class="mb-desc">Reject H₀ — significant at 1% level (more stringent)</span></div>
+  <div class="mb-rule"><span class="mb-cond">p ≥ 0.05</span><span class="mb-arrow">→</span><span class="mb-desc">Fail to reject H₀ — not enough evidence</span></div>
+  <div class="mb-note">"Fail to reject" ≠ "Accept H₀" &nbsp;·&nbsp; Absence of evidence ≠ evidence of absence</div>
+</div>
 <div class="misconception">
 <strong>⚠️ Correlation ≠ Causation — Always:</strong>
     A Pearson r = 0.95 means a strong linear relationship, but NOT that X causes Y. Classic examples: Nicholas Cage films released per year correlates with drowning deaths (r≈0.67). Per capita cheese consumption correlates with deaths by bedsheet tangling (r≈0.95). Always look for confounders. In ML, correlation helps feature selection but doesn't prove causation.
@@ -1276,33 +1500,66 @@ t, p = stats.ttest_ind(a, b)
   </div>
 <h3 class="sh3">1. Vectors — The Building Blocks</h3>
 <div class="analogy">Vector = direction + magnitude. Jaise GPS coordinates: "500m East, 300m North" — yeh ek 2D vector hai. ML mein, ek data point (age=25, salary=50000, experience=3) ek vector hai 3D space mein. Distance between two such vectors = similarity between two people's profiles. Yahi recommendation systems use karte hain.</div>
+<!-- SVG: Vector Projection & Dot Product -->
+<figure class="svg-diagram">
+  <svg viewBox="0 0 540 180" xmlns="http://www.w3.org/2000/svg" width="540" height="180" role="img" aria-label="Geometric vector projection and dot product interpretations">
+    <defs>
+      <!-- Arrow markers -->
+      <marker id="arrowB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L8,3 z" fill="#f7a94b"/>
+      </marker>
+      <marker id="arrowA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L8,3 z" fill="#6c8cff"/>
+      </marker>
+      <marker id="arrowP" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L8,3 z" fill="#4fd1a5"/>
+      </marker>
+    </defs>
+    
+    <!-- Coordinate axes lines -->
+    <line x1="40" y1="140" x2="500" y2="140" stroke="#252a40" stroke-width="1"/>
+    <line x1="40" y1="20" x2="40" y2="140" stroke="#252a40" stroke-width="1"/>
+    
+    <!-- Origin marker -->
+    <circle cx="40" cy="140" r="3" fill="#6b7590"/>
+    <text x="30" y="152" font-family="IBM Plex Mono,monospace" font-size="9" fill="#6b7590">0</text>
+    
+    <!-- Vector a (along x-axis mostly) -->
+    <line x1="40" y1="140" x2="380" y2="140" stroke="#6c8cff" stroke-width="2.5" marker-end="url(#arrowA)"/>
+    <text x="390" y="144" font-family="IBM Plex Mono,monospace" font-size="12" fill="#6c8cff" font-weight="600">a</text>
+    
+    <!-- Vector b (slanted) -->
+    <line x1="40" y1="140" x2="240" y2="40" stroke="#f7a94b" stroke-width="2.5" marker-end="url(#arrowB)"/>
+    <text x="245" y="35" font-family="IBM Plex Mono,monospace" font-size="12" fill="#f7a94b" font-weight="600">b</text>
+    
+    <!-- Orthogonal projection dashed line -->
+    <line x1="240" y1="40" x2="240" y2="140" stroke="#6b7590" stroke-width="1.3" stroke-dasharray="4,4"/>
+    
+    <!-- Projection vector p (along a) -->
+    <line x1="40" y1="140" x2="236" y2="140" stroke="#4fd1a5" stroke-width="2.5" marker-end="url(#arrowP)"/>
+    <text x="140" y="155" font-family="IBM Plex Mono,monospace" font-size="11" fill="#4fd1a5" font-weight="600">p = Proj_a(b)</text>
+    
+    <!-- Angle theta indicator arc -->
+    <path d="M 80 140 A 40 40 0 0 0 68 112" fill="none" stroke="#b47cfc" stroke-width="1.5"/>
+    <text x="82" y="125" font-family="DM Sans,sans-serif" font-size="11" fill="#b47cfc">θ</text>
+    
+    <!-- Formulas on the side -->
+    <rect x="290" y="20" width="220" height="95" rx="6" fill="#141720" stroke="#252a40" stroke-width="1"/>
+    <text x="305" y="38" font-family="DM Sans,sans-serif" font-size="10.5" fill="#dde2f0" font-weight="600">Vector Projection &amp; Dot Product</text>
+    <text x="305" y="58" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#38bdf8">a · b = |a| × |b| × cos(θ)</text>
+    <text x="305" y="74" font-family="IBM Plex Mono,monospace" font-size="9.5" fill="#4fd1a5">p = (|b| × cos(θ)) × (a / |a|)</text>
+    <text x="305" y="90" font-family="DM Sans,sans-serif" font-size="9" fill="#6b7590">a · b &gt; 0: same directions (θ &lt; 90°)</text>
+    <text x="305" y="103" font-family="DM Sans,sans-serif" font-size="9" fill="#6b7590">a · b = 0: perpendicular (θ = 90°)</text>
+  </svg>
+  <figcaption>Orthogonal projection of vector b onto vector a. The dot product captures the directional alignment and magnitude scaling between the two vectors.</figcaption>
+</figure>
+
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — vectors.py</span><div class="cb-btns"><button class="run-btn" onclick="openRepl()">▶ try online</button><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre><span class="kw">import</span> numpy <span class="kw">as</span> np
 
 a = np.array([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])
 b = np.array([<span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>])
-
-  <div class="diagram">
-    <pre>
-    Vector Projection &amp; Dot Product
-    =================================
-             b 
-            /  ^
-           /   |
-          /    | (Orthogonal projection)
-         /     v
-        +----------&gt; a
-             p
-        
-        * a · b = |a| * |b| * cos(θ)
-        * Proj of b onto a: p = (|b| * cos(θ)) * (a / |a|)
-        * dot product &gt; 0  --&gt; vectors point in similar directions (θ &lt; 90°)
-        * dot product == 0 --&gt; vectors are perpendicular (θ == 90°)
-        * dot product &lt; 0  --&gt; vectors point in opposite directions (θ &gt; 90°)
-    </pre>
-    <div class="diagram-cap">Geometric projection of vector b onto vector a and dot product interpretations.</div>
-  </div>
 
   <span class="cm"># --- Dot product: measures alignment / similarity ---</span>
   <span class="cm"># a · b = a₁b₁ + a₂b₂ + a₃b₃</span>
@@ -1541,7 +1798,6 @@ output = X @ W               <span class="cm"># (100, 5) @ (5, 10) = (100, 10) �
 <div class="git-block">git add . &amp;&amp; git commit -m "day26: linear regression via normal equation - pure linear algebra"</div>
 </div>
 </div>
-</div>
 <div id="day-26-resources-section">
 <h2 class="sh2">📚 Resources</h2>
 <div class="resources-grid">
@@ -1587,27 +1843,73 @@ output = X @ W               <span class="cm"># (100, 5) @ (5, 10) = (100, 10) �
 </div>
 <div id="day-27-theory">
 <h2 class="sh2">🧠 Theory</h2>
-<div class="diagram">
-<pre>
-    Gradient Descent Loss Minimisation
-    ====================================
-    Loss L
-      ^
-      |      * (Initial parameter w_0, high loss)
-      |       \
-      |        \  -- Gradient points right (positive slope)
-      |         v    Take step left (w_1 = w_0 - η * gradient)
-      |          *
-      |           \
-      |            \
-      |             v   * (Close to minimum, smaller steps)
-      |              \ /
-      |               *  &lt;--- Global Minimum (Gradient = 0)
-      +----------------------------------------&gt; w
-                                (Parameter weight)
-    </pre>
-<div class="diagram-cap">Gradient descent steps down the parabolic loss curve to reach the minimum point.</div>
-</div>
+<div class="mermaid">
+      graph TD
+      Loss["Loss Function J(w)"] --> Grad["Compute Gradient ∇J"]
+      Grad --> Dir["Gradient Points UPHILL"]
+      Dir --> Update["Update: w = w - η × ∇J"]
+      Update --> Loop["Repeat to Convergence"]
+  </div>
+
+<!-- SVG: Gradient Descent Parabola -->
+<figure class="svg-diagram">
+  <svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg" width="580" height="200" role="img" aria-label="Gradient descent steps down a parabolic loss curve to reach global minimum">
+    <defs>
+      <!-- Arrow markers -->
+      <marker id="arrowGD" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L6,3 z" fill="#f7a94b"/>
+      </marker>
+    </defs>
+    
+    <!-- Parabolic Curve (Loss Landscape) -->
+    <path d="M 90,30 Q 290,230 490,30" fill="none" stroke="#6c8cff" stroke-width="2.5"/>
+    
+    <!-- Y-axis (Loss) -->
+    <line x1="50" y1="20" x2="50" y2="180" stroke="#252a40" stroke-width="1.2"/>
+    <text x="42" y="16" font-family="DM Sans,sans-serif" font-size="9.5" fill="#6b7590" text-anchor="end">Loss L</text>
+    
+    <!-- X-axis (Parameter w) -->
+    <line x1="50" y1="180" x2="530" y2="180" stroke="#252a40" stroke-width="1.2"/>
+    <text x="535" y="184" font-family="DM Sans,sans-serif" font-size="9.5" fill="#6b7590">Parameter w</text>
+    
+    <!-- Minimum marker -->
+    <circle cx="290" cy="130" r="5" fill="#4fd1a5"/>
+    <text x="290" y="152" font-family="DM Sans,sans-serif" font-size="10" fill="#4fd1a5" text-anchor="middle" font-weight="600">Global Minimum (dL/dw = 0)</text>
+    
+    <!-- Descent Steps -->
+    <!-- Start w_0 -->
+    <circle cx="450" cy="54" r="4.5" fill="#f7a94b"/>
+    <text x="460" y="52" font-family="IBM Plex Mono,monospace" font-size="9" fill="#dde2f0">w₀ (Initial, high loss)</text>
+    
+    <!-- Tangent slope line at w_0 -->
+    <line x1="420" y1="24" x2="480" y2="84" stroke="#e56b8c" stroke-width="1" stroke-dasharray="3,2" opacity="0.6"/>
+    <text x="485" y="76" font-family="DM Sans,sans-serif" font-size="8.5" fill="#e56b8c">Positive Slope (+)</text>
+    
+    <!-- Step 1 -->
+    <path d="M 445,58 Q 410,95 385,100" fill="none" stroke="#f7a94b" stroke-width="1.5" stroke-dasharray="3,1" marker-end="url(#arrowGD)"/>
+    
+    <!-- w_1 -->
+    <circle cx="380" cy="101" r="4" fill="#f7a94b"/>
+    <text x="390" y="112" font-family="IBM Plex Mono,monospace" font-size="9" fill="#dde2f0">w₁</text>
+    
+    <!-- Step 2 -->
+    <path d="M 375,103 Q 350,120 330,123" fill="none" stroke="#f7a94b" stroke-width="1.5" stroke-dasharray="3,1" marker-end="url(#arrowGD)"/>
+    
+    <!-- w_2 -->
+    <circle cx="325" cy="124" r="3.5" fill="#f7a94b"/>
+    <text x="332" y="135" font-family="IBM Plex Mono,monospace" font-size="9" fill="#dde2f0">w₂</text>
+    
+    <!-- Step 3 -->
+    <path d="M 321,125 Q 305,130 297,130" fill="none" stroke="#f7a94b" stroke-width="1.2" stroke-dasharray="2,1" marker-end="url(#arrowGD)"/>
+    
+    <!-- Update rule box -->
+    <rect x="70" y="30" width="180" height="48" rx="5" fill="#141720" stroke="#252a40" stroke-width="1"/>
+    <text x="80" y="47" font-family="IBM Plex Mono,monospace" font-size="10.5" fill="#38bdf8">w_new = w - η × (dL/dw)</text>
+    <text x="80" y="64" font-family="DM Sans,sans-serif" font-size="9" fill="#6b7590">subtract gradient to go downhill</text>
+  </svg>
+  <figcaption>Gradient descent stepping down a 1D parabolic loss curve. Since the slope (derivative) is positive at w₀, subtracting it moves the parameter leftwards toward the global minimum.</figcaption>
+</figure>
+
 <h3 class="sh3">1. Derivatives — Measuring Rate of Change</h3>
 <div class="analogy">Slope of a hill par stand karo. Derivative = "iss point pe yeh hill kitna steep hai?" Agar derivative positive hai, hill upar ja rahi hai. Negative = neeche. Zero = flat (peak ya valley). Gradient descent mein hum slope ke opposite direction mein move karte hain — downhill jaate hain. Minimum loss dhundhne ka yahi tarika hai.</div>
 <div class="cb">
@@ -1615,13 +1917,13 @@ output = X @ W               <span class="cm"># (100, 5) @ (5, 10) = (100, 10) �
 <pre><span class="kw">import</span> numpy <span class="kw">as</span> np
 <span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
 
-<span class="cm"># Numerical derivative (finite difference approximation)
-# f'(x) ≈ [f(x+h) - f(x-h)] / (2h)  — central difference, more accurate</span>
+# Numerical derivative (finite difference approximation)
+# f'(x) ≈ [f(x+h) - f(x-h)] / (2h)  — central difference, more accurate
 
 <span class="kw">def</span> <span class="fn">numerical_derivative</span>(f, x, h=<span class="num">1e-5</span>):
     <span class="kw">return</span> (f(x + h) - f(x - h)) / (<span class="num">2</span> * h)
 
-<span class="cm"># Common functions and their derivatives</span>
+# Common functions and their derivatives
 f1 = <span class="kw">lambda</span> x: x**<span class="num">2</span>              <span class="cm"># f(x) = x²,  f'(x) = 2x</span>
 f2 = <span class="kw">lambda</span> x: np.sin(x)          <span class="cm"># f(x) = sin(x), f'(x) = cos(x)</span>
 f3 = <span class="kw">lambda</span> x: np.exp(x)          <span class="cm"># f(x) = eˣ,  f'(x) = eˣ (special!)</span>
@@ -1632,7 +1934,7 @@ x_test = <span class="num">2.0</span>
 <span class="bi">print</span>(<span class="str">f"f2'(π/4) = {numerical_derivative(f2, np.pi/4):.4f}"</span>)  <span class="cm"># ≈ 0.7071 = cos(π/4)</span>
 <span class="bi">print</span>(<span class="str">f"f3'(1) = {numerical_derivative(f3, 1.0):.4f}"</span>)         <span class="cm"># ≈ e ≈ 2.718</span>
 
-<span class="cm"># Visualise a function and its derivative</span>
+# Visualise a function and its derivative
 x = np.linspace(-<span class="num">3</span>, <span class="num">3</span>, <span class="num">200</span>)
 y = x**<span class="num">3</span> - <span class="num">3</span>*x  <span class="cm"># f(x) = x³ - 3x</span>
 dy = <span class="num">3</span>*x**<span class="num">2</span> - <span class="num">3</span>  <span class="cm"># f'(x) = 3x² - 3 (analytical)</span>
@@ -1648,14 +1950,15 @@ ax2.set_title(<span class="str">"Derivative (zero crossings = f's extrema)"</spa
 plt.tight_layout(); plt.savefig(<span class="str">'function_derivative.png'</span>, dpi=<span class="num">150</span>)</pre>
 </div>
 <h3 class="sh3">2. Gradient Descent — From Scratch</h3>
+<p style="margin:0.5rem 0 0.8rem;">To minimize a loss function, gradient descent starts at a random point and repeatedly takes a small step in the <strong>negative direction of the gradient</strong> (steepest downhill). The size of this step is controlled by the learning rate (η or α).</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — gradient_descent.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">import</span> numpy <span class="kw">as</span> np
 <span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
 
-<span class="cm"># --- GRADIENT DESCENT: minimise a function by following the negative gradient ---
+# --- GRADIENT DESCENT: minimise a function by following the negative gradient ---
 # Update rule: x_new = x_old - learning_rate × f'(x_old)
-# "Take a step in the direction that decreases f most steeply"</span>
+# "Take a step in the direction that decreases f most steeply"
 
 <span class="kw">def</span> <span class="fn">f</span>(x): <span class="kw">return</span> x**<span class="num">2</span> + <span class="num">2</span>*x + <span class="num">1</span>        <span class="cm"># f(x) = (x+1)² — minimum at x=-1</span>
 <span class="kw">def</span> <span class="fn">df</span>(x): <span class="kw">return</span> <span class="num">2</span>*x + <span class="num">2</span>               <span class="cm"># f'(x) = 2x + 2</span>
@@ -1673,7 +1976,7 @@ history = [x]
 
 <span class="bi">print</span>(<span class="str">f"Final: x = {x:.6f} (true minimum: x = -1.0)"</span>)
 
-<span class="cm"># --- Visualise descent path ---</span>
+# --- Visualise descent path ---
 x_range = np.linspace(-<span class="num">3</span>, <span class="num">6</span>, <span class="num">200</span>)
 fig, (ax1, ax2) = plt.subplots(<span class="num">1</span>, <span class="num">2</span>, figsize=(<span class="num">12</span>, <span class="num">4</span>))
 ax1.plot(x_range, f(x_range), <span class="str">'#6c8cff'</span>, linewidth=<span class="num">2</span>, label=<span class="str">'f(x)'</span>)
@@ -1685,6 +1988,7 @@ ax2.set_title(<span class="str">'Loss over Iterations'</span>); ax2.set_xlabel(<
 plt.tight_layout(); plt.savefig(<span class="str">'gradient_descent.png'</span>, dpi=<span class="num">150</span>)</pre>
 </div>
 <h3 class="sh3">3. Chain Rule — Why Backpropagation Works</h3>
+<p style="margin:0.5rem 0 0.8rem;">A neural network is a chain of operations (layers). To find how a change in early weights affects the final loss, we multiply the local derivatives at each step. This process of flowing derivatives backward using multiplication is the <strong>chain rule in action</strong>.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — chain_rule.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Chain Rule: if y = f(g(x)), then dy/dx = f'(g(x)) × g'(x)
@@ -1724,15 +2028,15 @@ print(f"Forward:  z={z}, a={a}")
 print(f"Backward: dL/dz[0] = {dL_dz:.6f}")</span></pre>
 </div>
 <div class="math-box">
-<strong>KEY GRADIENT DESCENT CONCEPTS</strong>
-    Learning Rate (α): too large → overshoot minimum (diverge). Too small → takes forever.
-    Local minimum: gradient descent can get stuck. Solution: momentum, Adam optimiser.
-    Vanishing gradients: in deep nets, chain rule multiplications can → 0. Solution: ReLU, BatchNorm.
-    Exploding gradients: can → ∞. Solution: gradient clipping.
-    Batch gradient descent: full dataset → exact but slow.
-    Stochastic GD (SGD): one sample → fast but noisy.
-    Mini-batch GD: small batch (32-256) → best of both worlds. Used in ALL deep learning.
-  </div>
+  <strong>Key Gradient Descent Concepts</strong>
+  <div class="mb-rule"><span class="mb-cond">Learning Rate (α)</span><span class="mb-arrow">→</span><span class="mb-desc">Step size. Too large: overshoots/diverges. Too small: takes forever.</span></div>
+  <div class="mb-rule"><span class="mb-cond">Local Minimum</span><span class="mb-arrow">→</span><span class="mb-desc">Valleys where gradient is 0. Solution: Momentum, Adam optimiser.</span></div>
+  <div class="mb-rule"><span class="mb-cond">Vanishing Gradient</span><span class="mb-arrow">→</span><span class="mb-desc">Gradients shrink to ~0 in deep networks. Solution: ReLU, BatchNorm.</span></div>
+  <div class="mb-rule"><span class="mb-cond">Exploding Gradient</span><span class="mb-arrow">→</span><span class="mb-desc">Gradients blow up to ∞. Solution: Gradient Clipping.</span></div>
+  <div class="mb-rule"><span class="mb-cond">Batch Gradient Descent</span><span class="mb-arrow">→</span><span class="mb-desc">Uses full dataset for one step — exact but slow.</span></div>
+  <div class="mb-rule"><span class="mb-cond">Stochastic GD (SGD)</span><span class="mb-arrow">→</span><span class="mb-desc">Uses 1 sample per step — fast but noisy.</span></div>
+  <div class="mb-rule"><span class="mb-cond">Mini-batch GD</span><span class="mb-arrow">→</span><span class="mb-desc">Uses a small batch (32-256) — best of both worlds. Standard in Deep Learning.</span></div>
+</div>
 <div class="hinglish">💡 Calculus ML mein ek hi kaam karta hai: gradient nikalo, negative direction mein jaao, repeat. Yahi gradient descent hai. Chain rule se backpropagation kaam karta hai — jaise ek factory ki assembly line pe kaam ulta track karna. PyTorch mein yeh sab automatic hai (autograd), lekin samajhna zaroori hai ki andar kya ho raha hai.</div>
 </div>
 <h2 class="sh2">🔮 Predict the Output</h2>
@@ -1910,11 +2214,13 @@ x = <span class="num">1.0</span>; lr = <span class="num">0.1</span>   <span clas
 <div id="day-28-theory">
 <h2 class="sh2">🧠 Theory</h2>
 <div class="mermaid">
-      graph LR
-      High["High-Dim Data"] --> Cov["Covariance Matrix"]
-      Cov --> Eigen["Eigenvalues / Eigenvectors"]
-      Eigen --> Proj["Project onto Top Components"]
-      Proj --> Low["Low-Dim PCA Space"]
+      graph TD
+      Info["Information Metrics"] --> Ent["Entropy H(X)<br/>Average uncertainty/surprise"]
+      Info --> CE["Cross-Entropy H(P, Q)<br/>Surprise using model distribution Q"]
+      Info --> KL["KL Divergence D_KL(P||Q)<br/>Extra bits wasted / Difference between P & Q"]
+      Ent --> Formula1["-Σ P(x) log P(x)"]
+      CE --> Formula2["-Σ P(x) log Q(x)"]
+      KL --> Formula3["H(P, Q) - H(P)"]
   </div>
 <h3 class="sh3">1. Entropy — Measuring Uncertainty</h3>
 <div class="analogy">Ek fair coin flip ka entropy maximum hai — pure uncertainty (head ya tail? 50-50, you never know). Ek biased coin jo 99% time head aata hai — almost no uncertainty — low entropy. Ek news headline jo hamesha "Dog bites man" hai (expected) — low entropy. "Man bites dog!" — high surprise = high information = high entropy. Information = surprise.</div>
@@ -2110,28 +2416,89 @@ bce(1, 0.0)</pre></div>
 <div id="day-29-theory">
 <h2 class="sh2">🧠 Theory</h2>
 <div class="mermaid">
-      graph TD
-      Loss["Loss Function J(w)"] --> Grad["Compute Gradient ∇J"]
-      Grad --> Dir["Gradient Points UPHILL"]
-      Dir --> Update["Update: w = w - η × ∇J"]
-      Update --> Loop["Repeat to Convergence"]
+      graph LR
+      High["High-Dim Data"] --> Cov["Covariance Matrix"]
+      Cov --> Eigen["Eigenvalues / Eigenvectors"]
+      Eigen --> Proj["Project onto Top Components"]
+      Proj --> Low["Low-Dim PCA Space"]
   </div>
+
 <h3 class="sh3">1. The Curse of Dimensionality</h3>
 <div class="analogy">Imagine searching for a lost coin on a 1D line (10 meters long) — easy. Now search in a 2D square (10x10 = 100 sq meters) — harder. Now a 3D cube (10x10x10 = 1000 cubic meters) — very hard! Every time you add a feature (dimension) to your ML dataset, the "volume" of the space grows exponentially, making your data points seem extremely sparse. Models struggle to find patterns in sparse high-dimensional space.</div>
+
 <h3 class="sh3">2. How PCA Works</h3>
 <div class="ml-connect">PCA rotates the axes of your dataset to align with the directions of maximum variance (spread). The direction with the most spread is Principal Component 1 (PC1). The next most spread (orthogonal to PC1) is PC2. You then just drop PC3, PC4... PC100, keeping only PC1 and PC2. You've compressed the data while keeping its essence!</div>
+
+<!-- SVG: Principal Component Analysis (PCA) -->
+<figure class="svg-diagram">
+  <svg viewBox="0 0 540 220" xmlns="http://www.w3.org/2000/svg" width="540" height="220" role="img" aria-label="PCA dimensions reduction showing PC1 of maximum variance and PC2 perpendicular to it">
+    <defs>
+      <!-- Arrow markers -->
+      <marker id="arrowPCA" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L8,3 z" fill="#4fd1a5"/>
+      </marker>
+      <marker id="arrowPCA2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L8,3 z" fill="#b47cfc"/>
+      </marker>
+    </defs>
+    
+    <!-- Original axes -->
+    <line x1="50" y1="180" x2="450" y2="180" stroke="#252a40" stroke-width="1"/>
+    <text x="455" y="184" font-family="DM Sans,sans-serif" font-size="9" fill="#6b7590">Feature X₁</text>
+    
+    <line x1="50" y1="20" x2="50" y2="180" stroke="#252a40" stroke-width="1"/>
+    <text x="42" y="16" font-family="DM Sans,sans-serif" font-size="9" fill="#6b7590" text-anchor="end">Feature X₂</text>
+    
+    <!-- Rotated PC1 axis (direction of maximum spread/variance) -->
+    <line x1="100" y1="150" x2="380" y2="50" stroke="#4fd1a5" stroke-width="2" marker-end="url(#arrowPCA)"/>
+    <text x="390" y="46" font-family="IBM Plex Mono,monospace" font-size="11" fill="#4fd1a5" font-weight="600">PC1 (Principal Component 1 — max spread)</text>
+    
+    <!-- Rotated PC2 axis (perpendicular to PC1) -->
+    <line x1="200" y1="70" x2="130" y2="120" stroke="#b47cfc" stroke-width="1.5" marker-end="url(#arrowPCA2)"/>
+    <text x="110" y="132" font-family="IBM Plex Mono,monospace" font-size="10" fill="#b47cfc" font-weight="600">PC2 (orthogonal)</text>
+    
+    <!-- Data points (scatter plot aligned with PC1 direction) -->
+    <circle cx="120" cy="145" r="4.5" fill="#f7a94b" opacity="0.8"/>
+    <circle cx="150" cy="130" r="4.5" fill="#f7a94b" opacity="0.8"/>
+    <circle cx="180" cy="125" r="4.5" fill="#f7a94b" opacity="0.8"/>
+    <circle cx="210" cy="110" r="4.5" fill="#f7a94b" opacity="0.8"/>
+    <circle cx="240" cy="105" r="4.5" fill="#f7a94b" opacity="0.8"/>
+    <circle cx="270" cy="90" r="4.5" fill="#f7a94b" opacity="0.8"/>
+    <circle cx="300" cy="85" r="4.5" fill="#f7a94b" opacity="0.8"/>
+    <circle cx="330" cy="65" r="4.5" fill="#f7a94b" opacity="0.8"/>
+    <circle cx="360" cy="60" r="4.5" fill="#f7a94b" opacity="0.8"/>
+    
+    <!-- Off-axis noise points -->
+    <circle cx="160" cy="115" r="4.5" fill="#f7a94b" opacity="0.8"/>
+    <circle cx="250" cy="85" r="4.5" fill="#f7a94b" opacity="0.8"/>
+    <circle cx="310" cy="95" r="4.5" fill="#f7a94b" opacity="0.8"/>
+    
+    <!-- Projections of off-axis points onto PC1 (dotted lines) -->
+    <line x1="160" y1="115" x2="183" y2="120" stroke="#dde2f0" stroke-width="0.8" stroke-dasharray="2,2"/>
+    <circle cx="183" cy="120" r="2.5" fill="#dde2f0"/>
+    
+    <line x1="250" y1="85" x2="251" y2="96" stroke="#dde2f0" stroke-width="0.8" stroke-dasharray="2,2"/>
+    <circle cx="251" cy="96" r="2.5" fill="#dde2f0"/>
+    
+    <line x1="310" y1="95" x2="295" y2="80" stroke="#dde2f0" stroke-width="0.8" stroke-dasharray="2,2"/>
+    <circle cx="295" cy="80" r="2.5" fill="#dde2f0"/>
+  </svg>
+  <figcaption>Principal Component Analysis (PCA) rotating original axes X₁ and X₂ into PC1 (direction of maximum variance) and PC2 (orthogonal). 2D data is compressed to 1D by projecting all points orthogonally onto PC1.</figcaption>
+</figure>
+
+<p style="margin:0.5rem 0 0.8rem;">Let's see how to implement PCA in scikit-learn. The process involves scaling the dataset first so that columns with larger numbers don't dominate the variance computation, then initializing the PCA transformer, fitting it, and extracting the reduced dimensions.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — pca.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">from</span> sklearn.decomposition <span class="kw">import</span> PCA
 <span class="kw">from</span> sklearn.preprocessing <span class="kw">import</span> StandardScaler
 
-<span class="cm"># 1. ALWAYS scale data before PCA! 
+# 1. ALWAYS scale data before PCA! 
 # PCA maximizes variance. If one column is in millions (e.g. Salary) 
-# and another in decimals, Salary will dominate PC1 just due to scale.</span>
+# and another in decimals, Salary will dominate PC1 just due to scale.
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-<span class="cm"># 2. Apply PCA to reduce to 2 dimensions</span>
+# 2. Apply PCA to reduce to 2 dimensions
 pca = PCA(n_components=<span class="num">2</span>)
 X_pca = pca.fit_transform(X_scaled)
 
@@ -2330,451 +2697,18 @@ out = X @ W # Output shape is (3, 2)</code></pre>
     </p>
 </div>
 <button class="complete-btn" id="btn-day-30" onclick="completeDay(30,300)">🏆 Complete Week 4 Capstone — Earn 300 XP! 🎉</button>
+
+<div class="bridge-note">
+<strong>🌉 Bridge: Math → Machine Learning</strong>
+You've just built the mathematical toolkit: linear algebra for data transformations, calculus for optimization, probability for uncertainty, and statistics for inference. Starting next week, every ML algorithm will use these tools directly — gradient descent uses partial derivatives to minimize loss functions, PCA uses eigendecomposition to reduce dimensions, and Bayesian methods use conditional probability to update beliefs. The math isn't separate from ML; it IS the engine underneath.
+</div>
 </div><!-- /day-30 -->
 </main>
 </div><!-- /layout -->
 <script>
-// ═══════════════════════════════════════════
-//  WEEK 4 — STATE & GAMIFICATION ENGINE
-// ═══════════════════════════════════════════
-const WEEK = 4;
-const DAYS = [22,23,24,25,26,27,28,29,30];
-
-
-
-
-
-let state = JSON.parse(localStorage.getItem(`w${WEEK}-state`) || '{}');
-state.xp     = state.xp     || 0;
-state.streak = state.streak || 0;
-state.done   = state.done   || [];
-state.lastDate= state.lastDate || '';
-
-function saveState() { localStorage.setItem(`w${WEEK}-state`, JSON.stringify(state)); }
-
-const LEVELS = [
-  { min:0,    label:'🌱 Beginner' },
-  { min:500,  label:'🔍 Explorer' },
-  { min:1500, label:'⚙️ Practitioner' },
-  { min:3000, label:'🤖 Engineer' },
-  { min:6000, label:'🧠 Expert' },
-  { min:10000,label:'🚀 Master' }
-];
-function getLevel(xp) {
-  for (let i = LEVELS.length - 1; i >= 0; i--) {
-    if (xp >= LEVELS[i].min) return LEVELS[i].label;
-  }
-  return LEVELS[0].label;
-}
-
-function syncUI() {
-  document.getElementById('xp-show').textContent   = `⚡ ${state.xp} XP`;
-  document.getElementById('streak-show').textContent = `🔥 ${state.streak} day streak`;
-  document.getElementById('sb-xp').textContent     = `${state.xp} XP earned`;
-  document.getElementById('sb-streak').textContent  = `${state.streak} day streak`;
-  const lvlEl = document.getElementById('level-show');
-  if (lvlEl) lvlEl.textContent = getLevel(state.xp || 0);
-
-  const pct = Math.round((state.done.length / DAYS.length) * 100);
-  const progBar = document.getElementById('prog-bar');
-  if (progBar) {
-    progBar.style.width = pct + '%';
-    progBar.parentElement.setAttribute('aria-valuenow', pct);
-  }
-  const progText = document.getElementById('prog-text');
-  if (progText) progText.textContent = `${state.done.length}/${DAYS.length} days`;
-
-  DAYS.forEach(d => {
-    const pill = document.getElementById('pill-' + d);
-    const sb   = document.getElementById('sb-' + d);
-    const btn  = document.getElementById('btn-day-' + d);
-    if (state.done.includes(d)) {
-      pill && pill.classList.add('done');
-      sb && sb.classList.add('done');
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-}
-
-function completeDay(day, xp) {
-  if (state.done.includes(day)) return;
-  state.done.push(day);
-  state.xp += xp;
-  const today = new Date().toDateString();
-  const yesterday = new Date(Date.now() - 86400000).toDateString();
-  if (state.lastDate !== today) {
-    if (state.lastDate === yesterday) { state.streak++; }
-    else { state.streak = 1; }
-    state.lastDate = today;
-  }
-  saveState();
-  syncUI();
-  showXPToast(xp, day);
-  const btn = document.getElementById('btn-day-' + day);
-  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + day + ' Complete'; }
-}
-
-function showXPToast(xp, day) {
-  const t = document.getElementById('xp-toast');
-  if (t) {
-    t.textContent = `+${xp} XP ⚡ — Day ${day} Complete!`;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
-}
-
-function goDay(n) {
-  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
-  document.querySelectorAll('.day-pill').forEach(p => { p.classList.remove('active'); p.setAttribute('aria-selected','false'); });
-  const section = document.getElementById('day-' + n);
-  if (section) { section.classList.add('active'); }
-  const sbItem = document.getElementById('sb-' + n);
-  if (sbItem) { sbItem.classList.add('active'); }
-  const pill = document.getElementById('pill-' + n);
-  if (pill) { pill.classList.add('active'); pill.setAttribute('aria-selected','true'); }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  renderMermaid('day-' + n);
-}
-
-function jumpTo(id) {
-  const day = document.querySelector('.day-section.active');
-  if (!day) return;
-  const dayNum = day.id.replace('day-', '');
-  const target = day.querySelector('#day-' + dayNum + '-' + id) || day.querySelector('#' + id);
-  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function toggleSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (!sb) return;
-  const open = sb.classList.toggle('open');
-  if (btn) btn.setAttribute('aria-expanded', String(open));
-}
-function closeSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (sb) sb.classList.remove('open');
-  if (btn) btn.setAttribute('aria-expanded', 'false');
-}
-
-function quiz(optEl, result, qid) {
-  const block = optEl.closest('.quiz-block');
-  if (!block) return;
-  block.querySelectorAll('.quiz-opt').forEach(o => {
-    o.style.pointerEvents = 'none';
-    if (o !== optEl) o.classList.add('dimmed');
-  });
-  optEl.classList.add(result === 'correct' ? 'correct' : 'wrong');
-  const letter = optEl.querySelector('.quiz-letter');
-  if (letter) letter.textContent = result === 'correct' ? '✓' : '✗';
-  const correctFb = block.querySelector('.correct-fb') || block.querySelector('#' + qid + '-correct');
-  const wrongFb   = block.querySelector('.wrong-fb') || block.querySelector('#' + qid + '-wrong');
-  if (result === 'correct') {
-    if (correctFb) {
-      correctFb.style.display = 'block';
-    }
-    state.xp += 10;
-    saveState();
-    syncUI();
-    showXPToast(10, 'quiz');
-  } else {
-    if (wrongFb) {
-      wrongFb.style.display = 'block';
-    }
-  }
-}
-
-function toggleTask(header) {
-  const body = header.nextElementSibling;
-  if (!body) return;
-  const isOpen = body.style.display === 'block';
-  body.style.display = isOpen ? 'none' : 'block';
-  header.setAttribute('aria-expanded', String(!isOpen));
-}
-
-// Add simple style fix for task header content if needed, but keeping toggleTask correct
-function toggleSolution(id) {
-  const box = document.getElementById(id);
-  if (!box) return;
-  const isOpen = box.style.display === 'block';
-  box.style.display = isOpen ? 'none' : 'block';
-}
-
-function copyCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (pre) {
-    navigator.clipboard.writeText(pre.innerText).then(() => {
-      btn.textContent = 'copied!';
-      setTimeout(() => btn.textContent = 'copy', 1500);
-    });
-  }
-}
-
-function runCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (!pre) return;
-  
-  // Copy code to clipboard
-  navigator.clipboard.writeText(pre.innerText);
-  
-  // Visual feedback on the button
-  btn.textContent = 'Copied!';
-  setTimeout(() => btn.textContent = 'Run', 2000);
-  
-  // Show compiler instructions modal
-  showCompilerModal();
-}
-
-function showCompilerModal() {
-  let modal = document.getElementById('compiler-modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'compiler-modal';
-    modal.style.cssText = `
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(13, 15, 20, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 10000;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    `;
-    
-    const card = document.createElement('div');
-    card.style.cssText = `
-      background: var(--bg2, #141720);
-      border: 1px solid var(--border, #252a40);
-      border-radius: 16px;
-      padding: 2.2rem;
-      max-width: 440px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.55);
-      text-align: center;
-      transform: scale(0.9);
-      transition: transform 0.25s ease;
-      color: var(--text, #dde2f0);
-      font-family: var(--font-body, system-ui, sans-serif);
-    `;
-    
-    card.innerHTML = `
-      <div style="font-size: 2.8rem; margin-bottom: 0.8rem;">🚀</div>
-      <h3 style="margin: 0 0 1rem 0; font-size: 1.35rem; color: var(--green, #4fd1a5); font-family: var(--font-head, sans-serif); font-weight: 800; letter-spacing: 0.5px;">Code Copied! Ready to Run</h3>
-      <p style="margin: 0 0 1.8rem 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted, #6b7590);">
-        The code is now copied to your clipboard.
-        <br><br>
-        1. Click below to open the online compiler in a new tab.
-        <br>
-        2. <strong>Paste (Ctrl+V or Cmd+V)</strong> the code into the editor.
-        <br>
-        3. Click the <strong>Run</strong> button in the compiler tab to execute.
-      </p>
-      <div style="display: flex; gap: 12px; justify-content: center;">
-        <button id="compiler-cancel" style="
-          background: transparent;
-          border: 1px solid var(--border, #252a40);
-          color: var(--text, #dde2f0);
-          padding: 10px 20px;
-          border-radius: 8px;
-          font-weight: 500;
-          cursor: pointer;
-          font-size: 0.9rem;
-          transition: background var(--transition, 0.2s);
-        ">Cancel</button>
-        <button id="compiler-go" style="
-          background: var(--green, #4fd1a5);
-          border: none;
-          color: var(--bg, #0d0f14);
-          padding: 10px 24px;
-          border-radius: 8px;
-          font-weight: 700;
-          cursor: pointer;
-          font-size: 0.9rem;
-          box-shadow: 0 4px 12px rgba(79, 209, 165, 0.2);
-          transition: transform var(--transition, 0.2s), opacity var(--transition, 0.2s);
-        ">Open Compiler</button>
-      </div>
-    `;
-    
-    modal.appendChild(card);
-    document.body.appendChild(modal);
-    
-    // Add hover styles
-    const style = document.createElement('style');
-    style.textContent = `
-      #compiler-cancel:hover { background: var(--bg3, #1c2030); }
-      #compiler-go:hover { transform: translateY(-1px); opacity: 0.95; }
-    `;
-    document.head.appendChild(style);
-
-    // Event listeners
-    document.getElementById('compiler-cancel').onclick = () => hide();
-    document.getElementById('compiler-go').onclick = () => {
-      window.open('https://www.programiz.com/python-programming/online-compiler/', '_blank');
-      hide();
-    };
-    
-    modal.onclick = (e) => {
-      if (e.target === modal) hide();
-    };
-  }
-
-  const modalElement = document.getElementById('compiler-modal');
-  function show() {
-    modalElement.style.display = 'flex';
-    modalElement.offsetHeight; // force reflow
-    modalElement.style.opacity = '1';
-    modalElement.querySelector('div').style.transform = 'scale(1)';
-  }
-
-  function hide() {
-    modalElement.style.opacity = '0';
-    modalElement.querySelector('div').style.transform = 'scale(0.9)';
-    setTimeout(() => {
-      modalElement.style.display = 'none';
-    }, 250);
-  }
-
-  show();
-}
-
-function checkPredict(id, answer) {
-  const input = document.getElementById(id + '-input');
-  const result = document.getElementById(id + '-result');
-  if (!input || !result) return;
-  
-  // Normalize whitespace, casing, quotes, brackets, and punctuation
-  const normalize = (str) => {
-    return String(str).replace(/\\n/g, ' ')
-              .replace(/\n/g, ' ')
-              .replace(/['"()\[\]]/g, '')
-              .replace(/[,;]/g, ' ')
-              .replace(/\s+/g, ' ')
-              .trim()
-              .toLowerCase();
-  };
-  
-  const userVal = normalize(input.value);
-  const correctVal = normalize(answer);
-  const isCorrect = userVal === correctVal || userVal.includes(correctVal);
-  
-  result.style.display = 'block';
-  if (isCorrect) {
-    result.style.background = 'rgba(79,209,165,.1)';
-    result.style.border = '1px solid rgba(79,209,165,.3)';
-    result.style.color = 'var(--green)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '✅ Correct! ' + answer.replace(/\n/g, ' ');
-    state.xp += 10; saveState(); syncUI();
-  } else {
-    result.style.background = 'rgba(229,107,140,.08)';
-    result.style.border = '1px solid rgba(229,107,140,.3)';
-    result.style.color = 'var(--pink)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '❌ Expected: ' + answer.replace(/\n/g, ' ') + ' — try again';
-  }
-}
-
-function openRepl() {
-  window.open('https://replit.com/languages/python3', '_blank');
-}
-
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') !== 'light';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  const btn = document.getElementById('theme-btn');
-  if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
-}
-(function() {
-  
-  document.querySelectorAll('.predict-input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const btn = input.nextElementSibling;
-        if (btn && btn.classList.contains('predict-btn')) {
-          btn.click();
-        }
-      }
-    });
-  });
-
-  const saved = localStorage.getItem('theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-})();
-
-function renderMermaid(dayId) {
-  const run = () => {
-    if (typeof mermaid === 'undefined') {
-      setTimeout(run, 100);
-      return;
-    }
-    if (!window.mermaidInitialized) {
-      mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
-      window.mermaidInitialized = true;
-    }
-    const sec = document.getElementById(dayId);
-    if (!sec) return;
-    const nodes = sec.querySelectorAll('.mermaid:not([data-rendered])');
-    if (!nodes.length) return;
-    if (mermaid.run) {
-      mermaid.run({ nodes }).then(() => {
-        nodes.forEach(n => n.setAttribute('data-rendered','1'));
-      }).catch((err) => { console.error('Mermaid render error:', err); });
-    } else if (mermaid.init) {
-      mermaid.init(undefined, nodes);
-      nodes.forEach(n => n.setAttribute('data-rendered','1'));
-    }
-  };
-  run();
-}
-
-function toggleCheck(lbl) {
-  let box = lbl.querySelector('.chk-box');
-  if (!box) return;
-  box.classList.toggle('checked');
-  lbl.classList.toggle('done-item');
-  if(box.classList.contains('checked')) box.innerText = '✓';
-  else box.innerText = '';
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  syncUI();
-  DAYS.forEach(d => {
-    if (state.done.includes(d)) {
-      const btn = document.getElementById('btn-day-' + d);
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-  
-  renderMermaid('day-' + DAYS[0]);
-  
-  
-  document.querySelectorAll('.predict-input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const btn = input.nextElementSibling;
-        if (btn && btn.classList.contains('predict-btn')) {
-          btn.click();
-        }
-      }
-    });
-  });
-
-  const saved = localStorage.getItem('theme');
-  const btn = document.getElementById('theme-btn');
-  if (btn && saved === 'light') btn.textContent = '🌙 Dark';
-});
+  const WEEK = 4;
+  const DAYS = [22,23,24,25,26,27,28,29,30];
 </script>
+<script src="course.js"></script>
 </body>
 </html>

@@ -7,17 +7,22 @@
 <title>Week 2 — Pandas + SQL + Git | 135-Day AI/ML Roadmap</title>
 <meta content="Week 2 — Pandas + SQL + Git — Complete coursework, tasks, quizzes, and resources for Week 2 of the 135-Day AI/ML Roadmap." name="description"/>
 <link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%230d0f14'/&gt;&lt;text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'&gt;AI&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link rel="stylesheet" href="course.css">
 <style>
 :root {
   --accent-rgb: 108, 140, 255;
   --accent-sec-rgb: 180, 124, 252;
 }
 </style>
-<link rel="stylesheet" href="course.css">
+
+
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
   if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
 </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
 </head>
 <body>
 <!-- XP TOAST -->
@@ -160,6 +165,7 @@ graph LR
 <div class="diagram-cap">Series (1D column representation) vs. DataFrame (2D table structure with multiple columns).</div>
 <div class="ml-connect">In ML, your dataset IS a DataFrame. Features (columns) go into X, target (label column) goes into y. Understanding DataFrame operations like iloc, loc, and boolean indexing is essential before you can split data for training.</div>
 <h3 class="sh3">2. Series — A Labeled 1D Array</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">A Pandas Series is a one-dimensional array-like object that contains a sequence of values associated with a labeling array, called its index.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — series_basics.py</span><div class="cb-btns"><button class="run-btn" onclick="openRepl()">▶ try online</button><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
@@ -182,6 +188,7 @@ student_scores = pd.Series(
 <span class="bi">print</span>(student_scores.max())     <span class="cm"># 92</span></pre>
 </div>
 <h3 class="sh3">3. DataFrame — The Core Structure</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">A DataFrame represents a tabular, spreadsheet-like data structure containing an ordered collection of columns, each of which can be a different value type.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — dataframe_basics.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Create DataFrame from a dictionary</span>
@@ -203,6 +210,7 @@ df = pd.DataFrame(data)
 <span class="bi">print</span>(df.columns)      <span class="cm"># Index(['name', 'age', 'city', 'salary'])</span></pre>
 </div>
 <h3 class="sh3">4. Selecting Data — iloc, loc, Boolean Indexing</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Pandas offers optimized label-based selection using <code>loc</code>, position-based selection using <code>iloc</code>, and conditional filtering using Boolean masks.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — selection.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># --- Column selection ---</span>
@@ -224,6 +232,7 @@ mumbai_people = df[df[<span class="str">"city"</span>] == <span class="str">"Mum
 young_rich = df[(df[<span class="str">"age"</span>] &lt; <span class="num">24</span>) &amp; (df[<span class="str">"salary"</span>] &gt; <span class="num">50000</span>)]</pre>
 </div>
 <h3 class="sh3">5. Loading Real Data with pd.read_csv()</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">The <code>pd.read_csv()</code> function reads a comma-separated values (CSV) file into a Pandas DataFrame, offering rich configuration parameters for parsing custom delimiters and missing values.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — load_titanic.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Download Titanic.csv from: kaggle.com/c/titanic/data</span>
@@ -260,27 +269,69 @@ survival_rate = survived[<span class="str">"Survived"</span>].mean() * <span cla
 <code>loc</code> uses <strong>labels</strong>: <code>df.loc[0, "name"]</code> — works by index label AND column name.<br/>
     If your DataFrame has a custom index like ["a","b","c"], <code>df.iloc[0]</code> = row "a" but <code>df.loc[0]</code> = KeyError! Always know your index.
   </div>
-<div class="diagram">
-<pre>
-    iloc vs loc Selection Mechanics
-    =================================
-    DataFrame index labels = ["a", "b", "c"]
+<!-- SVG: iloc vs loc Selection Mechanics -->
+<figure class="svg-diagram">
+  <svg viewBox="0 0 540 240" xmlns="http://www.w3.org/2000/svg" width="540" height="240" role="img" aria-label="iloc vs loc Selection Mechanics showing how loc references index labels and iloc references integer positions">
+    <!-- Grid Labels -->
+    <text x="75" y="35" font-family="DM Sans,sans-serif" font-size="11" fill="#4fd1a5" font-weight="600" text-anchor="middle">loc Index (Labels)</text>
+    <text x="160" y="35" font-family="DM Sans,sans-serif" font-size="11" fill="#6c8cff" font-weight="600" text-anchor="middle">iloc Index (Integers)</text>
+    <text x="330" y="35" font-family="DM Sans,sans-serif" font-size="11" fill="#6b7590" text-anchor="middle">DataFrame Rows (Data)</text>
     
-    Index Labels      Data Columns
-    (loc looks here)   (iloc looks here)
-          ↓                 ↓
-        +---+       +---------+-------+
-    "a" | 0 | ----&gt; | "Rahul" | 50000 |  &lt;--- df.iloc[0] or df.loc["a"]
-        +---+       +---------+-------+
-    "b" | 1 | ----&gt; | "Priya" | 65000 |  &lt;--- df.iloc[1] or df.loc["b"]
-        +---+       +---------+-------+
-    "c" | 2 | ----&gt; | "Arjun" | 45000 |  &lt;--- df.iloc[2] or df.loc["c"]
-        +---+       +---------+-------+
-    </pre>
-<div class="diagram-cap">Visual mapping of label-based indexing (loc) vs integer position-based indexing (iloc).</div>
-</div>
+    <!-- Row 1: "a" / 0 -->
+    <!-- loc label "a" -->
+    <rect x="35" y="55" width="80" height="40" rx="6" fill="rgba(79, 209, 165, 0.08)" stroke="#4fd1a5" stroke-width="1.5"/>
+    <text x="75" y="80" font-family="IBM Plex Mono,monospace" font-size="12" fill="#4fd1a5" text-anchor="middle" font-weight="600">"a"</text>
+    
+    <!-- iloc integer 0 -->
+    <rect x="135" y="55" width="50" height="40" rx="6" fill="rgba(108, 140, 255, 0.08)" stroke="#6c8cff" stroke-width="1.5"/>
+    <text x="160" y="80" font-family="IBM Plex Mono,monospace" font-size="12" fill="#6c8cff" text-anchor="middle" font-weight="600">0</text>
+    
+    <!-- Data cell Rahul -->
+    <rect x="220" y="55" width="220" height="40" rx="6" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
+    <text x="330" y="79" font-family="IBM Plex Mono,monospace" font-size="11" fill="#dde2f0" text-anchor="middle">"Rahul" | 50000</text>
+    
+    <!-- Row 2: "b" / 1 -->
+    <!-- loc label "b" -->
+    <rect x="35" y="110" width="80" height="40" rx="6" fill="rgba(79, 209, 165, 0.08)" stroke="#4fd1a5" stroke-width="1"/>
+    <text x="75" y="135" font-family="IBM Plex Mono,monospace" font-size="12" fill="#4fd1a5" text-anchor="middle">"b"</text>
+    
+    <!-- iloc integer 1 -->
+    <rect x="135" y="110" width="50" height="40" rx="6" fill="rgba(108, 140, 255, 0.08)" stroke="#6c8cff" stroke-width="1"/>
+    <text x="160" y="135" font-family="IBM Plex Mono,monospace" font-size="12" fill="#6c8cff" text-anchor="middle">1</text>
+    
+    <!-- Data cell Priya -->
+    <rect x="220" y="110" width="220" height="40" rx="6" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
+    <text x="330" y="134" font-family="IBM Plex Mono,monospace" font-size="11" fill="#dde2f0" text-anchor="middle">"Priya" | 65000</text>
+    
+    <!-- Row 3: "c" / 2 -->
+    <!-- loc label "c" -->
+    <rect x="35" y="165" width="80" height="40" rx="6" fill="rgba(79, 209, 165, 0.08)" stroke="#4fd1a5" stroke-width="1"/>
+    <text x="75" y="190" font-family="IBM Plex Mono,monospace" font-size="12" fill="#4fd1a5" text-anchor="middle">"c"</text>
+    
+    <!-- iloc integer 2 -->
+    <rect x="135" y="165" width="50" height="40" rx="6" fill="rgba(108, 140, 255, 0.08)" stroke="#6c8cff" stroke-width="1"/>
+    <text x="160" y="190" font-family="IBM Plex Mono,monospace" font-size="12" fill="#6c8cff" text-anchor="middle">2</text>
+    
+    <!-- Data cell Arjun -->
+    <rect x="220" y="165" width="220" height="40" rx="6" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
+    <text x="330" y="189" font-family="IBM Plex Mono,monospace" font-size="11" fill="#dde2f0" text-anchor="middle">"Arjun" | 45000</text>
+    
+    <!-- Connections & Queries -->
+    <!-- loc query -->
+    <path d="M 120,75 L 210,75" stroke="#4fd1a5" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <polygon points="215,75 208,71 208,79" fill="#4fd1a5"/>
+    <text x="450" y="79" font-family="IBM Plex Mono,monospace" font-size="10" fill="#4fd1a5" font-weight="600">df.loc["a"]</text>
+    
+    <!-- iloc query -->
+    <path d="M 195,130 L 210,130" stroke="#6c8cff" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <polygon points="215,130 208,126 208,134" fill="#6c8cff"/>
+    <text x="450" y="134" font-family="IBM Plex Mono,monospace" font-size="10" fill="#6c8cff" font-weight="600">df.iloc[1]</text>
+  </svg>
+  <figcaption>iloc vs loc Selection Mechanics showing how loc references index labels and iloc references integer positions.</figcaption>
+</figure>
 <div class="hinglish">💡 Ek line mein: DataFrame = Excel ka sheet Python mein. iloc = position se select (0,1,2...), loc = label se select ("name","age"). Boolean indexing = conditions lagao jaise SQL WHERE clause.</div>
 <h3 class="sh3">7. Sorting &amp; Frequency Analysis</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Sorting rows based on values and computing value frequencies (using <code>value_counts</code>) are crucial steps in initial data exploration and validation.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — sorting_frequency.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># sort_values — sort by one or more columns</span>
@@ -691,6 +742,7 @@ df[<span class="str">"score"</span>] = df[<span class="str">"score"</span>].fill
 df[<span class="str">"score"</span>] = df[<span class="str">"score"</span>].ffill()   <span class="cm"># useful for time series</span></pre>
 </div>
 <h3 class="sh3">2. Removing Duplicates + Renaming + Type Casting</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Data cleaning frequently requires identifying and removing duplicate rows, renaming column headers for consistency, and casting variables to their correct data types.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — cleaning_ops.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Remove duplicate rows</span>
@@ -714,6 +766,7 @@ df[<span class="str">"student_name"</span>] = df[<span class="str">"student_name
     Many Pandas methods accept <code>inplace=True</code>. However, in modern Pandas (2.0+), <strong>inplace is discouraged and slated for eventual deprecation</strong>. Under the hood, it does not actually save memory (it still copies the data), it prevents method chaining, and it can cause silent bugs. Always prefer assignment: <code>df = df.method()</code>.
   </div>
 <h3 class="sh3">3. apply() and map() — Transforming Data</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">The <code>apply()</code> and <code>map()</code> functions enable custom element-wise transformations across rows or columns, avoiding slow iterative Python loops.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — apply_map.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># apply() — runs a function on each element</span>
@@ -731,6 +784,15 @@ df[<span class="str">"description"</span>] = df.apply(describe_student, axis=<sp
 df[<span class="str">"pass_fail"</span>] = df[<span class="str">"score_grade"</span>].map({<span class="str">"A"</span>: <span class="kw">True</span>, <span class="str">"B"</span>: <span class="kw">True</span>, <span class="str">"C"</span>: <span class="kw">False</span>})</pre>
 </div>
 <h3 class="sh3">4. Merging DataFrames</h3>
+<div class="callout cr">
+<strong>⚠️ Warning: Cartesian Merge Explosions:</strong>
+<br/>When joining two DataFrames on a key, if that key contains duplicate values in *both* DataFrames, Pandas will perform a Cartesian product of those matching keys.
+<br/>If DataFrame A has 10,000 rows with <code>key="item_1"</code> and DataFrame B has 10,000 rows with <code>key="item_1"</code>, merging them will output <strong>100,000,000 rows</strong>! This will quickly consume all your system memory and crash the Python process.
+<br/><strong>Gotcha Prevention:</strong> Always validate merge cardinality in production using the <code>validate</code> parameter:
+<pre><span class="cm"># Throws a MergeError if cardinality is violated</span>
+pd.merge(df_left, df_right, on=<span class="str">'id'</span>, validate=<span class="str">'one_to_many'</span>)
+</pre>
+</div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — merge_concat.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre>students = pd.DataFrame({<span class="str">"id"</span>: [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>], <span class="str">"name"</span>: [<span class="str">"Rahul"</span>, <span class="str">"Priya"</span>, <span class="str">"Arjun"</span>]})
@@ -781,51 +843,101 @@ graph TD
     L3 --> LJ3
 </div>
 <div class="diagram-cap">Conceptual visualization of Left vs. Inner merges.</div>
-<div class="diagram">
-<pre>
-    Merge Types Diagram (how = ...)
-    =================================
-    Left DataFrame: [id, name] (id = 1, 2, 3)
-    Right DataFrame: [id, score] (id = 1, 2, 4)
+<!-- SVG: Merge Types Diagram -->
+<figure class="svg-diagram">
+  <svg viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg" width="540" height="380" role="img" aria-label="Visual comparison of inner, left, right, and outer merges. Shows which rows are retained and where NaN is filled for missing values.">
+    <!-- Panel 1: Inner Merge -->
+    <g transform="translate(10, 10)">
+      <!-- Panel Border -->
+      <rect width="250" height="170" rx="8" fill="#141720" stroke="#252a40" stroke-width="1"/>
+      <text x="125" y="22" font-family="DM Sans,sans-serif" font-size="11.5" fill="#4fd1a5" font-weight="600" text-anchor="middle">1. Inner Merge (how='inner')</text>
+      
+      <!-- Venn Diagram -->
+      <circle cx="105" cy="65" r="25" fill="rgba(108, 140, 255, 0.15)" stroke="#6c8cff" stroke-width="1"/>
+      <circle cx="145" cy="65" r="25" fill="rgba(229, 107, 140, 0.15)" stroke="#e56b8c" stroke-width="1"/>
+      <!-- Intersection Highlighted in Green -->
+      <path d="M 125,48 A 25,25 0 0,1 130,65 A 25,25 0 0,1 125,82 A 25,25 0 0,1 120,65 A 25,25 0 0,1 125,48 Z" fill="#4fd1a5" opacity="0.8"/>
+      
+      <text x="75" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#6c8cff" text-anchor="end">L</text>
+      <text x="175" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#e56b8c">R</text>
+      
+      <!-- Table Representation -->
+      <rect x="25" y="105" width="200" height="50" rx="4" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
+      <text x="125" y="122" font-family="IBM Plex Mono,monospace" font-size="9" fill="#6b7590" text-anchor="middle">id | name  | score</text>
+      <line x1="30" y1="128" x2="220" y2="128" stroke="#252a40" stroke-width="0.8"/>
+      <text x="125" y="139" font-family="IBM Plex Mono,monospace" font-size="9" fill="#4fd1a5" text-anchor="middle">1  | Rahul | 85.0</text>
+      <text x="125" y="149" font-family="IBM Plex Mono,monospace" font-size="9" fill="#4fd1a5" text-anchor="middle">2  | Priya | 92.0</text>
+    </g>
 
-    1. inner: Only rows with keys present in BOTH DataFrames.
-       +----+--------+-------+
-       | id |  name  | score |
-       +----+--------+-------+
-       |  1 | Rahul  |  85.0 |
-       |  2 | Priya  |  92.0 |
-       +----+--------+-------+
+    <!-- Panel 2: Left Merge -->
+    <g transform="translate(280, 10)">
+      <rect width="250" height="170" rx="8" fill="#141720" stroke="#252a40" stroke-width="1"/>
+      <text x="125" y="22" font-family="DM Sans,sans-serif" font-size="11.5" fill="#6c8cff" font-weight="600" text-anchor="middle">2. Left Merge (how='left')</text>
+      
+      <!-- Venn Diagram -->
+      <!-- Left circle fully highlighted in Blue/Green -->
+      <circle cx="105" cy="65" r="25" fill="#4fd1a5" opacity="0.6" stroke="#6c8cff" stroke-width="1.5"/>
+      <circle cx="145" cy="65" r="25" fill="rgba(229, 107, 140, 0.15)" stroke="#e56b8c" stroke-width="1"/>
+      
+      <text x="75" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#0d0f14" font-weight="bold" text-anchor="end">L</text>
+      <text x="175" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#e56b8c">R</text>
+      
+      <!-- Table Representation -->
+      <rect x="25" y="105" width="200" height="50" rx="4" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
+      <text x="125" y="120" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#6b7590" text-anchor="middle">id | name  | score</text>
+      <line x1="30" y1="124" x2="220" y2="124" stroke="#252a40" stroke-width="0.8"/>
+      <text x="125" y="133" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#dde2f0" text-anchor="middle">1  | Rahul | 85.0</text>
+      <text x="125" y="142" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#dde2f0" text-anchor="middle">2  | Priya | 92.0</text>
+      <text x="125" y="151" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#dde2f0" text-anchor="middle">3  | Arjun | <tspan fill="#e56b8c">NaN</tspan></text>
+    </g>
 
-    2. left: All rows from Left, plus matching columns from Right.
-       +----+--------+-------+
-       | id |  name  | score |
-       +----+--------+-------+
-       |  1 | Rahul  |  85.0 |
-       |  2 | Priya  |  92.0 |
-       |  3 | Arjun  |   NaN |   &lt;--- No match in Right DataFrame
-       +----+--------+-------+
+    <!-- Panel 3: Right Merge -->
+    <g transform="translate(10, 195)">
+      <rect width="250" height="170" rx="8" fill="#141720" stroke="#252a40" stroke-width="1"/>
+      <text x="125" y="22" font-family="DM Sans,sans-serif" font-size="11.5" fill="#f7a94b" font-weight="600" text-anchor="middle">3. Right Merge (how='right')</text>
+      
+      <!-- Venn Diagram -->
+      <!-- Right circle fully highlighted in Pink/Orange -->
+      <circle cx="105" cy="65" r="25" fill="rgba(108, 140, 255, 0.15)" stroke="#6c8cff" stroke-width="1"/>
+      <circle cx="145" cy="65" r="25" fill="#4fd1a5" opacity="0.6" stroke="#e56b8c" stroke-width="1.5"/>
+      
+      <text x="75" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#6c8cff" text-anchor="end">L</text>
+      <text x="175" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#0d0f14" font-weight="bold">R</text>
+      
+      <!-- Table Representation -->
+      <rect x="25" y="105" width="200" height="50" rx="4" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
+      <text x="125" y="120" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#6b7590" text-anchor="middle">id | name  | score</text>
+      <line x1="30" y1="124" x2="220" y2="124" stroke="#252a40" stroke-width="0.8"/>
+      <text x="125" y="133" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#dde2f0" text-anchor="middle">1  | Rahul | 85.0</text>
+      <text x="125" y="142" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#dde2f0" text-anchor="middle">2  | Priya | 92.0</text>
+      <text x="125" y="151" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#dde2f0" text-anchor="middle">4  | <tspan fill="#e56b8c">NaN</tspan>   | 78.0</text>
+    </g>
 
-    3. right: All rows from Right, plus matching columns from Left.
-       +----+--------+-------+
-       | id |  name  | score |
-       +----+--------+-------+
-       |  1 | Rahul  |  85.0 |
-       |  2 | Priya  |  92.0 |
-       |  4 |   NaN  |  78.0 |   &lt;--- No match in Left DataFrame
-       +----+--------+-------+
-
-    4. outer: All rows from Left and Right (Full Union).
-       +----+--------+-------+
-       | id |  name  | score |
-       +----+--------+-------+
-       |  1 | Rahul  |  85.0 |
-       |  2 | Priya  |  92.0 |
-       |  3 | Arjun  |   NaN |
-       |  4 |   NaN  |  78.0 |
-       +----+--------+-------+
-    </pre>
-<div class="diagram-cap">Visual comparison of inner, left, right, and outer merge output rows.</div>
-</div>
+    <!-- Panel 4: Outer Merge -->
+    <g transform="translate(280, 195)">
+      <rect width="250" height="170" rx="8" fill="#141720" stroke="#252a40" stroke-width="1"/>
+      <text x="125" y="22" font-family="DM Sans,sans-serif" font-size="11.5" fill="#b47cfc" font-weight="600" text-anchor="middle">4. Outer Merge (how='outer')</text>
+      
+      <!-- Venn Diagram -->
+      <!-- Both circles fully highlighted -->
+      <circle cx="105" cy="65" r="25" fill="#4fd1a5" opacity="0.5" stroke="#6c8cff" stroke-width="1"/>
+      <circle cx="145" cy="65" r="25" fill="#4fd1a5" opacity="0.5" stroke="#e56b8c" stroke-width="1"/>
+      
+      <text x="75" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#0d0f14" font-weight="bold" text-anchor="end">L</text>
+      <text x="175" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#0d0f14" font-weight="bold">R</text>
+      
+      <!-- Table Representation -->
+      <rect x="25" y="105" width="200" height="55" rx="4" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
+      <text x="125" y="117" font-family="IBM Plex Mono,monospace" font-size="8" fill="#6b7590" text-anchor="middle">id | name  | score</text>
+      <line x1="30" y1="121" x2="220" y2="121" stroke="#252a40" stroke-width="0.8"/>
+      <text x="125" y="129" font-family="IBM Plex Mono,monospace" font-size="8" fill="#dde2f0" text-anchor="middle">1  | Rahul | 85.0</text>
+      <text x="125" y="137" font-family="IBM Plex Mono,monospace" font-size="8" fill="#dde2f0" text-anchor="middle">2  | Priya | 92.0</text>
+      <text x="125" y="145" font-family="IBM Plex Mono,monospace" font-size="8" fill="#dde2f0" text-anchor="middle">3  | Arjun | <tspan fill="#e56b8c">NaN</tspan></text>
+      <text x="125" y="153" font-family="IBM Plex Mono,monospace" font-size="8" fill="#dde2f0" text-anchor="middle">4  | <tspan fill="#e56b8c">NaN</tspan>   | 78.0</text>
+    </g>
+  </svg>
+  <figcaption>Visual comparison of inner, left, right, and outer merge output rows. Retained rows are colored green, while missing values are filled with NaN.</figcaption>
+</figure>
 <div class="ml-connect">In ML, you'll often merge feature tables with label tables using an ID key — like merging a customer features table with a churn label table. Knowing merge types (inner vs left) prevents data leakage and silent row drops.</div>
 <div class="hinglish">💡 Ek line mein: Data cleaning = nulls handle karo, duplicates hato, types fix karo, strings strip karo. apply() function har row/column pe chalata hai. merge() SQL JOIN ki tarah kaam karta hai.</div>
 </div>
@@ -1046,6 +1158,7 @@ product_stats = sales.groupby(<span class="str">"product"</span>).agg(
 <span class="bi">print</span>(product_stats.sort_values(<span class="str">"total_revenue"</span>, ascending=<span class="kw">False</span>))</pre>
 </div>
 <h3 class="sh3">2. pivot_table() — Cross-tabulation</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Pivot tables summarize and aggregate tabular data along specified dimensions, providing a spreadsheet-like cross-tabulation view of features.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — pivot_table.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Revenue by product AND region (like a cross-tab Excel table)</span>
@@ -1069,6 +1182,7 @@ pivot = sales.pivot_table(
 # Tablet    1</span></pre>
 </div>
 <h3 class="sh3">3. String Operations on Columns</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Pandas provides vectorized string methods (accessible via the <code>.str</code> accessor) to perform operations like parsing, splitting, and replacing text in columns.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — string_ops.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre>df[<span class="str">"product"</span>].str.lower()         <span class="cm"># "Phone" → "phone"</span>
@@ -1084,6 +1198,7 @@ df[<span class="str">"full_name"</span>].str.split(<span class="str">"_"</span>,
 <div class="ml-connect">In ML, groupby is used for stratified sampling — making sure each class appears proportionally in train/test splits. pivot_table is used for feature engineering — creating features from categorical combinations.</div>
 <div class="hinglish">💡 Ek line mein: groupby() = data ko groups mein baant ke stats nikalo. agg() se ek saath multiple stats. pivot_table() = rows/columns cross-tab. str. operations = text columns ko clean aur transform karo.</div>
 <h3 class="sh3">4. Datetime Operations — pd.to_datetime() + .dt Accessor</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Converting objects to datetime representations and using the <code>.dt</code> accessor allows developers to extract time-based features like day of week, hour, or month.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — datetime_ops.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Convert a string column to datetime</span>
@@ -1107,6 +1222,7 @@ weekly  = df[<span class="str">"revenue"</span>].resample(<span class="str">"W"<
 </div>
 <details style="margin-top:20px; background:rgba(255,255,255,0.03); padding:10px; border-radius:8px;"><summary style="cursor:pointer; font-weight:bold; color:var(--orange);">Advanced: Rolling Windows &amp; Memory Optimization (Optional)</summary>
 <h3 class="sh3">5. Rolling &amp; Expanding Windows</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Rolling and expanding window functions calculate moving statistics (like moving averages or cumulative sums) over a sliding interval of time-series records.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — rolling_expanding.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># rolling() — sliding window (fixed size)</span>
@@ -1120,6 +1236,7 @@ df[<span class="str">"running_total"</span>]  = df[<span class="str">"sales"</sp
 </div>
 <div class="ml-connect">Rolling averages smooth out noise in time-series data. They are a standard feature engineering technique in stock price prediction, sales forecasting, and anomaly detection.</div>
 <h3 class="sh3">6. Reshaping Data — melt(), stack(), unstack(), explode()</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Reshaping functions transform data between wide format and long format, expanding nested lists or rotating hierarchical index structures.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — reshaping.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># melt() — wide format → long format (unpivot)</span>
@@ -1140,6 +1257,7 @@ df[<span class="str">"tags"</span>] = [[<span class="str">"python"</span>,<span 
 df.explode(<span class="str">"tags"</span>)  <span class="cm"># each tag gets its own row</span></pre>
 </div>
 <h3 class="sh3">7. MultiIndex — Hierarchical Indexing</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Hierarchical indexing (MultiIndex) enables you to represent higher-dimensional data structures within a standard two-dimensional DataFrame.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — multiindex.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># MultiIndex created by groupby without reset_index</span>
@@ -1155,6 +1273,7 @@ multi.reset_index()                 <span class="cm"># flatten back to regular c
 multi.unstack(level=<span class="str">"product"</span>)</pre>
 </div>
 <h3 class="sh3">8. Memory Optimization &amp; Chunking Large Files</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">When datasets exceed RAM capacity, chunking (loading data in batches) and optimizing data types (like downcasting floats or using categories) prevents memory exhaustion.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — memory_chunking.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Check memory usage</span>
@@ -1442,6 +1561,7 @@ To build complete query intuition, memorize the physical order in which a databa
 </div>
 <div class="hinglish">💡 Ek line mein: SELECT kya chahiye, FROM kahan se, WHERE kon sa row, GROUP BY kaise group karo, HAVING group filter, ORDER BY sort karo, LIMIT kitna lena. JOIN = do tables combine karo common key pe.</div>
 <h3 class="sh3">6. Complete JOIN Family — FULL OUTER, CROSS, SELF</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">SQL joins combine rows from two or more tables based on a related column, supporting full outer, cross, and self join strategies for relational queries.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — all_joins.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- RIGHT JOIN — all from right table (mirror of LEFT JOIN)</span>
@@ -1461,6 +1581,7 @@ To build complete query intuition, memorize the physical order in which a databa
 <span class="kw">LEFT JOIN</span> employees m <span class="kw">ON</span> e.manager_id <span class="op">=</span> m.id;</pre>
 </div>
 <h3 class="sh3">7. UNION vs UNION ALL + String &amp; Date Functions</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">The <code>UNION</code> operator combines the result sets of two or more queries, where <code>UNION ALL</code> retains duplicates and runs significantly faster.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — union_strings_dates.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- UNION — combine rows from 2 queries, removes duplicates</span>
@@ -2068,6 +2189,15 @@ df = pd.read_sql(query, engine)
 </div>
 
 <h3 class="sh3">15. pgvector — Modern Vector Search &amp; Similarity</h3>
+<div class="callout cp">
+<strong>⚡ Vector Indexing Trade-offs (IVFFlat vs HNSW):</strong>
+<br/>• <strong>IVFFlat (Inverted File with Flat Compression):</strong> An inverted file index that segments vectors into clusters using k-means clustering. Search query compares target with nearest cluster centroids, scanning only those sub-lists.
+  <br/>&nbsp;&nbsp;• <em>Complexity:</em> Indexing takes $O(N)$ time. Consumes near-zero extra memory (extremely lightweight).
+  <br/>&nbsp;&nbsp;• &quot;Lists&quot; Parameter: Must rebuild index whenever dataset grows significantly, otherwise search recall degrades.
+<br/>• <strong>HNSW (Hierarchical Navigable Small World):</strong> Graph-based index creating a multi-layer routing graph. Top layers hold sparse connections for fast routing; bottom layers hold dense connections for local search.
+  <br/>&nbsp;&nbsp;• <em>Complexity:</em> Index build takes $O(N \log N)$, search query takes $O(\log N)$ time with near 99% accuracy.
+  <br/>&nbsp;&nbsp;• <em>Memory:</em> Consumes 5-10x more RAM than IVFFlat because it stores graph edge structures (pointers) for every vector.
+</div>
 <p>Keyword search using operators like <code>LIKE '%python%'</code> has a major limitation: it only returns exact character matches. If a user searches for "machine learning", keyword queries fail to match documents containing "ML", "neural networks", or "deep learning" because the terms are textually different, despite being semantically similar.</p>
 <div class="analogy">Keyword search is like sorting clothes by looking at label text (e.g. "red shirts"). Vector search is like showing the salesperson a shirt and saying "find me fabrics that feel and look similar to this" (semantic similarity distance).</div>
 <p>Modern LLM applications (like Retrieval-Augmented Generation or RAG) convert text blocks into high-dimensional numerical lists called <strong>vector embeddings</strong>. The <strong><code>pgvector</code></strong> extension allows PostgreSQL to store, index, and query vectors directly alongside your relational tables:</p>
@@ -2332,6 +2462,7 @@ df = pd.read_sql(query, engine)
     </div>
 <div class="diagram-cap">Git's 4 zones — understand this and Git makes sense</div>
 <h3 class="sh3">2. Core Git Commands</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Git version control tracks modifications across files. Commands like <code>status</code>, <code>add</code>, and <code>commit</code> manage changes in the staging area.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">bash — git_workflow.sh</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># --- SETUP (one-time) ---</span>
@@ -2356,6 +2487,7 @@ git diff HEAD~1               <span class="cm"># compare with last commit</span>
 git checkout abc1234          <span class="cm"># jump to a specific commit</span></pre>
 </div>
 <h3 class="sh3">3. Branching — The Safe Way to Experiment</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Branching isolates code changes, enabling developers to build features or fix bugs in parallel without disrupting the main production branch.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">bash — git_branches.sh</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Create and switch to a new branch</span>
@@ -2372,6 +2504,7 @@ git merge feature/pandas-cleaning        <span class="cm"># bring changes in</sp
 git branch -d feature/pandas-cleaning   <span class="cm"># delete merged branch</span></pre>
 </div>
 <h3 class="sh3">3.5 Advanced Git: Stash, Conflicts &amp; Rewriting History</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Advanced Git commands allow stashing changes temporarily, resolving merge conflicts, and interactive rebasing to maintain a clean project history.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">bash — advanced_git.sh</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Stash: "I'm not ready to commit, but need to switch branches"</span>
@@ -2394,6 +2527,7 @@ git revert HEAD           <span class="cm"># Safely undoes last commit by creati
 git reset --hard HEAD~1   <span class="cm"># DANGEROUS: permanently deletes the last commit</span></pre>
 </div>
 <h3 class="sh3">4. Writing a Professional README.md</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">A README file provides clear documentation on installation, usage, architecture, and configuration, acting as the entry point for new contributors.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">markdown — README.md template</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># 🚢 Titanic Data Analysis</span>
@@ -2422,6 +2556,7 @@ jupyter notebook eda_titanic.ipynb
 ```</pre>
 </div>
 <h3 class="sh3">5. .gitignore — Never Push Secrets or Junk</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">The <code>.gitignore</code> file prevents build artifacts, local environment configurations, and sensitive credentials from being committed to repository history.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">gitignore — .gitignore for Python/ML</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Virtual environments</span>
@@ -2458,6 +2593,7 @@ config.py</pre>
 <div class="hinglish">💡 Ek line mein: Git = local version control (commits). GitHub = remote backup + portfolio. Branch = safe experiment zone. README = project ka face — isko seriously lena. .gitignore = private cheezein hide karo.</div>
 <details style="margin-top:20px; background:rgba(255,255,255,0.03); padding:10px; border-radius:8px;"><summary style="cursor:pointer; font-weight:bold; color:var(--orange);">Pro Git: SSH, Cherry-pick, Bisect &amp; Hooks</summary>
 <h3 class="sh3">6. SSH Keys &amp; Authentication</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">SSH authentication secures remote operations, eliminating the need to enter account credentials during git push and pull procedures.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">bash — ssh_setup.sh</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># SSH vs HTTPS: SSH = key-based (no password every push)</span>
@@ -2477,6 +2613,7 @@ ssh -T git@github.com  <span class="cm"># should say "Hi username!"</span>
 git clone git@github.com:username/repo.git</pre>
 </div>
 <h3 class="sh3">7. Git Log — Visualizing History</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">The git log command displays the commit history of a repository, supporting custom formatting and branching maps for tracing project changes.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">bash — git_log.sh</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># git log variants — find anything in history</span>
@@ -2490,6 +2627,7 @@ git log -p filename.py            <span class="cm"># show all changes to one fil
 git show abc1234                  <span class="cm"># full details of a specific commit</span></pre>
 </div>
 <h3 class="sh3">8. Detached HEAD, Tags &amp; Cherry-pick</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Cherry-picking imports specific commits from separate branches, while tags label release versions and a detached HEAD state lets you inspect past commits.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">bash — advanced_git2.sh</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Detached HEAD — when you checkout a commit directly (not a branch)</span>
@@ -2510,6 +2648,7 @@ git cherry-pick abc1234          <span class="cm"># apply that commit to current
 <span class="cm"># without merging the entire feature branch</span></pre>
 </div>
 <h3 class="sh3">9. Git Bisect &amp; Reflog — Power Recovery Tools</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Git bisect performs a binary search to identify the commit that introduced a bug, and git reflog tracks every local reference change to recover lost commits.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">bash — bisect_reflog.sh</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># git bisect — binary search to find WHICH commit introduced a bug</span>
@@ -2528,6 +2667,7 @@ git checkout abc1234             <span class="cm"># recover a "deleted" commit</
 <span class="cm"># Reflog saves you when git reset --hard deletes commits you needed</span></pre>
 </div>
 <h3 class="sh3">10. Pre-commit Hooks — Automate Quality Checks</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Pre-commit hooks automatically execute scripts (like linters, formatting tools, or test suites) before a commit is completed, ensuring standard code quality.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">bash — pre_commit_hook.sh</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Git hooks run scripts automatically at git events</span>
@@ -2721,6 +2861,7 @@ pre-commit install  <span class="cm"># now runs on every git commit automaticall
     💰 <strong>Zomato Restaurant Data</strong> (relatable) — search "zomato dataset kaggle"
   </div>
 <h3 class="sh3">Step 1 — Load &amp; First Look (30 min)</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">In this step, we establish database connections, load raw data into DataFrames, and print initial metadata to inspect column layouts.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — step1_load.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
@@ -2737,6 +2878,7 @@ df.describe()
 <span class="bi">print</span>(<span class="str">"\nNull counts:\n"</span>, df.isnull().sum())</pre>
 </div>
 <h3 class="sh3">Step 2 — Clean the Data (45 min)</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Here we run custom data cleaning pipelines to impute missing attributes, correct column schemas, and strip whitespace from text entries.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — step2_clean.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Document every cleaning decision with a comment explaining WHY</span>
@@ -2892,460 +3034,9 @@ GROUP BY customer_id;</code></pre>
 </main>
 </div>
 <script>
-// ═══════════════════════════════════════════
-//  WEEK 2 — STATE & GAMIFICATION ENGINE
-// ═══════════════════════════════════════════
-const WEEK = 2;
-const DAYS = [8,9,10,11,12,13,14];
-
-
-function migrateLegacy() {
-  if (!localStorage.getItem('w2-state')) {
-    const legacyXP   = parseInt(localStorage.getItem('w2_xp') || '0');
-    const legacyDone = JSON.parse(localStorage.getItem('w2_done') || '[]');
-    const legacyStr  = parseInt(localStorage.getItem('w2_streak') || '0');
-    const legacyDate = localStorage.getItem('w2_lastDate') || '';
-    if (legacyXP || legacyDone.length) {
-      localStorage.setItem('w2-state', JSON.stringify({ xp: legacyXP, done: legacyDone, streak: legacyStr, lastDate: legacyDate }));
-    }
-    ['w2_xp','w2_done','w2_streak','w2_lastDate'].forEach(k => localStorage.removeItem(k));
-  }
-}
-
-
-migrateLegacy();
-
-let state = JSON.parse(localStorage.getItem(`w${WEEK}-state`) || '{}');
-state.xp     = state.xp     || 0;
-state.streak = state.streak || 0;
-state.done   = state.done   || [];
-state.lastDate= state.lastDate || '';
-
-function saveState() { localStorage.setItem(`w${WEEK}-state`, JSON.stringify(state)); }
-
-const LEVELS = [
-  { min:0,    label:'🌱 Beginner' },
-  { min:500,  label:'🔍 Explorer' },
-  { min:1500, label:'⚙️ Practitioner' },
-  { min:3000, label:'🤖 Engineer' },
-  { min:6000, label:'🧠 Expert' },
-  { min:10000,label:'🚀 Master' }
-];
-function getLevel(xp) {
-  for (let i = LEVELS.length - 1; i >= 0; i--) {
-    if (xp >= LEVELS[i].min) return LEVELS[i].label;
-  }
-  return LEVELS[0].label;
-}
-
-function syncUI() {
-  document.getElementById('xp-show').textContent   = `⚡ ${state.xp} XP`;
-  document.getElementById('streak-show').textContent = `🔥 ${state.streak} day streak`;
-  document.getElementById('sb-xp').textContent     = `${state.xp} XP earned`;
-  document.getElementById('sb-streak').textContent  = `${state.streak} day streak`;
-  const lvlEl = document.getElementById('level-show');
-  if (lvlEl) lvlEl.textContent = getLevel(state.xp || 0);
-
-  const pct = Math.round((state.done.length / DAYS.length) * 100);
-  const progBar = document.getElementById('prog-bar');
-  if (progBar) {
-    progBar.style.width = pct + '%';
-    progBar.parentElement.setAttribute('aria-valuenow', pct);
-  }
-  const progText = document.getElementById('prog-text');
-  if (progText) progText.textContent = `${state.done.length}/${DAYS.length} days`;
-
-  DAYS.forEach(d => {
-    const pill = document.getElementById('pill-' + d);
-    const sb   = document.getElementById('sb-' + d);
-    const btn  = document.getElementById('btn-day-' + d);
-    if (state.done.includes(d)) {
-      pill && pill.classList.add('done');
-      sb && sb.classList.add('done');
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-}
-
-function completeDay(day, xp) {
-  if (state.done.includes(day)) return;
-  state.done.push(day);
-  state.xp += xp;
-  const today = new Date().toDateString();
-  const yesterday = new Date(Date.now() - 86400000).toDateString();
-  if (state.lastDate !== today) {
-    if (state.lastDate === yesterday) { state.streak++; }
-    else { state.streak = 1; }
-    state.lastDate = today;
-  }
-  saveState();
-  syncUI();
-  showXPToast(xp, day);
-  const btn = document.getElementById('btn-day-' + day);
-  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + day + ' Complete'; }
-}
-
-function showXPToast(xp, day) {
-  const t = document.getElementById('xp-toast');
-  if (t) {
-    t.textContent = `+${xp} XP ⚡ — Day ${day} Complete!`;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
-}
-
-function goDay(n) {
-  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
-  document.querySelectorAll('.day-pill').forEach(p => { p.classList.remove('active'); p.setAttribute('aria-selected','false'); });
-  const section = document.getElementById('day-' + n);
-  if (section) { section.classList.add('active'); }
-  const sbItem = document.getElementById('sb-' + n);
-  if (sbItem) { sbItem.classList.add('active'); }
-  const pill = document.getElementById('pill-' + n);
-  if (pill) { pill.classList.add('active'); pill.setAttribute('aria-selected','true'); }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  renderMermaid('day-' + n);
-}
-
-function jumpTo(id) {
-  const day = document.querySelector('.day-section.active');
-  if (!day) return;
-  const dayNum = day.id.replace('day-', '');
-  const target = day.querySelector('#day-' + dayNum + '-' + id) || day.querySelector('#' + id);
-  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function toggleSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (!sb) return;
-  const open = sb.classList.toggle('open');
-  if (btn) btn.setAttribute('aria-expanded', String(open));
-}
-function closeSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (sb) sb.classList.remove('open');
-  if (btn) btn.setAttribute('aria-expanded', 'false');
-}
-
-function quiz(optEl, result, qid) {
-  const block = optEl.closest('.quiz-block');
-  if (!block) return;
-  block.querySelectorAll('.quiz-opt').forEach(o => {
-    o.style.pointerEvents = 'none';
-    if (o !== optEl) o.classList.add('dimmed');
-  });
-  optEl.classList.add(result === 'correct' ? 'correct' : 'wrong');
-  const letter = optEl.querySelector('.quiz-letter');
-  if (letter) letter.textContent = result === 'correct' ? '✓' : '✗';
-  const correctFb = block.querySelector('.correct-fb') || block.querySelector('#' + qid + '-correct');
-  const wrongFb   = block.querySelector('.wrong-fb') || block.querySelector('#' + qid + '-wrong');
-  if (result === 'correct') {
-    if (correctFb) {
-      correctFb.style.display = 'block';
-    }
-    state.xp += 10;
-    saveState();
-    syncUI();
-    showXPToast(10, 'quiz');
-  } else {
-    if (wrongFb) {
-      wrongFb.style.display = 'block';
-    }
-  }
-}
-
-function toggleTask(header) {
-  const body = header.nextElementSibling;
-  if (!body) return;
-  const isOpen = body.style.display === 'block';
-  body.style.display = isOpen ? 'none' : 'block';
-  header.setAttribute('aria-expanded', String(!isOpen));
-}
-
-// Add simple style fix for task header content if needed, but keeping toggleTask correct
-function toggleSolution(id) {
-  const box = document.getElementById(id);
-  if (!box) return;
-  const isOpen = box.style.display === 'block';
-  box.style.display = isOpen ? 'none' : 'block';
-}
-
-function copyCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (pre) {
-    navigator.clipboard.writeText(pre.innerText).then(() => {
-      btn.textContent = 'copied!';
-      setTimeout(() => btn.textContent = 'copy', 1500);
-    });
-  }
-}
-
-function runCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (!pre) return;
-  
-  // Copy code to clipboard
-  navigator.clipboard.writeText(pre.innerText);
-  
-  // Visual feedback on the button
-  btn.textContent = 'Copied!';
-  setTimeout(() => btn.textContent = 'Run', 2000);
-  
-  // Show compiler instructions modal
-  showCompilerModal();
-}
-
-function showCompilerModal() {
-  let modal = document.getElementById('compiler-modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'compiler-modal';
-    modal.style.cssText = `
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(13, 15, 20, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 10000;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    `;
-    
-    const card = document.createElement('div');
-    card.style.cssText = `
-      background: var(--bg2, #141720);
-      border: 1px solid var(--border, #252a40);
-      border-radius: 16px;
-      padding: 2.2rem;
-      max-width: 440px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.55);
-      text-align: center;
-      transform: scale(0.9);
-      transition: transform 0.25s ease;
-      color: var(--text, #dde2f0);
-      font-family: var(--font-body, system-ui, sans-serif);
-    `;
-    
-    card.innerHTML = `
-      <div style="font-size: 2.8rem; margin-bottom: 0.8rem;">🚀</div>
-      <h3 style="margin: 0 0 1rem 0; font-size: 1.35rem; color: var(--green, #4fd1a5); font-family: var(--font-head, sans-serif); font-weight: 800; letter-spacing: 0.5px;">Code Copied! Ready to Run</h3>
-      <p style="margin: 0 0 1.8rem 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted, #6b7590);">
-        The code is now copied to your clipboard.
-        <br><br>
-        1. Click below to open the online compiler in a new tab.
-        <br>
-        2. <strong>Paste (Ctrl+V or Cmd+V)</strong> the code into the editor.
-        <br>
-        3. Click the <strong>Run</strong> button in the compiler tab to execute.
-      </p>
-      <div style="display: flex; gap: 12px; justify-content: center;">
-        <button id="compiler-cancel" style="
-          background: transparent;
-          border: 1px solid var(--border, #252a40);
-          color: var(--text, #dde2f0);
-          padding: 10px 20px;
-          border-radius: 8px;
-          font-weight: 500;
-          cursor: pointer;
-          font-size: 0.9rem;
-          transition: background var(--transition, 0.2s);
-        ">Cancel</button>
-        <button id="compiler-go" style="
-          background: var(--green, #4fd1a5);
-          border: none;
-          color: var(--bg, #0d0f14);
-          padding: 10px 24px;
-          border-radius: 8px;
-          font-weight: 700;
-          cursor: pointer;
-          font-size: 0.9rem;
-          box-shadow: 0 4px 12px rgba(79, 209, 165, 0.2);
-          transition: transform var(--transition, 0.2s), opacity var(--transition, 0.2s);
-        ">Open Compiler</button>
-      </div>
-    `;
-    
-    modal.appendChild(card);
-    document.body.appendChild(modal);
-    
-    // Add hover styles
-    const style = document.createElement('style');
-    style.textContent = `
-      #compiler-cancel:hover { background: var(--bg3, #1c2030); }
-      #compiler-go:hover { transform: translateY(-1px); opacity: 0.95; }
-    `;
-    document.head.appendChild(style);
-
-    // Event listeners
-    document.getElementById('compiler-cancel').onclick = () => hide();
-    document.getElementById('compiler-go').onclick = () => {
-      window.open('https://www.programiz.com/python-programming/online-compiler/', '_blank');
-      hide();
-    };
-    
-    modal.onclick = (e) => {
-      if (e.target === modal) hide();
-    };
-  }
-
-  const modalElement = document.getElementById('compiler-modal');
-  function show() {
-    modalElement.style.display = 'flex';
-    modalElement.offsetHeight; // force reflow
-    modalElement.style.opacity = '1';
-    modalElement.querySelector('div').style.transform = 'scale(1)';
-  }
-
-  function hide() {
-    modalElement.style.opacity = '0';
-    modalElement.querySelector('div').style.transform = 'scale(0.9)';
-    setTimeout(() => {
-      modalElement.style.display = 'none';
-    }, 250);
-  }
-
-  show();
-}
-
-function checkPredict(id, answer) {
-  const input = document.getElementById(id + '-input');
-  const result = document.getElementById(id + '-result');
-  if (!input || !result) return;
-  
-  // Normalize whitespace, casing, quotes, brackets, and punctuation
-  const normalize = (str) => {
-    return String(str).replace(/\\n/g, ' ')
-              .replace(/\n/g, ' ')
-              .replace(/['"()\[\]]/g, '')
-              .replace(/[,;]/g, ' ')
-              .replace(/\s+/g, ' ')
-              .trim()
-              .toLowerCase();
-  };
-  
-  const userVal = normalize(input.value);
-  const correctVal = normalize(answer);
-  const isCorrect = userVal === correctVal || userVal.includes(correctVal);
-  
-  result.style.display = 'block';
-  if (isCorrect) {
-    result.style.background = 'rgba(79,209,165,.1)';
-    result.style.border = '1px solid rgba(79,209,165,.3)';
-    result.style.color = 'var(--green)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '✅ Correct! ' + answer.replace(/\n/g, ' ');
-    state.xp += 10; saveState(); syncUI();
-  } else {
-    result.style.background = 'rgba(229,107,140,.08)';
-    result.style.border = '1px solid rgba(229,107,140,.3)';
-    result.style.color = 'var(--pink)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '❌ Expected: ' + answer.replace(/\n/g, ' ') + ' — try again';
-  }
-}
-
-function openRepl() {
-  window.open('https://replit.com/languages/python3', '_blank');
-}
-
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') !== 'light';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  const btn = document.getElementById('theme-btn');
-  if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
-}
-(function() {
-  
-  document.querySelectorAll('.predict-input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const btn = input.nextElementSibling;
-        if (btn && btn.classList.contains('predict-btn')) {
-          btn.click();
-        }
-      }
-    });
-  });
-
-  const saved = localStorage.getItem('theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-})();
-
-function renderMermaid(dayId) {
-  const run = () => {
-    if (typeof mermaid === 'undefined') {
-      setTimeout(run, 100);
-      return;
-    }
-    if (!window.mermaidInitialized) {
-      mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
-      window.mermaidInitialized = true;
-    }
-    const sec = document.getElementById(dayId);
-    if (!sec) return;
-    const nodes = sec.querySelectorAll('.mermaid:not([data-rendered])');
-    if (!nodes.length) return;
-    if (mermaid.run) {
-      mermaid.run({ nodes }).then(() => {
-        nodes.forEach(n => n.setAttribute('data-rendered','1'));
-      }).catch((err) => { console.error('Mermaid render error:', err); });
-    } else if (mermaid.init) {
-      mermaid.init(undefined, nodes);
-      nodes.forEach(n => n.setAttribute('data-rendered','1'));
-    }
-  };
-  run();
-}
-
-function toggleCheck(lbl) {
-  let box = lbl.querySelector('.chk-box');
-  if (!box) return;
-  box.classList.toggle('checked');
-  lbl.classList.toggle('done-item');
-  if(box.classList.contains('checked')) box.innerText = '✓';
-  else box.innerText = '';
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  syncUI();
-  DAYS.forEach(d => {
-    if (state.done.includes(d)) {
-      const btn = document.getElementById('btn-day-' + d);
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-  
-  renderMermaid('day-' + DAYS[0]);
-  
-  
-  document.querySelectorAll('.predict-input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const btn = input.nextElementSibling;
-        if (btn && btn.classList.contains('predict-btn')) {
-          btn.click();
-        }
-      }
-    });
-  });
-
-  const saved = localStorage.getItem('theme');
-  const btn = document.getElementById('theme-btn');
-  if (btn && saved === 'light') btn.textContent = '🌙 Dark';
-});
+  const WEEK = 2;
+  const DAYS = [8,9,10,11,12,13,14];
 </script>
+<script src="course.js"></script>
 </body>
 </html>

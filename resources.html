@@ -33,6 +33,10 @@
   --w12: #a3e635;
   --w13: #22d3ee;
   --w14: #e56b8c;
+  --w15: #fbbf24;
+  --w16: #10b981;
+  --w17: #6366f1;
+  --w18: #f43f5e;
   --yt:    #ff4444;
   --web:   #3b82f6;
   --paper: #8b5cf6;
@@ -386,7 +390,7 @@ body {
 
 <div class="hero">
   <div class="hero-tag">135-Day AI/ML Roadmap</div>
-  <h1>Complete Resource Guide<br>All 14 Weeks</h1>
+  <h1>Complete Resource Guide<br>All 18 Weeks</h1>
   <p>Curated, verified, high-quality free resources for every week — YouTube, papers, docs, books, GitHub repos. No dead links, no filler.</p>
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:var(--yt)"></div>YouTube Video</div>
@@ -415,7 +419,11 @@ body {
     <a class="nav-pill" href="#w11" style="color:var(--w11)">W11 GANs</a>
     <a class="nav-pill" href="#w12" style="color:var(--w12)">W12 Attention</a>
     <a class="nav-pill" href="#w13" style="color:var(--w13)">W13 NLP</a>
-    <a class="nav-pill" href="#w14" style="color:var(--w14)">W14 Transformers</a>
+    <a class=nav-pill href="#w14" style="color:var(--w14)">W14 Transformers</a>
+    <a class=nav-pill href="#w15" style="color:var(--w15)">W15 LLM Eng</a>
+    <a class=nav-pill href="#w16" style="color:var(--w16)">W16 Production AI</a>
+    <a class=nav-pill href="#w17" style="color:var(--w17)">W17 MLOps+Deploy</a>
+    <a class=nav-pill href="#w18" style="color:var(--w18)">W18 Capstone</a>
   </div>
 </div>
 
@@ -1625,6 +1633,183 @@ body {
         <div class="res-why">&#10026; Best for: Day 97 tokenizer mechanics.</div>
       </div>
     </a>
+  </div>
+</div>
+
+
+<div class="week-section" id="w15">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(251,191,36,.12);color:var(--w15)">WEEK 15</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w15)">LLM Engineering</h2>
+      <div class="week-sub">Days 101&#8211;107 &middot; Prompt Engineering, Fine-tuning, LoRA, PEFT, RAG</div>
+    </div>
+    <div class="week-days-tag">Days 101&#8211;107</div>
+  </div>
+  <div class="must-banner">&#9733; Must-watch first: Andrej Karpathy's 'Intro to Large Language Models' (YouTube) &#8212; best overview of LLM scaling, fine-tuning, security.</div>
+  <div class="day-group">
+    <div class="day-group-label">Core LLM &amp; Fine-Tuning Resources</div>
+    <div class="res-grid">
+      <a class="res-card type-yt-card" href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank">
+        <div class="res-icon type-yt">&#9654;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--yt)">YouTube Video</div>
+          <span class="res-title">Andrej Karpathy &#8212; Intro to Large Language Models</span>
+          <div class="res-desc">A comprehensive 1-hour overview. Covers tokenization, pre-training, instruction fine-tuning, RLHF, and future security risks like prompt injection.</div>
+          <div class="res-why">&#10026; Best for: Day 101 introduction.</div>
+        </div>
+      </a>
+      <a class="res-card type-course-card" href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" target="_blank">
+        <div class="res-icon type-course">&#127891;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--course)">DeepLearning.AI Course</div>
+          <span class="res-title">ChatGPT Prompt Engineering for Developers</span>
+          <div class="res-desc">Interactive 1-hour course by Andrew Ng and OpenAI developers. Covers prompting guidelines, system prompts, summarization, and building chatbots.</div>
+          <div class="res-why">&#10026; Best for: Day 102&#8211;103 prompting tasks.</div>
+        </div>
+      </a>
+      <a class="res-card type-doc-card" href="https://huggingface.co/docs/peft/index" target="_blank">
+        <div class="res-icon type-doc">&#128214;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--doc)">Official Docs</div>
+          <span class="res-title">HuggingFace PEFT Library &#8212; LoRA &amp; QLoRA Guide</span>
+          <div class="res-desc">Complete guide to parameter-efficient fine-tuning. Includes LoraConfig parameters, model merging, and saving fine-tuned weights.</div>
+          <div class="res-why">&#10026; Best for: Day 104&#8211;105 LoRA fine-tuning tasks.</div>
+        </div>
+      </a>
+      <a class="res-card type-web-card" href="https://python.langchain.com/docs/tutorials/rag/" target="_blank">
+        <div class="res-icon type-web">&#127760;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--web)">Tutorial</div>
+          <span class="res-title">LangChain RAG (Retrieval-Augmented Generation) Guide</span>
+          <div class="res-desc">Step-by-step tutorial on building a Q&amp;A pipeline: document loading, chunking, indexing with vector stores, and answering via LLM.</div>
+          <div class="res-why">&#10026; Best for: Day 106&#8211;107 RAG applications.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="week-section" id="w16">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(16,185,129,.12);color:var(--w16)">WEEK 16</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w16)">Production AI Engineering &amp; Search</h2>
+      <div class="week-sub">Days 108&#8211;117 &middot; Vector Databases, Indexing (HNSW, IVFFlat), Semantic Search, Embeddings</div>
+    </div>
+    <div class="week-days-tag">Days 108&#8211;117</div>
+  </div>
+  <div class="must-banner">&#9733; Must-read first: Pinecone's 'Vector Databases' (Learning Center) &#8212; standard reference for distance metrics, quantisation, and indexing.</div>
+  <div class="day-group">
+    <div class="day-group-label">Vector Search &amp; Database Guides</div>
+    <div class="res-grid">
+      <a class="res-card type-doc-card" href="https://docs.trychroma.com/" target="_blank">
+        <div class="res-icon type-doc">&#128214;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--doc)">Official Docs</div>
+          <span class="res-title">ChromaDB Developer Documentation</span>
+          <div class="res-desc">Quickstart and API reference for the open-source embedding database. Covers collection creation, metadata filtering, and embedding model bindings.</div>
+          <div class="res-why">&#10026; Best for: Day 108&#8211;110 vector search database setup.</div>
+        </div>
+      </a>
+      <a class="res-card type-web-card" href="https://www.pinecone.io/learn/series/vector-databases/" target="_blank">
+        <div class="res-icon type-web">&#127760;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--web)">Learning Center</div>
+          <span class="res-title">Pinecone Vector Database Master Class</span>
+          <div class="res-desc">Deep dive articles explaining the mathematics of vector similarity (Cosine, L2, Dot Product), indexing algorithms (HNSW, IVFFlat), and filtering models.</div>
+          <div class="res-why">&#10026; Best for: Day 111&#8211;113 semantic indexing understanding.</div>
+        </div>
+      </a>
+      <a class="res-card type-github-card" href="https://github.com/facebookresearch/faiss" target="_blank">
+        <div class="res-icon type-github">&#128187;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--github)">GitHub Repo</div>
+          <span class="res-title">FAISS (Facebook AI Similarity Search) Repo</span>
+          <div class="res-desc">Library for efficient similarity search and clustering of dense vectors. Includes C++ and Python wrapper implementation of GPU/CPU indexes.</div>
+          <div class="res-why">&#10026; Best for: Day 114&#8211;115 custom local index building.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="week-section" id="w17">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(99,102,241,.12);color:var(--w17)">WEEK 17</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w17)">Deploy, Flask, Docker &amp; MLOps</h2>
+      <div class="week-sub">Days 118&#8211;124 &middot; Flask, FastAPI APIs, Containerization (Docker), Multi-Container (Docker Compose)</div>
+    </div>
+    <div class="week-days-tag">Days 118&#8211;124</div>
+  </div>
+  <div class="must-banner">&#9733; Must-watch first: freeCodeCamp's 'Docker for Beginners' (3 hrs) &#8212; covers container creation, networking, Dockerfiles, and environment management.</div>
+  <div class="day-group">
+    <div class="day-group-label">Deployment &amp; Containerization Tools</div>
+    <div class="res-grid">
+      <a class="res-card type-blog-card" href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" target="_blank">
+        <div class="res-icon type-blog">&#9997;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--blog)">Blog Tutorial</div>
+          <span class="res-title">The Flask Mega-Tutorial &#8212; Miguel Grinberg</span>
+          <div class="res-desc">The gold standard tutorial for writing web applications in Flask. Covers routing, database connections, application structure, and deployment.</div>
+          <div class="res-why">&#10026; Best for: Day 118&#8211;119 Flask API creation.</div>
+        </div>
+      </a>
+      <a class="res-card type-doc-card" href="https://fastapi.tiangolo.com/tutorial/" target="_blank">
+        <div class="res-icon type-doc">&#128214;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--doc)">Official Docs</div>
+          <span class="res-title">FastAPI Tutorial User Guide &#8212; Complete Guide</span>
+          <div class="res-desc">FastAPI official user guide explaining Pydantic request models, asynchronous routing, dependency injection, and automatic Swagger UI docs.</div>
+          <div class="res-why">&#10026; Best for: Day 120 FastAPI tasks.</div>
+        </div>
+      </a>
+      <a class="res-card type-doc-card" href="https://docs.docker.com/get-started/" target="_blank">
+        <div class="res-icon type-doc">&#128214;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--doc)">Official Docs</div>
+          <span class="res-title">Docker Official Getting Started Guide</span>
+          <div class="res-desc">Official documentation on building image containers, writing Dockerfiles, managing volumes, port mapping, and running services in isolated sandboxes.</div>
+          <div class="res-why">&#10026; Best for: Day 121&#8211;122 Dockerfile orchestration.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="week-section" id="w18">
+  <div class="week-header">
+    <div class="week-badge" style="background:rgba(244,63,94,.12);color:var(--w18)">WEEK 18</div>
+    <div class="week-title-block">
+      <h2 style="color:var(--w18)">Capstone &amp; Portfolio Polish</h2>
+      <div class="week-sub">Days 125&#8211;135 &middot; Streamlit App Development, Hugging Face Spaces Deployment, Portfolio Showcase</div>
+    </div>
+    <div class="week-days-tag">Days 125&#8211;135</div>
+  </div>
+  <div class="must-banner">&#9733; Must-read first: Streamlit's 'API Reference' (Docs) &#8212; the complete reference for rendering charts, sidebar filters, tables, and buttons in pure Python.</div>
+  <div class="day-group">
+    <div class="day-group-label">UI Frameworks &amp; Model Sharing</div>
+    <div class="res-grid">
+      <a class="res-card type-doc-card" href="https://docs.streamlit.io/" target="_blank">
+        <div class="res-icon type-doc">&#128214;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--doc)">Official Docs</div>
+          <span class="res-title">Streamlit Official Developer Documentation</span>
+          <div class="res-desc">Quickstart and design system components for building web applications in pure Python. Highly optimized for data scientists to quickly demo models.</div>
+          <div class="res-why">&#10026; Best for: Day 125&#8211;127 capstone dashboard.</div>
+        </div>
+      </a>
+      <a class="res-card type-web-card" href="https://huggingface.co/docs/hub/spaces" target="_blank">
+        <div class="res-icon type-web">&#127760;</div>
+        <div class="res-body">
+          <div class="res-type" style="color:var(--web)">Learning Center</div>
+          <span class="res-title">Hugging Face Spaces deployment tutorial</span>
+          <div class="res-desc">Step-by-step guide on creating HF Spaces repositories, uploading Streamlit/Gradio code, managing secrets, and configuring hardware parameters.</div>
+          <div class="res-why">&#10026; Best for: Day 128&#8211;130 model deployment.</div>
+        </div>
+      </a>
+    </div>
   </div>
 </div>
 

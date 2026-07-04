@@ -7,17 +7,22 @@
 <title>Week 5 — ML Fundamentals | 135-Day AI/ML Roadmap</title>
 <meta content="Week 5 — ML Fundamentals — Complete coursework, tasks, quizzes, and resources for Week 5 of the 135-Day AI/ML Roadmap." name="description"/>
 <link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%230d0f14'/&gt;&lt;text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'&gt;AI&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link rel="stylesheet" href="course.css">
 <style>
 :root {
   --accent-rgb: 108, 140, 255;
   --accent-sec-rgb: 56, 189, 248;
 }
 </style>
-<link rel="stylesheet" href="course.css">
+
+
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
   if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
 </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters:[{left:'66296',right:'66296',display:true},{left:'$',right:'$',display:false}]});"></script>
 </head>
 <body>
 <div class="xp-toast" id="xp-toast">+50 XP ⚡</div>
@@ -275,6 +280,15 @@ train, test = train_test_split(data, test_size=<span class="num">0.4</span>, ran
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">
     🔍 <strong>Search terms:</strong> <code>sklearn train_test_split ValueError, classification report precision recall explained</code>
 </div>
+
+<h2 class="sh2">🃏 Revision Flashcards — Day 31</h2>
+<p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
+<div class="flashcard-grid">
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Supervised vs Unsupervised?</div><div class="fc-back">Supervised uses labeled targets for prediction; unsupervised analyzes unlabeled data for underlying structures.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Features vs Targets?</div><div class="fc-back">Features (X) are the input variables; Targets (y) are the labels we wish to predict.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Train-Test Split?</div><div class="fc-back">Partitioning data (e.g., 80/20) to train the model on one subset and evaluate it on unseen data.</div></div></div>
+</div>
+
 <div id="day-31-resources-section">
 <h2 class="sh2">📚 Day 31 Resources</h2>
 <div class="resources-grid">
@@ -503,6 +517,15 @@ y_pred = np.array([<span class="num">3</span>, <span class="num">3</span>, <span
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">
     🔍 <strong>Search terms:</strong> <code>numpy broadcasting tutorial, ordinary least squares linear regression math derivation</code>
 </div>
+
+<h2 class="sh2">🃏 Revision Flashcards — Day 32</h2>
+<p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
+<div class="flashcard-grid">
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">MAE vs MSE?</div><div class="fc-back">MAE measures absolute errors (robust to outliers); MSE squares errors (penalizes large errors heavily).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">R-squared (R²)?</div><div class="fc-back">Proportion of variance in the target explained by the model's features (0 to 1 scale).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">RMSE?</div><div class="fc-back">Root Mean Squared Error. Standard error metric on the same scale as the target variable.</div></div></div>
+</div>
+
 <div id="day-32-resources-section">
 <h2 class="sh2">📚 Day 32 Resources</h2>
 <div class="resources-grid">
@@ -837,6 +860,42 @@ print(f"P: {precision:.1f}, R: {recall:.1f}")</pre></div>
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. Bias-Variance Decomposition</h3>
 <p>The total expected prediction error of any ML model can be decomposed into three mathematically separate parts:</p>
+
+<figure class="svg-diagram">
+<svg viewBox="0 0 650 320" xmlns="http://www.w3.org/2000/svg" width="650" height="320" role="img" aria-label="Bias-Variance Tradeoff showing U-shaped total error curve">
+  <defs>
+    <linearGradient id="bv-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1e2e"/><stop offset="100%" stop-color="#0d1117"/></linearGradient>
+  </defs>
+  <rect width="650" height="320" rx="12" fill="url(#bv-bg)"/>
+  <!-- Axes -->
+  <line x1="80" y1="260" x2="600" y2="260" stroke="#6b7590" stroke-width="1.5"/>
+  <line x1="80" y1="260" x2="80" y2="40" stroke="#6b7590" stroke-width="1.5"/>
+  <text x="340" y="295" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#c9d1d9">Model Complexity →</text>
+  <text x="30" y="150" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="13" fill="#c9d1d9" transform="rotate(-90,30,150)">Error</text>
+  <!-- Bias² curve (decreasing) -->
+  <path d="M100,80 Q200,85 300,140 Q400,200 580,240" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="8,4"/>
+  <text x="520" y="228" font-family="DM Sans,sans-serif" font-size="11" fill="#58a6ff" font-weight="600">Bias²</text>
+  <!-- Variance curve (increasing) -->
+  <path d="M100,240 Q200,235 300,200 Q400,140 560,60" fill="none" stroke="#f97583" stroke-width="2.5" stroke-dasharray="8,4"/>
+  <text x="520" y="65" font-family="DM Sans,sans-serif" font-size="11" fill="#f97583" font-weight="600">Variance</text>
+  <!-- Total Error curve (U-shaped) -->
+  <path d="M100,100 Q200,85 280,95 Q340,105 380,130 Q450,170 560,240" fill="none" stroke="#f0c846" stroke-width="3"/>
+  <text x="520" y="255" font-family="DM Sans,sans-serif" font-size="11" fill="#f0c846" font-weight="700">Total Error</text>
+  <!-- Sweet spot marker -->
+  <circle cx="260" cy="92" r="6" fill="none" stroke="#7ee787" stroke-width="2"/>
+  <line x1="260" y1="98" x2="260" y2="260" stroke="#7ee787" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="260" y="30" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#7ee787" font-weight="700">⬇ Optimal Complexity</text>
+  <!-- Underfitting / Overfitting zones -->
+  <rect x="85" y="265" width="170" height="22" rx="4" fill="rgba(88,166,255,0.15)"/>
+  <text x="170" y="280" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#58a6ff">Underfitting (High Bias)</text>
+  <rect x="410" y="265" width="180" height="22" rx="4" fill="rgba(249,117,131,0.15)"/>
+  <text x="500" y="280" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#f97583">Overfitting (High Variance)</text>
+  <!-- Title -->
+  <text x="340" y="25" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" fill="#e6edf3" font-weight="700">Bias-Variance Tradeoff</text>
+</svg>
+<figcaption>Total error = Bias² + Variance + Irreducible Noise. The optimal model complexity minimizes total error — not just training error.</figcaption>
+</figure>
+
 <div class="math-block">
 <span class="formula">$$Total Error = Bias² + Variance + Irreducible Error$$</span>
 <span class="desc"><strong>Bias:</strong> Error from erroneous assumptions (e.g., fitting a line to circular data). High bias → Underfitting.</span>
@@ -948,6 +1007,15 @@ print("High Variance Model:", "A" if 0.95 - 0.01 &gt; 0.17 - 0.15 else "B")</pre
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">
     🔍 <strong>Search terms:</strong> <code>bias variance tradeoff mathematically, validation loss curves overfitting overfitting</code>
 </div>
+
+<h2 class="sh2">🃏 Revision Flashcards — Day 34</h2>
+<p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
+<div class="flashcard-grid">
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Bias-Variance Tradeoff?</div><div class="fc-back">Balancing error from simple assumptions (Bias) vs error from sensitivity to training noise (Variance).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Overfitting?</div><div class="fc-back">High variance. Fits training data perfectly but fails to generalize to unseen test data.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">K-Fold Cross-Validation?</div><div class="fc-back">Splitting data into K folds, training on K-1, validating on 1, and repeating K times for a stable score.</div></div></div>
+</div>
+
 <div id="day-34-resources-section">
 <h2 class="sh2">📚 Day 34 Resources</h2>
 <div class="resources-grid">
@@ -1061,6 +1129,43 @@ print("High Variance Model:", "A" if 0.95 - 0.01 &gt; 0.17 - 0.15 else "B")</pre
 <p><strong>Hyperparameters:</strong> External configurations specified by the developer before training starts (e.g. learning rate, number of neighbors $k$ in KNN, max depth of a Decision Tree).</p>
 <h3 class="sh3">2. Cross-Validation (K-Fold vs Stratified K-Fold)</h3>
 <p>Simple train/test split has high variance depending on where the split occurred. K-Fold splits the dataset into $K$ blocks, training on $K-1$ and validating on the remaining block, repeating $K$ times. Stratified K-Fold ensures each fold maintains the same percentage of target class labels as the complete dataset.</p>
+
+<figure class="svg-diagram">
+<svg viewBox="0 0 620 220" xmlns="http://www.w3.org/2000/svg" width="620" height="220" role="img" aria-label="5-Fold Cross-Validation showing rotating validation fold">
+  <defs>
+    <linearGradient id="kf-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1e2e"/><stop offset="100%" stop-color="#0d1117"/></linearGradient>
+  </defs>
+  <rect width="620" height="220" rx="12" fill="url(#kf-bg)"/>
+  <text x="310" y="28" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" fill="#e6edf3" font-weight="700">5-Fold Cross-Validation</text>
+  <!-- Labels -->
+  <text x="52" y="62" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#c9d1d9">Fold 1</text>
+  <text x="52" y="92" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#c9d1d9">Fold 2</text>
+  <text x="52" y="122" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#c9d1d9">Fold 3</text>
+  <text x="52" y="152" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#c9d1d9">Fold 4</text>
+  <text x="52" y="182" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#c9d1d9">Fold 5</text>
+  <!-- Fold 1: Val is block 1 -->
+  <rect x="90" y="48" width="90" height="20" rx="3" fill="#f97583" opacity="0.8"/><rect x="185" y="48" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="280" y="48" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="375" y="48" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="470" y="48" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/>
+  <!-- Fold 2: Val is block 2 -->
+  <rect x="90" y="78" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="185" y="78" width="90" height="20" rx="3" fill="#f97583" opacity="0.8"/><rect x="280" y="78" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="375" y="78" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="470" y="78" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/>
+  <!-- Fold 3: Val is block 3 -->
+  <rect x="90" y="108" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="185" y="108" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="280" y="108" width="90" height="20" rx="3" fill="#f97583" opacity="0.8"/><rect x="375" y="108" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="470" y="108" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/>
+  <!-- Fold 4: Val is block 4 -->
+  <rect x="90" y="138" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="185" y="138" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="280" y="138" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="375" y="138" width="90" height="20" rx="3" fill="#f97583" opacity="0.8"/><rect x="470" y="138" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/>
+  <!-- Fold 5: Val is block 5 -->
+  <rect x="90" y="168" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="185" y="168" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="280" y="168" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="375" y="168" width="90" height="20" rx="3" fill="#58a6ff" opacity="0.5"/><rect x="470" y="168" width="90" height="20" rx="3" fill="#f97583" opacity="0.8"/>
+  <!-- Legend -->
+  <rect x="200" y="200" width="14" height="10" rx="2" fill="#58a6ff" opacity="0.5"/><text x="220" y="209" font-family="DM Sans,sans-serif" font-size="10" fill="#c9d1d9">Training</text>
+  <rect x="310" y="200" width="14" height="10" rx="2" fill="#f97583" opacity="0.8"/><text x="330" y="209" font-family="DM Sans,sans-serif" font-size="10" fill="#c9d1d9">Validation</text>
+  <!-- Score labels -->
+  <text x="585" y="62" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#7ee787">Score₁</text>
+  <text x="585" y="92" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#7ee787">Score₂</text>
+  <text x="585" y="122" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#7ee787">Score₃</text>
+  <text x="585" y="152" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#7ee787">Score₄</text>
+  <text x="585" y="182" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#7ee787">Score₅</text>
+</svg>
+<figcaption>Each fold takes turns as the validation set. Final score = mean of all 5 scores. This eliminates evaluation bias from a single random split.</figcaption>
+</figure>
+
 <div class="mermaid">
       graph TD
       F1["Fold 1"] --> V1["Val"] & T1["Train"] & T2["Train"] & T3["Train"]
@@ -1177,6 +1282,15 @@ print("Total fits:", fits)</pre></div>
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">
     🔍 <strong>Search terms:</strong> <code>randomizedsearchcv vs gridsearchcv sklearn, param_grid syntax sklearn pipeline</code>
 </div>
+
+<h2 class="sh2">🃏 Revision Flashcards — Day 35</h2>
+<p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
+<div class="flashcard-grid">
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Grid Search vs Random Search?</div><div class="fc-back">Grid search exhaustively tries every parameter combination; random search samples combinations randomly (more efficient).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Hyperparameter?</div><div class="fc-back">Configuration external to the model (like learning rate or depth) set before training begins.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Validation Set?</div><div class="fc-back">Subset used to tune hyperparameters and select models without touching the final test set.</div></div></div>
+</div>
+
 <div id="day-35-resources-section">
 <h2 class="sh2">📚 Day 35 Resources</h2>
 <div class="resources-grid">
@@ -1407,6 +1521,15 @@ print("Distance:", dist)</pre></div>
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">
     🔍 <strong>Search terms:</strong> <code>sklearn kneighborsclassifier distance metrics, naive bayes conditional independence formula</code>
 </div>
+
+<h2 class="sh2">🃏 Revision Flashcards — Day 36</h2>
+<p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
+<div class="flashcard-grid">
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">KNN Classifier?</div><div class="fc-back">K-Nearest Neighbors. Classifies a point based on the majority label of its K closest neighbors.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Bayes Theorem?</div><div class="fc-back">P(A|B) = [P(B|A) * P(A)] / P(B). Calculates posterior probability from prior and likelihood.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Naive assumption?</div><div class="fc-back">Naive Bayes assumes all input features are independent given the target label.</div></div></div>
+</div>
+
 <div id="day-36-resources-section">
 <h2 class="sh2">📚 Day 36 Resources</h2>
 <div class="resources-grid">
@@ -1785,421 +1908,9 @@ print(knn.predict(X_test)) # Correctly yields [0]</code></pre>
 </main>
 </div><!-- /layout -->
 <script>
-// ═══════════════════════════════════════════
-//  WEEK 5 — STATE & GAMIFICATION ENGINE
-// ═══════════════════════════════════════════
-const WEEK = 5;
-const DAYS = [31,32,33,34,35,36,37];
-
-
-
-
-
-let state = JSON.parse(localStorage.getItem(`w${WEEK}-state`) || '{}');
-state.xp     = state.xp     || 0;
-state.streak = state.streak || 0;
-state.done   = state.done   || [];
-state.lastDate= state.lastDate || '';
-
-function saveState() { localStorage.setItem(`w${WEEK}-state`, JSON.stringify(state)); }
-
-const LEVELS = [
-  { min:0,    label:'🌱 Beginner' },
-  { min:500,  label:'🔍 Explorer' },
-  { min:1500, label:'⚙️ Practitioner' },
-  { min:3000, label:'🤖 Engineer' },
-  { min:6000, label:'🧠 Expert' },
-  { min:10000,label:'🚀 Master' }
-];
-function getLevel(xp) {
-  for (let i = LEVELS.length - 1; i >= 0; i--) {
-    if (xp >= LEVELS[i].min) return LEVELS[i].label;
-  }
-  return LEVELS[0].label;
-}
-
-function syncUI() {
-  document.getElementById('xp-show').textContent   = `⚡ ${state.xp} XP`;
-  document.getElementById('streak-show').textContent = `🔥 ${state.streak} day streak`;
-  document.getElementById('sb-xp').textContent     = `${state.xp} XP earned`;
-  document.getElementById('sb-streak').textContent  = `${state.streak} day streak`;
-  const lvlEl = document.getElementById('level-show');
-  if (lvlEl) lvlEl.textContent = getLevel(state.xp || 0);
-
-  const pct = Math.round((state.done.length / DAYS.length) * 100);
-  const progBar = document.getElementById('prog-bar');
-  if (progBar) {
-    progBar.style.width = pct + '%';
-    progBar.parentElement.setAttribute('aria-valuenow', pct);
-  }
-  const progText = document.getElementById('prog-text');
-  if (progText) progText.textContent = `${state.done.length}/${DAYS.length} days`;
-
-  DAYS.forEach(d => {
-    const pill = document.getElementById('pill-' + d);
-    const sb   = document.getElementById('sb-' + d);
-    const btn  = document.getElementById('btn-day-' + d);
-    if (state.done.includes(d)) {
-      pill && pill.classList.add('done');
-      sb && sb.classList.add('done');
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-}
-
-function completeDay(day, xp) {
-  if (state.done.includes(day)) return;
-  state.done.push(day);
-  state.xp += xp;
-  const today = new Date().toDateString();
-  const yesterday = new Date(Date.now() - 86400000).toDateString();
-  if (state.lastDate !== today) {
-    if (state.lastDate === yesterday) { state.streak++; }
-    else { state.streak = 1; }
-    state.lastDate = today;
-  }
-  saveState();
-  syncUI();
-  showXPToast(xp, day);
-  const btn = document.getElementById('btn-day-' + day);
-  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + day + ' Complete'; }
-}
-
-function showXPToast(xp, day) {
-  const t = document.getElementById('xp-toast');
-  if (t) {
-    t.textContent = `+${xp} XP ⚡ — Day ${day} Complete!`;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
-}
-
-function goDay(n) {
-  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
-  document.querySelectorAll('.day-pill').forEach(p => { p.classList.remove('active'); p.setAttribute('aria-selected','false'); });
-  const section = document.getElementById('day-' + n);
-  if (section) { section.classList.add('active'); }
-  const sbItem = document.getElementById('sb-' + n);
-  if (sbItem) { sbItem.classList.add('active'); }
-  const pill = document.getElementById('pill-' + n);
-  if (pill) { pill.classList.add('active'); pill.setAttribute('aria-selected','true'); }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  renderMermaid('day-' + n);
-}
-
-function jumpTo(id) {
-  const day = document.querySelector('.day-section.active');
-  if (!day) return;
-  const dayNum = day.id.replace('day-', '');
-  const target = day.querySelector('#day-' + dayNum + '-' + id) || day.querySelector('#' + id);
-  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function toggleSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (!sb) return;
-  const open = sb.classList.toggle('open');
-  if (btn) btn.setAttribute('aria-expanded', String(open));
-}
-function closeSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (sb) sb.classList.remove('open');
-  if (btn) btn.setAttribute('aria-expanded', 'false');
-}
-
-function quiz(optEl, result, qid) {
-  const block = optEl.closest('.quiz-block');
-  if (!block) return;
-  block.querySelectorAll('.quiz-opt').forEach(o => {
-    o.style.pointerEvents = 'none';
-    if (o !== optEl) o.classList.add('dimmed');
-  });
-  optEl.classList.add(result === 'correct' ? 'correct' : 'wrong');
-  const letter = optEl.querySelector('.quiz-letter');
-  if (letter) letter.textContent = result === 'correct' ? '✓' : '✗';
-  const correctFb = block.querySelector('.correct-fb') || block.querySelector('#' + qid + '-correct');
-  const wrongFb   = block.querySelector('.wrong-fb') || block.querySelector('#' + qid + '-wrong');
-  if (result === 'correct') {
-    if (correctFb) {
-      correctFb.style.display = 'block';
-    }
-    state.xp += 10;
-    saveState();
-    syncUI();
-    showXPToast(10, 'quiz');
-  } else {
-    if (wrongFb) {
-      wrongFb.style.display = 'block';
-    }
-  }
-}
-
-function toggleTask(header) {
-  const body = header.nextElementSibling;
-  if (!body) return;
-  const isOpen = body.style.display === 'block';
-  body.style.display = isOpen ? 'none' : 'block';
-  header.setAttribute('aria-expanded', String(!isOpen));
-}
-
-// Add simple style fix for task header content if needed, but keeping toggleTask correct
-function toggleSolution(id) {
-  const box = document.getElementById(id);
-  if (!box) return;
-  const isOpen = box.style.display === 'block';
-  box.style.display = isOpen ? 'none' : 'block';
-}
-
-function copyCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (pre) {
-    navigator.clipboard.writeText(pre.innerText).then(() => {
-      btn.textContent = 'copied!';
-      setTimeout(() => btn.textContent = 'copy', 1500);
-    });
-  }
-}
-
-function runCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (!pre) return;
-  
-  // Copy code to clipboard
-  navigator.clipboard.writeText(pre.innerText);
-  
-  // Visual feedback on the button
-  btn.textContent = 'Copied!';
-  setTimeout(() => btn.textContent = 'Run', 2000);
-  
-  // Show compiler instructions modal
-  showCompilerModal();
-}
-
-function showCompilerModal() {
-  let modal = document.getElementById('compiler-modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'compiler-modal';
-    modal.style.cssText = `
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(13, 15, 20, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 10000;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    `;
-    
-    const card = document.createElement('div');
-    card.style.cssText = `
-      background: var(--bg2, #141720);
-      border: 1px solid var(--border, #252a40);
-      border-radius: 16px;
-      padding: 2.2rem;
-      max-width: 440px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.55);
-      text-align: center;
-      transform: scale(0.9);
-      transition: transform 0.25s ease;
-      color: var(--text, #dde2f0);
-      font-family: var(--font-body, system-ui, sans-serif);
-    `;
-    
-    card.innerHTML = `
-      <div style="font-size: 2.8rem; margin-bottom: 0.8rem;">🚀</div>
-      <h3 style="margin: 0 0 1rem 0; font-size: 1.35rem; color: var(--green, #4fd1a5); font-family: var(--font-head, sans-serif); font-weight: 800; letter-spacing: 0.5px;">Code Copied! Ready to Run</h3>
-      <p style="margin: 0 0 1.8rem 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted, #6b7590);">
-        The code is now copied to your clipboard.
-        <br><br>
-        1. Click below to open the online compiler in a new tab.
-        <br>
-        2. <strong>Paste (Ctrl+V or Cmd+V)</strong> the code into the editor.
-        <br>
-        3. Click the <strong>Run</strong> button in the compiler tab to execute.
-      </p>
-      <div style="display: flex; gap: 12px; justify-content: center;">
-        <button id="compiler-cancel" style="
-          background: transparent;
-          border: 1px solid var(--border, #252a40);
-          color: var(--text, #dde2f0);
-          padding: 10px 20px;
-          border-radius: 8px;
-          font-weight: 500;
-          cursor: pointer;
-          font-size: 0.9rem;
-          transition: background var(--transition, 0.2s);
-        ">Cancel</button>
-        <button id="compiler-go" style="
-          background: var(--green, #4fd1a5);
-          border: none;
-          color: var(--bg, #0d0f14);
-          padding: 10px 24px;
-          border-radius: 8px;
-          font-weight: 700;
-          cursor: pointer;
-          font-size: 0.9rem;
-          box-shadow: 0 4px 12px rgba(79, 209, 165, 0.2);
-          transition: transform var(--transition, 0.2s), opacity var(--transition, 0.2s);
-        ">Open Compiler</button>
-      </div>
-    `;
-    
-    modal.appendChild(card);
-    document.body.appendChild(modal);
-    
-    // Add hover styles
-    const style = document.createElement('style');
-    style.textContent = `
-      #compiler-cancel:hover { background: var(--bg3, #1c2030); }
-      #compiler-go:hover { transform: translateY(-1px); opacity: 0.95; }
-    `;
-    document.head.appendChild(style);
-
-    // Event listeners
-    document.getElementById('compiler-cancel').onclick = () => hide();
-    document.getElementById('compiler-go').onclick = () => {
-      window.open('https://www.programiz.com/python-programming/online-compiler/', '_blank');
-      hide();
-    };
-    
-    modal.onclick = (e) => {
-      if (e.target === modal) hide();
-    };
-  }
-
-  const modalElement = document.getElementById('compiler-modal');
-  function show() {
-    modalElement.style.display = 'flex';
-    modalElement.offsetHeight; // force reflow
-    modalElement.style.opacity = '1';
-    modalElement.querySelector('div').style.transform = 'scale(1)';
-  }
-
-  function hide() {
-    modalElement.style.opacity = '0';
-    modalElement.querySelector('div').style.transform = 'scale(0.9)';
-    setTimeout(() => {
-      modalElement.style.display = 'none';
-    }, 250);
-  }
-
-  show();
-}
-
-function checkPredict(id, answer) {
-  const input = document.getElementById(id + '-input');
-  const result = document.getElementById(id + '-result');
-  if (!input || !result) return;
-  
-  // Normalize whitespace, casing, quotes, brackets, and punctuation
-  const normalize = (str) => {
-    return str.replace(/\\n/g, ' ')
-              .replace(/\s+/g, ' ')
-              .replace(/['"()\[\]]/g, '')
-              .replace(/[,;]/g, ' ')
-              .replace(/\s+/g, ' ')
-              .trim()
-              .toLowerCase();
-  };
-  
-  const userVal = normalize(input.value);
-  const correctVal = normalize(answer);
-  const isCorrect = userVal === correctVal || userVal.includes(correctVal);
-  
-  result.style.display = 'block';
-  if (isCorrect) {
-    result.style.background = 'rgba(79,209,165,.1)';
-    result.style.border = '1px solid rgba(79,209,165,.3)';
-    result.style.color = 'var(--green)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '✅ Correct! ' + answer.replace(/\n/g, ' ');
-    state.xp += 10; saveState(); syncUI();
-  } else {
-    result.style.background = 'rgba(229,107,140,.08)';
-    result.style.border = '1px solid rgba(229,107,140,.3)';
-    result.style.color = 'var(--pink)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '❌ Expected: ' + answer.replace(/\n/g, ' ') + ' — try again';
-  }
-}
-
-function openRepl() {
-  window.open('https://replit.com/languages/python3', '_blank');
-}
-
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') !== 'light';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  const btn = document.getElementById('theme-btn');
-  if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
-}
-(function() {
-  const saved = localStorage.getItem('theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-})();
-
-function renderMermaid(dayId) {
-  const run = () => {
-    if (typeof mermaid === 'undefined') {
-      setTimeout(run, 100);
-      return;
-    }
-    if (!window.mermaidInitialized) {
-      mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
-      window.mermaidInitialized = true;
-    }
-    const sec = document.getElementById(dayId);
-    if (!sec) return;
-    const nodes = sec.querySelectorAll('.mermaid:not([data-rendered])');
-    if (!nodes.length) return;
-    if (mermaid.run) {
-      mermaid.run({ nodes }).then(() => {
-        nodes.forEach(n => n.setAttribute('data-rendered','1'));
-      }).catch((err) => { console.error('Mermaid render error:', err); });
-    } else if (mermaid.init) {
-      mermaid.init(undefined, nodes);
-      nodes.forEach(n => n.setAttribute('data-rendered','1'));
-    }
-  };
-  run();
-}
-
-function toggleCheck(lbl) {
-  let box = lbl.querySelector('.chk-box');
-  if (!box) return;
-  box.classList.toggle('checked');
-  lbl.classList.toggle('done-item');
-  if(box.classList.contains('checked')) box.innerText = '✓';
-  else box.innerText = '';
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  syncUI();
-  DAYS.forEach(d => {
-    if (state.done.includes(d)) {
-      const btn = document.getElementById('btn-day-' + d);
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-  
-  renderMermaid('day-' + DAYS[0]);
-  
-  const saved = localStorage.getItem('theme');
-  const btn = document.getElementById('theme-btn');
-  if (btn && saved === 'light') btn.textContent = '🌙 Dark';
-});
+  const WEEK = 5;
+  const DAYS = [31,32,33,34,35,36,37];
 </script>
+<script src="course.js"></script>
 </body>
 </html>

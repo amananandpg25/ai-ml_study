@@ -7,17 +7,22 @@
 <title>Week 6 — Regression | 135-Day AI/ML Roadmap</title>
 <meta content="Week 6 — Regression — Complete coursework, tasks, quizzes, and resources for Week 6 of the 135-Day AI/ML Roadmap." name="description"/>
 <link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%230d0f14'/&gt;&lt;text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'&gt;AI&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link rel="stylesheet" href="course.css">
 <style>
 :root {
   --accent-rgb: 108, 140, 255;
   --accent-sec-rgb: 56, 189, 248;
 }
 </style>
-<link rel="stylesheet" href="course.css">
+
+
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
   if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
 </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters:[{left:'66296',right:'66296',display:true},{left:'$',right:'$',display:false}]});"></script>
 </head>
 <body>
 <div class="xp-toast" id="xp-toast">+50 XP ⚡</div>
@@ -987,6 +992,11 @@ lasso_cv.fit(Xtr, y_tr)
 <span class="bi">print</span>(<span class="str">f"Features eliminated: {np.sum(lasso_cv.coef_ == 0)}/{X.shape[1]}"</span>)</pre>
 </div>
 <h3 class="sh3">2. WHY L1 Creates Zeros and L2 Doesn't — The Geometry</h3>
+<div class="callout cp">
+<strong>📐 The Geometry of Sparsity (Diamond vs. Circle):</strong>
+<br/>• <strong>L1 Regularization (Lasso):</strong> Adds penalty $\lambda \sum |w_j|$. The constraint boundary forms a **diamond shape** (L1-ball) in weight space with sharp corners on the axes. The contours of the loss function expand until they intercept the constraint boundary. Mathematically, these contours hit the sharp corners on the axes first, forcing some weights to be exactly 0.
+<br/>• <strong>L2 Regularization (Ridge):</strong> Adds penalty $\lambda \sum w_j^2$. The constraint boundary forms a **smooth circle/sphere** (L2-ball). The loss function contours intercept the circle at arbitrary non-zero tangent points. This shrinks all weights close to 0, but never sets them exactly to 0.
+</div>
 <div class="callout ci">
 <strong>📐 The Geometry Explanation (Crucial for Interviews):</strong>
     Minimizing the regularised loss is geometrically equivalent to minimizing the OLS loss SUBJECT TO a constraint on the coefficients.<br/><br/>
@@ -1705,6 +1715,12 @@ r2_adj = <span class="num">1</span> - (<span class="num">1</span> - r2) * (n - <
 <span class="cm"># Adjusted R² DECREASES when you add irrelevant features — R² never decreases</span></pre>
 </div>
 <h3 class="sh3">2. R² — The Most Misunderstood Metric</h3>
+<div class="callout cp">
+<strong>⚡ Why $R^2$ Can Be Negative:</strong>
+<br/>The Coefficient of Determination formula is $R^2 = 1 - \frac{SS_{res}}{SS_{tot}} = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}$.
+<br/>If your model predicts values that are *worse* than just predicting the horizontal average line (the mean $\bar{y}$) for every data point, then $SS_{res} > SS_{tot}$.
+<br/>In this case, the ratio $\frac{SS_{res}}{SS_{tot}} > 1$, resulting in a negative value for $R^2$. A negative $R^2$ indicates that your model fails to capture even the simplest mean baseline of the target data.
+</div>
 <div class="math-block">
 <span class="formula">$$R² = 1 − SS_res / SS_tot$$</span>
 <span class="desc">SS_res = Σ(yᵢ − ŷᵢ)² (residual sum of squares — model error)</span>
@@ -2039,6 +2055,44 @@ plt.legend(); plt.title(<span class="str">'SVR with RBF Kernel — Non-linear Re
 plt.tight_layout(); plt.savefig(<span class="str">'svr_fit.png'</span>, dpi=<span class="num">150</span>)</pre>
 </div>
 <h3 class="sh3">2. Tree-Based Regression Models</h3>
+
+<figure class="svg-diagram">
+<svg viewBox="0 0 650 340" xmlns="http://www.w3.org/2000/svg" width="650" height="340" role="img" aria-label="Decision Tree showing recursive splitting with Gini impurity values">
+  <defs><linearGradient id="dt-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1e2e"/><stop offset="100%" stop-color="#0d1117"/></linearGradient></defs>
+  <rect width="650" height="340" rx="12" fill="url(#dt-bg)"/>
+  <text x="325" y="25" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" fill="#e6edf3" font-weight="700">Decision Tree — Recursive Splitting</text>
+  <rect x="240" y="40" width="170" height="44" rx="8" fill="#1c2333" stroke="#58a6ff" stroke-width="2"/>
+  <text x="325" y="57" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#58a6ff" font-weight="600">Age ≤ 30?</text>
+  <text x="325" y="73" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#8b949e">Gini = 0.48 | n = 100</text>
+  <line x1="280" y1="84" x2="180" y2="130" stroke="#7ee787" stroke-width="1.5"/>
+  <text x="215" y="105" font-family="DM Sans,sans-serif" font-size="9" fill="#7ee787">Yes</text>
+  <line x1="370" y1="84" x2="470" y2="130" stroke="#f97583" stroke-width="1.5"/>
+  <text x="435" y="105" font-family="DM Sans,sans-serif" font-size="9" fill="#f97583">No</text>
+  <rect x="95" y="130" width="170" height="44" rx="8" fill="#1c2333" stroke="#58a6ff" stroke-width="1.5"/>
+  <text x="180" y="147" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#58a6ff" font-weight="600">Income ≤ 50K?</text>
+  <text x="180" y="163" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#8b949e">Gini = 0.32 | n = 45</text>
+  <rect x="385" y="130" width="170" height="44" rx="8" fill="#1c2333" stroke="#58a6ff" stroke-width="1.5"/>
+  <text x="470" y="147" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#58a6ff" font-weight="600">Education ≥ BS?</text>
+  <text x="470" y="163" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#8b949e">Gini = 0.44 | n = 55</text>
+  <line x1="140" y1="174" x2="90" y2="220" stroke="#7ee787" stroke-width="1.2"/>
+  <rect x="30" y="220" width="120" height="36" rx="6" fill="#0d4429" stroke="#7ee787" stroke-width="1.5"/>
+  <text x="90" y="237" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#7ee787" font-weight="600">Buy: Yes</text>
+  <text x="90" y="249" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#8b949e">Gini=0.0 | n=30</text>
+  <line x1="220" y1="174" x2="270" y2="220" stroke="#f97583" stroke-width="1.2"/>
+  <rect x="210" y="220" width="120" height="36" rx="6" fill="#4a1520" stroke="#f97583" stroke-width="1.5"/>
+  <text x="270" y="237" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#f97583" font-weight="600">Buy: No</text>
+  <text x="270" y="249" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#8b949e">Gini=0.13 | n=15</text>
+  <line x1="430" y1="174" x2="380" y2="220" stroke="#7ee787" stroke-width="1.2"/>
+  <rect x="320" y="220" width="120" height="36" rx="6" fill="#0d4429" stroke="#7ee787" stroke-width="1.5"/>
+  <text x="380" y="237" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#7ee787" font-weight="600">Buy: Yes</text>
+  <line x1="510" y1="174" x2="560" y2="220" stroke="#f97583" stroke-width="1.2"/>
+  <rect x="500" y="220" width="120" height="36" rx="6" fill="#4a1520" stroke="#f97583" stroke-width="1.5"/>
+  <text x="560" y="237" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#f97583" font-weight="600">Buy: No</text>
+  <text x="325" y="300" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#f0c846">At each node: pick the feature + threshold that yields the lowest weighted Gini of children</text>
+</svg>
+<figcaption>A decision tree recursively splits data by choosing the feature and threshold that maximize information gain (minimize Gini impurity) at each node.</figcaption>
+</figure>
+
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — tree_regression_comparison.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">import</span> numpy <span class="kw">as</span> np
@@ -2299,421 +2353,9 @@ model = LinearRegression().fit(X, df['price'])</code></pre>
 </main>
 </div><!-- /layout -->
 <script>
-// ═══════════════════════════════════════════
-//  WEEK 6 — STATE & GAMIFICATION ENGINE
-// ═══════════════════════════════════════════
-const WEEK = 6;
-const DAYS = [38,39,40,41,42,43,44];
-
-
-
-
-
-let state = JSON.parse(localStorage.getItem(`w${WEEK}-state`) || '{}');
-state.xp     = state.xp     || 0;
-state.streak = state.streak || 0;
-state.done   = state.done   || [];
-state.lastDate= state.lastDate || '';
-
-function saveState() { localStorage.setItem(`w${WEEK}-state`, JSON.stringify(state)); }
-
-const LEVELS = [
-  { min:0,    label:'🌱 Beginner' },
-  { min:500,  label:'🔍 Explorer' },
-  { min:1500, label:'⚙️ Practitioner' },
-  { min:3000, label:'🤖 Engineer' },
-  { min:6000, label:'🧠 Expert' },
-  { min:10000,label:'🚀 Master' }
-];
-function getLevel(xp) {
-  for (let i = LEVELS.length - 1; i >= 0; i--) {
-    if (xp >= LEVELS[i].min) return LEVELS[i].label;
-  }
-  return LEVELS[0].label;
-}
-
-function syncUI() {
-  document.getElementById('xp-show').textContent   = `⚡ ${state.xp} XP`;
-  document.getElementById('streak-show').textContent = `🔥 ${state.streak} day streak`;
-  document.getElementById('sb-xp').textContent     = `${state.xp} XP earned`;
-  document.getElementById('sb-streak').textContent  = `${state.streak} day streak`;
-  const lvlEl = document.getElementById('level-show');
-  if (lvlEl) lvlEl.textContent = getLevel(state.xp || 0);
-
-  const pct = Math.round((state.done.length / DAYS.length) * 100);
-  const progBar = document.getElementById('prog-bar');
-  if (progBar) {
-    progBar.style.width = pct + '%';
-    progBar.parentElement.setAttribute('aria-valuenow', pct);
-  }
-  const progText = document.getElementById('prog-text');
-  if (progText) progText.textContent = `${state.done.length}/${DAYS.length} days`;
-
-  DAYS.forEach(d => {
-    const pill = document.getElementById('pill-' + d);
-    const sb   = document.getElementById('sb-' + d);
-    const btn  = document.getElementById('btn-day-' + d);
-    if (state.done.includes(d)) {
-      pill && pill.classList.add('done');
-      sb && sb.classList.add('done');
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-}
-
-function completeDay(day, xp) {
-  if (state.done.includes(day)) return;
-  state.done.push(day);
-  state.xp += xp;
-  const today = new Date().toDateString();
-  const yesterday = new Date(Date.now() - 86400000).toDateString();
-  if (state.lastDate !== today) {
-    if (state.lastDate === yesterday) { state.streak++; }
-    else { state.streak = 1; }
-    state.lastDate = today;
-  }
-  saveState();
-  syncUI();
-  showXPToast(xp, day);
-  const btn = document.getElementById('btn-day-' + day);
-  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + day + ' Complete'; }
-}
-
-function showXPToast(xp, day) {
-  const t = document.getElementById('xp-toast');
-  if (t) {
-    t.textContent = `+${xp} XP ⚡ — Day ${day} Complete!`;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
-}
-
-function goDay(n) {
-  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
-  document.querySelectorAll('.day-pill').forEach(p => { p.classList.remove('active'); p.setAttribute('aria-selected','false'); });
-  const section = document.getElementById('day-' + n);
-  if (section) { section.classList.add('active'); }
-  const sbItem = document.getElementById('sb-' + n);
-  if (sbItem) { sbItem.classList.add('active'); }
-  const pill = document.getElementById('pill-' + n);
-  if (pill) { pill.classList.add('active'); pill.setAttribute('aria-selected','true'); }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  renderMermaid('day-' + n);
-}
-
-function jumpTo(id) {
-  const day = document.querySelector('.day-section.active');
-  if (!day) return;
-  const dayNum = day.id.replace('day-', '');
-  const target = day.querySelector('#day-' + dayNum + '-' + id) || day.querySelector('#' + id);
-  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function toggleSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (!sb) return;
-  const open = sb.classList.toggle('open');
-  if (btn) btn.setAttribute('aria-expanded', String(open));
-}
-function closeSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (sb) sb.classList.remove('open');
-  if (btn) btn.setAttribute('aria-expanded', 'false');
-}
-
-function quiz(optEl, result, qid) {
-  const block = optEl.closest('.quiz-block');
-  if (!block) return;
-  block.querySelectorAll('.quiz-opt').forEach(o => {
-    o.style.pointerEvents = 'none';
-    if (o !== optEl) o.classList.add('dimmed');
-  });
-  optEl.classList.add(result === 'correct' ? 'correct' : 'wrong');
-  const letter = optEl.querySelector('.quiz-letter');
-  if (letter) letter.textContent = result === 'correct' ? '✓' : '✗';
-  const correctFb = block.querySelector('.correct-fb') || block.querySelector('#' + qid + '-correct');
-  const wrongFb   = block.querySelector('.wrong-fb') || block.querySelector('#' + qid + '-wrong');
-  if (result === 'correct') {
-    if (correctFb) {
-      correctFb.style.display = 'block';
-    }
-    state.xp += 10;
-    saveState();
-    syncUI();
-    showXPToast(10, 'quiz');
-  } else {
-    if (wrongFb) {
-      wrongFb.style.display = 'block';
-    }
-  }
-}
-
-function toggleTask(header) {
-  const body = header.nextElementSibling;
-  if (!body) return;
-  const isOpen = body.style.display === 'block';
-  body.style.display = isOpen ? 'none' : 'block';
-  header.setAttribute('aria-expanded', String(!isOpen));
-}
-
-// Add simple style fix for task header content if needed, but keeping toggleTask correct
-function toggleSolution(id) {
-  const box = document.getElementById(id);
-  if (!box) return;
-  const isOpen = box.style.display === 'block';
-  box.style.display = isOpen ? 'none' : 'block';
-}
-
-function copyCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (pre) {
-    navigator.clipboard.writeText(pre.innerText).then(() => {
-      btn.textContent = 'copied!';
-      setTimeout(() => btn.textContent = 'copy', 1500);
-    });
-  }
-}
-
-function runCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (!pre) return;
-  
-  // Copy code to clipboard
-  navigator.clipboard.writeText(pre.innerText);
-  
-  // Visual feedback on the button
-  btn.textContent = 'Copied!';
-  setTimeout(() => btn.textContent = 'Run', 2000);
-  
-  // Show compiler instructions modal
-  showCompilerModal();
-}
-
-function showCompilerModal() {
-  let modal = document.getElementById('compiler-modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'compiler-modal';
-    modal.style.cssText = `
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(13, 15, 20, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 10000;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    `;
-    
-    const card = document.createElement('div');
-    card.style.cssText = `
-      background: var(--bg2, #141720);
-      border: 1px solid var(--border, #252a40);
-      border-radius: 16px;
-      padding: 2.2rem;
-      max-width: 440px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.55);
-      text-align: center;
-      transform: scale(0.9);
-      transition: transform 0.25s ease;
-      color: var(--text, #dde2f0);
-      font-family: var(--font-body, system-ui, sans-serif);
-    `;
-    
-    card.innerHTML = `
-      <div style="font-size: 2.8rem; margin-bottom: 0.8rem;">🚀</div>
-      <h3 style="margin: 0 0 1rem 0; font-size: 1.35rem; color: var(--green, #4fd1a5); font-family: var(--font-head, sans-serif); font-weight: 800; letter-spacing: 0.5px;">Code Copied! Ready to Run</h3>
-      <p style="margin: 0 0 1.8rem 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted, #6b7590);">
-        The code is now copied to your clipboard.
-        <br><br>
-        1. Click below to open the online compiler in a new tab.
-        <br>
-        2. <strong>Paste (Ctrl+V or Cmd+V)</strong> the code into the editor.
-        <br>
-        3. Click the <strong>Run</strong> button in the compiler tab to execute.
-      </p>
-      <div style="display: flex; gap: 12px; justify-content: center;">
-        <button id="compiler-cancel" style="
-          background: transparent;
-          border: 1px solid var(--border, #252a40);
-          color: var(--text, #dde2f0);
-          padding: 10px 20px;
-          border-radius: 8px;
-          font-weight: 500;
-          cursor: pointer;
-          font-size: 0.9rem;
-          transition: background var(--transition, 0.2s);
-        ">Cancel</button>
-        <button id="compiler-go" style="
-          background: var(--green, #4fd1a5);
-          border: none;
-          color: var(--bg, #0d0f14);
-          padding: 10px 24px;
-          border-radius: 8px;
-          font-weight: 700;
-          cursor: pointer;
-          font-size: 0.9rem;
-          box-shadow: 0 4px 12px rgba(79, 209, 165, 0.2);
-          transition: transform var(--transition, 0.2s), opacity var(--transition, 0.2s);
-        ">Open Compiler</button>
-      </div>
-    `;
-    
-    modal.appendChild(card);
-    document.body.appendChild(modal);
-    
-    // Add hover styles
-    const style = document.createElement('style');
-    style.textContent = `
-      #compiler-cancel:hover { background: var(--bg3, #1c2030); }
-      #compiler-go:hover { transform: translateY(-1px); opacity: 0.95; }
-    `;
-    document.head.appendChild(style);
-
-    // Event listeners
-    document.getElementById('compiler-cancel').onclick = () => hide();
-    document.getElementById('compiler-go').onclick = () => {
-      window.open('https://www.programiz.com/python-programming/online-compiler/', '_blank');
-      hide();
-    };
-    
-    modal.onclick = (e) => {
-      if (e.target === modal) hide();
-    };
-  }
-
-  const modalElement = document.getElementById('compiler-modal');
-  function show() {
-    modalElement.style.display = 'flex';
-    modalElement.offsetHeight; // force reflow
-    modalElement.style.opacity = '1';
-    modalElement.querySelector('div').style.transform = 'scale(1)';
-  }
-
-  function hide() {
-    modalElement.style.opacity = '0';
-    modalElement.querySelector('div').style.transform = 'scale(0.9)';
-    setTimeout(() => {
-      modalElement.style.display = 'none';
-    }, 250);
-  }
-
-  show();
-}
-
-function checkPredict(id, answer) {
-  const input = document.getElementById(id + '-input');
-  const result = document.getElementById(id + '-result');
-  if (!input || !result) return;
-  
-  // Normalize whitespace, casing, quotes, brackets, and punctuation
-  const normalize = (str) => {
-    return str.replace(/\\n/g, ' ')
-              .replace(/\s+/g, ' ')
-              .replace(/['"()\[\]]/g, '')
-              .replace(/[,;]/g, ' ')
-              .replace(/\s+/g, ' ')
-              .trim()
-              .toLowerCase();
-  };
-  
-  const userVal = normalize(input.value);
-  const correctVal = normalize(answer);
-  const isCorrect = userVal === correctVal || userVal.includes(correctVal);
-  
-  result.style.display = 'block';
-  if (isCorrect) {
-    result.style.background = 'rgba(79,209,165,.1)';
-    result.style.border = '1px solid rgba(79,209,165,.3)';
-    result.style.color = 'var(--green)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '✅ Correct! ' + answer.replace(/\n/g, ' ');
-    state.xp += 10; saveState(); syncUI();
-  } else {
-    result.style.background = 'rgba(229,107,140,.08)';
-    result.style.border = '1px solid rgba(229,107,140,.3)';
-    result.style.color = 'var(--pink)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '❌ Expected: ' + answer.replace(/\n/g, ' ') + ' — try again';
-  }
-}
-
-function openRepl() {
-  window.open('https://replit.com/languages/python3', '_blank');
-}
-
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') !== 'light';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  const btn = document.getElementById('theme-btn');
-  if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
-}
-(function() {
-  const saved = localStorage.getItem('theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-})();
-
-function renderMermaid(dayId) {
-  const run = () => {
-    if (typeof mermaid === 'undefined') {
-      setTimeout(run, 100);
-      return;
-    }
-    if (!window.mermaidInitialized) {
-      mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
-      window.mermaidInitialized = true;
-    }
-    const sec = document.getElementById(dayId);
-    if (!sec) return;
-    const nodes = sec.querySelectorAll('.mermaid:not([data-rendered])');
-    if (!nodes.length) return;
-    if (mermaid.run) {
-      mermaid.run({ nodes }).then(() => {
-        nodes.forEach(n => n.setAttribute('data-rendered','1'));
-      }).catch((err) => { console.error('Mermaid render error:', err); });
-    } else if (mermaid.init) {
-      mermaid.init(undefined, nodes);
-      nodes.forEach(n => n.setAttribute('data-rendered','1'));
-    }
-  };
-  run();
-}
-
-function toggleCheck(lbl) {
-  let box = lbl.querySelector('.chk-box');
-  if (!box) return;
-  box.classList.toggle('checked');
-  lbl.classList.toggle('done-item');
-  if(box.classList.contains('checked')) box.innerText = '✓';
-  else box.innerText = '';
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  syncUI();
-  DAYS.forEach(d => {
-    if (state.done.includes(d)) {
-      const btn = document.getElementById('btn-day-' + d);
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-  
-  renderMermaid('day-' + DAYS[0]);
-  
-  const saved = localStorage.getItem('theme');
-  const btn = document.getElementById('theme-btn');
-  if (btn && saved === 'light') btn.textContent = '🌙 Dark';
-});
+  const WEEK = 6;
+  const DAYS = [38,39,40,41,42,43,44];
 </script>
+<script src="course.js"></script>
 </body>
 </html>

@@ -294,6 +294,7 @@ body {
 /* ── MAIN ── */
 .main {
   flex: 1;
+  min-width: 0;
   max-width: 880px;
   margin: 0 auto;
 }
@@ -1452,4 +1453,133 @@ code {
     border-left: 3px solid #999;
     background: #f9f9f9;
   }
+}
+
+/* ─── Math Box / Formula Cards ─── */
+.math-box {
+  background: rgba(var(--accent-rgb), 0.04);
+  border: 1px solid rgba(var(--accent-rgb), 0.18);
+  border-left: 4px solid rgb(var(--accent-rgb));
+  border-radius: 10px;
+  padding: 1.1rem 1.3rem;
+  margin: 1.2rem 0;
+  font-size: 13px;
+  line-height: 1.8;
+  font-family: var(--font-mono);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+.math-box strong {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgb(var(--accent-rgb));
+}
+.math-box .mb-formula {
+  color: var(--teal);
+  font-size: 13.5px;
+  font-weight: 500;
+  margin: 0.35rem 0;
+}
+.math-box .mb-rule {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.math-box .mb-rule:last-child { border-bottom: none; }
+.math-box .mb-rule .mb-cond {
+  color: var(--orange);
+  font-weight: 600;
+  min-width: 90px;
+  white-space: nowrap;
+}
+.math-box .mb-rule .mb-arrow { color: var(--muted); }
+.math-box .mb-rule .mb-desc { color: var(--text); font-size: 12.5px; }
+.math-box .mb-not {
+  color: var(--pink);
+  font-size: 12px;
+  padding: 0.15rem 0;
+}
+.math-box .mb-note {
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-size: 11.5px;
+  font-style: italic;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 0.5rem;
+}
+
+/* ─── SVG Diagram Figures ─── */
+.svg-diagram {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  margin: 1.2rem 0;
+  text-align: center;
+  overflow-x: auto;
+}
+.svg-diagram figcaption {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 0.55rem;
+  font-style: italic;
+  font-family: var(--font-mono);
+}
+.svg-diagram svg { max-width: 100%; }
+
+/* ─── Gotcha / Warning Boxes ─── */
+.gotcha-box {
+  background: rgba(255, 80, 80, 0.08);
+  border-left: 4px solid #ff5050;
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.gotcha-box strong {
+  color: #ff5050;
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+}
+
+/* ─── Intuition / Why Boxes ─── */
+.intuition-box {
+  background: rgba(100, 180, 255, 0.08);
+  border-left: 4px solid #64b4ff;
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.intuition-box strong {
+  color: #64b4ff;
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+}
+
+/* ─── Bridge / Transition Notes ─── */
+.bridge-note {
+  background: rgba(160, 120, 255, 0.08);
+  border-left: 4px solid #a078ff;
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  margin: 1.5rem 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.bridge-note strong {
+  color: #a078ff;
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
 }

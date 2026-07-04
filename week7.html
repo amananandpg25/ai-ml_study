@@ -7,17 +7,22 @@
 <title>Week 7 — Classification | 135-Day AI/ML Roadmap</title>
 <meta content="Week 7 — Classification — Complete coursework, tasks, quizzes, and resources for Week 7 of the 135-Day AI/ML Roadmap." name="description"/>
 <link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%230d0f14'/&gt;&lt;text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'&gt;AI&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link rel="stylesheet" href="course.css">
 <style>
 :root {
   --accent-rgb: 180, 124, 252;
   --accent-sec-rgb: 108, 140, 255;
 }
 </style>
-<link rel="stylesheet" href="course.css">
+
+
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
   if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
 </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters:[{left:'66296',right:'66296',display:true},{left:'$',right:'$',display:false}]});"></script>
 </head>
 <body>
 <div class="xp-toast" id="xp-toast">+50 XP ⚡</div>
@@ -364,6 +369,15 @@ grid.fit(X_tr, y_train)
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">
     🔍 <strong>Search terms:</strong> <code>binary cross entropy loss derivative derivation, logistic regression sigmoid activation math</code>
 </div>
+
+<h2 class="sh2">🃏 Revision Flashcards — Day 45</h2>
+<p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
+<div class="flashcard-grid">
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">K-Means Objective?</div><div class="fc-back">Minimize within-cluster sum of squares (Inertia) by updating centroids iteratively.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Elbow Method?</div><div class="fc-back">Plotting inertia vs K and picking the 'elbow' where the rate of decrease slows significantly.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Centroid?</div><div class="fc-back">The mathematical center point of a cluster (mean coordinates of all points in the cluster).</div></div></div>
+</div>
+
 <div id="day-45-resources-section">
 <h2 class="sh2">📚 Resources</h2>
 <div class="resources-grid">
@@ -514,6 +528,12 @@ importances = dt.feature_importances_
     <span class="bi">print</span>(<span class="str">f"  {name:30s} {imp:.3f} {bar}"</span>)</pre>
 </div>
 <h3 class="sh3">2. Gini vs Entropy — Practical Difference</h3>
+<div class="callout cp">
+<strong>⚡ Mathematical Formulations of Node Splits:</strong>
+<br/>• <strong>Gini Impurity:</strong> $I_G(p) = 1 - \sum_{i=1}^C p_i^2$. Measures the probability of misclassifying a chosen element if it were randomly labeled according to the class distribution.
+<br/>• <strong>Shannon Entropy:</strong> $H(X) = -\sum_{i=1}^C p_i \log_2 p_i$. Measures the average information content or surprise associated with outcomes.
+<br/>• <strong>Practical Choice:</strong> Gini Impurity does not require computing logarithmic functions ($\log_2$), which is computationally expensive for CPUs. Gini splits can be evaluated much faster, which is why it is the default splitting criterion in scikit-learn's Decision Trees.
+</div>
 <table class="concept-table">
 <tr><th>METRIC</th><th>FORMULA</th><th>RANGE</th><th>SPEED</th><th>WHEN TO PREFER</th></tr>
 <tr><td><strong>Gini Impurity</strong></td><td>1 − Σpₖ²</td><td>[0, 0.5] binary</td><td>Faster (no log)</td><td>Default — slightly biased toward larger partitions</td></tr>
@@ -594,6 +614,15 @@ importances = dt.feature_importances_
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">
     🔍 <strong>Search terms:</strong> <code>support vector machine lagrangian multiplier dual problem, soft margin classifier SVM math</code>
 </div>
+
+<h2 class="sh2">🃏 Revision Flashcards — Day 46</h2>
+<p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
+<div class="flashcard-grid">
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Agglomerative Clustering?</div><div class="fc-back">Bottom-up hierarchical clustering where each point starts as its own cluster and closest pairs merge.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Dendrogram?</div><div class="fc-back">Tree diagram showing the sequence of merges or splits and the distances at which they occurred.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Linkage Criteria?</div><div class="fc-back">Rules defining how distance is calculated between clusters (Ward, Complete, Single, Average).</div></div></div>
+</div>
+
 <div id="day-46-resources-section">
 <h2 class="sh2">📚 Resources</h2>
 <div class="resources-grid">
@@ -701,6 +730,11 @@ importances = dt.feature_importances_
 <div id="day-47-theory">
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. Bagging — Bootstrap Aggregating</h3>
+<div class="callout cp">
+<strong>⚡ Bagging vs. Boosting Bias-Variance Trade-off:</strong>
+<br/>• <strong>Bagging (Random Forest):</strong> Trains multiple fully grown, deep decision trees independently in parallel on bootstrap samples. Deep trees have high variance but low bias. By averaging their outputs, Bagging reduces <strong>variance</strong> without increasing bias.
+<br/>• <strong>Boosting (Gradient Boosting):</strong> Trains shallow trees (weak learners) sequentially. Each tree fits the residual errors (gradients) of the previous trees. By sequentially correcting errors, Boosting reduces <strong>bias</strong> and creates a strong ensemble model.
+</div>
 <div class="analogy">Imagine 100 election analysts. Each one studies a different random sample of 500 voters (with replacement). Each makes their own prediction. You aggregate all 100 predictions by majority vote. Even if each analyst is wrong 40% of the time, their collective vote is rarely wrong — because their errors are uncorrelated. Yahi bagging hai.</div>
 <div class="callout ci">
 <strong>🔑 Two Sources of Randomness in Random Forest:</strong>
@@ -825,6 +859,51 @@ plt.show()</pre>
 <div class="task-body">
 <p>On the Breast Cancer dataset, plot OOB score vs n_estimators (from 1 to 300). Find the "elbow" — the point where adding more trees gives diminishing returns. This is a free, efficient way to avoid expensive cross-validation just for choosing n_estimators.</p>
 <div class="done-when">Plot produced, optimal n_estimators identified, explanation written in a notebook markdown cell.</div>
+
+<h3 class="sh3">Silhouette Score — Measuring Cluster Quality</h3>
+<p style="margin-bottom:1rem; color:var(--text); line-height:1.6;">The Silhouette Score measures how similar each point is to its own cluster vs the nearest neighboring cluster. It ranges from -1 (wrong cluster) to +1 (perfectly clustered), with 0 meaning the point sits on the boundary between clusters.</p>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python — silhouette_evaluation.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+<h3 class="sh3">DBSCAN — Density-Based Clustering</h3>
+<p style="margin-bottom:1rem; color:var(--text); line-height:1.6;">Unlike K-Means which requires specifying the number of clusters upfront, DBSCAN discovers clusters automatically based on point density. It identifies clusters as dense regions separated by sparse areas, and automatically labels outlier points as noise.</p>
+<div class="analogy">Think of DBSCAN like identifying cities on a dark satellite image by looking at clusters of lights. Dense clusters of lights = cities. Scattered lights in between = noise/rural areas. You don't need to know how many cities there are beforehand.</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python — dbscan_clustering.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div><pre><code><span class="kw">from</span> <span class="bi">sklearn.cluster</span> <span class="kw">import</span> DBSCAN
+<span class="kw">from</span> <span class="bi">sklearn.datasets</span> <span class="kw">import</span> make_moons
+<span class="kw">import</span> <span class="bi">numpy</span> <span class="kw">as</span> np
+
+<span class="cm"># Generate non-spherical clusters (K-Means fails here!)</span>
+X, y = make_moons(n_samples=<span class="num">300</span>, noise=<span class="num">0.08</span>, random_state=<span class="num">42</span>)
+
+<span class="cm"># DBSCAN parameters:</span>
+<span class="cm">#   eps: maximum distance between two points to be neighbors</span>
+<span class="cm">#   min_samples: minimum points to form a dense region (core point)</span>
+db = DBSCAN(eps=<span class="num">0.2</span>, min_samples=<span class="num">5</span>)
+labels = db.fit_predict(X)
+
+n_clusters = <span class="fn">len</span>(<span class="fn">set</span>(labels) - {-<span class="num">1</span>})
+n_noise = <span class="fn">list</span>(labels).count(-<span class="num">1</span>)
+<span class="fn">print</span>(<span class="str">f"Clusters: {n_clusters}, Noise points: {n_noise}"</span>)
+<span class="cm"># Output: Clusters: 2, Noise points: 3</span></code></pre></div>
+<div class="gotcha-box">
+<strong>⚠️ DBSCAN vs K-Means — When to Use Which</strong>
+Use <strong>K-Means</strong> when clusters are roughly spherical and you know K. Use <strong>DBSCAN</strong> when clusters have irregular shapes, you don't know K, or you need automatic outlier detection. DBSCAN fails on datasets with varying densities — use HDBSCAN for those cases.
+</div>
+<pre><code><span class="kw">from</span> <span class="bi">sklearn.metrics</span> <span class="kw">import</span> silhouette_score, silhouette_samples
+<span class="kw">from</span> <span class="bi">sklearn.cluster</span> <span class="kw">import</span> KMeans
+
+<span class="cm"># Test multiple K values and pick the one with highest silhouette</span>
+scores = {}
+<span class="kw">for</span> k <span class="kw">in</span> <span class="fn">range</span>(<span class="num">2</span>, <span class="num">8</span>):
+    km = KMeans(n_clusters=k, random_state=<span class="num">42</span>, n_init=<span class="num">10</span>)
+    labels = km.fit_predict(X_scaled)
+    score = silhouette_score(X_scaled, labels)
+    scores[k] = score
+    <span class="fn">print</span>(<span class="str">f"K={k}: Silhouette = {score:.3f}"</span>)
+
+best_k = <span class="fn">max</span>(scores, key=scores.get)
+<span class="fn">print</span>(<span class="str">f"\nBest K = {best_k} (Silhouette = {scores[best_k]:.3f})"</span>)
+<span class="cm"># Rule of thumb: Silhouette > 0.5 = reasonable, > 0.7 = strong clusters</span></code></pre></div>
+
+
 </div>
 </div>
 </div>
@@ -854,6 +933,15 @@ plt.show()</pre>
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">
     🔍 <strong>Search terms:</strong> <code>decision tree gini impurity vs entropy information gain, tree pruning algorithms CART</code>
 </div>
+
+<h2 class="sh2">🃏 Revision Flashcards — Day 47</h2>
+<p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
+<div class="flashcard-grid">
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">PCA?</div><div class="fc-back">Principal Component Analysis. Linear dimensionality reduction technique projecting data onto axes of max variance.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Eigenvectors?</div><div class="fc-back">The direction vectors of the principal components representing the new axes in space.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Explained Variance?</div><div class="fc-back">The amount of variance captured by each principal component (helps select number of components).</div></div></div>
+</div>
+
 <div id="day-47-resources-section">
 <h2 class="sh2">📚 Resources</h2>
 <div class="resources-grid">
@@ -1115,6 +1203,15 @@ imp_types = [<span class="str">'weight'</span>, <span class="str">'gain'</span>,
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">
     🔍 <strong>Search terms:</strong> <code>bagging ensemble variance reduction proof, random forest out of bag error estimation</code>
 </div>
+
+<h2 class="sh2">🃏 Revision Flashcards — Day 48</h2>
+<p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
+<div class="flashcard-grid">
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">t-SNE vs PCA?</div><div class="fc-back">PCA is linear (preserves global structure); t-SNE is non-linear (preserves local neighborhoods/clusters).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Perplexity?</div><div class="fc-back">Hyperparameter in t-SNE determining the number of effective nearest neighbors to consider.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">t-SNE Crowding Problem?</div><div class="fc-back">Points cluster too closely in 2D space. Solved by Student-t distribution heavy tails.</div></div></div>
+</div>
+
 <div id="day-48-resources-section">
 <h2 class="sh2">📚 Resources</h2>
 <div class="resources-grid">
@@ -1465,6 +1562,27 @@ df[<span class="str">'IsMonthToMonth'</span>] = (df[<span class="str">'Contract'
 <p style="margin-top:0.4rem;">What is Gradient Boosting? How does XGBoost differ from vanilla Gradient Boosting?</p>
 </div>
 </div>
+
+
+<h2 class="sh2">🃏 Revision Flashcards — Day 49</h2>
+<p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
+<div class="flashcard-grid">
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Silhouette Coefficient?</div><div class="fc-back">Measures cluster cohesion vs separation. Range: -1 (bad) to +1 (dense, separated).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">DBSCAN core point?</div><div class="fc-back">Point with at least 'min_samples' neighbors within 'eps' distance.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Noise/Outliers?</div><div class="fc-back">DBSCAN explicitly tags points that don't belong to any cluster as noise (-1).</div></div></div>
+</div>
+
+<div id="day-49-resources-section">
+<h2 class="sh2">📚 Day 49 Resources</h2>
+<div class="resources-grid">
+<a class="resource-card" href="https://scikit-learn.org/stable/modules/clustering.html" target="_blank">
+<div class="rc-type">📖 DOCUMENTATION</div>
+<div class="rc-title">Comparing Clustering Algorithms in Scikit-Learn</div>
+<div class="rc-sub">Detailed comparison guide showing shapes and densities</div>
+</a>
+</div>
+</div>
+
 <button class="complete-btn" id="btn-day-49" onclick="completeDay(49,200)">✓ Mark Day 49 Complete — Earn 200 XP</button></div><!-- /day-49 -->
 <!-- ═══════════════════════════════════════════════
      DAY 50 — Churn: Modeling + SHAP Explainability
@@ -1696,6 +1814,27 @@ shap.waterfall_plot(shap.Explanation(
 <li><strong>Pipeline</strong> bundles preprocessing + model into one object. This prevents data leakage and makes deployment trivial.</li>
 </ol>
 </div>
+
+
+<h2 class="sh2">🃏 Revision Flashcards — Day 50</h2>
+<p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
+<div class="flashcard-grid">
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Isolation Forest?</div><div class="fc-back">Tree-based anomaly detection that isolates anomalies by randomly partitioning feature values.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Why Isolation works?</div><div class="fc-back">Anomalies require fewer random splits to isolate, resulting in shorter path lengths in the trees.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Contamination?</div><div class="fc-back">Hyperparameter defining the expected proportion of outliers in the dataset.</div></div></div>
+</div>
+
+<div id="day-50-resources-section">
+<h2 class="sh2">📚 Day 50 Resources</h2>
+<div class="resources-grid">
+<a class="resource-card" href="https://scikit-learn.org/stable/modules/outlier_detection.html" target="_blank">
+<div class="rc-type">📖 DOCUMENTATION</div>
+<div class="rc-title">Novelty and Outlier Detection</div>
+<div class="rc-sub">Official user guide for Isolation Forest, One-Class SVM, and EllipticEnvelope</div>
+</a>
+</div>
+</div>
+
 <button class="complete-btn" id="btn-day-50" onclick="completeDay(50,200)">✓ Mark Day 50 Complete — Earn 200 XP</button>
 <div class="callout" style="background:rgba(79,209,165,.05);border-left:3px solid var(--green);padding:0.8rem 1.1rem;margin:1rem 0;font-size:13.5px;">
 <strong>🎤 Asked in interviews at: Urban Company</strong>
@@ -2092,421 +2231,9 @@ clf = DecisionTreeClassifier().fit(X_encoded, y)</code></pre>
 </main>
 </div><!-- /layout -->
 <script>
-// ═══════════════════════════════════════════
-//  WEEK 7 — STATE & GAMIFICATION ENGINE
-// ═══════════════════════════════════════════
-const WEEK = 7;
-const DAYS = [45,46,47,48,49,50,51];
-
-
-
-
-
-let state = JSON.parse(localStorage.getItem(`w${WEEK}-state`) || '{}');
-state.xp     = state.xp     || 0;
-state.streak = state.streak || 0;
-state.done   = state.done   || [];
-state.lastDate= state.lastDate || '';
-
-function saveState() { localStorage.setItem(`w${WEEK}-state`, JSON.stringify(state)); }
-
-const LEVELS = [
-  { min:0,    label:'🌱 Beginner' },
-  { min:500,  label:'🔍 Explorer' },
-  { min:1500, label:'⚙️ Practitioner' },
-  { min:3000, label:'🤖 Engineer' },
-  { min:6000, label:'🧠 Expert' },
-  { min:10000,label:'🚀 Master' }
-];
-function getLevel(xp) {
-  for (let i = LEVELS.length - 1; i >= 0; i--) {
-    if (xp >= LEVELS[i].min) return LEVELS[i].label;
-  }
-  return LEVELS[0].label;
-}
-
-function syncUI() {
-  document.getElementById('xp-show').textContent   = `⚡ ${state.xp} XP`;
-  document.getElementById('streak-show').textContent = `🔥 ${state.streak} day streak`;
-  document.getElementById('sb-xp').textContent     = `${state.xp} XP earned`;
-  document.getElementById('sb-streak').textContent  = `${state.streak} day streak`;
-  const lvlEl = document.getElementById('level-show');
-  if (lvlEl) lvlEl.textContent = getLevel(state.xp || 0);
-
-  const pct = Math.round((state.done.length / DAYS.length) * 100);
-  const progBar = document.getElementById('prog-bar');
-  if (progBar) {
-    progBar.style.width = pct + '%';
-    progBar.parentElement.setAttribute('aria-valuenow', pct);
-  }
-  const progText = document.getElementById('prog-text');
-  if (progText) progText.textContent = `${state.done.length}/${DAYS.length} days`;
-
-  DAYS.forEach(d => {
-    const pill = document.getElementById('pill-' + d);
-    const sb   = document.getElementById('sb-' + d);
-    const btn  = document.getElementById('btn-day-' + d);
-    if (state.done.includes(d)) {
-      pill && pill.classList.add('done');
-      sb && sb.classList.add('done');
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-}
-
-function completeDay(day, xp) {
-  if (state.done.includes(day)) return;
-  state.done.push(day);
-  state.xp += xp;
-  const today = new Date().toDateString();
-  const yesterday = new Date(Date.now() - 86400000).toDateString();
-  if (state.lastDate !== today) {
-    if (state.lastDate === yesterday) { state.streak++; }
-    else { state.streak = 1; }
-    state.lastDate = today;
-  }
-  saveState();
-  syncUI();
-  showXPToast(xp, day);
-  const btn = document.getElementById('btn-day-' + day);
-  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + day + ' Complete'; }
-}
-
-function showXPToast(xp, day) {
-  const t = document.getElementById('xp-toast');
-  if (t) {
-    t.textContent = `+${xp} XP ⚡ — Day ${day} Complete!`;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
-}
-
-function goDay(n) {
-  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
-  document.querySelectorAll('.day-pill').forEach(p => { p.classList.remove('active'); p.setAttribute('aria-selected','false'); });
-  const section = document.getElementById('day-' + n);
-  if (section) { section.classList.add('active'); }
-  const sbItem = document.getElementById('sb-' + n);
-  if (sbItem) { sbItem.classList.add('active'); }
-  const pill = document.getElementById('pill-' + n);
-  if (pill) { pill.classList.add('active'); pill.setAttribute('aria-selected','true'); }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  renderMermaid('day-' + n);
-}
-
-function jumpTo(id) {
-  const day = document.querySelector('.day-section.active');
-  if (!day) return;
-  const dayNum = day.id.replace('day-', '');
-  const target = day.querySelector('#day-' + dayNum + '-' + id) || day.querySelector('#' + id);
-  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function toggleSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (!sb) return;
-  const open = sb.classList.toggle('open');
-  if (btn) btn.setAttribute('aria-expanded', String(open));
-}
-function closeSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (sb) sb.classList.remove('open');
-  if (btn) btn.setAttribute('aria-expanded', 'false');
-}
-
-function quiz(optEl, result, qid) {
-  const block = optEl.closest('.quiz-block');
-  if (!block) return;
-  block.querySelectorAll('.quiz-opt').forEach(o => {
-    o.style.pointerEvents = 'none';
-    if (o !== optEl) o.classList.add('dimmed');
-  });
-  optEl.classList.add(result === 'correct' ? 'correct' : 'wrong');
-  const letter = optEl.querySelector('.quiz-letter');
-  if (letter) letter.textContent = result === 'correct' ? '✓' : '✗';
-  const correctFb = block.querySelector('.correct-fb') || block.querySelector('#' + qid + '-correct');
-  const wrongFb   = block.querySelector('.wrong-fb') || block.querySelector('#' + qid + '-wrong');
-  if (result === 'correct') {
-    if (correctFb) {
-      correctFb.style.display = 'block';
-    }
-    state.xp += 10;
-    saveState();
-    syncUI();
-    showXPToast(10, 'quiz');
-  } else {
-    if (wrongFb) {
-      wrongFb.style.display = 'block';
-    }
-  }
-}
-
-function toggleTask(header) {
-  const body = header.nextElementSibling;
-  if (!body) return;
-  const isOpen = body.style.display === 'block';
-  body.style.display = isOpen ? 'none' : 'block';
-  header.setAttribute('aria-expanded', String(!isOpen));
-}
-
-// Add simple style fix for task header content if needed, but keeping toggleTask correct
-function toggleSolution(id) {
-  const box = document.getElementById(id);
-  if (!box) return;
-  const isOpen = box.style.display === 'block';
-  box.style.display = isOpen ? 'none' : 'block';
-}
-
-function copyCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (pre) {
-    navigator.clipboard.writeText(pre.innerText).then(() => {
-      btn.textContent = 'copied!';
-      setTimeout(() => btn.textContent = 'copy', 1500);
-    });
-  }
-}
-
-function runCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (!pre) return;
-  
-  // Copy code to clipboard
-  navigator.clipboard.writeText(pre.innerText);
-  
-  // Visual feedback on the button
-  btn.textContent = 'Copied!';
-  setTimeout(() => btn.textContent = 'Run', 2000);
-  
-  // Show compiler instructions modal
-  showCompilerModal();
-}
-
-function showCompilerModal() {
-  let modal = document.getElementById('compiler-modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'compiler-modal';
-    modal.style.cssText = `
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(13, 15, 20, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 10000;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    `;
-    
-    const card = document.createElement('div');
-    card.style.cssText = `
-      background: var(--bg2, #141720);
-      border: 1px solid var(--border, #252a40);
-      border-radius: 16px;
-      padding: 2.2rem;
-      max-width: 440px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.55);
-      text-align: center;
-      transform: scale(0.9);
-      transition: transform 0.25s ease;
-      color: var(--text, #dde2f0);
-      font-family: var(--font-body, system-ui, sans-serif);
-    `;
-    
-    card.innerHTML = `
-      <div style="font-size: 2.8rem; margin-bottom: 0.8rem;">🚀</div>
-      <h3 style="margin: 0 0 1rem 0; font-size: 1.35rem; color: var(--green, #4fd1a5); font-family: var(--font-head, sans-serif); font-weight: 800; letter-spacing: 0.5px;">Code Copied! Ready to Run</h3>
-      <p style="margin: 0 0 1.8rem 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted, #6b7590);">
-        The code is now copied to your clipboard.
-        <br><br>
-        1. Click below to open the online compiler in a new tab.
-        <br>
-        2. <strong>Paste (Ctrl+V or Cmd+V)</strong> the code into the editor.
-        <br>
-        3. Click the <strong>Run</strong> button in the compiler tab to execute.
-      </p>
-      <div style="display: flex; gap: 12px; justify-content: center;">
-        <button id="compiler-cancel" style="
-          background: transparent;
-          border: 1px solid var(--border, #252a40);
-          color: var(--text, #dde2f0);
-          padding: 10px 20px;
-          border-radius: 8px;
-          font-weight: 500;
-          cursor: pointer;
-          font-size: 0.9rem;
-          transition: background var(--transition, 0.2s);
-        ">Cancel</button>
-        <button id="compiler-go" style="
-          background: var(--green, #4fd1a5);
-          border: none;
-          color: var(--bg, #0d0f14);
-          padding: 10px 24px;
-          border-radius: 8px;
-          font-weight: 700;
-          cursor: pointer;
-          font-size: 0.9rem;
-          box-shadow: 0 4px 12px rgba(79, 209, 165, 0.2);
-          transition: transform var(--transition, 0.2s), opacity var(--transition, 0.2s);
-        ">Open Compiler</button>
-      </div>
-    `;
-    
-    modal.appendChild(card);
-    document.body.appendChild(modal);
-    
-    // Add hover styles
-    const style = document.createElement('style');
-    style.textContent = `
-      #compiler-cancel:hover { background: var(--bg3, #1c2030); }
-      #compiler-go:hover { transform: translateY(-1px); opacity: 0.95; }
-    `;
-    document.head.appendChild(style);
-
-    // Event listeners
-    document.getElementById('compiler-cancel').onclick = () => hide();
-    document.getElementById('compiler-go').onclick = () => {
-      window.open('https://www.programiz.com/python-programming/online-compiler/', '_blank');
-      hide();
-    };
-    
-    modal.onclick = (e) => {
-      if (e.target === modal) hide();
-    };
-  }
-
-  const modalElement = document.getElementById('compiler-modal');
-  function show() {
-    modalElement.style.display = 'flex';
-    modalElement.offsetHeight; // force reflow
-    modalElement.style.opacity = '1';
-    modalElement.querySelector('div').style.transform = 'scale(1)';
-  }
-
-  function hide() {
-    modalElement.style.opacity = '0';
-    modalElement.querySelector('div').style.transform = 'scale(0.9)';
-    setTimeout(() => {
-      modalElement.style.display = 'none';
-    }, 250);
-  }
-
-  show();
-}
-
-function checkPredict(id, answer) {
-  const input = document.getElementById(id + '-input');
-  const result = document.getElementById(id + '-result');
-  if (!input || !result) return;
-  
-  // Normalize whitespace, casing, quotes, brackets, and punctuation
-  const normalize = (str) => {
-    return str.replace(/\\n/g, ' ')
-              .replace(/\s+/g, ' ')
-              .replace(/['"()\[\]]/g, '')
-              .replace(/[,;]/g, ' ')
-              .replace(/\s+/g, ' ')
-              .trim()
-              .toLowerCase();
-  };
-  
-  const userVal = normalize(input.value);
-  const correctVal = normalize(answer);
-  const isCorrect = userVal === correctVal || userVal.includes(correctVal);
-  
-  result.style.display = 'block';
-  if (isCorrect) {
-    result.style.background = 'rgba(79,209,165,.1)';
-    result.style.border = '1px solid rgba(79,209,165,.3)';
-    result.style.color = 'var(--green)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '✅ Correct! ' + answer.replace(/\n/g, ' ');
-    state.xp += 10; saveState(); syncUI();
-  } else {
-    result.style.background = 'rgba(229,107,140,.08)';
-    result.style.border = '1px solid rgba(229,107,140,.3)';
-    result.style.color = 'var(--pink)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '❌ Expected: ' + answer.replace(/\n/g, ' ') + ' — try again';
-  }
-}
-
-function openRepl() {
-  window.open('https://replit.com/languages/python3', '_blank');
-}
-
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') !== 'light';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  const btn = document.getElementById('theme-btn');
-  if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
-}
-(function() {
-  const saved = localStorage.getItem('theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-})();
-
-function renderMermaid(dayId) {
-  const run = () => {
-    if (typeof mermaid === 'undefined') {
-      setTimeout(run, 100);
-      return;
-    }
-    if (!window.mermaidInitialized) {
-      mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
-      window.mermaidInitialized = true;
-    }
-    const sec = document.getElementById(dayId);
-    if (!sec) return;
-    const nodes = sec.querySelectorAll('.mermaid:not([data-rendered])');
-    if (!nodes.length) return;
-    if (mermaid.run) {
-      mermaid.run({ nodes }).then(() => {
-        nodes.forEach(n => n.setAttribute('data-rendered','1'));
-      }).catch((err) => { console.error('Mermaid render error:', err); });
-    } else if (mermaid.init) {
-      mermaid.init(undefined, nodes);
-      nodes.forEach(n => n.setAttribute('data-rendered','1'));
-    }
-  };
-  run();
-}
-
-function toggleCheck(lbl) {
-  let box = lbl.querySelector('.chk-box');
-  if (!box) return;
-  box.classList.toggle('checked');
-  lbl.classList.toggle('done-item');
-  if(box.classList.contains('checked')) box.innerText = '✓';
-  else box.innerText = '';
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  syncUI();
-  DAYS.forEach(d => {
-    if (state.done.includes(d)) {
-      const btn = document.getElementById('btn-day-' + d);
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-  
-  renderMermaid('day-' + DAYS[0]);
-  
-  const saved = localStorage.getItem('theme');
-  const btn = document.getElementById('theme-btn');
-  if (btn && saved === 'light') btn.textContent = '🌙 Dark';
-});
+  const WEEK = 7;
+  const DAYS = [45,46,47,48,49,50,51];
 </script>
+<script src="course.js"></script>
 </body>
 </html>

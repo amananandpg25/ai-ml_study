@@ -7,13 +7,15 @@
 <title>Week 1 — Python Foundations | 135-Day AI/ML Roadmap</title>
 <meta content="Week 1 — Python Foundations — Complete coursework, tasks, quizzes, and resources for Week 1 of the 135-Day AI/ML Roadmap." name="description"/>
 <link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%230d0f14'/&gt;&lt;text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'&gt;AI&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link rel="stylesheet" href="course.css">
 <style>
 :root {
   --accent-rgb: 79, 209, 165;
   --accent-sec-rgb: 108, 140, 255;
 }
 </style>
-<link rel="stylesheet" href="course.css">
+
+
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
   if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
@@ -183,6 +185,11 @@ total_price = <span class="num">499.99</span>    <span class="cm"># ✅ correct<
 </table>
 <h3 class="sh3">4. Type Conversion (Casting)</h3>
 <p>You can convert between types using <code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code>. Critical rule: <code>input()</code> <strong>always returns a string</strong> — you must convert it before doing math.</p>
+<div class="intuition-box">
+<strong>💡 Why does Python use references?</strong>
+When you write <code>b = a</code> for a list, Python doesn't copy the data — it creates a second name pointing to the same memory location. This is efficient (no wasted RAM for large datasets), but it means modifying <code>b</code> also modifies <code>a</code>. Think of it like two people sharing the same Google Doc: edits by one are visible to the other instantly.
+</div>
+
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — type_casting.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre>marks_str = <span class="str">"95"</span>               <span class="cm"># This is TEXT, not a number</span>
@@ -203,6 +210,7 @@ birth_year = <span class="num">2026</span> - user_age          <span class="cm">
 <span class="bi">print</span>(<span class="bi">bool</span>(<span class="str">"hi"</span>))   <span class="cm"># True — any non-empty string is truthy</span></pre>
 </div>
 <h3 class="sh3">5. f-strings — The Professional Way to Print</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">f-strings (formatted string literals) provide a clean, readable, and fast way to embed expressions inside string literals using minimal syntax.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — fstrings.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre>name = <span class="str">"Arjun"</span>
@@ -619,6 +627,12 @@ git commit -m "Day 1: EMI calculator — float arithmetic, ** operator, f-string
     </div>
 <div class="diagram-cap">Use this decision tree every time you pick a data structure</div>
 <h3 class="sh3">1. Lists — Ordered, Mutable Collections</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Lists are the most versatile built-in sequence type in Python, allowing you to store an ordered collection of items that can be dynamically modified.</p>
+<div class="gotcha-box">
+<strong>⚠️ Gotcha: Shallow vs Deep Copy</strong>
+Assignment (<code>b = a</code>) creates a <em>reference</em>, not a copy. <code>b = a.copy()</code> creates a shallow copy (nested objects still share references). Use <code>import copy; b = copy.deepcopy(a)</code> for fully independent nested copies. This is a top Python interview pitfall.
+</div>
+
 <div class="cb"><div class="cb-head"><span class="cb-lang">python — lists.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Create lists with square brackets</span>
 ipl_teams = [<span class="str">"MI"</span>, <span class="str">"CSK"</span>, <span class="str">"RCB"</span>, <span class="str">"KKR"</span>]
@@ -647,6 +661,7 @@ passed = [s <span class="kw">for</span> s <span class="kw">in</span> scores <spa
 doubled = [s * <span class="num">2</span> <span class="kw">for</span> s <span class="kw">in</span> scores]         <span class="cm"># transform every item</span></pre></div>
 <div class="ml-connect">In ML, your entire training dataset is a list of lists (or NumPy array, which IS a list underneath). list comprehensions are used to filter data, normalize values, and transform labels — you'll write dozens of these in Pandas and scikit-learn.</div>
 <h3 class="sh3">2. Tuples — Immutable, Fixed Collections</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Tuples are ordered collections that cannot be modified after creation, making them ideal for representing fixed read-only data structures.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python — tuples.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Tuples use () — cannot be changed after creation</span>
 delhi_coords = (<span class="num">28.6139</span>, <span class="num">77.2090</span>)   <span class="cm"># lat, lng — fixed forever</span>
@@ -666,6 +681,7 @@ low, high = min_max([<span class="num">4</span>, <span class="num">7</span>, <sp
 <span class="cm"># This crashes — tuples are immutable</span>
 <span class="cm"># delhi_coords[0] = 0   → TypeError: 'tuple' object does not support item assignment</span></pre></div>
 <h3 class="sh3">3. Sets — Unique Values, Fast Membership</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Sets are unordered collections of unique elements, highly optimized for $O(1)$ fast membership testing and mathematical operations.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python — sets.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Sets store only UNIQUE values — auto-removes duplicates</span>
 students_a = {<span class="str">"Raj"</span>, <span class="str">"Priya"</span>, <span class="str">"Amit"</span>, <span class="str">"Raj"</span>}
@@ -686,6 +702,12 @@ ml_devs = {<span class="str">"Priya"</span>, <span class="str">"Sara"</span>, <s
 <span class="cm"># Membership check is O(1) — instant even for 1 million items</span>
 <span class="bi">print</span>(<span class="str">"Priya"</span> <span class="kw">in</span> python_devs)  <span class="cm"># True</span></pre></div>
 <h3 class="sh3">4. Dictionaries — The Most Important Structure in ML</h3>
+<div class="callout cp">
+<strong>⚡ Big-O Time Complexity & ML Vocabulary Mapping:</strong>
+<br/>• <strong>Lookup:</strong> $O(1)$ average time complexity. Dictionaries are implemented as hash tables. Looking up a key takes a constant amount of time, regardless of whether the dictionary has 10 keys or 10 million keys.
+<br/>• <strong>List lookup vs. Dict lookup:</strong> Checking if an element exists in a list takes $O(n)$ time because Python has to scan the entire list sequentially. In ML, always use a dictionary or a set for lookup tables (like a vocabulary dictionary mapping words to IDs in NLP: <code>vocab = {'hello': 0, 'world': 1}</code>).
+<br/>• <strong>Hash Collisions:</strong> Under the hood, if two different keys hash to the same index, Python resolves this using open addressing, which can degrade lookup performance to $O(n)$ in the absolute worst-case scenario (extremely rare).
+</div>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python — dicts.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Dicts store key:value pairs — like a real dictionary</span>
 student = {
@@ -999,6 +1021,7 @@ sorted_freq = sorted(freq.items(), key=<span class="kw">lambda</span> x: x[<span
 <h2 class="sh2">🧠 Theory</h2>
 <div class="analogy">IRCTC booking: if seat available → book; elif waitlist open → waitlist mein daalo; else → "no seats". Python mein bhi exactly yahi — pehli true condition run hoti hai, baaki skip.</div>
 <h3 class="sh3">1. if / elif / else</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Conditional statements control the execution flow of a program by running specific code blocks only when their corresponding Boolean expressions evaluate to true.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre>score = <span class="num">78</span>
 <span class="kw">if</span> score &gt;= <span class="num">90</span>:   grade = <span class="str">"A"</span>
@@ -1014,6 +1037,7 @@ age, has_id = <span class="num">20</span>, <span class="kw">True</span>
 <span class="kw">if</span> age &gt;= <span class="num">18</span> <span class="kw">and</span> has_id:
     <span class="bi">print</span>(<span class="str">"Entry allowed"</span>)</pre></div>
 <h3 class="sh3">2. for Loops</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">for loops iterate over a sequence (such as a list, tuple, or string), executing the block of code repeatedly for each item in the sequence.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre>cities = [<span class="str">"Delhi"</span>, <span class="str">"Mumbai"</span>, <span class="str">"Bangalore"</span>]
 
@@ -1038,6 +1062,7 @@ temps = [<span class="num">35</span>, <span class="num">38</span>, <span class="
     <span class="kw">if</span> n == <span class="num">7</span>: <span class="kw">break</span>      <span class="cm"># stop at 7</span>
     <span class="bi">print</span>(n)</pre></div>
 <h3 class="sh3">3. List Comprehensions — THE ML Pattern</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">List comprehensions offer a concise syntax to create new lists from existing iterables, serving as a clean alternative to standard loop structures.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre>scores = [<span class="num">45</span>, <span class="num">78</span>, <span class="num">92</span>, <span class="num">55</span>, <span class="num">88</span>, <span class="num">34</span>, <span class="num">91</span>]
 
@@ -1201,6 +1226,12 @@ guessed = <span class="kw">False</span>
 <h2 class="sh2">🧠 Theory</h2>
 <div class="analogy">Ek chai ki dukaan ka example: tumhara chai banana ka process ek function hai — same steps, same output, lekin different type of milk/sugar as inputs. Function ek recipe hai — write once, use many times with different ingredients.</div>
 <h3 class="sh3">1. Defining and Calling Functions</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Functions are reusable blocks of code that organize logic into modular units. They take inputs (arguments), perform operations, and return outputs.</p>
+<div class="gotcha-box">
+<strong>⚠️ Gotcha: Mutable Default Arguments</strong>
+Never use a mutable object (list, dict, set) as a default function argument. Python evaluates default arguments <em>once</em> at function definition, not at each call. So <code>def append_to(item, lst=[])</code> will share the same list across all calls. Always use <code>None</code> as the default and create the list inside the function body.
+</div>
+
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">def</span> <span class="fn">greet</span>(name, greeting=<span class="str">"Namaste"</span>):   <span class="cm"># default parameter</span>
     <span class="str">"""Greets a person. Docstring explains what function does."""</span>
@@ -1217,6 +1248,7 @@ guessed = <span class="kw">False</span>
 lo, hi, avg = stats([<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>])
 <span class="bi">print</span>(<span class="str">f"min={lo}, max={hi}, avg={avg}"</span>)</pre></div>
 <h3 class="sh3">2. *args and **kwargs</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Python uses <code>*args</code> and <code>**kwargs</code> in function signatures to accept an arbitrary number of positional and keyword arguments, offering extreme flexibility for wrapping APIs.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># *args — accept any number of positional arguments</span>
 <span class="kw">def</span> <span class="fn">total</span>(*args):
@@ -1236,6 +1268,7 @@ create_profile(name=<span class="str">"Raj"</span>, age=<span class="num">22</sp
 <span class="cm"># This is EXACTLY how sklearn models accept hyperparameters!</span>
 <span class="cm"># RandomForestClassifier(n_estimators=100, max_depth=5) uses **kwargs</span></pre></div>
 <h3 class="sh3">3. Lambda Functions</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Lambda functions are small, anonymous, single-expression functions that are defined inline without the standard <code>def</code> keyword.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># lambda args: expression — anonymous one-liner function</span>
 square = <span class="kw">lambda</span> x: x ** <span class="num">2</span>
@@ -1374,6 +1407,19 @@ print(calculate(3, 3))</pre></div>
 <h2 class="sh2">🧠 Theory</h2>
 <div class="analogy">File reading bilkul ek library kitaab ki tarah hai. Pehle shelf se kitaab uthao (file open), pado (read), phir wapas rakh do (close). with open() ensures kitaab automatically wapas shelf pe jaayegi — chahe kuch bhi ho.</div>
 <h3 class="sh3">1. Reading and Writing Files</h3>
+<div class="callout cw">
+<strong>⚡ Memory-Efficient Data Loading via Generators ():</strong>
+<br/>When training ML models on datasets that are larger than your computer's RAM, loading the entire file into a Python list using <code>f.readlines()</code> will crash your kernel (Out Of Memory error).
+<br/>Instead, use a **generator** with the <code>yield</code> keyword. A generator yields one row at a time, keeping only a single line in memory:
+<pre><span class="kw">def</span> stream_dataset(file_path):
+    <span class="kw">with</span> <span class="bi">open</span>(file_path, <span class="str">'r'</span>) <span class="kw">as</span> f:
+        <span class="kw">for</span> line <span class="kw">in</span> f:
+            <span class="kw">yield</span> line.strip().split(<span class="str">','</span>)
+
+<span class="cm"># This streams rows one-by-one, consumption uses O(1) RAM:</span>
+<span class="kw">for</span> row <span class="kw">in</span> stream_dataset(<span class="str">'large_dataset.csv'</span>):
+    process_row(row)</pre>
+</div>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># ALWAYS use 'with open()' — auto-closes file even if error occurs</span>
 
@@ -1396,6 +1442,7 @@ print(calculate(3, 3))</pre></div>
 <span class="kw">with</span> <span class="bi">open</span>(<span class="str">"notes.txt"</span>, <span class="str">"a"</span>) <span class="kw">as</span> f:    <span class="cm"># "a" = append</span>
     f.write(<span class="str">"Line 3: File I/O mastered!\n"</span>)</pre></div>
 <h3 class="sh3">2. CSV Files — The Most Common ML Data Format</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">CSV (Comma-Separated Values) files are the standard format for tabular datasets. Python's built-in <code>csv</code> module allows reading and writing rows efficiently.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">import</span> csv
 
@@ -1415,6 +1462,7 @@ students = [
     <span class="kw">for</span> row <span class="kw">in</span> reader:
         <span class="bi">print</span>(<span class="str">f"{row['Name']}: {row['Score']}"</span>)</pre></div>
 <h3 class="sh3">3. Exception Handling — Never Let Your Program Crash</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Exception handling blocks (<code>try / except / finally</code>) intercept runtime errors gracefully, allowing programs to log issues or run cleanup tasks without crashing.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># try: attempt the code | except: catch errors | finally: always runs</span>
 <span class="kw">def</span> <span class="fn">safe_divide</span>(a, b):
@@ -1572,6 +1620,7 @@ save_students(students)</pre></div></div>
 <h2 class="sh2">🧠 Theory</h2>
 <div class="analogy">Class ek blueprint hai, object ek ghar hai. Blueprint se hazaron ghar ban sakte hain — sab ka structure same, lekin andar ka saman alag. <code>class Student</code> blueprint hai. <code>raj = Student("Raj", 21)</code> ek actual student object hai RAM mein.</div>
 <h3 class="sh3">1. Classes and Objects</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Object-Oriented Programming (OOP) structures code by grouping data (attributes) and behavior (methods) into reusable blueprints called classes.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">class</span> <span class="fn">Student</span>:
     school = <span class="str">"IIT Delhi"</span>    <span class="cm"># class variable — shared by ALL students</span>
@@ -1600,6 +1649,7 @@ raj.upgrade_gpa(<span class="num">0.3</span>)
 <span class="bi">print</span>(raj.gpa)               <span class="cm"># 9.0</span>
 <span class="bi">print</span>(Student.school)        <span class="cm"># IIT Delhi — class variable</span></pre></div>
 <h3 class="sh3">2. Inheritance — Extend Without Rewriting</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Inheritance allows a subclass to adopt all the methods and attributes of a parent class, enabling developers to extend functionality and reduce duplicate code.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">class</span> <span class="fn">MLStudent</span>(Student):    <span class="cm"># inherits from Student</span>
     <span class="kw">def</span> <span class="fn">__init__</span>(self, name, age, gpa, specialization):
@@ -1761,6 +1811,7 @@ preds = clf.predict(scaled)
 <h2 class="sh2">🧠 Theory</h2>
 <div class="analogy">Python list ek market bag hai — kuch bhi daal sako, lekin heavy lifting ke liye efficient nahi. NumPy array ek industrial conveyor belt hai — sirf ek type ka data, lekin millions of items per second. ML mein lakhs of data points milliseconds mein process — NumPy ke bina impossible.</div>
 <h3 class="sh3">1. Creating Arrays</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">NumPy arrays (<code>ndarray</code>) are homogeneous, multi-dimensional grids that store numerical values of the same data type, forming the basis of all ML data representations.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">import</span> numpy <span class="kw">as</span> np   <span class="cm"># ALWAYS import as np — universal convention</span>
 
@@ -1779,6 +1830,7 @@ g = np.random.randn(<span class="num">3</span>, <span class="num">3</span>)     
 <span class="bi">print</span>(b.dtype)    <span class="cm"># int64 — data type</span>
 <span class="bi">print</span>(b.size)     <span class="cm"># 6 — total elements</span></pre></div>
 <h3 class="sh3">2. Vectorized Operations — Why NumPy is 100x Faster</h3>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Vectorization bypasses slow Python loop operations by executing math calculations in parallel compiled C code, drastically accelerating numerical computations.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre>scores = np.array([<span class="num">85</span>, <span class="num">92</span>, <span class="num">78</span>, <span class="num">95</span>, <span class="num">88</span>])
 
@@ -2013,460 +2065,9 @@ print(doubled) # Correct: [2.4, 6.8, 11.2]</code></pre>
 </main>
 </div><!-- /layout -->
 <script>
-// ═══════════════════════════════════════════
-//  WEEK 1 — STATE & GAMIFICATION ENGINE
-// ═══════════════════════════════════════════
-const WEEK = 1;
-const DAYS = [1,2,3,4,5,6,7];
-
-
-function migrateLegacy() {
-  if (!localStorage.getItem('w1-state')) {
-    const legacyXP   = parseInt(localStorage.getItem('w1-xp') || '0');
-    const legacyDone = JSON.parse(localStorage.getItem('w1-done') || '[]');
-    const legacyStr  = parseInt(localStorage.getItem('w1-streak') || '0');
-    const legacyDate = localStorage.getItem('w1-lastdate') || '';
-    if (legacyXP || legacyDone.length) {
-      localStorage.setItem('w1-state', JSON.stringify({ xp: legacyXP, done: legacyDone, streak: legacyStr, lastDate: legacyDate }));
-    }
-    ['w1-xp','w1-done','w1-streak','w1-lastdate'].forEach(k => localStorage.removeItem(k));
-  }
-}
-
-
-migrateLegacy();
-
-let state = JSON.parse(localStorage.getItem(`w${WEEK}-state`) || '{}');
-state.xp     = state.xp     || 0;
-state.streak = state.streak || 0;
-state.done   = state.done   || [];
-state.lastDate= state.lastDate || '';
-
-function saveState() { localStorage.setItem(`w${WEEK}-state`, JSON.stringify(state)); }
-
-const LEVELS = [
-  { min:0,    label:'🌱 Beginner' },
-  { min:500,  label:'🔍 Explorer' },
-  { min:1500, label:'⚙️ Practitioner' },
-  { min:3000, label:'🤖 Engineer' },
-  { min:6000, label:'🧠 Expert' },
-  { min:10000,label:'🚀 Master' }
-];
-function getLevel(xp) {
-  for (let i = LEVELS.length - 1; i >= 0; i--) {
-    if (xp >= LEVELS[i].min) return LEVELS[i].label;
-  }
-  return LEVELS[0].label;
-}
-
-function syncUI() {
-  document.getElementById('xp-show').textContent   = `⚡ ${state.xp} XP`;
-  document.getElementById('streak-show').textContent = `🔥 ${state.streak} day streak`;
-  document.getElementById('sb-xp').textContent     = `${state.xp} XP earned`;
-  document.getElementById('sb-streak').textContent  = `${state.streak} day streak`;
-  const lvlEl = document.getElementById('level-show');
-  if (lvlEl) lvlEl.textContent = getLevel(state.xp || 0);
-
-  const pct = Math.round((state.done.length / DAYS.length) * 100);
-  const progBar = document.getElementById('prog-bar');
-  if (progBar) {
-    progBar.style.width = pct + '%';
-    progBar.parentElement.setAttribute('aria-valuenow', pct);
-  }
-  const progText = document.getElementById('prog-text');
-  if (progText) progText.textContent = `${state.done.length}/${DAYS.length} days`;
-
-  DAYS.forEach(d => {
-    const pill = document.getElementById('pill-' + d);
-    const sb   = document.getElementById('sb-' + d);
-    const btn  = document.getElementById('btn-day-' + d);
-    if (state.done.includes(d)) {
-      pill && pill.classList.add('done');
-      sb && sb.classList.add('done');
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-}
-
-function completeDay(day, xp) {
-  if (state.done.includes(day)) return;
-  state.done.push(day);
-  state.xp += xp;
-  const today = new Date().toDateString();
-  const yesterday = new Date(Date.now() - 86400000).toDateString();
-  if (state.lastDate !== today) {
-    if (state.lastDate === yesterday) { state.streak++; }
-    else { state.streak = 1; }
-    state.lastDate = today;
-  }
-  saveState();
-  syncUI();
-  showXPToast(xp, day);
-  const btn = document.getElementById('btn-day-' + day);
-  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + day + ' Complete'; }
-}
-
-function showXPToast(xp, day) {
-  const t = document.getElementById('xp-toast');
-  if (t) {
-    t.textContent = `+${xp} XP ⚡ — Day ${day} Complete!`;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
-}
-
-function goDay(n) {
-  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
-  document.querySelectorAll('.day-pill').forEach(p => { p.classList.remove('active'); p.setAttribute('aria-selected','false'); });
-  const section = document.getElementById('day-' + n);
-  if (section) { section.classList.add('active'); }
-  const sbItem = document.getElementById('sb-' + n);
-  if (sbItem) { sbItem.classList.add('active'); }
-  const pill = document.getElementById('pill-' + n);
-  if (pill) { pill.classList.add('active'); pill.setAttribute('aria-selected','true'); }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  renderMermaid('day-' + n);
-}
-
-function jumpTo(id) {
-  const day = document.querySelector('.day-section.active');
-  if (!day) return;
-  const dayNum = day.id.replace('day-', '');
-  const target = day.querySelector('#day-' + dayNum + '-' + id) || day.querySelector('#' + id);
-  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function toggleSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (!sb) return;
-  const open = sb.classList.toggle('open');
-  if (btn) btn.setAttribute('aria-expanded', String(open));
-}
-function closeSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (sb) sb.classList.remove('open');
-  if (btn) btn.setAttribute('aria-expanded', 'false');
-}
-
-function quiz(optEl, result, qid) {
-  const block = optEl.closest('.quiz-block');
-  if (!block) return;
-  block.querySelectorAll('.quiz-opt').forEach(o => {
-    o.style.pointerEvents = 'none';
-    if (o !== optEl) o.classList.add('dimmed');
-  });
-  optEl.classList.add(result === 'correct' ? 'correct' : 'wrong');
-  const letter = optEl.querySelector('.quiz-letter');
-  if (letter) letter.textContent = result === 'correct' ? '✓' : '✗';
-  const correctFb = block.querySelector('.correct-fb') || block.querySelector('#' + qid + '-correct');
-  const wrongFb   = block.querySelector('.wrong-fb') || block.querySelector('#' + qid + '-wrong');
-  if (result === 'correct') {
-    if (correctFb) {
-      correctFb.style.display = 'block';
-    }
-    state.xp += 10;
-    saveState();
-    syncUI();
-    showXPToast(10, 'quiz');
-  } else {
-    if (wrongFb) {
-      wrongFb.style.display = 'block';
-    }
-  }
-}
-
-function toggleTask(header) {
-  const body = header.nextElementSibling;
-  if (!body) return;
-  const isOpen = body.style.display === 'block';
-  body.style.display = isOpen ? 'none' : 'block';
-  header.setAttribute('aria-expanded', String(!isOpen));
-}
-
-// Add simple style fix for task header content if needed, but keeping toggleTask correct
-function toggleSolution(id) {
-  const box = document.getElementById(id);
-  if (!box) return;
-  const isOpen = box.style.display === 'block';
-  box.style.display = isOpen ? 'none' : 'block';
-}
-
-function copyCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (pre) {
-    navigator.clipboard.writeText(pre.innerText).then(() => {
-      btn.textContent = 'copied!';
-      setTimeout(() => btn.textContent = 'copy', 1500);
-    });
-  }
-}
-
-function runCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (!pre) return;
-  
-  // Copy code to clipboard
-  navigator.clipboard.writeText(pre.innerText);
-  
-  // Visual feedback on the button
-  btn.textContent = 'Copied!';
-  setTimeout(() => btn.textContent = 'Run', 2000);
-  
-  // Show compiler instructions modal
-  showCompilerModal();
-}
-
-function showCompilerModal() {
-  let modal = document.getElementById('compiler-modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'compiler-modal';
-    modal.style.cssText = `
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(13, 15, 20, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 10000;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    `;
-    
-    const card = document.createElement('div');
-    card.style.cssText = `
-      background: var(--bg2, #141720);
-      border: 1px solid var(--border, #252a40);
-      border-radius: 16px;
-      padding: 2.2rem;
-      max-width: 440px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.55);
-      text-align: center;
-      transform: scale(0.9);
-      transition: transform 0.25s ease;
-      color: var(--text, #dde2f0);
-      font-family: var(--font-body, system-ui, sans-serif);
-    `;
-    
-    card.innerHTML = `
-      <div style="font-size: 2.8rem; margin-bottom: 0.8rem;">🚀</div>
-      <h3 style="margin: 0 0 1rem 0; font-size: 1.35rem; color: var(--green, #4fd1a5); font-family: var(--font-head, sans-serif); font-weight: 800; letter-spacing: 0.5px;">Code Copied! Ready to Run</h3>
-      <p style="margin: 0 0 1.8rem 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted, #6b7590);">
-        The code is now copied to your clipboard.
-        <br><br>
-        1. Click below to open the online compiler in a new tab.
-        <br>
-        2. <strong>Paste (Ctrl+V or Cmd+V)</strong> the code into the editor.
-        <br>
-        3. Click the <strong>Run</strong> button in the compiler tab to execute.
-      </p>
-      <div style="display: flex; gap: 12px; justify-content: center;">
-        <button id="compiler-cancel" style="
-          background: transparent;
-          border: 1px solid var(--border, #252a40);
-          color: var(--text, #dde2f0);
-          padding: 10px 20px;
-          border-radius: 8px;
-          font-weight: 500;
-          cursor: pointer;
-          font-size: 0.9rem;
-          transition: background var(--transition, 0.2s);
-        ">Cancel</button>
-        <button id="compiler-go" style="
-          background: var(--green, #4fd1a5);
-          border: none;
-          color: var(--bg, #0d0f14);
-          padding: 10px 24px;
-          border-radius: 8px;
-          font-weight: 700;
-          cursor: pointer;
-          font-size: 0.9rem;
-          box-shadow: 0 4px 12px rgba(79, 209, 165, 0.2);
-          transition: transform var(--transition, 0.2s), opacity var(--transition, 0.2s);
-        ">Open Compiler</button>
-      </div>
-    `;
-    
-    modal.appendChild(card);
-    document.body.appendChild(modal);
-    
-    // Add hover styles
-    const style = document.createElement('style');
-    style.textContent = `
-      #compiler-cancel:hover { background: var(--bg3, #1c2030); }
-      #compiler-go:hover { transform: translateY(-1px); opacity: 0.95; }
-    `;
-    document.head.appendChild(style);
-
-    // Event listeners
-    document.getElementById('compiler-cancel').onclick = () => hide();
-    document.getElementById('compiler-go').onclick = () => {
-      window.open('https://www.programiz.com/python-programming/online-compiler/', '_blank');
-      hide();
-    };
-    
-    modal.onclick = (e) => {
-      if (e.target === modal) hide();
-    };
-  }
-
-  const modalElement = document.getElementById('compiler-modal');
-  function show() {
-    modalElement.style.display = 'flex';
-    modalElement.offsetHeight; // force reflow
-    modalElement.style.opacity = '1';
-    modalElement.querySelector('div').style.transform = 'scale(1)';
-  }
-
-  function hide() {
-    modalElement.style.opacity = '0';
-    modalElement.querySelector('div').style.transform = 'scale(0.9)';
-    setTimeout(() => {
-      modalElement.style.display = 'none';
-    }, 250);
-  }
-
-  show();
-}
-
-function checkPredict(id, answer) {
-  const input = document.getElementById(id + '-input');
-  const result = document.getElementById(id + '-result');
-  if (!input || !result) return;
-  
-  // Normalize whitespace, casing, quotes, brackets, and punctuation
-  const normalize = (str) => {
-    return String(str).replace(/\\n/g, ' ')
-              .replace(/\n/g, ' ')
-              .replace(/['"()\[\]]/g, '')
-              .replace(/[,;]/g, ' ')
-              .replace(/\s+/g, ' ')
-              .trim()
-              .toLowerCase();
-  };
-  
-  const userVal = normalize(input.value);
-  const correctVal = normalize(answer);
-  const isCorrect = userVal === correctVal || userVal.includes(correctVal);
-  
-  result.style.display = 'block';
-  if (isCorrect) {
-    result.style.background = 'rgba(79,209,165,.1)';
-    result.style.border = '1px solid rgba(79,209,165,.3)';
-    result.style.color = 'var(--green)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '✅ Correct! ' + answer.replace(/\n/g, ' ');
-    state.xp += 10; saveState(); syncUI();
-  } else {
-    result.style.background = 'rgba(229,107,140,.08)';
-    result.style.border = '1px solid rgba(229,107,140,.3)';
-    result.style.color = 'var(--pink)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '❌ Expected: ' + answer.replace(/\n/g, ' ') + ' — try again';
-  }
-}
-
-function openRepl() {
-  window.open('https://replit.com/languages/python3', '_blank');
-}
-
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') !== 'light';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  const btn = document.getElementById('theme-btn');
-  if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
-}
-(function() {
-  
-  document.querySelectorAll('.predict-input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const btn = input.nextElementSibling;
-        if (btn && btn.classList.contains('predict-btn')) {
-          btn.click();
-        }
-      }
-    });
-  });
-
-  const saved = localStorage.getItem('theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-})();
-
-function renderMermaid(dayId) {
-  const run = () => {
-    if (typeof mermaid === 'undefined') {
-      setTimeout(run, 100);
-      return;
-    }
-    if (!window.mermaidInitialized) {
-      mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
-      window.mermaidInitialized = true;
-    }
-    const sec = document.getElementById(dayId);
-    if (!sec) return;
-    const nodes = sec.querySelectorAll('.mermaid:not([data-rendered])');
-    if (!nodes.length) return;
-    if (mermaid.run) {
-      mermaid.run({ nodes }).then(() => {
-        nodes.forEach(n => n.setAttribute('data-rendered','1'));
-      }).catch((err) => { console.error('Mermaid render error:', err); });
-    } else if (mermaid.init) {
-      mermaid.init(undefined, nodes);
-      nodes.forEach(n => n.setAttribute('data-rendered','1'));
-    }
-  };
-  run();
-}
-
-function toggleCheck(lbl) {
-  let box = lbl.querySelector('.chk-box');
-  if (!box) return;
-  box.classList.toggle('checked');
-  lbl.classList.toggle('done-item');
-  if(box.classList.contains('checked')) box.innerText = '✓';
-  else box.innerText = '';
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  syncUI();
-  DAYS.forEach(d => {
-    if (state.done.includes(d)) {
-      const btn = document.getElementById('btn-day-' + d);
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-  
-  renderMermaid('day-' + DAYS[0]);
-  
-  
-  document.querySelectorAll('.predict-input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const btn = input.nextElementSibling;
-        if (btn && btn.classList.contains('predict-btn')) {
-          btn.click();
-        }
-      }
-    });
-  });
-
-  const saved = localStorage.getItem('theme');
-  const btn = document.getElementById('theme-btn');
-  if (btn && saved === 'light') btn.textContent = '🌙 Dark';
-});
+  const WEEK = 1;
+  const DAYS = [1,2,3,4,5,6,7];
 </script>
+<script src="course.js"></script>
 </body>
 </html>

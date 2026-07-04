@@ -7,17 +7,22 @@
 <title>Week 8 — Neural Networks &amp; Deep Learning | 135-Day AI/ML Roadmap</title>
 <meta content="Week 8 — Neural Networks &amp; Deep Learning — Complete coursework, tasks, quizzes, and resources for Week 8 of the 135-Day AI/ML Roadmap." name="description"/>
 <link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%230d0f14'/&gt;&lt;text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'&gt;AI&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link rel="stylesheet" href="course.css">
 <style>
 :root {
   --accent-rgb: 56, 189, 248;
   --accent-sec-rgb: 108, 140, 255;
 }
 </style>
-<link rel="stylesheet" href="course.css">
+
+
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
   if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
 </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters:[{left:'66296',right:'66296',display:true},{left:'$',right:'$',display:false}]});"></script>
 </head>
 <body>
 <div class="xp-toast" id="xp-toast">+50 XP ⚡</div>
@@ -52,6 +57,11 @@
 <div class="sb-item active" id="sb-52" onclick="goDay(52);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(52)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--teal)"></span>Day 52 — Perceptron &amp; Neurons</div>
 <div class="sb-item" id="sb-53" onclick="goDay(53);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(53)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--blue)"></span>Day 53 — Activation Functions</div>
 <div class="sb-item" id="sb-54" onclick="goDay(54);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(54)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--orange)"></span>Day 54 — Backpropagation</div>
+<div class="gotcha-box">
+<strong>⚠️ Gotcha: Forgetting to Zero Gradients</strong>
+PyTorch <em>accumulates</em> gradients by default. If you forget <code>optimizer.zero_grad()</code> before <code>loss.backward()</code>, gradients from previous batches will stack up, causing erratic training. Always follow this order: <code>optimizer.zero_grad()</code> → <code>loss.backward()</code> → <code>optimizer.step()</code>.
+</div>
+
 <div class="sb-item" id="sb-55" onclick="goDay(55);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(55)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--green)"></span>Day 55 — Keras &amp; TensorFlow</div>
 <div class="sb-item" id="sb-56" onclick="goDay(56);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(56)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--purple)"></span>Day 56 — Regularization in DL</div>
 <div class="sb-item" id="sb-57" onclick="goDay(57);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(57)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--pink)"></span>Day 57 — Optimizers &amp; LR Schedules</div>
@@ -144,6 +154,73 @@
 <div class="diagram-cap">Biological inspiration → mathematical model</div>
 <h3 class="sh3">2. The Perceptron</h3>
 <p>Frank Rosenblatt's Perceptron (1957) was the first trainable neural model. It uses a <strong>step function</strong> as activation: output is 1 if the weighted sum ≥ 0, else 0.</p>
+
+<figure class="svg-diagram">
+<svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg" width="680" height="320" role="img" aria-label="Feedforward Neural Network architecture with input, hidden, and output layers">
+  <defs>
+    <linearGradient id="nn-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1e2e"/><stop offset="100%" stop-color="#0d1117"/></linearGradient>
+  </defs>
+  <rect width="680" height="320" rx="12" fill="url(#nn-bg)"/>
+  <text x="340" y="22" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" fill="#e6edf3" font-weight="700">Feedforward Neural Network</text>
+  <!-- Input layer neurons -->
+  <text x="100" y="290" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#58a6ff" font-weight="600">Input Layer</text>
+  <circle cx="100" cy="80" r="18" fill="#1c2333" stroke="#58a6ff" stroke-width="2"/><text x="100" y="84" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#58a6ff">x₁</text>
+  <circle cx="100" cy="150" r="18" fill="#1c2333" stroke="#58a6ff" stroke-width="2"/><text x="100" y="154" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#58a6ff">x₂</text>
+  <circle cx="100" cy="220" r="18" fill="#1c2333" stroke="#58a6ff" stroke-width="2"/><text x="100" y="224" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#58a6ff">x₃</text>
+  <!-- Hidden layer 1 -->
+  <text x="270" y="290" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#f0c846" font-weight="600">Hidden Layer 1</text>
+  <circle cx="270" cy="65" r="18" fill="#1c2333" stroke="#f0c846" stroke-width="2"/><text x="270" y="69" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#f0c846">h₁</text>
+  <circle cx="270" cy="130" r="18" fill="#1c2333" stroke="#f0c846" stroke-width="2"/><text x="270" y="134" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#f0c846">h₂</text>
+  <circle cx="270" cy="195" r="18" fill="#1c2333" stroke="#f0c846" stroke-width="2"/><text x="270" y="199" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#f0c846">h₃</text>
+  <circle cx="270" cy="260" r="18" fill="#1c2333" stroke="#f0c846" stroke-width="2"/><text x="270" y="264" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#f0c846">h₄</text>
+  <!-- Hidden layer 2 -->
+  <text x="430" y="290" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#d2a8ff" font-weight="600">Hidden Layer 2</text>
+  <circle cx="430" cy="100" r="18" fill="#1c2333" stroke="#d2a8ff" stroke-width="2"/><text x="430" y="104" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#d2a8ff">h₅</text>
+  <circle cx="430" cy="170" r="18" fill="#1c2333" stroke="#d2a8ff" stroke-width="2"/><text x="430" y="174" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#d2a8ff">h₆</text>
+  <circle cx="430" cy="240" r="18" fill="#1c2333" stroke="#d2a8ff" stroke-width="2"/><text x="430" y="244" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#d2a8ff">h₇</text>
+  <!-- Output layer -->
+  <text x="580" y="290" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#7ee787" font-weight="600">Output Layer</text>
+  <circle cx="580" cy="150" r="20" fill="#0d4429" stroke="#7ee787" stroke-width="2.5"/><text x="580" y="154" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#7ee787">ŷ</text>
+  <!-- Connections: Input → Hidden1 (sample) -->
+  <line x1="118" y1="80" x2="252" y2="65" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="118" y1="80" x2="252" y2="130" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="118" y1="80" x2="252" y2="195" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="118" y1="80" x2="252" y2="260" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="118" y1="150" x2="252" y2="65" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="118" y1="150" x2="252" y2="130" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="118" y1="150" x2="252" y2="195" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="118" y1="150" x2="252" y2="260" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="118" y1="220" x2="252" y2="65" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="118" y1="220" x2="252" y2="130" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="118" y1="220" x2="252" y2="195" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="118" y1="220" x2="252" y2="260" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <!-- Connections: Hidden1 → Hidden2 -->
+  <line x1="288" y1="65" x2="412" y2="100" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="288" y1="65" x2="412" y2="170" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="288" y1="65" x2="412" y2="240" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="288" y1="130" x2="412" y2="100" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="288" y1="130" x2="412" y2="170" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="288" y1="130" x2="412" y2="240" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="288" y1="195" x2="412" y2="100" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="288" y1="195" x2="412" y2="170" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="288" y1="195" x2="412" y2="240" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="288" y1="260" x2="412" y2="100" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="288" y1="260" x2="412" y2="170" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <line x1="288" y1="260" x2="412" y2="240" stroke="#6b7590" stroke-width="0.6" opacity="0.4"/>
+  <!-- Connections: Hidden2 → Output -->
+  <line x1="448" y1="100" x2="560" y2="150" stroke="#7ee787" stroke-width="0.8" opacity="0.5"/>
+  <line x1="448" y1="170" x2="560" y2="150" stroke="#7ee787" stroke-width="0.8" opacity="0.5"/>
+  <line x1="448" y1="240" x2="560" y2="150" stroke="#7ee787" stroke-width="0.8" opacity="0.5"/>
+  <!-- Annotations -->
+  <text x="185" y="308" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#8b949e">w₁ weights</text>
+  <text x="350" y="308" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#8b949e">w₂ weights</text>
+  <text x="510" y="308" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#8b949e">w₃ weights</text>
+  <!-- Formula -->
+  <text x="340" y="42" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#f0c846">h = σ(Wx + b)  →  Each neuron: weighted sum + bias + activation</text>
+</svg>
+<figcaption>A feedforward neural network passes inputs through layers of neurons. Each connection has a learnable weight; each neuron applies an activation function to its weighted sum.</figcaption>
+</figure>
+
 <div class="math-block">
 <span class="formula">$$z = w₁x₁ + w₂x₂ + ... + wₙxₙ + b = wᵀx + b$$</span>
 <span class="desc">Weighted sum of inputs plus bias term</span>
@@ -442,6 +519,46 @@ p_xor.<span class="fn">fit</span>(X_xor, y_xor)
 <strong>The linear collapse theorem:</strong> If every layer uses f(x) = x (identity / no activation), then an N-layer network computes: output = WₙWₙ₋₁...W₁x = Wx — one single matrix multiplication. The network has no more expressive power than linear regression, regardless of depth. Non-linear activations break this collapse, allowing the network to approximate any function.
   </div>
 <h3 class="sh3">2. The Activation Function Zoo</h3>
+
+<figure class="svg-diagram">
+<svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" width="680" height="240" role="img" aria-label="Comparison of ReLU, Sigmoid, and Tanh activation functions">
+  <defs>
+    <linearGradient id="af-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1e2e"/><stop offset="100%" stop-color="#0d1117"/></linearGradient>
+  </defs>
+  <rect width="680" height="240" rx="12" fill="url(#af-bg)"/>
+  <text x="340" y="22" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="14" fill="#e6edf3" font-weight="700">Activation Functions Comparison</text>
+  
+  <!-- ReLU -->
+  <text x="120" y="45" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#58a6ff" font-weight="600">ReLU: max(0, x)</text>
+  <line x1="30" y1="150" x2="210" y2="150" stroke="#6b7590" stroke-width="0.8"/>
+  <line x1="120" y1="60" x2="120" y2="200" stroke="#6b7590" stroke-width="0.8"/>
+  <path d="M30,150 L120,150 L200,70" fill="none" stroke="#58a6ff" stroke-width="2.5"/>
+  <text x="120" y="218" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7ee787">✓ Fast, no vanishing grad</text>
+  <text x="120" y="230" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#f97583">✗ Dying ReLU (grad=0 for x&lt;0)</text>
+  
+  <!-- Sigmoid -->
+  <text x="340" y="45" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#f0c846" font-weight="600">Sigmoid: 1/(1+e⁻ˣ)</text>
+  <line x1="250" y1="150" x2="430" y2="150" stroke="#6b7590" stroke-width="0.8"/>
+  <line x1="340" y1="60" x2="340" y2="200" stroke="#6b7590" stroke-width="0.8"/>
+  <path d="M255,185 Q290,183 310,175 Q330,160 340,150 Q350,140 370,125 Q390,117 425,115" fill="none" stroke="#f0c846" stroke-width="2.5"/>
+  <text x="260" y="192" font-family="DM Sans,sans-serif" font-size="8" fill="#8b949e">0</text>
+  <text x="420" y="112" font-family="DM Sans,sans-serif" font-size="8" fill="#8b949e">1</text>
+  <text x="340" y="218" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7ee787">✓ Output ∈ (0,1) for probabilities</text>
+  <text x="340" y="230" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#f97583">✗ Vanishing gradients at extremes</text>
+  
+  <!-- Tanh -->
+  <text x="560" y="45" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#d2a8ff" font-weight="600">Tanh: (eˣ−e⁻ˣ)/(eˣ+e⁻ˣ)</text>
+  <line x1="470" y1="150" x2="650" y2="150" stroke="#6b7590" stroke-width="0.8"/>
+  <line x1="560" y1="60" x2="560" y2="200" stroke="#6b7590" stroke-width="0.8"/>
+  <path d="M475,190 Q510,188 530,178 Q550,160 560,150 Q570,140 590,122 Q610,112 645,110" fill="none" stroke="#d2a8ff" stroke-width="2.5"/>
+  <text x="478" y="197" font-family="DM Sans,sans-serif" font-size="8" fill="#8b949e">-1</text>
+  <text x="640" y="107" font-family="DM Sans,sans-serif" font-size="8" fill="#8b949e">+1</text>
+  <text x="560" y="218" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#7ee787">✓ Zero-centered output</text>
+  <text x="560" y="230" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="#f97583">✗ Still saturates at extremes</text>
+</svg>
+<figcaption>ReLU is the default choice for hidden layers (fast, avoids vanishing gradients). Sigmoid is used in the output layer for binary classification. Tanh is used in RNNs and LSTMs.</figcaption>
+</figure>
+
 <table class="concept-table">
 <tr><th>FUNCTION</th><th>FORMULA</th><th>RANGE</th><th>VANISHING GRAD?</th><th>BEST USE</th></tr>
 <tr><td><strong>Sigmoid</strong></td><td>σ(z) = 1/(1+e⁻ᶻ)</td><td>(0, 1)</td><td>Yes — saturates at 0 &amp; 1</td><td>Output layer (binary classification)</td></tr>
@@ -505,6 +622,12 @@ output, cache = <span class="fn">forward</span>(X_test)
 <span class="bi">print</span>(<span class="str">f"A1 shape: {cache['A1'].shape}"</span>)  <span class="cm"># (4, 5) — hidden layer activations</span></pre>
 </div>
 <h3 class="sh3">4. Weight Initialisation — Why It Matters</h3>
+<div class="callout cp">
+<strong>⚡ Xavier vs. He Initialization (Variance Match):</strong>
+<br/>If initial neural weights are too large, activations explode. If they are too small, gradients vanish. Weight initialization ensures activation variance remains constant across layers.
+<br/>• <strong>Xavier/Glorot Initialization:</strong> Draws weights from a distribution with variance $Var(w) = \frac{2}{n_{in} + n_{out}}$. Best for layers with symmetric activations like Tanh or Sigmoid.
+<br/>• <strong>He/Kaiming Initialization:</strong> Draws weights with variance $Var(w) = \frac{2}{n_{in}}$. Best for layers using ReLU or Leaky ReLU activations (compensating for the fact that half of the ReLU outputs are zeroed).
+</div>
 <div class="callout cw">
 <strong>⚠ All-zeros initialisation is deadly:</strong> If all weights start at zero, every neuron computes the same output, produces the same gradient, and updates identically. The network is "symmetric" — all neurons in a layer remain identical forever. Always use random initialisation. <br/><br/>
 <strong>He initialisation</strong> (for ReLU): W ~ N(0, √(2/nˡ⁻¹)) — accounts for ReLU zeroing half the neurons<br/>
@@ -2319,451 +2442,18 @@ print(a.shape)</code></pre>
 </div>
 <a class="ws-btn" href="roadmap.html">View Full Roadmap →</a>
 </div>
+
+<div class="bridge-note">
+<strong>🌉 Bridge: Math Neurons → PyTorch Code</strong>
+You now understand neural networks mathematically: forward passes as matrix multiplications, backpropagation as chain rule applications, and gradient descent as iterative optimization. Starting next week, you'll translate these exact equations into PyTorch code. Every <code>nn.Linear()</code> is a weight matrix multiplication, every <code>loss.backward()</code> triggers the chain rule, and every <code>optimizer.step()</code> is one gradient descent update. The math you learned IS the code — PyTorch just automates the bookkeeping.
+</div>
 </div>
 </main>
 </div><!-- /layout -->
 <script>
-// ═══════════════════════════════════════════
-//  WEEK 8 — STATE & GAMIFICATION ENGINE
-// ═══════════════════════════════════════════
-const WEEK = 8;
-const DAYS = [52,53,54,55,56,57,58];
-
-
-
-
-
-let state = JSON.parse(localStorage.getItem(`w${WEEK}-state`) || '{}');
-state.xp     = state.xp     || 0;
-state.streak = state.streak || 0;
-state.done   = state.done   || [];
-state.lastDate= state.lastDate || '';
-
-function saveState() { localStorage.setItem(`w${WEEK}-state`, JSON.stringify(state)); }
-
-const LEVELS = [
-  { min:0,    label:'🌱 Beginner' },
-  { min:500,  label:'🔍 Explorer' },
-  { min:1500, label:'⚙️ Practitioner' },
-  { min:3000, label:'🤖 Engineer' },
-  { min:6000, label:'🧠 Expert' },
-  { min:10000,label:'🚀 Master' }
-];
-function getLevel(xp) {
-  for (let i = LEVELS.length - 1; i >= 0; i--) {
-    if (xp >= LEVELS[i].min) return LEVELS[i].label;
-  }
-  return LEVELS[0].label;
-}
-
-function syncUI() {
-  document.getElementById('xp-show').textContent   = `⚡ ${state.xp} XP`;
-  document.getElementById('streak-show').textContent = `🔥 ${state.streak} day streak`;
-  document.getElementById('sb-xp').textContent     = `${state.xp} XP earned`;
-  document.getElementById('sb-streak').textContent  = `${state.streak} day streak`;
-  const lvlEl = document.getElementById('level-show');
-  if (lvlEl) lvlEl.textContent = getLevel(state.xp || 0);
-
-  const pct = Math.round((state.done.length / DAYS.length) * 100);
-  const progBar = document.getElementById('prog-bar');
-  if (progBar) {
-    progBar.style.width = pct + '%';
-    progBar.parentElement.setAttribute('aria-valuenow', pct);
-  }
-  const progText = document.getElementById('prog-text');
-  if (progText) progText.textContent = `${state.done.length}/${DAYS.length} days`;
-
-  DAYS.forEach(d => {
-    const pill = document.getElementById('pill-' + d);
-    const sb   = document.getElementById('sb-' + d);
-    const btn  = document.getElementById('btn-day-' + d);
-    if (state.done.includes(d)) {
-      pill && pill.classList.add('done');
-      sb && sb.classList.add('done');
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-}
-
-function completeDay(day, xp) {
-  if (state.done.includes(day)) return;
-  state.done.push(day);
-  state.xp += xp;
-  const today = new Date().toDateString();
-  const yesterday = new Date(Date.now() - 86400000).toDateString();
-  if (state.lastDate !== today) {
-    if (state.lastDate === yesterday) { state.streak++; }
-    else { state.streak = 1; }
-    state.lastDate = today;
-  }
-  saveState();
-  syncUI();
-  showXPToast(xp, day);
-  const btn = document.getElementById('btn-day-' + day);
-  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + day + ' Complete'; }
-}
-
-function showXPToast(xp, day) {
-  const t = document.getElementById('xp-toast');
-  if (t) {
-    t.textContent = `+${xp} XP ⚡ — Day ${day} Complete!`;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
-}
-
-function goDay(n) {
-  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
-  document.querySelectorAll('.day-pill').forEach(p => { p.classList.remove('active'); p.setAttribute('aria-selected','false'); });
-  const section = document.getElementById('day-' + n);
-  if (section) { section.classList.add('active'); }
-  const sbItem = document.getElementById('sb-' + n);
-  if (sbItem) { sbItem.classList.add('active'); }
-  const pill = document.getElementById('pill-' + n);
-  if (pill) { pill.classList.add('active'); pill.setAttribute('aria-selected','true'); }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  renderMermaid('day-' + n);
-}
-
-function jumpTo(id) {
-  const day = document.querySelector('.day-section.active');
-  if (!day) return;
-  const dayNum = day.id.replace('day-', '');
-  const target = day.querySelector('#day-' + dayNum + '-' + id) || day.querySelector('#' + id);
-  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function toggleSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (!sb) return;
-  const open = sb.classList.toggle('open');
-  if (btn) btn.setAttribute('aria-expanded', String(open));
-}
-function closeSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (sb) sb.classList.remove('open');
-  if (btn) btn.setAttribute('aria-expanded', 'false');
-}
-
-function quiz(optEl, result, qid) {
-  const block = optEl.closest('.quiz-block');
-  if (!block) return;
-  block.querySelectorAll('.quiz-opt').forEach(o => {
-    o.style.pointerEvents = 'none';
-    if (o !== optEl) o.classList.add('dimmed');
-  });
-  optEl.classList.add(result === 'correct' ? 'correct' : 'wrong');
-  const letter = optEl.querySelector('.quiz-letter');
-  if (letter) letter.textContent = result === 'correct' ? '✓' : '✗';
-  const correctFb = block.querySelector('.correct-fb') || block.querySelector('#' + qid + '-correct');
-  const wrongFb   = block.querySelector('.wrong-fb') || block.querySelector('#' + qid + '-wrong');
-  if (result === 'correct') {
-    if (correctFb) {
-      correctFb.style.display = 'block';
-    }
-    state.xp += 10;
-    saveState();
-    syncUI();
-    showXPToast(10, 'quiz');
-  } else {
-    if (wrongFb) {
-      wrongFb.style.display = 'block';
-    }
-  }
-}
-
-function toggleTask(header) {
-  const body = header.nextElementSibling;
-  if (!body) return;
-  const isOpen = body.style.display === 'block';
-  body.style.display = isOpen ? 'none' : 'block';
-  header.setAttribute('aria-expanded', String(!isOpen));
-}
-
-// Add simple style fix for task header content if needed, but keeping toggleTask correct
-function toggleSolution(id) {
-  const box = document.getElementById(id);
-  if (!box) return;
-  const isOpen = box.style.display === 'block';
-  box.style.display = isOpen ? 'none' : 'block';
-}
-
-function copyCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (pre) {
-    navigator.clipboard.writeText(pre.innerText).then(() => {
-      btn.textContent = 'copied!';
-      setTimeout(() => btn.textContent = 'copy', 1500);
-    });
-  }
-}
-
-function runCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (!pre) return;
-  
-  // Copy code to clipboard
-  navigator.clipboard.writeText(pre.innerText);
-  
-  // Visual feedback on the button
-  btn.textContent = 'Copied!';
-  setTimeout(() => btn.textContent = 'Run', 2000);
-  
-  // Show compiler instructions modal
-  showCompilerModal();
-}
-
-function showCompilerModal() {
-  let modal = document.getElementById('compiler-modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'compiler-modal';
-    modal.style.cssText = `
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(13, 15, 20, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 10000;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    `;
-    
-    const card = document.createElement('div');
-    card.style.cssText = `
-      background: var(--bg2, #141720);
-      border: 1px solid var(--border, #252a40);
-      border-radius: 16px;
-      padding: 2.2rem;
-      max-width: 440px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.55);
-      text-align: center;
-      transform: scale(0.9);
-      transition: transform 0.25s ease;
-      color: var(--text, #dde2f0);
-      font-family: var(--font-body, system-ui, sans-serif);
-    `;
-    
-    card.innerHTML = `
-      <div style="font-size: 2.8rem; margin-bottom: 0.8rem;">🚀</div>
-      <h3 style="margin: 0 0 1rem 0; font-size: 1.35rem; color: var(--green, #4fd1a5); font-family: var(--font-head, sans-serif); font-weight: 800; letter-spacing: 0.5px;">Code Copied! Ready to Run</h3>
-      <p style="margin: 0 0 1.8rem 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted, #6b7590);">
-        The code is now copied to your clipboard.
-        <br><br>
-        1. Click below to open the online compiler in a new tab.
-        <br>
-        2. <strong>Paste (Ctrl+V or Cmd+V)</strong> the code into the editor.
-        <br>
-        3. Click the <strong>Run</strong> button in the compiler tab to execute.
-      </p>
-      <div style="display: flex; gap: 12px; justify-content: center;">
-        <button id="compiler-cancel" style="
-          background: transparent;
-          border: 1px solid var(--border, #252a40);
-          color: var(--text, #dde2f0);
-          padding: 10px 20px;
-          border-radius: 8px;
-          font-weight: 500;
-          cursor: pointer;
-          font-size: 0.9rem;
-          transition: background var(--transition, 0.2s);
-        ">Cancel</button>
-        <button id="compiler-go" style="
-          background: var(--green, #4fd1a5);
-          border: none;
-          color: var(--bg, #0d0f14);
-          padding: 10px 24px;
-          border-radius: 8px;
-          font-weight: 700;
-          cursor: pointer;
-          font-size: 0.9rem;
-          box-shadow: 0 4px 12px rgba(79, 209, 165, 0.2);
-          transition: transform var(--transition, 0.2s), opacity var(--transition, 0.2s);
-        ">Open Compiler</button>
-      </div>
-    `;
-    
-    modal.appendChild(card);
-    document.body.appendChild(modal);
-    
-    // Add hover styles
-    const style = document.createElement('style');
-    style.textContent = `
-      #compiler-cancel:hover { background: var(--bg3, #1c2030); }
-      #compiler-go:hover { transform: translateY(-1px); opacity: 0.95; }
-    `;
-    document.head.appendChild(style);
-
-    // Event listeners
-    document.getElementById('compiler-cancel').onclick = () => hide();
-    document.getElementById('compiler-go').onclick = () => {
-      window.open('https://www.programiz.com/python-programming/online-compiler/', '_blank');
-      hide();
-    };
-    
-    modal.onclick = (e) => {
-      if (e.target === modal) hide();
-    };
-  }
-
-  const modalElement = document.getElementById('compiler-modal');
-  function show() {
-    modalElement.style.display = 'flex';
-    modalElement.offsetHeight; // force reflow
-    modalElement.style.opacity = '1';
-    modalElement.querySelector('div').style.transform = 'scale(1)';
-  }
-
-  function hide() {
-    modalElement.style.opacity = '0';
-    modalElement.querySelector('div').style.transform = 'scale(0.9)';
-    setTimeout(() => {
-      modalElement.style.display = 'none';
-    }, 250);
-  }
-
-  show();
-}
-
-function checkPredict(id, answer) {
-  const input = document.getElementById(id + '-input');
-  const result = document.getElementById(id + '-result');
-  if (!input || !result) return;
-  
-  // Normalize whitespace, casing, quotes, brackets, and punctuation
-  const normalize = (str) => {
-    return String(str).replace(/\\n/g, ' ')
-              .replace(/\n/g, ' ')
-              .replace(/['"()\[\]]/g, '')
-              .replace(/[,;]/g, ' ')
-              .replace(/\s+/g, ' ')
-              .trim()
-              .toLowerCase();
-  };
-  
-  const userVal = normalize(input.value);
-  const correctVal = normalize(answer);
-  const isCorrect = userVal === correctVal || userVal.includes(correctVal);
-  
-  result.style.display = 'block';
-  if (isCorrect) {
-    result.style.background = 'rgba(79,209,165,.1)';
-    result.style.border = '1px solid rgba(79,209,165,.3)';
-    result.style.color = 'var(--green)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '✅ Correct! ' + answer.replace(/\n/g, ' ');
-    state.xp += 10; saveState(); syncUI();
-  } else {
-    result.style.background = 'rgba(229,107,140,.08)';
-    result.style.border = '1px solid rgba(229,107,140,.3)';
-    result.style.color = 'var(--pink)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '❌ Expected: ' + answer.replace(/\n/g, ' ') + ' — try again';
-  }
-}
-
-function openRepl() {
-  window.open('https://replit.com/languages/python3', '_blank');
-}
-
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') !== 'light';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  const btn = document.getElementById('theme-btn');
-  if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
-}
-(function() {
-  
-  document.querySelectorAll('.predict-input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const btn = input.nextElementSibling;
-        if (btn && btn.classList.contains('predict-btn')) {
-          btn.click();
-        }
-      }
-    });
-  });
-
-  const saved = localStorage.getItem('theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-})();
-
-function renderMermaid(dayId) {
-  const run = () => {
-    if (typeof mermaid === 'undefined') {
-      setTimeout(run, 100);
-      return;
-    }
-    if (!window.mermaidInitialized) {
-      mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
-      window.mermaidInitialized = true;
-    }
-    const sec = document.getElementById(dayId);
-    if (!sec) return;
-    const nodes = sec.querySelectorAll('.mermaid:not([data-rendered])');
-    if (!nodes.length) return;
-    if (mermaid.run) {
-      mermaid.run({ nodes }).then(() => {
-        nodes.forEach(n => n.setAttribute('data-rendered','1'));
-      }).catch((err) => { console.error('Mermaid render error:', err); });
-    } else if (mermaid.init) {
-      mermaid.init(undefined, nodes);
-      nodes.forEach(n => n.setAttribute('data-rendered','1'));
-    }
-  };
-  run();
-}
-
-function toggleCheck(lbl) {
-  let box = lbl.querySelector('.chk-box');
-  if (!box) return;
-  box.classList.toggle('checked');
-  lbl.classList.toggle('done-item');
-  if(box.classList.contains('checked')) box.innerText = '✓';
-  else box.innerText = '';
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  syncUI();
-  DAYS.forEach(d => {
-    if (state.done.includes(d)) {
-      const btn = document.getElementById('btn-day-' + d);
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-  
-  renderMermaid('day-' + DAYS[0]);
-  
-  
-  document.querySelectorAll('.predict-input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const btn = input.nextElementSibling;
-        if (btn && btn.classList.contains('predict-btn')) {
-          btn.click();
-        }
-      }
-    });
-  });
-
-  const saved = localStorage.getItem('theme');
-  const btn = document.getElementById('theme-btn');
-  if (btn && saved === 'light') btn.textContent = '🌙 Dark';
-});
+  const WEEK = 8;
+  const DAYS = [52,53,54,55,56,57,58];
 </script>
+<script src="course.js"></script>
 </body>
 </html>

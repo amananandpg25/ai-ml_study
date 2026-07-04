@@ -10,13 +10,15 @@
 <link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
 <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 <script defer="" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="course.css">
 <style>
 :root {
   --accent-rgb: 229, 107, 140;
   --accent-sec-rgb: 180, 124, 252;
 }
 </style>
-<link rel="stylesheet" href="course.css">
+
+
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
   if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
@@ -56,6 +58,11 @@
 <div class="sb-item" id="sb-95" onclick="goDay(95);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(95)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--purple)"></span>Day 95 — Transformers &amp; RoPE</div>
 <div class="sb-item" id="sb-96" onclick="goDay(96);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(96)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--orange)"></span>Day 96 — BERT &amp; GPT Theory</div>
 <div class="sb-item" id="sb-97" onclick="goDay(97);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(97)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--green)"></span>Day 97 — Tokenizer Mechanics</div>
+<div class="gotcha-box">
+<strong>⚠️ Gotcha: Tokenizer-Model Mismatch</strong>
+Always load the tokenizer that matches the exact model checkpoint. Using <code>bert-base-uncased</code> tokenizer with <code>bert-base-cased</code> model will produce wrong token IDs and silently degrade performance. The rule: <code>AutoTokenizer.from_pretrained()</code> must use the same model name as <code>AutoModel.from_pretrained()</code>.
+</div>
+
 <div class="sb-item" id="sb-98" onclick="goDay(98);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(98)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--pink)"></span>Day 98 — PEFT &amp; LoRA</div>
 <div class="sb-item" id="sb-99" onclick="goDay(99);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(99)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--teal)"></span>Day 99 — RAG Fundamentals: Retrieval Architecture</div>
 <div class="sb-item" id="sb-100" onclick="goDay(100);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(100)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--yellow)"></span>Day 100 — App Deployment</div>
@@ -146,6 +153,15 @@
 <span class="desc">$Q$ represents what we are searching for, $K$ acts as the database index, and $V$ is the actual feature content.</span>
 </div>
 <h3 class="sh3">3. Deriving Scaled Dot-Product Attention</h3>
+<div class="callout cp">
+<strong>⚡ Mathematical Proof for the Scaling Factor $1/\sqrt{d_k}$:</strong>
+<br/>Let $q$ and $k$ be $d_k$-dimensional vectors whose components are independent random variables with mean 0 and variance 1.
+<br/>The dot product is $q \cdot k = \sum_{i=1}^{d_k} q_i k_i$.
+<br/>• The expectation (mean) is $E[q \cdot k] = 0$.
+<br/>• The variance is $Var(q \cdot k) = \sum_{i=1}^{d_k} Var(q_i k_i) = d_k$.
+<br/>For large dimensions $d_k$ (e.g. 64 or 128), the variance is large. The dot products can grow very large in magnitude, pushing the softmax function into flat, high-magnitude regions where its gradients are near-zero (vanishing gradients).
+<br/>Dividing by $\sqrt{d_k}$ scales the dot product's variance back to exactly 1 ($Var(\frac{q \cdot k}{\sqrt{d_k}}) = 1$), keeping softmax values in responsive gradient regions.
+</div>
 <p>The unscaled attention scores are given by <em>S = $Q$ $K$^T</em>. If components of $Q$ and $K$ are independent random variables with mean 0 and variance 1, the dot product will have mean 0 and variance <em>$d_k$</em>. For a large <em>$d_k$</em> (e.g., 64), the variance is 64.</p>
 <p>Passing a vector with high variance into the Softmax function pushes the values to the tails of the exponential curve, where the derivative of softmax approaches zero. This causes <strong>gradient saturation</strong> and halts learning. To solve this, we scale by the standard deviation <em>√$d_k$</em>.</p>
 <div class="math-block">
@@ -575,6 +591,99 @@ Attention Output = [6.7 + 0.66, 13.4 + 1.32] = [7.36, 14.72].</pre>
 <div class="analogy">Imagine writing a recipe step-by-step. Sinusoidal encoding is like writing the step number at the top of the card. RoPE (Rotary Position Embeddings) is like drawing a clock hand on the card that rotates a specific angle for each step. When you compare two cards, you just check the relative angle difference between the clock hands to know how far apart the steps are, regardless of their card numbers.</div>
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. The Transformer Architecture</h3>
+
+<figure class="svg-diagram">
+<svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" width="700" height="420" role="img" aria-label="Transformer architecture showing encoder and decoder with multi-head attention">
+  <defs>
+    <linearGradient id="tr-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1e2e"/><stop offset="100%" stop-color="#0d1117"/></linearGradient>
+  </defs>
+  <rect width="700" height="420" rx="12" fill="url(#tr-bg)"/>
+  <text x="350" y="22" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="15" fill="#e6edf3" font-weight="700">The Transformer Architecture</text>
+
+  <!-- ENCODER STACK (left) -->
+  <rect x="40" y="45" width="260" height="340" rx="10" fill="none" stroke="#58a6ff" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="170" y="65" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#58a6ff" font-weight="700">ENCODER (×N)</text>
+  
+  <!-- Input Embedding -->
+  <rect x="80" y="340" width="180" height="28" rx="5" fill="#1c2333" stroke="#d2a8ff" stroke-width="1.5"/>
+  <text x="170" y="358" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#d2a8ff">Input Embedding + Pos Encoding</text>
+  <line x1="170" y1="340" x2="170" y2="320" stroke="#6b7590" stroke-width="1.2"/>
+  
+  <!-- Multi-Head Self-Attention -->
+  <rect x="80" y="280" width="180" height="38" rx="6" fill="#1c2333" stroke="#f0c846" stroke-width="2"/>
+  <text x="170" y="298" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#f0c846" font-weight="600">Multi-Head Self-Attention</text>
+  <text x="170" y="312" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7" fill="#8b949e">Q, K, V from same input</text>
+  <line x1="170" y1="280" x2="170" y2="260" stroke="#6b7590" stroke-width="1.2"/>
+  
+  <!-- Add & Norm 1 -->
+  <rect x="110" y="245" width="120" height="15" rx="3" fill="rgba(126,231,135,0.15)"/>
+  <text x="170" y="255" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7" fill="#7ee787">Add & LayerNorm</text>
+  <line x1="170" y1="245" x2="170" y2="225" stroke="#6b7590" stroke-width="1.2"/>
+  
+  <!-- Feed-Forward -->
+  <rect x="80" y="185" width="180" height="38" rx="6" fill="#1c2333" stroke="#58a6ff" stroke-width="1.5"/>
+  <text x="170" y="203" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#58a6ff" font-weight="600">Feed-Forward Network</text>
+  <text x="170" y="217" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7" fill="#8b949e">FFN(x) = ReLU(xW₁+b₁)W₂+b₂</text>
+  <line x1="170" y1="185" x2="170" y2="165" stroke="#6b7590" stroke-width="1.2"/>
+  
+  <!-- Add & Norm 2 -->
+  <rect x="110" y="150" width="120" height="15" rx="3" fill="rgba(126,231,135,0.15)"/>
+  <text x="170" y="160" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7" fill="#7ee787">Add & LayerNorm</text>
+  
+  <!-- Residual connection arrows -->
+  <path d="M75,310 L60,310 L60,253 L108,253" fill="none" stroke="#7ee787" stroke-width="1" stroke-dasharray="3,3"/>
+  <path d="M75,210 L60,210 L60,158 L108,158" fill="none" stroke="#7ee787" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- DECODER STACK (right) -->
+  <rect x="380" y="45" width="280" height="340" rx="10" fill="none" stroke="#f97583" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="520" y="65" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" fill="#f97583" font-weight="700">DECODER (×N)</text>
+  
+  <!-- Output Embedding -->
+  <rect x="420" y="340" width="200" height="28" rx="5" fill="#1c2333" stroke="#d2a8ff" stroke-width="1.5"/>
+  <text x="520" y="358" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#d2a8ff">Output Embedding + Pos Encoding</text>
+  <line x1="520" y1="340" x2="520" y2="318" stroke="#6b7590" stroke-width="1.2"/>
+  
+  <!-- Masked Self-Attention -->
+  <rect x="420" y="280" width="200" height="36" rx="6" fill="#1c2333" stroke="#f97583" stroke-width="2"/>
+  <text x="520" y="298" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#f97583" font-weight="600">Masked Self-Attention</text>
+  <text x="520" y="310" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7" fill="#8b949e">Prevents seeing future tokens</text>
+  <line x1="520" y1="280" x2="520" y2="262" stroke="#6b7590" stroke-width="1.2"/>
+  
+  <!-- Add & Norm -->
+  <rect x="460" y="248" width="120" height="14" rx="3" fill="rgba(126,231,135,0.15)"/>
+  <text x="520" y="258" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7" fill="#7ee787">Add & LayerNorm</text>
+  <line x1="520" y1="248" x2="520" y2="228" stroke="#6b7590" stroke-width="1.2"/>
+  
+  <!-- Cross-Attention -->
+  <rect x="420" y="190" width="200" height="36" rx="6" fill="#1c2333" stroke="#f0c846" stroke-width="2"/>
+  <text x="520" y="208" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#f0c846" font-weight="600">Cross-Attention</text>
+  <text x="520" y="220" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7" fill="#8b949e">K,V from encoder; Q from decoder</text>
+  
+  <!-- Arrow from encoder to cross-attention -->
+  <path d="M300,155 L340,155 L340,208 L418,208" fill="none" stroke="#f0c846" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="345" y="175" font-family="DM Sans,sans-serif" font-size="7" fill="#f0c846">K, V</text>
+  
+  <line x1="520" y1="190" x2="520" y2="172" stroke="#6b7590" stroke-width="1.2"/>
+  <!-- Add & Norm -->
+  <rect x="460" y="158" width="120" height="14" rx="3" fill="rgba(126,231,135,0.15)"/>
+  <text x="520" y="168" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7" fill="#7ee787">Add & LayerNorm</text>
+  <line x1="520" y1="158" x2="520" y2="138" stroke="#6b7590" stroke-width="1.2"/>
+  
+  <!-- Feed-Forward -->
+  <rect x="420" y="100" width="200" height="36" rx="6" fill="#1c2333" stroke="#58a6ff" stroke-width="1.5"/>
+  <text x="520" y="118" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#58a6ff" font-weight="600">Feed-Forward Network</text>
+  <line x1="520" y1="100" x2="520" y2="82" stroke="#6b7590" stroke-width="1.2"/>
+  
+  <!-- Add & Norm -->
+  <rect x="460" y="72" width="120" height="14" rx="3" fill="rgba(126,231,135,0.15)"/>
+  <text x="520" y="82" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7" fill="#7ee787">Add & LayerNorm</text>
+
+  <!-- Output -->
+  <text x="350" y="405" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#f0c846" font-weight="600">Input: "The cat sat" → Encoder → Decoder → "Le chat assis" (autoregressive, one token at a time)</text>
+</svg>
+<figcaption>The Transformer uses self-attention instead of recurrence. The encoder processes the full input; the decoder generates output tokens autoregressively with masked attention and cross-attention to the encoder.</figcaption>
+</figure>
+
 <div class="mermaid">
       graph TD
       subgraph Encoder ["Encoder"]
@@ -1682,6 +1791,14 @@ fast_tokenizer <span class="op">=</span> <span class="fn">PreTrainedTokenizerFas
 <h3 class="sh3">1. The Need for PEFT</h3>
 <p>Full fine-tuning requires updating and storing optimizer states for every parameter. For a 7B model, Adam optimizer states take 14GB of VRAM on top of the model weights. Parameter-Efficient Fine-Tuning (PEFT) methods reduce trainable parameters by &gt;99% while maintaining 90-100% of performance.</p>
 <h3 class="sh3">2. LoRA (Low-Rank Adaptation)</h3>
+<div class="callout cp">
+<strong>⚡ LoRA Mathematical Decomposition ($h = W_0 x + \frac{\alpha}{r} B A x$):</strong>
+<br/>During fine-tuning, instead of updating the entire pre-trained weight matrix $W_0$ (of size $d \times k$), LoRA freezes $W_0$ and decomposes the weight update $\Delta W$ into two low-rank matrices $B$ (of size $d \times r$) and $A$ (of size $r \times k$), where the rank $r \ll \min(d, k)$.
+<br/>The forward pass of the adapter layer is written as:
+<pre>h = W_0 x + \Delta W x = W_0 x + \frac{\alpha}{r} B A x</pre>
+• Matrix $A$ is initialized with a Gaussian distribution, and matrix $B$ is initialized to 0, ensuring $\Delta W = 0$ at the start of training.
+<br/>• $\alpha$ is a constant scaling hyperparameter. Tuning $\alpha$ scales the influence of adapter weights without needing to re-tune learning rates.
+</div>
 <p>LoRA hypothesizes that the change in weights (ΔW) during fine-tuning has a low "intrinsic rank". Instead of updating the massive weight matrix <em>$W$ ∈ ℝ^(d × k)</em> directly, we freeze <em>$W$</em> and inject trainable rank decomposition matrices <em>A ∈ ℝ^(d × r)</em> and <em>B ∈ ℝ^(r × k)</em>, where <em>r ≪ min(d, k)</em>.</p>
 <div class="math-block">
 <span class="formula">$$h = Wx + ΔWx = Wx + B(Ax)$$</span>
@@ -2360,6 +2477,12 @@ inputs <span class="op">=</span> <span class="fn">tokenizer</span>(prompt, retur
 <div class="analogy">Hugging Face Spaces is like renting a small food stall in a busy marketplace (Hugging Face Hub). Instead of building a restaurant from scratch, you just place your menu (Gradio app) in the stall, and customers can instantly interact with it over the web.</div>
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. FastAPI for Machine Learning</h3>
+<div class="callout cp">
+<strong>⚡ Production Deployment Gotchas & FastAPI Best Practices:</strong>
+<br/>• <strong>Model Loading:</strong> Never load your model inside the endpoint function! This loads the model from disk on *every request*, creating massive latency and memory leaks. Always load the model as a singleton on startup (e.g. using FastAPI Lifespan events).
+<br/>• <strong>Pickle Warning:</strong> Avoid Python's <code>pickle</code> for serializing models in production. It is highly vulnerable to code execution attacks and incompatible across python versions. Use <strong>joblib</strong> or export models to <strong>ONNX</strong> / <strong>TensorRT</strong> formats.
+<br/>• <strong>Concurrency & Workers:</strong> In FastAPI production, run behind an ASGI server like Uvicorn managed by Gunicorn. Calculate optimal workers: <code>workers = (2 * CPU_cores) + 1</code>. Use async endpoints ONLY for non-blocking I/O operations (like database lookups); CPU-bound model inference should run in standard `def` functions so FastAPI can run them in a separate thread pool.
+</div>
 <p>Flask and Django are synchronous and can block when running heavy GPU inference. FastAPI leverages Python's <code>asyncio</code>, allowing the web server to handle thousands of requests while waiting for the GPU to finish batch processing.</p>
 <h3 class="sh3">2. Docker Containerization</h3>
 <p>Dependency hell is a massive problem in ML (CUDA versions, PyTorch builds). A <code>Dockerfile</code> guarantees that your model runs exactly the same on an AWS server as it does on your local machine.</p>
@@ -2631,451 +2754,18 @@ weights = torch.softmax(scores, dim=-1)</code></pre>
 </div>
 <a class="ws-btn" href="roadmap.html">View Full Roadmap →</a>
 </div>
+
+<div class="bridge-note">
+<strong>🌉 Bridge: Understanding Transformers → Using LLMs as Services</strong>
+You now know how Transformers work internally: self-attention, positional encoding, multi-head attention, and fine-tuning with LoRA/PEFT. Starting next week, you'll use these models as black-box APIs — prompting GPT-4, Claude, and Gemini through REST endpoints. Understanding the internals gives you a massive advantage: you'll know WHY certain prompting strategies work (temperature controls softmax sharpness), WHY token limits exist (context window = max sequence length), and WHY fine-tuning sometimes beats prompting (weight updates vs in-context learning).
+</div>
 </div>
 </main>
 </div>
 <script>
-// ═══════════════════════════════════════════
-//  WEEK 14 — STATE & GAMIFICATION ENGINE
-// ═══════════════════════════════════════════
-const WEEK = 14;
-const DAYS = [94,95,96,97,98,99,100];
-
-
-
-
-
-let state = JSON.parse(localStorage.getItem(`w${WEEK}-state`) || '{}');
-state.xp     = state.xp     || 0;
-state.streak = state.streak || 0;
-state.done   = state.done   || [];
-state.lastDate= state.lastDate || '';
-
-function saveState() { localStorage.setItem(`w${WEEK}-state`, JSON.stringify(state)); }
-
-const LEVELS = [
-  { min:0,    label:'🌱 Beginner' },
-  { min:500,  label:'🔍 Explorer' },
-  { min:1500, label:'⚙️ Practitioner' },
-  { min:3000, label:'🤖 Engineer' },
-  { min:6000, label:'🧠 Expert' },
-  { min:10000,label:'🚀 Master' }
-];
-function getLevel(xp) {
-  for (let i = LEVELS.length - 1; i >= 0; i--) {
-    if (xp >= LEVELS[i].min) return LEVELS[i].label;
-  }
-  return LEVELS[0].label;
-}
-
-function syncUI() {
-  document.getElementById('xp-show').textContent   = `⚡ ${state.xp} XP`;
-  document.getElementById('streak-show').textContent = `🔥 ${state.streak} day streak`;
-  document.getElementById('sb-xp').textContent     = `${state.xp} XP earned`;
-  document.getElementById('sb-streak').textContent  = `${state.streak} day streak`;
-  const lvlEl = document.getElementById('level-show');
-  if (lvlEl) lvlEl.textContent = getLevel(state.xp || 0);
-
-  const pct = Math.round((state.done.length / DAYS.length) * 100);
-  const progBar = document.getElementById('prog-bar');
-  if (progBar) {
-    progBar.style.width = pct + '%';
-    progBar.parentElement.setAttribute('aria-valuenow', pct);
-  }
-  const progText = document.getElementById('prog-text');
-  if (progText) progText.textContent = `${state.done.length}/${DAYS.length} days`;
-
-  DAYS.forEach(d => {
-    const pill = document.getElementById('pill-' + d);
-    const sb   = document.getElementById('sb-' + d);
-    const btn  = document.getElementById('btn-day-' + d);
-    if (state.done.includes(d)) {
-      pill && pill.classList.add('done');
-      sb && sb.classList.add('done');
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-}
-
-function completeDay(day, xp) {
-  if (state.done.includes(day)) return;
-  state.done.push(day);
-  state.xp += xp;
-  const today = new Date().toDateString();
-  const yesterday = new Date(Date.now() - 86400000).toDateString();
-  if (state.lastDate !== today) {
-    if (state.lastDate === yesterday) { state.streak++; }
-    else { state.streak = 1; }
-    state.lastDate = today;
-  }
-  saveState();
-  syncUI();
-  showXPToast(xp, day);
-  const btn = document.getElementById('btn-day-' + day);
-  if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + day + ' Complete'; }
-}
-
-function showXPToast(xp, day) {
-  const t = document.getElementById('xp-toast');
-  if (t) {
-    t.textContent = `+${xp} XP ⚡ — Day ${day} Complete!`;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
-}
-
-function goDay(n) {
-  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
-  document.querySelectorAll('.day-pill').forEach(p => { p.classList.remove('active'); p.setAttribute('aria-selected','false'); });
-  const section = document.getElementById('day-' + n);
-  if (section) { section.classList.add('active'); }
-  const sbItem = document.getElementById('sb-' + n);
-  if (sbItem) { sbItem.classList.add('active'); }
-  const pill = document.getElementById('pill-' + n);
-  if (pill) { pill.classList.add('active'); pill.setAttribute('aria-selected','true'); }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  renderMermaid('day-' + n);
-}
-
-function jumpTo(id) {
-  const day = document.querySelector('.day-section.active');
-  if (!day) return;
-  const dayNum = day.id.replace('day-', '');
-  const target = day.querySelector('#day-' + dayNum + '-' + id) || day.querySelector('#' + id);
-  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function toggleSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (!sb) return;
-  const open = sb.classList.toggle('open');
-  if (btn) btn.setAttribute('aria-expanded', String(open));
-}
-function closeSidebar() {
-  const sb  = document.getElementById('sidebar');
-  const btn = document.getElementById('sidebar-toggle');
-  if (sb) sb.classList.remove('open');
-  if (btn) btn.setAttribute('aria-expanded', 'false');
-}
-
-function quiz(optEl, result, qid) {
-  const block = optEl.closest('.quiz-block');
-  if (!block) return;
-  block.querySelectorAll('.quiz-opt').forEach(o => {
-    o.style.pointerEvents = 'none';
-    if (o !== optEl) o.classList.add('dimmed');
-  });
-  optEl.classList.add(result === 'correct' ? 'correct' : 'wrong');
-  const letter = optEl.querySelector('.quiz-letter');
-  if (letter) letter.textContent = result === 'correct' ? '✓' : '✗';
-  const correctFb = block.querySelector('.correct-fb') || block.querySelector('#' + qid + '-correct');
-  const wrongFb   = block.querySelector('.wrong-fb') || block.querySelector('#' + qid + '-wrong');
-  if (result === 'correct') {
-    if (correctFb) {
-      correctFb.style.display = 'block';
-    }
-    state.xp += 10;
-    saveState();
-    syncUI();
-    showXPToast(10, 'quiz');
-  } else {
-    if (wrongFb) {
-      wrongFb.style.display = 'block';
-    }
-  }
-}
-
-function toggleTask(header) {
-  const body = header.nextElementSibling;
-  if (!body) return;
-  const isOpen = body.style.display === 'block';
-  body.style.display = isOpen ? 'none' : 'block';
-  header.setAttribute('aria-expanded', String(!isOpen));
-}
-
-// Add simple style fix for task header content if needed, but keeping toggleTask correct
-function toggleSolution(id) {
-  const box = document.getElementById(id);
-  if (!box) return;
-  const isOpen = box.style.display === 'block';
-  box.style.display = isOpen ? 'none' : 'block';
-}
-
-function copyCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (pre) {
-    navigator.clipboard.writeText(pre.innerText).then(() => {
-      btn.textContent = 'copied!';
-      setTimeout(() => btn.textContent = 'copy', 1500);
-    });
-  }
-}
-
-function runCode(btn) {
-  const cb = btn.closest('.cb') || btn.closest('.solution-box');
-  const pre = cb ? cb.querySelector('pre') : null;
-  if (!pre) return;
-  
-  // Copy code to clipboard
-  navigator.clipboard.writeText(pre.innerText);
-  
-  // Visual feedback on the button
-  btn.textContent = 'Copied!';
-  setTimeout(() => btn.textContent = 'Run', 2000);
-  
-  // Show compiler instructions modal
-  showCompilerModal();
-}
-
-function showCompilerModal() {
-  let modal = document.getElementById('compiler-modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'compiler-modal';
-    modal.style.cssText = `
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(13, 15, 20, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 10000;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    `;
-    
-    const card = document.createElement('div');
-    card.style.cssText = `
-      background: var(--bg2, #141720);
-      border: 1px solid var(--border, #252a40);
-      border-radius: 16px;
-      padding: 2.2rem;
-      max-width: 440px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.55);
-      text-align: center;
-      transform: scale(0.9);
-      transition: transform 0.25s ease;
-      color: var(--text, #dde2f0);
-      font-family: var(--font-body, system-ui, sans-serif);
-    `;
-    
-    card.innerHTML = `
-      <div style="font-size: 2.8rem; margin-bottom: 0.8rem;">🚀</div>
-      <h3 style="margin: 0 0 1rem 0; font-size: 1.35rem; color: var(--green, #4fd1a5); font-family: var(--font-head, sans-serif); font-weight: 800; letter-spacing: 0.5px;">Code Copied! Ready to Run</h3>
-      <p style="margin: 0 0 1.8rem 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted, #6b7590);">
-        The code is now copied to your clipboard.
-        <br><br>
-        1. Click below to open the online compiler in a new tab.
-        <br>
-        2. <strong>Paste (Ctrl+V or Cmd+V)</strong> the code into the editor.
-        <br>
-        3. Click the <strong>Run</strong> button in the compiler tab to execute.
-      </p>
-      <div style="display: flex; gap: 12px; justify-content: center;">
-        <button id="compiler-cancel" style="
-          background: transparent;
-          border: 1px solid var(--border, #252a40);
-          color: var(--text, #dde2f0);
-          padding: 10px 20px;
-          border-radius: 8px;
-          font-weight: 500;
-          cursor: pointer;
-          font-size: 0.9rem;
-          transition: background var(--transition, 0.2s);
-        ">Cancel</button>
-        <button id="compiler-go" style="
-          background: var(--green, #4fd1a5);
-          border: none;
-          color: var(--bg, #0d0f14);
-          padding: 10px 24px;
-          border-radius: 8px;
-          font-weight: 700;
-          cursor: pointer;
-          font-size: 0.9rem;
-          box-shadow: 0 4px 12px rgba(79, 209, 165, 0.2);
-          transition: transform var(--transition, 0.2s), opacity var(--transition, 0.2s);
-        ">Open Compiler</button>
-      </div>
-    `;
-    
-    modal.appendChild(card);
-    document.body.appendChild(modal);
-    
-    // Add hover styles
-    const style = document.createElement('style');
-    style.textContent = `
-      #compiler-cancel:hover { background: var(--bg3, #1c2030); }
-      #compiler-go:hover { transform: translateY(-1px); opacity: 0.95; }
-    `;
-    document.head.appendChild(style);
-
-    // Event listeners
-    document.getElementById('compiler-cancel').onclick = () => hide();
-    document.getElementById('compiler-go').onclick = () => {
-      window.open('https://www.programiz.com/python-programming/online-compiler/', '_blank');
-      hide();
-    };
-    
-    modal.onclick = (e) => {
-      if (e.target === modal) hide();
-    };
-  }
-
-  const modalElement = document.getElementById('compiler-modal');
-  function show() {
-    modalElement.style.display = 'flex';
-    modalElement.offsetHeight; // force reflow
-    modalElement.style.opacity = '1';
-    modalElement.querySelector('div').style.transform = 'scale(1)';
-  }
-
-  function hide() {
-    modalElement.style.opacity = '0';
-    modalElement.querySelector('div').style.transform = 'scale(0.9)';
-    setTimeout(() => {
-      modalElement.style.display = 'none';
-    }, 250);
-  }
-
-  show();
-}
-
-function checkPredict(id, answer) {
-  const input = document.getElementById(id + '-input');
-  const result = document.getElementById(id + '-result');
-  if (!input || !result) return;
-  
-  // Normalize whitespace, casing, quotes, brackets, and punctuation
-  const normalize = (str) => {
-    return String(str).replace(/\\n/g, ' ')
-              .replace(/\n/g, ' ')
-              .replace(/['"()\[\]]/g, '')
-              .replace(/[,;]/g, ' ')
-              .replace(/\s+/g, ' ')
-              .trim()
-              .toLowerCase();
-  };
-  
-  const userVal = normalize(input.value);
-  const correctVal = normalize(answer);
-  const isCorrect = userVal === correctVal || userVal.includes(correctVal);
-  
-  result.style.display = 'block';
-  if (isCorrect) {
-    result.style.background = 'rgba(79,209,165,.1)';
-    result.style.border = '1px solid rgba(79,209,165,.3)';
-    result.style.color = 'var(--green)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '✅ Correct! ' + answer.replace(/\n/g, ' ');
-    state.xp += 10; saveState(); syncUI();
-  } else {
-    result.style.background = 'rgba(229,107,140,.08)';
-    result.style.border = '1px solid rgba(229,107,140,.3)';
-    result.style.color = 'var(--pink)';
-    result.style.borderRadius = '6px';
-    result.style.padding = '.5rem .8rem';
-    result.textContent = '❌ Expected: ' + answer.replace(/\n/g, ' ') + ' — try again';
-  }
-}
-
-function openRepl() {
-  window.open('https://replit.com/languages/python3', '_blank');
-}
-
-function toggleTheme() {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') !== 'light';
-  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  const btn = document.getElementById('theme-btn');
-  if (btn) btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
-}
-(function() {
-  
-  document.querySelectorAll('.predict-input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const btn = input.nextElementSibling;
-        if (btn && btn.classList.contains('predict-btn')) {
-          btn.click();
-        }
-      }
-    });
-  });
-
-  const saved = localStorage.getItem('theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-})();
-
-function renderMermaid(dayId) {
-  const run = () => {
-    if (typeof mermaid === 'undefined') {
-      setTimeout(run, 100);
-      return;
-    }
-    if (!window.mermaidInitialized) {
-      mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
-      window.mermaidInitialized = true;
-    }
-    const sec = document.getElementById(dayId);
-    if (!sec) return;
-    const nodes = sec.querySelectorAll('.mermaid:not([data-rendered])');
-    if (!nodes.length) return;
-    if (mermaid.run) {
-      mermaid.run({ nodes }).then(() => {
-        nodes.forEach(n => n.setAttribute('data-rendered','1'));
-      }).catch((err) => { console.error('Mermaid render error:', err); });
-    } else if (mermaid.init) {
-      mermaid.init(undefined, nodes);
-      nodes.forEach(n => n.setAttribute('data-rendered','1'));
-    }
-  };
-  run();
-}
-
-function toggleCheck(lbl) {
-  let box = lbl.querySelector('.chk-box');
-  if (!box) return;
-  box.classList.toggle('checked');
-  lbl.classList.toggle('done-item');
-  if(box.classList.contains('checked')) box.innerText = '✓';
-  else box.innerText = '';
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  syncUI();
-  DAYS.forEach(d => {
-    if (state.done.includes(d)) {
-      const btn = document.getElementById('btn-day-' + d);
-      if (btn) { btn.classList.add('done'); btn.textContent = '✓ Day ' + d + ' Complete'; }
-    }
-  });
-  
-  renderMermaid('day-' + DAYS[0]);
-  
-  
-  document.querySelectorAll('.predict-input').forEach(input => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const btn = input.nextElementSibling;
-        if (btn && btn.classList.contains('predict-btn')) {
-          btn.click();
-        }
-      }
-    });
-  });
-
-  const saved = localStorage.getItem('theme');
-  const btn = document.getElementById('theme-btn');
-  if (btn && saved === 'light') btn.textContent = '🌙 Dark';
-});
+  const WEEK = 14;
+  const DAYS = [94,95,96,97,98,99,100];
 </script>
+<script src="course.js"></script>
 </body>
 </html>

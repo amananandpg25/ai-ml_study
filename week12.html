@@ -22,9 +22,6 @@ All materials are verified to build real, robust, and industry-standard SDE capa
 <title>Week 12 — Attention &amp; Image Captioning | 135-Day AI/ML Roadmap</title>
 <meta content="Week 12 — Attention &amp; Image Captioning — Complete coursework, tasks, quizzes, and resources for Week 12 of the 135-Day AI/ML Roadmap." name="description"/>
 <link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%230d0f14'/&gt;&lt;text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'&gt;AI&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
-<link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
-<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer="" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 <link rel="stylesheet" href="course.css">
 <style>
 :root {
@@ -32,8 +29,6 @@ All materials are verified to build real, robust, and industry-standard SDE capa
   --accent-sec-rgb: 229, 107, 140;
 }
 </style>
-
-
 <link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
 <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 <script defer="" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
@@ -107,9 +102,9 @@ All materials are verified to build real, robust, and industry-standard SDE capa
 <div class="day-tag">WEEK 12 · DAY 80 · MONTH 3 — DEEP LEARNING</div>
 <h1>The Attention Mechanism</h1>
 <p>
-      In Sequence-to-Sequence (Seq2Seq) architectures, the Encoder compresses the entire input sequence into a single, fixed-size context vector. For long sentences, this creates a severe **informational bottleneck**, causing the model to forget early elements.
-      Today, we master the **Attention Mechanism**, which solves this by allowing the Decoder to dynamically inspect all historical hidden states of the Encoder at each decoding step.
-      We will dissect the mathematics of **Additive (Bahdanau) vs. Dot-Product (Luong) Attention**, calculate attention weights, derive context vectors, and understand the **BLEU** evaluation metric.
+      In Sequence-to-Sequence (Seq2Seq) architectures, the Encoder compresses the entire input sequence into a single, fixed-size context vector. For long sentences, this creates a severe <strong>informational bottleneck</strong>, causing the model to forget early elements.
+      Today, we master the <strong>Attention Mechanism</strong>, which solves this by allowing the Decoder to dynamically inspect all historical hidden states of the Encoder at each decoding step.
+      We will dissect the mathematics of <strong>Additive (Bahdanau) vs. Dot-Product (Luong) Attention</strong>, calculate attention weights, derive context vectors, and understand the <strong>BLEU</strong> evaluation metric.
     </p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 6 hours</span>
@@ -193,7 +188,7 @@ All materials are verified to build real, robust, and industry-standard SDE capa
   </p>
 <h3 class="sh3">2. Bahdanau (Additive) vs. Luong (Dot-Product) Attention</h3>
 <p>
-    The core of the attention mechanism is calculating an **alignment score** $e_{t,i}$ measuring how well the input at position $i$ aligns with the output at position $t$:
+    The core of the attention mechanism is calculating an <strong>alignment score</strong> $e_{t,i}$ measuring how well the input at position $i$ aligns with the output at position $t$:
   </p>
 <ul class="prose-list">
 <li>
@@ -209,7 +204,7 @@ All materials are verified to build real, robust, and industry-standard SDE capa
 </ul>
 <h3 class="sh3">3. Deriving Attention Weights and Context Vectors</h3>
 <p>
-    Once alignment scores $e_{t,i}$ are calculated, we apply a softmax function over all input sequence positions to compute the **attention weights** $\alpha_{t,i}$:
+    Once alignment scores $e_{t,i}$ are calculated, we apply a softmax function over all input sequence positions to compute the <strong>attention weights</strong> $\alpha_{t,i}$:
   </p>
 <div class="math-block">
 <span class="formula">$$\alpha_{t,i} = \frac{\exp(e_{t,i})}{\sum_{j=1}^T \exp(e_{t,j})}$$</span>
@@ -232,35 +227,35 @@ All materials are verified to build real, robust, and industry-standard SDE capa
     $$W_a = \begin{pmatrix} 0.2 &amp; 0.4 \\ -0.1 &amp; 0.3 \end{pmatrix}, \quad U_a = \begin{pmatrix} 0.5 &amp; -0.2 \\ 0.1 &amp; 0.6 \end{pmatrix}, \quad v_a = \begin{pmatrix} 0.8 \\ 0.5 \end{pmatrix}$$
   </p>
 <p>
-    **Step 4.1: Compute query projection $W_a s_{t-1}$:**
+    <strong>Step 4.1: Compute query projection $W_a s_{t-1}$:</strong>
     $$W_a s_{t-1} = \begin{pmatrix} 0.2 &amp; 0.4 \\ -0.1 &amp; 0.3 \end{pmatrix} \begin{pmatrix} 0.5 \\ -0.2 \end{pmatrix} = \begin{pmatrix} (0.2)(0.5) + (0.4)(-0.2) \\ (-0.1)(0.5) + (0.3)(-0.2) \end{pmatrix} = \begin{pmatrix} 0.1 - 0.08 \\ -0.05 - 0.06 \end{pmatrix} = \begin{pmatrix} 0.02 \\ -0.11 \end{pmatrix}$$
   </p>
 <p>
-    **Step 4.2: Compute key projections $U_a h_i$:**
+    <strong>Step 4.2: Compute key projections $U_a h_i$:</strong>
     $$U_a h_1 = \begin{pmatrix} 0.5 &amp; -0.2 \\ 0.1 &amp; 0.6 \end{pmatrix} \begin{pmatrix} 0.8 \\ 0.1 \end{pmatrix} = \begin{pmatrix} 0.4 - 0.02 \\ 0.08 + 0.06 \end{pmatrix} = \begin{pmatrix} 0.38 \\ 0.14 \end{pmatrix}$$
     $$U_a h_2 = \begin{pmatrix} 0.5 &amp; -0.2 \\ 0.1 &amp; 0.6 \end{pmatrix} \begin{pmatrix} -0.3 \\ 0.9 \end{pmatrix} = \begin{pmatrix} -0.15 - 0.18 \\ -0.03 + 0.54 \end{pmatrix} = \begin{pmatrix} -0.33 \\ 0.51 \end{pmatrix}$$
   </p>
 <p>
-    **Step 4.3: Compute raw score $e_{t,1}$ for $h_1$:**
+    <strong>Step 4.3: Compute raw score $e_{t,1}$ for $h_1$:</strong>
     $$\text{Sum}_1 = W_a s_{t-1} + U_a h_1 = \begin{pmatrix} 0.02 \\ -0.11 \end{pmatrix} + \begin{pmatrix} 0.38 \\ 0.14 \end{pmatrix} = \begin{pmatrix} 0.40 \\ 0.03 \end{pmatrix}$$
     $$\tanh(\text{Sum}_1) = \begin{pmatrix} \tanh(0.40) \\ \tanh(0.03) \end{pmatrix} \approx \begin{pmatrix} 0.3799 \\ 0.0300 \end{pmatrix}$$
     $$e_{t,1} = v_a^{\top} \tanh(\text{Sum}_1) = \begin{pmatrix} 0.8 &amp; 0.5 \end{pmatrix} \begin{pmatrix} 0.3799 \\ 0.0300 \end{pmatrix} = (0.8)(0.3799) + (0.5)(0.0300) \approx 0.3039 + 0.0150 = 0.3189$$
   </p>
 <p>
-    **Step 4.4: Compute raw score $e_{t,2}$ for $h_2$:**
+    <strong>Step 4.4: Compute raw score $e_{t,2}$ for $h_2$:</strong>
     $$\text{Sum}_2 = W_a s_{t-1} + U_a h_2 = \begin{pmatrix} 0.02 \\ -0.11 \end{pmatrix} + \begin{pmatrix} -0.33 \\ 0.51 \end{pmatrix} = \begin{pmatrix} -0.31 \\ 0.40 \end{pmatrix}$$
     $$\tanh(\text{Sum}_2) = \begin{pmatrix} \tanh(-0.31) \\ \tanh(0.40) \end{pmatrix} \approx \begin{pmatrix} -0.3008 \\ 0.3799 \end{pmatrix}$$
     $$e_{t,2} = v_a^{\top} \tanh(\text{Sum}_2) = \begin{pmatrix} 0.8 &amp; 0.5 \end{pmatrix} \begin{pmatrix} -0.3008 \\ 0.3799 \end{pmatrix} = (0.8)(-0.3008) + (0.5)(0.3799) \approx -0.2406 + 0.1900 = -0.0506$$
   </p>
 <p>
-    **Step 4.5: Calculate attention weights via softmax:**
+    <strong>Step 4.5: Calculate attention weights via softmax:</strong>
     $$\exp(e_{t,1}) = \exp(0.3189) \approx 1.3756$$
     $$\exp(e_{t,2}) = \exp(-0.0506) \approx 0.9507$$
     $$\text{Sum of Exponentials} = 1.3756 + 0.9507 = 2.3263$$
     $$\alpha_{t,1} = \frac{1.3756}{2.3263} \approx 0.5913, \quad \alpha_{t,2} = \frac{0.9507}{2.3263} \approx 0.4087$$
   </p>
 <p>
-    **Step 4.6: Calculate context vector $c_t$:**
+    <strong>Step 4.6: Calculate context vector $c_t$:</strong>
     $$c_t = \alpha_{t,1} h_1 + \alpha_{t,2} h_2 = 0.5913 \begin{pmatrix} 0.8 \\ 0.1 \end{pmatrix} + 0.4087 \begin{pmatrix} -0.3 \\ 0.9 \end{pmatrix} = \begin{pmatrix} 0.4730 \\ 0.0591 \end{pmatrix} + \begin{pmatrix} -0.1226 \\ 0.3678 \end{pmatrix} = \begin{pmatrix} 0.3504 \\ 0.4269 \end{pmatrix}$$
   </p>
 <h3 class="sh3">5. Computational Trace of Attention Weights</h3>
@@ -277,8 +272,10 @@ encoder_states = np.random.randn(<span class="num">3</span>, <span class="num">4
 decoder_state = np.random.randn(<span class="num">4</span>)      <span class="cm"># 1 state of shape (4,)</span>
 W_a = np.random.randn(<span class="num">4</span>, <span class="num">4</span>)             <span class="cm"># General attention weight matrix</span>
 
-<span class="bi">print</span>(<span class="str">"Encoder States H:\\n"</span>, encoder_states)
-<span class="bi">print</span>(<span class="str">"Decoder State s:\\n"</span>, decoder_state)
+<span class="bi">print</span>(<span class="str">"Encoder States H:\
+"</span>, encoder_states)
+<span class="bi">print</span>(<span class="str">"Decoder State s:\
+"</span>, decoder_state)
 
 <span class="cm"># 2. Calculate alignment scores: e_i = s^T * W_a * h_i</span>
 scores = []
@@ -286,7 +283,8 @@ scores = []
     score = decoder_state.dot(W_a).dot(h_i)
     scores.append(score)
 scores = np.array(scores)
-<span class="bi">print</span>(<span class="str">"\\nRaw Alignment Scores e:"</span>, scores)
+<span class="bi">print</span>(<span class="str">"\
+Raw Alignment Scores e:"</span>, scores)
 
 <span class="cm"># 3. Softmax activation to get Attention Weights alpha</span>
 exp_scores = np.exp(scores)
@@ -296,12 +294,15 @@ weights = exp_scores / np.sum(exp_scores)
 
 <span class="cm"># 4. Context vector as weighted sum</span>
 context = np.sum([w * h <span class="kw">for</span> w, h <span class="kw">in</span> <span class="bi">zip</span>(weights, encoder_states)], axis=<span class="num">0</span>)
-<span class="bi">print</span>(<span class="str">"\\nResulting Context Vector c_t:"</span>, context)</pre>
+<span class="bi">print</span>(<span class="str">"\
+Resulting Context Vector c_t:"</span>, context)</pre>
 </div>
 <div class="analogy">Traditional Seq2Seq ek bilkul aisi book summaries ki tarah hai jahan ek student ko puri kitab padh kar exam hall me sirf ek chhota sa paragraph (fixed context vector) likhne diya jata hai, jisse details bhool jati hain. Attention mechanism exam hall me student ko puri open-book library access (historical hidden states) deta hai jahan wo har sawaal (decoder step) likhte waqt specific lines par direct ungli (attention weights) rakh kar reference le sakta hai.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 80: Attention Matrix shape\n# Q of shape (1, 10, 64) and K of shape (1, 12, 64).\n# What is the shape of attention weights (Q K^T)?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 80: Attention Matrix shape
+# Q of shape (1, 10, 64) and K of shape (1, 12, 64).
+# What is the shape of attention weights (Q K^T)?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day80-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day80-p1', '(1, 10, 12)')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -343,8 +344,8 @@ context = np.sum([w * h <span class="kw">for</span> w, h <span class="kw">in</sp
 </div>
 <div class="task-body">
 <p>Given the following sequences:
-      <br/>- **Reference:** "the quick brown fox jumps over the lazy dog"
-      <br/>- **Candidate:** "the quick brown fox jumps over lazy dog"
+      <br/>- <strong>Reference:</strong> "the quick brown fox jumps over the lazy dog"
+      <br/>- <strong>Candidate:</strong> "the quick brown fox jumps over lazy dog"
       <br/><br/>Calculate:
       <br/>1. BLEU-1 (unigram precision) incorporating brevity penalty (BP) calculation.
       <br/>2. BLEU-2 (bigram precision) calculation.
@@ -366,30 +367,11 @@ context = np.sum([w * h <span class="kw">for</span> w, h <span class="kw">in</sp
 <h2 class="sh2">🃏 Revision Flashcards — Day 80</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is Attention?</div>
-<div class="fc-back">A mechanism allowing models to focus on specific parts of input sequences dynamically.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Additive Attention?</div>
-<div class="fc-back">Proposed by Bahdanau. Uses a feedforward network to calculate alignment scores.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 80 fit in Week 12?</div>
-<div class="fc-back">It is a key day in Week 12 (Attention Mechanism, Luong/Bahdanau, Image Captioning).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Recurrent Networks?</div><div class="fc-back">Processes sequential inputs by passing a hidden state vector (memory) from step to step across time.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">LSTM Cell?</div><div class="fc-back">Uses input, forget, and output gates along with a cell state to regulate information flow and solve gradient problems.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GRU Cell?</div><div class="fc-back">Simplified LSTM variant merging cell and hidden state; uses reset and update gates for faster training.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradients?</div><div class="fc-back">In long sequences, backpropagation-through-time causes gradients to fade, losing memory of early steps.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Bidirectional RNN?</div><div class="fc-back">Processes sequences in both forward and backward directions to capture future and past context simultaneously.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -479,8 +461,8 @@ context = np.sum([w * h <span class="kw">for</span> w, h <span class="kw">in</sp
 <h1>Multi-Modal Architectures: CNN + RNN</h1>
 <p>
       Generative deep learning shines when we stitch different modalities together.
-      Today, we master **Multi-Modal Architectures**, focusing on linking Computer Vision (CNNs) with Sequential Text Modeling (RNNs/LSTMs).
-      We will study how to extract spatial features from deep pre-trained CNN backbones, project these high-dimensional grids into sequence spaces, initialize LSTM hidden states, and employ the **Teacher Forcing** training strategy.
+      Today, we master <strong>Multi-Modal Architectures</strong>, focusing on linking Computer Vision (CNNs) with Sequential Text Modeling (RNNs/LSTMs).
+      We will study how to extract spatial features from deep pre-trained CNN backbones, project these high-dimensional grids into sequence spaces, initialize LSTM hidden states, and employ the <strong>Teacher Forcing</strong> training strategy.
     </p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 5 hours</span>
@@ -509,7 +491,7 @@ context = np.sum([w * h <span class="kw">for</span> w, h <span class="kw">in</sp
 <h2 class="sh2">🧠 Theory &amp; Engineering Deep Dive</h2>
 <h3 class="sh3">1. Modality Stitching: Vision to Sequence</h3>
 <p>
-    To generate description captions for a given image, we employ an **Encoder-Decoder** structure jahan vision encoder convolutional layers ko language decoder sequence layers se directly link kiya jata hai:
+    To generate description captions for a given image, we employ an <strong>Encoder-Decoder</strong> structure jahan vision encoder convolutional layers ko language decoder sequence layers se directly link kiya jata hai:
   </p>
 <ul class="prose-list">
 <li>
@@ -542,7 +524,7 @@ context = np.sum([w * h <span class="kw">for</span> w, h <span class="kw">in</sp
 </ul>
 <h3 class="sh3">4. Scheduled Sampling Decay Mathematical Formulations</h3>
 <p>
-    To resolve the mismatch of Exposure Bias (where the model is trained with perfect targets but evaluated on its own previous predicted tokens), we use **Scheduled Sampling**.
+    To resolve the mismatch of Exposure Bias (where the model is trained with perfect targets but evaluated on its own previous predicted tokens), we use <strong>Scheduled Sampling</strong>.
     Instead of a constant teacher forcing ratio, we decay the ratio $\epsilon_i$ dynamically as the training epochs $i$ progress, transitioning the model from guided teaching to fully autonomous inference:
   </p>
 <ul class="prose-list">
@@ -635,7 +617,8 @@ grid, (h, c) = model(mock_cnn_out)
 <div class="analogy">CNN-RNN stitching bilkul ek live football commentator ki tarah kaam karta hai. CNN hamari eyes hai jo camera raw pixels ko lekar direct spatial landscape coordinates aur players positioning (spatial feature grid) me code karti hai. LSTM commentating brain hai jo spatial updates dekh kar (pooled hidden states) correct sequence labels aur sentences select karta hai, taaki final audience match ki kahani (captions) padh sake.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 81: Context vector length\n# If encoder hidden states size is 256, what is context vector shape?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 81: Context vector length
+# If encoder hidden states size is 256, what is context vector shape?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day81-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day81-p1', '(256,)')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -696,30 +679,11 @@ grid, (h, c) = model(mock_cnn_out)
 <h2 class="sh2">🃏 Revision Flashcards — Day 81</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Encoder-Decoder bottleneck?</div>
-<div class="fc-back">Fixed-length context vector fails to summarize long sequences correctly.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Luong Attention?</div>
-<div class="fc-back">Multiplicative attention using dot-product alignment: score = h_t^T W s_a.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 81 fit in Week 12?</div>
-<div class="fc-back">It is a key day in Week 12 (Attention Mechanism, Luong/Bahdanau, Image Captioning).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Proposed by Bahdanau. Uses a feedforward network to calculate alignment scores.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Recurrent Networks?</div><div class="fc-back">Processes sequential inputs by passing a hidden state vector (memory) from step to step across time.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">LSTM Cell?</div><div class="fc-back">Uses input, forget, and output gates along with a cell state to regulate information flow and solve gradient problems.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GRU Cell?</div><div class="fc-back">Simplified LSTM variant merging cell and hidden state; uses reset and update gates for faster training.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradients?</div><div class="fc-back">In long sequences, backpropagation-through-time causes gradients to fade, losing memory of early steps.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Bidirectional RNN?</div><div class="fc-back">Processes sequences in both forward and backward directions to capture future and past context simultaneously.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -803,9 +767,9 @@ grid, (h, c) = model(mock_cnn_out)
 <div class="day-tag">WEEK 12 · DAY 82 · MONTH 3 — DEEP LEARNING</div>
 <h1>Capstone Part 1: Dataset &amp; Visual Grid Feature Extraction</h1>
 <p>
-      Today, we launch our Month 3 Major Capstone Project: the **Attention-Augmented Image Caption Generator**.
+      Today, we launch our Month 3 Major Capstone Project: the <strong>Attention-Augmented Image Caption Generator</strong>.
       Our first phase is establishing the data pre-processing and feature extraction pipelines.
-      We will implement a custom, robust text tokenization and `Vocabulary` class in PyTorch, construct a dataset wrapper to clean and load the Flickr8k dataset captions, and build a convolutional feature extractor using a pre-trained **ResNet-50** backbone to capture spatial visual feature grids.
+      We will implement a custom, robust text tokenization and `Vocabulary` class in PyTorch, construct a dataset wrapper to clean and load the Flickr8k dataset captions, and build a convolutional feature extractor using a pre-trained <strong>ResNet-50</strong> backbone to capture spatial visual feature grids.
     </p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 6 hours</span>
@@ -850,12 +814,12 @@ grid, (h, c) = model(mock_cnn_out)
   </p>
 <h3 class="sh3">3. Zipf's Law and Vocabulary Frequency Thresholds</h3>
 <p>
-    Natural language tokens follow **Zipf's Law**, which states that the frequency of any word $f$ is inversely proportional to its rank $r$ in the frequency table:
+    Natural language tokens follow <strong>Zipf's Law</strong>, which states that the frequency of any word $f$ is inversely proportional to its rank $r$ in the frequency table:
     $$f(w) \propto \frac{1}{r(w)^s}$$
     where $s \approx 1$.
     In practice, a tiny fraction of words (like "the", "a", "is") account for the vast majority of occurrences, while a massive tail of words (like "unicycle", "somersault") appear only once or twice in the entire Flickr8k corpus.
     If we include these rare words, our vocabulary size bloats (causing massive memory overhead in the decoder linear projection layer), but the model will never see enough examples to learn their representations properly, leading to high gradient variance.
-    By enforcing a **frequency threshold** (e.g. 5 occurrences), we trim the tail of Zipf's distribution, mapping rare tokens to `&lt;unk&gt;` and stabilizing the classification gradients.
+    By enforcing a <strong>frequency threshold</strong> (e.g. 5 occurrences), we trim the tail of Zipf's distribution, mapping rare tokens to `&lt;unk&gt;` and stabilizing the classification gradients.
   </p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — zipf_distribution_analysis.py</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
@@ -958,7 +922,8 @@ output_features = encoder(mock_imgs)
 <div class="analogy">Flickr8k dataset raw captions mapping aur tokenization bilkul ek naye dictionary system banaye jaane ki tarah hai. Hum raw language tokens ko standard numbered index identifiers (vocab mapping) me decode karte hain, taaki hum unhe visual feature arrays se stitch kar sakein.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 82: Image Captioning vocab index output\n# Predict vocabulary token mapping index for standard <sos> token</sos></code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 82: Image Captioning vocab index output
+# Predict vocabulary token mapping index for standard <sos> token</sos></code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day82-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day82-p1', '1')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1004,30 +969,11 @@ output_features = encoder(mock_imgs)
 <h2 class="sh2">🃏 Revision Flashcards — Day 82</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Show and Tell model?</div>
-<div class="fc-back">CNN extracts visual features, feeds them as initial state to an LSTM language decoder.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Captioning loss function?</div>
-<div class="fc-back">Sparse Categorical Cross-Entropy over the generated vocabulary sequence.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 82 fit in Week 12?</div>
-<div class="fc-back">It is a key day in Week 12 (Attention Mechanism, Luong/Bahdanau, Image Captioning).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Fixed-length context vector fails to summarize long sequences correctly.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Recurrent Networks?</div><div class="fc-back">Processes sequential inputs by passing a hidden state vector (memory) from step to step across time.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">LSTM Cell?</div><div class="fc-back">Uses input, forget, and output gates along with a cell state to regulate information flow and solve gradient problems.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GRU Cell?</div><div class="fc-back">Simplified LSTM variant merging cell and hidden state; uses reset and update gates for faster training.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradients?</div><div class="fc-back">In long sequences, backpropagation-through-time causes gradients to fade, losing memory of early steps.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Bidirectional RNN?</div><div class="fc-back">Processes sequences in both forward and backward directions to capture future and past context simultaneously.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -1111,9 +1057,9 @@ output_features = encoder(mock_imgs)
 <div class="day-tag">WEEK 12 · DAY 83 · MONTH 3 — DEEP LEARNING</div>
 <h1>Capstone Part 2: Attention-Augmented Decoder Module</h1>
 <p>
-      In Phase 2 of our Major Capstone, we implement the core engine of the multi-modal caption generator: the **Attention-Augmented Decoder**.
-      Today, we construct the decoder network in PyTorch from scratch, integrating an additive attention module directly inside a sequential **LSTMCell** decoding loop.
-      We will project visual features, map word tokens, calculate soft attention maps over spatial coordinates, concatenate context vectors with token embeddings, and program the **Teacher Forcing** decision logic.
+      In Phase 2 of our Major Capstone, we implement the core engine of the multi-modal caption generator: the <strong>Attention-Augmented Decoder</strong>.
+      Today, we construct the decoder network in PyTorch from scratch, integrating an additive attention module directly inside a sequential <strong>LSTMCell</strong> decoding loop.
+      We will project visual features, map word tokens, calculate soft attention maps over spatial coordinates, concatenate context vectors with token embeddings, and program the <strong>Teacher Forcing</strong> decision logic.
     </p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 6 hours</span>
@@ -1270,7 +1216,8 @@ out = decoder(mock_feats, mock_caps, init_states)
 <div class="analogy">Attention decoder module bilkul ek high-speed translation engine ki tarah hai. Ye image feature tokens ko text inputs ke saath concatenate karke recurrent equations run karta hai, aur check karta hai ki generation flow path balance me rahe.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 83: Temperature decoding\n# If Temp = 0.0, the decoding behavior is strictly equivalent to which search?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 83: Temperature decoding
+# If Temp = 0.0, the decoding behavior is strictly equivalent to which search?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day83-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day83-p1', 'Greedy Search')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1318,30 +1265,11 @@ out = decoder(mock_feats, mock_caps, init_states)
 <h2 class="sh2">🃏 Revision Flashcards — Day 83</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Temperature scaling?</div>
-<div class="fc-back">Divides logits by T before softmax. T &lt; 1 sharpens, T &gt; 1 flattens probability.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 83 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 83 fit in Week 12?</div>
-<div class="fc-back">It is a key day in Week 12 (Attention Mechanism, Luong/Bahdanau, Image Captioning).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Multiplicative attention using dot-product alignment: score = h_t^T W s_a.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Recurrent Networks?</div><div class="fc-back">Processes sequential inputs by passing a hidden state vector (memory) from step to step across time.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">LSTM Cell?</div><div class="fc-back">Uses input, forget, and output gates along with a cell state to regulate information flow and solve gradient problems.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GRU Cell?</div><div class="fc-back">Simplified LSTM variant merging cell and hidden state; uses reset and update gates for faster training.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradients?</div><div class="fc-back">In long sequences, backpropagation-through-time causes gradients to fade, losing memory of early steps.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Bidirectional RNN?</div><div class="fc-back">Processes sequences in both forward and backward directions to capture future and past context simultaneously.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -1420,8 +1348,8 @@ out = decoder(mock_feats, mock_caps, init_states)
 <div class="day-tag">WEEK 12 · DAY 84 · MONTH 3 — DEEP LEARNING</div>
 <h1>Capstone Part 3: Training &amp; BLEU Evaluation Loop</h1>
 <p>
-      In Phase 3 of our Major Capstone, we orchestrate the complete **Training &amp; Validation Loop** for our multi-modal attention captioner.
-      Today, we master the engineering of stable sequence backpropagation, implement a padding-aware cross-entropy loss function to ignore non-semantic tokens, protect our LSTM gradients from exploding via gradient clipping, and build a validation metrics pipeline to compute real-time **BLEU-1 to BLEU-4** scores.
+      In Phase 3 of our Major Capstone, we orchestrate the complete <strong>Training &amp; Validation Loop</strong> for our multi-modal attention captioner.
+      Today, we master the engineering of stable sequence backpropagation, implement a padding-aware cross-entropy loss function to ignore non-semantic tokens, protect our LSTM gradients from exploding via gradient clipping, and build a validation metrics pipeline to compute real-time <strong>BLEU-1 to BLEU-4</strong> scores.
     </p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 6 hours</span>
@@ -1479,7 +1407,7 @@ out = decoder(mock_feats, mock_caps, init_states)
   </p>
 <h3 class="sh3">2. Mitigating Exploding Gradients</h3>
 <p>
-    LSTMs backpropagating over many sequential steps are highly vulnerable to **exploding gradients** where parameter updates grow exponentially, causing numerical instability (NaN values).
+    LSTMs backpropagating over many sequential steps are highly vulnerable to <strong>exploding gradients</strong> where parameter updates grow exponentially, causing numerical instability (NaN values).
     We enforce gradient clipping by capping the global norm of all trainable parameters:
   </p>
 <div class="math-block">
@@ -1489,7 +1417,7 @@ out = decoder(mock_feats, mock_caps, init_states)
 <h3 class="sh3">3. Dynamic Early Stopping &amp; Model Checkpointing</h3>
 <p>
     To prevent overfitting during deep visual captioner training, we must monitor validation BLEU-4 metrics rather than simple training loss.
-    We design a custom **EarlyStopping** callback in PyTorch.
+    We design a custom <strong>EarlyStopping</strong> callback in PyTorch.
     If the validation BLEU-4 score fails to increase for a specified number of epochs (e.g. `patience = 5`), we interrupt training and reload the saved checkpoint weights containing the highest score:
   </p>
 <div class="cb">
@@ -1592,7 +1520,8 @@ b1, b4 = evaluate_bleu(ref_str, cand_str)
 <div class="analogy">Padding-aware loss bilkul ek board exam paper checker ki tarah kaam karta hai jo students ke answer papers evaluate karte waqt unke borders par khichi gayi rough design margin lines (pad tokens) ko completely ignore karke sirf unke likhe gaye answers (actual vocabulary predictions) ko score karta hai.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 84: BERT Masked Language Modeling\n# If input has 100 tokens, standard pre-training masks what percentage?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 84: BERT Masked Language Modeling
+# If input has 100 tokens, standard pre-training masks what percentage?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day84-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day84-p1', '15%')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1640,30 +1569,11 @@ b1, b4 = evaluate_bleu(ref_str, cand_str)
 <h2 class="sh2">🃏 Revision Flashcards — Day 84</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">BERT training goals?</div>
-<div class="fc-back">Masked Language Modeling (MLM) and Next Sentence Prediction (NSP).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 84 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 84 fit in Week 12?</div>
-<div class="fc-back">It is a key day in Week 12 (Attention Mechanism, Luong/Bahdanau, Image Captioning).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">CNN extracts visual features, feeds them as initial state to an LSTM language decoder.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Recurrent Networks?</div><div class="fc-back">Processes sequential inputs by passing a hidden state vector (memory) from step to step across time.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">LSTM Cell?</div><div class="fc-back">Uses input, forget, and output gates along with a cell state to regulate information flow and solve gradient problems.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GRU Cell?</div><div class="fc-back">Simplified LSTM variant merging cell and hidden state; uses reset and update gates for faster training.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradients?</div><div class="fc-back">In long sequences, backpropagation-through-time causes gradients to fade, losing memory of early steps.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Bidirectional RNN?</div><div class="fc-back">Processes sequences in both forward and backward directions to capture future and past context simultaneously.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -1748,7 +1658,7 @@ Without BatchNorm, each layer's input distribution shifts as previous layers upd
 <h1>Capstone Part 4: Greedy vs. Beam Search Inference Decoding</h1>
 <p>
       During sequence generation inference, a model outputs probability distributions over the vocabulary step-by-step. How we select tokens from these distributions dictates the quality of generated captions.
-      Today, we master advanced **Inference Decoding Algorithms**. We will compare standard **Greedy Search** against the high-performance **Beam Search** algorithm, analyzing path probabilities, vocabulary search spaces, and tracking cumulative log-probabilities to decode optimal captions.
+      Today, we master advanced <strong>Inference Decoding Algorithms</strong>. We will compare standard <strong>Greedy Search</strong> against the high-performance <strong>Beam Search</strong> algorithm, analyzing path probabilities, vocabulary search spaces, and tracking cumulative log-probabilities to decode optimal captions.
     </p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 5.5 hours</span>
@@ -1780,9 +1690,8 @@ Without BatchNorm, each layer's input distribution shifts as previous layers upd
     Greedy Search selects the word token with the highest absolute probability at the current step:
   </p>
 <div class="math-block">
-<span class="formula">w_t = \arg\max_{w \in \mathcal{V}} P(w \mid w_{<t}, i)<="" span="">
-<span class="desc">Where the model grabs the single best token immediately.</span>
-</t},></span></div>
+<span class="formula">$$w_t = \arg\max_{w \in \mathcal{V}} P(w \mid w_{&lt;t}, i)$$</span>
+<span class="desc">Where the model grabs the single best token immediately.</span></div>
 <p>
     While computationally instantaneous, this is a mathematically short-sighted heuristic. A highly probable early word might lead to a dead-end with extremely low future probabilities. Greedy search cannot backtrack, forever trapping the model in sub-optimal local basins or highly repetitive phrase loops.
   </p>
@@ -1956,7 +1865,8 @@ Without BatchNorm, each layer's input distribution shifts as previous layers upd
 <div class="analogy">Greedy search bilkul ek aise short-sighted traveler ki tarah hai jo raste ke har crossroads par sirf sabse chhaon wali sadak (immediate highest probability token) pakad leta hai, bhale hi wo sadak aage chalkar band ho jaye. Beam search ek experienced guide ki tarah hai jo ek saath 3 alag-alag potential paths (beam width K=3) par nazar rakhta hai aur pure route ki total smoothness (cumulative log probability) calculate karke best path select karta hai.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 85: GPT-2 causal mask shape\n# For sequence length 5, what is the lower triangular causal mask shape?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 85: GPT-2 causal mask shape
+# For sequence length 5, what is the lower triangular causal mask shape?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day85-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day85-p1', '(5, 5)')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -2003,30 +1913,11 @@ Without BatchNorm, each layer's input distribution shifts as previous layers upd
 <h2 class="sh2">🃏 Revision Flashcards — Day 85</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Causal masking?</div>
-<div class="fc-back">Triangular masking prevents self-attention from looking at future tokens during training.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 85 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 85 fit in Week 12?</div>
-<div class="fc-back">It is a key day in Week 12 (Attention Mechanism, Luong/Bahdanau, Image Captioning).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Sparse Categorical Cross-Entropy over the generated vocabulary sequence.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Recurrent Networks?</div><div class="fc-back">Processes sequential inputs by passing a hidden state vector (memory) from step to step across time.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">LSTM Cell?</div><div class="fc-back">Uses input, forget, and output gates along with a cell state to regulate information flow and solve gradient problems.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GRU Cell?</div><div class="fc-back">Simplified LSTM variant merging cell and hidden state; uses reset and update gates for faster training.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradients?</div><div class="fc-back">In long sequences, backpropagation-through-time causes gradients to fade, losing memory of early steps.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Bidirectional RNN?</div><div class="fc-back">Processes sequences in both forward and backward directions to capture future and past context simultaneously.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -2126,8 +2017,8 @@ Without BatchNorm, each layer's input distribution shifts as previous layers upd
 <h1>Capstone Part 5: Gradio Web Deployment</h1>
 <p>
       In the final phase of our Month 3 Capstone, we deploy our fully trained, attention-augmented image captioning model.
-      Today, we master the construction of a beautiful, interactive **Gradio Web Interface** with a dark, premium UI theme.
-      We will write production-ready code that loads our weights, processes uploaded images, generates real-time captions using Greedy or Beam Search, and overlays **Attention Heatmap Vismaps** directly onto the images to show users exactly where the model looked for each predicted word.
+      Today, we master the construction of a beautiful, interactive <strong>Gradio Web Interface</strong> with a dark, premium UI theme.
+      We will write production-ready code that loads our weights, processes uploaded images, generates real-time captions using Greedy or Beam Search, and overlays <strong>Attention Heatmap Vismaps</strong> directly onto the images to show users exactly where the model looked for each predicted word.
     </p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 6 hours</span>
@@ -2159,7 +2050,7 @@ Without BatchNorm, each layer's input distribution shifts as previous layers upd
 <h2 class="sh2">🧠 Theory &amp; Engineering Deep Dive</h2>
 <h3 class="sh3">1. Visualizing Spatial Attention Heatmaps</h3>
 <p>
-    One of the greatest benefits of the Attention mechanism is its **interpretability**. Since the model calculates attention weights $\alpha_{t,i}$ over the 49 visual grid locations for each word, we can reconstruct exactly what the model was looking at.
+    One of the greatest benefits of the Attention mechanism is its <strong>interpretability</strong>. Since the model calculates attention weights $\alpha_{t,i}$ over the 49 visual grid locations for each word, we can reconstruct exactly what the model was looking at.
     We take the weights tensor at step $t$ of shape (49,), reshape it to a $7 \times 7$ grid, resize it back to the original image dimensions (e.g. $224 \times 224$) using bilinear interpolation, and overlay it as a semi-transparent colored heatmap.
   </p>
 <h3 class="sh3">2. Gradio Web Interface Engineering</h3>
@@ -2170,7 +2061,7 @@ Without BatchNorm, each layer's input distribution shifts as previous layers upd
 <h3 class="sh3">3. Low-Latency Deployments: Dynamic INT8 Quantization</h3>
 <p>
     Deploying deep neural networks to production servers often encounters hardware resource limitations. If our web deployment runs on standard CPUs, standard 32-bit floating point calculations (FP32) can result in high user latencies.
-    To accelerate inference without degrading model precision, we utilize **Dynamic INT8 Quantization**.
+    To accelerate inference without degrading model precision, we utilize <strong>Dynamic INT8 Quantization</strong>.
     This maps floating-point parameters to 8-bit integers (INT8) dynamically during execution:
     $$q = \text{round}\left( \frac{r}{S} \right) + Z$$
     where $r$ is the real value, $S$ is a scaling factor, and $Z$ is the zero-point integer offset.
@@ -2206,7 +2097,7 @@ Without BatchNorm, each layer's input distribution shifts as previous layers upd
 </div>
 <h3 class="sh3">4. Structured Weight Pruning</h3>
 <p>
-    Beyond quantization, we can further accelerate our sequential decoders on target edge devices by using **Weight Pruning**.
+    Beyond quantization, we can further accelerate our sequential decoders on target edge devices by using <strong>Weight Pruning</strong>.
     Pruning zeroes out model parameters that contribute least to the network's predictive capacity. We employ PyTorch's `prune` utility to apply L1-norm unstructured pruning to the LSTM recurrent parameter matrices. This zeroes out 30% of the recurrent connection weights while keeping the validation BLEU score virtually intact:
   </p>
 <div class="cb">
@@ -2276,10 +2167,10 @@ Without BatchNorm, each layer's input distribution shifts as previous layers upd
 <span class="cm"># Building premium Gradio Web interface block</span>
 with gr.Blocks(theme=gr.themes.Soft(primary_hue=<span class="str">"purple"</span>, neutral_hue=<span class="str">"slate"</span>)) <span class="kw">as</span> demo:
     gr.Markdown(
-        <span class="str">\"\"\"</span>
+        <span class="str">"""</span>
         # 🌌 Attention-Augmented Image Caption Generator
         Upload an image, and the pre-trained spatial attention visual model will write a descriptive caption and show you exactly what it was focusing on!
-        <span class="str">\"\"\"</span>
+        <span class="str">"""</span>
     )
     
     with gr.Row():
@@ -2297,7 +2188,8 @@ with gr.Blocks(theme=gr.themes.Soft(primary_hue=<span class="str">"purple"</span
 <div class="analogy">Gradio deployment bilkul ek artist ki gallery exhibition ki tarah hai. Jab tak hamara image captioning model terminal backend par tha, wo andhere laboratory me rakhi masterpiece ki tarah tha. Gradio interface us masterpiece par lights aur interpretability heatmaps lagakar public ke dekhne aur access karne ke liye tayyar kar deta hai.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 86: Gradio Input type\n# If fn accepts gr.Image(), what datatype does it pass to the function?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 86: Gradio Input type
+# If fn accepts gr.Image(), what datatype does it pass to the function?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day86-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day86-p1', 'numpy.ndarray')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -2343,30 +2235,11 @@ with gr.Blocks(theme=gr.themes.Soft(primary_hue=<span class="str">"purple"</span
 <h2 class="sh2">🃏 Revision Flashcards — Day 86</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Gradio application factory?</div>
-<div class="fc-back">gr.Interface(fn=predict, inputs=&#x27;text&#x27;, outputs=&#x27;label&#x27;).launch()</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 86 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 86 fit in Week 12?</div>
-<div class="fc-back">It is a key day in Week 12 (Attention Mechanism, Luong/Bahdanau, Image Captioning).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Divides logits by T before softmax. T &lt; 1 sharpens, T &gt; 1 flattens probability.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Recurrent Networks?</div><div class="fc-back">Processes sequential inputs by passing a hidden state vector (memory) from step to step across time.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">LSTM Cell?</div><div class="fc-back">Uses input, forget, and output gates along with a cell state to regulate information flow and solve gradient problems.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GRU Cell?</div><div class="fc-back">Simplified LSTM variant merging cell and hidden state; uses reset and update gates for faster training.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradients?</div><div class="fc-back">In long sequences, backpropagation-through-time causes gradients to fade, losing memory of early steps.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Bidirectional RNN?</div><div class="fc-back">Processes sequences in both forward and backward directions to capture future and past context simultaneously.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -2522,7 +2395,7 @@ attn_weights = torch.softmax(scores, dim=-1)</code></pre>
 <span class="formula">$$\text{BLEU} = \text{BP} \cdot \exp\left( \sum_{n=1}^N w_n \log p_n \right)$$</span>
 </div>
 <p>
-    The **Brevity Penalty (BP)** is formulated to prevent short candidate sequences from inflating their precision metrics:
+    The <strong>Brevity Penalty (BP)</strong> is formulated to prevent short candidate sequences from inflating their precision metrics:
   </p>
 <div class="math-block">
 <span class="formula">$$\text{BP} = \begin{cases} 1 &amp; \text{if } c &gt; r \\ \exp\left(1 - \frac{r}{c}\right) &amp; \text{if } c \leq r \end{cases}$$</span>

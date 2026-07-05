@@ -14,15 +14,13 @@
   --accent-sec-rgb: 56, 189, 248;
 }
 </style>
-
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
   if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
 </script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters:[{left:'66296',right:'66296',display:true},{left:'$',right:'$',display:false}]});"></script>
 </head>
 <body>
 <div class="xp-toast" id="xp-toast">+50 XP ⚡</div>
@@ -154,7 +152,7 @@
 <h3 class="sh3">4. Train-Test Split: Why and How</h3>
 <p>Agar aap kisi student ka test usi questions se loge jo class mein solve karwaye the, toh ho sakta hai usne concepts samjhe na ho, sirf answers ratta maar liye ho. Generalization check karne ke liye, humesha test un-seen questions (test set) par hona chahiye.</p>
 <div class="math-block">
-<span class="formula">$$Dataset = Train Set (80%) + Test Set (20%)$$</span>
+<span class="formula">$$\text{Dataset} = \text{Train Set (80\%)} + \text{Test Set (20\%)}$$</span>
 <span class="desc">Train set is used to learn weights. Test set is strictly reserved for final evaluation.</span>
 </div>
 <div class="cb">
@@ -284,7 +282,9 @@ train, test = train_test_split(data, test_size=<span class="num">0.4</span>, ran
 <h2 class="sh2">🃏 Revision Flashcards — Day 31</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Supervised vs Unsupervised?</div><div class="fc-back">Supervised uses labeled targets for prediction; unsupervised analyzes unlabeled data for underlying structures.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Log-Loss (Binary Cross-Entropy)?</div><div class="fc-back">Loss function for binary classification: L = -[y*log(p) + (1-y)*log(1-p)]. Penalizes confident wrong predictions.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Sigmoid Activation?</div><div class="fc-back">Formula: 1 / (1 + e^-z). Maps any real value to the range (0, 1), representing probability output.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Odds Ratio?</div><div class="fc-back">The probability of an event occurring divided by the probability of it not occurring: p / (1 - p).</div></div></div>
 <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Features vs Targets?</div><div class="fc-back">Features (X) are the input variables; Targets (y) are the labels we wish to predict.</div></div></div>
 <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Train-Test Split?</div><div class="fc-back">Partitioning data (e.g., 80/20) to train the model on one subset and evaluate it on unseen data.</div></div></div>
 </div>
@@ -375,18 +375,18 @@ train, test = train_test_split(data, test_size=<span class="num">0.4</span>, ran
 <p>MAE calculates the average magnitude of absolute errors. MSE squares the errors before averaging them. Because of the squaring operation, MSE penalizes large errors disproportionately more than small errors.</p>
 <div class="analogy">Ghar ki price predict karte waqt, agar aap Rs. 10k off ho, toh normal baat hai. Par agar aap Rs. 10 Lakhs off ho, toh bohot bada failure hai. MSE is failure ko bohot heavy fine karta hai (squaring the 10 Lakhs error), jabki MAE simple proportion mein penalty lagata hai.</div>
 <div class="math-block">
-<span class="formula">$$MAE = (1/n) * Σ |y_i - ŷ_i|$$</span>
+<span class="formula">$$\text{MAE} = \frac{1}{n} \sum_{i=1}^n |y_i - \hat{y}_i|$$</span>
 <span class="desc">L1 Loss. Robust to outliers, but gradient is constant (not smooth at zero).</span>
-<span class="formula">$$MSE = (1/n) * Σ (y_i - ŷ_i)²$$</span>
+<span class="formula">$$\text{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2$$</span>
 <span class="desc">L2 Loss. Penalizes larger errors heavily, smooth gradient, easy to differentiate.</span>
-<span class="formula">$$RMSE = √[MSE]$$</span>
+<span class="formula">$$\text{RMSE} = \sqrt{\text{MSE}}$$</span>
 <span class="desc">Root Mean Squared Error. Converts units back to original y scale.</span>
 </div>
 <h3 class="sh3">2. Coefficient of Determination (R² Score)</h3>
 <p>R² compares your model's predictions to a baseline model that always predicts the mean of target variables (ŷ = mean(y)). It represents the proportion of variance in the dependent variable that is predictable from the independent variables.</p>
 <div class="math-block">
-<span class="formula">$$R² = 1 - (SS_res / SS_tot)$$</span>
-<span class="desc">Where SS_res = Σ(y_i - ŷ_i)² [sum of squared residuals], and SS_tot = Σ(y_i - y_mean)² [total sum of squares]</span>
+<span class="formula">$$R^2 = 1 - \frac{SS_{\text{res}}}{SS_{\text{tot}}}$$</span>
+<span class="desc">Where $SS_{\text{res}} = \sum(y_i - \hat{y}_i)^2$ [sum of squared residuals], and $SS_{\text{tot}} = \sum(y_i - \bar{y})^2$ [total sum of squares]</span>
 </div>
 <div class="callout ci">
 <strong>📊 Interpreting R² values:</strong>
@@ -417,7 +417,8 @@ r2_scratch = <span class="num">1.0</span> - (ss_res / ss_tot)
 <span class="bi">print</span>(<span class="str">f"  MAE : {mae_scratch:.2f}, MSE : {mse_scratch:.2f}, RMSE: {rmse_scratch:.2f}, R2: {r2_scratch:.4f}"</span>)
 
 <span class="cm"># Verify with sklearn</span>
-<span class="bi">print</span>(<span class="str">"\nSklearn Results:"</span>)
+<span class="bi">print</span>(<span class="str">"
+Sklearn Results:"</span>)
 <span class="bi">print</span>(<span class="str">f"  MAE : {mean_absolute_error(y_true, y_pred):.2f}"</span>)
 <span class="bi">print</span>(<span class="str">f"  MSE : {mean_squared_error(y_true, y_pred):.2f}"</span>)
 <span class="bi">print</span>(<span class="str">f"  R2  : {r2_score(y_true, y_pred):.4f}"</span>)</pre>
@@ -521,9 +522,11 @@ y_pred = np.array([<span class="num">3</span>, <span class="num">3</span>, <span
 <h2 class="sh2">🃏 Revision Flashcards — Day 32</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">MAE vs MSE?</div><div class="fc-back">MAE measures absolute errors (robust to outliers); MSE squares errors (penalizes large errors heavily).</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">R-squared (R²)?</div><div class="fc-back">Proportion of variance in the target explained by the model's features (0 to 1 scale).</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">RMSE?</div><div class="fc-back">Root Mean Squared Error. Standard error metric on the same scale as the target variable.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Log-Loss (Binary Cross-Entropy)?</div><div class="fc-back">Loss function for binary classification: L = -[y*log(p) + (1-y)*log(1-p)]. Penalizes confident wrong predictions.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Sigmoid Activation?</div><div class="fc-back">Formula: 1 / (1 + e^-z). Maps any real value to the range (0, 1), representing probability output.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Odds Ratio?</div><div class="fc-back">The probability of an event occurring divided by the probability of it not occurring: p / (1 - p).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Features vs Targets?</div><div class="fc-back">Features (X) are the input variables; Targets (y) are the labels we wish to predict.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Train-Test Split?</div><div class="fc-back">Partitioning data (e.g., 80/20) to train the model on one subset and evaluate it on unseen data.</div></div></div>
 </div>
 
 <div id="day-32-resources-section">
@@ -570,7 +573,7 @@ w_1 = w_0 - η * (dJ/dw)
 w_1 = 5.0 - 0.1 * 6.0 = 4.4.
 
 Step 3: Compute new loss:
-J(w_1) = (4.4 - 2)² = 5.76 (reduced from J(5.0) = 9.0).</pre>
+$J(w_1) = (4.4 - 2)^2 = 5.76$ (reduced from J(5.0) = 9.0).</pre>
 </div>
 <div class="misconception">
 <strong>⚠️ Common Misconception:</strong> Deep models for Machine Learning Fundamentals, Bias-Variance, Metrics, Tuning always generalize better without regularization.
@@ -642,11 +645,11 @@ J(w_1) = (4.4 - 2)² = 5.76 (reduced from J(5.0) = 9.0).</pre>
 <strong>🛡️ Fraud Alert (High Precision):</strong> If a bank blocks a UPI card on every false alarm, customer experience will be terrible. We want to be absolutely sure when marking a transaction as fraud (minimizing false positives/FP), so we prioritize High Precision.
     </div>
 <div class="math-block">
-<span class="formula">$$Precision = TP / (TP + FP)$$</span>
+<span class="formula">$$\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}$$</span>
 <span class="desc">What fraction of predictions were correct?</span>
-<span class="formula">$$Recall = TP / (TP + FN)$$</span>
+<span class="formula">$$\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}$$</span>
 <span class="desc">What fraction of positive cases did we capture?</span>
-<span class="formula">$$F1-Score = 2 * (Precision * Recall) / (Precision + Recall)$$</span>
+<span class="formula">$$\text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$</span>
 <span class="desc">Harmonic mean. Penalizes extreme values of either precision or recall.</span>
 </div>
 <h3 class="sh3">3. ROC Curve and AUC</h3>
@@ -669,7 +672,8 @@ auc = roc_auc_score(y_true, y_pred)
 
 <span class="bi">print</span>(<span class="str">"Confusion Matrix Counts:"</span>)
 <span class="bi">print</span>(<span class="str">f"  TP: {tp}, FP: {fp}, TN: {tn}, FN: {fn}"</span>)
-<span class="bi">print</span>(<span class="str">"\nMetrics:"</span>)
+<span class="bi">print</span>(<span class="str">"
+Metrics:"</span>)
 <span class="bi">print</span>(<span class="str">f"  Precision : {prec:.4f}"</span>)
 <span class="bi">print</span>(<span class="str">f"  Recall    : {rec:.4f}"</span>)
 <span class="bi">print</span>(<span class="str">f"  F1 Score  : {f1:.4f}"</span>)
@@ -746,14 +750,11 @@ print(f"P: {precision:.1f}, R: {recall:.1f}")</pre></div>
 <h2 class="sh2">🃏 Revision Flashcards — Day 33</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Confusion Matrix?</div><div class="fc-back">TP, TN, FP, FN grid summarizing model predictions vs actual targets.</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Precision?</div><div class="fc-back">TP / (TP + FP)<br/>Focus: minimizing False Positives.</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Recall (Sensitivity)?</div><div class="fc-back">TP / (TP + FN)<br/>Focus: minimizing False Negatives.</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">F1-Score?</div><div class="fc-back">Harmonic mean of precision &amp; recall.<br/>2*(P*R)/(P+R)</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">ROC-AUC?</div><div class="fc-back">ROC: TPR vs FPR curve.<br/>AUC: Area Under Curve. 0.5=random, 1.0=perfect.</div></div></div>
-<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:1rem;margin:1rem 0;font-size:13.5px;">
-<strong>⚙️ Hyperparameter Tip:</strong> class_weight='balanced' automatically adjusts weights inversely proportional to class frequencies. This is crucial for imbalanced classification tasks (like fraud detection).
-  </div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Log-Loss (Binary Cross-Entropy)?</div><div class="fc-back">Loss function for binary classification: L = -[y*log(p) + (1-y)*log(1-p)]. Penalizes confident wrong predictions.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Sigmoid Activation?</div><div class="fc-back">Formula: 1 / (1 + e^-z). Maps any real value to the range (0, 1), representing probability output.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Odds Ratio?</div><div class="fc-back">The probability of an event occurring divided by the probability of it not occurring: p / (1 - p).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Features vs Targets?</div><div class="fc-back">Features (X) are the input variables; Targets (y) are the labels we wish to predict.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Train-Test Split?</div><div class="fc-back">Partitioning data (e.g., 80/20) to train the model on one subset and evaluate it on unseen data.</div></div></div>
 </div>
 <div id="day-33-tasks-section">
 <h2 class="sh2">💻 Coding Tasks</h2>
@@ -897,7 +898,7 @@ print(f"P: {precision:.1f}, R: {recall:.1f}")</pre></div>
 </figure>
 
 <div class="math-block">
-<span class="formula">$$Total Error = Bias² + Variance + Irreducible Error$$</span>
+<span class="formula">$$\text{Total Error} = \text{Bias}^2 + \text{Variance} + \text{Irreducible Error}$$</span>
 <span class="desc"><strong>Bias:</strong> Error from erroneous assumptions (e.g., fitting a line to circular data). High bias → Underfitting.</span>
 <span class="desc"><strong>Variance:</strong> Sensitivity to small fluctuations in training set. High variance → Overfitting.</span>
 <span class="desc"><strong>Irreducible Error (noise):</strong> Noise in data generation. Cannot be reduced regardless of algorithm.</span>
@@ -1011,9 +1012,11 @@ print("High Variance Model:", "A" if 0.95 - 0.01 &gt; 0.17 - 0.15 else "B")</pre
 <h2 class="sh2">🃏 Revision Flashcards — Day 34</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Bias-Variance Tradeoff?</div><div class="fc-back">Balancing error from simple assumptions (Bias) vs error from sensitivity to training noise (Variance).</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Overfitting?</div><div class="fc-back">High variance. Fits training data perfectly but fails to generalize to unseen test data.</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">K-Fold Cross-Validation?</div><div class="fc-back">Splitting data into K folds, training on K-1, validating on 1, and repeating K times for a stable score.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Log-Loss (Binary Cross-Entropy)?</div><div class="fc-back">Loss function for binary classification: L = -[y*log(p) + (1-y)*log(1-p)]. Penalizes confident wrong predictions.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Sigmoid Activation?</div><div class="fc-back">Formula: 1 / (1 + e^-z). Maps any real value to the range (0, 1), representing probability output.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Odds Ratio?</div><div class="fc-back">The probability of an event occurring divided by the probability of it not occurring: p / (1 - p).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Features vs Targets?</div><div class="fc-back">Features (X) are the input variables; Targets (y) are the labels we wish to predict.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Train-Test Split?</div><div class="fc-back">Partitioning data (e.g., 80/20) to train the model on one subset and evaluate it on unseen data.</div></div></div>
 </div>
 
 <div id="day-34-resources-section">
@@ -1286,9 +1289,11 @@ print("Total fits:", fits)</pre></div>
 <h2 class="sh2">🃏 Revision Flashcards — Day 35</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Grid Search vs Random Search?</div><div class="fc-back">Grid search exhaustively tries every parameter combination; random search samples combinations randomly (more efficient).</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Hyperparameter?</div><div class="fc-back">Configuration external to the model (like learning rate or depth) set before training begins.</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Validation Set?</div><div class="fc-back">Subset used to tune hyperparameters and select models without touching the final test set.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Log-Loss (Binary Cross-Entropy)?</div><div class="fc-back">Loss function for binary classification: L = -[y*log(p) + (1-y)*log(1-p)]. Penalizes confident wrong predictions.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Sigmoid Activation?</div><div class="fc-back">Formula: 1 / (1 + e^-z). Maps any real value to the range (0, 1), representing probability output.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Odds Ratio?</div><div class="fc-back">The probability of an event occurring divided by the probability of it not occurring: p / (1 - p).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Features vs Targets?</div><div class="fc-back">Features (X) are the input variables; Targets (y) are the labels we wish to predict.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Train-Test Split?</div><div class="fc-back">Partitioning data (e.g., 80/20) to train the model on one subset and evaluate it on unseen data.</div></div></div>
 </div>
 
 <div id="day-35-resources-section">
@@ -1402,9 +1407,9 @@ print("Total fits:", fits)</pre></div>
 <p>KNN classifies a new data point based on the majority vote of its $k$ closest neighbors in the feature space. It is a lazy learner (no training phase; it stores the dataset in memory and does all calculations during prediction).</p>
 <div class="analogy">"Sangat ka asar." Agar aapke 5 sabse close friends software engineers hain, toh probability hai ki aap bhi tech/code mein interest rakhte hain. Yahi KNN hai.</div>
 <div class="math-block">
-<span class="formula">$$Euclidean Distance = √[ Σ (x_i - y_i)² ]$$</span>
+<span class="formula">$$\text{Euclidean Distance} = \sqrt{ \sum_{i=1}^n (x_i - y_i)^2 }$$</span>
 <span class="desc">Straight-line distance. Sensitive to variable scales (requires normalization!).</span>
-<span class="formula">$$Manhattan Distance = Σ |x_i - y_i|$$</span>
+<span class="formula">$$\text{Manhattan Distance} = \sum_{i=1}^n |x_i - y_i|$$</span>
 <span class="desc">Grid-like taxi cab distance. Useful in high dimensional spaces.</span>
 </div>
 <div class="callout cw">
@@ -1415,7 +1420,7 @@ print("Total fits:", fits)</pre></div>
 <h3 class="sh3">2. Naive Bayes Classifier</h3>
 <p>Naive Bayes uses probability formulas derived from Bayes' Theorem to classify instances. It calculates the conditional probability of each class given the input features, choosing the class with highest probability.</p>
 <div class="math-block">
-<span class="formula">$$P(C | X) = [ P(X | C) * P(C) ] / P(X)$$</span>
+<span class="formula">$$P(C | X) = \frac{P(X | C) \times P(C)}{P(X)}$$</span>
 <span class="desc">Where C is class, X is features vector [x₁, x₂, ..., xₙ].</span>
 </div>
 <p>Why is it called <strong>"Naive"</strong>? Because it assumes all input features are independent of each other given the class label. Even though this is almost never true in real life, the classifier performs surprisingly well on text classification (spam detection, sentiment analysis).</p>
@@ -1449,7 +1454,8 @@ nb.fit(X_tr, y_train)
 <span class="bi">print</span>(<span class="str">"KNN Classification Report:"</span>)
 <span class="bi">print</span>(classification_report(y_test, knn.predict(X_te)))
 
-<span class="bi">print</span>(<span class="str">"\nNaive Bayes Classification Report:"</span>)
+<span class="bi">print</span>(<span class="str">"
+Naive Bayes Classification Report:"</span>)
 <span class="bi">print</span>(classification_report(y_test, nb.predict(X_te)))</pre>
 </div>
 <div class="hinglish">💡 KNN distance calculating algorithm hai, isliye features scale hona compulsory hai. Agar ek feature Age (20-60) aur dusra Income (50,000-5,00,000) hai, toh bina scaling ke income distance computation ko domainate kar lega aur model logic distort ho jayega. Standardize hamesha karein!</div>
@@ -1525,9 +1531,11 @@ print("Distance:", dist)</pre></div>
 <h2 class="sh2">🃏 Revision Flashcards — Day 36</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">KNN Classifier?</div><div class="fc-back">K-Nearest Neighbors. Classifies a point based on the majority label of its K closest neighbors.</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Bayes Theorem?</div><div class="fc-back">P(A|B) = [P(B|A) * P(A)] / P(B). Calculates posterior probability from prior and likelihood.</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Naive assumption?</div><div class="fc-back">Naive Bayes assumes all input features are independent given the target label.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Log-Loss (Binary Cross-Entropy)?</div><div class="fc-back">Loss function for binary classification: L = -[y*log(p) + (1-y)*log(1-p)]. Penalizes confident wrong predictions.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Sigmoid Activation?</div><div class="fc-back">Formula: 1 / (1 + e^-z). Maps any real value to the range (0, 1), representing probability output.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Odds Ratio?</div><div class="fc-back">The probability of an event occurring divided by the probability of it not occurring: p / (1 - p).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Features vs Targets?</div><div class="fc-back">Features (X) are the input variables; Targets (y) are the labels we wish to predict.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Train-Test Split?</div><div class="fc-back">Partitioning data (e.g., 80/20) to train the model on one subset and evaluate it on unseen data.</div></div></div>
 </div>
 
 <div id="day-36-resources-section">
@@ -1791,14 +1799,11 @@ print("Applies Transform:", True)</pre></div>
 <h2 class="sh2">🃏 Revision Flashcards — Day 37</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Pipeline?</div><div class="fc-back">Class that packages data transformers and a model together for clean execution.</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">ColumnTransformer?</div><div class="fc-back">Allows applying different preprocessing transformers to specific columns.</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">handle_unknown='ignore'?</div><div class="fc-back">Ensures OneHotEncoder ignores unseen categories in production data.</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">joblib.dump?</div><div class="fc-back">Best method to serialize scikit-learn pipeline objects to disc.</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Train-Serving Skew?</div><div class="fc-back">Mismatch between training data prep and serving/inference data prep.</div></div></div>
-<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:1rem;margin:1rem 0;font-size:13.5px;">
-<strong>⚙️ Hyperparameter Tip:</strong> StandardScaler shifts data to mean=0 and variance=1. This is a critical prerequisite for distance-based estimators (like KNN or SVM) to prevent large scale features from dominating.
-  </div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Log-Loss (Binary Cross-Entropy)?</div><div class="fc-back">Loss function for binary classification: L = -[y*log(p) + (1-y)*log(1-p)]. Penalizes confident wrong predictions.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Sigmoid Activation?</div><div class="fc-back">Formula: 1 / (1 + e^-z). Maps any real value to the range (0, 1), representing probability output.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Odds Ratio?</div><div class="fc-back">The probability of an event occurring divided by the probability of it not occurring: p / (1 - p).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Features vs Targets?</div><div class="fc-back">Features (X) are the input variables; Targets (y) are the labels we wish to predict.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Train-Test Split?</div><div class="fc-back">Partitioning data (e.g., 80/20) to train the model on one subset and evaluate it on unseen data.</div></div></div>
 </div>
 <div id="day-37-tasks-section">
 <h2 class="sh2">💻 Coding Tasks</h2>

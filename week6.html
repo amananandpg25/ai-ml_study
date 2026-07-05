@@ -14,15 +14,13 @@
   --accent-sec-rgb: 56, 189, 248;
 }
 </style>
-
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
   if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
 </script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters:[{left:'66296',right:'66296',display:true},{left:'$',right:'$',display:false}]});"></script>
 </head>
 <body>
 <div class="xp-toast" id="xp-toast">+50 XP ⚡</div>
@@ -196,7 +194,8 @@ beta = np.linalg.inv(X_tr_b.T @ X_tr_b) @ X_tr_b.T @ y_train
 <span class="cm"># Predictions and MSE</span>
 y_pred_scratch = X_te_b @ beta
 mse_scratch = np.mean((y_test - y_pred_scratch)**<span class="num">2</span>)
-<span class="bi">print</span>(<span class="str">f"\nTest MSE (scratch OLS): {mse_scratch:.4f}"</span>)
+<span class="bi">print</span>(<span class="str">f"
+Test MSE (scratch OLS): {mse_scratch:.4f}"</span>)
 
 <span class="cm"># ── Verify against sklearn ───────────────────────────────────</span>
 <span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LinearRegression
@@ -263,7 +262,8 @@ mse_sk = np.mean((y_test - y_pred_sk)**<span class="num">2</span>)
 
     <span class="cm"># Normality test</span>
     stat, p = stats.shapiro(residuals[:<span class="num">5000</span>])  <span class="cm"># Shapiro-Wilk (max 5000)</span>
-    <span class="bi">print</span>(<span class="str">f"\nShapiro-Wilk normality test: p={p:.4f}"</span>)
+    <span class="bi">print</span>(<span class="str">f"
+Shapiro-Wilk normality test: p={p:.4f}"</span>)
     <span class="bi">print</span>(<span class="str">"Residuals normal"</span> <span class="kw">if</span> p &gt; <span class="num">0.05</span> <span class="kw">else</span> <span class="str">"Residuals NOT normal — consider transforming y"</span>)</pre>
 </div>
 <h3 class="sh3">3. When OLS Fails — And What To Do</h3>
@@ -302,7 +302,8 @@ data = fetch_california_housing()
 X_df = pd.DataFrame(data.data, columns=data.feature_names)
 vif = calc_vif(X_df)
 <span class="bi">print</span>(vif)
-<span class="bi">print</span>(<span class="str">"\nFeatures with VIF &gt; 5 (potential multicollinearity):"</span>)
+<span class="bi">print</span>(<span class="str">"
+Features with VIF &gt; 5 (potential multicollinearity):"</span>)
 <span class="bi">print</span>(vif[vif &gt; <span class="num">5</span>])</pre>
 </div>
 <div class="interview">Interviewers ask: "What are the assumptions of linear regression?" — the correct answer lists all 5 (LINE + H) and includes what happens when each is violated. Never just say "it assumes normality" — be specific: it's the RESIDUALS that must be normal, not the features or the target.</div>
@@ -404,18 +405,11 @@ beta = np.linalg.pinv(X_b.T @ X_b) @ X_b.T @ y  <span class="cm"># pinv is safer
 <h2 class="sh2">🃏 Revision Flashcards — Day 38</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Normal Equation (OLS closed form)?</div><div class="fc-back">β = (XᵀX)⁻¹ Xᵀy<br/>Exact solution<br/>O(p³) — slow if p large</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">5 Assumptions (LINE+H)?</div><div class="fc-back">Linearity · Independence<br/>Normality (residuals!)<br/>Equal variance · No multicollin</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Heteroscedasticity fix?</div><div class="fc-back">Fan shape in residual plot<br/>→ log(y) or sqrt(y) transform<br/>or Weighted Least Squares</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">VIF threshold?</div><div class="fc-back">VIF = 1: no multicollin<br/>VIF 1-5: acceptable<br/>VIF &gt; 10: REMOVE feature / Ridge</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">When to use pinv vs inv?</div><div class="fc-back">Always use pinv for safety<br/>inv fails if matrix singular<br/>pinv handles rank-deficient X</div></div></div>
-<div class="callout" style="background:rgba(108,140,255,.05);border-left:3px solid var(--blue);padding:1rem;margin:1rem 0;font-size:13.5px;">
-<strong>💡 Why does this work? (Math Intuition):</strong>
-<p style="margin-top:0.4rem;">Linear Regression works by finding the line that minimizes the sum of squared differences between observed values and predictions. Mathematically, it minimizes Mean Squared Error (MSE): $J(m, c) = \frac{1}{n}\sum(y_i - (mx_i + c))^2$. Squaring the errors ensures they are positive and penalizes larger errors more heavily. The derivatives $\frac{\partial J}{\partial m}$ and $\frac{\partial J}{\partial c}$ guide us to the exact minimum.</p>
-</div>
-<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:1rem;margin:1rem 0;font-size:13.5px;">
-<strong>⚙️ Hyperparameter Tip:</strong> fit_intercept=True is default. Only set fit_intercept=False if you are sure your target variable is exactly zero when all input features are zero.
-  </div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Lasso vs Ridge Regression?</div><div class="fc-back">Lasso (L1): Adds absolute weight penalty, leads to sparse feature selection. Ridge (L2): Adds squared weight penalty, shrinks weights.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">R-squared?</div><div class="fc-back">Proportion of variance in the dependent variable explained by features: 1 - (SS_res / SS_tot).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Mean Squared Error (MSE)?</div><div class="fc-back">Average of squared differences between true and predicted values. Highly sensitive to outliers.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">MAE vs MSE?</div><div class="fc-back">MAE (Mean Absolute Error) uses absolute differences (linear penalty); MSE uses squared differences (quadratic penalty for outliers).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Multicollinearity?</div><div class="fc-back">When two or more predictor variables are highly correlated, inflating the variance of regression coefficients.</div></div></div>
 </div>
 <div id="day-38-tasks-section">
 <h2 class="sh2">💻 Coding Tasks</h2>
@@ -802,17 +796,11 @@ best_deg, best_mse = <span class="num">0</span>, <span class="bi">float</span>(<
 <h2 class="sh2">🃏 Revision Flashcards — Day 39</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Bias-Variance decomposition?</div><div class="fc-back">Error = Bias² + Variance<br/>+ Irreducible Noise<br/>Only first two are controllable</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Underfitting symptoms?</div><div class="fc-back">Train error HIGH<br/>Test error HIGH<br/>→ more complex model needed</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Overfitting symptoms?</div><div class="fc-back">Train error LOW<br/>Test error HIGH<br/>→ regularize or more data</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Selecting hyperparameters — rule?</div><div class="fc-back">NEVER on training error<br/>ALWAYS cross-validation<br/>Test set touched ONCE at end</div></div></div>
-<div class="callout" style="background:rgba(108,140,255,.05);border-left:3px solid var(--blue);padding:1rem;margin:1rem 0;font-size:13.5px;">
-<strong>💡 Why does this work? (Math Intuition):</strong>
-<p style="margin-top:0.4rem;">Ordinary Least Squares (OLS) works because it has a closed-form analytical solution. Mathematically, we solve $\hat{\beta} = (X^T X)^{-1} X^T y$ by setting the gradient of the sum of squared residuals to zero. The term $(X^T X)^{-1}$ projects the target vector $y$ onto the column space of the feature matrix $X$, finding the closest possible linear combination.</p>
-</div>
-<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:1rem;margin:1rem 0;font-size:13.5px;">
-<strong>⚙️ Hyperparameter Tip:</strong> When fitting multiple regression models, avoid using highly correlated features (collinearity) as they inflate the variance of coefficient estimates.
-  </div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Lasso vs Ridge Regression?</div><div class="fc-back">Lasso (L1): Adds absolute weight penalty, leads to sparse feature selection. Ridge (L2): Adds squared weight penalty, shrinks weights.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">R-squared?</div><div class="fc-back">Proportion of variance in the dependent variable explained by features: 1 - (SS_res / SS_tot).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Mean Squared Error (MSE)?</div><div class="fc-back">Average of squared differences between true and predicted values. Highly sensitive to outliers.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">MAE vs MSE?</div><div class="fc-back">MAE (Mean Absolute Error) uses absolute differences (linear penalty); MSE uses squared differences (quadratic penalty for outliers).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Multicollinearity?</div><div class="fc-back">When two or more predictor variables are highly correlated, inflating the variance of regression coefficients.</div></div></div>
 </div>
 <div id="day-39-tasks-section">
 <h2 class="sh2">💻 Coding Tasks</h2>
@@ -982,12 +970,14 @@ lasso_zeros = [np.sum(c == <span class="num">0</span>) <span class="kw">for</spa
 <span class="cm"># === Auto-tune alpha with cross-validation ===</span>
 ridge_cv = RidgeCV(alphas=np.logspace(-<span class="num">3</span>, <span class="num">3</span>, <span class="num">50</span>), cv=<span class="num">5</span>)
 ridge_cv.fit(Xtr, y_tr)
-<span class="bi">print</span>(<span class="str">f"\nRidgeCV best alpha : {ridge_cv.alpha_:.4f}"</span>)
+<span class="bi">print</span>(<span class="str">f"
+RidgeCV best alpha : {ridge_cv.alpha_:.4f}"</span>)
 <span class="bi">print</span>(<span class="str">f"RidgeCV test MSE   : {np.mean((y_te - ridge_cv.predict(Xte))**2):.4f}"</span>)
 
 lasso_cv = LassoCV(alphas=np.logspace(-<span class="num">3</span>, <span class="num">1</span>, <span class="num">50</span>), cv=<span class="num">5</span>, max_iter=<span class="num">5000</span>)
 lasso_cv.fit(Xtr, y_tr)
-<span class="bi">print</span>(<span class="str">f"\nLassoCV best alpha : {lasso_cv.alpha_:.4f}"</span>)
+<span class="bi">print</span>(<span class="str">f"
+LassoCV best alpha : {lasso_cv.alpha_:.4f}"</span>)
 <span class="bi">print</span>(<span class="str">f"LassoCV test MSE   : {np.mean((y_te - lasso_cv.predict(Xte))**2):.4f}"</span>)
 <span class="bi">print</span>(<span class="str">f"Features eliminated: {np.sum(lasso_cv.coef_ == 0)}/{X.shape[1]}"</span>)</pre>
 </div>
@@ -1048,7 +1038,9 @@ plt.tight_layout(); plt.savefig(<span class="str">'regularisation_paths.png'</sp
 <tr><td><strong>sklearn class</strong></td><td>Ridge, RidgeCV</td><td>Lasso, LassoCV</td></tr>
 <tr><td><strong>Auto alpha tuning</strong></td><td>RidgeCV (very fast — closed form)</td><td>LassoCV (slower — iterative)</td></tr>
 </table>
-<div class="interview">Interview classic: "When would you choose Lasso over Ridge?" Answer: When you suspect only a few features are truly predictive (sparse signal), or when you want automatic feature selection as part of the model. If all features are relevant with small individual effects (like genomics with 20,000 genes all affecting disease risk slightly), use Ridge. If you're working in economics and 3 variables explain most of the variance — Lasso. Always scale features before both.</div>
+<div class="interview">
+  <strong>Interview classic: "When would you choose Lasso over Ridge?"</strong><br><br><strong>Answer:</strong> When you suspect only a few features are truly predictive (sparse signal), or when you want automatic feature selection as part of the model. If all features are relevant with small individual effects (like genomics with 20,000 genes all affecting disease risk slightly), use Ridge. If you're working in economics and 3 variables explain most of the variance — Lasso. Always scale features before both.
+</div>
 </div>
 <h2 class="sh2">🔮 Predict the Output</h2>
 <div class="predict-block">
@@ -1156,18 +1148,11 @@ pipe.fit(X, y)
 <h2 class="sh2">🃏 Revision Flashcards — Day 40</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Ridge closed-form solution?</div><div class="fc-back">β = (XᵀX + αI)⁻¹Xᵀy<br/>αI ensures invertibility<br/>Shrinks but never exactly 0</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Lasso vs Ridge for correlated features?</div><div class="fc-back">Ridge: spreads weight evenly<br/>Lasso: picks one, zeros rest<br/>→ Use ElasticNet for both</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">When to use Lasso?</div><div class="fc-back">Sparse signal expected<br/>Few features truly matter<br/>Want automatic feature selection</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">MUST do before Ridge/Lasso?</div><div class="fc-back">StandardScaler first!<br/>Penalty is scale-dependent<br/>Without scaling → unfair penalty</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Auto-tune alpha?</div><div class="fc-back">RidgeCV(alphas=..., cv=5)<br/>LassoCV(alphas=..., cv=5)<br/>.alpha_ gives best value</div></div></div>
-<div class="callout" style="background:rgba(108,140,255,.05);border-left:3px solid var(--blue);padding:1rem;margin:1rem 0;font-size:13.5px;">
-<strong>💡 Why does this work? (Math Intuition):</strong>
-<p style="margin-top:0.4rem;">Regularization works by adding a penalty to the loss function to constrain coefficient sizes. Ridge (L2) adds $\lambda \sum \beta_j^2$, drawing coefficients close to zero but not exactly zero (due to the circular/spherical constraint). Lasso (L1) adds $\lambda \sum |\beta_j|$, which creates a diamond-shaped constraint space whose sharp corners intersect the axis, forcing some coefficients to exactly zero, thereby performing automatic feature selection.</p>
-</div>
-<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:1rem;margin:1rem 0;font-size:13.5px;">
-<strong>⚙️ Hyperparameter Tip:</strong> Lasso alpha controls sparsity. Setting alpha=0 is equivalent to ordinary linear regression. Start with alpha=0.1 and use cross-validation (LassoCV) to find the optimal L1 penalty.
-  </div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Lasso vs Ridge Regression?</div><div class="fc-back">Lasso (L1): Adds absolute weight penalty, leads to sparse feature selection. Ridge (L2): Adds squared weight penalty, shrinks weights.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">R-squared?</div><div class="fc-back">Proportion of variance in the dependent variable explained by features: 1 - (SS_res / SS_tot).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Mean Squared Error (MSE)?</div><div class="fc-back">Average of squared differences between true and predicted values. Highly sensitive to outliers.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">MAE vs MSE?</div><div class="fc-back">MAE (Mean Absolute Error) uses absolute differences (linear penalty); MSE uses squared differences (quadratic penalty for outliers).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Multicollinearity?</div><div class="fc-back">When two or more predictor variables are highly correlated, inflating the variance of regression coefficients.</div></div></div>
 </div>
 <div id="day-40-tasks-section">
 <h2 class="sh2">💻 Coding Tasks</h2>
@@ -1367,7 +1352,8 @@ grid.fit(X_tr, y_tr)
 <span class="bi">print</span>(<span class="str">f"Test MSE     : {np.mean((y_te - grid.predict(X_te))**2):.4f}"</span>)
 
 best = grid.best_estimator_.named_steps[<span class="str">'model'</span>]
-<span class="bi">print</span>(<span class="str">f"\nNon-zero coefs: {np.sum(best.coef_ != 0)}/{data.data.shape[1]}"</span>)
+<span class="bi">print</span>(<span class="str">f"
+Non-zero coefs: {np.sum(best.coef_ != 0)}/{data.data.shape[1]}"</span>)
 <span class="bi">print</span>(<span class="str">f"l1_ratio → {best.l1_ratio} (closer to 1 = more Lasso-like, more sparse)"</span>)
 
 <span class="cm"># For large hyperparameter spaces, use RandomizedSearchCV</span>
@@ -1381,7 +1367,8 @@ rnd = RandomizedSearchCV(pipe, param_dist, n_iter=<span class="num">40</span>, c
                           scoring=<span class="str">'neg_mean_squared_error'</span>,
                           random_state=<span class="num">42</span>, n_jobs=-<span class="num">1</span>)
 rnd.fit(X_tr, y_tr)
-<span class="bi">print</span>(<span class="str">f"\nRandomized best: {rnd.best_params_}"</span>)</pre>
+<span class="bi">print</span>(<span class="str">f"
+Randomized best: {rnd.best_params_}"</span>)</pre>
 </div>
 <h3 class="sh3">2. Cross-Validation Strategies</h3>
 <table class="concept-table">
@@ -1434,7 +1421,8 @@ search = GridSearchCV(pipe_correct, param_grid, cv=inner_cv,
                       scoring=<span class="str">'neg_mean_squared_error'</span>)
 nested_scores = cross_val_score(search, X, y, cv=outer_cv,
                                 scoring=<span class="str">'neg_mean_squared_error'</span>)
-<span class="bi">print</span>(<span class="str">f"\nNested CV MSE: {-nested_scores.mean():.4f} ± {nested_scores.std():.4f}"</span>)
+<span class="bi">print</span>(<span class="str">f"
+Nested CV MSE: {-nested_scores.mean():.4f} ± {nested_scores.std():.4f}"</span>)
 <span class="cm"># This is the gold standard: inner CV tunes alpha, outer CV evaluates performance.</span></pre>
 </div>
 <div class="callout cd">
@@ -1532,13 +1520,11 @@ param_grid = {<span class="str">'ridge__alpha'</span>: [<span class="num">0.1</s
 <h2 class="sh2">🃏 Revision Flashcards — Day 41</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">ElasticNet l1_ratio extremes?</div><div class="fc-back">l1_ratio=0 → Ridge<br/>l1_ratio=1 → Lasso<br/>0.5 → equal mix</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Pipeline param naming in GridSearch?</div><div class="fc-back">'stepname__paramname'<br/>(double underscore!)<br/>e.g. 'ridge__alpha'</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Nested CV purpose?</div><div class="fc-back">Inner loop: tune hyperparams<br/>Outer loop: estimate performance<br/>Gold standard for evaluation</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Time-series CV rule?</div><div class="fc-back">Train always BEFORE test<br/>Use TimeSeriesSplit<br/>Never shuffle time-series data</div></div></div>
-<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:1rem;margin:1rem 0;font-size:13.5px;">
-<strong>⚙️ Hyperparameter Tip:</strong> Gradient descent learning_rate=0.01 is a safe baseline. If loss oscillates or goes to NaN, reduce learning rate to 0.001. If convergence is too slow, increase it to 0.1.
-  </div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Lasso vs Ridge Regression?</div><div class="fc-back">Lasso (L1): Adds absolute weight penalty, leads to sparse feature selection. Ridge (L2): Adds squared weight penalty, shrinks weights.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">R-squared?</div><div class="fc-back">Proportion of variance in the dependent variable explained by features: 1 - (SS_res / SS_tot).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Mean Squared Error (MSE)?</div><div class="fc-back">Average of squared differences between true and predicted values. Highly sensitive to outliers.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">MAE vs MSE?</div><div class="fc-back">MAE (Mean Absolute Error) uses absolute differences (linear penalty); MSE uses squared differences (quadratic penalty for outliers).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Multicollinearity?</div><div class="fc-back">When two or more predictor variables are highly correlated, inflating the variance of regression coefficients.</div></div></div>
 </div>
 <div id="day-41-tasks-section">
 <h2 class="sh2">💻 Coding Tasks</h2>
@@ -1702,7 +1688,8 @@ r2    = r2_score(y_true, y_pred)                 <span class="cm"># R-squared</s
 <span class="cm"># MSE vs MAE — outlier sensitivity</span>
 mse_out  = np.mean((y_true - y_pred_outlier)**<span class="num">2</span>)
 mae_out  = np.mean(np.abs(y_true - y_pred_outlier))
-<span class="bi">print</span>(<span class="str">"\n=== With 1 Outlier Prediction (350 → 50) ==="</span>)
+<span class="bi">print</span>(<span class="str">"
+=== With 1 Outlier Prediction (350 → 50) ==="</span>)
 <span class="bi">print</span>(<span class="str">f"  MSE change : {mse:.2f} → {mse_out:.2f}  ({(mse_out-mse)/mse*100:.0f}% increase!)"</span>)
 <span class="bi">print</span>(<span class="str">f"  MAE change : {mae:.2f} → {mae_out:.2f}  ({(mae_out-mae)/mae*100:.0f}% increase — much less)"</span>)
 <span class="cm"># MSE squares the outlier error (300²=90000) — gets dominated
@@ -1711,7 +1698,8 @@ mae_out  = np.mean(np.abs(y_true - y_pred_outlier))
 <span class="cm"># Adjusted R² — penalises unnecessary features</span>
 n, p = <span class="num">100</span>, <span class="num">5</span>  <span class="cm"># 100 samples, 5 features</span>
 r2_adj = <span class="num">1</span> - (<span class="num">1</span> - r2) * (n - <span class="num">1</span>) / (n - p - <span class="num">1</span>)
-<span class="bi">print</span>(<span class="str">f"\nAdjusted R² (5 features, 100 samples): {r2_adj:.4f}"</span>)
+<span class="bi">print</span>(<span class="str">f"
+Adjusted R² (5 features, 100 samples): {r2_adj:.4f}"</span>)
 <span class="cm"># Adjusted R² DECREASES when you add irrelevant features — R² never decreases</span></pre>
 </div>
 <h3 class="sh3">2. R² — The Most Misunderstood Metric</h3>
@@ -1776,9 +1764,12 @@ y_train[<span class="num">0</span>] = <span class="num">100</span>  <span class=
 
 huber_reg = HuberRegressor(epsilon=<span class="num">1.35</span>)  <span class="cm"># epsilon ≈ delta</span>
 huber_reg.fit(X_train, y_train)
-<span class="bi">print</span>(<span class="str">f"\nHuber coef (robust):   {huber_reg.coef_[0]:.3f}"</span>)  <span class="cm"># ≈ 2.0 despite outlier</span></pre>
+<span class="bi">print</span>(<span class="str">f"
+Huber coef (robust):   {huber_reg.coef_[0]:.3f}"</span>)  <span class="cm"># ≈ 2.0 despite outlier</span></pre>
 </div>
-<div class="interview">Classic interview scenario: "Your model has R²=0.95 on training data but R²=0.40 on test data. What happened and how do you fix it?" Answer: Severe overfitting. Fix: regularisation, more training data, reduce model complexity, add cross-validation for hyperparameter tuning. Never report training R² as model performance — always report test R² or cross-validated R².</div>
+<div class="interview">
+  <strong>Classic interview scenario: "Your model has R²=0.95 on training data but R²=0.40 on test data. What happened and how do you fix it?"</strong><br><br><strong>Answer:</strong> Severe overfitting. Fix: regularisation, more training data, reduce model complexity, add cross-validation for hyperparameter tuning. Never report training R² as model performance — always report test R² or cross-validated R².
+</div>
 </div>
 <h2 class="sh2">🔮 Predict the Output</h2>
 <div class="predict-block">
@@ -1873,13 +1864,11 @@ smape = np.mean(<span class="num">2</span> * np.abs(y_true - y_pred) / (np.abs(y
 <h2 class="sh2">🃏 Revision Flashcards — Day 42</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">R² = 0 means?</div><div class="fc-back">Model is as good as predicting the mean<br/>R² &lt; 0: worse than mean!<br/>R² = 1: perfect</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">MSE vs MAE for outliers?</div><div class="fc-back">MSE: squares errors → outliers dominate<br/>MAE: absolute → robust<br/>Huber: best of both</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">MAPE limitation?</div><div class="fc-back">Fails when y_true = 0<br/>Division by zero!<br/>Use sMAPE or filter zeros</div></div></div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Adjusted R² vs R²?</div><div class="fc-back">R²: never decreases with features<br/>Adj-R²: penalises extra features<br/>Use Adj-R² for feature selection</div></div></div>
-<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:1rem;margin:1rem 0;font-size:13.5px;">
-<strong>⚙️ Hyperparameter Tip:</strong> Normalizing target variables is rarely necessary but scaling feature coordinates is critical. Always run feature scaling *after* splitting data to avoid validation leakage.
-  </div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Lasso vs Ridge Regression?</div><div class="fc-back">Lasso (L1): Adds absolute weight penalty, leads to sparse feature selection. Ridge (L2): Adds squared weight penalty, shrinks weights.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">R-squared?</div><div class="fc-back">Proportion of variance in the dependent variable explained by features: 1 - (SS_res / SS_tot).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Mean Squared Error (MSE)?</div><div class="fc-back">Average of squared differences between true and predicted values. Highly sensitive to outliers.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">MAE vs MSE?</div><div class="fc-back">MAE (Mean Absolute Error) uses absolute differences (linear penalty); MSE uses squared differences (quadratic penalty for outliers).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Multicollinearity?</div><div class="fc-back">When two or more predictor variables are highly correlated, inflating the variance of regression coefficients.</div></div></div>
 </div>
 <div id="day-42-tasks-section">
 <h2 class="sh2">💻 Coding Tasks</h2>
@@ -2134,7 +2123,8 @@ df_results = pd.DataFrame(results).sort_values(<span class="str">'Test RMSE'</sp
 <span class="cm"># Feature importance from Random Forest and Gradient Boosting</span>
 rf = models[<span class="str">'Random Forest'</span>]
 fi = pd.Series(rf.feature_importances_,               index=data.feature_names).sort_values(ascending=False)
-print("\nRandom Forest Feature Importances:")
+print("
+Random Forest Feature Importances:")
 print(fi)</pre>
 </div>
 <div class="callout cp">
@@ -2211,7 +2201,6 @@ print(fi)</pre>
      DAY 44 — CAPSTONE PROJECT
 ════════════════════════════════════════ -->
 <div class="day-section" id="day-44">
-<div class="analogy">A Capstone regression pipeline is like setting up an automated drip irrigation system in a farm. Once configured, water flows from the source (data) through filters (scalers) to crops (model predictions) automatically.</div>
 <div class="day-header">
 <div class="day-tag">WEEK 6 · DAY 44 · MONTH 2 FINALE</div>
 <h1>Capstone: End-to-End House Price Predictor</h1>
@@ -2222,6 +2211,7 @@ print(fi)</pre>
 <span class="meta-badge p">⚡ +300 XP</span>
 </div>
 </div>
+<div class="analogy">A Capstone regression pipeline is like setting up an automated drip irrigation system in a farm. Once configured, water flows from the source (data) through filters (scalers) to crops (model predictions) automatically.</div>
 <div class="objectives">
 <h3>🎯 By end of Day 44 you will be able to:</h3>
 <ul>

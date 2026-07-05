@@ -7,22 +7,20 @@
 <title>Week 2 — Pandas + SQL + Git | 135-Day AI/ML Roadmap</title>
 <meta content="Week 2 — Pandas + SQL + Git — Complete coursework, tasks, quizzes, and resources for Week 2 of the 135-Day AI/ML Roadmap." name="description"/>
 <link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%230d0f14'/&gt;&lt;text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'&gt;AI&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
-<link rel="stylesheet" href="course.css">
+<link href="course.css" rel="stylesheet"/>
 <style>
 :root {
   --accent-rgb: 108, 140, 255;
   --accent-sec-rgb: 180, 124, 252;
 }
 </style>
-
-
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
+<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer="" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
   if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
 </script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
 </head>
 <body>
 <!-- XP TOAST -->
@@ -70,10 +68,10 @@
 <div class="sb-item" id="sb-streak-info"><span class="sb-dot" style="background:var(--pink)"></span><span id="sb-streak">0 day streak</span></div>
 <div class="sb-divider"></div>
 <div class="sb-label">Quick Jump</div>
-<div class="sb-item" onclick="jumpTo('theory')"><span class="sb-dot" style="background:var(--blue)"></span>Theory</div>
-<div class="sb-item" onclick="jumpTo('tasks-section')"><span class="sb-dot" style="background:var(--orange)"></span>Tasks</div>
-<div class="sb-item" onclick="jumpTo('quiz-section')"><span class="sb-dot" style="background:var(--purple)"></span>Quiz</div>
-<div class="sb-item" onclick="jumpTo('resources-section')"><span class="sb-dot" style="background:var(--green)"></span>Resources</div>
+<div class="sb-item" onclick="jumpTo('theory')" onkeydown="if(event.key==='Enter'||event.key===' ')jumpTo('theory')" role="button" tabindex="0"><span class="sb-dot" style="background:var(--blue)"></span>Theory</div>
+<div class="sb-item" onclick="jumpTo('tasks-section')" onkeydown="if(event.key==='Enter'||event.key===' ')jumpTo('tasks-section')" role="button" tabindex="0"><span class="sb-dot" style="background:var(--orange)"></span>Tasks</div>
+<div class="sb-item" onclick="jumpTo('quiz-section')" onkeydown="if(event.key==='Enter'||event.key===' ')jumpTo('quiz-section')" role="button" tabindex="0"><span class="sb-dot" style="background:var(--purple)"></span>Quiz</div>
+<div class="sb-item" onclick="jumpTo('resources-section')" onkeydown="if(event.key==='Enter'||event.key===' ')jumpTo('resources-section')" role="button" tabindex="0"><span class="sb-dot" style="background:var(--green)"></span>Resources</div>
 <div class="sb-divider"></div>
 <div class="sb-label">Navigate</div>
 <div class="week-nav-links">
@@ -93,7 +91,8 @@
 <div class="day-header">
 <div class="day-tag">WEEK 2 · DAY 8 · MONTH 1 — FOUNDATIONS</div>
 <h1>Pandas — Series &amp; DataFrames</h1>
-<p>Aaj hum Pandas seekhenge — Python ka sabse powerful data analysis library. Data science mein Pandas wahi hai jo Excel professionals ke liye hai, lekin 100x zyada powerful aur programmable.</p>
+<p>Aaj hum Pandas seekhenge — Python ka sabse powerful data analysis library.</p>
+<p>Data science mein Pandas wahi hai jo Excel professionals ke liye hai, lekin 100x zyada powerful aur programmable.</p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 4 hours</span>
 <span class="meta-badge o">📊 Beginner-Intermediate</span>
@@ -134,8 +133,9 @@
 <div id="day-8-theory">
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. Why Pandas? The Data Science Workhorse</h3>
-<div class="analogy">Excel toh sab jaante hain — rows aur columns mein data. Pandas bilkul wahi hai, lekin code se control karo. Ek click ki jagah ek line Python — aur millions of rows handle karo bina hangs ke. Bade companies ka data terabytes mein hota hai — Excel toh crash ho jata hai, Pandas nahi.</div>
-<p>Pandas has two core data structures: <strong>Series</strong> (1D — like a single column) and <strong>DataFrame</strong> (2D — like a full spreadsheet). Almost all ML workflows start with loading a DataFrame from a CSV file.</p>
+<div class="analogy">Excel toh sab jaante hain — rows aur columns mein data.<br/><br/>Pandas bilkul wahi hai, lekin code se control karo.<br/><br/>Ek click ki jagah ek line Python — aur millions of rows handle karo bina hangs ke.<br/><br/>Bade companies ka data terabytes mein hota hai — Excel toh crash ho jata hai, Pandas nahi.</div>
+<p>Pandas has two core data structures: <strong>Series</strong> (1D — like a single column) and <strong>DataFrame</strong> (2D — like a full spreadsheet).</p>
+<p>Almost all ML workflows start with loading a DataFrame from a CSV file.</p>
 <div class="mermaid">
 graph LR
     subgraph "Series (1D Labeled Array)"
@@ -163,7 +163,7 @@ graph LR
     end
 </div>
 <div class="diagram-cap">Series (1D column representation) vs. DataFrame (2D table structure with multiple columns).</div>
-<div class="ml-connect">In ML, your dataset IS a DataFrame. Features (columns) go into X, target (label column) goes into y. Understanding DataFrame operations like iloc, loc, and boolean indexing is essential before you can split data for training.</div>
+<div class="ml-connect">In ML, your dataset IS a DataFrame.<br/><br/>Features (columns) go into X, target (label column) goes into y.<br/><br/>Understanding DataFrame operations like iloc, loc, and boolean indexing is essential before you can split data for training.</div>
 <h3 class="sh3">2. Series — A Labeled 1D Array</h3>
 <p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">A Pandas Series is a one-dimensional array-like object that contains a sequence of values associated with a labeling array, called its index.</p>
 <div class="cb">
@@ -250,12 +250,8 @@ survival_rate = survived[<span class="str">"Survived"</span>].mean() * <span cla
 <span class="bi">print</span>(<span class="str">f"Survival rate: {survival_rate:.1f}%"</span>)  <span class="cm"># 38.4%</span></pre>
 </div>
 <h3 class="sh3">6. Concept Depth: Under the Hood</h3>
-<div class="callout cw">
-<strong>⚡ Vectorization vs Loops:</strong> Why is Pandas so fast? Under the hood, Pandas uses NumPy (C/C++). <strong>Never use <code>for</code> loops</strong> to iterate through a DataFrame if you can avoid it. Vectorized operations (like <code>df["A"] + df["B"]</code>) apply to the entire column at once, running 100x-1000x faster than a Python loop.
-  </div>
-<div class="callout ci">
-<strong>🚀 Scaling Mindset &amp; Advanced Curiosity:</strong> Pandas is great for "medium" data (fits in RAM, up to a few GBs). What happens at scale? Pandas struggles with huge data because it loads everything into memory. For terabytes of data, companies use distributed engines like <strong>Spark</strong> or out-of-core tools like <strong>Dask</strong> and <strong>Polars</strong>.
-  </div>
+<div class="callout cw"><strong>⚡ Vectorization vs Loops:</strong> Why is Pandas so fast?<br/><br/>Under the hood, Pandas uses NumPy (C/C++).<br/><br/><strong>Never use <code>for</code> loops</strong> to iterate through a DataFrame if you can avoid it.<br/><br/>Vectorized operations (like <code>df["A"] + df["B"]</code>) apply to the entire column at once, running 100x-1000x faster than a Python loop.</div>
+<div class="callout ci"><strong>🚀 Scaling Mindset &amp; Advanced Curiosity:</strong> Pandas is great for "medium" data (fits in RAM, up to a few GBs).<br/><br/>What happens at scale?<br/><br/>Pandas struggles with huge data because it loads everything into memory.<br/><br/>For terabytes of data, companies use distributed engines like <strong>Spark</strong> or out-of-core tools like <strong>Dask</strong> and <strong>Polars</strong>.</div>
 <table class="concept-table">
 <tr><th>Tool</th><th>Best For</th><th>Mental Model</th></tr>
 <tr><td>Excel</td><td>Manual analysis, small data</td><td>Visual, cell-based</td></tr>
@@ -263,73 +259,60 @@ survival_rate = survived[<span class="str">"Survived"</span>].mean() * <span cla
 <tr><td>SQL</td><td>Extracting data from databases</td><td>Declarative querying</td></tr>
 <tr><td>Spark/Dask</td><td>Huge distributed data (Terabytes)</td><td>Cluster computing</td></tr>
 </table>
-<div class="misconception">
-<strong>⚠️ iloc vs loc — The #1 Confusion:</strong>
+<div class="misconception"><strong>⚠️ iloc vs loc — The #1 Confusion:</strong>
 <code>iloc</code> uses <strong>integer positions</strong> (like list indexing): <code>df.iloc[0]</code> = first row regardless of index.<br/>
 <code>loc</code> uses <strong>labels</strong>: <code>df.loc[0, "name"]</code> — works by index label AND column name.<br/>
-    If your DataFrame has a custom index like ["a","b","c"], <code>df.iloc[0]</code> = row "a" but <code>df.loc[0]</code> = KeyError! Always know your index.
-  </div>
+    If your DataFrame has a custom index like ["a","b","c"], <code>df.iloc[0]</code> = row "a" but <code>df.loc[0]</code> = KeyError!<br/><br/>Always know your index.</div>
 <!-- SVG: iloc vs loc Selection Mechanics -->
 <figure class="svg-diagram">
-  <svg viewBox="0 0 540 240" xmlns="http://www.w3.org/2000/svg" width="540" height="240" role="img" aria-label="iloc vs loc Selection Mechanics showing how loc references index labels and iloc references integer positions">
-    <!-- Grid Labels -->
-    <text x="75" y="35" font-family="DM Sans,sans-serif" font-size="11" fill="#4fd1a5" font-weight="600" text-anchor="middle">loc Index (Labels)</text>
-    <text x="160" y="35" font-family="DM Sans,sans-serif" font-size="11" fill="#6c8cff" font-weight="600" text-anchor="middle">iloc Index (Integers)</text>
-    <text x="330" y="35" font-family="DM Sans,sans-serif" font-size="11" fill="#6b7590" text-anchor="middle">DataFrame Rows (Data)</text>
-    
-    <!-- Row 1: "a" / 0 -->
-    <!-- loc label "a" -->
-    <rect x="35" y="55" width="80" height="40" rx="6" fill="rgba(79, 209, 165, 0.08)" stroke="#4fd1a5" stroke-width="1.5"/>
-    <text x="75" y="80" font-family="IBM Plex Mono,monospace" font-size="12" fill="#4fd1a5" text-anchor="middle" font-weight="600">"a"</text>
-    
-    <!-- iloc integer 0 -->
-    <rect x="135" y="55" width="50" height="40" rx="6" fill="rgba(108, 140, 255, 0.08)" stroke="#6c8cff" stroke-width="1.5"/>
-    <text x="160" y="80" font-family="IBM Plex Mono,monospace" font-size="12" fill="#6c8cff" text-anchor="middle" font-weight="600">0</text>
-    
-    <!-- Data cell Rahul -->
-    <rect x="220" y="55" width="220" height="40" rx="6" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
-    <text x="330" y="79" font-family="IBM Plex Mono,monospace" font-size="11" fill="#dde2f0" text-anchor="middle">"Rahul" | 50000</text>
-    
-    <!-- Row 2: "b" / 1 -->
-    <!-- loc label "b" -->
-    <rect x="35" y="110" width="80" height="40" rx="6" fill="rgba(79, 209, 165, 0.08)" stroke="#4fd1a5" stroke-width="1"/>
-    <text x="75" y="135" font-family="IBM Plex Mono,monospace" font-size="12" fill="#4fd1a5" text-anchor="middle">"b"</text>
-    
-    <!-- iloc integer 1 -->
-    <rect x="135" y="110" width="50" height="40" rx="6" fill="rgba(108, 140, 255, 0.08)" stroke="#6c8cff" stroke-width="1"/>
-    <text x="160" y="135" font-family="IBM Plex Mono,monospace" font-size="12" fill="#6c8cff" text-anchor="middle">1</text>
-    
-    <!-- Data cell Priya -->
-    <rect x="220" y="110" width="220" height="40" rx="6" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
-    <text x="330" y="134" font-family="IBM Plex Mono,monospace" font-size="11" fill="#dde2f0" text-anchor="middle">"Priya" | 65000</text>
-    
-    <!-- Row 3: "c" / 2 -->
-    <!-- loc label "c" -->
-    <rect x="35" y="165" width="80" height="40" rx="6" fill="rgba(79, 209, 165, 0.08)" stroke="#4fd1a5" stroke-width="1"/>
-    <text x="75" y="190" font-family="IBM Plex Mono,monospace" font-size="12" fill="#4fd1a5" text-anchor="middle">"c"</text>
-    
-    <!-- iloc integer 2 -->
-    <rect x="135" y="165" width="50" height="40" rx="6" fill="rgba(108, 140, 255, 0.08)" stroke="#6c8cff" stroke-width="1"/>
-    <text x="160" y="190" font-family="IBM Plex Mono,monospace" font-size="12" fill="#6c8cff" text-anchor="middle">2</text>
-    
-    <!-- Data cell Arjun -->
-    <rect x="220" y="165" width="220" height="40" rx="6" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
-    <text x="330" y="189" font-family="IBM Plex Mono,monospace" font-size="11" fill="#dde2f0" text-anchor="middle">"Arjun" | 45000</text>
-    
-    <!-- Connections & Queries -->
-    <!-- loc query -->
-    <path d="M 120,75 L 210,75" stroke="#4fd1a5" stroke-width="1.5" stroke-dasharray="3,3"/>
-    <polygon points="215,75 208,71 208,79" fill="#4fd1a5"/>
-    <text x="450" y="79" font-family="IBM Plex Mono,monospace" font-size="10" fill="#4fd1a5" font-weight="600">df.loc["a"]</text>
-    
-    <!-- iloc query -->
-    <path d="M 195,130 L 210,130" stroke="#6c8cff" stroke-width="1.5" stroke-dasharray="3,3"/>
-    <polygon points="215,130 208,126 208,134" fill="#6c8cff"/>
-    <text x="450" y="134" font-family="IBM Plex Mono,monospace" font-size="10" fill="#6c8cff" font-weight="600">df.iloc[1]</text>
-  </svg>
-  <figcaption>iloc vs loc Selection Mechanics showing how loc references index labels and iloc references integer positions.</figcaption>
+<svg aria-label="iloc vs loc Selection Mechanics showing how loc references index labels and iloc references integer positions" height="240" role="img" viewbox="0 0 540 240" width="540" xmlns="http://www.w3.org/2000/svg">
+<!-- Grid Labels -->
+<text fill="#4fd1a5" font-family="DM Sans,sans-serif" font-size="10" font-weight="600" text-anchor="middle" x="65" y="35">loc (Labels)</text>
+<text fill="#6c8cff" font-family="DM Sans,sans-serif" font-size="10" font-weight="600" text-anchor="middle" x="180" y="35">iloc (Integers)</text>
+<text fill="#6b7590" font-family="DM Sans,sans-serif" font-size="11" text-anchor="middle" x="330" y="35">DataFrame Rows (Data)</text>
+<!-- Row 1: "a" / 0 -->
+<!-- loc label "a" -->
+<rect fill="rgba(79, 209, 165, 0.08)" height="40" rx="6" stroke="#4fd1a5" stroke-width="1.5" width="80" x="35" y="55"></rect>
+<text fill="#4fd1a5" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" text-anchor="middle" x="75" y="80">"a"</text>
+<!-- iloc integer 0 -->
+<rect fill="rgba(108, 140, 255, 0.08)" height="40" rx="6" stroke="#6c8cff" stroke-width="1.5" width="50" x="135" y="55"></rect>
+<text fill="#6c8cff" font-family="IBM Plex Mono,monospace" font-size="12" font-weight="600" text-anchor="middle" x="160" y="80">0</text>
+<!-- Data cell Rahul -->
+<rect fill="#1e2230" height="40" rx="6" stroke="#252a40" stroke-width="1" width="220" x="220" y="55"></rect>
+<text fill="#dde2f0" font-family="IBM Plex Mono,monospace" font-size="11" text-anchor="middle" x="330" y="79">"Rahul" | 50000</text>
+<!-- Row 2: "b" / 1 -->
+<!-- loc label "b" -->
+<rect fill="rgba(79, 209, 165, 0.08)" height="40" rx="6" stroke="#4fd1a5" stroke-width="1" width="80" x="35" y="110"></rect>
+<text fill="#4fd1a5" font-family="IBM Plex Mono,monospace" font-size="12" text-anchor="middle" x="75" y="135">"b"</text>
+<!-- iloc integer 1 -->
+<rect fill="rgba(108, 140, 255, 0.08)" height="40" rx="6" stroke="#6c8cff" stroke-width="1" width="50" x="135" y="110"></rect>
+<text fill="#6c8cff" font-family="IBM Plex Mono,monospace" font-size="12" text-anchor="middle" x="160" y="135">1</text>
+<!-- Data cell Priya -->
+<rect fill="#1e2230" height="40" rx="6" stroke="#252a40" stroke-width="1" width="220" x="220" y="110"></rect>
+<text fill="#dde2f0" font-family="IBM Plex Mono,monospace" font-size="11" text-anchor="middle" x="330" y="134">"Priya" | 65000</text>
+<!-- Row 3: "c" / 2 -->
+<!-- loc label "c" -->
+<rect fill="rgba(79, 209, 165, 0.08)" height="40" rx="6" stroke="#4fd1a5" stroke-width="1" width="80" x="35" y="165"></rect>
+<text fill="#4fd1a5" font-family="IBM Plex Mono,monospace" font-size="12" text-anchor="middle" x="75" y="190">"c"</text>
+<!-- iloc integer 2 -->
+<rect fill="rgba(108, 140, 255, 0.08)" height="40" rx="6" stroke="#6c8cff" stroke-width="1" width="50" x="135" y="165"></rect>
+<text fill="#6c8cff" font-family="IBM Plex Mono,monospace" font-size="12" text-anchor="middle" x="160" y="190">2</text>
+<!-- Data cell Arjun -->
+<rect fill="#1e2230" height="40" rx="6" stroke="#252a40" stroke-width="1" width="220" x="220" y="165"></rect>
+<text fill="#dde2f0" font-family="IBM Plex Mono,monospace" font-size="11" text-anchor="middle" x="330" y="189">"Arjun" | 45000</text>
+<!-- Connections & Queries -->
+<!-- loc query -->
+<path d="M 120,75 L 210,75" stroke="#4fd1a5" stroke-dasharray="3,3" stroke-width="1.5"></path>
+<polygon fill="#4fd1a5" points="215,75 208,71 208,79"></polygon>
+<text fill="#4fd1a5" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600" x="450" y="79">df.loc["a"]</text>
+<!-- iloc query -->
+<path d="M 195,130 L 210,130" stroke="#6c8cff" stroke-dasharray="3,3" stroke-width="1.5"></path>
+<polygon fill="#6c8cff" points="215,130 208,126 208,134"></polygon>
+<text fill="#6c8cff" font-family="IBM Plex Mono,monospace" font-size="10" font-weight="600" x="450" y="134">df.iloc[1]</text>
+</svg>
+<figcaption>iloc vs loc Selection Mechanics showing how loc references index labels and iloc references integer positions.</figcaption>
 </figure>
-<div class="hinglish">💡 Ek line mein: DataFrame = Excel ka sheet Python mein. iloc = position se select (0,1,2...), loc = label se select ("name","age"). Boolean indexing = conditions lagao jaise SQL WHERE clause.</div>
+<div class="hinglish">💡 Ek line mein: DataFrame = Excel ka sheet Python mein. iloc = position se select (0,1,2...), loc = label se select ("name","age").<br/><br/>Boolean indexing = conditions lagao jaise SQL WHERE clause.</div>
 <h3 class="sh3">7. Sorting &amp; Frequency Analysis</h3>
 <p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Sorting rows based on values and computing value frequencies (using <code>value_counts</code>) are crucial steps in initial data exploration and validation.</p>
 <div class="cb">
@@ -352,7 +335,7 @@ df[<span class="str">"city"</span>].nunique()  <span class="cm"># how many uniqu
 df.nunique()           <span class="cm"># unique count for EVERY column at once</span></pre>
 </div>
 <h3 class="sh3">8. Binning Continuous Data — cut() and qcut()</h3>
-<div class="analogy">Marks ke basis pe grades dena — 0-40 F, 41-60 C, 61-80 B, 81-100 A. Yahi binning hai. ML mein continuous features ko categories mein baantna common technique hai.</div>
+<div class="analogy">Marks ke basis pe grades dena — 0-40 F, 41-60 C, 61-80 B, 81-100 A.<br/><br/>Yahi binning hai.<br/><br/>ML mein continuous features ko categories mein baantna common technique hai.</div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — binning.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># cut() — fixed bin edges (YOU define the boundaries)</span>
@@ -370,12 +353,11 @@ df[<span class="str">"salary_quartile"</span>] = pd.qcut(df[<span class="str">"s
 <span class="cm"># cut()  → you know domain boundaries (0-18 is minor, etc.)</span>
 <span class="cm"># qcut() → you want equal population in each bucket</span></pre>
 </div>
-<div class="ml-connect">cut() and qcut() are core feature engineering tools. Age groups, salary bands, and risk tiers are all created this way before feeding data into ML models.</div>
+<div class="ml-connect">cut() and qcut() are core feature engineering tools.<br/><br/>Age groups, salary bands, and risk tiers are all created this way before feeding data into ML models.</div>
 <h3 class="sh3">9. Slicing Caution: SettingWithCopyWarning &amp; .copy()</h3>
-<p>
-    When you slice a subset of a DataFrame (e.g. <code>subset = df[df["salary"] &gt; 55000]</code>) and then try to modify it (e.g. <code>subset["bonus"] = 100</code>), Pandas will frequently throw a <code>SettingWithCopyWarning</code>. 
-    This happens because Pandas is unsure whether your slice is a <strong>View</strong> (points to the original data) or a <strong>Copy</strong> (a separate object in memory). Modifying a view modifies the original, while modifying a copy does not.
-  </p>
+<p>When you slice a subset of a DataFrame (e.g. <code>subset = df[df["salary"] &gt; 55000]</code>) and then try to modify it (e.g. <code>subset["bonus"] = 100</code>), Pandas will frequently throw a <code>SettingWithCopyWarning</code>.</p>
+<p>This happens because Pandas is unsure whether your slice is a <strong>View</strong> (points to the original data) or a <strong>Copy</strong> (a separate object in memory).</p>
+<p>Modifying a view modifies the original, while modifying a copy does not.</p>
 <div class="misconception">
 <strong>⚠️ SettingWithCopyWarning is NOT a crash:</strong>
     It is a warning to prevent you from writing code that might fail to update the original DataFrame or update it accidentally.
@@ -513,7 +495,7 @@ top = df.loc[<span class="num">0</span>:<span class="num">1</span>, <span class=
 <span class="task-time">⏱ 2.5 hours</span>
 </div>
 <div class="task-body">
-<p>Before diving into Pandas, recap your Python basics by building a command-line contact manager that uses <strong>OOP, lists, dicts, file I/O, exceptions, and lambdas</strong>. This cements your foundations.</p>
+<p style="margin-bottom: 0.6rem;">Before diving into Pandas, recap your Python basics by building a command-line contact manager that uses <strong>OOP, lists, dicts, file I/O, exceptions, and lambdas</strong>.</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">This cements your foundations.</li></ul>
 <ul style="padding-left:1.2rem;font-size:13.5px;line-height:2.1">
 <li>✅ <strong>Add contact</strong> — name, phone, email, city (stored as object)</li>
 <li>✅ <strong>Search</strong> — by name or city (loops + conditions)</li>
@@ -592,7 +574,8 @@ def main():
     book = ContactBook()
     menu = {"1":book.add,"2":book.search,"3":book.delete,"4":book.list_all}
     while True:
-        print("\n📒 1.Add 2.Search 3.Delete 4.List 5.Exit")
+        print("
+📒 1.Add 2.Search 3.Delete 4.List 5.Exit")
         choice = input("Choice: ").strip()
         if choice == "5": break
         if choice in menu: menu[choice]()
@@ -600,7 +583,53 @@ def main():
 if __name__ == "__main__":
     main()</pre></div>
 </div>
-<div class="done-when">Your contact book loads existing CSV entries, allows adding/deleting, and list sorted contacts alphabetically.</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w2-t01')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w2-t01">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># CLI Contact Book - Python Recap Warm-up
+import csv
+import os
+class Contact:
+    def __init__(self, name, phone, email, city):
+        self.name = name.strip().title()
+        self.phone = phone.strip()
+        self.email = email.strip().lower()
+        self.city = city.strip().title()
+    def __str__(self):
+        return f"{self.name:&amp;lt;18} | {self.phone:&amp;lt;12} | {self.email:&amp;lt;23} | {self.city}"
+    def to_dict(self):
+        return {"name":self.name,"phone":self.phone,"email":self.email,"city":self.city}
+class ContactBook:
+    FIELDS = ["name","phone","email","city"]
+    def __init__(self, filename="contacts.csv"):
+        self.filename = filename
+        self.contacts = []
+        self.load()
+    def load(self):
+        if not os.path.exists(self.filename): return
+        try:
+            with open(self.filename,"r") as f:
+                for row in csv.DictReader(f):
+                    self.contacts.append(Contact(row["name"],row["phone"],row["email"],row["city"]))
+        except: pass
+    def save(self):
+        with open(self.filename,"w",newline="") as f:
+            w = csv.DictWriter(f,fieldnames=self.FIELDS)
+            w.writeheader()
+            w.writerows([c.to_dict() for c in self.contacts])
+    def list_all(self):
+        if not self.contacts: print("No contacts yet!")
+        return
+        for c in sorted(self.contacts, key=lambda c: c.name): print(c)
+print("=== CLI Contact Book (Demo) ===")
+book = ContactBook()
+book.contacts = [Contact("Alice","9876543210","alice@email.com","Mumbai"),
+                 Contact("Bob","8765432109","bob@email.com","Delhi")]
+print(f"Loaded {len(book.contacts)} contacts:")
+book.list_all()</pre>
+</div>
+</div><div class="done-when">Your contact book loads existing CSV entries, allows adding/deleting, and list sorted contacts alphabetically.</div>
 <div class="git-block">git add contact_book.py &amp;&amp; git commit -m "feat: add CLI contact book python refresher project"</div>
 </div>
 </div>
@@ -611,8 +640,30 @@ if __name__ == "__main__":
 <span class="task-time">⏱ 25 min</span>
 </div>
 <div class="task-body">
-<p>Create a DataFrame of 5 of your favourite cricketers with columns: name, matches, runs, average. Then: (1) print shape, (2) sort by average descending, (3) filter players with average &gt; 45, (4) find who scored the most total runs.</p>
-<div class="done-when">Your filtered DataFrame prints correctly and you can explain each line of code without reading it.</div>
+<p style="margin-bottom: 0.6rem;">Create a DataFrame of 5 of your favourite cricketers with columns: name, matches, runs, average. Then:</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;"><strong>(1)</strong> Print shape</li><li style="margin-bottom: 0.4rem;"><strong>(2)</strong> Sort by average descending</li><li style="margin-bottom: 0.4rem;"><strong>(3)</strong> Filter players with average &gt; 45</li><li style="margin-bottom: 0.4rem;"><strong>(4)</strong> Find who scored the most total runs</li></ul>
+<button class="solution-toggle" onclick="toggleSolution('sol-w2-t02')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w2-t02">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># Create and Explore a DataFrame
+import pandas as pd
+data = {
+    "name": ["Virat Kohli","Rohit Sharma","KL Rahul","Suryakumar Yadav","Jasprit Bumrah"],
+    "matches": [16,14,15,13,12],
+    "runs": [741,531,626,498,45],
+    "average": [52.5,45.2,49.8,42.3,8.5]
+}
+df = pd.DataFrame(data)
+print("DataFrame shape:", df.shape)
+print("Data:")
+print(df)
+print("Sorted by average (descending):")
+print(df.sort_values("average", ascending=False))
+print("Players with avg &amp;gt; 45:")
+print(df[df["average"] &amp;gt; 45])
+print("Highest run scorer:", df.loc[df["runs"].idxmax(), "name"])</pre>
+</div>
+</div><div class="done-when">Your filtered DataFrame prints correctly and you can explain each line of code without reading it.</div>
 <div class="git-block">git add . &amp;&amp; git commit -m "day8: pandas series and dataframe basics"</div>
 </div>
 </div>
@@ -623,8 +674,27 @@ if __name__ == "__main__":
 <span class="task-time">⏱ 45 min</span>
 </div>
 <div class="task-body">
-<p>Download titanic.csv from Kaggle. Write a script that: (1) prints shape and dtypes, (2) counts missing values per column, (3) finds survival rate overall and by gender (df.groupby coming tomorrow — use boolean filtering today), (4) finds the most common passenger class (Pclass), (5) prints min/max/mean age.</p>
-<div class="done-when">You can answer 5 questions about the dataset from code output alone, without looking at the raw CSV.</div>
+<p style="margin-bottom: 0.6rem;">Download titanic.csv from Kaggle. Write a script that:</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;"><strong>(1)</strong> Prints shape and dtypes</li><li style="margin-bottom: 0.4rem;"><strong>(2)</strong> Counts missing values per column</li><li style="margin-bottom: 0.4rem;"><strong>(3)</strong> Finds survival rate overall and by gender (df.groupby coming tomorrow — use boolean filtering today)</li><li style="margin-bottom: 0.4rem;"><strong>(4)</strong> Finds the most common passenger class (Pclass)</li><li style="margin-bottom: 0.4rem;"><strong>(5)</strong> Prints min/max/mean age</li></ul>
+<button class="solution-toggle" onclick="toggleSolution('sol-w2-t03')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w2-t03">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># Titanic Dataset EDA - First Look
+import pandas as pd
+url = "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
+df = pd.read_csv(url)
+print("Shape:", df.shape)
+print("Missing values:")
+print(df.isnull().sum().to_string())
+print("Overall survival rate:", f"{df['Survived'].mean()*100:.1f}%")
+print("Survival by gender:")
+for sex in ["male","female"]:
+    subset = df[df["Sex"]==sex]
+    print(f"  {sex}: {subset['Survived'].mean()*100:.1f}%")
+print("Most common Pclass:", df["Pclass"].mode()[0])
+print(f"Age stats: min={df['Age'].min():.0f}, max={df['Age'].max():.0f}, mean={df['Age'].mean():.1f}")</pre>
+</div>
+</div><div class="done-when">You can answer 5 questions about the dataset from code output alone, without looking at the raw CSV.</div>
 </div>
 </div>
 <div class="task-block">
@@ -634,8 +704,30 @@ if __name__ == "__main__":
 <span class="task-time">⏱ 3 hours</span>
 </div>
 <div class="task-body">
-<p>Download IPL matches dataset from Kaggle. Find: (1) team with most wins, (2) player of the match most awarded to whom, (3) most matches won by toss winner, (4) top 5 venues by number of matches. Use only indexing and value_counts() — no groupby yet. Push to GitHub with a README listing your 4 findings.</p>
-<div class="done-when">GitHub repo has the IPL notebook AND a README with at least 4 findings written in plain English.</div>
+<p style="margin-bottom: 0.6rem;">Download IPL matches dataset from Kaggle. Find:</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;"><strong>(1)</strong> Team with most wins</li><li style="margin-bottom: 0.4rem;"><strong>(2)</strong> Player of the match most awarded to whom</li><li style="margin-bottom: 0.4rem;"><strong>(3)</strong> Most matches won by toss winner</li><li style="margin-bottom: 0.4rem;"><strong>(4)</strong> Top 5 venues by number of matches. Use only indexing and value_counts() — no groupby yet. Push to GitHub with a README listing your 4 findings</li></ul>
+<button class="solution-toggle" onclick="toggleSolution('sol-w2-t04')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w2-t04">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># IPL Dataset Deep Dive
+import pandas as pd
+url = "https://raw.githubusercontent.com/amananand/ai-ml-journey/refs/heads/main/data/ipl_matches.csv"
+try:
+    df = pd.read_csv(url)
+    print("Shape:", df.shape)
+    print("1. Team with most wins:")
+    print(df["winner"].value_counts().head(1))
+    print("2. Player of the Match most awarded:")
+    print(df["player_of_match"].value_counts().head(3))
+    print("3. Matches won by toss winner:")
+    toss_win = df[df["toss_winner"] == df["winner"]]
+    print(f"  {len(toss_win)}/{len(df)} ({len(toss_win)/len(df)*100:.1f}%)")
+    print("4. Top 5 venues by matches:")
+    print(df["venue"].value_counts().head(5))
+except:
+    print("Could not load IPL data.")</pre>
+</div>
+</div><div class="done-when">GitHub repo has the IPL notebook AND a README with at least 4 findings written in plain English.</div>
 </div>
 </div>
 </div>
@@ -669,15 +761,14 @@ if __name__ == "__main__":
 <li>isnull().sum() tells you where your data has gaps — critical before ML!</li>
 </ol>
 </div>
-<div class="callout ct">
-<strong>⚖️ Confidence Calibration:</strong> You truly understand Day 8 if you can do these 3 things without looking at documentation:
-    <br/>1. Load a CSV and check its shape and memory footprint.
-    <br/>2. Filter rows where a specific column meets a condition (e.g., Age &gt; 30).
-    <br/>3. Select specific columns using both <code>loc</code> and <code>iloc</code> correctly.
-  </div>
+<div class="callout ct"><strong>⚖️ Confidence Calibration:</strong> You truly understand Day 8 if you can do these 3 things without looking at documentation:
+    <br/>1.<br/><br/>Load a CSV and check its shape and memory footprint.<br/><br/><br/>2.<br/><br/>Filter rows where a specific column meets a condition (e.g., Age &gt; 30).<br/><br/><br/>3.<br/><br/>Select specific columns using both <code>loc</code> and <code>iloc</code> correctly.</div>
 <div class="takeaways" style="background:rgba(180,124,252,.05); border-color:rgba(180,124,252,.15);">
 <h3 style="color:var(--purple);">🤔 Mini Capstone Reflection</h3>
-<p style="font-size: 13px;">Ask yourself: What confused you today? (iloc vs loc?) What patterns repeated? (square brackets everywhere!). Write down your answers to cement your learning.</p>
+<p style="font-size: 13px;">Ask yourself: What confused you today?</p>
+<p style="font-size: 13px;">(iloc vs loc?) What patterns repeated?</p>
+<p style="font-size: 13px;">(square brackets everywhere!).</p>
+<p style="font-size: 13px;">Write down your answers to cement your learning.</p>
 </div>
 <button class="complete-btn" id="btn-day-8" onclick="completeDay(8,150)">✓ Mark Day 8 Complete — Earn 150 XP</button>
 </div>
@@ -688,7 +779,9 @@ if __name__ == "__main__":
 <div class="day-header">
 <div class="day-tag">WEEK 2 · DAY 9 · MONTH 1 — FOUNDATIONS</div>
 <h1>Pandas — Data Cleaning</h1>
-<p>Real-world data is always messy — missing values, duplicates, wrong types. Data cleaning is 70% of a data scientist's job. Aaj hum seekhenge ki kisi bhi dirty dataset ko clean kaise karein.</p>
+<p>Real-world data is always messy — missing values, duplicates, wrong types.</p>
+<p>Data cleaning is 70% of a data scientist's job.</p>
+<p>Aaj hum seekhenge ki kisi bhi dirty dataset ko clean kaise karein.</p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 5 hours</span>
 <span class="meta-badge o">📊 Intermediate</span>
@@ -705,10 +798,11 @@ if __name__ == "__main__":
 <li>Clean a real-world messy CSV from Kaggle end-to-end</li>
 </ul>
 </div>
+<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with Day 8 basics: loading DataFrames, checking shapes, and selecting columns?</li></ul></div>
 <div id="day-9-theory">
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. Handling Missing Values</h3>
-<div class="analogy">Imagine student attendance register mein kuch din khali chhod diye. Aap kya karoge — us din absent maano, ya pichle din se copy karo, ya average lao? Yahi choices hain missing data mein — drop, fill with constant, fill with mean/median.</div>
+<div class="analogy">Imagine student attendance register mein kuch din khali chhod diye.<br/><br/>Aap kya karoge — us din absent maano, ya pichle din se copy karo, ya average lao?<br/><br/>Yahi choices hain missing data mein — drop, fill with constant, fill with mean/median.</div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — missing_values.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
@@ -761,10 +855,8 @@ df[<span class="str">"score"</span>] = df[<span class="str">"score"</span>].asty
 df[<span class="str">"student_name"</span>] = df[<span class="str">"student_name"</span>].str.strip()
 df[<span class="str">"student_name"</span>] = df[<span class="str">"student_name"</span>].str.lower()</pre>
 </div>
-<div class="misconception">
-<strong>⚠️ Deprecation Warning: Avoid <code>inplace=True</code></strong><br/>
-    Many Pandas methods accept <code>inplace=True</code>. However, in modern Pandas (2.0+), <strong>inplace is discouraged and slated for eventual deprecation</strong>. Under the hood, it does not actually save memory (it still copies the data), it prevents method chaining, and it can cause silent bugs. Always prefer assignment: <code>df = df.method()</code>.
-  </div>
+<div class="misconception"><strong>⚠️ Deprecation Warning: Avoid <code>inplace=True</code></strong><br/>
+    Many Pandas methods accept <code>inplace=True</code>.<br/><br/>However, in modern Pandas (2.0+), <strong>inplace is discouraged and slated for eventual deprecation</strong>.<br/><br/>Under the hood, it does not actually save memory (it still copies the data), it prevents method chaining, and it can cause silent bugs.<br/><br/>Always prefer assignment: <code>df = df.method()</code>.</div>
 <h3 class="sh3">3. apply() and map() — Transforming Data</h3>
 <p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">The <code>apply()</code> and <code>map()</code> functions enable custom element-wise transformations across rows or columns, avoiding slow iterative Python loops.</p>
 <div class="cb">
@@ -784,15 +876,11 @@ df[<span class="str">"description"</span>] = df.apply(describe_student, axis=<sp
 df[<span class="str">"pass_fail"</span>] = df[<span class="str">"score_grade"</span>].map({<span class="str">"A"</span>: <span class="kw">True</span>, <span class="str">"B"</span>: <span class="kw">True</span>, <span class="str">"C"</span>: <span class="kw">False</span>})</pre>
 </div>
 <h3 class="sh3">4. Merging DataFrames</h3>
-<div class="callout cr">
-<strong>⚠️ Warning: Cartesian Merge Explosions:</strong>
-<br/>When joining two DataFrames on a key, if that key contains duplicate values in *both* DataFrames, Pandas will perform a Cartesian product of those matching keys.
-<br/>If DataFrame A has 10,000 rows with <code>key="item_1"</code> and DataFrame B has 10,000 rows with <code>key="item_1"</code>, merging them will output <strong>100,000,000 rows</strong>! This will quickly consume all your system memory and crash the Python process.
-<br/><strong>Gotcha Prevention:</strong> Always validate merge cardinality in production using the <code>validate</code> parameter:
+<div class="callout cr"><strong>⚠️ Warning: Cartesian Merge Explosions:</strong>
+<br/>When joining two DataFrames on a key, if that key contains duplicate values in *both* DataFrames, Pandas will perform a Cartesian product of those matching keys.<br/><br/><br/>If DataFrame A has 10,000 rows with <code>key="item_1"</code> and DataFrame B has 10,000 rows with <code>key="item_1"</code>, merging them will output <strong>100,000,000 rows</strong>!<br/><br/>This will quickly consume all your system memory and crash the Python process.<br/><br/><br/><strong>Gotcha Prevention:</strong> Always validate merge cardinality in production using the <code>validate</code> parameter:
 <pre><span class="cm"># Throws a MergeError if cardinality is violated</span>
 pd.merge(df_left, df_right, on=<span class="str">'id'</span>, validate=<span class="str">'one_to_many'</span>)
-</pre>
-</div>
+</pre></div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — merge_concat.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre>students = pd.DataFrame({<span class="str">"id"</span>: [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>], <span class="str">"name"</span>: [<span class="str">"Rahul"</span>, <span class="str">"Priya"</span>, <span class="str">"Arjun"</span>]})
@@ -845,100 +933,85 @@ graph TD
 <div class="diagram-cap">Conceptual visualization of Left vs. Inner merges.</div>
 <!-- SVG: Merge Types Diagram -->
 <figure class="svg-diagram">
-  <svg viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg" width="540" height="380" role="img" aria-label="Visual comparison of inner, left, right, and outer merges. Shows which rows are retained and where NaN is filled for missing values.">
-    <!-- Panel 1: Inner Merge -->
-    <g transform="translate(10, 10)">
-      <!-- Panel Border -->
-      <rect width="250" height="170" rx="8" fill="#141720" stroke="#252a40" stroke-width="1"/>
-      <text x="125" y="22" font-family="DM Sans,sans-serif" font-size="11.5" fill="#4fd1a5" font-weight="600" text-anchor="middle">1. Inner Merge (how='inner')</text>
-      
-      <!-- Venn Diagram -->
-      <circle cx="105" cy="65" r="25" fill="rgba(108, 140, 255, 0.15)" stroke="#6c8cff" stroke-width="1"/>
-      <circle cx="145" cy="65" r="25" fill="rgba(229, 107, 140, 0.15)" stroke="#e56b8c" stroke-width="1"/>
-      <!-- Intersection Highlighted in Green -->
-      <path d="M 125,48 A 25,25 0 0,1 130,65 A 25,25 0 0,1 125,82 A 25,25 0 0,1 120,65 A 25,25 0 0,1 125,48 Z" fill="#4fd1a5" opacity="0.8"/>
-      
-      <text x="75" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#6c8cff" text-anchor="end">L</text>
-      <text x="175" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#e56b8c">R</text>
-      
-      <!-- Table Representation -->
-      <rect x="25" y="105" width="200" height="50" rx="4" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
-      <text x="125" y="122" font-family="IBM Plex Mono,monospace" font-size="9" fill="#6b7590" text-anchor="middle">id | name  | score</text>
-      <line x1="30" y1="128" x2="220" y2="128" stroke="#252a40" stroke-width="0.8"/>
-      <text x="125" y="139" font-family="IBM Plex Mono,monospace" font-size="9" fill="#4fd1a5" text-anchor="middle">1  | Rahul | 85.0</text>
-      <text x="125" y="149" font-family="IBM Plex Mono,monospace" font-size="9" fill="#4fd1a5" text-anchor="middle">2  | Priya | 92.0</text>
-    </g>
-
-    <!-- Panel 2: Left Merge -->
-    <g transform="translate(280, 10)">
-      <rect width="250" height="170" rx="8" fill="#141720" stroke="#252a40" stroke-width="1"/>
-      <text x="125" y="22" font-family="DM Sans,sans-serif" font-size="11.5" fill="#6c8cff" font-weight="600" text-anchor="middle">2. Left Merge (how='left')</text>
-      
-      <!-- Venn Diagram -->
-      <!-- Left circle fully highlighted in Blue/Green -->
-      <circle cx="105" cy="65" r="25" fill="#4fd1a5" opacity="0.6" stroke="#6c8cff" stroke-width="1.5"/>
-      <circle cx="145" cy="65" r="25" fill="rgba(229, 107, 140, 0.15)" stroke="#e56b8c" stroke-width="1"/>
-      
-      <text x="75" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#0d0f14" font-weight="bold" text-anchor="end">L</text>
-      <text x="175" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#e56b8c">R</text>
-      
-      <!-- Table Representation -->
-      <rect x="25" y="105" width="200" height="50" rx="4" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
-      <text x="125" y="120" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#6b7590" text-anchor="middle">id | name  | score</text>
-      <line x1="30" y1="124" x2="220" y2="124" stroke="#252a40" stroke-width="0.8"/>
-      <text x="125" y="133" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#dde2f0" text-anchor="middle">1  | Rahul | 85.0</text>
-      <text x="125" y="142" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#dde2f0" text-anchor="middle">2  | Priya | 92.0</text>
-      <text x="125" y="151" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#dde2f0" text-anchor="middle">3  | Arjun | <tspan fill="#e56b8c">NaN</tspan></text>
-    </g>
-
-    <!-- Panel 3: Right Merge -->
-    <g transform="translate(10, 195)">
-      <rect width="250" height="170" rx="8" fill="#141720" stroke="#252a40" stroke-width="1"/>
-      <text x="125" y="22" font-family="DM Sans,sans-serif" font-size="11.5" fill="#f7a94b" font-weight="600" text-anchor="middle">3. Right Merge (how='right')</text>
-      
-      <!-- Venn Diagram -->
-      <!-- Right circle fully highlighted in Pink/Orange -->
-      <circle cx="105" cy="65" r="25" fill="rgba(108, 140, 255, 0.15)" stroke="#6c8cff" stroke-width="1"/>
-      <circle cx="145" cy="65" r="25" fill="#4fd1a5" opacity="0.6" stroke="#e56b8c" stroke-width="1.5"/>
-      
-      <text x="75" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#6c8cff" text-anchor="end">L</text>
-      <text x="175" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#0d0f14" font-weight="bold">R</text>
-      
-      <!-- Table Representation -->
-      <rect x="25" y="105" width="200" height="50" rx="4" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
-      <text x="125" y="120" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#6b7590" text-anchor="middle">id | name  | score</text>
-      <line x1="30" y1="124" x2="220" y2="124" stroke="#252a40" stroke-width="0.8"/>
-      <text x="125" y="133" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#dde2f0" text-anchor="middle">1  | Rahul | 85.0</text>
-      <text x="125" y="142" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#dde2f0" text-anchor="middle">2  | Priya | 92.0</text>
-      <text x="125" y="151" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#dde2f0" text-anchor="middle">4  | <tspan fill="#e56b8c">NaN</tspan>   | 78.0</text>
-    </g>
-
-    <!-- Panel 4: Outer Merge -->
-    <g transform="translate(280, 195)">
-      <rect width="250" height="170" rx="8" fill="#141720" stroke="#252a40" stroke-width="1"/>
-      <text x="125" y="22" font-family="DM Sans,sans-serif" font-size="11.5" fill="#b47cfc" font-weight="600" text-anchor="middle">4. Outer Merge (how='outer')</text>
-      
-      <!-- Venn Diagram -->
-      <!-- Both circles fully highlighted -->
-      <circle cx="105" cy="65" r="25" fill="#4fd1a5" opacity="0.5" stroke="#6c8cff" stroke-width="1"/>
-      <circle cx="145" cy="65" r="25" fill="#4fd1a5" opacity="0.5" stroke="#e56b8c" stroke-width="1"/>
-      
-      <text x="75" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#0d0f14" font-weight="bold" text-anchor="end">L</text>
-      <text x="175" y="69" font-family="DM Sans,sans-serif" font-size="9.5" fill="#0d0f14" font-weight="bold">R</text>
-      
-      <!-- Table Representation -->
-      <rect x="25" y="105" width="200" height="55" rx="4" fill="#1e2230" stroke="#252a40" stroke-width="1"/>
-      <text x="125" y="117" font-family="IBM Plex Mono,monospace" font-size="8" fill="#6b7590" text-anchor="middle">id | name  | score</text>
-      <line x1="30" y1="121" x2="220" y2="121" stroke="#252a40" stroke-width="0.8"/>
-      <text x="125" y="129" font-family="IBM Plex Mono,monospace" font-size="8" fill="#dde2f0" text-anchor="middle">1  | Rahul | 85.0</text>
-      <text x="125" y="137" font-family="IBM Plex Mono,monospace" font-size="8" fill="#dde2f0" text-anchor="middle">2  | Priya | 92.0</text>
-      <text x="125" y="145" font-family="IBM Plex Mono,monospace" font-size="8" fill="#dde2f0" text-anchor="middle">3  | Arjun | <tspan fill="#e56b8c">NaN</tspan></text>
-      <text x="125" y="153" font-family="IBM Plex Mono,monospace" font-size="8" fill="#dde2f0" text-anchor="middle">4  | <tspan fill="#e56b8c">NaN</tspan>   | 78.0</text>
-    </g>
-  </svg>
-  <figcaption>Visual comparison of inner, left, right, and outer merge output rows. Retained rows are colored green, while missing values are filled with NaN.</figcaption>
+<svg aria-label="Visual comparison of inner, left, right, and outer merges. Shows which rows are retained and where NaN is filled for missing values." height="380" role="img" viewbox="0 0 540 380" width="540" xmlns="http://www.w3.org/2000/svg">
+<!-- Panel 1: Inner Merge -->
+<g transform="translate(10, 10)">
+<!-- Panel Border -->
+<rect fill="#141720" height="170" rx="8" stroke="#252a40" stroke-width="1" width="250"></rect>
+<text fill="#4fd1a5" font-family="DM Sans,sans-serif" font-size="11.5" font-weight="600" text-anchor="middle" x="125" y="22">1. Inner Merge (how='inner')</text>
+<!-- Venn Diagram -->
+<circle cx="105" cy="65" fill="rgba(108, 140, 255, 0.15)" r="25" stroke="#6c8cff" stroke-width="1"></circle>
+<circle cx="145" cy="65" fill="rgba(229, 107, 140, 0.15)" r="25" stroke="#e56b8c" stroke-width="1"></circle>
+<!-- Intersection Highlighted in Green -->
+<path d="M 125,48 A 25,25 0 0,1 130,65 A 25,25 0 0,1 125,82 A 25,25 0 0,1 120,65 A 25,25 0 0,1 125,48 Z" fill="#4fd1a5" opacity="0.8"></path>
+<text fill="#6c8cff" font-family="DM Sans,sans-serif" font-size="9.5" text-anchor="end" x="75" y="69">L</text>
+<text fill="#e56b8c" font-family="DM Sans,sans-serif" font-size="9.5" x="175" y="69">R</text>
+<!-- Table Representation -->
+<rect fill="#1e2230" height="50" rx="4" stroke="#252a40" stroke-width="1" width="200" x="25" y="105"></rect>
+<text fill="#6b7590" font-family="IBM Plex Mono,monospace" font-size="9" text-anchor="middle" x="125" y="122">id | name  | score</text>
+<line stroke="#252a40" stroke-width="0.8" x1="30" x2="220" y1="128" y2="128"></line>
+<text fill="#4fd1a5" font-family="IBM Plex Mono,monospace" font-size="9" text-anchor="middle" x="125" y="139">1  | Rahul | 85.0</text>
+<text fill="#4fd1a5" font-family="IBM Plex Mono,monospace" font-size="9" text-anchor="middle" x="125" y="149">2  | Priya | 92.0</text>
+</g>
+<!-- Panel 2: Left Merge -->
+<g transform="translate(280, 10)">
+<rect fill="#141720" height="170" rx="8" stroke="#252a40" stroke-width="1" width="250"></rect>
+<text fill="#6c8cff" font-family="DM Sans,sans-serif" font-size="11.5" font-weight="600" text-anchor="middle" x="125" y="22">2. Left Merge (how='left')</text>
+<!-- Venn Diagram -->
+<!-- Left circle fully highlighted in Blue/Green -->
+<circle cx="105" cy="65" fill="#4fd1a5" opacity="0.6" r="25" stroke="#6c8cff" stroke-width="1.5"></circle>
+<circle cx="145" cy="65" fill="rgba(229, 107, 140, 0.15)" r="25" stroke="#e56b8c" stroke-width="1"></circle>
+<text fill="#0d0f14" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="bold" text-anchor="end" x="75" y="69">L</text>
+<text fill="#e56b8c" font-family="DM Sans,sans-serif" font-size="9.5" x="175" y="69">R</text>
+<!-- Table Representation -->
+<rect fill="#1e2230" height="50" rx="4" stroke="#252a40" stroke-width="1" width="200" x="25" y="105"></rect>
+<text fill="#6b7590" font-family="IBM Plex Mono,monospace" font-size="8.5" text-anchor="middle" x="125" y="120">id | name  | score</text>
+<line stroke="#252a40" stroke-width="0.8" x1="30" x2="220" y1="124" y2="124"></line>
+<text fill="#dde2f0" font-family="IBM Plex Mono,monospace" font-size="8.5" text-anchor="middle" x="125" y="133">1  | Rahul | 85.0</text>
+<text fill="#dde2f0" font-family="IBM Plex Mono,monospace" font-size="8.5" text-anchor="middle" x="125" y="142">2  | Priya | 92.0</text>
+<text fill="#dde2f0" font-family="IBM Plex Mono,monospace" font-size="8.5" text-anchor="middle" x="125" y="151">3  | Arjun | <tspan fill="#e56b8c">NaN</tspan></text>
+</g>
+<!-- Panel 3: Right Merge -->
+<g transform="translate(10, 195)">
+<rect fill="#141720" height="170" rx="8" stroke="#252a40" stroke-width="1" width="250"></rect>
+<text fill="#f7a94b" font-family="DM Sans,sans-serif" font-size="11.5" font-weight="600" text-anchor="middle" x="125" y="22">3. Right Merge (how='right')</text>
+<!-- Venn Diagram -->
+<!-- Right circle fully highlighted in Pink/Orange -->
+<circle cx="105" cy="65" fill="rgba(108, 140, 255, 0.15)" r="25" stroke="#6c8cff" stroke-width="1"></circle>
+<circle cx="145" cy="65" fill="#4fd1a5" opacity="0.6" r="25" stroke="#e56b8c" stroke-width="1.5"></circle>
+<text fill="#6c8cff" font-family="DM Sans,sans-serif" font-size="9.5" text-anchor="end" x="75" y="69">L</text>
+<text fill="#0d0f14" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="bold" x="175" y="69">R</text>
+<!-- Table Representation -->
+<rect fill="#1e2230" height="50" rx="4" stroke="#252a40" stroke-width="1" width="200" x="25" y="105"></rect>
+<text fill="#6b7590" font-family="IBM Plex Mono,monospace" font-size="8.5" text-anchor="middle" x="125" y="120">id | name  | score</text>
+<line stroke="#252a40" stroke-width="0.8" x1="30" x2="220" y1="124" y2="124"></line>
+<text fill="#dde2f0" font-family="IBM Plex Mono,monospace" font-size="8.5" text-anchor="middle" x="125" y="133">1  | Rahul | 85.0</text>
+<text fill="#dde2f0" font-family="IBM Plex Mono,monospace" font-size="8.5" text-anchor="middle" x="125" y="142">2  | Priya | 92.0</text>
+<text fill="#dde2f0" font-family="IBM Plex Mono,monospace" font-size="8.5" text-anchor="middle" x="125" y="151">4  | <tspan fill="#e56b8c">NaN</tspan>   | 78.0</text>
+</g>
+<!-- Panel 4: Outer Merge -->
+<g transform="translate(280, 195)">
+<rect fill="#141720" height="170" rx="8" stroke="#252a40" stroke-width="1" width="250"></rect>
+<text fill="#b47cfc" font-family="DM Sans,sans-serif" font-size="11.5" font-weight="600" text-anchor="middle" x="125" y="22">4. Outer Merge (how='outer')</text>
+<!-- Venn Diagram -->
+<!-- Both circles fully highlighted -->
+<circle cx="105" cy="65" fill="#4fd1a5" opacity="0.5" r="25" stroke="#6c8cff" stroke-width="1"></circle>
+<circle cx="145" cy="65" fill="#4fd1a5" opacity="0.5" r="25" stroke="#e56b8c" stroke-width="1"></circle>
+<text fill="#0d0f14" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="bold" text-anchor="end" x="75" y="69">L</text>
+<text fill="#0d0f14" font-family="DM Sans,sans-serif" font-size="9.5" font-weight="bold" x="175" y="69">R</text>
+<!-- Table Representation -->
+<rect fill="#1e2230" height="55" rx="4" stroke="#252a40" stroke-width="1" width="200" x="25" y="105"></rect>
+<text fill="#6b7590" font-family="IBM Plex Mono,monospace" font-size="8" text-anchor="middle" x="125" y="117">id | name  | score</text>
+<line stroke="#252a40" stroke-width="0.8" x1="30" x2="220" y1="121" y2="121"></line>
+<text fill="#dde2f0" font-family="IBM Plex Mono,monospace" font-size="8" text-anchor="middle" x="125" y="129">1  | Rahul | 85.0</text>
+<text fill="#dde2f0" font-family="IBM Plex Mono,monospace" font-size="8" text-anchor="middle" x="125" y="137">2  | Priya | 92.0</text>
+<text fill="#dde2f0" font-family="IBM Plex Mono,monospace" font-size="8" text-anchor="middle" x="125" y="145">3  | Arjun | <tspan fill="#e56b8c">NaN</tspan></text>
+<text fill="#dde2f0" font-family="IBM Plex Mono,monospace" font-size="8" text-anchor="middle" x="125" y="153">4  | <tspan fill="#e56b8c">NaN</tspan>   | 78.0</text>
+</g>
+</svg>
+<figcaption>Visual comparison of inner, left, right, and outer merge output rows. Retained rows are colored green, while missing values are filled with NaN.</figcaption>
 </figure>
-<div class="ml-connect">In ML, you'll often merge feature tables with label tables using an ID key — like merging a customer features table with a churn label table. Knowing merge types (inner vs left) prevents data leakage and silent row drops.</div>
+<div class="ml-connect">In ML, you'll often merge feature tables with label tables using an ID key — like merging a customer features table with a churn label table.<br/><br/>Knowing merge types (inner vs left) prevents data leakage and silent row drops.</div>
 <div class="hinglish">💡 Ek line mein: Data cleaning = nulls handle karo, duplicates hato, types fix karo, strings strip karo. apply() function har row/column pe chalata hai. merge() SQL JOIN ki tarah kaam karta hai.</div>
 </div>
 <div id="day-9-quiz-section">
@@ -1021,9 +1094,32 @@ graph TD
 <span class="task-time">⏱ 25 min</span>
 </div>
 <div class="task-body">
-<p><strong>Failure-Based Learning:</strong> Create an intentionally broken CSV (corrupt delimiters, "$5,000" salaries, date strings, and NaN values). Load it. Notice how Pandas reads the types wrong. Clean it: strip currency symbols, fix types, standardise names. Print before/after dtypes.</p>
-<p><strong>Reading Existing Code:</strong> Find a public Kaggle notebook about data cleaning. Find a bug or inefficiency in their code. Add a markdown cell explaining "Why is this code buggy?" and "How would I improve it?".</p>
-<div class="done-when">df.isnull().sum() returns all zeros after cleaning and dtypes are all correct. You have successfully debugged another person's code.</div>
+<p style="margin-bottom: 0.6rem;"><strong>Failure-Based Learning:</strong> Create an intentionally broken CSV (corrupt delimiters, "$5,000" salaries, date strings, and NaN values).</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">Load it.</li><li style="margin-bottom: 0.4rem;">Notice how Pandas reads the types wrong.</li><li style="margin-bottom: 0.4rem;">Clean it: strip currency symbols, fix types, standardise names.</li><li style="margin-bottom: 0.4rem;">Print before/after dtypes.</li></ul>
+<p style="margin-bottom: 0.6rem;"><strong>Reading Existing Code:</strong> Find a public Kaggle notebook about data cleaning.</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">Find a bug or inefficiency in their code.</li><li style="margin-bottom: 0.4rem;">Add a markdown cell explaining "Why is this code buggy?" and "How would I improve it?".</li></ul>
+<button class="solution-toggle" onclick="toggleSolution('sol-w2-t05')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w2-t05">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># Clean a Messy DataFrame
+import pandas as pd
+import numpy as np
+df = pd.DataFrame({
+    "name": ["Alice "," Bob"," Charlie","Alice ","Eve"],
+    "age": [25, -30, 35, 25, 200],
+    "salary": ["50000", "60000", "NA", "50000", "75000"],
+    "date": ["2021-01-01", "2021/02/15", "2021-03-20", "2021-01-01", "01-04-2021"]
+})
+print("Before:", df, sep="
+")
+df["name"] = df["name"].str.strip()
+df = df.drop_duplicates()
+df["age"] = pd.to_numeric(df["age"], errors="coerce").clip(0, 120)
+df.loc[df["age"].isna(), "age"] = df["age"].median()
+df["salary"] = pd.to_numeric(df["salary"], errors="coerce").fillna(df["salary"].median())
+print("After:", df, sep="
+")</pre>
+</div>
+</div><div class="done-when">df.isnull().sum() returns all zeros after cleaning and dtypes are all correct. You have successfully debugged another person's code.</div>
 <div class="git-block">git add . &amp;&amp; git commit -m "day9: data cleaning — fillna, dropna, astype, apply"</div>
 </div>
 </div>
@@ -1034,9 +1130,28 @@ graph TD
 <span class="task-time">⏱ 45 min</span>
 </div>
 <div class="task-body">
-<p>Take titanic.csv. Clean it completely: (1) fill Age nulls with median by Pclass (advanced — use groupby fillna), (2) fill Embarked nulls with mode, (3) drop Cabin column (too many nulls), (4) create a new column "FamilySize" = SibSp + Parch + 1, (5) apply a lambda to create "IsAlone" = 1 if FamilySize==1. Save cleaned CSV.</p>
+<p style="margin-bottom: 0.6rem;">Take titanic.csv. Clean it completely:</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;"><strong>(1)</strong> Fill Age nulls with median by Pclass (advanced — use groupby fillna)</li><li style="margin-bottom: 0.4rem;"><strong>(2)</strong> Fill Embarked nulls with mode</li><li style="margin-bottom: 0.4rem;"><strong>(3)</strong> Drop Cabin column (too many nulls)</li><li style="margin-bottom: 0.4rem;"><strong>(4)</strong> Create a new column "FamilySize" = SibSp + Parch + 1</li><li style="margin-bottom: 0.4rem;"><strong>(5)</strong> Apply a lambda to create "IsAlone" = 1 if FamilySize==1. Save cleaned CSV</li></ul>
 <p><strong>💡 Hint:</strong> If you get a <code>SettingWithCopyWarning</code>, add <code>.copy()</code> when creating your subset — this was covered in Day 8.</p>
-<div class="done-when">Zero null values except Cabin (dropped). 3 new derived columns exist.</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w2-t06')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w2-t06">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># Incremental Project: Clean Titanic Dataset Fully
+import pandas as pd
+url = "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
+df = pd.read_csv(url)
+print(f"Original: {df.shape}")
+print(f"Missing:
+{df.isnull().sum()}
+")
+df.drop("Cabin", axis=1, inplace=True)
+df["Age"] = df["Age"].fillna(df["Age"].median())
+df["Embarked"] = df["Embarked"].fillna(df["Embarked"].mode()[0])
+print(f"Missing after:
+{df.isnull().sum()}")
+print(f"Clean shape: {df.shape}")</pre>
+</div>
+</div><div class="done-when">Zero null values except Cabin (dropped). 3 new derived columns exist.</div>
 </div>
 </div>
 </div>
@@ -1073,7 +1188,8 @@ graph TD
 <div class="day-header">
 <div class="day-tag">WEEK 2 · DAY 10 · MONTH 1 — FOUNDATIONS</div>
 <h1>Pandas — GroupBy &amp; Aggregation</h1>
-<p>Data ko groups mein baant ke statistics nikalna — yahi GroupBy ka kaam hai. Aaj seekhenge how to split-apply-combine, pivot tables, string ops, datetime ops, aur memory-efficient chunked processing.</p>
+<p>Data ko groups mein baant ke statistics nikalna — yahi GroupBy ka kaam hai.</p>
+<p>Aaj seekhenge how to split-apply-combine, pivot tables, string ops, datetime ops, aur memory-efficient chunked processing.</p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 4 hours</span>
 <span class="meta-badge o">📊 Intermediate</span>
@@ -1090,10 +1206,11 @@ graph TD
 <li>Complete a sales data analysis finding top products and monthly revenue</li>
 </ul>
 </div>
+<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with merging, joining, and concatenating DataFrames from Day 9?</li></ul></div>
 <div id="day-10-theory">
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. groupby() — Split, Apply, Combine</h3>
-<div class="analogy">Socho tumhare school ke sab students ka data hai. "Class ke hisaab se average marks nikalo" — yahi groupby hai. Pehle data ko groups mein baanto (class A, B, C), phir har group pe operation karo (mean lao), phir results combine karo.</div>
+<div class="analogy">Socho tumhare school ke sab students ka data hai.<br/><br/>"Class ke hisaab se average marks nikalo" — yahi groupby hai.<br/><br/>Pehle data ko groups mein baanto (class A, B, C), phir har group pe operation karo (mean lao), phir results combine karo.</div>
 <div class="mermaid">
 graph TD
     subgraph Input ["1. Input DataFrame"]
@@ -1234,7 +1351,7 @@ df[<span class="str">"cumulative_max"</span>] = df[<span class="str">"sales"</sp
 df[<span class="str">"running_total"</span>]  = df[<span class="str">"sales"</span>].expanding().sum()
 <span class="cm"># First N-1 rows of rolling(N) are NaN — no full window yet</span></pre>
 </div>
-<div class="ml-connect">Rolling averages smooth out noise in time-series data. They are a standard feature engineering technique in stock price prediction, sales forecasting, and anomaly detection.</div>
+<div class="ml-connect">Rolling averages smooth out noise in time-series data.<br/><br/>They are a standard feature engineering technique in stock price prediction, sales forecasting, and anomaly detection.</div>
 <h3 class="sh3">6. Reshaping Data — melt(), stack(), unstack(), explode()</h3>
 <p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Reshaping functions transform data between wide format and long format, expanding nested lists or rotating hierarchical index structures.</p>
 <div class="cb">
@@ -1292,7 +1409,7 @@ results = []
     results.append(chunk[chunk[<span class="str">"city"</span>] == <span class="str">"Mumbai"</span>])  <span class="cm"># filter each chunk</span>
 df_filtered = pd.concat(results, ignore_index=<span class="kw">True</span>)</pre>
 </div>
-<div class="callout cw"><strong>⚡ When to care about memory:</strong> If <code>df.memory_usage(deep=True).sum()</code> is over 500MB, start downcasting. <code>"category"</code> dtype is the single biggest win for string columns with &lt;50 unique values.</div>
+<div class="callout cw"><strong>⚡ When to care about memory:</strong> If <code>df.memory_usage(deep=True).sum()</code> is over 500MB, start downcasting.<br/><br/><code>"category"</code> dtype is the single biggest win for string columns with &lt;50 unique values.</div>
 </details></div>
 <div id="day-10-quiz-section">
 <h2 class="sh2">✅ Knowledge Check — Day 10 Quiz</h2>
@@ -1358,8 +1475,29 @@ df_filtered = pd.concat(results, ignore_index=<span class="kw">True</span>)</pre
 <span class="task-time">⏱ 45 min</span>
 </div>
 <div class="task-body">
-<p>Find a sales CSV on Kaggle (search "sales data"). Analyze: (1) top 5 products by total revenue, (2) monthly revenue trend (group by month — extract month from date column), (3) region with highest average order value, (4) product with most transactions, (5) revenue per product per region (pivot table). Create 3 insights with comments.</p>
-<div class="done-when">A Jupyter notebook with 5 clearly commented analysis cells, each answering one question.</div>
+<p style="margin-bottom: 0.6rem;">Find a sales CSV on Kaggle (search "sales data"). Analyze:</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;"><strong>(1)</strong> Top 5 products by total revenue</li><li style="margin-bottom: 0.4rem;"><strong>(2)</strong> Monthly revenue trend (group by month — extract month from date column)</li><li style="margin-bottom: 0.4rem;"><strong>(3)</strong> Region with highest average order value</li><li style="margin-bottom: 0.4rem;"><strong>(4)</strong> Product with most transactions</li><li style="margin-bottom: 0.4rem;"><strong>(5)</strong> Revenue per product per region (pivot table). Create 3 insights with comments</li></ul>
+<button class="solution-toggle" onclick="toggleSolution('sol-w2-t07')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w2-t07">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># Sales Data Analysis - GroupBy Deep Dive
+import pandas as pd
+import numpy as np
+np.random.seed(42)
+df = pd.DataFrame({
+    "region": np.random.choice(["North","South","East","West"], 100),
+    "product": np.random.choice(["A","B","C"], 100),
+    "sales": np.random.randint(100, 1000, 100),
+    "profit": np.random.randint(10, 200, 100),
+})
+print("Sales by region:")
+print(df.groupby("region")["sales"].agg(["sum","mean","count"]))
+print("Profit by product:")
+print(df.groupby("product")["profit"].agg(["sum","mean"]))
+print("Region-Product breakdown:")
+print(df.groupby(["region","product"])[["sales","profit"]].mean().round(1))</pre>
+</div>
+</div><div class="done-when">A Jupyter notebook with 5 clearly commented analysis cells, each answering one question.</div>
 <div class="git-block">git add . &amp;&amp; git commit -m "day10: groupby aggregation, pivot table sales analysis"</div>
 </div>
 </div>
@@ -1397,7 +1535,9 @@ df_filtered = pd.concat(results, ignore_index=<span class="kw">True</span>)</pre
 <div class="day-header">
 <div class="day-tag">WEEK 2 · DAY 11 · MONTH 1 — FOUNDATIONS</div>
 <h1>SQL — SELECT, WHERE, JOIN Basics</h1>
-<p>SQL (Structured Query Language) ek ऐसी language hai jisse databases se data maango. Har data job mein SQL aata hai — Data Scientist, ML Engineer, Analytics Engineer — sab SQL likhte hain. Aaj se tumhara SQL start hota hai.</p>
+<p>SQL (Structured Query Language) ek ऐसी language hai jisse databases se data maango.</p>
+<p>Har data job mein SQL aata hai — Data Scientist, ML Engineer, Analytics Engineer — sab SQL likhte hain.</p>
+<p>Aaj se tumhara SQL start hota hai.</p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 4 hours</span>
 <span class="meta-badge o">🗄️ Beginner</span>
@@ -1417,24 +1557,22 @@ df_filtered = pd.concat(results, ignore_index=<span class="kw">True</span>)</pre
 <div id="day-11-theory">
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. Database &amp; RDBMS Fundamentals</h3>
-<div class="analogy">School registry register ki tarah relational database ko socho. Ek page pe student detail, doosre page pe attendance, teesre page pe library books. In sabko link karne ke liye standard columns hote hain (jaise Roll Number). Yahi Relational Database hai jahan multi-tables mein data linked rehta hai.</div>
-<p>
-    A <strong>Database</strong> is an organized collection of structured information or data, typically stored electronically in a computer system. 
-    A <strong>Relational Database Management System (RDBMS)</strong> is a type of database management system (DBMS) that stores data in tables (relations) of rows (tuples) and columns (attributes), and manages data based on the relational model.
-</p>
+<div class="analogy">School registry register ki tarah relational database ko socho.<br/><br/>Ek page pe student detail, doosre page pe attendance, teesre page pe library books.<br/><br/>In sabko link karne ke liye standard columns hote hain (jaise Roll Number).<br/><br/>Yahi Relational Database hai jahan multi-tables mein data linked rehta hai.</div>
+<p>A <strong>Database</strong> is an organized collection of structured information or data, typically stored electronically in a computer system.</p>
+<p>A <strong>Relational Database Management System (RDBMS)</strong> is a type of database management system (DBMS) that stores data in tables (relations) of rows (tuples) and columns (attributes), and manages data based on the relational model.</p>
 <div class="callout cw">
-    <strong>🔑 Keys &amp; Table Structures:</strong>
-    <ul style="margin-left:1.25rem;">
-        <li><strong>Primary Key (PK):</strong> A column (or set of columns) that uniquely identifies each row in a table. It cannot be NULL and must be unique (e.g., <code>student_id</code>).</li>
-        <li><strong>Foreign Key (FK):</strong> A column in one table that links to the Primary Key of another table. It enforces referential integrity between tables (e.g., <code>dept_id</code> in the employees table).</li>
-    </ul>
+<strong>🔑 Keys &amp; Table Structures:</strong>
+<ul style="margin-left:1.25rem;">
+<li><strong>Primary Key (PK):</strong> A column (or set of columns) that uniquely identifies each row in a table. It cannot be NULL and must be unique (e.g., <code>student_id</code>).</li>
+<li><strong>Foreign Key (FK):</strong> A column in one table that links to the Primary Key of another table. It enforces referential integrity between tables (e.g., <code>dept_id</code> in the employees table).</li>
+</ul>
 </div>
 <h4 class="sh3" style="color:var(--orange)">Entity Relationships &amp; Junction Tables</h4>
 <p>Databases model the real world via three primary relationship types:</p>
 <ul style="margin-left:1.25rem; margin-bottom:1rem;">
-    <li><strong>One-to-One (1:1):</strong> A row in Table A is linked to exactly one row in Table B. E.g., A <code>user</code> has exactly one <code>user_profile</code>.</li>
-    <li><strong>One-to-Many (1:N):</strong> A row in Table A can be linked to multiple rows in Table B. E.g., A <code>department</code> has multiple <code>employees</code>, but each employee belongs to only one department.</li>
-    <li><strong>Many-to-Many (M:N):</strong> Multiple rows in Table A can relate to multiple rows in Table B. E.g., <code>students</code> can enroll in multiple <code>courses</code>, and each course has multiple students. This is resolved in databases using a <strong>Junction Table</strong> (also called Join or Bridge table) that stores pairs of foreign keys.</li>
+<li><strong>One-to-One (1:1):</strong> A row in Table A is linked to exactly one row in Table B. E.g., A <code>user</code> has exactly one <code>user_profile</code>.</li>
+<li><strong>One-to-Many (1:N):</strong> A row in Table A can be linked to multiple rows in Table B. E.g., A <code>department</code> has multiple <code>employees</code>, but each employee belongs to only one department.</li>
+<li><strong>Many-to-Many (M:N):</strong> Multiple rows in Table A can relate to multiple rows in Table B. E.g., <code>students</code> can enroll in multiple <code>courses</code>, and each course has multiple students. This is resolved in databases using a <strong>Junction Table</strong> (also called Join or Bridge table) that stores pairs of foreign keys.</li>
 </ul>
 <div class="mermaid">
 graph TD
@@ -1450,17 +1588,19 @@ graph TD
     end
 </div>
 <div class="diagram-cap">RDBMS Relationship Cardinalities and Junction Table implementation.</div>
-
 <h3 class="sh3">2. SQL vs. Pandas — The Paradigm Shift</h3>
-<div class="analogy">Pandas is like cooking in your own small kitchen (RAM) where you pull all ingredients from the fridge (CSV) onto your counter and chop them up step-by-step (procedural). SQL is like ordering from a mega-warehouse: you tell the clerk exactly WHAT you want (declarative), and the warehouse engine fetches it from giant storage shelves (disk) using efficient forklifts.</div>
-<p>As a data scientist, you already know Pandas. But Pandas has a limit: it loads the <strong>entire dataset into RAM</strong>. If you have a 50GB dataset and 16GB of RAM, Pandas will crash. <strong>SQL (Structured Query Language)</strong> solves this. SQL is <strong>declarative</strong> (you define <em>what</em> data you want, not <em>how</em> to get it) and operates directly on database files stored on disk, streaming only the necessary results to your computer.</p>
+<div class="analogy">Pandas is like cooking in your own small kitchen (RAM) where you pull all ingredients from the fridge (CSV) onto your counter and chop them up step-by-step (procedural).<br/><br/>SQL is like ordering from a mega-warehouse: you tell the clerk exactly WHAT you want (declarative), and the warehouse engine fetches it from giant storage shelves (disk) using efficient forklifts.</div>
+<p>As a data scientist, you already know Pandas.</p>
+<p>But Pandas has a limit: it loads the <strong>entire dataset into RAM</strong>.</p>
+<p>If you have a 50GB dataset and 16GB of RAM, Pandas will crash.</p>
+<p><strong>SQL (Structured Query Language)</strong> solves this.</p>
+<p>SQL is <strong>declarative</strong> (you define <em>what</em> data you want, not <em>how</em> to get it) and operates directly on database files stored on disk, streaming only the necessary results to your computer.</p>
 <table class="concept-table">
 <tr><th>Feature</th><th>Pandas</th><th>SQL</th></tr>
 <tr><td><strong>Execution style</strong></td><td>Procedural (Step-by-step code)</td><td>Declarative (Describe the target output)</td></tr>
 <tr><td><strong>Memory footprint</strong></td><td>High (Loads entire dataset into RAM)</td><td>Low (Streams data from disk storage)</td></tr>
 <tr><td><strong>Best for</strong></td><td>Complex preprocessing, feature engineering, modeling</td><td>Data extraction, cleaning, multi-table joining</td></tr>
 </table>
-
 <h3 class="sh3">3. SELECT &amp; WHERE — The Filter Scaffolding</h3>
 <p>To learn SQL, we start with the simplest retrieval: choosing columns (<code>SELECT</code>) and filtering rows (<code>WHERE</code>).</p>
 <div class="cb">
@@ -1483,14 +1623,12 @@ graph TD
 <span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>
 <span class="kw">LIMIT</span> <span class="num">5</span>;</pre>
 </div>
-
 <h3 class="sh3">4. Aggregations, GROUP BY &amp; The HAVING Scaffold</h3>
-<p>Suppose you want to find statistics about departments. We use <strong>Aggregations</strong> (like <code>SUM</code> or <code>AVG</code>) to collapse multiple values into one. But how do we group them?</p>
-<div class="callout ci">
-<strong>📐 The "Collapse" Concept of GROUP BY:</strong>
-When you run <code>GROUP BY department</code>, the database groups rows matching the same department into single summary rows. Any non-grouped column (like <code>salary</code>) <strong>must</strong> have an aggregate function applied to tell the engine how to shrink those rows (e.g., take the <code>AVG</code> or <code>SUM</code>).
-</div>
-
+<p>Suppose you want to find statistics about departments.</p>
+<p>We use <strong>Aggregations</strong> (like <code>SUM</code> or <code>AVG</code>) to collapse multiple values into one.</p>
+<p>But how do we group them?</p>
+<div class="callout ci"><strong>📐 The "Collapse" Concept of GROUP BY:</strong>
+When you run <code>GROUP BY department</code>, the database groups rows matching the same department into single summary rows.<br/><br/>Any non-grouped column (like <code>salary</code>) <strong>must</strong> have an aggregate function applied to tell the engine how to shrink those rows (e.g., take the <code>AVG</code> or <code>SUM</code>).</div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — group_by_basics.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- Simple Aggregation (Pandas: df['salary'].mean())</span>
@@ -1501,9 +1639,9 @@ When you run <code>GROUP BY department</code>, the database groups rows matching
 <span class="kw">FROM</span> employees
 <span class="kw">GROUP BY</span> department;</pre>
 </div>
-
 <h4 class="sh3" style="color:var(--orange)">The HAVING Limitation (Where vs Having)</h4>
-<p>What if you want to filter out departments with an average salary of less than 60,000? Your first instinct might be to write this:</p>
+<p>What if you want to filter out departments with an average salary of less than 60,000?</p>
+<p>Your first instinct might be to write this:</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — wrong_where.sql</span></div>
 <pre><span class="cm">-- ❌ THIS WILL FAIL WITH A SYNTAX ERROR!</span>
@@ -1512,10 +1650,8 @@ When you run <code>GROUP BY department</code>, the database groups rows matching
 <span class="kw">WHERE</span> <span class="bi">AVG</span>(salary) <span class="op">&gt;</span> <span class="num">60000</span>  <span class="cm">-- Aggregates not allowed in WHERE</span>
 <span class="kw">GROUP BY</span> department;</pre>
 </div>
-<div class="misconception">
-<strong>⚠️ Why did it fail? (SQL Execution Order):</strong>
-The database engine runs the <code>WHERE</code> clause <strong>before</strong> it groups the data. Since grouping hasn't happened yet, the engine doesn't know what the average salary per department is! To filter groups, we must use <code>HAVING</code>, which is executed <strong>after</strong> <code>GROUP BY</code>.
-</div>
+<div class="misconception"><strong>⚠️ Why did it fail?<br/><br/>(SQL Execution Order):</strong>
+The database engine runs the <code>WHERE</code> clause <strong>before</strong> it groups the data.<br/><br/>Since grouping hasn't happened yet, the engine doesn't know what the average salary per department is!<br/><br/>To filter groups, we must use <code>HAVING</code>, which is executed <strong>after</strong> <code>GROUP BY</code>.</div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — correct_having.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- ✅ CORRECT: HAVING filters AFTER grouping</span>
@@ -1524,42 +1660,44 @@ The database engine runs the <code>WHERE</code> clause <strong>before</strong> i
 <span class="kw">GROUP BY</span> department
 <span class="kw">HAVING</span> <span class="bi">AVG</span>(salary) <span class="op">&gt;</span> <span class="num">60000</span>;</pre>
 </div>
-
 <h3 class="sh3">5. JOINs — Combining Tables from First Principles</h3>
-<p>When data is split across tables (e.g. <code>employees</code> and <code>departments</code>), we must join them. Let's understand how a join actually works step-by-step.</p>
+<p>When data is split across tables (e.g. <code>employees</code> and <code>departments</code>), we must join them.</p>
+<p>Let's understand how a join actually works step-by-step.</p>
 <h4 class="sh3" style="color:var(--orange)">Step 1: The Cartesian Product (CROSS JOIN)</h4>
-<p>If you join two tables without any matching keys, the engine matches <strong>every row</strong> of Table A with <strong>every row</strong> of Table B. If Table A has 100 rows and Table B has 10 rows, the result is 1,000 rows. This is a Cartesian Product.</p>
+<p>If you join two tables without any matching keys, the engine matches <strong>every row</strong> of Table A with <strong>every row</strong> of Table B.</p>
+<p>If Table A has 100 rows and Table B has 10 rows, the result is 1,000 rows.</p>
+<p>This is a Cartesian Product.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — cross_join.sql</span></div>
 <pre><span class="kw">SELECT</span> e.name, d.department_name
 <span class="kw">FROM</span> employees e
 <span class="kw">CROSS JOIN</span> departments d;  <span class="cm">-- Matches everything with everything</span></pre>
 </div>
-
 <h4 class="sh3" style="color:var(--orange)">Step 2: INNER JOIN (Filtering the Cartesian Product)</h4>
-<p>To make the join meaningful, we add an <code>ON</code> clause. This acts like a filter on the Cartesian Product, retaining only rows where keys match (e.g. <code>e.dept_id = d.id</code>).</p>
+<p>To make the join meaningful, we add an <code>ON</code> clause.</p>
+<p>This acts like a filter on the Cartesian Product, retaining only rows where keys match (e.g. <code>e.dept_id = d.id</code>).</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — inner_join.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">SELECT</span> e.name, d.department_name
 <span class="kw">FROM</span> employees e
 <span class="kw">INNER JOIN</span> departments d <span class="kw">ON</span> e.dept_id <span class="op">=</span> d.id;  <span class="cm">-- Only matching records kept</span></pre>
 </div>
-
 <h4 class="sh3" style="color:var(--orange)">Step 3: LEFT JOIN (Handling Dangling Keys)</h4>
-<p>If an employee has a <code>dept_id</code> of <code>NULL</code> (or a department that doesn't exist), the `INNER JOIN` will drop that employee row. We call this a <strong>dangling key</strong>. To retain all employees regardless of whether they have a department match, we use a <strong>`LEFT JOIN`</strong>.</p>
+<p>If an employee has a <code>dept_id</code> of <code>NULL</code> (or a department that doesn't exist), the `INNER JOIN` will drop that employee row.</p>
+<p>We call this a <strong>dangling key</strong>.</p>
+<p>To retain all employees regardless of whether they have a department match, we use a <strong>`LEFT JOIN`</strong>.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — left_join.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">SELECT</span> e.name, d.department_name
 <span class="kw">FROM</span> employees e
 <span class="kw">LEFT JOIN</span> departments d <span class="kw">ON</span> e.dept_id <span class="op">=</span> d.id;  <span class="cm">-- Retains all employees, shows NULL if no match</span></pre>
 </div>
-
 <div class="callout cp">
 <strong>🧠 Database Execution Order (The Execution Pipeline):</strong>
 To build complete query intuition, memorize the physical order in which a database processes your query:
 <br/><code>FROM ➔ JOIN ➔ ON ➔ WHERE ➔ GROUP BY ➔ HAVING ➔ SELECT ➔ DISTINCT ➔ ORDER BY ➔ LIMIT</code>
 </div>
-<div class="hinglish">💡 Ek line mein: SELECT kya chahiye, FROM kahan se, WHERE kon sa row, GROUP BY kaise group karo, HAVING group filter, ORDER BY sort karo, LIMIT kitna lena. JOIN = do tables combine karo common key pe.</div>
+<div class="hinglish">💡 Ek line mein: SELECT kya chahiye, FROM kahan se, WHERE kon sa row, GROUP BY kaise group karo, HAVING group filter, ORDER BY sort karo, LIMIT kitna lena.<br/><br/>JOIN = do tables combine karo common key pe.</div>
 <h3 class="sh3">6. Complete JOIN Family — FULL OUTER, CROSS, SELF</h3>
 <p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">SQL joins combine rows from two or more tables based on a related column, supporting full outer, cross, and self join strategies for relational queries.</p>
 <div class="cb">
@@ -1611,14 +1749,12 @@ To build complete query intuition, memorize the physical order in which a databa
 <span class="kw">FROM</span> orders <span class="kw">GROUP BY</span> <span class="num">1</span>;</pre>
 </div>
 <h3 class="sh3">8. Database Normalization — 1NF, 2NF, 3NF, BCNF</h3>
-<div class="callout cp">
-<strong>🧠 Why Normalization Matters:</strong> Normalization removes data redundancy and prevents update anomalies.<br/>
-<strong>1NF</strong> — Each cell has one atomic value. No repeating groups. (No comma-separated lists in a column!)<br/>
+<div class="callout cp"><strong>🧠 Why Normalization Matters:</strong> Normalization removes data redundancy and prevents update anomalies.<br/>
+<strong>1NF</strong> — Each cell has one atomic value.<br/><br/>No repeating groups.<br/><br/>(No comma-separated lists in a column!)<br/>
 <strong>2NF</strong> — 1NF + every non-key column depends on the <em>whole</em> primary key (not just part of it).<br/>
 <strong>3NF</strong> — 2NF + no transitive dependencies (non-key column must depend <em>only</em> on the primary key, not on another non-key column).<br/>
-<strong>BCNF (Boyce-Codd Normal Form)</strong> — A stronger version of 3NF. For every functional dependency X ➔ Y, X must be a superkey. It resolves anomalies when a table has overlapping candidate keys.<br/><br/>
-<em>Example: Storing "city" and "state" in an orders table where city already determines state — that's a 3NF violation. Move city→state mapping to a separate lookup table.</em>
-</div>
+<strong>BCNF (Boyce-Codd Normal Form)</strong> — A stronger version of 3NF.<br/><br/>For every functional dependency X ➔ Y, X must be a superkey.<br/><br/>It resolves anomalies when a table has overlapping candidate keys.<br/><br/>
+<em>Example: Storing "city" and "state" in an orders table where city already determines state — that's a 3NF violation.<br/><br/>Move city→state mapping to a separate lookup table.</em></div>
 </div>
 <div id="day-11-quiz-section">
 <h2 class="sh2">✅ Knowledge Check — Day 11 Quiz</h2>
@@ -1700,8 +1836,27 @@ To build complete query intuition, memorize the physical order in which a databa
 <span class="task-time">⏱ 25 min</span>
 </div>
 <div class="task-body">
-<p>Go to <strong>www.thoughtspot.com/sql-tutorial</strong>. Complete: Introduction to SQL, SQL SELECT, and SQL WHERE. Write each query yourself — don't copy. After each exercise, translate the SQL to a Pandas equivalent in your notebook.</p>
-<div class="done-when">You've completed all exercises and can explain SELECT, WHERE, ORDER BY, LIMIT without looking at notes.</div>
+<p style="margin-bottom: 0.6rem;">Go to <strong>www.thoughtspot.com/sql-tutorial</strong>.</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">Complete: Introduction to SQL, SQL SELECT, and SQL WHERE.</li><li style="margin-bottom: 0.4rem;">Write each query yourself — don't copy.</li><li style="margin-bottom: 0.4rem;">After each exercise, translate the SQL to a Pandas equivalent in your notebook.</li></ul>
+<button class="solution-toggle" onclick="toggleSolution('sol-w2-t08')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w2-t08">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># SQL Practice - Mode Analytics Tutorial Demo
+import sqlite3
+conn = sqlite3.connect(":memory:")
+cur = conn.cursor()
+cur.execute("CREATE TABLE employees (id INTEGER, name TEXT, dept TEXT, salary INTEGER)")
+for e in [(1,'Alice','Engineering',90000),(2,'Bob','Sales',70000),(3,'Charlie','Engineering',85000)]:
+    cur.execute("INSERT INTO employees VALUES (?,?,?,?)", e)
+print("All employees:")
+for r in cur.execute("SELECT * FROM employees"): print(r)
+print("Engineering dept:")
+for r in cur.execute("SELECT * FROM employees WHERE dept='Engineering'"): print(r)
+print("Avg salary by dept:")
+for r in cur.execute("SELECT dept, AVG(salary) FROM employees GROUP BY dept"): print(r)
+conn.close()</pre>
+</div>
+</div><div class="done-when">You've completed all exercises and can explain SELECT, WHERE, ORDER BY, LIMIT without looking at notes.</div>
 </div>
 </div>
 <div class="task-block">
@@ -1711,8 +1866,28 @@ To build complete query intuition, memorize the physical order in which a databa
 <span class="task-time">⏱ 45 min</span>
 </div>
 <div class="task-body">
-<p>Go to hackerrank.com/domains/sql. Solve 5 Easy-rated problems. Start with "Select All", "Select By ID", "Japanese Cities' Attributes", "Weather Observation Stations". Time yourself — aim for under 10 min per problem. Screenshot your solutions to GitHub.</p>
-<div class="done-when">5 green checkmarks on HackerRank. Problems solved without hints.</div>
+<p style="margin-bottom: 0.6rem;">Go to hackerrank.com/domains/sql.</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">Solve 5 Easy-rated problems.</li><li style="margin-bottom: 0.4rem;">Start with "Select All", "Select By ID", "Japanese Cities' Attributes", "Weather Observation Stations".</li><li style="margin-bottom: 0.4rem;">Time yourself — aim for under 10 min per problem.</li><li style="margin-bottom: 0.4rem;">Screenshot your solutions to GitHub.</li></ul>
+<button class="solution-toggle" onclick="toggleSolution('sol-w2-t09')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w2-t09">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># SQL Practice - 5 Common Problems
+import sqlite3
+conn = sqlite3.connect(":memory:")
+cur = conn.cursor()
+cur.execute("CREATE TABLE students (id INTEGER, name TEXT, marks INTEGER)")
+for s in [(1,'Alice',85),(2,'Bob',72),(3,'Charlie',95),(4,'Diana',60),(5,'Eve',88)]:
+    cur.execute("INSERT INTO students VALUES (?,?,?)", s)
+print("1. Students with marks &amp;gt; 75:")
+for r in cur.execute("SELECT name, marks FROM students WHERE marks &amp;gt; 75"): print(r)
+print("2. Top 3 by marks:")
+for r in cur.execute("SELECT name, marks FROM students ORDER BY marks DESC LIMIT 3"): print(r)
+print("3. Count per grade:")
+cur.execute("SELECT CASE WHEN marks&amp;gt;=85 THEN 'A' WHEN marks&amp;gt;=70 THEN 'B' ELSE 'C' END AS g, COUNT(*) FROM students GROUP BY g")
+for r in cur: print(r)
+conn.close()</pre>
+</div>
+</div><div class="done-when">5 green checkmarks on HackerRank. Problems solved without hints.</div>
 <div class="git-block">git add . &amp;&amp; git commit -m "day11: SQL basics SELECT WHERE JOIN — 5 HackerRank solved"</div>
 </div>
 </div>
@@ -1760,14 +1935,14 @@ To build complete query intuition, memorize the physical order in which a databa
 <div class="day-header">
 <div class="day-tag">WEEK 2 · DAY 12 · MONTH 1 — FOUNDATIONS</div>
 <h1>SQL Advanced — Analytics, Concurrency &amp; pgvector</h1>
-<p>Today we dive deep into the advanced, production-grade SQL concepts that distinguish a junior developer from a database expert. We will cover CTEs, window functions, locking mechanisms, performance indexing, security, database design, NoSQL vs. SQL, and PostgreSQL's pgvector for semantic search.</p>
+<p>Today we dive deep into the advanced, production-grade SQL concepts that distinguish a junior developer from a database expert.</p>
+<p>We will cover CTEs, window functions, locking mechanisms, performance indexing, security, database design, NoSQL vs. SQL, and PostgreSQL's pgvector for semantic search.</p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 8 hours</span>
 <span class="meta-badge o">🗄️ Advanced</span>
 <span class="meta-badge p">⚡ +200 XP</span>
 </div>
 </div>
-
 <div class="objectives">
 <h3>🎯 By end of Day 12 you will be able to:</h3>
 <ul>
@@ -1780,15 +1955,13 @@ To build complete query intuition, memorize the physical order in which a databa
 <li>Perform semantic searches using PostgreSQL pgvector (L2, Cosine similarity, IVFFlat, HNSW)</li>
 </ul>
 </div>
-
-<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Day 12 Prerequisites:</strong> You must understand Day 11 basics (SELECT, WHERE, JOINs) before continuing. We build directly on top of those concepts.</div>
-
+<div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with SQL syntax, SELECT queries, WHERE filters, and basic JOIN operations?</li></ul></div>
 <div id="day-12-theory">
 <h2 class="sh2">🧠 Theory</h2>
-
 <h3 class="sh3">1. Subqueries — The "Stuck Query" Problem</h3>
-<div class="analogy">Imagine trying to find the tallest student in a classroom. You cannot filter the students until you first measure everyone and calculate the average height. A subquery is exactly that: a query that runs first to find a dynamic threshold (like average salary), which is then passed to the outer query to filter the rows.</div>
-<p>Suppose you want to find employees who earn more than the average salary of the entire company. Your first instinct might be to write this query:</p>
+<div class="analogy">Imagine trying to find the tallest student in a classroom.<br/><br/>You cannot filter the students until you first measure everyone and calculate the average height.<br/><br/>A subquery is exactly that: a query that runs first to find a dynamic threshold (like average salary), which is then passed to the outer query to filter the rows.</div>
+<p>Suppose you want to find employees who earn more than the average salary of the entire company.</p>
+<p>Your first instinct might be to write this query:</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — wrong_where_aggregate.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- ❌ THIS WILL FAIL WITH A SYNTAX ERROR!</span>
@@ -1796,11 +1969,10 @@ To build complete query intuition, memorize the physical order in which a databa
 <span class="kw">FROM</span> employees
 <span class="kw">WHERE</span> salary <span class="op">&gt;</span> <span class="bi">AVG</span>(salary);  <span class="cm">-- Aggregates not allowed in WHERE</span></pre>
 </div>
-<div class="misconception">
-<strong>⚠️ Why did it fail? (SQL Execution Order):</strong>
-The database engine runs the <code>WHERE</code> clause <strong>before</strong> it aggregates any data. Since the engine doesn't know what the overall <code>AVG(salary)</code> is when checking individual rows, it throws a syntax error.
-</div>
-<p>To solve this, we nest a query inside another query. The <strong>inner query</strong> calculates the average first, and its single output value is handed to the <strong>outer query</strong> for row filtering:</p>
+<div class="misconception"><strong>⚠️ Why did it fail?<br/><br/>(SQL Execution Order):</strong>
+The database engine runs the <code>WHERE</code> clause <strong>before</strong> it aggregates any data.<br/><br/>Since the engine doesn't know what the overall <code>AVG(salary)</code> is when checking individual rows, it throws a syntax error.</div>
+<p>To solve this, we nest a query inside another query.</p>
+<p>The <strong>inner query</strong> calculates the average first, and its single output value is handed to the <strong>outer query</strong> for row filtering:</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — independent_subquery.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- ✅ Independent Subquery: Runs exactly once first, then filters the outer query</span>
@@ -1817,9 +1989,10 @@ The database engine runs the <code>WHERE</code> clause <strong>before</strong> i
     <span class="kw">SELECT</span> id <span class="kw">FROM</span> departments <span class="kw">WHERE</span> location <span class="op">=</span> <span class="str">'Mumbai'</span>
 );</pre>
 </div>
-
 <h4 class="sh3" style="color:var(--orange)">Correlated Subqueries — The Performance Bottleneck</h4>
-<p>Unlike independent subqueries which run once, a <strong>Correlated Subquery</strong> references columns from the outer query. The database engine must execute the inner query <strong>once for every single row</strong> processed by the outer query. This is physically slow and should be avoided on large datasets unless optimized.</p>
+<p>Unlike independent subqueries which run once, a <strong>Correlated Subquery</strong> references columns from the outer query.</p>
+<p>The database engine must execute the inner query <strong>once for every single row</strong> processed by the outer query.</p>
+<p>This is physically slow and should be avoided on large datasets unless optimized.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — correlated_subquery.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- Find employees earning more than the average salary of THEIR specific department</span>
@@ -1831,10 +2004,10 @@ The database engine runs the <code>WHERE</code> clause <strong>before</strong> i
     <span class="kw">WHERE</span> e2.dept_id <span class="op">=</span> e1.dept_id  <span class="cm">-- Binds inner query to the current outer row</span>
 );</pre>
 </div>
-
 <h3 class="sh3">2. CTEs (WITH clause) — Solving the "Spaghetti Query"</h3>
-<div class="analogy">CTEs are like defining intermediate variables in Python (e.g. <code>high_earning_df = df[df.salary > 70000]</code>) before running a merge. Instead of nesting queries inside queries like Russian nesting dolls, you declare readable temporary blocks at the top of your script.</div>
-<p>If you need to perform multiple levels of aggregations or joins on subqueries, nesting them quickly turns your SQL script into unreadable spaghetti code. For example:</p>
+<div class="analogy">CTEs are like defining intermediate variables in Python (e.g. <code>high_earning_df = df[df.salary &gt; 70000]</code>) before running a merge.<br/><br/>Instead of nesting queries inside queries like Russian nesting dolls, you declare readable temporary blocks at the top of your script.</div>
+<p>If you need to perform multiple levels of aggregations or joins on subqueries, nesting them quickly turns your SQL script into unreadable spaghetti code.</p>
+<p>For example:</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — nested_spaghetti.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- ❌ Nested Subqueries: Hard to read, scan, and maintain</span>
@@ -1850,7 +2023,8 @@ The database engine runs the <code>WHERE</code> clause <strong>before</strong> i
 ) ds
 <span class="kw">JOIN</span> departments d <span class="kw">ON</span> ds.dept_id <span class="op">=</span> d.id;</pre>
 </div>
-<p>A <strong>Common Table Expression (CTE)</strong> solves this. By using the <code>WITH</code> clause, you declare named, temporary virtual tables at the start of your script and query them sequentially:</p>
+<p>A <strong>Common Table Expression (CTE)</strong> solves this.</p>
+<p>By using the <code>WITH</code> clause, you declare named, temporary virtual tables at the start of your script and query them sequentially:</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — cte_refactored.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- ✅ Clean, modular, and self-documenting</span>
@@ -1869,16 +2043,16 @@ dept_summary <span class="kw">AS</span> (
 <span class="kw">JOIN</span> departments d <span class="kw">ON</span> ds.dept_id <span class="op">=</span> d.id
 <span class="kw">ORDER BY</span> ds.headcount <span class="kw">DESC</span>;</pre>
 </div>
-
 <h4 class="sh3" style="color:var(--orange)">2.1. Recursive CTEs — Tree Traversal</h4>
-<p>Standard SQL joins cannot query hierarchical structures (like company org charts or nested website categories) where the depth is unknown. <strong>Recursive CTEs</strong> loop through rows until no more connections are found.</p>
+<p>Standard SQL joins cannot query hierarchical structures (like company org charts or nested website categories) where the depth is unknown.</p>
+<p><strong>Recursive CTEs</strong> loop through rows until no more connections are found.</p>
 <div class="callout ci">
 <strong>📐 Deconstructing the Recursive CTE Pipeline:</strong>
 A recursive CTE contains three core parts connected via <code>UNION ALL</code>:
 <ol style="margin-left: 1.25rem; margin-top: 0.4rem;">
-  <li><strong>Anchor Member:</strong> The base query that starts the recursion. It runs once and finds the root node (e.g. CEO who has no manager).</li>
-  <li><strong>Recursive Member:</strong> The query that joins the CTE back to the base table to fetch the next level (e.g. subordinates who report to the managers found in the previous iteration). It increments a tracker (like level).</li>
-  <li><strong>Termination Condition:</strong> This is implicit. The recursion stops automatically when an iteration returns 0 rows (no more subordinates left to join).</li>
+<li><strong>Anchor Member:</strong> The base query that starts the recursion. It runs once and finds the root node (e.g. CEO who has no manager).</li>
+<li><strong>Recursive Member:</strong> The query that joins the CTE back to the base table to fetch the next level (e.g. subordinates who report to the managers found in the previous iteration). It increments a tracker (like level).</li>
+<li><strong>Termination Condition:</strong> This is implicit. The recursion stops automatically when an iteration returns 0 rows (no more subordinates left to join).</li>
 </ol>
 </div>
 <div class="cb">
@@ -1898,7 +2072,6 @@ A recursive CTE contains three core parts connected via <code>UNION ALL</code>:
 )
 <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> org_chart <span class="kw">ORDER BY</span> level, name;</pre>
 </div>
-
 <h3 class="sh3">3. Window Functions — Aggregates Without Collapsing</h3>
 <div class="mermaid">
 graph LR
@@ -1919,20 +2092,19 @@ graph LR
 <tr><td><strong>Selection</strong></td><td>Only grouped columns &amp; aggregates can be selected</td><td>Any columns can be selected alongside window aggregates</td></tr>
 <tr><td><strong>Best for</strong></td><td>Summarized reporting and overall group counts</td><td>Running totals, rolling averages, rankings, and LEAD/LAG checks</td></tr>
 </table>
-<p>To use window functions, we use the <code>OVER</code> clause. It defines the "window" or partition of data the function calculates across. Let's break down the syntax step-by-step:</p>
-<div class="callout ci">
-<strong>📐 Anatomy of a Window Definition:</strong>
+<p>To use window functions, we use the <code>OVER</code> clause.</p>
+<p>It defines the "window" or partition of data the function calculates across.</p>
+<p>Let's break down the syntax step-by-step:</p>
+<div class="callout ci"><strong>📐 Anatomy of a Window Definition:</strong>
 <br/><code>FUNCTION() OVER (PARTITION BY department ORDER BY salary DESC)</code>
-<br/>• <strong>PARTITION BY:</strong> Slices the dataset into subgroups (like GROUP BY, but rows aren't collapsed).
-<br/>• <strong>ORDER BY:</strong> Sorts the rows inside each partition so the function runs in a specific sequence (critical for rankings or running totals).
-</div>
-
+<br/>• <strong>PARTITION BY:</strong> Slices the dataset into subgroups (like GROUP BY, but rows aren't collapsed).<br/><br/><br/>• <strong>ORDER BY:</strong> Sorts the rows inside each partition so the function runs in a specific sequence (critical for rankings or running totals).</div>
 <h4 class="sh3" style="color:var(--orange)">Ranking Functions: ROW_NUMBER vs. RANK vs. DENSE_RANK</h4>
-<p>Suppose three employees in the IT department earn the exact same salary ($80,000). How do different ranking functions rank them?</p>
+<p>Suppose three employees in the IT department earn the exact same salary ($80,000).</p>
+<p>How do different ranking functions rank them?</p>
 <ul>
-  <li><code>ROW_NUMBER()</code>: Assigns a unique consecutive number to every row (1, 2, 3) ignoring ties.</li>
-  <li><code>RANK()</code>: Assigns the same rank to ties, but skips the next rank numbers (1, 1, 1, 4).</li>
-  <li><code>DENSE_RANK()</code>: Assigns the same rank to ties without skipping numbers (1, 1, 1, 2).</li>
+<li><code>ROW_NUMBER()</code>: Assigns a unique consecutive number to every row (1, 2, 3) ignoring ties.</li>
+<li><code>RANK()</code>: Assigns the same rank to ties, but skips the next rank numbers (1, 1, 1, 4).</li>
+<li><code>DENSE_RANK()</code>: Assigns the same rank to ties without skipping numbers (1, 1, 1, 2).</li>
 </ul>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — window_rankings.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
@@ -1942,9 +2114,9 @@ graph LR
     <span class="bi">DENSE_RANK</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION BY</span> department <span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>) <span class="kw">AS</span> dense_rnk
 <span class="kw">FROM</span> employees;</pre>
 </div>
-
 <h4 class="sh3" style="color:var(--orange)">Time-Series Row Comparisons: LEAD and LAG</h4>
-<p><code>LEAD()</code> fetches a value from a subsequent row, and <code>LAG()</code> fetches a value from a preceding row. They allow you to compare rows sequentially without expensive self-joins (perfect for Month-over-Month changes).</p>
+<p><code>LEAD()</code> fetches a value from a subsequent row, and <code>LAG()</code> fetches a value from a preceding row.</p>
+<p>They allow you to compare rows sequentially without expensive self-joins (perfect for Month-over-Month changes).</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — lead_lag.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">SELECT</span> month, revenue,
@@ -1952,7 +2124,6 @@ graph LR
     revenue <span class="op">-</span> <span class="bi">LAG</span>(revenue, <span class="num">1</span>) <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> month) <span class="kw">AS</span> mom_change
 <span class="kw">FROM</span> monthly_sales;</pre>
 </div>
-
 <h3 class="sh3">4. CASE WHEN &amp; COALESCE — Row-Level Logic</h3>
 <p>SQL provides standard inline conditional statements to alter data values on a row-by-row basis:</p>
 <div class="cb">
@@ -1970,17 +2141,15 @@ graph LR
 <span class="kw">SELECT</span> name, <span class="bi">COALESCE</span>(phone, email, emergency_contact, <span class="str">'No Contact Available'</span>) <span class="kw">AS</span> contact_info
 <span class="kw">FROM</span> employees;</pre>
 </div>
-
 <h3 class="sh3">5. EXISTS vs. IN — Performance &amp; Null Behaviors</h3>
-<p>To check if a value exists in another set, we use <code>IN</code> or <code>EXISTS</code>. But they act differently under the hood:</p>
+<p>To check if a value exists in another set, we use <code>IN</code> or <code>EXISTS</code>.</p>
+<p>But they act differently under the hood:</p>
 <ul>
-  <li><code>IN</code>: The database retrieves the entire subquery result set, caches it in memory, and checks if the outer value exists in that set.</li>
-  <li><code>EXISTS</code>: The database uses a <strong>semi-join</strong>. It stops searching the moment it finds the <strong>first matching record</strong> in the subquery. For large subqueries, <code>EXISTS</code> is significantly faster!</li>
+<li><code>IN</code>: The database retrieves the entire subquery result set, caches it in memory, and checks if the outer value exists in that set.</li>
+<li><code>EXISTS</code>: The database uses a <strong>semi-join</strong>. It stops searching the moment it finds the <strong>first matching record</strong> in the subquery. For large subqueries, <code>EXISTS</code> is significantly faster!</li>
 </ul>
-<div class="misconception">
-<strong>⚠️ The NOT IN Null Trap:</strong>
-If the subquery returns even a single <code>NULL</code>, a query using <code>NOT IN</code> will return <strong>zero rows</strong>. This is because SQL evaluates <code>x NOT IN (y, NULL)</code> as <code>UNKNOWN</code>. To prevent this, always use <code>NOT EXISTS</code>, which handles NULLs safely and correctly!
-</div>
+<div class="misconception"><strong>⚠️ The NOT IN Null Trap:</strong>
+If the subquery returns even a single <code>NULL</code>, a query using <code>NOT IN</code> will return <strong>zero rows</strong>.<br/><br/>This is because SQL evaluates <code>x NOT IN (y, NULL)</code> as <code>UNKNOWN</code>.<br/><br/>To prevent this, always use <code>NOT EXISTS</code>, which handles NULLs safely and correctly!</div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — exists_vs_in.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- Use IN for small, static lists (e.g. IN (1, 2, 3))</span>
@@ -1996,7 +2165,6 @@ If the subquery returns even a single <code>NULL</code>, a query using <code>NOT
     <span class="kw">WHERE</span> d.id <span class="op">=</span> e.dept_id <span class="op">AND</span> d.location <span class="op">=</span> <span class="str">'Mumbai'</span>
 );</pre>
 </div>
-
 <h3 class="sh3">6. Running Aggregates — Dynamic Windows</h3>
 <p>By ordering inside the <code>OVER</code> clause, we can compute cumulative and rolling metrics over time:</p>
 <div class="cb">
@@ -2011,9 +2179,8 @@ If the subquery returns even a single <code>NULL</code>, a query using <code>NOT
     <span class="bi">PERCENT_RANK</span>() <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> revenue) <span class="kw">AS</span> percentile_rank
 <span class="kw">FROM</span> monthly_sales;</pre>
 </div>
-
 <h3 class="sh3">7. Views &amp; Materialized Views — Virtual vs. Cached Queries</h3>
-<div class="analogy">A standard <strong>View</strong> is like a "saved filter" on your inbox. No emails are copied; it just reruns the search on-the-fly when you click it. A <strong>Materialized View</strong> is like taking a screenshot of your inbox. It is extremely fast to look at, but it doesn't show new emails until you manually take a new screenshot (Refresh).</div>
+<div class="analogy">A standard <strong>View</strong> is like a "saved filter" on your inbox.<br/><br/>No emails are copied; it just reruns the search on-the-fly when you click it.<br/><br/>A <strong>Materialized View</strong> is like taking a screenshot of your inbox.<br/><br/>It is extremely fast to look at, but it doesn't show new emails until you manually take a new screenshot (Refresh).</div>
 <p>To reuse code and restrict access to sensitive table columns, databases let you save queries as views:</p>
 <table class="concept-table">
 <tr><th>Feature</th><th>Standard View</th><th>Materialized View</th></tr>
@@ -2038,10 +2205,10 @@ If the subquery returns even a single <code>NULL</code>, a query using <code>NOT
 <span class="cm">-- Refreshing the cached data in the materialized view</span>
 <span class="kw">REFRESH MATERIALIZED VIEW</span> mv_sales_summary;</pre>
 </div>
-
 <h3 class="sh3">8. Database Triggers — Event-Driven Automation</h3>
-<div class="analogy">Triggers are like smart home automations: "IF motion sensor detects movement BEFORE 6 AM, THEN turn on the hallway lights". In databases: "IF a row is updated in table X, THEN log the historical values to audit table Y".</div>
-<p>A <strong>Trigger</strong> automatically executes a procedure in response to <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code> events on a specific table. This is perfect for security auditing and maintaining history logs:</p>
+<div class="analogy">Triggers are like smart home automations: "IF motion sensor detects movement BEFORE 6 AM, THEN turn on the hallway lights".<br/><br/>In databases: "IF a row is updated in table X, THEN log the historical values to audit table Y".</div>
+<p>A <strong>Trigger</strong> automatically executes a procedure in response to <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code> events on a specific table.</p>
+<p>This is perfect for security auditing and maintaining history logs:</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — triggers.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- 1. Audit log table</span>
@@ -2070,7 +2237,6 @@ If the subquery returns even a single <code>NULL</code>, a query using <code>NOT
 <span class="kw">FOR EACH ROW</span>
 <span class="kw">EXECUTE FUNCTION</span> log_salary_change();</pre>
 </div>
-
 <h3 class="sh3">9. Cursors, Stored Procedures &amp; User-Defined Functions</h3>
 <p>When write operations require complex procedural logic rather than simple set statements, database engines support running code blocks:</p>
 <table class="concept-table">
@@ -2079,7 +2245,6 @@ If the subquery returns even a single <code>NULL</code>, a query using <code>NOT
 <tr><td><strong>Return Requirements</strong></td><td>Can return data, multiple output parameters, or nothing</td><td><strong>Must</strong> return a single value or a table result</td></tr>
 <tr><td><strong>Transactions</strong></td><td><strong>Allowed</strong> to run <code>COMMIT</code> and <code>ROLLBACK</code> statements</td><td><strong>Strictly Forbidden</strong> from controlling transactions</td></tr>
 </table>
-
 <h4 class="sh3" style="color:var(--orange)">Cursors — Row-by-Row Iteration</h4>
 <p>While standard SQL works on <strong>sets of rows</strong> simultaneously, a <strong>Cursor</strong> is a pointer that allows you to iterate through query results row-by-row, running loops and conditional operations in a procedural container.</p>
 <div class="cb">
@@ -2102,19 +2267,18 @@ If the subquery returns even a single <code>NULL</code>, a query using <code>NOT
 <span class="kw">END</span>;
 <span class="str">$$</span> <span class="kw">LANGUAGE</span> plpgsql;</pre>
 </div>
-<div class="misconception">
-<strong>⚠️ The Cursor Performance Trap:</strong>
-Writing cursor loops is slow because it bypasses the database compiler's query optimization. A single set-based query like <code>UPDATE employees SET salary = salary * 1.10 WHERE perf_score >= 9;</code> runs up to 100x faster than a cursor. Use cursors only when row-by-row procedural calculation is absolutely unavoidable.
-</div>
-
+<div class="misconception"><strong>⚠️ The Cursor Performance Trap:</strong>
+Writing cursor loops is slow because it bypasses the database compiler's query optimization.<br/><br/>A single set-based query like <code>UPDATE employees SET salary = salary * 1.10 WHERE perf_score &gt;= 9;</code> runs up to 100x faster than a cursor.<br/><br/>Use cursors only when row-by-row procedural calculation is absolutely unavoidable.</div>
 <details style="margin-top:20px; background:rgba(255,255,255,0.03); padding:10px; border-radius:8px;"><summary style="cursor:pointer; font-weight:bold; color:var(--orange);">Bonus/Advanced: Transactions, Concurrency &amp; Query Plans</summary>
 <h3 class="sh3">10. Transactions &amp; ACID Properties</h3>
-<p>Transactions bundle multiple SQL writes into a single, atomic block. Either <strong>all</strong> operations succeed, or <strong>none</strong> do. This preserves database integrity in the event of hardware failures or network cuts.</p>
+<p>Transactions bundle multiple SQL writes into a single, atomic block.</p>
+<p>Either <strong>all</strong> operations succeed, or <strong>none</strong> do.</p>
+<p>This preserves database integrity in the event of hardware failures or network cuts.</p>
 <ul>
-  <li><strong>Atomicity:</strong> All statements in a transaction succeed, or everything is rolled back (All-or-Nothing).</li>
-  <li><strong>Consistency:</strong> The database transitions cleanly according to rules (e.g. constraints, unique keys).</li>
-  <li><strong>Isolation:</strong> Concurrent transactions run independently and do not read uncommitted states.</li>
-  <li><strong>Durability:</strong> Once committed, updates are permanently written to disk and survive system crashes.</li>
+<li><strong>Atomicity:</strong> All statements in a transaction succeed, or everything is rolled back (All-or-Nothing).</li>
+<li><strong>Consistency:</strong> The database transitions cleanly according to rules (e.g. constraints, unique keys).</li>
+<li><strong>Isolation:</strong> Concurrent transactions run independently and do not read uncommitted states.</li>
+<li><strong>Durability:</strong> Once committed, updates are permanently written to disk and survive system crashes.</li>
 </ul>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — transactions.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
@@ -2128,9 +2292,8 @@ Writing cursor loops is slow because it bypasses the database compiler's query o
     <span class="kw">DELETE FROM</span> orders <span class="kw">WHERE</span> status <span class="op">=</span> <span class="str">'cancelled'</span>;
 <span class="kw">ROLLBACK</span>;  <span class="cm">-- Reverts the deletes</span></pre>
 </div>
-
 <h3 class="sh3">11. Database Locks — Shared vs. Exclusive</h3>
-<div class="analogy">A <strong>Shared Lock</strong> is like sharing a view-only document: many people can read it simultaneously, but no one can edit it. An <strong>Exclusive Lock</strong> is like opening a document in edit-only checkout mode: one person gets full write access, and everyone else is blocked from editing or reading until the document is closed.</div>
+<div class="analogy">A <strong>Shared Lock</strong> is like sharing a view-only document: many people can read it simultaneously, but no one can edit it.<br/><br/>An <strong>Exclusive Lock</strong> is like opening a document in edit-only checkout mode: one person gets full write access, and everyone else is blocked from editing or reading until the document is closed.</div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — locks.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- 1. Shared Lock (FOR SHARE): Allows others to read, blocks write updates</span>
@@ -2139,7 +2302,6 @@ Writing cursor loops is slow because it bypasses the database compiler's query o
 <span class="cm">-- 2. Exclusive Lock (FOR UPDATE): Blocks others from both reading and writing</span>
 <span class="kw">SELECT</span> balance <span class="kw">FROM</span> accounts <span class="kw">WHERE</span> id <span class="op">=</span> <span class="num">1</span> <span class="kw">FOR UPDATE</span>;</pre>
 </div>
-
 <h3 class="sh3">12. Transaction Isolation Levels</h3>
 <p>To balance performance against transaction interference, databases support four isolation levels:</p>
 <table class="concept-table">
@@ -2149,9 +2311,9 @@ Writing cursor loops is slow because it bypasses the database compiler's query o
 <tr><td><strong>Repeatable Read</strong></td><td>Prevented</td><td>Prevented</td><td>Allowed</td></tr>
 <tr><td><strong>Serializable</strong> (Strict)</td><td>Prevented</td><td>Prevented</td><td>Prevented</td></tr>
 </table>
-
 <h3 class="sh3">13. EXPLAIN — Reading the Query Plan</h3>
-<p>To see how the query planner compiles your query, prefix it with <code>EXPLAIN</code>. This displays the cost and execution pathways (e.g. using index lookup trees vs reading files sequentially):</p>
+<p>To see how the query planner compiles your query, prefix it with <code>EXPLAIN</code>.</p>
+<p>This displays the cost and execution pathways (e.g. using index lookup trees vs reading files sequentially):</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — explain_plans.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm">-- EXPLAIN displays execution steps</span>
@@ -2164,9 +2326,8 @@ Writing cursor loops is slow because it bypasses the database compiler's query o
 <span class="cm">-- Adding an index changes the query plan from a Seq Scan to an Index Scan</span>
 <span class="kw">CREATE INDEX</span> idx_dept_id <span class="kw">ON</span> employees(dept_id);</pre>
 </div>
-<div class="callout cw"><strong>⚡ Production Rule:</strong> In production, any query taking &gt;100ms probably requires an index. Run <code>EXPLAIN</code> to verify that searches scan index trees rather than files.</div>
+<div class="callout cw"><strong>⚡ Production Rule:</strong> In production, any query taking &gt;100ms probably requires an index.<br/><br/>Run <code>EXPLAIN</code> to verify that searches scan index trees rather than files.</div>
 </details>
-
 <h3 class="sh3">14. Python Integration — pd.read_sql() and SQLAlchemy</h3>
 <p>In real-world data pipelines, we use Python to extract data from a relational database and load it directly into a Pandas DataFrame for modeling or cleaning:</p>
 <div class="cb">
@@ -2187,20 +2348,14 @@ HAVING AVG(salary) &gt; 50000
 df = pd.read_sql(query, engine)
 <span class="bi">print</span>(df.head())</pre>
 </div>
-
 <h3 class="sh3">15. pgvector — Modern Vector Search &amp; Similarity</h3>
-<div class="callout cp">
-<strong>⚡ Vector Indexing Trade-offs (IVFFlat vs HNSW):</strong>
-<br/>• <strong>IVFFlat (Inverted File with Flat Compression):</strong> An inverted file index that segments vectors into clusters using k-means clustering. Search query compares target with nearest cluster centroids, scanning only those sub-lists.
-  <br/>&nbsp;&nbsp;• <em>Complexity:</em> Indexing takes $O(N)$ time. Consumes near-zero extra memory (extremely lightweight).
-  <br/>&nbsp;&nbsp;• &quot;Lists&quot; Parameter: Must rebuild index whenever dataset grows significantly, otherwise search recall degrades.
-<br/>• <strong>HNSW (Hierarchical Navigable Small World):</strong> Graph-based index creating a multi-layer routing graph. Top layers hold sparse connections for fast routing; bottom layers hold dense connections for local search.
-  <br/>&nbsp;&nbsp;• <em>Complexity:</em> Index build takes $O(N \log N)$, search query takes $O(\log N)$ time with near 99% accuracy.
-  <br/>&nbsp;&nbsp;• <em>Memory:</em> Consumes 5-10x more RAM than IVFFlat because it stores graph edge structures (pointers) for every vector.
-</div>
-<p>Keyword search using operators like <code>LIKE '%python%'</code> has a major limitation: it only returns exact character matches. If a user searches for "machine learning", keyword queries fail to match documents containing "ML", "neural networks", or "deep learning" because the terms are textually different, despite being semantically similar.</p>
-<div class="analogy">Keyword search is like sorting clothes by looking at label text (e.g. "red shirts"). Vector search is like showing the salesperson a shirt and saying "find me fabrics that feel and look similar to this" (semantic similarity distance).</div>
-<p>Modern LLM applications (like Retrieval-Augmented Generation or RAG) convert text blocks into high-dimensional numerical lists called <strong>vector embeddings</strong>. The <strong><code>pgvector</code></strong> extension allows PostgreSQL to store, index, and query vectors directly alongside your relational tables:</p>
+<div class="callout cp"><strong>⚡ Vector Indexing Trade-offs (IVFFlat vs HNSW):</strong>
+<br/>• <strong>IVFFlat (Inverted File with Flat Compression):</strong> An inverted file index that segments vectors into clusters using k-means clustering. Search query compares target with nearest cluster centroids, scanning only those sub-lists.<br/><br/>  • <em>Complexity:</em> Indexing takes $O(N)$ time. Consumes near-zero extra memory (extremely lightweight).<br/><br/>  • "Lists" Parameter: Must rebuild index whenever dataset grows significantly, otherwise search recall degrades.<br/><br/>• <strong>HNSW (Hierarchical Navigable Small World):</strong> Graph-based index creating a multi-layer routing graph. Top layers hold sparse connections for fast routing; bottom layers hold dense connections for local search.<br/><br/>  • <em>Complexity:</em> Index build takes $O(N \log N)$, search query takes $O(\log N)$ time with near 99% accuracy.<br/><br/>  • <em>Memory:</em> Consumes 5-10x more RAM than IVFFlat because it stores graph edge structures (pointers) for every vector.</div>
+<p>Keyword search using operators like <code>LIKE '%python%'</code> has a major limitation: it only returns exact character matches.</p>
+<p>If a user searches for "machine learning", keyword queries fail to match documents containing "ML", "neural networks", or "deep learning" because the terms are textually different, despite being semantically similar.</p>
+<div class="analogy">Keyword search is like sorting clothes by looking at label text (e.g. "red shirts").<br/><br/>Vector search is like showing the salesperson a shirt and saying "find me fabrics that feel and look similar to this" (semantic similarity distance).</div>
+<p>Modern LLM applications (like Retrieval-Augmented Generation or RAG) convert text blocks into high-dimensional numerical lists called <strong>vector embeddings</strong>.</p>
+<p>The <strong><code>pgvector</code></strong> extension allows PostgreSQL to store, index, and query vectors directly alongside your relational tables:</p>
 <div class="ml-connect">In RAG architectures, we embed a user's natural language question, run a vector similarity query in PostgreSQL to retrieve the most relevant background documents, and pass that retrieved text as context to LLMs like Claude or GPT.</div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">sql — pgvector_search.sql</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
@@ -2225,14 +2380,9 @@ df = pd.read_sql(query, engine)
 <span class="cm">-- &lt;-&gt; L2 Euclidean Distance (used for physical distance/coordinate metrics)</span>
 <span class="cm">-- &lt;#&gt; Negative Inner Product</span></pre>
 </div>
-<div class="callout cp">
-<strong>⚡ Vector Indexing (HNSW vs IVFFlat):</strong> By default, similarity queries perform a full table scan. To speed up vector queries:
-<br/>• <strong>IVFFlat</strong>: Divides vectors into clusters. Fast index build times, but slightly lower recall.
-<br/>• <strong>HNSW (Hierarchical Navigable Small World)</strong>: Creates a multi-layer graph. Extremely fast queries and high recall, but takes longer to build and consumes more memory.
+<div class="callout cp"><strong>⚡ Vector Indexing (HNSW vs IVFFlat):</strong> By default, similarity queries perform a full table scan.<br/><br/>To speed up vector queries:
+<br/>• <strong>IVFFlat</strong>: Divides vectors into clusters. Fast index build times, but slightly lower recall.<br/><br/>• <strong>HNSW (Hierarchical Navigable Small World)</strong>: Creates a multi-layer graph. Extremely fast queries and high recall, but takes longer to build and consumes more memory.</div>
 </div>
-
-</div>
-
 <div id="day-12-quiz-section">
 <h2 class="sh2">✅ Knowledge Check — Day 12 Quiz</h2>
 <div class="quiz-block">
@@ -2379,8 +2529,27 @@ df = pd.read_sql(query, engine)
 <span class="task-time">⏱ 45 min</span>
 </div>
 <div class="task-body">
-<p>Solve 10 SQL problems: 5 on HackerRank (Medium level) + 5 on SQLZoo (sections 3-5). Focus on GROUP BY, HAVING, subqueries. Write each solution in a local .sql file with comments explaining your logic. Push to GitHub.</p>
-<div class="done-when">10 solutions committed to GitHub with SQL comments. You can explain HAVING vs WHERE without hesitation.</div>
+<p style="margin-bottom: 0.6rem;">Solve 10 SQL problems: 5 on HackerRank (Medium level) + 5 on SQLZoo (sections 3-5).</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">Focus on GROUP BY, HAVING, subqueries.</li><li style="margin-bottom: 0.4rem;">Write each solution in a local .sql file with comments explaining your logic.</li><li style="margin-bottom: 0.4rem;">Push to GitHub.</li></ul>
+<button class="solution-toggle" onclick="toggleSolution('sol-w2-t10')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w2-t10">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># SQL Problems Practice
+import sqlite3
+conn = sqlite3.connect(":memory:")
+cur = conn.cursor()
+cur.execute("CREATE TABLE orders (id INTEGER, customer TEXT, product TEXT, amount REAL, city TEXT)")
+for d in [(1,'Alice','Laptop',1200,'Mumbai'),(2,'Bob','Phone',800,'Delhi'),(3,'Alice','Tablet',600,'Mumbai'),
+          (4,'Charlie','Laptop',1300,'Pune'),(5,'Diana','Phone',750,'BLR'),(6,'Bob','Charger',50,'Delhi')]:
+    cur.execute("INSERT INTO orders VALUES (?,?,?,?,?)", d)
+print("Total revenue:", cur.execute("SELECT SUM(amount) FROM orders").fetchone()[0])
+print("Revenue by customer:")
+for r in cur.execute("SELECT customer, SUM(amount) FROM orders GROUP BY customer ORDER BY SUM(amount) DESC"): print(r)
+print("City with most orders:")
+for r in cur.execute("SELECT city, COUNT(*) FROM orders GROUP BY city ORDER BY COUNT(*) DESC LIMIT 1"): print(r)
+conn.close()</pre>
+</div>
+</div><div class="done-when">10 solutions committed to GitHub with SQL comments. You can explain HAVING vs WHERE without hesitation.</div>
 <div class="git-block">git add . &amp;&amp; git commit -m "day12: SQL advanced — CTEs, window functions, 10 problems solved"</div>
 </div>
 </div>
@@ -2391,8 +2560,26 @@ df = pd.read_sql(query, engine)
 <span class="task-time">⏱ 90 min</span>
 </div>
 <div class="task-body">
-<p>Using DB Fiddle (dbfiddle.uk), create a sample employees table with 15 rows across 3 departments. Then write a query using a CTE + ROW_NUMBER() to find the top-earning employee in each department. Then extend it to find TOP 3 per department using DENSE_RANK.</p>
-<div class="done-when">Both queries run correctly in DB Fiddle. You can reproduce them from memory in 5 minutes.</div>
+<p style="margin-bottom: 0.6rem;">Using DB Fiddle (dbfiddle.uk), create a sample employees table with 15 rows across 3 departments.</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">Then write a query using a CTE + ROW_NUMBER() to find the top-earning employee in each department.</li><li style="margin-bottom: 0.4rem;">Then extend it to find TOP 3 per department using DENSE_RANK.</li></ul>
+<button class="solution-toggle" onclick="toggleSolution('sol-w2-t11')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w2-t11">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># Top Earner Per Department - Classic Interview
+import sqlite3
+conn = sqlite3.connect(":memory:")
+cur = conn.cursor()
+cur.execute("CREATE TABLE emp (id INTEGER, name TEXT, dept TEXT, salary INTEGER)")
+for e in [(1,'Alice','Eng',100),(2,'Bob','Eng',90),(3,'Charlie','Sales',80),(4,'Diana','Sales',95),(5,'Eve','Eng',85)]:
+    cur.execute("INSERT INTO emp VALUES (?,?,?,?)", e)
+print("All employees:")
+for r in cur.execute("SELECT * FROM emp"): print(r)
+print("Top earner per department:")
+for r in cur.execute("SELECT e.dept, e.name, e.salary FROM emp e WHERE e.salary = (SELECT MAX(salary) FROM emp WHERE dept=e.dept)"):
+    print(f"  {r[0]}: {r[1]} (${r[2]}k)")
+conn.close()</pre>
+</div>
+</div><div class="done-when">Both queries run correctly in DB Fiddle. You can reproduce them from memory in 5 minutes.</div>
 </div>
 </div>
 </div>
@@ -2433,7 +2620,9 @@ df = pd.read_sql(query, engine)
 <div class="day-header">
 <div class="day-tag">WEEK 2 · DAY 13 · MONTH 1 — FOUNDATIONS</div>
 <h1>Git &amp; GitHub — Full Professional Workflow</h1>
-<p>Git is a time machine for your code. GitHub is its online backup and your public portfolio. Every recruiter checks GitHub — aaj hum iska full workflow master karenge taaki tumhara profile professional dikhe.</p>
+<p>Git is a time machine for your code.</p>
+<p>GitHub is its online backup and your public portfolio.</p>
+<p>Every recruiter checks GitHub — aaj hum iska full workflow master karenge taaki tumhara profile professional dikhe.</p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 4 hours</span>
 <span class="meta-badge o">🔧 Beginner</span>
@@ -2453,7 +2642,7 @@ df = pd.read_sql(query, engine)
 <div id="day-13-theory">
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. The Git Mental Model</h3>
-<div class="analogy">Git ek "save checkpoint" system hai game ki tarah. Jab game mein save karte ho — woh ek commit hai. Agar kuch galat ho jaye toh us checkpoint pe wapas aa sakte ho. Branch = game ka naya level try karna bina main save delete kiye.</div>
+<div class="analogy">Git ek "save checkpoint" system hai game ki tarah.<br/><br/>Jab game mein save karte ho — woh ek commit hai.<br/><br/>Agar kuch galat ho jaye toh us checkpoint pe wapas aa sakte ho.<br/><br/>Branch = game ka naya level try karna bina main save delete kiye.</div>
 <div class="mermaid">
       graph LR
       WD["Working Directory \n Untracked / Modified"] -->|git add| SA["Staging Area \n Staged"]
@@ -2462,7 +2651,8 @@ df = pd.read_sql(query, engine)
     </div>
 <div class="diagram-cap">Git's 4 zones — understand this and Git makes sense</div>
 <h3 class="sh3">2. Core Git Commands</h3>
-<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Git version control tracks modifications across files. Commands like <code>status</code>, <code>add</code>, and <code>commit</code> manage changes in the staging area.</p>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Git version control tracks modifications across files.</p>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Commands like <code>status</code>, <code>add</code>, and <code>commit</code> manage changes in the staging area.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">bash — git_workflow.sh</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># --- SETUP (one-time) ---</span>
@@ -2590,7 +2780,7 @@ config.py</pre>
 <code>refactor: simplify groupby aggregation</code> — code improvement<br/>
     Recruiters look at commit history — clean messages = professional impression.
   </div>
-<div class="hinglish">💡 Ek line mein: Git = local version control (commits). GitHub = remote backup + portfolio. Branch = safe experiment zone. README = project ka face — isko seriously lena. .gitignore = private cheezein hide karo.</div>
+<div class="hinglish">💡 Ek line mein: Git = local version control (commits).<br/><br/>GitHub = remote backup + portfolio.<br/><br/>Branch = safe experiment zone.<br/><br/>README = project ka face — isko seriously lena. .gitignore = private cheezein hide karo.</div>
 <details style="margin-top:20px; background:rgba(255,255,255,0.03); padding:10px; border-radius:8px;"><summary style="cursor:pointer; font-weight:bold; color:var(--orange);">Pro Git: SSH, Cherry-pick, Bisect &amp; Hooks</summary>
 <h3 class="sh3">6. SSH Keys &amp; Authentication</h3>
 <p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">SSH authentication secures remote operations, eliminating the need to enter account credentials during git push and pull procedures.</p>
@@ -2760,8 +2950,24 @@ pre-commit install  <span class="cm"># now runs on every git commit automaticall
 <span class="task-time">⏱ 25 min</span>
 </div>
 <div class="task-body">
-<p>Create a special repo named exactly your GitHub username (e.g. github.com/rahulkumar → repo name = "rahulkumar"). Add a README.md that includes: your name, what you're learning (AI/ML 135-day journey), your current skills, your goals, and at least one GitHub badge. Make all your existing repos have proper README files.</p>
-<div class="done-when">Your GitHub profile page shows the custom README. All existing repos have descriptions.</div>
+<p style="margin-bottom: 0.6rem;">Create a special repo named exactly your GitHub username (e.g. github.com/rahulkumar → repo name = "rahulkumar").</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">Add a README.md that includes: your name, what you're learning (AI/ML 135-day journey), your current skills, your goals, and at least one GitHub badge.</li><li style="margin-bottom: 0.4rem;">Make all your existing repos have proper README files.</li></ul>
+<button class="solution-toggle" onclick="toggleSolution('sol-w2-t12')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w2-t12">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># GitHub Profile README Generator
+print("Create README.md with this template:")
+print('''# Hello, I'm [Your Name]!
+## About Me
+- AI/ML Engineer in training
+- Currently learning: Python, Pandas, Scikit-learn
+## Skills
+![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&amp;logoColor=white)
+## GitHub Stats
+![Your stats](https://github-readme-stats.vercel.app/api?username=YOUR_USERNAME)''')
+print("Push to your GitHub profile repository!")</pre>
+</div>
+</div><div class="done-when">Your GitHub profile page shows the custom README. All existing repos have descriptions.</div>
 </div>
 </div>
 <div class="task-block">
@@ -2771,8 +2977,29 @@ pre-commit install  <span class="cm"># now runs on every git commit automaticall
 <span class="task-time">⏱ 45 min</span>
 </div>
 <div class="task-body">
-<p>In your ai-ml-journey repo: (1) Create branch "feature/week2-pandas", (2) add your Day 8-10 notebooks, (3) commit with good messages, (4) push the branch to GitHub, (5) create a Pull Request on GitHub, (6) merge it to main, (7) delete the feature branch locally and remotely.</p>
-<div class="done-when">GitHub shows the merged PR. Main branch has all Week 2 notebooks. No loose branches.</div>
+<p style="margin-bottom: 0.6rem;">In your ai-ml-journey repo:</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;"><strong>(1)</strong> Create branch "feature/week2-pandas"</li><li style="margin-bottom: 0.4rem;"><strong>(2)</strong> Add your Day 8-10 notebooks</li><li style="margin-bottom: 0.4rem;"><strong>(3)</strong> Commit with good messages</li><li style="margin-bottom: 0.4rem;"><strong>(4)</strong> Push the branch to GitHub</li><li style="margin-bottom: 0.4rem;"><strong>(5)</strong> Create a Pull Request on GitHub</li><li style="margin-bottom: 0.4rem;"><strong>(6)</strong> Merge it to main</li><li style="margin-bottom: 0.4rem;"><strong>(7)</strong> Delete the feature branch locally and remotely</li></ul>
+<button class="solution-toggle" onclick="toggleSolution('sol-w2-t13')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w2-t13">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># Git Branching Practice
+print("Git Practice Steps:")
+steps = [
+    "1. git init my-repo &amp;&amp; cd my-repo",
+    "2. echo 'main file' &gt; main.py &amp;&amp; git add . &amp;&amp; git commit -m 'initial commit'",
+    "3. git checkout -b feature-1",
+    "4. echo 'feature 1' &gt; feature.py &amp;&amp; git add . &amp;&amp; git commit -m 'add feature 1'",
+    "5. git checkout main",
+    "6. git checkout -b feature-2",
+    "7. echo 'feature 2' &gt; feature2.py &amp;&amp; git add . &amp;&amp; git commit -m 'add feature 2'",
+    "8. git checkout main &amp;&amp; git merge feature-1",
+    "9. git merge feature-2",
+    "10. git log --oneline --graph --all",
+]
+for s in steps: print(s)
+print("Practice creating branches, switching, and merging!")</pre>
+</div>
+</div><div class="done-when">GitHub shows the merged PR. Main branch has all Week 2 notebooks. No loose branches.</div>
 <div class="git-block">git push origin --delete feature/week2-pandas  # delete remote branch</div>
 </div>
 </div>
@@ -2815,7 +3042,9 @@ pre-commit install  <span class="cm"># now runs on every git commit automaticall
 <div class="day-header">
 <div class="day-tag">WEEK 2 · DAY 14 · MONTH 1 — FOUNDATIONS</div>
 <h1>Mini Project: Full Exploratory Data Analysis (EDA)</h1>
-<p>Aaj ka din is week ka final boss hai — ek complete EDA project banao jo tumhara portfolio piece banega. Real dataset, real insights, real GitHub repo with README. Yahi recruiters dekhte hain.</p>
+<p>Aaj ka din is week ka final boss hai — ek complete EDA project banao jo tumhara portfolio piece banega.</p>
+<p>Real dataset, real insights, real GitHub repo with README.</p>
+<p>Yahi recruiters dekhte hain.</p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 6 hours (Project Day)</span>
 <span class="meta-badge o">🎯 Portfolio Project</span>
@@ -2840,8 +3069,7 @@ pre-commit install  <span class="cm"># now runs on every git commit automaticall
     </div>
 <div class="diagram-cap">End-to-End Workflow Mindset: You don't just "do Pandas". You build a pipeline.</div>
 <h3 class="sh3">0. Project Architecture Thinking</h3>
-<div class="callout cw">
-<strong>📂 Folder Structure &amp; Reproducibility:</strong> Don't just put everything in one folder. A real project looks like this:<br/><br/>
+<div class="callout cw"><strong>📂 Folder Structure &amp; Reproducibility:</strong> Don't just put everything in one folder.<br/><br/>A real project looks like this:<br/><br/>
 <code>
     ├── data/<br/>
     │   ├── raw/ (never modify these files!)<br/>
@@ -2851,8 +3079,7 @@ pre-commit install  <span class="cm"># now runs on every git commit automaticall
     ├── requirements.txt (list of pip packages for reproducibility)<br/>
     └── README.md
     </code><br/><br/>
-<em>Production Constraint:</em> Anyone should be able to run <code>pip install -r requirements.txt</code> and execute your notebook from top to bottom without errors. Handle API failures and memory constraints gracefully.
-  </div>
+<em>Production Constraint:</em> Anyone should be able to run <code>pip install -r requirements.txt</code> and execute your notebook from top to bottom without errors.<br/><br/>Handle API failures and memory constraints gracefully.</div>
 <div class="callout ci">
 <strong>Choose ONE dataset (all free on Kaggle):</strong><br/>
     🚢 <strong>Titanic</strong> (classic, well-documented) — kaggle.com/c/titanic<br/>
@@ -2872,10 +3099,13 @@ df = pd.read_csv(<span class="str">"your_dataset.csv"</span>)
 
 <span class="cm"># Always start with these 5 commands</span>
 <span class="bi">print</span>(<span class="str">"Shape:"</span>, df.shape)
-<span class="bi">print</span>(<span class="str">"\nColumns:"</span>, df.columns.tolist())
+<span class="bi">print</span>(<span class="str">"
+Columns:"</span>, df.columns.tolist())
 df.info()
 df.describe()
-<span class="bi">print</span>(<span class="str">"\nNull counts:\n"</span>, df.isnull().sum())</pre>
+<span class="bi">print</span>(<span class="str">"
+Null counts:
+"</span>, df.isnull().sum())</pre>
 </div>
 <h3 class="sh3">Step 2 — Clean the Data (45 min)</h3>
 <p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Here we run custom data cleaning pipelines to impute missing attributes, correct column schemas, and strip whitespace from text entries.</p>
@@ -2888,7 +3118,8 @@ df = df.drop_duplicates()
 df[<span class="str">"Embarked"</span>] = df[<span class="str">"Embarked"</span>].fillna(df[<span class="str">"Embarked"</span>].mode()[<span class="num">0</span>])
 
 <span class="cm"># Verify cleaning worked</span>
-<span class="bi">print</span>(<span class="str">"Nulls after cleaning:\n"</span>, df.isnull().sum())
+<span class="bi">print</span>(<span class="str">"Nulls after cleaning:
+"</span>, df.isnull().sum())
 </pre></div>
 <h3 class="sh3">Step 3 — Analysis + Visualisation (3 hours)</h3>
 <div class="callout ci">
@@ -2898,7 +3129,10 @@ df[<span class="str">"Embarked"</span>] = df[<span class="str">"Embarked"</span>
     - <strong>Scatterplot:</strong> Finding correlations between two numeric variables.<br/>
     - <strong>Correlation Heatmap:</strong> Seeing how all numeric variables relate to each other simultaneously.
   </div>
-<p>Write at least 10 analysis cells, each answering one question. Add a markdown cell above each with the question and a markdown cell below with the finding in plain English. Think deeply: <em>Why use median instead of mean? Why is dropping nulls dangerous?</em> Add these <strong>Thinking Questions</strong> to your notebook.</p>
+<p>Write at least 10 analysis cells, each answering one question.</p>
+<p>Add a markdown cell above each with the question and a markdown cell below with the finding in plain English.</p>
+<p>Think deeply: <em>Why use median instead of mean?</em></p>
+<p>Why is dropping nulls dangerous? Add these <strong>Thinking Questions</strong> to your notebook.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — step3_analysis_example.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Question: Does gender affect survival?</span>
@@ -2928,7 +3162,8 @@ plt.show()
 <h2 class="sh2">✅ Week 2 Checkpoint</h2>
 <div class="week-summary">
 <h2>🎉 Week 2 Complete!</h2>
-<p style="color:var(--muted);font-size:14px">By completing Week 2, you can now work with ANY dataset professionally. You have produced a polished EDA report, a GitHub-ready repo, and a reproducible workflow.</p>
+<p style="color:var(--muted);font-size:14px">By completing Week 2, you can now work with ANY dataset professionally.</p>
+<p style="color:var(--muted);font-size:14px">You have produced a polished EDA report, a GitHub-ready repo, and a reproducible workflow.</p>
 </div>
 <table class="concept-table">
 <tr><th>SKILL</th><th>WHAT YOU CAN NOW DO</th><th>LEVEL</th></tr>
@@ -3022,12 +3257,9 @@ GROUP BY customer_id;</code></pre>
 <li><strong>Document everything:</strong> A complete EDA notebook with markdown cells explaining each step is more valuable than raw analysis code.</li>
 </ol>
 </div>
-<div class="callout" style="background:rgba(79,209,165,.05); border-left:3px solid var(--green); padding:1rem; margin:1.5rem 0; font-size:13.5px;">
-<strong>🚀 Connect to Next Week:</strong>
+<div class="callout" style="background:rgba(79,209,165,.05); border-left:3px solid var(--green); padding:1rem; margin:1.5rem 0; font-size:13.5px;"><strong>🚀 Connect to Next Week:</strong>
 <p style="margin-top:0.4rem; margin-bottom:0; line-height:1.6;">
-      Next week, we will transition into data analysis and visualization using Pandas, Matplotlib, and Seaborn. Make sure you are comfortable writing SQL JOIN statements and basic Git commits!
-    </p>
-</div>
+      Next week, we will transition into data analysis and visualization using Pandas, Matplotlib, and Seaborn.<br/><br/>Make sure you are comfortable writing SQL JOIN statements and basic Git commits!<br/><br/></p></div>
 <div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Git version control operations, making commits, and staging changes.</li></ul></div>
 <button class="complete-btn" id="btn-day-14" onclick="completeDay(14,300)">🏆 Complete Week 2 Capstone — Earn 300 XP! 🎉</button>
 </div>

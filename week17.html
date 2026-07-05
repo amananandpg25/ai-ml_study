@@ -269,7 +269,8 @@ predict_bp = Blueprint(<span class="str">'predict'</span>, __name__)   <span cla
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 118: Flask routing parameters\n# @app.route(\'/user/&lt;int:id&gt;\') parses id as which type?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 118: Flask routing parameters
+# @app.route('/user/&lt;int:id&gt;') parses id as which type?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day118-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day118-p1', 'int')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -318,10 +319,10 @@ predict_bp = Blueprint(<span class="str">'predict'</span>, __name__)   <span cla
 <div class="quiz-num">Q1 OF 5</div>
 <div class="quiz-q">What does Flask's <code>debug=True</code> mode do, and why must you NEVER use it in production?</div>
 <div class="quiz-opts" id="q118-1-opts">
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>It disables all logging to speed up responses</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q118-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It enables auto-reload on code changes AND exposes an interactive debugger in the browser — which gives anyone who can reach the server a Python shell with full server access</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It only enables auto-reload with no security implications</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>It enables HTTPS automatically</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>It disables all logging to speed up responses</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q118-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It enables auto-reload on code changes AND exposes an interactive debugger in the browser — which gives anyone who can reach the server a Python shell with full server access</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It only enables auto-reload with no security implications</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>It enables HTTPS automatically</div>
 </div>
 <div class="quiz-feedback correct-fb" id="q118-1-correct">✅ Correct! The Werkzeug debugger is a full Python REPL accessible in the browser when an exception occurs. In production, anyone who can trigger an error gets code execution on your server. Always set <code>debug=False</code> and use <code>FLASK_ENV=production</code> in prod.</div>
 <div class="quiz-feedback wrong-fb" id="q118-1-wrong">❌ debug=True enables two things: (1) auto-reloader on file changes, (2) the Werkzeug interactive debugger shown in browser on errors. The debugger is effectively a Python shell — a critical security vulnerability if exposed publicly.</div>
@@ -330,10 +331,10 @@ predict_bp = Blueprint(<span class="str">'predict'</span>, __name__)   <span cla
 <div class="quiz-num">Q2 OF 5</div>
 <div class="quiz-q">You call <code>request.get_json()</code> and get <code>None</code> back. What are the two most likely causes?</div>
 <div class="quiz-opts" id="q118-2-opts">
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-2',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>The request body is empty AND the server is in debug mode</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q118-2',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>The Content-Type header is not set to application/json, OR the body is malformed JSON (not valid JSON syntax)</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-2',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>The route method is GET, not POST</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-2',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>Flask version is outdated</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-2')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>The request body is empty AND the server is in debug mode</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q118-2')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>The Content-Type header is not set to application/json, OR the body is malformed JSON (not valid JSON syntax)</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-2')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>The route method is GET, not POST</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-2')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>Flask version is outdated</div>
 </div>
 <div class="quiz-feedback correct-fb" id="q118-2-correct">✅ Exactly. Use <code>get_json(force=True)</code> to skip Content-Type check, and <code>get_json(silent=True)</code> to suppress parse errors (returns None instead of 400). In production, always handle None explicitly rather than relying on silent=True masking bugs.</div>
 <div class="quiz-feedback wrong-fb" id="q118-2-wrong">❌ get_json() returns None when: (1) Content-Type != application/json (unless force=True), (2) the body is not valid JSON. Fix with: <code>request.get_json(force=True, silent=True)</code> and check for None explicitly.</div>
@@ -342,10 +343,10 @@ predict_bp = Blueprint(<span class="str">'predict'</span>, __name__)   <span cla
 <div class="quiz-num">Q3 OF 5</div>
 <div class="quiz-q">What is the main benefit of using Blueprints over putting all routes in a single <code>app.py</code>?</div>
 <div class="quiz-opts" id="q118-3-opts">
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-3',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Blueprints make Flask run faster by pre-compiling routes</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q118-3',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>Blueprints allow modular code organisation — each feature has its own file with its own URL prefix, and can be registered/unregistered without touching other code</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-3',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Blueprints add automatic authentication to routes</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-3',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>Blueprints are mandatory for any Flask app with more than 5 routes</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-3')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Blueprints make Flask run faster by pre-compiling routes</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q118-3')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>Blueprints allow modular code organisation — each feature has its own file with its own URL prefix, and can be registered/unregistered without touching other code</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-3')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Blueprints add automatic authentication to routes</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-3')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>Blueprints are mandatory for any Flask app with more than 5 routes</div>
 </div>
 <div class="quiz-feedback correct-fb" id="q118-3-correct">✅ Right. Blueprints are Flask's module system. Each blueprint has its own routes, error handlers, templates, and static files. You can mount the same blueprint at different URL prefixes, enabling API versioning (register predict_bp at /api/v1 and /api/v2 with different handlers).</div>
 <div class="quiz-feedback wrong-fb" id="q118-3-wrong">❌ Blueprints are about code organisation and maintainability. They let you split a large app into smaller, self-contained modules. Each blueprint can have its own routes, templates, and URL prefix — crucial for team development and API versioning.</div>
@@ -354,10 +355,10 @@ predict_bp = Blueprint(<span class="str">'predict'</span>, __name__)   <span cla
 <div class="quiz-num">Q4 OF 5</div>
 <div class="quiz-q">What HTTP status code should a POST /predict endpoint return when the request body is syntactically valid JSON but the <code>features</code> field contains strings instead of floats?</div>
 <div class="quiz-opts" id="q118-4-opts">
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-4',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>400 Bad Request</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q118-4',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>422 Unprocessable Entity — the JSON is syntactically valid but semantically wrong (wrong field type)</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-4',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>500 Internal Server Error</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-4',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>200 OK with an error field in the response body</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-4')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>400 Bad Request</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q118-4')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>422 Unprocessable Entity — the JSON is syntactically valid but semantically wrong (wrong field type)</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-4')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>500 Internal Server Error</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-4')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>200 OK with an error field in the response body</div>
 </div>
 <div class="quiz-feedback correct-fb" id="q118-4-correct">✅ Correct. 400 = malformed request (can't parse). 422 = well-formed but semantically invalid (correct JSON, wrong values). For ML APIs: 400 when JSON can't be parsed, 422 when JSON is valid but field types/values fail schema validation.</div>
 <div class="quiz-feedback wrong-fb" id="q118-4-wrong">❌ The distinction: 400 Bad Request = JSON syntax error (can't parse at all). 422 Unprocessable Entity = JSON parsed fine but field validation failed (wrong type, out-of-range value). FastAPI and modern REST APIs use 422 for schema violations.</div>
@@ -366,10 +367,10 @@ predict_bp = Blueprint(<span class="str">'predict'</span>, __name__)   <span cla
 <div class="quiz-num">Q5 OF 5</div>
 <div class="quiz-q">Why is Flask's built-in development server (<code>flask run</code>) not suitable for production?</div>
 <div class="quiz-opts" id="q118-5-opts">
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-5',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>It doesn't support Python 3</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q118-5',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It's single-threaded (one request at a time), not designed for load, has no graceful shutdown, and Werkzeug's warning itself says not to use it in production</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-5',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It can't serve JSON responses</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q118-5',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>It requires root privileges</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-5')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>It doesn't support Python 3</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q118-5')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It's single-threaded (one request at a time), not designed for load, has no graceful shutdown, and Werkzeug's warning itself says not to use it in production</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-5')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It can't serve JSON responses</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q118-5')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>It requires root privileges</div>
 </div>
 <div class="quiz-feedback correct-fb" id="q118-5-correct">✅ Exactly. Use Gunicorn (<code>gunicorn -w 4 "myapp:create_app()"</code>) or uWSGI in production. Gunicorn spawns multiple worker processes, handles graceful restarts, and can sit behind nginx for SSL termination and static file serving.</div>
 <div class="quiz-feedback wrong-fb" id="q118-5-wrong">❌ Flask's dev server is single-threaded and not optimised for concurrency or production load. The fix: <code>pip install gunicorn</code> and run <code>gunicorn -w 4 -b 0.0.0.0:5000 "myapp:create_app()"</code> — 4 worker processes, each handling requests independently.</div>
@@ -610,7 +611,8 @@ limiter = Limiter(key_func=get_remote_address, default_limits=[<span class="str"
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 119: Flask JSON return helper\n# Helper function to convert dict to JSON Response in Flask</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 119: Flask JSON return helper
+# Helper function to convert dict to JSON Response in Flask</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day119-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day119-p1', 'jsonify')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -703,9 +705,11 @@ limiter = Limiter(key_func=get_remote_address, default_limits=[<span class="str"
 <div class="quiz-num">Q1 OF 2</div>
 <div class="quiz-q">Why should REST APIs use plural nouns (e.g., /predictions) rather than verbs in endpoints?</div>
 <div class="quiz-opts" id="q119-1-opts">
-<div class="quiz-opt" onclick="quiz(this,'wrong','q119-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Verbs cause network failures on client-side requests</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q119-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>REST is resources-centric; actions are represented by HTTP methods (GET, POST), not endpoint paths</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q119-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It is a routing requirement enforced by Gunicorn and nginx</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q119-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Verbs cause network failures on client-side requests</div>
+<div class="quiz-feedback correct-fb" id="q119-1-correct">✅ Correct! REST endpoints represent resources (nouns). The action is defined by HTTP verbs (like GET, POST, DELETE). For example, creating a prediction is POST /predictions, not POST /predict.</div>
+<div class="quiz-feedback wrong-fb" id="q119-1-wrong">❌ Incorrect. The choice of nouns over verbs is a REST architectural convention (resources represent nouns, while HTTP methods represent verbs). It is not enforced by servers or networks. Try B.</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q119-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>REST is resources-centric; actions are represented by HTTP methods (GET, POST), not endpoint paths</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q119-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It is a routing requirement enforced by Gunicorn and nginx</div>
 </div>
 </div>
 </div>
@@ -874,7 +878,8 @@ gunicorn \
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 120: Model loading with joblib\n# model = joblib.load(\'model.pkl\') returns what type of object?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 120: Model loading with joblib
+# model = joblib.load('model.pkl') returns what type of object?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day120-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day120-p1', 'model')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -967,9 +972,11 @@ gunicorn \
 <div class="quiz-num">Q1 OF 2</div>
 <div class="quiz-q">Why should ML models be loaded at server startup rather than inside the request route?</div>
 <div class="quiz-opts" id="q120-1-opts">
-<div class="quiz-opt" onclick="quiz(this,'correct','q120-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Loading inside the route will cause huge latency spikes on every prediction request</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q120-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>FastAPI/Flask will crash if a model file is read inside a route function</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q120-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Production networks block external disk operations inside endpoints</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q120-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Loading inside the route will cause huge latency spikes on every prediction request</div>
+<div class="quiz-feedback correct-fb" id="q120-1-correct">✅ Correct! Reading model weights from disk and loading them into memory (RAM/VRAM) can take seconds or even minutes. Doing this inside the request route means every user request experiences this delay. Loading at startup ensures this happens only once.</div>
+<div class="quiz-feedback wrong-fb" id="q120-1-wrong">❌ Incorrect. While loading inside the route doesn't throw a crash or get blocked by production networks automatically, it degrades performance. Reading weights from disk takes a long time, causing unacceptable latency for predictions. Try A.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q120-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>FastAPI/Flask will crash if a model file is read inside a route function</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q120-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Production networks block external disk operations inside endpoints</div>
 </div>
 </div>
 </div>
@@ -1100,7 +1107,8 @@ docker run --network ml-network --name redis redis:alpine
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 121: Docker run port mapping\n# docker run -p 8080:5000 maps host port 8080 to container port</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 121: Docker run port mapping
+# docker run -p 8080:5000 maps host port 8080 to container port</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day121-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day121-p1', '5000')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1204,9 +1212,11 @@ docker run --network ml-network --name redis redis:alpine
 <div class="quiz-num">Q1 OF 2</div>
 <div class="quiz-q">What is the primary difference between a Docker Image and a Docker Container?</div>
 <div class="quiz-opts" id="q121-1-opts">
-<div class="quiz-opt" onclick="quiz(this,'wrong','q121-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Images run on GPUs; Containers run on CPUs</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q121-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>An image is a static read-only blueprint template; a container is a running, writable instance of that image</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q121-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Containers are stored on Docker Hub; images only exist locally</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q121-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Images run on GPUs; Containers run on CPUs</div>
+<div class="quiz-feedback correct-fb" id="q121-1-correct">✅ Correct! A Docker Image is the static, read-only template that packages your code and dependencies. A Docker Container is the active, live runtime environment created by running the image.</div>
+<div class="quiz-feedback wrong-fb" id="q121-1-wrong">❌ Incorrect. Images and containers are not hardware-specific (both can run on CPU or GPU), and images are published to Docker Hub, not containers. A Docker Image is a static blueprint, whereas a container is a running instance. Try B.</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q121-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>An image is a static read-only blueprint template; a container is a running, writable instance of that image</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q121-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Containers are stored on Docker Hub; images only exist locally</div>
 </div>
 </div>
 </div>
@@ -1365,7 +1375,8 @@ mlruns/</pre>
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 122: Dockerfile directive for default run command\n# Directive to specify default executable when container runs</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 122: Dockerfile directive for default run command
+# Directive to specify default executable when container runs</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day122-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day122-p1', 'CMD')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1469,9 +1480,11 @@ mlruns/</pre>
 <div class="quiz-num">Q1 OF 2</div>
 <div class="quiz-q">How does Docker layer caching optimize container builds?</div>
 <div class="quiz-opts" id="q122-1-opts">
-<div class="quiz-opt" onclick="quiz(this,'correct','q122-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>It skips execution of layers that have no code changes since the last build</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q122-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It compresses libraries to reduce network usage</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q122-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It runs multi-stage builds in parallel across multiple machines</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q122-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>It skips execution of layers that have no code changes since the last build</div>
+<div class="quiz-feedback correct-fb" id="q122-1-correct">✅ Correct! Docker caches the result of each instruction (like COPY or RUN) in a layer. If the input files or command haven't changed, Docker reuses the cached layer, saving substantial build time (especially for slow steps like pip installs).</div>
+<div class="quiz-feedback wrong-fb" id="q122-1-wrong">❌ Incorrect. Docker layer caching doesn't perform compression or distribute builds. It reuses layers from the cache when the build context and instructions are unchanged. Try A.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q122-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It compresses libraries to reduce network usage</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q122-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It runs multi-stage builds in parallel across multiple machines</div>
 </div>
 </div>
 </div>
@@ -1604,7 +1617,7 @@ networks:
 <p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Caching prediction responses in Redis avoids redundant inference loops on identical inputs, reducing latencies from 200ms to under 5ms.</p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">PYTHON — REDIS CACHE IN FLASK</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
-<pre><span class="kw">import</span> redis, json, hashlib, os
+<pre><span class="kw">import</span> redis, json, hashlib, os, numpy as np
 
 redis_client = redis.from_url(
     os.environ.get(<span class="str">'REDIS_URL'</span>, <span class="str">'redis://localhost:6379/0'</span>),
@@ -1652,7 +1665,8 @@ redis_client = redis.from_url(
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 123: Docker Compose up command\n# Command to launch and build all compose services</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 123: Docker Compose up command
+# Command to launch and build all compose services</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day123-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day123-p1', 'docker-compose up --build')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1745,9 +1759,11 @@ redis_client = redis.from_url(
 <div class="quiz-num">Q1 OF 2</div>
 <div class="quiz-q">What does `depends_on` do in a docker-compose.yml configuration?</div>
 <div class="quiz-opts" id="q123-1-opts">
-<div class="quiz-opt" onclick="quiz(this,'wrong','q123-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>It bridges virtual network adapters between remote hosts</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q123-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It defines dependency boot order, starting specified containers before launching the current container</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q123-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It mounts local host paths inside database containers</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q123-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>It bridges virtual network adapters between remote hosts</div>
+<div class="quiz-feedback correct-fb" id="q123-1-correct">✅ Correct! The depends_on property defines startup order: Gunicorn/FastAPI depends_on Redis and PostgreSQL, ensuring the databases boot up first before the ML web server starts.</div>
+<div class="quiz-feedback wrong-fb" id="q123-1-wrong">❌ Incorrect. depends_on only controls startup and shutdown order, not mounting local paths or bridging adapters. It ensures required dependency containers are booted up first. Try B.</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q123-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It defines dependency boot order, starting specified containers before launching the current container</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q123-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It mounts local host paths inside database containers</div>
 </div>
 </div>
 </div>
@@ -1879,7 +1895,8 @@ docker compose down -v         <span class="cm"># --volumes removes redis-data v
 <h2 class="sh2">⚡ Capstone Tasks</h2>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 124: Render sleep duration\n# Free Render web service sleeps after how many minutes of inactivity?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 124: Render sleep duration
+# Free Render web service sleeps after how many minutes of inactivity?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day124-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day124-p1', '15')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1910,10 +1927,10 @@ docker compose down -v         <span class="cm"># --volumes removes redis-data v
 <div class="quiz-num">Q1 OF 5</div>
 <div class="quiz-q">In a Flask + Gunicorn setup with 4 workers, where should you load your ML model to avoid loading it on every request?</div>
 <div class="quiz-opts" id="q124-1-opts">
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Inside the view function, using a local variable</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q124-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>At module level or in create_app() — loaded once per worker process when Gunicorn forks, then reused across all requests handled by that worker</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>In a before_request hook so it loads fresh each time</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-1',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>In a separate thread that shares the model via a global queue</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Inside the view function, using a local variable</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q124-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>At module level or in create_app() — loaded once per worker process when Gunicorn forks, then reused across all requests handled by that worker</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>In a before_request hook so it loads fresh each time</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-1')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>In a separate thread that shares the model via a global queue</div>
 </div>
 <div class="quiz-feedback correct-fb" id="q124-1-correct">✅ Correct. With Gunicorn -w 4, there are 4 worker processes. Each loads the model once at startup. All requests to that worker reuse the loaded model. Loading in the view function would load the model on every single request — potentially seconds of latency each time.</div>
 <div class="quiz-feedback wrong-fb" id="q124-1-wrong">❌ Load the model at module level or in create_app(). Gunicorn workers are forked after app initialisation, so each worker inherits the loaded model. Loading per-request = O(seconds) latency overhead = unacceptable in production.</div>
@@ -1922,10 +1939,10 @@ docker compose down -v         <span class="cm"># --volumes removes redis-data v
 <div class="quiz-num">Q2 OF 5</div>
 <div class="quiz-q">Why does the Flask app in docker-compose NOT expose port 5000 to the host, while Nginx DOES expose port 80?</div>
 <div class="quiz-opts" id="q124-2-opts">
-<div class="quiz-opt" onclick="quiz(this,'correct','q124-2',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Defence in depth — Flask should only be accessible through Nginx, not directly from the internet. Nginx handles SSL, rate limiting, and acts as a single entry point. If Flask were exposed, clients could bypass Nginx's protections.</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-2',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>Docker requires one container to own each port</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-2',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Flask can't bind to external interfaces</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-2',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>Port 5000 is reserved by the OS</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q124-2')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Defence in depth — Flask should only be accessible through Nginx, not directly from the internet. Nginx handles SSL, rate limiting, and acts as a single entry point. If Flask were exposed, clients could bypass Nginx's protections.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-2')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>Docker requires one container to own each port</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-2')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Flask can't bind to external interfaces</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-2')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>Port 5000 is reserved by the OS</div>
 </div>
 <div class="quiz-feedback correct-fb" id="q124-2-correct">✅ Exactly. The pattern is: expose only the reverse proxy (Nginx on 80/443), keep app servers (Gunicorn) and data stores (Redis) internal to the Docker network. This is the standard "proxy + app + data" separation used in production. Only Nginx needs to be internet-facing.</div>
 <div class="quiz-feedback wrong-fb" id="q124-2-wrong">❌ It's a security architecture decision. Only Nginx should be internet-accessible. Flask runs on the internal Docker network — Nginx proxies to it by container name. This prevents clients from bypassing Nginx (and its rate limiting, SSL termination, etc.) by hitting Flask directly.</div>
@@ -1934,10 +1951,10 @@ docker compose down -v         <span class="cm"># --volumes removes redis-data v
 <div class="quiz-num">Q3 OF 5</div>
 <div class="quiz-q">You changed one line in app.py. With proper Dockerfile layer ordering, which layers need to be rebuilt?</div>
 <div class="quiz-opts" id="q124-3-opts">
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-3',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>All layers from scratch including pip install</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q124-3',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>Only the "COPY . ." layer and everything after it. The base image, apt-get, and pip install layers are cached and reused.</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-3',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Only the CMD layer changes</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-3',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>The entire image is always rebuilt from scratch</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-3')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>All layers from scratch including pip install</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q124-3')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>Only the "COPY . ." layer and everything after it. The base image, apt-get, and pip install layers are cached and reused.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-3')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Only the CMD layer changes</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-3')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>The entire image is always rebuilt from scratch</div>
 </div>
 <div class="quiz-feedback correct-fb" id="q124-3-correct">✅ Right. Order: FROM (cache hit) → RUN apt-get (cache hit) → COPY requirements.txt (cache hit) → RUN pip install (cache hit) → COPY models/ (cache hit) → COPY . . (CACHE MISS — app.py changed) → USER/EXPOSE/CMD (rebuilt). Result: rebuild in ~5 seconds instead of ~3 minutes.</div>
 <div class="quiz-feedback wrong-fb" id="q124-3-wrong">❌ With correct layer ordering (requirements first, source last), changing app.py only invalidates the COPY . . layer and everything after. Base image, apt-get, pip install all hit the cache. That's why layer ordering is so important — it determines rebuild time.</div>
@@ -1946,10 +1963,10 @@ docker compose down -v         <span class="cm"># --volumes removes redis-data v
 <div class="quiz-num">Q4 OF 5</div>
 <div class="quiz-q">Your Flask /predict endpoint receives {"features": "5.1,3.5,1.4,0.2"} (a string, not a list). What HTTP status code and response should you return?</div>
 <div class="quiz-opts" id="q124-4-opts">
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-4',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>200 OK — try to parse the string automatically</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q124-4',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>422 Unprocessable Entity — valid JSON but wrong type for the features field; return field-level error: {"error": "Validation failed", "detail": {"features": "must be a list of numbers"}}</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-4',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>400 Bad Request — the JSON is malformed</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-4',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>500 Internal Server Error — let numpy handle the bad input</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-4')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>200 OK — try to parse the string automatically</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q124-4')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>422 Unprocessable Entity — valid JSON but wrong type for the features field; return field-level error: {"error": "Validation failed", "detail": {"features": "must be a list of numbers"}}</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-4')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>400 Bad Request — the JSON is malformed</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-4')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>500 Internal Server Error — let numpy handle the bad input</div>
 </div>
 <div class="quiz-feedback correct-fb" id="q124-4-correct">✅ Correct. The JSON is syntactically valid (a string is legal JSON). The problem is semantic — the field type is wrong. 422 is the correct code for semantic validation failures. Never let bad input reach numpy/sklearn — always validate input types and shapes at the API boundary.</div>
 <div class="quiz-feedback wrong-fb" id="q124-4-wrong">❌ The JSON is valid — it's {"features": "5.1,3.5,1.4,0.2"} which parses fine. But the value is a string, not a list. That's a 422 (semantic error). 400 = syntax/parse error. 500 = never intentionally return this from bad user input. Always validate at the API boundary.</div>
@@ -1958,10 +1975,10 @@ docker compose down -v         <span class="cm"># --volumes removes redis-data v
 <div class="quiz-num">Q5 OF 5</div>
 <div class="quiz-q">What is the purpose of <code>depends_on: condition: service_healthy</code> in docker-compose, and what must you define on the dependency for it to work?</div>
 <div class="quiz-opts" id="q124-5-opts">
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-5',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>It's the same as depends_on with no condition — just a newer syntax</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q124-5',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It delays the dependent service from starting until the dependency passes its healthcheck. The dependency service must have a <code>healthcheck:</code> block defined, otherwise Compose can't know when it's "healthy"</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-5',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It automatically restarts the dependent service if the dependency crashes</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q124-5',this.parentElement)" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>It requires Docker Swarm mode to work</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-5')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>It's the same as depends_on with no condition — just a newer syntax</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q124-5')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It delays the dependent service from starting until the dependency passes its healthcheck. The dependency service must have a <code>healthcheck:</code> block defined, otherwise Compose can't know when it's "healthy"</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-5')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It automatically restarts the dependent service if the dependency crashes</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','q124-5')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>It requires Docker Swarm mode to work</div>
 </div>
 <div class="quiz-feedback correct-fb" id="q124-5-correct">✅ Exactly. Without <code>condition: service_healthy</code>, depends_on only waits for the container to START (not to be ready). Redis might be starting but not ready to accept connections when Flask boots. The healthcheck block (test: redis-cli ping) defines what "healthy" means. Compose polls it until it passes, then starts Flask.</div>
 <div class="quiz-feedback wrong-fb" id="q124-5-wrong">❌ depends_on without condition only waits for the container process to start — not for the service inside to be ready. Redis takes ~1 second to initialise. <code>condition: service_healthy</code> polls the healthcheck (redis-cli ping) until it returns exit 0, then starts the dependent service. Requires a healthcheck block on the dependency.</div>

@@ -7,15 +7,16 @@
 <title>Week 1 — Python Foundations | 135-Day AI/ML Roadmap</title>
 <meta content="Week 1 — Python Foundations — Complete coursework, tasks, quizzes, and resources for Week 1 of the 135-Day AI/ML Roadmap." name="description"/>
 <link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%230d0f14'/&gt;&lt;text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'&gt;AI&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
-<link rel="stylesheet" href="course.css">
+<link href="course.css" rel="stylesheet"/>
 <style>
 :root {
   --accent-rgb: 79, 209, 165;
   --accent-sec-rgb: 108, 140, 255;
 }
 </style>
-
-
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
+<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer="" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
   if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
@@ -67,10 +68,10 @@
 <div class="sb-item" id="sb-streak-info"><span class="sb-dot" style="background:var(--pink)"></span><span id="sb-streak">0 day streak</span></div>
 <div class="sb-divider"></div>
 <div class="sb-label">Quick Jump</div>
-<div class="sb-item" onclick="jumpTo('theory')"><span class="sb-dot" style="background:var(--blue)"></span>Theory</div>
-<div class="sb-item" onclick="jumpTo('tasks-section')"><span class="sb-dot" style="background:var(--orange)"></span>Tasks</div>
-<div class="sb-item" onclick="jumpTo('quiz-section')"><span class="sb-dot" style="background:var(--purple)"></span>Quiz</div>
-<div class="sb-item" onclick="jumpTo('resources-section')"><span class="sb-dot" style="background:var(--green)"></span>Resources</div>
+<div class="sb-item" onclick="jumpTo('theory')" onkeydown="if(event.key==='Enter'||event.key===' ')jumpTo('theory')" role="button" tabindex="0"><span class="sb-dot" style="background:var(--blue)"></span>Theory</div>
+<div class="sb-item" onclick="jumpTo('tasks-section')" onkeydown="if(event.key==='Enter'||event.key===' ')jumpTo('tasks-section')" role="button" tabindex="0"><span class="sb-dot" style="background:var(--orange)"></span>Tasks</div>
+<div class="sb-item" onclick="jumpTo('quiz-section')" onkeydown="if(event.key==='Enter'||event.key===' ')jumpTo('quiz-section')" role="button" tabindex="0"><span class="sb-dot" style="background:var(--purple)"></span>Quiz</div>
+<div class="sb-item" onclick="jumpTo('resources-section')" onkeydown="if(event.key==='Enter'||event.key===' ')jumpTo('resources-section')" role="button" tabindex="0"><span class="sb-dot" style="background:var(--green)"></span>Resources</div>
 <div class="sb-divider"></div>
 <div class="sb-label">Navigate</div>
 <div class="week-nav-links">
@@ -89,7 +90,9 @@
 <div class="day-header">
 <div class="day-tag">WEEK 1 · DAY 1 · MONTH 1 — FOUNDATIONS</div>
 <h1>Python Setup + Variables + Data Types</h1>
-<p>Aaj se tumhara AI/ML journey shuru hota hai. Pehle din hum Python install karenge, variables ko samjhenge, aur Python ki 4 core data types master karenge — int, float, str, bool. Yeh sab kuch ka foundation hai.</p>
+<p>Aaj se tumhara AI/ML journey shuru hota hai.</p>
+<p>Pehle din hum Python install karenge, variables ko samjhenge, aur Python ki 4 core data types master karenge — int, float, str, bool.</p>
+<p>Yeh sab kuch ka foundation hai.</p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 4 hours</span>
 <span class="meta-badge o">🔰 Absolute Beginner</span>
@@ -131,18 +134,19 @@
 <div id="day-1-theory">
 <h2 class="sh2">🧠 Theory</h2>
 <h3 class="sh3">1. Why Python? Why Now?</h3>
-<div class="analogy">Python ek universal bhasha hai — jaise English tech companies mein sab samajhte hain. C++ fast hai lekin mushkil; Java verbose hai; Python seedha, readable, aur powerful hai. Isliye Google, Netflix, Zomato, Swiggy — sab Python use karte hain apne ML systems ke liye.</div>
-<p>Python is a <strong>high-level, interpreted language</strong>. "High-level" = close to human language. "Interpreted" = runs line by line immediately, no compilation needed. For AI/ML, Python dominates because <strong>NumPy, Pandas, TensorFlow, PyTorch</strong> — every important library is Python-first.</p>
-<div class="ml-connect">Variables store data temporarily in RAM. In ML, you store dataset paths, model configurations, training parameters — all as variables. When you later write <code>learning_rate = 0.001</code> for a neural network, that's just a float variable.</div>
-<div class="callout ci">
-<strong>🛠 Installation Checklist — Do This First:</strong>
-    1. Python 3.11+ from <strong>python.org</strong> → Windows: ✅ check "Add Python to PATH"<br/>
-    2. VS Code from <strong>code.visualstudio.com</strong> → install "Python" extension by Microsoft<br/>
-    3. In terminal: <code>python --version</code> → should show Python 3.11.x<br/>
-    4. Create folder: <code>ai-ml-journey/week1/day1/</code> — this is your workspace
-  </div>
+<div class="analogy">Python ek universal bhasha hai — jaise English tech companies mein sab samajhte hain.<br/><br/>C++ fast hai lekin mushkil; Java verbose hai; Python seedha, readable, aur powerful hai.<br/><br/>Isliye Google, Netflix, Zomato, Swiggy — sab Python use karte hain apne ML systems ke liye.</div>
+<p>Python is a <strong>high-level, interpreted language</strong>.</p>
+<p>"High-level" = close to human language.</p>
+<p>"Interpreted" = runs line by line immediately, no compilation needed.</p>
+<p>For AI/ML, Python dominates because <strong>NumPy, Pandas, TensorFlow, PyTorch</strong> — every important library is Python-first.</p>
+<div class="ml-connect">Variables store data temporarily in RAM.<br/><br/>In ML, you store dataset paths, model configurations, training parameters — all as variables.<br/><br/>When you later write <code>learning_rate = 0.001</code> for a neural network, that's just a float variable.</div>
+<div class="callout ci"><strong>🚦 Before You Start Checklist: Installation &amp; Workspace Setup</strong>
+    1.<br/><br/>Python 3.11+ from <strong>python.org</strong> → Windows: ✅ check "Add Python to PATH"<br/>
+    2.<br/><br/>VS Code from <strong>code.visualstudio.com</strong> → install "Python" extension by Microsoft<br/>
+    3.<br/><br/>In terminal: <code>python --version</code> → should show Python 3.11.x<br/>
+    4.<br/><br/>Create folder: <code>ai-ml-journey/week1/day1/</code> — this is your workspace</div>
 <h3 class="sh3">2. Variables — Named Containers for Data</h3>
-<div class="analogy">Zomato app mein tumhara naam, phone, address — sab alag "boxes" mein store hota hai. Python mein bhi alag-alag variables alag values rakhte hain. <code>user_name = "Raj"</code> ka matlab: ek box banao, label lagao "user_name", usme value "Raj" daalo.</div>
+<div class="analogy">Zomato app mein tumhara naam, phone, address — sab alag "boxes" mein store hota hai.<br/><br/>Python mein bhi alag-alag variables alag values rakhte hain.<br/><br/><code>user_name = "Raj"</code> ka matlab: ek box banao, label lagao "user_name", usme value "Raj" daalo.</div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — variables.py</span><div class="cb-btns"><button class="run-btn" onclick="openRepl()">▶ try online</button><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
 <pre><span class="cm"># = means ASSIGN (store). It is NOT "equals".</span>
@@ -184,12 +188,12 @@ total_price = <span class="num">499.99</span>    <span class="cm"># ✅ correct<
 <tr><td><code>bool</code></td><td><code>verbose = True</code></td><td>Training flags, feature toggles</td><td>True/False are capitalized in Python</td></tr>
 </table>
 <h3 class="sh3">4. Type Conversion (Casting)</h3>
-<p>You can convert between types using <code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code>. Critical rule: <code>input()</code> <strong>always returns a string</strong> — you must convert it before doing math.</p>
+<p>You can convert between types using <code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code>.</p>
+<p>Critical rule: <code>input()</code> <strong>always returns a string</strong> — you must convert it before doing math.</p>
 <div class="intuition-box">
 <strong>💡 Why does Python use references?</strong>
 When you write <code>b = a</code> for a list, Python doesn't copy the data — it creates a second name pointing to the same memory location. This is efficient (no wasted RAM for large datasets), but it means modifying <code>b</code> also modifies <code>a</code>. Think of it like two people sharing the same Google Doc: edits by one are visible to the other instantly.
 </div>
-
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — type_casting.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre>marks_str = <span class="str">"95"</span>               <span class="cm"># This is TEXT, not a number</span>
@@ -232,17 +236,16 @@ score = <span class="num">94.567</span>
 <span class="bi">print</span>(<span class="str">f"Next year age: {<span class="num">21</span> + <span class="num">1</span>}"</span>)   <span class="cm"># 22</span>
 <span class="bi">print</span>(<span class="str">f"Upper: {name.upper()}"</span>)     <span class="cm"># ARJUN</span></pre>
 </div>
-<div class="misconception">
-<strong>⚠️ Top 3 Day-1 Mistakes:</strong>
-<strong>1. = vs ==</strong> → <code>age = 21</code> assigns. <code>age == 21</code> compares. Writing <code>if age = 21</code> crashes with <code>SyntaxError: invalid syntax</code>.<br/>
-<strong>2. Forgetting to convert input()</strong> → <code>x = input("num: ")</code> then <code>x + 1</code> crashes with <code>TypeError: can only concatenate str (not "int") to str</code>. Fix: <code>x = int(input("num: "))</code><br/>
-<strong>3. true vs True</strong> → Python is case-sensitive. <code>true</code>, <code>false</code>, <code>null</code> are NOT valid Python. It must be <code>True</code>, <code>False</code>, <code>None</code>.
-  </div>
+<div class="misconception"><strong>⚠️ Top 3 Day-1 Mistakes:</strong>
+<strong>1. = vs ==</strong> → <code>age = 21</code> assigns.<br/><br/><code>age == 21</code> compares.<br/><br/>Writing <code>if age = 21</code> crashes with <code>SyntaxError: invalid syntax</code>.<br/>
+<strong>2.<br/><br/>Forgetting to convert input()</strong> → <code>x = input("num: ")</code> then <code>x + 1</code> crashes with <code>TypeError: can only concatenate str (not "int") to str</code>.<br/><br/>Fix: <code>x = int(input("num: "))</code><br/>
+<strong>3. true vs True</strong> → Python is case-sensitive.<br/><br/><code>true</code>, <code>false</code>, <code>null</code> are NOT valid Python.<br/><br/>It must be <code>True</code>, <code>False</code>, <code>None</code>.</div>
 <div class="hinglish">💡 Ek line mein: Variable ek labelled box hai RAM mein. int = whole numbers, float = decimals, str = text, bool = True/False. f-string sabse clean printing method hai.</div>
 </div><!-- /theory -->
 <!-- PREDICT THE OUTPUT -->
 <h2 class="sh2">🔮 Predict the Output</h2>
-<p style="font-size:13px;color:var(--muted)">Read the code, type what you think it prints, then check. This builds the most important skill — reading code in your head.</p>
+<p style="font-size:13px;color:var(--muted)">Read the code, type what you think it prints, then check.</p>
+<p style="font-size:13px;color:var(--muted)">This builds the most important skill — reading code in your head.</p>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT — Q1</div>
 <div class="cb" style="margin:.5rem 0"><div class="cb-head"><span class="cb-lang">python</span></div>
@@ -381,7 +384,7 @@ birth_year = <span class="num">2026</span> - age
 <span class="task-time">⏱ 25 min</span>
 </div>
 <div class="task-body">
-<p>Write a script that takes 4 inputs from the user and prints a formatted bio card. Practice: input(), int(), f-strings, type().</p>
+<p style="margin-bottom: 0.6rem;">Write a script that takes 4 inputs from the user and prints a formatted bio card.</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">Practice: input(), int(), f-strings, type().</li></ul>
 <div class="cb"><div class="cb-head"><span class="cb-lang">expected output</span></div>
 <pre>Enter your name: Ravi Kumar
 Enter your age: 20
@@ -418,9 +421,29 @@ birth_year = <span class="num">2026</span> - age
 <span class="bi">print</span>()
 <span class="bi">print</span>(<span class="str">f"Type of name : {<span class="bi">type</span>(name)}"</span>)
 <span class="bi">print</span>(<span class="str">f"Type of age  : {<span class="bi">type</span>(age)}"</span>)</pre></div>
-<div class="callout ct" style="margin:.8rem"><strong>💡 Why int() matters:</strong> Without int(input()), Python stores "20" as text. Then 2026 - "20" crashes with TypeError. Always convert input immediately when you need math.</div>
+<div class="callout ct" style="margin:.8rem"><strong>💡 Why int() matters:</strong> Without int(input()), Python stores "20" as text.<br/><br/>Then 2026 - "20" crashes with TypeError.<br/><br/>Always convert input immediately when you need math.</div>
 </div>
-<div class="done-when">Script runs, prints formatted bio with correct born-in year, shows correct types for name and age.</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w1-t01')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w1-t01">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># Bio Generator - Input + f-strings
+name = input("Enter your name: ")
+age = int(input("Enter your age: "))
+city = input("Enter your city: ")
+subject = input("Favourite subject: ")
+birth_year = 2026 - age
+print()
+print("=" * 31)
+print(f"   Hello, I am {name}!")
+print(f"   Age: {age} | Born in: {birth_year}")
+print(f"   From: {city} | Loves: {subject}")
+print("=" * 31)
+print()
+print(f"Type of name : {type(name)}")
+print(f"Type of age  : {type(age)}")</pre>
+</div>
+</div><div class="done-when">Script runs, prints formatted bio with correct born-in year, shows correct types for name and age.</div>
 <div class="git-block">
 git add bio_generator.py
 git commit -m "Day 1: bio generator — input, int conversion, f-strings"</div>
@@ -476,7 +499,30 @@ header = <span class="str">f"{'Player':<span class="num">15</span>} {'Avg':<span
 <span class="bi">print</span>(<span class="str">f"{p3_name:<span class="num">15</span>} {p3_avg:<span class="num">8</span>} {p3_sr:<span class="num">8</span>} {p3_perf:<span class="num">8</span>}"</span>)
 <span class="bi">print</span>(<span class="str">"─" * 45</span>)</pre></div>
 </div>
-<div class="done-when">Table prints with correct averages and performance scores. No hardcoded answers — all computed from variables.</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w1-t02')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w1-t02">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># IPL Stats Calculator - Variables + Math + Formatting
+p1_name, p1_runs, p1_matches, p1_sr = "Virat Kohli", 741, 16, 139.6
+p2_name, p2_runs, p2_matches, p2_sr = "Rohit Sharma", 531, 14, 132.1
+p3_name, p3_runs, p3_matches, p3_sr = "KL Rahul", 626, 15, 135.8
+p1_avg = round(p1_runs / p1_matches, 2)
+p2_avg = round(p2_runs / p2_matches, 2)
+p3_avg = round(p3_runs / p3_matches, 2)
+p1_perf = round(p1_avg * 0.6 + p1_sr * 0.4, 1)
+p2_perf = round(p2_avg * 0.6 + p2_sr * 0.4, 1)
+p3_perf = round(p3_avg * 0.6 + p3_sr * 0.4, 1)
+print()
+print("=" * 45)
+print(f"{'Player':&lt;15} {'Avg':&lt;8} {'SR':&lt;8} {'Score':&lt;8}")
+print("=" * 45)
+print(f"{p1_name:&lt;15} {p1_avg:&lt;8} {p1_sr:&lt;8} {p1_perf:&lt;8}")
+print(f"{p2_name:&lt;15} {p2_avg:&lt;8} {p2_sr:&lt;8} {p2_perf:&lt;8}")
+print(f"{p3_name:&lt;15} {p3_avg:&lt;8} {p3_sr:&lt;8} {p3_perf:&lt;8}")
+print("=" * 45)</pre>
+</div>
+</div><div class="done-when">Table prints with correct averages and performance scores. No hardcoded answers — all computed from variables.</div>
 <div class="git-block">
 git add ipl_stats.py
 git commit -m "Day 1: IPL stats — arithmetic, round(), f-string table formatting"</div>
@@ -489,11 +535,11 @@ git commit -m "Day 1: IPL stats — arithmetic, round(), f-string table formatti
 <span class="task-time">⏱ 90 min</span>
 </div>
 <div class="task-body">
-<p>Build a loan EMI calculator. The user inputs loan amount, annual interest rate, and tenure (months). Output the monthly EMI, total payment, and total interest paid.</p>
+<p style="margin-bottom: 0.6rem;">Build a loan EMI calculator.</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">The user inputs loan amount, annual interest rate, and tenure (months).</li><li style="margin-bottom: 0.4rem;">Output the monthly EMI, total payment, and total interest paid.</li></ul>
 <div class="callout ci"><strong>📐 EMI Formula:</strong><br/>
       EMI = P × r × (1+r)^n / ((1+r)^n - 1)<br/>
       where P = principal, r = monthly rate (annual_rate/12/100), n = months</div>
-<div class="hinglish">Hint: <code>**</code> operator power ke liye use hota hai Python mein. (1+r)**n matlab (1+r) ki power n. monthly_rate = annual_rate / 12 / 100.</div>
+<div class="hinglish">Hint: <code>**</code> operator power ke liye use hota hai Python mein.<br/><br/>(1+r)**n matlab (1+r) ki power n. monthly_rate = annual_rate / 12 / 100.</div>
 <button class="solution-toggle" onclick="toggleSolution('sol-d1t3')">👁 Show Complete Solution</button>
 <div class="solution-box" id="sol-d1t3">
 <div class="sol-header">✅ COMPLETE SOLUTION — emi_calculator.py</div>
@@ -532,9 +578,35 @@ total_interest = total_payment - principal
 <span class="cm"># Resume description:</span>
 <span class="cm"># "Built a financial EMI calculator in Python computing compound interest</span>
 <span class="cm">#  using the standard amortization formula with formatted tabular output."</span></pre></div>
-<div class="callout ct" style="margin:.8rem"><strong>💡 The :, format spec:</strong> <code>f"{1234567:,.2f}"</code> prints <code>1,234,567.00</code> — commas for thousands, 2 decimal places. Use this for any money display.</div>
+<div class="callout ct" style="margin:.8rem"><strong>💡 The :, format spec:</strong> <code>f"{1234567:,.2f}"</code> prints <code>1,234,567.00</code> — commas for thousands, 2 decimal places.<br/><br/>Use this for any money display.</div>
 </div>
-<div class="done-when">Calculator takes 3 inputs, correctly computes EMI using the formula, prints all 5 output lines with ₹ symbol and comma-formatted numbers.</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w1-t03')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w1-t03">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># Smart EMI Calculator - Real-World Finance App
+print("=" * 40)
+print("   \U0001f3e6 SMART EMI CALCULATOR")
+print("=" * 40)
+principal = float(input("Loan Amount (\u20b9): "))
+annual_rate = float(input("Annual Interest Rate (%): "))
+tenure_months = int(input("Loan Tenure (months): "))
+monthly_rate = annual_rate / 12 / 100
+numerator = principal * monthly_rate * (1 + monthly_rate) ** tenure_months
+denominator = (1 + monthly_rate) ** tenure_months - 1
+emi = numerator / denominator
+total_payment = emi * tenure_months
+total_interest = total_payment - principal
+print()
+print("=" * 40)
+print(f"  Monthly EMI      : \u20b9{emi:,.2f}")
+print(f"  Total Payment    : \u20b9{total_payment:,.2f}")
+print(f"  Principal        : \u20b9{principal:,.2f}")
+print(f"  Total Interest   : \u20b9{total_interest:,.2f}")
+print(f"  Interest Rate    : {annual_rate}% per year")
+print("=" * 40)</pre>
+</div>
+</div><div class="done-when">Calculator takes 3 inputs, correctly computes EMI using the formula, prints all 5 output lines with ₹ symbol and comma-formatted numbers.</div>
 <div class="git-block">
 git add emi_calculator.py
 git commit -m "Day 1: EMI calculator — float arithmetic, ** operator, f-string formatting"</div>
@@ -596,7 +668,9 @@ git commit -m "Day 1: EMI calculator — float arithmetic, ** operator, f-string
 <div class="day-header">
 <div class="day-tag">WEEK 1 · DAY 2 · MONTH 1 — FOUNDATIONS</div>
 <h1>Lists, Tuples, Sets &amp; Dictionaries</h1>
-<p>Python ki 4 sabse powerful data structures. ML mein datasets lists mein hote hain, model configs dicts mein, coordinates tuples mein. Inhe master karna = ML code likhna possible banana.</p>
+<p>Python ki 4 sabse powerful data structures.</p>
+<p>ML mein datasets lists mein hote hain, model configs dicts mein, coordinates tuples mein.</p>
+<p>Inhe master karna = ML code likhna possible banana.</p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 4 hours</span>
 <span class="meta-badge o">🔰 Beginner</span>
@@ -615,7 +689,7 @@ git commit -m "Day 1: EMI calculator — float arithmetic, ** operator, f-string
 </div><div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Variables, basic data types (int, float, str, bool), and input/output print statements.</li></ul></div>
 <div id="day-2-theory">
 <h2 class="sh2">🧠 Theory</h2>
-<div class="analogy">Ek school ka example: List = attendance register (ordered, can add/remove names, duplicates allowed). Tuple = exam timetable (fixed, nobody changes it). Set = unique toppers across all classes (no duplicates). Dictionary = student ID card system (roll number → student details, instant lookup).</div>
+<div class="analogy">Ek school ka example: List = attendance register (ordered, can add/remove names, duplicates allowed).<br/><br/>Tuple = exam timetable (fixed, nobody changes it).<br/><br/>Set = unique toppers across all classes (no duplicates).<br/><br/>Dictionary = student ID card system (roll number → student details, instant lookup).</div>
 <div class="mermaid">
       graph TD
       Q1["Key-Value lookup needed?"] -->|Yes| Dict["Dictionary <br/> O1 constant lookup"]
@@ -632,7 +706,6 @@ git commit -m "Day 1: EMI calculator — float arithmetic, ** operator, f-string
 <strong>⚠️ Gotcha: Shallow vs Deep Copy</strong>
 Assignment (<code>b = a</code>) creates a <em>reference</em>, not a copy. <code>b = a.copy()</code> creates a shallow copy (nested objects still share references). Use <code>import copy; b = copy.deepcopy(a)</code> for fully independent nested copies. This is a top Python interview pitfall.
 </div>
-
 <div class="cb"><div class="cb-head"><span class="cb-lang">python — lists.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Create lists with square brackets</span>
 ipl_teams = [<span class="str">"MI"</span>, <span class="str">"CSK"</span>, <span class="str">"RCB"</span>, <span class="str">"KKR"</span>]
@@ -702,12 +775,8 @@ ml_devs = {<span class="str">"Priya"</span>, <span class="str">"Sara"</span>, <s
 <span class="cm"># Membership check is O(1) — instant even for 1 million items</span>
 <span class="bi">print</span>(<span class="str">"Priya"</span> <span class="kw">in</span> python_devs)  <span class="cm"># True</span></pre></div>
 <h3 class="sh3">4. Dictionaries — The Most Important Structure in ML</h3>
-<div class="callout cp">
-<strong>⚡ Big-O Time Complexity & ML Vocabulary Mapping:</strong>
-<br/>• <strong>Lookup:</strong> $O(1)$ average time complexity. Dictionaries are implemented as hash tables. Looking up a key takes a constant amount of time, regardless of whether the dictionary has 10 keys or 10 million keys.
-<br/>• <strong>List lookup vs. Dict lookup:</strong> Checking if an element exists in a list takes $O(n)$ time because Python has to scan the entire list sequentially. In ML, always use a dictionary or a set for lookup tables (like a vocabulary dictionary mapping words to IDs in NLP: <code>vocab = {'hello': 0, 'world': 1}</code>).
-<br/>• <strong>Hash Collisions:</strong> Under the hood, if two different keys hash to the same index, Python resolves this using open addressing, which can degrade lookup performance to $O(n)$ in the absolute worst-case scenario (extremely rare).
-</div>
+<div class="callout cp"><strong>⚡ Big-O Time Complexity &amp; ML Vocabulary Mapping:</strong>
+<br/>• <strong>Lookup:</strong> $O(1)$ average time complexity. Dictionaries are implemented as hash tables. Looking up a key takes a constant amount of time, regardless of whether the dictionary has 10 keys or 10 million keys.<br/><br/>• <strong>List lookup vs. Dict lookup:</strong> Checking if an element exists in a list takes $O(n)$ time because Python has to scan the entire list sequentially. In ML, always use a dictionary or a set for lookup tables (like a vocabulary dictionary mapping words to IDs in NLP: <code>vocab = {'hello': 0, 'world': 1}</code>).<br/><br/>• <strong>Hash Collisions:</strong> Under the hood, if two different keys hash to the same index, Python resolves this using open addressing, which can degrade lookup performance to $O(n)$ in the absolute worst-case scenario (extremely rare).</div>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python — dicts.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># Dicts store key:value pairs — like a real dictionary</span>
 student = {
@@ -733,16 +802,14 @@ student[<span class="str">"gpa"</span>] = <span class="num">9.1</span>          
 <span class="cm"># Dict comprehension — builds a dict from a sequence</span>
 grades = {<span class="str">"Raj"</span>: <span class="num">88</span>, <span class="str">"Priya"</span>: <span class="num">92</span>, <span class="str">"Amit"</span>: <span class="num">75</span>}
 passed = {name: g <span class="kw">for</span> name, g <span class="kw">in</span> grades.items() <span class="kw">if</span> g &gt;= <span class="num">80</span>}</pre></div>
-<div class="ml-connect">In scikit-learn, you call models like this: <code>model = RandomForestClassifier(n_estimators=100, max_depth=5)</code>. Those keyword arguments are a dict. Model hyperparameters, dataset metadata, training config — ALL dicts. Mastering dicts = mastering ML APIs.</div>
-<div class="misconception">
-<strong>⚠️ Top Mistakes — Day 2:</strong>
-<strong>1. List index out of range:</strong> <code>lst[5]</code> when list has 4 items → IndexError. Fix: check <code>len(lst)</code> first.<br/>
-<strong>2. dict KeyError:</strong> <code>d["missing_key"]</code> crashes if key doesn't exist. Fix: use <code>d.get("key", default)</code>.<br/>
-<strong>3. Empty set confusion:</strong> <code>{}</code> creates an empty DICT, not a set. Use <code>set()</code> for empty set.<br/>
-<strong>4. sort() vs sorted():</strong> <code>list.sort()</code> modifies in place and returns None. <code>sorted(list)</code> returns a new list.
-  </div>
+<div class="ml-connect">In scikit-learn, you call models like this: <code>model = RandomForestClassifier(n_estimators=100, max_depth=5)</code>.<br/><br/>Those keyword arguments are a dict.<br/><br/>Model hyperparameters, dataset metadata, training config — ALL dicts.<br/><br/>Mastering dicts = mastering ML APIs.</div>
+<div class="misconception"><strong>⚠️ Top Mistakes — Day 2:</strong>
+<strong>1.<br/><br/>List index out of range:</strong> <code>lst[5]</code> when list has 4 items → IndexError.<br/><br/>Fix: check <code>len(lst)</code> first.<br/>
+<strong>2. dict KeyError:</strong> <code>d["missing_key"]</code> crashes if key doesn't exist.<br/><br/>Fix: use <code>d.get("key", default)</code>.<br/>
+<strong>3.<br/><br/>Empty set confusion:</strong> <code>{}</code> creates an empty DICT, not a set.<br/><br/>Use <code>set()</code> for empty set.<br/>
+<strong>4. sort() vs sorted():</strong> <code>list.sort()</code> modifies in place and returns None.<br/><br/><code>sorted(list)</code> returns a new list.</div>
 <h3 class="sh3">5. The `collections` Module (Advanced Data Structures)</h3>
-<div class="ml-connect">In ML (especially NLP and graphs), built-in dictionaries and lists are sometimes too basic. Python's `collections` module provides specialized, high-performance data structures.</div>
+<div class="ml-connect">In ML (especially NLP and graphs), built-in dictionaries and lists are sometimes too basic.<br/><br/>Python's `collections` module provides specialized, high-performance data structures.</div>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — collections_demo.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">from</span> collections <span class="kw">import</span> Counter, defaultdict, deque
@@ -840,7 +907,7 @@ d[<span class="str">"a"</span>] = <span class="num">99</span>
 <span class="task-time">⏱ 25 min</span>
 </div>
 <div class="task-body">
-<p>Given a list of Bollywood top-10 box office movies, use slicing and list methods to answer specific questions. No loops yet.</p>
+<p style="margin-bottom: 0.6rem;">Given a list of Bollywood top-10 box office movies, use slicing and list methods to answer specific questions.</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">No loops yet.</li></ul>
 <button class="solution-toggle" onclick="toggleSolution('sol-d2t1')">👁 Show Solution</button>
 <div class="solution-box" id="sol-d2t1">
 <div class="sol-header">✅ SOLUTION</div>
@@ -855,7 +922,22 @@ d[<span class="str">"a"</span>] = <span class="num">99</span>
 <span class="bi">print</span>(<span class="str">"Sorted:"</span>, sorted(movies))       <span class="cm"># alphabetical</span>
 <span class="bi">print</span>(<span class="str">"Count:"</span>, <span class="bi">len</span>(movies))           <span class="cm"># 10</span></pre></div>
 </div>
-<div class="done-when">All 7 outputs print correctly. You understand slicing notation [start:stop:step].</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w1-t04')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w1-t04">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># List Slicer - Indexing Practice
+movies = ["Pathaan", "Jawan", "Animal", "Dunki", "Tiger 3",
+          "12th Fail", "Tu Jhoothi", "Gadar 2", "OMG 2", "Sam Bahadur"]
+print("Top 3:", movies[:3])
+print("Last 2:", movies[-2:])
+print("Middle:", movies[3:7])
+print("Every 2nd:", movies[::2])
+print("Reversed:", movies[::-1])
+print("Sorted:", sorted(movies))
+print("Count:", len(movies))</pre>
+</div>
+</div><div class="done-when">All 7 outputs print correctly. You understand slicing notation [start:stop:step].</div>
 </div>
 </div>
 <div class="task-block">
@@ -865,7 +947,7 @@ d[<span class="str">"a"</span>] = <span class="num">99</span>
 <span class="task-time">⏱ 45 min</span>
 </div>
 <div class="task-body">
-<p>Build a grade tracker that uses all 4 data structures together. Store 5 students with their marks in 3 subjects. Compute averages, find unique grades, and build a rank dictionary.</p>
+<p style="margin-bottom: 0.6rem;">Build a grade tracker that uses all 4 data structures together.</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">Store 5 students with their marks in 3 subjects.</li><li style="margin-bottom: 0.4rem;">Compute averages, find unique grades, and build a rank dictionary.</li></ul>
 <button class="solution-toggle" onclick="toggleSolution('sol-d2t2')">👁 Show Solution</button>
 <div class="solution-box" id="sol-d2t2">
 <div class="sol-header">✅ SOLUTION — grade_tracker.py</div>
@@ -898,10 +980,37 @@ grade_set = <span class="bi">set</span>()  <span class="cm"># unique grades earn
     grade_set.add(grade)
     <span class="bi">print</span>(<span class="str">f"{name:<span class="num">10</span>} {avg:<span class="num">10</span>} {grade:<span class="num">8</span>}"</span>)
 
-<span class="bi">print</span>(<span class="str">f"\nGrades awarded this batch: {grade_set}"</span>)  <span class="cm"># set</span>
+<span class="bi">print</span>(<span class="str">f"
+Grades awarded this batch: {grade_set}"</span>)  <span class="cm"># set</span>
 <span class="bi">print</span>(<span class="str">f"Top scorer: {<span class="bi">max</span>(averages, key=averages.get)}"</span>)</pre></div>
 </div>
-<div class="done-when">Output shows formatted table with names, averages, grades. Set shows unique grades. max() finds top scorer.</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w1-t05')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w1-t05">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># Student Grade Tracker - All 4 Structures
+students = {
+    "Raj":   (88, 92, 79),
+    "Priya": (95, 87, 91),
+    "Amit":  (72, 68, 74),
+    "Sara":  (61, 55, 63),
+    "Karan": (84, 89, 82),
+}
+averages = {}
+for name, marks in students.items():
+    averages[name] = round(sum(marks) / len(marks), 2)
+grade_set = set()
+print(f"{'Name':&lt;10} {'Average':&lt;10} {'Grade':&lt;8}")
+print("-" * 30)
+for name, avg in averages.items():
+    grade = "A" if avg &gt;= 85 else "B" if avg &gt;= 70 else "C" if avg &gt;= 60 else "F"
+    grade_set.add(grade)
+    print(f"{name:&lt;10} {avg:&lt;10} {grade:&lt;8}")
+print(f"
+Grades awarded: {grade_set}")
+print(f"Top scorer: {max(averages, key=averages.get)}")</pre>
+</div>
+</div><div class="done-when">Output shows formatted table with names, averages, grades. Set shows unique grades. max() finds top scorer.</div>
 <div class="git-block">
 git add grade_tracker.py
 git commit -m "Day 2: grade tracker — dict, tuple, list comprehension, set"</div>
@@ -914,7 +1023,7 @@ git commit -m "Day 2: grade tracker — dict, tuple, list comprehension, set"</d
 <span class="task-time">⏱ 90 min</span>
 </div>
 <div class="task-body">
-<p>Count word frequency in a paragraph using a dict. This is literally how text preprocessing works in NLP (Natural Language Processing). Clean the text, split into words, count each word.</p>
+<p style="margin-bottom: 0.6rem;">Count word frequency in a paragraph using a dict.</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">This is literally how text preprocessing works in NLP (Natural Language Processing).</li><li style="margin-bottom: 0.4rem;">Clean the text, split into words, count each word.</li></ul>
 <button class="solution-toggle" onclick="toggleSolution('sol-d2t3')">👁 Show Solution</button>
 <div class="solution-box" id="sol-d2t3">
 <div class="sol-header">✅ SOLUTION — word_counter.py</div>
@@ -928,10 +1037,11 @@ Machine learning and AI are transforming India's tech industry rapidly.
 """</span>
 
 <span class="cm"># Clean and split</span>
-words = text.lower().replace(<span class="str">"\n"</span>, <span class="str">" "</span>).split()
+words = text.lower().replace(<span class="str">"
+"</span>, <span class="str">" "</span>).split()
 
 <span class="cm"># Remove punctuation from each word</span>
-clean_words = [w.strip(<span class="str">".,!?;:'\"()"</span>) <span class="kw">for</span> w <span class="kw">in</span> words <span class="kw">if</span> w.strip(<span class="str">".,!?;:'\"()"</span>)]
+clean_words = [w.strip(<span class="str">".,!?;:'"()"</span>) <span class="kw">for</span> w <span class="kw">in</span> words <span class="kw">if</span> w.strip(<span class="str">".,!?;:'"()"</span>)]
 
 <span class="cm"># Count frequency using dict</span>
 freq = {}
@@ -947,11 +1057,34 @@ sorted_freq = sorted(freq.items(), key=<span class="kw">lambda</span> x: x[<span
     bar = <span class="str">"█"</span> * count
     <span class="bi">print</span>(<span class="str">f"{word:<span class="num">15</span>} {count:2d} {bar}"</span>)
 
-<span class="bi">print</span>(<span class="str">f"\nTotal unique words: {<span class="bi">len</span>(freq)}"</span>)
+<span class="bi">print</span>(<span class="str">f"
+Total unique words: {<span class="bi">len</span>(freq)}"</span>)
 <span class="bi">print</span>(<span class="str">f"Total words: {<span class="bi">len</span>(clean_words)}"</span>)</pre></div>
-<div class="ml-connect">This is EXACTLY how tokenizers work in NLP models like BERT and GPT — count word frequencies, build vocabulary dicts, map words to IDs. You just built a baby tokenizer.</div>
+<div class="ml-connect">This is EXACTLY how tokenizers work in NLP models like BERT and GPT — count word frequencies, build vocabulary dicts, map words to IDs.<br/><br/>You just built a baby tokenizer.</div>
 </div>
-<div class="done-when">Word frequencies computed, top 10 printed with visual bars, unique vs total word counts shown.</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w1-t06')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w1-t06">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># Word Frequency Counter - NLP Foundation
+text = """Python is amazing. Python is powerful and Python is easy.
+Machine learning with Python is fun and exciting."""
+for p in ".,!?;:"'":
+    text = text.replace(p, "")
+words = text.lower().split()
+freq = {}
+for word in set(words):
+    freq[word] = words.count(word)
+sorted_words = sorted(freq.items(), key=lambda x: x[1], reverse=True)
+print(f"{'Word':&lt;15} {'Count':&lt;6}")
+print("-" * 21)
+for word, count in sorted_words:
+    print(f"{word:&lt;15} {count:&lt;6}")
+print(f"
+Total unique words: {len(freq)}")
+print(f"Most common: '{sorted_words[0][0]}' ({sorted_words[0][1]} times)")</pre>
+</div>
+</div><div class="done-when">Word frequencies computed, top 10 printed with visual bars, unique vs total word counts shown.</div>
 </div>
 </div>
 </div>
@@ -966,7 +1099,7 @@ sorted_freq = sorted(freq.items(), key=<span class="kw">lambda</span> x: x[<span
 </a>
 <a class="resource-card" href="https://www.youtube.com/playlist?list=PLu71SKxNbfoBsMugTFALhdLlZ5VOqCg2s" target="_blank">
 <div class="rc-type">🎬 INDIAN YOUTUBE</div>
-<div class="rc-title">Lists & Tuples in Python — Hitesh Choudhary</div>
+<div class="rc-title">Lists &amp; Tuples in Python — Hitesh Choudhary</div>
 <div class="rc-sub">Chai aur Code · Hindi, hands-on lists and tuples deep-dive</div>
 </a>
 <a class="resource-card" href="https://www.youtube.com/watch?v=jcQjp11mn1A" target="_blank">
@@ -1019,7 +1152,7 @@ sorted_freq = sorted(freq.items(), key=<span class="kw">lambda</span> x: x[<span
 <li>Build a number guessing game and a grade distribution analyzer</li>
 </ul></div><div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Data structures (Lists, Tuples, Sets, and Dictionaries) and indexing.</li></ul></div>
 <h2 class="sh2">🧠 Theory</h2>
-<div class="analogy">IRCTC booking: if seat available → book; elif waitlist open → waitlist mein daalo; else → "no seats". Python mein bhi exactly yahi — pehli true condition run hoti hai, baaki skip.</div>
+<div class="analogy">IRCTC booking: if seat available → book; elif waitlist open → waitlist mein daalo; else → "no seats".<br/><br/>Python mein bhi exactly yahi — pehli true condition run hoti hai, baaki skip.</div>
 <h3 class="sh3">1. if / elif / else</h3>
 <p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Conditional statements control the execution flow of a program by running specific code blocks only when their corresponding Boolean expressions evaluate to true.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
@@ -1074,9 +1207,9 @@ grades = [<span class="str">"A"</span> <span class="kw">if</span> s&gt;=<span cl
 <span class="cm"># Normalize to 0-1 (you do this EVERY time before training ML models!)</span>
 max_s = <span class="bi">max</span>(scores)
 normalized = [<span class="bi">round</span>(s / max_s, <span class="num">3</span>) <span class="kw">for</span> s <span class="kw">in</span> scores]</pre></div>
-<div class="ml-connect">Training loops in ML: <code>for epoch in range(100): train_step()</code>. Dataset loops: <code>for X, y in dataloader: predict(X)</code>. List comprehensions: feature engineering, label encoding, data normalization. Control flow is literally the skeleton of every ML training script.</div>
+<div class="ml-connect">Training loops in ML: <code>for epoch in range(100): train_step()</code>.<br/><br/>Dataset loops: <code>for X, y in dataloader: predict(X)</code>.<br/><br/>List comprehensions: feature engineering, label encoding, data normalization.<br/><br/>Control flow is literally the skeleton of every ML training script.</div>
 <div class="misconception"><strong>⚠️ Top Mistakes — Day 3:</strong>
-<strong>Indentation errors:</strong> Python uses 4 spaces for blocks. Mixed tabs/spaces = IndentationError.<br/>
+<strong>Indentation errors:</strong> Python uses 4 spaces for blocks.<br/><br/>Mixed tabs/spaces = IndentationError.<br/>
 <strong>range(n) goes 0 to n-1:</strong> range(5) = [0,1,2,3,4], NOT [1,2,3,4,5].<br/>
 <strong>Off-by-one in slices:</strong> range(1,11) gives 1 to 10 — the 11 is excluded.</div>
 <!-- PREDICT THE OUTPUT -->
@@ -1126,7 +1259,7 @@ passed = [x <span class="kw">for</span> x <span class="kw">in</span> scores <spa
 <span class="task-time">⏱ 25 min</span>
 </div>
 <div class="task-body">
-<p>Classic interview problems. FizzBuzz 1-30, then write a function that checks if a number is prime.</p>
+<p style="margin-bottom: 0.6rem;">Classic interview problems.</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">FizzBuzz 1-30, then write a function that checks if a number is prime.</li></ul>
 <button class="solution-toggle" onclick="toggleSolution('sol-d3t1')">👁 Show Solution</button>
 <div class="solution-box" id="sol-d3t1"><div class="sol-header">✅ SOLUTION</div>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
@@ -1146,7 +1279,41 @@ passed = [x <span class="kw">for</span> x <span class="kw">in</span> scores <spa
 
 primes = [n <span class="kw">for</span> n <span class="kw">in</span> <span class="bi">range</span>(<span class="num">2</span>, <span class="num">50</span>) <span class="kw">if</span> is_prime(n)]
 <span class="bi">print</span>(<span class="str">f"Primes under 50: {primes}"</span>)</pre></div></div>
-<div class="done-when">FizzBuzz prints correctly 1-30. is_prime() correctly identifies primes. List comprehension builds primes list.</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w1-t07')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w1-t07">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># FizzBuzz + Prime Checker
+print("FizzBuzz 1-30:")
+for i in range(1, 31):
+    if i % 15 == 0:
+        print("FizzBuzz", end=" ")
+    elif i % 3 == 0:
+        print("Fizz", end=" ")
+    elif i % 5 == 0:
+        print("Buzz", end=" ")
+    else:
+        print(i, end=" ")
+print("
+")
+
+def is_prime(n):
+    if n &amp;lt; 2:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+print("Testing is_prime():")
+for num in [2, 3, 4, 7, 9, 11, 13, 17, 19, 23, 29, 30, 31, 37]:
+    print(f"  {num}: {'Prime' if is_prime(num) else 'Not Prime'}")
+
+primes = [n for n in range(2, 51) if is_prime(n)]
+print(f"
+Primes under 50: {primes}")</pre>
+</div>
+</div><div class="done-when">FizzBuzz prints correctly 1-30. is_prime() correctly identifies primes. List comprehension builds primes list.</div>
 </div>
 </div>
 <div class="task-block">
@@ -1155,7 +1322,7 @@ primes = [n <span class="kw">for</span> n <span class="kw">in</span> <span class
 <span class="task-time">⏱ 45 min</span>
 </div>
 <div class="task-body">
-<p>Build a while-loop based number guessing game. Computer picks random number 1-100, user has 7 attempts, gets "higher"/"lower" hints, game tracks attempts.</p>
+<p style="margin-bottom: 0.6rem;">Build a while-loop based number guessing game.</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">Computer picks random number 1-100, user has 7 attempts, gets "higher"/"lower" hints, game tracks attempts.</li></ul>
 <button class="solution-toggle" onclick="toggleSolution('sol-d3t2')">👁 Show Solution</button>
 <div class="solution-box" id="sol-d3t2"><div class="sol-header">✅ SOLUTION</div>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
@@ -1170,7 +1337,8 @@ guessed = <span class="kw">False</span>
 
 <span class="kw">while</span> attempts &lt; max_attempts:
     <span class="kw">try</span>:
-        guess = <span class="bi">int</span>(<span class="bi">input</span>(<span class="str">f"\nAttempt {attempts+1}/{max_attempts}: "</span>))
+        guess = <span class="bi">int</span>(<span class="bi">input</span>(<span class="str">f"
+Attempt {attempts+1}/{max_attempts}: "</span>))
     <span class="kw">except</span> <span class="bi">ValueError</span>:
         <span class="bi">print</span>(<span class="str">"Enter a valid number!"</span>)
         <span class="kw">continue</span>
@@ -1186,7 +1354,34 @@ guessed = <span class="kw">False</span>
 
 <span class="kw">if</span> <span class="kw">not</span> guessed:
     <span class="bi">print</span>(<span class="str">f"❌ Game over! Number was {secret}"</span>)</pre></div></div>
-<div class="done-when">Game runs, gives hints, counts attempts, handles non-integer input without crashing, shows result.</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w1-t08')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w1-t08">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># Number Guessing Game - Random + Loops
+import random
+secret = random.randint(1, 100)
+max_attempts = 7
+attempts = 0
+print("Guess 1-100, you have 7 tries!")
+while attempts &amp;lt; max_attempts:
+    try:
+        guess = int(input(f"Attempt {attempts + 1}/{max_attempts}: "))
+    except ValueError:
+        print("Enter a valid number!")
+        continue
+    attempts += 1
+    if guess == secret:
+        print(f"Correct! You got it in {attempts} tries!")
+        break
+    elif guess &amp;lt; secret:
+        print("Higher! Go up.")
+    else:
+        print("Lower! Go down.")
+else:
+    print(f"Game over! The number was {secret}.")</pre>
+</div>
+</div><div class="done-when">Game runs, gives hints, counts attempts, handles non-integer input without crashing, shows result.</div>
 <div class="git-block">git add *.py &amp;&amp; git commit -m "Day 3: FizzBuzz, prime checker, guessing game" &amp;&amp; git push</div>
 </div>
 </div>
@@ -1213,7 +1408,8 @@ guessed = <span class="kw">False</span>
 <div class="day-header">
 <div class="day-tag">WEEK 1 · DAY 4 · MONTH 1</div>
 <h1>Functions — Parameters, Return Values, Lambda, Scope</h1>
-<p>Functions = reusable code blocks. In ML, every neural network layer is a function, every preprocessing step is a function, every evaluation metric is a function.</p>
+<p>Functions = reusable code blocks.</p>
+<p>In ML, every neural network layer is a function, every preprocessing step is a function, every evaluation metric is a function.</p>
 <div class="meta-row"><span class="meta-badge g">⏱ 4 hours</span><span class="meta-badge o">🔰 Beginner–Intermediate</span><span class="meta-badge p">⚡ +150 XP</span></div>
 </div>
 <div class="objectives"><h3>🎯 By end of Day 4:</h3><ul>
@@ -1224,14 +1420,14 @@ guessed = <span class="kw">False</span>
 <li>Build a utility library of functions you'll reuse all roadmap</li>
 </ul></div><div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Conditional execution (if-else statements) and iterative loops (for, while).</li></ul></div>
 <h2 class="sh2">🧠 Theory</h2>
-<div class="analogy">Ek chai ki dukaan ka example: tumhara chai banana ka process ek function hai — same steps, same output, lekin different type of milk/sugar as inputs. Function ek recipe hai — write once, use many times with different ingredients.</div>
+<div class="analogy">Ek chai ki dukaan ka example: tumhara chai banana ka process ek function hai — same steps, same output, lekin different type of milk/sugar as inputs.<br/><br/>Function ek recipe hai — write once, use many times with different ingredients.</div>
 <h3 class="sh3">1. Defining and Calling Functions</h3>
-<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Functions are reusable blocks of code that organize logic into modular units. They take inputs (arguments), perform operations, and return outputs.</p>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Functions are reusable blocks of code that organize logic into modular units.</p>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">They take inputs (arguments), perform operations, and return outputs.</p>
 <div class="gotcha-box">
 <strong>⚠️ Gotcha: Mutable Default Arguments</strong>
 Never use a mutable object (list, dict, set) as a default function argument. Python evaluates default arguments <em>once</em> at function definition, not at each call. So <code>def append_to(item, lst=[])</code> will share the same list across all calls. Always use <code>None</code> as the default and create the list inside the function body.
 </div>
-
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">def</span> <span class="fn">greet</span>(name, greeting=<span class="str">"Namaste"</span>):   <span class="cm"># default parameter</span>
     <span class="str">"""Greets a person. Docstring explains what function does."""</span>
@@ -1281,8 +1477,8 @@ add = <span class="kw">lambda</span> x, y: x + y
 students = [(<span class="str">"Raj"</span>, <span class="num">88</span>), (<span class="str">"Priya"</span>, <span class="num">95</span>), (<span class="str">"Amit"</span>, <span class="num">72</span>)]
 students.sort(key=<span class="kw">lambda</span> x: x[<span class="num">1</span>], reverse=<span class="kw">True</span>)   <span class="cm"># sort by score</span>
 <span class="bi">print</span>(students)   <span class="cm"># [("Priya", 95), ("Raj", 88), ("Amit", 72)]</span></pre></div>
-<div class="ml-connect">In ML: <code>model.fit(X_train, y_train)</code>, <code>model.predict(X_test)</code>, <code>accuracy_score(y_true, y_pred)</code> — every single ML operation is a function call. Understanding how functions work, including *args and **kwargs, lets you read and write ML library code with confidence.</div>
-<div class="misconception"><strong>⚠️ Scope Confusion:</strong> Variables defined inside a function don't exist outside it. <code>x = 10</code> inside a function is a local variable — <code>print(x)</code> outside the function crashes with NameError. Use return to pass values out of functions.</div>
+<div class="ml-connect">In ML: <code>model.fit(X_train, y_train)</code>, <code>model.predict(X_test)</code>, <code>accuracy_score(y_true, y_pred)</code> — every single ML operation is a function call.<br/><br/>Understanding how functions work, including *args and **kwargs, lets you read and write ML library code with confidence.</div>
+<div class="misconception"><strong>⚠️ Scope Confusion:</strong> Variables defined inside a function don't exist outside it.<br/><br/><code>x = 10</code> inside a function is a local variable — <code>print(x)</code> outside the function crashes with NameError.<br/><br/>Use return to pass values out of functions.</div>
 <!-- PREDICT THE OUTPUT -->
 <h2 class="sh2">🔮 Predict the Output</h2>
 <div class="predict-block">
@@ -1367,7 +1563,38 @@ print(calculate(3, 3))</pre></div>
 <span class="bi">print</span>(mean(<span class="num">80</span>, <span class="num">90</span>, <span class="num">85</span>, <span class="num">92</span>))               <span class="cm"># 86.75</span>
 <span class="bi">print</span>(accuracy([<span class="num">1</span>,<span class="num">0</span>,<span class="num">1</span>,<span class="num">1</span>], [<span class="num">1</span>,<span class="num">0</span>,<span class="num">0</span>,<span class="num">1</span>]))    <span class="cm"># 0.75</span>
 <span class="bi">print</span>(one_hot(<span class="num">2</span>, <span class="num">5</span>))                        <span class="cm"># [0, 0, 1, 0, 0]</span></pre></div></div>
-<div class="done-when">All 5 functions work correctly and produce expected outputs.</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w1-t09')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w1-t09">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># ML Utility Functions Library
+def normalize(values):
+    lo, hi = min(values), max(values)
+    return [round((v - lo) / (hi - lo), 4) for v in values]
+
+def clamp(value, lo=0, hi=1):
+    return max(lo, min(hi, value))
+
+def mean(*args):
+    return sum(args) / len(args)
+
+def accuracy(predictions, labels):
+    correct = sum(1 for p, l in zip(predictions, labels) if p == l)
+    return correct / len(labels)
+
+def one_hot(label, num_classes):
+    vec = [0] * num_classes
+    vec[label] = 1
+    return vec
+
+print("Testing ML utilities:")
+print(f"normalize([10,20,30,40]): {normalize([10, 20, 30, 40])}")
+print(f"clamp(1.5): {clamp(1.5)}")
+print(f"mean(80,90,85,92): {mean(80, 90, 85, 92)}")
+print(f"accuracy([1,0,1,1],[1,0,0,1]): {accuracy([1,0,1,1], [1,0,0,1])}")
+print(f"one_hot(2,5): {one_hot(2, 5)}")</pre>
+</div>
+</div><div class="done-when">All 5 functions work correctly and produce expected outputs.</div>
 <div class="git-block">git add ml_utils.py &amp;&amp; git commit -m "Day 4: ML utility functions — normalize, accuracy, one-hot" &amp;&amp; git push</div>
 </div>
 </div>
@@ -1394,7 +1621,8 @@ print(calculate(3, 3))</pre></div>
 <div class="day-header">
 <div class="day-tag">WEEK 1 · DAY 5 · MONTH 1</div>
 <h1>File I/O + Exception Handling</h1>
-<p>ML mein datasets files mein hote hain — CSV, JSON, TXT. File handling aur error handling ke bina koi production ML system nahi chal sakta.</p>
+<p>ML mein datasets files mein hote hain — CSV, JSON, TXT.</p>
+<p>File handling aur error handling ke bina koi production ML system nahi chal sakta.</p>
 <div class="meta-row"><span class="meta-badge g">⏱ 4 hours</span><span class="meta-badge o">🔰 Beginner–Intermediate</span><span class="meta-badge p">⚡ +150 XP</span></div>
 </div>
 <div class="objectives"><h3>🎯 By end of Day 5:</h3><ul>
@@ -1405,12 +1633,10 @@ print(calculate(3, 3))</pre></div>
 <li>Build a persistent data store for a real dataset</li>
 </ul></div><div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Defining custom functions, parameter parsing, and return values.</li></ul></div>
 <h2 class="sh2">🧠 Theory</h2>
-<div class="analogy">File reading bilkul ek library kitaab ki tarah hai. Pehle shelf se kitaab uthao (file open), pado (read), phir wapas rakh do (close). with open() ensures kitaab automatically wapas shelf pe jaayegi — chahe kuch bhi ho.</div>
+<div class="analogy">File reading bilkul ek library kitaab ki tarah hai.<br/><br/>Pehle shelf se kitaab uthao (file open), pado (read), phir wapas rakh do (close). with open() ensures kitaab automatically wapas shelf pe jaayegi — chahe kuch bhi ho.</div>
 <h3 class="sh3">1. Reading and Writing Files</h3>
-<div class="callout cw">
-<strong>⚡ Memory-Efficient Data Loading via Generators ():</strong>
-<br/>When training ML models on datasets that are larger than your computer's RAM, loading the entire file into a Python list using <code>f.readlines()</code> will crash your kernel (Out Of Memory error).
-<br/>Instead, use a **generator** with the <code>yield</code> keyword. A generator yields one row at a time, keeping only a single line in memory:
+<div class="callout cw"><strong>⚡ Memory-Efficient Data Loading via Generators ():</strong>
+<br/>When training ML models on datasets that are larger than your computer's RAM, loading the entire file into a Python list using <code>f.readlines()</code> will crash your kernel (Out Of Memory error).<br/><br/><br/>Instead, use a **generator** with the <code>yield</code> keyword.<br/><br/>A generator yields one row at a time, keeping only a single line in memory:
 <pre><span class="kw">def</span> stream_dataset(file_path):
     <span class="kw">with</span> <span class="bi">open</span>(file_path, <span class="str">'r'</span>) <span class="kw">as</span> f:
         <span class="kw">for</span> line <span class="kw">in</span> f:
@@ -1418,15 +1644,16 @@ print(calculate(3, 3))</pre></div>
 
 <span class="cm"># This streams rows one-by-one, consumption uses O(1) RAM:</span>
 <span class="kw">for</span> row <span class="kw">in</span> stream_dataset(<span class="str">'large_dataset.csv'</span>):
-    process_row(row)</pre>
-</div>
+    process_row(row)</pre></div>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="cm"># ALWAYS use 'with open()' — auto-closes file even if error occurs</span>
 
 <span class="cm"># Writing to a file</span>
 <span class="kw">with</span> <span class="bi">open</span>(<span class="str">"notes.txt"</span>, <span class="str">"w"</span>) <span class="kw">as</span> f:    <span class="cm"># "w" = write (overwrites existing)</span>
-    f.write(<span class="str">"Line 1: Python is awesome\n"</span>)
-    f.write(<span class="str">"Line 2: AI/ML is the future\n"</span>)
+    f.write(<span class="str">"Line 1: Python is awesome
+"</span>)
+    f.write(<span class="str">"Line 2: AI/ML is the future
+"</span>)
 
 <span class="cm"># Reading entire file</span>
 <span class="kw">with</span> <span class="bi">open</span>(<span class="str">"notes.txt"</span>, <span class="str">"r"</span>) <span class="kw">as</span> f:    <span class="cm"># "r" = read</span>
@@ -1436,13 +1663,16 @@ print(calculate(3, 3))</pre></div>
 <span class="cm"># Reading line by line (memory efficient for large files)</span>
 <span class="kw">with</span> <span class="bi">open</span>(<span class="str">"notes.txt"</span>, <span class="str">"r"</span>) <span class="kw">as</span> f:
     <span class="kw">for</span> line <span class="kw">in</span> f:
-        <span class="bi">print</span>(line.strip())            <span class="cm"># strip() removes trailing \n</span>
+        <span class="bi">print</span>(line.strip())            <span class="cm"># strip() removes trailing 
+</span>
 
 <span class="cm"># Appending to existing file</span>
 <span class="kw">with</span> <span class="bi">open</span>(<span class="str">"notes.txt"</span>, <span class="str">"a"</span>) <span class="kw">as</span> f:    <span class="cm"># "a" = append</span>
-    f.write(<span class="str">"Line 3: File I/O mastered!\n"</span>)</pre></div>
+    f.write(<span class="str">"Line 3: File I/O mastered!
+"</span>)</pre></div>
 <h3 class="sh3">2. CSV Files — The Most Common ML Data Format</h3>
-<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">CSV (Comma-Separated Values) files are the standard format for tabular datasets. Python's built-in <code>csv</code> module allows reading and writing rows efficiently.</p>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">CSV (Comma-Separated Values) files are the standard format for tabular datasets.</p>
+<p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Python's built-in <code>csv</code> module allows reading and writing rows efficiently.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
 <pre><span class="kw">import</span> csv
 
@@ -1485,7 +1715,7 @@ students = [
 <span class="kw">except</span> <span class="bi">FileNotFoundError</span>:
     <span class="bi">print</span>(<span class="str">"File not found! Creating empty dataset..."</span>)
     data = <span class="str">""</span></pre></div>
-<div class="ml-connect">In ML, you load datasets from CSV/JSON constantly. If a file doesn't exist, if a column is missing, if data is corrupted — your training script should handle it gracefully, not crash. Production ML pipelines have try/except everywhere.</div>
+<div class="ml-connect">In ML, you load datasets from CSV/JSON constantly.<br/><br/>If a file doesn't exist, if a column is missing, if data is corrupted — your training script should handle it gracefully, not crash.<br/><br/>Production ML pipelines have try/except everywhere.</div>
 <!-- PREDICT THE OUTPUT -->
 <h2 class="sh2">🔮 Predict the Output</h2>
 <div class="predict-block">
@@ -1539,7 +1769,7 @@ print(x)</pre></div>
 <span class="task-time">⏱ 45 min</span>
 </div>
 <div class="task-body">
-<p>Build a program that lets you add students, save to CSV, and reload on next run. This is exactly how ML data pipelines work.</p>
+<p style="margin-bottom: 0.6rem;">Build a program that lets you add students, save to CSV, and reload on next run.</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;">This is exactly how ML data pipelines work.</li></ul>
 <button class="solution-toggle" onclick="toggleSolution('sol-d5t1')">👁 Show Solution</button>
 <div class="solution-box" id="sol-d5t1"><div class="sol-header">✅ SOLUTION</div>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
@@ -1580,7 +1810,41 @@ students = load_students()
 <span class="bi">print</span>(<span class="str">f"Loaded {<span class="bi">len</span>(students)} existing records."</span>)
 add_student(students)
 save_students(students)</pre></div></div>
-<div class="done-when">Program loads existing CSV on start, adds a student, saves back. Run it twice — second run should show the student from first run.</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w1-t10')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w1-t10">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># Student Records to CSV - Persistent Storage
+import csv
+import os
+FILENAME = "students.csv"
+FIELDS = ["name", "age", "score", "city"]
+def load_students():
+    if not os.path.exists(FILENAME):
+        return []
+    try:
+        with open(FILENAME, "r") as f:
+            return list(csv.DictReader(f))
+    except Exception as e:
+        print(f"Error loading: {e}")
+        return []
+def save_students(students):
+    with open(FILENAME, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDS)
+        writer.writeheader()
+        writer.writerows(students)
+    print(f"Saved {len(students)} records.")
+students = load_students()
+print(f"Loaded {len(students)} existing records.")
+if students:
+    for s in students:
+        print(f"  {s['name']:12} {s['age']:3} {s['score']:5} {s['city']:12}")
+else:
+    print("No records. Adding sample...")
+    students.append({"name": "Test", "age": 20, "score": 85.5, "city": "Mumbai"})
+    save_students(students)</pre>
+</div>
+</div><div class="done-when">Program loads existing CSV on start, adds a student, saves back. Run it twice — second run should show the student from first run.</div>
 <div class="git-block">git add *.py &amp;&amp; git commit -m "Day 5: file I/O, CSV read/write, exception handling" &amp;&amp; git push</div>
 </div>
 </div>
@@ -1595,7 +1859,7 @@ save_students(students)</pre></div></div>
 </div>
 <h2 class="sh2">📚 Day 5 Resources</h2>
 <div class="resources-grid">
-<a class="resource-card" href="https://www.youtube.com/watch?v=o-TAYRMQzIQ" target="_blank"><div class="rc-type">🎬 HINGLISH</div><div class="rc-title">File Handling & Serialization — CampusX DSMP</div><div class="rc-sub">CampusX · Hinglish, files, JSON, pickle — DSMP 2022-23</div></a>
+<a class="resource-card" href="https://www.youtube.com/watch?v=o-TAYRMQzIQ" target="_blank"><div class="rc-type">🎬 HINGLISH</div><div class="rc-title">File Handling &amp; Serialization — CampusX DSMP</div><div class="rc-sub">CampusX · Hinglish, files, JSON, pickle — DSMP 2022-23</div></a>
 <a class="resource-card" href="https://realpython.com/python-exceptions/" target="_blank"><div class="rc-type">📝 ARTICLE</div><div class="rc-title">Python Exceptions — RealPython</div><div class="rc-sub">Complete guide to try/except/finally</div></a>
 <a class="resource-card" href="https://www.geeksforgeeks.org/reading-and-writing-csv-files-in-python/" target="_blank"><div class="rc-type">📝 REFERENCE</div><div class="rc-title">CSV Files in Python — GFG</div><div class="rc-sub">csv.reader vs csv.DictReader explained</div></a>
 <a class="resource-card" href="https://docs.python.org/3/library/csv.html" target="_blank"><div class="rc-type">📖 DOCS</div><div class="rc-title">Python csv module — Official Docs</div><div class="rc-sub">All csv module methods and options</div></a>
@@ -1607,7 +1871,10 @@ save_students(students)</pre></div></div>
 <div class="day-header">
 <div class="day-tag">WEEK 1 · DAY 6 · MONTH 1</div>
 <h1>Object-Oriented Programming — Classes, Objects, Inheritance</h1>
-<p>OOP is how ALL of ML is built. sklearn models are classes. PyTorch neural networks are classes. Everything is an object. Understanding OOP = understanding ML library code.</p>
+<p>OOP is how ALL of ML is built. sklearn models are classes.</p>
+<p>PyTorch neural networks are classes.</p>
+<p>Everything is an object.</p>
+<p>Understanding OOP = understanding ML library code.</p>
 <div class="meta-row"><span class="meta-badge g">⏱ 4 hours</span><span class="meta-badge o">🔸 Intermediate</span><span class="meta-badge p">⚡ +150 XP</span></div>
 </div>
 <div class="objectives"><h3>🎯 By end of Day 6:</h3><ul>
@@ -1618,7 +1885,7 @@ save_students(students)</pre></div></div>
 <li>Model a mini ML pipeline using OOP (Scaler + Classifier skeleton)</li>
 </ul></div><div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Exception handling (try-except-finally) and reading/writing files.</li></ul></div>
 <h2 class="sh2">🧠 Theory</h2>
-<div class="analogy">Class ek blueprint hai, object ek ghar hai. Blueprint se hazaron ghar ban sakte hain — sab ka structure same, lekin andar ka saman alag. <code>class Student</code> blueprint hai. <code>raj = Student("Raj", 21)</code> ek actual student object hai RAM mein.</div>
+<div class="analogy">Class ek blueprint hai, object ek ghar hai.<br/><br/>Blueprint se hazaron ghar ban sakte hain — sab ka structure same, lekin andar ka saman alag.<br/><br/><code>class Student</code> blueprint hai.<br/><br/><code>raj = Student("Raj", 21)</code> ek actual student object hai RAM mein.</div>
 <h3 class="sh3">1. Classes and Objects</h3>
 <p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">Object-Oriented Programming (OOP) structures code by grouping data (attributes) and behavior (methods) into reusable blueprints called classes.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
@@ -1671,7 +1938,7 @@ arjun = MLStudent(<span class="str">"Arjun"</span>, <span class="num">23</span>,
 <span class="bi">print</span>(arjun)
 <span class="bi">print</span>(arjun.recommend_courses())    <span class="cm"># ["NLTK", "HuggingFace"]</span>
 <span class="bi">print</span>(arjun.is_eligible())          <span class="cm"># inherited from Student!</span></pre></div>
-<div class="ml-connect">Every sklearn model follows this pattern: <code>class LinearRegression(BaseEstimator, RegressorMixin)</code> — inheriting from base classes that provide fit(), predict(), score() contracts. PyTorch: <code>class MyNet(nn.Module)</code> — you inherit from nn.Module and override forward(). Understanding OOP = understanding how to build ML models from scratch.</div>
+<div class="ml-connect">Every sklearn model follows this pattern: <code>class LinearRegression(BaseEstimator, RegressorMixin)</code> — inheriting from base classes that provide fit(), predict(), score() contracts.<br/><br/>PyTorch: <code>class MyNet(nn.Module)</code> — you inherit from nn.Module and override forward().<br/><br/>Understanding OOP = understanding how to build ML models from scratch.</div>
 <div class="mermaid">
       graph TD
       Base["BaseModel <br/> fit X, y <br/> predict X <br/> score X, y"]
@@ -1769,9 +2036,50 @@ clf = ThresholdClassifier(threshold=<span class="num">0.5</span>)
 preds = clf.predict(scaled)
 <span class="bi">print</span>(<span class="str">"Predictions:"</span>, preds)
 <span class="bi">print</span>(<span class="str">f"Accuracy: {clf.score(scaled, labels):.0%}"</span>)</pre></div>
-<div class="ml-connect">This is LITERALLY the sklearn pattern. When you use sklearn next week: scaler = MinMaxScaler(); scaler.fit(X_train); X_scaled = scaler.transform(X_test) — exact same API. You just understood how sklearn is built.</div>
+<div class="ml-connect">This is LITERALLY the sklearn pattern.<br/><br/>When you use sklearn next week: scaler = MinMaxScaler(); scaler.fit(X_train); X_scaled = scaler.transform(X_test) — exact same API.<br/><br/>You just understood how sklearn is built.</div>
 </div>
-<div class="done-when">MinMaxScaler scales to [0,1]. ThresholdClassifier predicts. Score prints correctly. No sklearn import — pure Python OOP.</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w1-t11')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w1-t11">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># MinMaxScaler + SimpleClassifier - sklearn-style OOP
+class MinMaxScaler:
+    def __init__(self):
+        self.min_ = None
+        self.max_ = None
+    def fit(self, data):
+        self.min_ = min(data)
+        self.max_ = max(data)
+        return self
+    def transform(self, data):
+        if self.min_ is None:
+            raise ValueError("Call fit() before transform()!")
+        r = self.max_ - self.min_
+        return [round((x - self.min_) / r, 4) for x in data]
+    def fit_transform(self, data):
+        return self.fit(data).transform(data)
+
+class ThresholdClassifier:
+    def __init__(self, threshold=0.5):
+        self.threshold = threshold
+    def predict(self, data):
+        return [1 if x &amp;gt;= self.threshold else 0 for x in data]
+    def score(self, data, labels):
+        preds = self.predict(data)
+        correct = sum(1 for p, l in zip(preds, labels) if p == l)
+        return correct / len(labels)
+
+raw_scores = [45, 78, 92, 55, 88, 34, 67]
+scaler = MinMaxScaler()
+scaled = scaler.fit_transform(raw_scores)
+print("Scaled scores:", scaled)
+clf = ThresholdClassifier(threshold=0.5)
+labels = [0, 1, 1, 0, 1, 0, 1]
+preds = clf.predict(scaled)
+print("Predictions:", preds)
+print(f"Accuracy: {clf.score(scaled, labels):.2%}")</pre>
+</div>
+</div><div class="done-when">MinMaxScaler scales to [0,1]. ThresholdClassifier predicts. Score prints correctly. No sklearn import — pure Python OOP.</div>
 <div class="git-block">git add mini_pipeline.py &amp;&amp; git commit -m "Day 6: OOP — MinMaxScaler + Classifier, sklearn-style API" &amp;&amp; git push</div>
 </div>
 </div>
@@ -1798,7 +2106,9 @@ preds = clf.predict(scaled)
 <div class="day-header">
 <div class="day-tag">WEEK 1 · DAY 7 · MONTH 1</div>
 <h1>NumPy &amp; Week 1 Review</h1>
-<p>NumPy is the foundation of ALL numerical ML in Python. Tensors in PyTorch, arrays in Pandas, matrices in scikit-learn — everything is NumPy underneath. Today we master NumPy basics and run a comprehensive review of Week 1.</p>
+<p>NumPy is the foundation of ALL numerical ML in Python.</p>
+<p>Tensors in PyTorch, arrays in Pandas, matrices in scikit-learn — everything is NumPy underneath.</p>
+<p>Today we master NumPy basics and run a comprehensive review of Week 1.</p>
 <div class="meta-row"><span class="meta-badge g">⏱ 4 hours</span><span class="meta-badge o">🔸 Intermediate</span><span class="meta-badge p">⚡ +300 XP</span></div>
 </div>
 <div class="objectives"><h3>🎯 By end of Day 7:</h3><ul>
@@ -1809,7 +2119,7 @@ preds = clf.predict(scaled)
 <li>Run a complete recap and review of all Python basics from Week 1</li>
 </ul></div><div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:.8rem 1.1rem;margin:1rem 0;font-size:13.5px;"><strong>🚦 Before You Start Checklist:</strong><ul style="margin-left: 1.25rem; margin-top: 0.4rem;"><li>Are you comfortable with the concepts of: Object-Oriented Programming (classes, objects, methods, inheritance) and variable scopes.</li></ul></div>
 <h2 class="sh2">🧠 Theory</h2>
-<div class="analogy">Python list ek market bag hai — kuch bhi daal sako, lekin heavy lifting ke liye efficient nahi. NumPy array ek industrial conveyor belt hai — sirf ek type ka data, lekin millions of items per second. ML mein lakhs of data points milliseconds mein process — NumPy ke bina impossible.</div>
+<div class="analogy">Python list ek market bag hai — kuch bhi daal sako, lekin heavy lifting ke liye efficient nahi.<br/><br/>NumPy array ek industrial conveyor belt hai — sirf ek type ka data, lekin millions of items per second.<br/><br/>ML mein lakhs of data points milliseconds mein process — NumPy ke bina impossible.</div>
 <h3 class="sh3">1. Creating Arrays</h3>
 <p style="margin-top:0.4rem; margin-bottom:1rem; color:var(--text); line-height:1.6;">NumPy arrays (<code>ndarray</code>) are homogeneous, multi-dimensional grids that store numerical values of the same data type, forming the basis of all ML data representations.</p>
 <div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div>
@@ -1853,8 +2163,8 @@ g = np.random.randn(<span class="num">3</span>, <span class="num">3</span>)     
 flat = np.arange(<span class="num">12</span>)           <span class="cm"># [0,1,...,11]</span>
 matrix = flat.reshape(<span class="num">3</span>, <span class="num">4</span>)    <span class="cm"># 3 rows, 4 cols</span>
 col = flat.reshape(-<span class="num">1</span>, <span class="num">1</span>)      <span class="cm"># -1 means "figure it out" → 12 rows, 1 col</span></pre></div>
-<div class="callout ci"><strong>⚡ Why NumPy is 100x faster:</strong> Python lists store items as separate Python objects scattered in memory. NumPy stores all values contiguously as raw C numbers — the CPU reads them in one sweep using SIMD instructions. 1 million numbers: Python loop ≈ 100ms, NumPy ≈ 1ms.</div>
-<div class="ml-connect">NumPy arrays ARE tensors (just without autograd). <code>np.array([[1,2],[3,4]])</code> becomes <code>torch.tensor([[1,2],[3,4]])</code> in PyTorch. Same operations, same shape system, same reshape. Every concept you learn in NumPy today transfers directly to PyTorch in Month 3.</div>
+<div class="callout ci"><strong>⚡ Why NumPy is 100x faster:</strong> Python lists store items as separate Python objects scattered in memory.<br/><br/>NumPy stores all values contiguously as raw C numbers — the CPU reads them in one sweep using SIMD instructions. 1 million numbers: Python loop ≈ 100ms, NumPy ≈ 1ms.</div>
+<div class="ml-connect">NumPy arrays ARE tensors (just without autograd).<br/><br/><code>np.array([[1,2],[3,4]])</code> becomes <code>torch.tensor([[1,2],[3,4]])</code> in PyTorch.<br/><br/>Same operations, same shape system, same reshape.<br/><br/>Every concept you learn in NumPy today transfers directly to PyTorch in Month 3.</div>
 <h2 class="sh2">🔮 Predict the Output</h2>
 <div class="predict-block">
 <div class="predict-label">PREDICT — NumPy</div>
@@ -1898,11 +2208,14 @@ a = np.array([<span class="num">1</span>,<span class="num">2</span>,<span class=
 <span class="task-time">⏱ 20 min</span>
 </div>
 <div class="task-body">
-<p>Write a script to practice basic NumPy matrix operations:
-      <br/>1. Create a 3x3 matrix containing values from 1 to 9.
-      <br/>2. Print its shape, dimensions, and size.
-      <br/>3. Extract and print the center element (5) and the entire third row.
-      <br/>4. Multiply the matrix by 2, add 10, and calculate the sum of all elements.</p>
+<p style="margin-bottom: 0.6rem;">Write a script to practice basic NumPy matrix operations:
+      <br/>1.</p>
+<p style="margin-bottom: 0.6rem;">Create a 3x3 matrix containing values from 1 to 9.</p>
+<p style="margin-bottom: 0.6rem;"><br/>2.</p>
+<p style="margin-bottom: 0.6rem;">Print its shape, dimensions, and size.</p>
+<p style="margin-bottom: 0.6rem;"><br/>3.</p>
+<p style="margin-bottom: 0.6rem;">Extract and print the center element</p><ul style="padding-left: 1.5rem; margin-top: 0.4rem; margin-bottom: 1rem; list-style-type: disc;"><li style="margin-bottom: 0.4rem;"><strong>(5)</strong> And the entire third row.
+      <br/>4. Multiply the matrix by 2, add 10, and calculate the sum of all elements</li></ul>
 <button class="solution-toggle" onclick="toggleSolution('sol-d7t1')">👁 Show Solution</button>
 <div class="solution-box" id="sol-d7t1">
 <div class="sol-header">✅ SOLUTION — numpy_practice.py</div>
@@ -1911,7 +2224,8 @@ a = np.array([<span class="num">1</span>,<span class="num">2</span>,<span class=
 
 # 1. Create 3x3 matrix
 matrix = np.arange(1, 10).reshape(3, 3)
-print("Matrix:\n", matrix)
+print("Matrix:
+", matrix)
 
 # 2. Print attributes
 print("Shape:", matrix.shape)
@@ -1926,10 +2240,30 @@ print("Third Row:", third_row)
 
 # 4. Math
 new_matrix = matrix * 2 + 10
-print("Modified Matrix:\n", new_matrix)
+print("Modified Matrix:
+", new_matrix)
 print("Sum of elements:", np.sum(new_matrix))</pre></div>
 </div>
-<div class="done-when">Your script runs without errors, produces the correct shapes, correct center element, and prints the sum of modified elements (180).</div>
+<button class="solution-toggle" onclick="toggleSolution('sol-w1-t12')">📓 Show Complete Colab Code</button>
+<div class="solution-box" id="sol-w1-t12">
+<div class="sol-header">📓 Complete Colab Code</div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">python</span><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left:4px;">Run</button></div>
+<pre># NumPy Array + Matrix Math Practice
+import numpy as np
+matrix = np.arange(1, 10).reshape(3, 3)
+print("Matrix:")
+print(matrix)
+print("Shape:", matrix.shape)
+print("Dimensions:", matrix.ndim)
+print("Size:", matrix.size)
+print("Center element:", matrix[1, 1])
+print("Third row:", matrix[2, :])
+new_matrix = matrix * 2 + 10
+print("Modified matrix (x2 + 10):")
+print(new_matrix)
+print("Sum of elements:", np.sum(new_matrix))</pre>
+</div>
+</div><div class="done-when">Your script runs without errors, produces the correct shapes, correct center element, and prints the sum of modified elements (180).</div>
 <div class="git-block">git add numpy_practice.py &amp;&amp; git commit -m "day7: numpy matrix operations and slicing practice"</div>
 </div>
 </div>
@@ -2031,10 +2365,10 @@ print(doubled) # Expected: [2.4, 6.8, 11.2]</code></pre>
         <br/><br/>
 <strong>The Fix:</strong>
 <div class="cb">
-<pre><code class="language-python">import numpy as np
+<pre>&lt;code class="language-python"&gt;import numpy as np
 data = np.array([1.2, 3.4, 5.6])
 doubled = data * 2
-print(doubled) # Correct: [2.4, 6.8, 11.2]</code></pre>
+print(doubled) # Correct: [2.4, 6.8, 11.2]&lt;/code&gt;</pre>
 </div>
 </div>
 </div>
@@ -2051,15 +2385,13 @@ print(doubled) # Correct: [2.4, 6.8, 11.2]</code></pre>
 <div class="week-summary">
 <h2>🎉 Week 1 Complete!</h2>
 <p style="color:var(--muted);font-size:14px;margin:.5rem 0">Most beginners quit in Week 1. You didn't.</p>
-<p style="font-size:13.5px">You now have: variables, data structures, control flow, functions, file I/O, OOP, and NumPy. <strong>Everything in ML builds on exactly these 7 days.</strong> Week 2 starts with Pandas — you'll use everything you learned this week, every single day.</p>
+<p style="font-size:13.5px">You now have: variables, data structures, control flow, functions, file I/O, OOP, and NumPy.</p>
+<p style="font-size:13.5px"><strong>Everything in ML builds on exactly these 7 days.</strong> Week 2 starts with Pandas — you'll use everything you learned this week, every single day.</p>
 <p style="color:var(--orange);font-family:var(--font-mono);font-size:12px;margin-top:1rem">Aage ki raah mein bahut kuch hai — lekin foundation solid hai. Chalo chalte hain. 🚀</p>
 </div>
-<div class="callout" style="background:rgba(79,209,165,.05); border-left:3px solid var(--green); padding:1rem; margin:1.5rem 0; font-size:13.5px;">
-<strong>🚀 Connect to Next Week:</strong>
+<div class="callout" style="background:rgba(79,209,165,.05); border-left:3px solid var(--green); padding:1rem; margin:1.5rem 0; font-size:13.5px;"><strong>🚀 Connect to Next Week:</strong>
 <p style="margin-top:0.4rem; margin-bottom:0; line-height:1.6;">
-      Next week, we will write advanced Python structures (like decorators and generators) and interface with SQL databases. Make sure you are comfortable with list manipulation and writing basic functions!
-    </p>
-</div>
+      Next week, we will write advanced Python structures (like decorators and generators) and interface with SQL databases.<br/><br/>Make sure you are comfortable with list manipulation and writing basic functions!<br/><br/></p></div>
 <button class="complete-btn" id="btn-day-7" onclick="completeDay(7,300)">🏆 Complete Week 1 Capstone — Earn 300 XP! 🎉</button>
 </div><!-- /day-7 -->
 </main>

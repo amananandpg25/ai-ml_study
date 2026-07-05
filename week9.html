@@ -1075,10 +1075,10 @@ profile_model_latency(model)</pre>
 <div class="quiz-block">
 <div class="quiz-num">Q2 OF 3</div>
 <div class="quiz-q">Why does Global Average Pooling (GAP) act as a powerful regularizer?</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>By taking the average of each channel across spatial dimensions, it completely removes dense connections, shrinking parameter counts by millions and preventing spatial coordinate memorization.</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It converts float values to integers.</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It forces the learning rate to decay.</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>It only operates on high-frequency noise.</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','day-61-q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>By taking the average of each channel across spatial dimensions, it completely removes dense connections, shrinking parameter counts by millions and preventing spatial coordinate memorization.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-61-q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>It converts float values to integers.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-61-q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>It forces the learning rate to decay.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-61-q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>It only operates on high-frequency noise.</div>
 <div class="quiz-feedback correct-fb" id="day-61-q62b-correct">✅ Correct! Flattening keeps every single spatial grid pixel, leading to giant weights and localized memorization. GAP computes channel-wise global averages, destroying spatial coordinate dependency and forcing the network to look for global semantic constructs.</div>
 <div class="quiz-feedback wrong-fb" id="day-61-q62b-wrong">❌ Think about the reduction in parameter size. If you flatten a large conv layer output, you get a giant vector. If you average it spatially, how many elements remain per channel?</div>
 </div>
@@ -1433,10 +1433,10 @@ profile_model_latency(model)</pre>
 <div class="quiz-block">
 <div class="quiz-num">Q2 OF 3</div>
 <div class="quiz-q">Under what physical conditions must you use a Projection Shortcut instead of an Identity Shortcut in a ResNet block?</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>When training on small datasets.</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>When the spatial dimensions (height/width) decrease or the number of channels increases, requiring a 1x1 Conv to match shapes.</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Only when training on GPUs without tensor cores.</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>When applying Batch Normalization.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-62-q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>When training on small datasets.</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','day-62-q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>When the spatial dimensions (height/width) decrease or the number of channels increases, requiring a 1x1 Conv to match shapes.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-62-q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Only when training on GPUs without tensor cores.</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-62-q62b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>When applying Batch Normalization.</div>
 <div class="quiz-feedback correct-fb" id="day-62-q62b-correct">✅ Correct! Matrix addition requires both operands to have identical shapes. If a residual block downsamples spatial grids or expands channels, the skip connection input must be projected using a 1x1 Conv with matching stride and filter counts to enable the addition.</div>
 <div class="quiz-feedback wrong-fb" id="day-62-q62b-wrong">❌ Think about basic linear algebra. Can you add a tensor of shape (28, 28, 64) to a tensor of shape (14, 14, 128)? What must you do to make their shapes match?</div>
 </div>

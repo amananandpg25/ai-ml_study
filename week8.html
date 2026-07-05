@@ -14,15 +14,13 @@
   --accent-sec-rgb: 108, 140, 255;
 }
 </style>
-
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
   if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
 </script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters:[{left:'66296',right:'66296',display:true},{left:'$',right:'$',display:false}]});"></script>
 </head>
 <body>
 <div class="xp-toast" id="xp-toast">+50 XP ⚡</div>
@@ -57,10 +55,7 @@
 <div class="sb-item active" id="sb-52" onclick="goDay(52);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(52)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--teal)"></span>Day 52 — Perceptron &amp; Neurons</div>
 <div class="sb-item" id="sb-53" onclick="goDay(53);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(53)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--blue)"></span>Day 53 — Activation Functions</div>
 <div class="sb-item" id="sb-54" onclick="goDay(54);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(54)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--orange)"></span>Day 54 — Backpropagation</div>
-<div class="gotcha-box">
-<strong>⚠️ Gotcha: Forgetting to Zero Gradients</strong>
-PyTorch <em>accumulates</em> gradients by default. If you forget <code>optimizer.zero_grad()</code> before <code>loss.backward()</code>, gradients from previous batches will stack up, causing erratic training. Always follow this order: <code>optimizer.zero_grad()</code> → <code>loss.backward()</code> → <code>optimizer.step()</code>.
-</div>
+
 
 <div class="sb-item" id="sb-55" onclick="goDay(55);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(55)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--green)"></span>Day 55 — Keras &amp; TensorFlow</div>
 <div class="sb-item" id="sb-56" onclick="goDay(56);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(56)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--purple)"></span>Day 56 — Regularization in DL</div>
@@ -300,7 +295,9 @@ p_xor.<span class="fn">fit</span>(X_xor, y_xor)
       end
     </div>
 <div class="diagram-cap">The XOR problem — the original motivation for multi-layer networks</div>
-<div class="interview">The classic interview question: "What is the XOR problem and why did it matter historically?" Answer: In 1969, Minsky &amp; Papert proved perceptrons cannot solve XOR. This caused the first AI winter (1970s) — funding dried up. The solution — backpropagation through multiple layers — was popularised by Rumelhart et al. in 1986, reigniting neural network research. Deep learning as we know it is the eventual payoff.</div>
+<div class="interview">
+  <strong>The classic interview question: "What is the XOR problem and why did it matter historically?"</strong><br><br><strong>Answer:</strong> In 1969, Minsky &amp; Papert proved perceptrons cannot solve XOR. This caused the first AI winter (1970s) — funding dried up. The solution — backpropagation through multiple layers — was popularised by Rumelhart et al. in 1986, reigniting neural network research. Deep learning as we know it is the eventual payoff.
+</div>
 <div class="callout" style="background:rgba(108,140,255,.05);border-left:3px solid var(--blue);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>💡 Why does this work? (Math Intuition):</strong>
 <p style="margin-top:0.4rem;">The Perceptron works because its learning rule is guaranteed to converge if the data is linearly separable (Perceptron Convergence Theorem). Mathematically, it updates weights only when it makes a mistake: $w \leftarrow w + \eta(y_i - \hat{y}_i)x_i$. If the target is $1$ and prediction is $0$, it adds $x_i$ to $w$, bringing the weight vector closer to the misclassified point.</p>
@@ -311,7 +308,8 @@ p_xor.<span class="fn">fit</span>(X_xor, y_xor)
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 52: Perceptron step function output\n# print(1 if np.dot([2, -1], [1, 3]) + 0.5 &gt;= 0 else 0)</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 52: Perceptron step function output
+# print(1 if np.dot([2, -1], [1, 3]) + 0.5 &gt;= 0 else 0)</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day52-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day52-p1', '0')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -374,30 +372,11 @@ p_xor.<span class="fn">fit</span>(X_xor, y_xor)
 <h2 class="sh2">🃏 Revision Flashcards — Day 52</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the main goal of Day 52?</div>
-<div class="fc-back">To master Deep Learning, Perceptrons, Backpropagation, Activations and build the associated coding tasks.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 52 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 52 fit in Week 8?</div>
-<div class="fc-back">It is a key day in Week 8 (Deep Learning, Perceptrons, Backpropagation, Activations).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Feedforward Networks?</div><div class="fc-back">Information flows in one direction: input -> hidden layers -> output. No recurrent loops or backward cycles.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Backpropagation?</div><div class="fc-back">Calculates loss function gradients w.r.t weights using the Chain Rule, propagating backward to update parameters.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">ReLU Activation?</div><div class="fc-back">f(x) = max(0, x). Solves vanishing gradient problem in deep networks; fast to compute and induces sparsity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradient?</div><div class="fc-back">In deep networks, backpropagated gradients shrink exponentially in early layers, stopping weight updates.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Softmax Function?</div><div class="fc-back">Converts raw score vectors (logits) into a probability distribution summing to 1. Used in multi-class output layers.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -706,30 +685,11 @@ output, cache = <span class="fn">forward</span>(X_test)
 <h2 class="sh2">🃏 Revision Flashcards — Day 53</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the main goal of Day 53?</div>
-<div class="fc-back">To master Deep Learning, Perceptrons, Backpropagation, Activations and build the associated coding tasks.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 53 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 53 fit in Week 8?</div>
-<div class="fc-back">It is a key day in Week 8 (Deep Learning, Perceptrons, Backpropagation, Activations).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Feedforward Networks?</div><div class="fc-back">Information flows in one direction: input -> hidden layers -> output. No recurrent loops or backward cycles.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Backpropagation?</div><div class="fc-back">Calculates loss function gradients w.r.t weights using the Chain Rule, propagating backward to update parameters.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">ReLU Activation?</div><div class="fc-back">f(x) = max(0, x). Solves vanishing gradient problem in deep networks; fast to compute and induces sparsity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradient?</div><div class="fc-back">In deep networks, backpropagated gradients shrink exponentially in early layers, stopping weight updates.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Softmax Function?</div><div class="fc-back">Converts raw score vectors (logits) into a probability distribution summing to 1. Used in multi-class output layers.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -846,9 +806,9 @@ output, cache = <span class="fn">forward</span>(X_test)
 <div class="math-block">
 <span class="formula">$$Binary Cross-Entropy: L = −(y log(ŷ) + (1−y) log(1−ŷ))$$</span>
 <span class="desc">Use with sigmoid output for binary classification. Penalises confident wrong predictions heavily.</span>
-<span class="formula">$$Categorical Cross-Entropy: L = −Σ yₖ log(ŷₖ)$$</span>
+<span class="formula">$$\text{Categorical Cross-Entropy: } L = - \sum_{k} y_k \log(\hat{y}_k)$$</span>
 <span class="desc">Use with softmax output for multi-class classification.</span>
-<span class="formula">$$MSE: L = (1/n) Σ(y − ŷ)²$$</span>
+<span class="formula">$$\text{MSE: } L = \frac{1}{n} \sum (y - \hat{y})^2$$</span>
 <span class="desc">Use for regression problems.</span>
 </div>
 <h3 class="sh3">2. The Chain Rule — Backprop's Foundation</h3>
@@ -936,7 +896,8 @@ lr = <span class="num">0.01</span>
 <span class="cm"># ── Test accuracy ─────────────────────────────────────────</span>
 A2_test, _ = <span class="fn">forward</span>(X_te, params)
 test_acc = ((A2_test &gt; <span class="num">0.5</span>) == y_te).mean()
-<span class="bi">print</span>(<span class="str">f"\nTest accuracy: {test_acc:.4f}"</span>)  <span class="cm"># Should be ~90%+</span></pre>
+<span class="bi">print</span>(<span class="str">f"
+Test accuracy: {test_acc:.4f}"</span>)  <span class="cm"># Should be ~90%+</span></pre>
 </div>
 <h3 class="sh3">3. Gradient Descent Variants</h3>
 <table class="concept-table">
@@ -945,7 +906,9 @@ test_acc = ((A2_test &gt; <span class="num">0.5</span>) == y_te).mean()
 <tr><td><strong>Stochastic GD (SGD)</strong></td><td>1 sample</td><td>Fast updates, escapes local minima</td><td>Very noisy, doesn't converge cleanly</td></tr>
 <tr><td><strong>Mini-batch GD</strong></td><td>32–256 samples</td><td>Best of both — GPU-efficient, stable</td><td>Batch size is a hyperparameter</td></tr>
 </table>
-<div class="interview">Classic question: "Why do we use mini-batch instead of full-batch gradient descent?" Answer: (1) Memory — full dataset may not fit in GPU VRAM; (2) Speed — matrix ops on mini-batches are GPU-optimised; (3) Regularisation — the noise in mini-batch gradients acts like implicit regularisation and can help generalisation; (4) Convergence — mini-batch strikes the right tradeoff between stability and speed.</div>
+<div class="interview">
+  <strong>Classic question: "Why do we use mini-batch instead of full-batch gradient descent?"</strong><br><br><strong>Answer:</strong> (1) Memory — full dataset may not fit in GPU VRAM; (2) Speed — matrix ops on mini-batches are GPU-optimised; (3) Regularisation — the noise in mini-batch gradients acts like implicit regularisation and can help generalisation; (4) Convergence — mini-batch strikes the right tradeoff between stability and speed.
+</div>
 <div class="callout" style="background:rgba(108,140,255,.05);border-left:3px solid var(--blue);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>💡 Why does this work? (Math Intuition):</strong>
 <p style="margin-top:0.4rem;">Backpropagation works by applying the <strong>chain rule of calculus</strong> to efficiently calculate the gradient of a loss function with respect to all weights in the network. Instead of computing gradients from scratch for each weight (which is computationally prohibitive), backprop propagates error signals backward from output to input, storing intermediate derivatives. This dynamic programming approach reduces the time complexity from $O(N^2)$ to $O(N)$.</p>
@@ -956,7 +919,8 @@ test_acc = ((A2_test &gt; <span class="num">0.5</span>) == y_te).mean()
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 54: Backpropagation gradient shape\n# If y has shape (32, 10) and loss is MSE. Shape of dL/dy is</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 54: Backpropagation gradient shape
+# If y has shape (32, 10) and loss is MSE. Shape of dL/dy is</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day54-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day54-p1', '(32, 10)')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1019,30 +983,11 @@ test_acc = ((A2_test &gt; <span class="num">0.5</span>) == y_te).mean()
 <h2 class="sh2">🃏 Revision Flashcards — Day 54</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is backpropagation mathematically based on?</div>
-<div class="fc-back">The chain rule of differential calculus.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Why is backprop more efficient than calculating gradients numerically?</div>
-<div class="fc-back">Because it computes all gradients in a single backward pass, running in O(N) time instead of O(N²) running multiple forward passes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What does the gradient vector represent?</div>
-<div class="fc-back">The direction of steepest increase of the loss function; we subtract it to minimize loss.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the difference between backprop and gradient descent?</div>
-<div class="fc-back">Backprop computes the gradients; Gradient Descent uses those gradients to update the weights.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Feedforward Networks?</div><div class="fc-back">Information flows in one direction: input -> hidden layers -> output. No recurrent loops or backward cycles.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Backpropagation?</div><div class="fc-back">Calculates loss function gradients w.r.t weights using the Chain Rule, propagating backward to update parameters.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">ReLU Activation?</div><div class="fc-back">f(x) = max(0, x). Solves vanishing gradient problem in deep networks; fast to compute and induces sparsity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradient?</div><div class="fc-back">In deep networks, backpropagated gradients shrink exponentially in early layers, stopping weight updates.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Softmax Function?</div><div class="fc-back">Converts raw score vectors (logits) into a probability distribution summing to 1. Used in multi-class output layers.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -1234,7 +1179,8 @@ history = model.<span class="fn">fit</span>(
 
 <span class="cm"># ── 6. Evaluate ───────────────────────────────────────────</span>
 test_loss, test_acc = model.<span class="fn">evaluate</span>(X_test, y_test, verbose=<span class="num">0</span>)
-<span class="bi">print</span>(<span class="str">f"\nTest accuracy: {test_acc:.4f}"</span>)  <span class="cm"># Should be ≥ 97.5%</span>
+<span class="bi">print</span>(<span class="str">f"
+Test accuracy: {test_acc:.4f}"</span>)  <span class="cm"># Should be ≥ 97.5%</span>
 
 <span class="cm"># ── 7. Plot training history ──────────────────────────────</span>
 fig, (ax1, ax2) = plt.subplots(<span class="num">1</span>, <span class="num">2</span>, figsize=(<span class="num">12</span>, <span class="num">4</span>))
@@ -1290,7 +1236,8 @@ model = keras.Model(inputs=inputs, outputs=outputs, name=<span class="str">'mnis
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 55: Keras Dense layer weights shape\n# Dense(64, input_shape=(32,)) weight matrix shape is</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 55: Keras Dense layer weights shape
+# Dense(64, input_shape=(32,)) weight matrix shape is</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day55-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day55-p1', '(32, 64)')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1353,30 +1300,11 @@ model = keras.Model(inputs=inputs, outputs=outputs, name=<span class="str">'mnis
 <h2 class="sh2">🃏 Revision Flashcards — Day 55</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the main goal of Day 55?</div>
-<div class="fc-back">To master Deep Learning, Perceptrons, Backpropagation, Activations and build the associated coding tasks.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 55 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 55 fit in Week 8?</div>
-<div class="fc-back">It is a key day in Week 8 (Deep Learning, Perceptrons, Backpropagation, Activations).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Feedforward Networks?</div><div class="fc-back">Information flows in one direction: input -> hidden layers -> output. No recurrent loops or backward cycles.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Backpropagation?</div><div class="fc-back">Calculates loss function gradients w.r.t weights using the Chain Rule, propagating backward to update parameters.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">ReLU Activation?</div><div class="fc-back">f(x) = max(0, x). Solves vanishing gradient problem in deep networks; fast to compute and induces sparsity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradient?</div><div class="fc-back">In deep networks, backpropagated gradients shrink exponentially in early layers, stopping weight updates.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Softmax Function?</div><div class="fc-back">Converts raw score vectors (logits) into a probability distribution summing to 1. Used in multi-class output layers.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -1502,9 +1430,9 @@ model = keras.Model(inputs=inputs, outputs=outputs, name=<span class="str">'mnis
 <h3 class="sh3">2. Batch Normalisation — Fixing the "Covariate Shift" Problem</h3>
 <p>As training progresses, the distribution of each layer's inputs changes because the previous layer's weights change. This is called <strong>internal covariate shift</strong>. BatchNorm fixes this by normalising the layer's input to zero mean and unit variance, then learning a scale (γ) and shift (β).</p>
 <div class="math-block">
-<span class="formula">$$μ_B = (1/m) Σ zᵢ,  σ²_B = (1/m) Σ(zᵢ − μ_B)²$$</span>
+<span class="formula">$$\mu_B = \frac{1}{m} \sum_{i=1}^{m} z_i, \quad \sigma^2_B = \frac{1}{m} \sum_{i=1}^{m} (z_i - \mu_B)^2$$</span>
 <span class="desc">Compute batch mean and variance for each feature</span>
-<span class="formula">$$ẑᵢ = (zᵢ − μ_B) / √(σ²_B + ε)$$</span>
+<span class="formula">$$\hat{z}_i = \frac{z_i - \mu_B}{\sqrt{\sigma^2_B + \epsilon}}$$</span>
 <span class="desc">Normalise. ε=1e-5 for numerical stability.</span>
 <span class="formula">$$yᵢ = γ ẑᵢ + β   (γ and β are learnable parameters)$$</span>
 <span class="desc">Scale and shift — the network can "undo" normalisation if needed. γ and β are learned via backprop.</span>
@@ -1550,7 +1478,8 @@ X_tr, X_te = X_tr / <span class="num">255.0</span>, X_te / <span class="num">255
 
 results = {}
 <span class="kw">for</span> name, model <span class="kw">in</span> configs.items():
-    <span class="bi">print</span>(<span class="str">f"\nTraining: {name}"</span>)
+    <span class="bi">print</span>(<span class="str">f"
+Training: {name}"</span>)
     history = model.<span class="fn">fit</span>(X_tr, y_tr, epochs=<span class="num">20</span>, batch_size=<span class="num">256</span>,
                          validation_split=<span class="num">0.1</span>, verbose=<span class="num">0</span>)
     _, test_acc = model.<span class="fn">evaluate</span>(X_te, y_te, verbose=<span class="num">0</span>)
@@ -1578,7 +1507,9 @@ results = {}
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 56: CNN output dimension\n# Input: 28x28x1, Conv2D: 16 filters of size 3x3, stride=1, padding=valid\n# Output spatial shape is HxW:</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 56: CNN output dimension
+# Input: 28x28x1, Conv2D: 16 filters of size 3x3, stride=1, padding=valid
+# Output spatial shape is HxW:</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day56-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day56-p1', '26x26')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1641,30 +1572,11 @@ results = {}
 <h2 class="sh2">🃏 Revision Flashcards — Day 56</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the main goal of Day 56?</div>
-<div class="fc-back">To master Deep Learning, Perceptrons, Backpropagation, Activations and build the associated coding tasks.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 56 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 56 fit in Week 8?</div>
-<div class="fc-back">It is a key day in Week 8 (Deep Learning, Perceptrons, Backpropagation, Activations).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Feedforward Networks?</div><div class="fc-back">Information flows in one direction: input -> hidden layers -> output. No recurrent loops or backward cycles.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Backpropagation?</div><div class="fc-back">Calculates loss function gradients w.r.t weights using the Chain Rule, propagating backward to update parameters.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">ReLU Activation?</div><div class="fc-back">f(x) = max(0, x). Solves vanishing gradient problem in deep networks; fast to compute and induces sparsity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradient?</div><div class="fc-back">In deep networks, backpropagated gradients shrink exponentially in early layers, stopping weight updates.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Softmax Function?</div><div class="fc-back">Converts raw score vectors (logits) into a probability distribution summing to 1. Used in multi-class output layers.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -1783,11 +1695,11 @@ results = {}
 <span class="desc">Same learning rate for all parameters. No memory of previous gradients.</span>
 <span class="formula">$$SGD + Momentum: v ← β·v + (1−β)·∇L; w ← w − η·v$$</span>
 <span class="desc">β≈0.9. Accumulates velocity in consistent gradient directions. Dampens oscillations.</span>
-<span class="formula">$$RMSProp: s ← β·s + (1−β)·(∇L)²; w ← w − η·∇L / (√s + ε)$$</span>
+<span class="formula">$$s \leftarrow \beta s + (1-\beta)(\nabla L)^2, \quad w \leftarrow w - \frac{\eta \nabla L}{\sqrt{s} + \epsilon}$$</span>
 <span class="desc">Adapts LR per parameter — divides by RMS of recent gradients. Good for non-stationary problems.</span>
 <span class="formula">$$Adam: m ← β₁m + (1−β₁)∇L; v ← β₂v + (1−β₂)(∇L)²$$</span>
 <span class="desc">First moment (momentum) + second moment (RMSProp). With bias correction: m̂=m/(1−β₁ᵗ), v̂=v/(1−β₂ᵗ)</span>
-<span class="formula">$$Adam update: w ← w − η · m̂ / (√v̂ + ε)$$</span>
+<span class="formula">$$w \leftarrow w - \frac{\eta \hat{m}}{\sqrt{\hat{v}} + \epsilon}$$</span>
 <span class="desc">Defaults: β₁=0.9, β₂=0.999, ε=1e-8, η=0.001. Rarely needs tuning — the "it just works" optimizer.</span>
 </div>
 <div class="analogy">Socho tum ek ball ko pahaad se neeche roll kar rahe ho (gradient descent). Vanilla SGD: har step mein tum ball ko push karte ho, chahe koi bhi direction ho. Momentum: ball apni velocity maintain karta hai — consistent direction mein tezi se jaata hai, fluctuating directions mein slow. Adam: ek smart ball jo har direction mein alag speed maintain karta hai — jo direction mein consistent gradient hai, wahan tez; jo mein noisy hai, wahan slow.</div>
@@ -1852,14 +1764,17 @@ model.<span class="fn">compile</span>(optimizer=optimizer, loss=<span class="str
               metrics=[<span class="str">'accuracy'</span>])
 <span class="cm"># Or use ReduceLROnPlateau as a callback in model.fit()</span></pre>
 </div>
-<div class="interview">Common interview question: "Why use Adam over SGD?" Nuanced answer: Adam converges faster with less LR tuning, making it great for experimentation. However, some research shows that carefully tuned SGD+Momentum can achieve slightly better generalisation than Adam, especially for image classification with CNNs (see "Closing the Generalisation Gap" paper). In practice: use Adam to get results fast, consider SGD+Momentum with cosine annealing when squeezing out the last 0.5% accuracy. For transformers and LLMs, AdamW is the standard — Adam with proper weight decay decoupled from the adaptive update.</div>
+<div class="interview">
+  <strong>Common interview question: "Why use Adam over SGD?"</strong><br><br><strong>Nuanced answer:</strong> Adam converges faster with less LR tuning, making it great for experimentation. However, some research shows that carefully tuned SGD+Momentum can achieve slightly better generalisation than Adam, especially for image classification with CNNs (see "Closing the Generalisation Gap" paper). In practice: use Adam to get results fast, consider SGD+Momentum with cosine annealing when squeezing out the last 0.5% accuracy. For transformers and LLMs, AdamW is the standard — Adam with proper weight decay decoupled from the adaptive update.
+</div>
 <div class="callout" style="background:rgba(247,169,75,.05);border-left:3px solid var(--orange);padding:1rem;margin:1rem 0;font-size:13.5px;">
 <strong>⚙️ Hyperparameter Tip:</strong> Learning rate schedulers (like ReduceLROnPlateau) decrease the learning rate when validation loss stalls, helping the model settle into global minima.
   </div>
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 57: Learning Rate Schedule\n# If base_lr=0.1, decay_steps=10, decay_rate=0.5. Learning rate at step 10 is</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 57: Learning Rate Schedule
+# If base_lr=0.1, decay_steps=10, decay_rate=0.5. Learning rate at step 10 is</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day57-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day57-p1', '0.05')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1922,30 +1837,11 @@ model.<span class="fn">compile</span>(optimizer=optimizer, loss=<span class="str
 <h2 class="sh2">🃏 Revision Flashcards — Day 57</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the main goal of Day 57?</div>
-<div class="fc-back">To master Deep Learning, Perceptrons, Backpropagation, Activations and build the associated coding tasks.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 57 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 57 fit in Week 8?</div>
-<div class="fc-back">It is a key day in Week 8 (Deep Learning, Perceptrons, Backpropagation, Activations).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Feedforward Networks?</div><div class="fc-back">Information flows in one direction: input -> hidden layers -> output. No recurrent loops or backward cycles.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Backpropagation?</div><div class="fc-back">Calculates loss function gradients w.r.t weights using the Chain Rule, propagating backward to update parameters.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">ReLU Activation?</div><div class="fc-back">f(x) = max(0, x). Solves vanishing gradient problem in deep networks; fast to compute and induces sparsity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradient?</div><div class="fc-back">In deep networks, backpropagated gradients shrink exponentially in early layers, stopping weight updates.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Softmax Function?</div><div class="fc-back">Converts raw score vectors (logits) into a probability distribution summing to 1. Used in multi-class output layers.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -2353,30 +2249,11 @@ print(a.shape)</code></pre>
 <h2 class="sh2">🃏 Revision Flashcards — Day 58</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the main goal of Day 58?</div>
-<div class="fc-back">To master Deep Learning, Perceptrons, Backpropagation, Activations and build the associated coding tasks.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 58 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 58 fit in Week 8?</div>
-<div class="fc-back">It is a key day in Week 8 (Deep Learning, Perceptrons, Backpropagation, Activations).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Feedforward Networks?</div><div class="fc-back">Information flows in one direction: input -> hidden layers -> output. No recurrent loops or backward cycles.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Backpropagation?</div><div class="fc-back">Calculates loss function gradients w.r.t weights using the Chain Rule, propagating backward to update parameters.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">ReLU Activation?</div><div class="fc-back">f(x) = max(0, x). Solves vanishing gradient problem in deep networks; fast to compute and induces sparsity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Vanishing Gradient?</div><div class="fc-back">In deep networks, backpropagated gradients shrink exponentially in early layers, stopping weight updates.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Softmax Function?</div><div class="fc-back">Converts raw score vectors (logits) into a probability distribution summing to 1. Used in multi-class output layers.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">

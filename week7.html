@@ -15,7 +15,6 @@
 }
 </style>
 
-
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
 <script>
   if (typeof mermaid !== 'undefined') { mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' }); }
@@ -246,7 +245,9 @@ grid.fit(X_tr, y_train)
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 45: SVM classifier prediction\n# clf = SVC(kernel=\'linear\')\n# What is the shape of prediction array clf.predict([[0.5, 0.5]])?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 45: SVM classifier prediction
+# clf = SVC(kernel='linear')
+# What is the shape of prediction array clf.predict([[0.5, 0.5]])?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day45-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day45-p1', '(1,)')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -300,20 +301,20 @@ grid.fit(X_tr, y_train)
 <div class="quiz-block">
 <div class="quiz-num">Q1 OF 5</div>
 <div class="quiz-q">You train an SVM on a dataset and get 99% training accuracy but 65% test accuracy. What should you try?</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Increase C to make the margin harder</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>Decrease C to allow a wider, more regularised margin</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Switch to a linear kernel — it's simpler and won't overfit</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>Remove scaling — SVM doesn't need it</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-45-q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Increase C to make the margin harder</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','day-45-q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>Decrease C to allow a wider, more regularised margin</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-45-q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Switch to a linear kernel — it's simpler and won't overfit</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-45-q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>Remove scaling — SVM doesn't need it</div>
 <div class="quiz-feedback correct-fb" id="day-45-q43a-correct">✅ Correct! High train / low test accuracy = overfitting. Decreasing C widens the margin (more regularisation), trading some training accuracy for better generalisation. The kernel choice and scaling are separate issues.</div>
 <div class="quiz-feedback wrong-fb" id="day-45-q43a-wrong">❌ Think about what 99% train and 65% test means — the model memorised the training data. C controls how strictly we penalise misclassifications. Increasing C will make it even more strict. You need to go the other direction.</div>
 </div>
 <div class="quiz-block">
 <div class="quiz-num">Q2 OF 5</div>
 <div class="quiz-q">Which SVM kernel is most appropriate for classifying 10,000-dimensional text data (e.g. TF-IDF features)?</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>RBF — it always works best</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>Linear — efficient and effective in high-dimensional sparse spaces</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Polynomial degree=5 — more expressive for complex text</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>Sigmoid — text is inherently sigmoidal</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-45-q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>RBF — it always works best</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','day-45-q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>Linear — efficient and effective in high-dimensional sparse spaces</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-45-q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Polynomial degree=5 — more expressive for complex text</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-45-q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>Sigmoid — text is inherently sigmoidal</div>
 <div class="quiz-feedback correct-fb" id="day-45-q43b-correct">✅ Correct! In high-dimensional, sparse feature spaces (like TF-IDF), linear kernels work extremely well and are computationally far cheaper. RBF can actually perform worse here because with many dimensions, distance-based calculations become less meaningful (curse of dimensionality).</div>
 <div class="quiz-feedback wrong-fb" id="day-45-q43b-wrong">❌ For high-dimensional sparse text data (TF-IDF), linear kernels are the industry standard. Liblinear-based SVMs are trained on millions of text documents this way. RBF can work but is expensive and often unnecessary in high-dim spaces.</div>
 </div>
@@ -552,7 +553,8 @@ importances = dt.feature_importances_
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 46: Decision Tree maximum leaf node count\n# If max_depth is 3, what is the maximum possible number of leaf nodes?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 46: Decision Tree maximum leaf node count
+# If max_depth is 3, what is the maximum possible number of leaf nodes?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day46-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day46-p1', '8')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -593,10 +595,10 @@ importances = dt.feature_importances_
 <div class="quiz-block">
 <div class="quiz-num">QUESTION 1 OF 5</div>
 <div class="quiz-q">A node has 10 samples: 5 Class A and 5 Class B. What is its Gini Impurity?</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>0.0 — perfectly mixed</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>0.5 — maximum impurity for binary classification</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>1.0 — complete disorder</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>0.25 — quarter impure</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-46-q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>0.0 — perfectly mixed</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','day-46-q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>0.5 — maximum impurity for binary classification</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-46-q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>1.0 — complete disorder</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-46-q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>0.25 — quarter impure</div>
 <div class="quiz-feedback correct-fb" id="day-46-q44a-correct">✅ Correct! G = 1 − (0.5² + 0.5²) = 1 − 0.5 = 0.5. A 50/50 split gives maximum Gini impurity of 0.5 for binary classification. A pure node (all one class) has G = 1 − (1² + 0²) = 0.</div>
 <div class="quiz-feedback wrong-fb" id="day-46-q44a-wrong">❌ Use the formula: G = 1 − Σpₖ². Here p(A) = 0.5, p(B) = 0.5. So G = 1 − (0.25 + 0.25) = 1 − 0.5 = 0.5. Maximum impurity occurs at the 50/50 split.</div>
 </div>
@@ -826,7 +828,8 @@ plt.show()</pre>
 </div><!-- /theory -->
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 47: Random Forest default max features\n# For classification with 16 features, what is the default max_features?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 47: Random Forest default max features
+# For classification with 16 features, what is the default max_features?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day47-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day47-p1', '4')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -860,48 +863,6 @@ plt.show()</pre>
 <p>On the Breast Cancer dataset, plot OOB score vs n_estimators (from 1 to 300). Find the "elbow" — the point where adding more trees gives diminishing returns. This is a free, efficient way to avoid expensive cross-validation just for choosing n_estimators.</p>
 <div class="done-when">Plot produced, optimal n_estimators identified, explanation written in a notebook markdown cell.</div>
 
-<h3 class="sh3">Silhouette Score — Measuring Cluster Quality</h3>
-<p style="margin-bottom:1rem; color:var(--text); line-height:1.6;">The Silhouette Score measures how similar each point is to its own cluster vs the nearest neighboring cluster. It ranges from -1 (wrong cluster) to +1 (perfectly clustered), with 0 meaning the point sits on the boundary between clusters.</p>
-<div class="cb"><div class="cb-head"><span class="cb-lang">python — silhouette_evaluation.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
-<h3 class="sh3">DBSCAN — Density-Based Clustering</h3>
-<p style="margin-bottom:1rem; color:var(--text); line-height:1.6;">Unlike K-Means which requires specifying the number of clusters upfront, DBSCAN discovers clusters automatically based on point density. It identifies clusters as dense regions separated by sparse areas, and automatically labels outlier points as noise.</p>
-<div class="analogy">Think of DBSCAN like identifying cities on a dark satellite image by looking at clusters of lights. Dense clusters of lights = cities. Scattered lights in between = noise/rural areas. You don't need to know how many cities there are beforehand.</div>
-<div class="cb"><div class="cb-head"><span class="cb-lang">python — dbscan_clustering.py</span><button class="copy-btn" onclick="copyCode(this)">copy</button></div><pre><code><span class="kw">from</span> <span class="bi">sklearn.cluster</span> <span class="kw">import</span> DBSCAN
-<span class="kw">from</span> <span class="bi">sklearn.datasets</span> <span class="kw">import</span> make_moons
-<span class="kw">import</span> <span class="bi">numpy</span> <span class="kw">as</span> np
-
-<span class="cm"># Generate non-spherical clusters (K-Means fails here!)</span>
-X, y = make_moons(n_samples=<span class="num">300</span>, noise=<span class="num">0.08</span>, random_state=<span class="num">42</span>)
-
-<span class="cm"># DBSCAN parameters:</span>
-<span class="cm">#   eps: maximum distance between two points to be neighbors</span>
-<span class="cm">#   min_samples: minimum points to form a dense region (core point)</span>
-db = DBSCAN(eps=<span class="num">0.2</span>, min_samples=<span class="num">5</span>)
-labels = db.fit_predict(X)
-
-n_clusters = <span class="fn">len</span>(<span class="fn">set</span>(labels) - {-<span class="num">1</span>})
-n_noise = <span class="fn">list</span>(labels).count(-<span class="num">1</span>)
-<span class="fn">print</span>(<span class="str">f"Clusters: {n_clusters}, Noise points: {n_noise}"</span>)
-<span class="cm"># Output: Clusters: 2, Noise points: 3</span></code></pre></div>
-<div class="gotcha-box">
-<strong>⚠️ DBSCAN vs K-Means — When to Use Which</strong>
-Use <strong>K-Means</strong> when clusters are roughly spherical and you know K. Use <strong>DBSCAN</strong> when clusters have irregular shapes, you don't know K, or you need automatic outlier detection. DBSCAN fails on datasets with varying densities — use HDBSCAN for those cases.
-</div>
-<pre><code><span class="kw">from</span> <span class="bi">sklearn.metrics</span> <span class="kw">import</span> silhouette_score, silhouette_samples
-<span class="kw">from</span> <span class="bi">sklearn.cluster</span> <span class="kw">import</span> KMeans
-
-<span class="cm"># Test multiple K values and pick the one with highest silhouette</span>
-scores = {}
-<span class="kw">for</span> k <span class="kw">in</span> <span class="fn">range</span>(<span class="num">2</span>, <span class="num">8</span>):
-    km = KMeans(n_clusters=k, random_state=<span class="num">42</span>, n_init=<span class="num">10</span>)
-    labels = km.fit_predict(X_scaled)
-    score = silhouette_score(X_scaled, labels)
-    scores[k] = score
-    <span class="fn">print</span>(<span class="str">f"K={k}: Silhouette = {score:.3f}"</span>)
-
-best_k = <span class="fn">max</span>(scores, key=scores.get)
-<span class="fn">print</span>(<span class="str">f"\nBest K = {best_k} (Silhouette = {scores[best_k]:.3f})"</span>)
-<span class="cm"># Rule of thumb: Silhouette > 0.5 = reasonable, > 0.7 = strong clusters</span></code></pre></div>
 
 
 </div>
@@ -912,20 +873,20 @@ best_k = <span class="fn">max</span>(scores, key=scores.get)
 <div class="quiz-block">
 <div class="quiz-num">QUESTION 1 OF 5</div>
 <div class="quiz-q">In a Random Forest with 30 features, how many features are typically considered at each split?</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>All 30 — RF uses all features at every split</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>15 — half the features by default</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>~5-6 — √30 ≈ 5.5, rounded to 5</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>1 — only one random feature per split</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-47-q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>All 30 — RF uses all features at every split</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-47-q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>15 — half the features by default</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','day-47-q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>~5-6 — √30 ≈ 5.5, rounded to 5</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-47-q43a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>1 — only one random feature per split</div>
 <div class="quiz-feedback correct-fb" id="day-47-q43a-correct">✅ Correct! max_features='sqrt' means √p features per split. For p=30: √30 ≈ 5.5 → sklearn uses 5. This is the key RF hyperparameter that decorrelates the trees. Without it (using all 30 features), you'd get Bagging, not Random Forest.</div>
 <div class="quiz-feedback wrong-fb" id="day-47-q43a-wrong">❌ Random Forest's key innovation over Bagging is feature randomness at each split: only √p features (for classification) or p/3 (for regression) are considered. For p=30, that's √30 ≈ 5 features.</div>
 </div>
 <div class="quiz-block">
 <div class="quiz-num">Q2 OF 2</div>
 <div class="quiz-q">What is the Out-of-Bag (OOB) error in Random Forest?</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>The error on the training set averaged across all trees</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>The error when the model fails to converge</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>The validation error estimated using each sample's trees that did NOT train on it</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>The error rate of the worst-performing tree in the forest</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-47-q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>The error on the training set averaged across all trees</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-47-q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>The error when the model fails to converge</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','day-47-q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>The validation error estimated using each sample's trees that did NOT train on it</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-47-q43b')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>The error rate of the worst-performing tree in the forest</div>
 <div class="quiz-feedback correct-fb" id="day-47-q43b-correct">✅ Correct! Each tree trains on ~63% of samples. The remaining ~37% (not in the bootstrap sample) are "out-of-bag." For each training point, you can predict it using only the trees that were NOT trained on it — giving a nearly unbiased validation estimate. This is essentially free cross-validation!</div>
 <div class="quiz-feedback wrong-fb" id="day-47-q43b-wrong">❌ OOB is the key free validation in RF. Since each tree trains on a bootstrap sample (~63% of data), ~37% of samples are never seen by each tree. Those "out-of-bag" samples can be used as validation — averaged across all trees to give an unbiased error estimate.</div>
 </div>
@@ -1151,7 +1112,9 @@ imp_types = [<span class="str">'weight'</span>, <span class="str">'gain'</span>,
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 48: XGBoost learning rate shrinkage\n# If base prediction is 0.5, new tree prediction is 0.2, learning rate eta=0.1,\n# what is the updated prediction?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 48: XGBoost learning rate shrinkage
+# If base prediction is 0.5, new tree prediction is 0.2, learning rate eta=0.1,
+# what is the updated prediction?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day48-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day48-p1', '0.52')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1192,10 +1155,10 @@ imp_types = [<span class="str">'weight'</span>, <span class="str">'gain'</span>,
 <div class="quiz-block">
 <div class="quiz-num">QUESTION 1 OF 5</div>
 <div class="quiz-q">What is the main difference between Random Forest (bagging) and Gradient Boosting?</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>RF uses decision trees; Gradient Boosting uses linear models</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>RF trains trees in parallel independently; Gradient Boosting trains trees sequentially, each correcting previous errors</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Gradient Boosting always outperforms Random Forest</div>
-<div class="quiz-opt" onclick="quiz(this,'wrong','q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>RF is for regression only; GBM is for classification only</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-48-q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>RF uses decision trees; Gradient Boosting uses linear models</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','day-48-q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>RF trains trees in parallel independently; Gradient Boosting trains trees sequentially, each correcting previous errors</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-48-q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Gradient Boosting always outperforms Random Forest</div>
+<div class="quiz-opt" onclick="quiz(this,'wrong','day-48-q44a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>RF is for regression only; GBM is for classification only</div>
 <div class="quiz-feedback correct-fb" id="day-48-q44a-correct">✅ Correct! RF = parallel ensemble (bagging, reduces variance). GBM = sequential ensemble (boosting, reduces both bias and variance). GBM is typically more accurate but more sensitive to hyperparameters and prone to overfitting if not tuned carefully. RF is more robust out of the box.</div>
 <div class="quiz-feedback wrong-fb" id="day-48-q44a-wrong">❌ Both use decision trees (shallow ones in GBM). GBM doesn't always win — RF is often better on noisy data. The key difference is parallel vs sequential training. RF trees are independent; GBM trees each learn from the previous tree's residuals.</div>
 </div>
@@ -1563,7 +1526,6 @@ df[<span class="str">'IsMonthToMonth'</span>] = (df[<span class="str">'Contract'
 </div>
 </div>
 
-
 <h2 class="sh2">🃏 Revision Flashcards — Day 49</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
@@ -1814,7 +1776,6 @@ shap.waterfall_plot(shap.Explanation(
 <li><strong>Pipeline</strong> bundles preprocessing + model into one object. This prevents data leakage and makes deployment trivial.</li>
 </ol>
 </div>
-
 
 <h2 class="sh2">🃏 Revision Flashcards — Day 50</h2>
 <p class="flashcard-hint">CLICK EACH CARD TO FLIP ↓</p>

@@ -7,9 +7,6 @@
 <title>Week 11 — GANs &amp; PyTorch | 135-Day AI/ML Roadmap</title>
 <meta content="Week 11 — GANs &amp; PyTorch — Complete coursework, tasks, quizzes, and resources for Week 11 of the 135-Day AI/ML Roadmap." name="description"/>
 <link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%230d0f14'/&gt;&lt;text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'&gt;AI&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
-<link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
-<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer="" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 <link rel="stylesheet" href="course.css">
 <style>
 :root {
@@ -17,6 +14,9 @@
   --accent-sec-rgb: 229, 107, 140;
 }
 </style>
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
+<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer="" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
@@ -90,11 +90,11 @@
 <h1>Adversarial Game Theory &amp; GANs</h1>
 <p>
       Generative Modeling traditionally relies on maximizing pixel likelihoods.
-      In 2014, Ian Goodfellow revolutionized the field by framing generative modeling as a **two-player Zero-Sum Game**.
-      Today, we master **Generative Adversarial Networks (GANs)**.
-      We will dissect the mathematics of the **Min-Max Game**,
-      analyze **Binary Cross-Entropy (BCE)** loss formulations,
-      address the dangerous pitfall of **Mode Collapse**,
+      In 2014, Ian Goodfellow revolutionized the field by framing generative modeling as a <strong>two-player Zero-Sum Game</strong>.
+      Today, we master <strong>Generative Adversarial Networks (GANs)</strong>.
+      We will dissect the mathematics of the <strong>Min-Max Game</strong>,
+      analyze <strong>Binary Cross-Entropy (BCE)</strong> loss formulations,
+      address the dangerous pitfall of <strong>Mode Collapse</strong>,
       and study gradient unbalance mitigation strategies.
     </p>
 <div class="meta-row">
@@ -168,7 +168,7 @@
 <strong>Generator Update (Heuristic):</strong> Minimizing $\log(1 - D(G(z)))$ causes massive vanishing gradients in early epochs when $G$ is weak and $D$ rejects synthetic images with high confidence ($D(G(z)) \approx 0$).
       To bypass this, we maximize the likelihood that the discriminator is fooled:
       <div class="math-block"><span class="formula">$$\mathcal{L}_G = - \mathbb{E}_{z \sim p_z}[ \log D(G(z)) ]$$</span></div>
-      This is known as the **Non-Saturating Game (NS-GAN)**, providing strong gradients to the Generator early in training.
+      This is known as the <strong>Non-Saturating Game (NS-GAN)</strong>, providing strong gradients to the Generator early in training.
     </li>
 </ul>
 <h3 class="sh3">3. Crucial Pitfalls: Mode Collapse &amp; Vanishing Gradients</h3>
@@ -276,50 +276,31 @@ lr = <span class="num">0.1</span>
 <div class="task-body">
 <p>Given:
       <br/>- A generated sample gets a discriminator score D(G(z)) = 0.05.
-      <br/>1. Calculate the minimax generator objective: \log(1 - D(G(z))).
-      <br/>2. Calculate the non-saturating generator objective: -\log D(G(z)).
+      <br/>1. Calculate the minimax generator objective: $\log(1 - D(G(z)))$.
+      <br/>2. Calculate the non-saturating generator objective: $-\log D(G(z))$.
       <br/>Show your step-by-step arithmetic steps using natural log approximations.</p>
-<div class="done-when">Your calculations correctly prove that minimax loss is \log(0.95) \approx -0.051 (very flat gradient), while non-saturating loss is -\log(0.05) \approx 2.996 (strong gradient scaling), proving why the NS-GAN heuristic is vital.</div>
+<div class="done-when">Your calculations correctly prove that minimax loss is $\log(0.95) \approx -0.051$ (very flat gradient), while non-saturating loss is $-\log(0.05) \approx 2.996$ (strong gradient scaling), proving why the NS-GAN heuristic is vital.</div>
 </div>
 </div>
 <div id="day-73-quiz-section">
 <h2 class="sh2">🧪 Quiz</h2>
 <div class="quiz-block">
 <div class="quiz-num">Q1 OF 3</div>
-<div class="quiz-q">Why does the standard minimax generator loss \log(1 - D(G(z))) struggle in early training phases?</div>
+<div class="quiz-q">Why does the standard minimax generator loss $\log(1 - D(G(z)))$ struggle in early training phases?</div>
 <div class="quiz-opt" onclick="quiz(this,'wrong','q73a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">A</span>Because it requires positive activations.</div>
-<div class="quiz-opt" onclick="quiz(this,'correct','q73a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>Because when the Generator is weak, the Discriminator easily rejects fake samples, making D(G(z)) close to 0. The derivative of \log(1-x) at x=0 is extremely small, causing vanishing gradients.</div>
+<div class="quiz-opt" onclick="quiz(this,'correct','q73a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">B</span>Because when the Generator is weak, the Discriminator easily rejects fake samples, making D(G(z)) close to 0. The derivative of $\log(1-x)$ at $x=0$ is extremely small, causing vanishing gradients.</div>
 <div class="quiz-opt" onclick="quiz(this,'wrong','q73a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">C</span>Because it decreases training parameter bounds.</div>
 <div class="quiz-opt" onclick="quiz(this,'wrong','q73a')" onkeydown="if(event.key==='Enter'||event.key===' ')this.click()" role="button" tabindex="0"><span class="quiz-letter">D</span>To enforce positive definite weights.</div>
-<div class="quiz-feedback correct-fb" id="q73a-correct">✅ Correct! In early epochs, the discriminator easily classifies fake samples as 0, which makes the slope of the loss function \log(1-x) extremely flat, causing learning to stall. NS-GAN solves this.</div>
-<div class="quiz-feedback wrong-fb" id="q73a-wrong">❌ Think about what value D(G(z)) has when the Generator is completely random. If it is 0.05, what is the value and slope of \log(1-x) compared to -\log(x)? Which one has a steeper slope near 0?</div>
+<div class="quiz-feedback correct-fb" id="q73a-correct">✅ Correct! In early epochs, the discriminator easily classifies fake samples as 0, which makes the slope of the loss function $\log(1-x)$ extremely flat, causing learning to stall. NS-GAN solves this.</div>
+<div class="quiz-feedback wrong-fb" id="q73a-wrong">❌ Think about what value D(G(z)) has when the Generator is completely random. If it is 0.05, what is the value and slope of $\log(1-x)$ compared to $-\log(x)$? Which one has a steeper slope near 0?</div>
 <h2 class="sh2">🃏 Revision Flashcards — Day 73</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">GAN Minimax Loss?</div>
-<div class="fc-back">min_G max_D E[log D(x)] + E[log(1 - D(G(z)))]</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Discriminator role?</div>
-<div class="fc-back">Binary classifier separating genuine target samples from synthetic fake generations.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 73 fit in Week 11?</div>
-<div class="fc-back">It is a key day in Week 11 (Generative Adversarial Networks (GANs), PyTorch workflows).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GAN Architecture?</div><div class="fc-back">Two networks training minimax style: Generator makes fake data; Discriminator tries to distinguish fake from real.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Generator Loss?</div><div class="fc-back">Minimizes the probability of Discriminator detecting fakes: $\log(1 - D(G(z)))$, or maximizes $\log(D(G(z)))$.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Discriminator Loss?</div><div class="fc-back">Maximizes the probability of correct classification: log(D(x)) [reals] + log(1 - D(G(z))) [fakes].</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Mode Collapse?</div><div class="fc-back">GAN failure where Generator learns to produce samples from only a few output modes, ignoring overall dataset diversity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Wasserstein GAN?</div><div class="fc-back">Uses Earth Mover's Distance to provide smooth gradients even when probability distributions do not overlap.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -423,9 +404,9 @@ lr = <span class="num">0.1</span>
 <h1>DCGAN: Deep Convolutional GANs</h1>
 <p>
       Standard GANs rely on fully-connected layers, making them highly unstable on spatial, high-dimensional images.
-      In 2015, Radford et al. proposed **DCGAN (Deep Convolutional GANs)**, establishing a set of architectural constraints that stabilized adversarial training on spatial grids.
-      Today, we master **Transpose Convolutions** for learnable upsampling,
-      dissect the structural placement of **Batch Normalization** and **LeakyReLU**,
+      In 2015, Radford et al. proposed <strong>DCGAN (Deep Convolutional GANs)</strong>, establishing a set of architectural constraints that stabilized adversarial training on spatial grids.
+      Today, we master <strong>Transpose Convolutions</strong> for learnable upsampling,
+      dissect the structural placement of <strong>Batch Normalization</strong> and <strong>LeakyReLU</strong>,
       and study a full, end-to-end digit generation pipeline from scratch.
     </p>
 <div class="meta-row">
@@ -455,7 +436,7 @@ lr = <span class="num">0.1</span>
 <h3 class="sh3">1. Transpose Convolutions for Spatial Upsampling</h3>
 <p>
     The Generator starts with a 1D noise vector $z \in \mathbb{R}^{d}$ and must map it to a high-dimensional spatial grid (e.g. $28 \times 28 \times 1$ or $64 \times 64 \times 3$).
-    To achieve learnable spatial expansion, we use **Transpose Convolutions** ($ConvTranspose2d$, often called *fractionally-strided convolutions*).
+    To achieve learnable spatial expansion, we use <strong>Transpose Convolutions</strong> ($ConvTranspose2d$, often called *fractionally-strided convolutions*).
     Instead of calculating a dot product to shrink space, transpose convolutions spread a single input element across a window scaled by a kernel, accumulating overlaps.
   </p>
 <p>
@@ -485,7 +466,7 @@ lr = <span class="num">0.1</span>
 <p>
     A standard ReLU zero-out negative activations completely ($\text{ReLU}(x) = \max(0, x)$).
     If the Discriminator rejects samples with high confidence, standard ReLU gradients go to zero, leaving the Generator with absolutely no gradient signals.
-    By using **LeakyReLU** ($\text{LeakyReLU}(x) = \max(\alpha x, x)$ with $\alpha = 0.2$), we guarantee that weak gradient signals can still flow back even for negative regions:
+    By using <strong>LeakyReLU</strong> ($\text{LeakyReLU}(x) = \max(\alpha x, x)$ with $\alpha = 0.2$), we guarantee that weak gradient signals can still flow back even for negative regions:
   </p>
 <div class="math-block">
 <span class="formula">$$\frac{d}{dx} \text{LeakyReLU}(x) = \begin{cases} 1 &amp; \text{if } x &gt; 0 \\ 0.2 &amp; \text{if } x \le 0 \end{cases}$$</span>
@@ -611,30 +592,11 @@ Final spatial output size: 4x4!</pre>
 <h2 class="sh2">🃏 Revision Flashcards — Day 74</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Transposed Conv?</div>
-<div class="fc-back">Upsampling layer learning parameters to project small inputs to larger resolutions.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">DCGAN rules?</div>
-<div class="fc-back">No pooling layers (use strided/transposed convs), batchnorm in both, LeakyReLU for D.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 74 fit in Week 11?</div>
-<div class="fc-back">It is a key day in Week 11 (Generative Adversarial Networks (GANs), PyTorch workflows).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GAN Architecture?</div><div class="fc-back">Two networks training minimax style: Generator makes fake data; Discriminator tries to distinguish fake from real.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Generator Loss?</div><div class="fc-back">Minimizes the probability of Discriminator detecting fakes: $\log(1 - D(G(z)))$, or maximizes $\log(D(G(z)))$.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Discriminator Loss?</div><div class="fc-back">Maximizes the probability of correct classification: log(D(x)) [reals] + log(1 - D(G(z))) [fakes].</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Mode Collapse?</div><div class="fc-back">GAN failure where Generator learns to produce samples from only a few output modes, ignoring overall dataset diversity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Wasserstein GAN?</div><div class="fc-back">Uses Earth Mover's Distance to provide smooth gradients even when probability distributions do not overlap.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -732,12 +694,13 @@ Final spatial output size: 4x4!</pre>
 <div class="day-tag">WEEK 11 · DAY 75 · MONTH 3 — DEEP LEARNING FRAMEWORKS</div>
 <h1>PyTorch Foundations</h1>
 <p>
-      TensorFlow dominated early deep learning with static computation graphs.
-      PyTorch disrupted the field by introducing **Dynamic Computation Graphs (Define-by-Run)**, becoming the standard in modern research and LLM engineering.
-      Today, we master **Tensors and Operations**,
-      explore **GPU/Accelerator Migrations** (CUDA &amp; Apple Silicon MPS),
-      dissect the **Autograd Dynamic Engine** at a mathematical level,
-      and construct seamless, zero-copy **NumPy-to-PyTorch Pipeline Workflows**.
+      TensorFlow dominated early deep learning with static computation graphs.<br/>
+      PyTorch disrupted the field by introducing <strong>Dynamic Computation Graphs (Define-by-Run)</strong>, becoming the standard in modern research and LLM engineering.
+      <br/><br/>
+      Today, we master <strong>Tensors and Operations</strong>,
+      explore <strong>GPU/Accelerator Migrations</strong> (CUDA &amp; Apple Silicon MPS),
+      dissect the <strong>Autograd Dynamic Engine</strong> at a mathematical level,
+      and construct seamless, zero-copy <strong>NumPy-to-PyTorch Pipeline Workflows</strong>.
     </p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 5 hours</span>
@@ -774,7 +737,7 @@ Final spatial output size: 4x4!</pre>
 <h3 class="sh3">2. Device Migration: A Device-Agnostic Setup</h3>
 <p>
     To train deep learning models on specialized accelerators, we must migrate our tensors from the CPU system RAM to dedicated hardware memory.
-    Modern PyTorch utilizes **Apple Silicon MPS (Metal Performance Shaders)** or **NVIDIA CUDA**:
+    Modern PyTorch utilizes <strong>Apple Silicon MPS (Metal Performance Shaders)</strong> or <strong>NVIDIA CUDA</strong>:
   </p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — device_selection.py</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
@@ -786,10 +749,10 @@ x = torch.randn(<span class="num">3</span>, <span class="num">3</span>).to(devic
 <p>
     When a tensor has `requires_grad=True`, PyTorch tracks every operation performed on it.
     It builds a computational graph using `Function` objects that point back to each other.
-    When we call `.backward()`, the **Autograd engine** computes the gradients of the scalar output with respect to all leaf variables using the multi-variable chain rule.
+    When we call `.backward()`, the <strong>Autograd engine</strong> computes the gradients of the scalar output with respect to all leaf variables using the multi-variable chain rule.
   </p>
 <p>
-    Mathematically, instead of calculating a massive Jacobian matrix $J$ from scratch, PyTorch computes a **Jacobian-Vector Product (JVP)**:
+    Mathematically, instead of calculating a massive Jacobian matrix $J$ from scratch, PyTorch computes a <strong>Jacobian-Vector Product (JVP)</strong>:
   </p>
 <div class="math-block">
 <span class="formula">$$v^T \cdot J = \left[ \frac{\partial l}{\partial y_1}, \dots, \frac{\partial l}{\partial y_m} \right] \cdot \begin{bmatrix} \frac{\partial y_1}{\partial x_1} &amp; \dots &amp; \frac{\partial y_1}{\partial x_n} \\ \vdots &amp; \ddots &amp; \vdots \\ \frac{\partial y_m}{\partial x_1} &amp; \dots &amp; \frac{\partial y_m}{\partial x_n} \end{bmatrix}$$</span>
@@ -798,7 +761,7 @@ x = torch.randn(<span class="num">3</span>, <span class="num">3</span>).to(devic
 <h3 class="sh3">4. Seamless NumPy Pipeline Integration</h3>
 <p>
     To convert between NumPy arrays and PyTorch tensors, we must prevent redundant memory copies (which slow down data loaders).
-    Using `torch.from_numpy()` creates a **shared-memory view** (a pointer to the same memory block).
+    Using `torch.from_numpy()` creates a <strong>shared-memory view</strong> (a pointer to the same memory block).
     Changes in the PyTorch tensor will reflect instantly in the NumPy array, and vice-versa!
   </p>
 <div class="cb">
@@ -904,30 +867,11 @@ np_arr[<span class="num">0</span>] = <span class="num">99.0</span>
 <h2 class="sh2">🃏 Revision Flashcards — Day 75</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Mode Collapse?</div>
-<div class="fc-back">GAN failure where Generator outputs a narrow subset of repeating class styles, ignoring diversity.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Non-Saturating Loss?</div>
-<div class="fc-back">Generator maximizes log D(G(z)) instead of minimizing log(1-D(G(z))) to boost early gradients.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 75 fit in Week 11?</div>
-<div class="fc-back">It is a key day in Week 11 (Generative Adversarial Networks (GANs), PyTorch workflows).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GAN Architecture?</div><div class="fc-back">Two networks training minimax style: Generator makes fake data; Discriminator tries to distinguish fake from real.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Generator Loss?</div><div class="fc-back">Minimizes the probability of Discriminator detecting fakes: $\log(1 - D(G(z)))$, or maximizes $\log(D(G(z)))$.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Discriminator Loss?</div><div class="fc-back">Maximizes the probability of correct classification: log(D(x)) [reals] + log(1 - D(G(z))) [fakes].</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Mode Collapse?</div><div class="fc-back">GAN failure where Generator learns to produce samples from only a few output modes, ignoring overall dataset diversity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Wasserstein GAN?</div><div class="fc-back">Uses Earth Mover's Distance to provide smooth gradients even when probability distributions do not overlap.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -1027,9 +971,9 @@ np_arr[<span class="num">0</span>] = <span class="num">99.0</span>
 <p>
       Writing production-ready deep learning models requires structured abstraction.
       PyTorch organizes model architectures, data flow, and training loops using modular OOP classes.
-      Today, we master subclassing **`nn.Module`** to design neural networks,
-      build robust data-streaming pipelines using **`Dataset`** and **`DataLoader`**,
-      dissect the inner workings of an optimizer by writing a **manual parameter update step**,
+      Today, we master subclassing <strong>`nn.Module`</strong> to design neural networks,
+      build robust data-streaming pipelines using <strong>`Dataset`</strong> and <strong>`DataLoader`</strong>,
+      dissect the inner workings of an optimizer by writing a <strong>manual parameter update step</strong>,
       and build a fully-functional regularized FNN class from scratch in PyTorch.
     </p>
 <div class="meta-row">
@@ -1077,11 +1021,11 @@ np_arr[<span class="num">0</span>] = <span class="num">99.0</span>
 <h3 class="sh3">3. Writing a Manual Weight Update Step</h3>
 <p>
     To truly understand how optimizers like SGD operate, we can manually update model weights.
-    We must modify weights inside a **`torch.no_grad()`** context manager, using **in-place subtraction (`sub_`)**:
+    We must modify weights inside a <strong>`torch.no_grad()`</strong> context manager, using <strong>in-place subtraction (`sub_`)</strong>:
   </p>
 <div class="math-block">
 <span class="formula">$$w \leftarrow w - \eta \cdot \nabla_w \mathcal{L}$$</span>
-<span class="desc">$Where $\eta$ is the learning rate, and updates must be in-place to avoid building dynamic graph nodes on the update itself.$</span>
+<span class="desc">Where $\eta$ is the learning rate, and updates must be in-place to avoid building dynamic graph nodes on the update itself.</span>
 </div>
 <p>
     If we omit `torch.no_grad()`, PyTorch will attempt to track the gradient descent step itself in the computational graph.
@@ -1244,30 +1188,11 @@ scheduler = WarmupCosineDecayLR(optimizer, warmup_epochs=<span class="num">5</sp
 <h2 class="sh2">🃏 Revision Flashcards — Day 76</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Wasserstein GAN?</div>
-<div class="fc-back">Utilizes Earth Mover&#x27;s distance to evaluate sample closeness, yielding smooth gradients everywhere.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Weight Clipping?</div>
-<div class="fc-back">Clips Discriminator (Critic) weights to enforce 1-Lipschitz boundary constraint.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 76 fit in Week 11?</div>
-<div class="fc-back">It is a key day in Week 11 (Generative Adversarial Networks (GANs), PyTorch workflows).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GAN Architecture?</div><div class="fc-back">Two networks training minimax style: Generator makes fake data; Discriminator tries to distinguish fake from real.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Generator Loss?</div><div class="fc-back">Minimizes the probability of Discriminator detecting fakes: $\log(1 - D(G(z)))$, or maximizes $\log(D(G(z)))$.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Discriminator Loss?</div><div class="fc-back">Maximizes the probability of correct classification: log(D(x)) [reals] + log(1 - D(G(z))) [fakes].</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Mode Collapse?</div><div class="fc-back">GAN failure where Generator learns to produce samples from only a few output modes, ignoring overall dataset diversity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Wasserstein GAN?</div><div class="fc-back">Uses Earth Mover's Distance to provide smooth gradients even when probability distributions do not overlap.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -1366,9 +1291,9 @@ scheduler = WarmupCosineDecayLR(optimizer, warmup_epochs=<span class="num">5</sp
 <h1>DCGAN Project: Dataset Loading &amp; Network Design</h1>
 <p>
       Generative modeling culminations require structured codebase designs.
-      We launch our three-day major project: **Synthesizing Anime Faces using a Deep Convolutional GAN (DCGAN)**.
+      We launch our three-day major project: <strong>Synthesizing Anime Faces using a Deep Convolutional GAN (DCGAN)</strong>.
       Today (Phase 1), we build the input pipeline, load and normalize image grids,
-      design the custom **Generator** and **Discriminator** network subclasses using PyTorch,
+      design the custom <strong>Generator</strong> and <strong>Discriminator</strong> network subclasses using PyTorch,
       and implement the specific weight initialization rules specified in the DCGAN paper.
     </p>
 <div class="meta-row">
@@ -1399,7 +1324,7 @@ scheduler = WarmupCosineDecayLR(optimizer, warmup_epochs=<span class="num">5</sp
 <h3 class="sh3">1. Custom Image Normalization for Generative Targets</h3>
 <p>
     Standard images loaded by PIL or OpenCV store pixels as integers in $[0, 255]$, which standard deep networks scale to $[0, 1]$.
-    However, the final activation layer of a DCGAN Generator is a **Tanh** function, which outputs values in $[-1, 1]$.
+    However, the final activation layer of a DCGAN Generator is a <strong>Tanh</strong> function, which outputs values in $[-1, 1]$.
     To ensure the Discriminator evaluates images on the same scale, we must normalize real input images to $[-1, 1]$:
   </p>
 <div class="math-block">
@@ -1432,7 +1357,7 @@ scheduler = WarmupCosineDecayLR(optimizer, warmup_epochs=<span class="num">5</sp
   </p>
 <div class="math-block">
 <span class="formula">$$w \sim \mathcal{N}(0, 0.02^2), \quad b = 0$$</span>
-<span class="desc">$Where biases are initialized to 0, and Batch Normalization weights are set to $\gamma \sim \mathcal{N}(1, 0.02^2)$.$</span>
+<span class="desc">Where biases are initialized to 0, and Batch Normalization weights are set to $\gamma \sim \mathcal{N}(1, 0.02^2)$.</span>
 </div>
 <h3 class="sh3">4. Custom Networks and Weight Initialization Script</h3>
 <p>
@@ -1582,35 +1507,11 @@ preds = netD(fake_img)
 <h2 class="sh2">🃏 Revision Flashcards — Day 77</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">U-Net?</div>
-<div class="fc-back">Encoder-Decoder structure with direct skip connections across matching resolution depths.</div>
-<div class="intuition-box">
-<strong>💡 Intuition: Why Skip Connections Solve Vanishing Gradients</strong>
-In a deep network, gradients must travel back through dozens of layers during backpropagation. Each layer multiplies the gradient by its weights — if weights are small, the gradient shrinks exponentially (vanishes). Skip connections create a "gradient highway" that bypasses layers entirely: <code>output = F(x) + x</code>. The <code>+ x</code> term means the gradient always has a direct path back, regardless of how deep the network is. This is why ResNets can train 152+ layers while plain networks fail beyond 20.
-</div>
-
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">PatchGAN?</div>
-<div class="fc-back">Discriminator classifying individual NxN patches as real/fake to preserve texture detail.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 77 fit in Week 11?</div>
-<div class="fc-back">It is a key day in Week 11 (Generative Adversarial Networks (GANs), PyTorch workflows).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GAN Architecture?</div><div class="fc-back">Two networks training minimax style: Generator makes fake data; Discriminator tries to distinguish fake from real.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Generator Loss?</div><div class="fc-back">Minimizes the probability of Discriminator detecting fakes: $\log(1 - D(G(z)))$, or maximizes $\log(D(G(z)))$.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Discriminator Loss?</div><div class="fc-back">Maximizes the probability of correct classification: log(D(x)) [reals] + log(1 - D(G(z))) [fakes].</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Mode Collapse?</div><div class="fc-back">GAN failure where Generator learns to produce samples from only a few output modes, ignoring overall dataset diversity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Wasserstein GAN?</div><div class="fc-back">Uses Earth Mover's Distance to provide smooth gradients even when probability distributions do not overlap.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -1709,11 +1610,11 @@ In a deep network, gradients must travel back through dozens of layers during ba
 <h1>DCGAN Project: Min-Max Training Loop</h1>
 <p>
       Defining our network architectures is only the beginning.
-      The core engineering of a GAN lies in the **adversarial training loop**.
+      The core engineering of a GAN lies in the <strong>adversarial training loop</strong>.
       Today (Phase 2), we implement the alternating gradient update schedules,
       synchronize loss targets using Binary Cross-Entropy,
-      train the **Discriminator** to separate real vs. synthetic images,
-      train the **Generator** using the Non-Saturating game heuristic,
+      train the <strong>Discriminator</strong> to separate real vs. synthetic images,
+      train the <strong>Generator</strong> using the Non-Saturating game heuristic,
       and write code to output generated image progression grids across epochs.
     </p>
 <div class="meta-row">
@@ -1747,13 +1648,13 @@ In a deep network, gradients must travel back through dozens of layers during ba
   </p>
 <ul class="prose-list">
 <li><strong>Step 1: Train the Discriminator ($D$).</strong>
-<br/>- First, compute the loss on real training images: pass $x$ through $D$ with targets set to **1** (real labels). Backpropagate the gradients.
-      <br/>- Next, generate fake images $G(z)$ using a noise vector $z$. Pass $G(z)$ through $D$ with targets set to **0** (fake labels). **Detach** the fake images ($G(z).\text{detach()}$) before passing them to the Discriminator.
+<br/>- First, compute the loss on real training images: pass $x$ through $D$ with targets set to <strong>1</strong> (real labels). Backpropagate the gradients.
+      <br/>- Next, generate fake images $G(z)$ using a noise vector $z$. Pass $G(z)$ through $D$ with targets set to <strong>0</strong> (fake labels). <strong>Detach</strong> the fake images ($G(z).\text{detach()}$) before passing them to the Discriminator.
       <br/>- Backpropagate gradients for the fake batch, and update the Discriminator weights. Detaching prevents PyTorch from calculating gradients through the Generator during the Discriminator's update step.
     </li>
 <li><strong>Step 2: Train the Generator ($G$).</strong>
 <br/>- Pass the same fake images $G(z)$ (without detaching!) through the updated Discriminator.
-      <br/>- Calculate the loss with targets set to **1** (real labels). This is the Non-Saturating game heuristic, which penalizes the Generator if the Discriminator correctly identifies the images as fake.
+      <br/>- Calculate the loss with targets set to <strong>1</strong> (real labels). This is the Non-Saturating game heuristic, which penalizes the Generator if the Discriminator correctly identifies the images as fake.
       <br/>- Backpropagate gradients through both $D$ and $G$, and update the Generator weights.
     </li>
 </ul>
@@ -1931,30 +1832,11 @@ optimizerG.step()
 <h2 class="sh2">🃏 Revision Flashcards — Day 78</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Inception Score?</div>
-<div class="fc-back">Evaluates GAN samples by measuring classification confidence and diversity of predicted classes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">FID?</div>
-<div class="fc-back">Compares statistics (mean, covariance) of real and fake feature layers from an Inception model.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 78 fit in Week 11?</div>
-<div class="fc-back">It is a key day in Week 11 (Generative Adversarial Networks (GANs), PyTorch workflows).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GAN Architecture?</div><div class="fc-back">Two networks training minimax style: Generator makes fake data; Discriminator tries to distinguish fake from real.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Generator Loss?</div><div class="fc-back">Minimizes the probability of Discriminator detecting fakes: $\log(1 - D(G(z)))$, or maximizes $\log(D(G(z)))$.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Discriminator Loss?</div><div class="fc-back">Maximizes the probability of correct classification: log(D(x)) [reals] + log(1 - D(G(z))) [fakes].</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Mode Collapse?</div><div class="fc-back">GAN failure where Generator learns to produce samples from only a few output modes, ignoring overall dataset diversity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Wasserstein GAN?</div><div class="fc-back">Uses Earth Mover's Distance to provide smooth gradients even when probability distributions do not overlap.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -2053,8 +1935,8 @@ optimizerG.step()
 <h1>DCGAN Project: Persistence &amp; Optimization</h1>
 <p>
       Adversarial training is delicate, and securing trained models is paramount.
-      Today (Phase 3), we finalize our capstone project by exploring advanced stabilization techniques like **Wasserstein GANs (WGAN-GP)** and **Spectral Normalization**,
-      implementing robust **Model Persistence** (saving and loading weight dictionaries for both models and optimizers),
+      Today (Phase 3), we finalize our capstone project by exploring advanced stabilization techniques like <strong>Wasserstein GANs (WGAN-GP)</strong> and <strong>Spectral Normalization</strong>,
+      implementing robust <strong>Model Persistence</strong> (saving and loading weight dictionaries for both models and optimizers),
       and building a standalone inference script to generate synthetic anime faces from noise inputs on the fly.
     </p>
 <div class="meta-row">
@@ -2084,21 +1966,21 @@ optimizerG.step()
 <h2 class="sh2">🧠 Theory &amp; Engineering Deep Dive</h2>
 <h3 class="sh3">1. Advanced GAN Optimization: WGAN and Gradient Penalty</h3>
 <p>
-    Standard GANs minimize Binary Cross-Entropy loss, which mathematically approximates the **Jensen-Shannon (JS) Divergence** between training and synthetic data.
+    Standard GANs minimize Binary Cross-Entropy loss, which mathematically approximates the <strong>Jensen-Shannon (JS) Divergence</strong> between training and synthetic data.
     When the data distributions do not overlap (e.g. early in training), the JS divergence is a constant ($\log 2$), resulting in zero gradients.
   </p>
 <p>
-    To resolve this, Arjovsky et al. introduced **Wasserstein GAN (WGAN)**, which utilizes the **Earth Mover's Distance (EMD)**.
+    To resolve this, Arjovsky et al. introduced <strong>Wasserstein GAN (WGAN)</strong>, which utilizes the <strong>Earth Mover's Distance (EMD)</strong>.
     The EMD provides smooth gradients everywhere, even when distributions do not overlap.
-    To satisfy the Lipschitz continuity condition required by EMD, we add a **Gradient Penalty (WGAN-GP)** constraint:
+    To satisfy the Lipschitz continuity condition required by EMD, we add a <strong>Gradient Penalty (WGAN-GP)</strong> constraint:
   </p>
 <div class="math-block">
 <span class="formula">$$\mathcal{L}_{\text{GP}} = \mathbb{E}_{\hat{x} \sim p_{\hat{x}}}[ (||\nabla_{\hat{x}} D(\hat{x})||_2 - 1)^2 ]$$</span>
-<span class="desc">$Where $\hat{x}$ is a random interpolation between real and fake images, penalizing the Discriminator if the gradient norm of its outputs deviates from 1.$</span>
+<span class="desc">Where $\hat{x}$ is a random interpolation between real and fake images, penalizing the Discriminator if the gradient norm of its outputs deviates from 1.</span>
 </div>
 <h3 class="sh3">2. Spectral Normalization: An Alternative Path</h3>
 <p>
-    Instead of calculating a complex gradient penalty, modern architectures often apply **Spectral Normalization** directly to convolutional weights.
+    Instead of calculating a complex gradient penalty, modern architectures often apply <strong>Spectral Normalization</strong> directly to convolutional weights.
     Spectral normalization scales the weight matrices by their largest singular value (spectral norm $\sigma(W)$), guaranteeing that the Lipschitz constant of each layer is at most 1:
   </p>
 <div class="math-block">
@@ -2229,30 +2111,11 @@ netG.eval()  <span class="cm"># Disable Batch Normalization learning trackers!</
 <h2 class="sh2">🃏 Revision Flashcards — Day 79</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Checkpointing?</div>
-<div class="fc-back">Periodically storing Generator and Discriminator parameters during minimax training iterations.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Latent Space?</div>
-<div class="fc-back">Low-dimensional continuous vector domain sampled to produce unique synthetic variations.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 79 fit in Week 11?</div>
-<div class="fc-back">It is a key day in Week 11 (Generative Adversarial Networks (GANs), PyTorch workflows).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">GAN Architecture?</div><div class="fc-back">Two networks training minimax style: Generator makes fake data; Discriminator tries to distinguish fake from real.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Generator Loss?</div><div class="fc-back">Minimizes the probability of Discriminator detecting fakes: $\log(1 - D(G(z)))$, or maximizes $\log(D(G(z)))$.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Discriminator Loss?</div><div class="fc-back">Maximizes the probability of correct classification: log(D(x)) [reals] + log(1 - D(G(z))) [fakes].</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Mode Collapse?</div><div class="fc-back">GAN failure where Generator learns to produce samples from only a few output modes, ignoring overall dataset diversity.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Wasserstein GAN?</div><div class="fc-back">Uses Earth Mover's Distance to provide smooth gradients even when probability distributions do not overlap.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -2353,10 +2216,10 @@ opt_d = torch.optim.Adam(discriminator.parameters(), lr=0.0002, betas=(0.5, 0.99
 <p>
       Generative Adversarial Networks and PyTorch computational graph engines demand rigorous graduate-level grounding.
       This master toolkit serves as an exhaustive reference.
-      It contains the mathematical proofs for **Wasserstein Distance Kantrovich-Rubinstein Duality**,
-      complete structural walk-throughs for implementing **Custom PyTorch Autograd Functions**,
-      **15 scenario-based senior interview questions**,
-      and an academic-grade **55-term Generative/PyTorch Glossary**.
+      It contains the mathematical proofs for <strong>Wasserstein Distance Kantrovich-Rubinstein Duality</strong>,
+      complete structural walk-throughs for implementing <strong>Custom PyTorch Autograd Functions</strong>,
+      <strong>15 scenario-based senior interview questions</strong>,
+      and an academic-grade <strong>55-term Generative/PyTorch Glossary</strong>.
     </p>
 <div class="meta-row">
 <span class="meta-badge g">🔬 Research Reference</span>
@@ -2373,19 +2236,19 @@ opt_d = torch.optim.Adam(discriminator.parameters(), lr=0.0002, betas=(0.5, 0.99
     However, when these distributions reside on lower-dimensional manifolds in high-dimensional space, they rarely overlap, leading to a constant JS divergence of $\log 2$ and leaving the Generator with zero gradients.
   </p>
 <p>
-    To resolve this, WGAN utilizes the **Wasserstein-1 (Earth Mover's) Distance**, defined as:
+    To resolve this, WGAN utilizes the <strong>Wasserstein-1 (Earth Mover's) Distance</strong>, defined as:
   </p>
 <div class="math-block">
 <span class="formula">$$W(P_r, P_g) = \inf_{\gamma \in \Pi(P_r, P_g)} \mathbb{E}_{(x, y) \sim \gamma}[ ||x - y|| ]$$</span>
-<span class="desc">$Where $\Pi(P_r, P_g)$ is the set of all joint distributions $\gamma(x, y)$ whose marginals are $P_r$ and $P_g$ respectively.$</span>
+<span class="desc">Where $\Pi(P_r, P_g)$ is the set of all joint distributions $\gamma(x, y)$ whose marginals are $P_r$ and $P_g$ respectively.</span>
 </div>
 <p>
     Evaluating this infimum is computationally intractable because it requires optimizing over all possible joint distributions.
-    To make it tractable, we apply **Kantorovich-Rubinstein (KR) Duality**, converting the infimum over joint distributions into a supremum over 1-Lipschitz functions:
+    To make it tractable, we apply <strong>Kantorovich-Rubinstein (KR) Duality</strong>, converting the infimum over joint distributions into a supremum over 1-Lipschitz functions:
   </p>
 <div class="math-block">
 <span class="formula">$$W(P_r, P_g) = \sup_{||f||_L \le 1} \mathbb{E}_{x \sim P_r}[ f(x) ] - \mathbb{E}_{y \sim P_g}[ f(y) ]$$</span>
-<span class="desc">$Where $f$ is a critic function satisfying the 1-Lipschitz condition: $|f(x) - f(y)| \le ||x - y||$ for all $x, y$.$</span>
+<span class="desc">Where $f$ is a critic function satisfying the 1-Lipschitz condition: $|f(x) - f(y)| \le ||x - y||$ for all $x, y$.</span>
 </div>
 <p>
     This allows us to train a neural network $D$ (the Critic) to approximate the Wasserstein distance, providing continuous, informative gradients to the Generator everywhere.
@@ -2444,15 +2307,15 @@ loss.backward()
 <strong>Q2: Explain the "Constant Error Carousel" (CEC) property and why we must omit Batch Normalization in the output layer of the Generator and the input layer of the Discriminator.</strong>
 <br/><br/>
 <strong>A:</strong> Omiting Batch Normalization in these layers is a key rule of the DCGAN framework:
-    <br/>1. **Generator Output Layer:** Batch normalization normalizes values across the batch. If applied to the output layer, it creates dependencies between images in the same batch, distorting pixel values and destabilizing training.
-    <br/>2. **Discriminator Input Layer:** The Discriminator must evaluate real and synthetic images independently. If Batch Norm is applied to the input layer, the statistics of a batch of synthetic images will differ from a batch of real images, allowing the Discriminator to trivially separate them based on batch scale shifts.
+    <br/>1. <strong>Generator Output Layer:</strong> Batch normalization normalizes values across the batch. If applied to the output layer, it creates dependencies between images in the same batch, distorting pixel values and destabilizing training.
+    <br/>2. <strong>Discriminator Input Layer:</strong> The Discriminator must evaluate real and synthetic images independently. If Batch Norm is applied to the input layer, the statistics of a batch of synthetic images will differ from a batch of real images, allowing the Discriminator to trivially separate them based on batch scale shifts.
   </div>
 <div class="interview">
 <strong>Q3: How does Spectral Normalization mathematically stabilize GAN training compared to Weight Clipping in WGAN?</strong>
 <br/><br/>
 <strong>A:</strong> Wasserstein GAN requires the Critic function to be 1-Lipschitz.
-    <br/>- **Weight Clipping:** Constrains weights to a fixed range $[-c, c]$. This is a harsh constraint that forces weights to their boundary values, reducing the capacity of the network and leading to capacity saturation.
-    <br/>- **Spectral Normalization:** Scales the weight matrix of each layer by its largest singular value (spectral norm $\sigma(W)$), calculated using power iteration:
+    <br/>- <strong>Weight Clipping:</strong> Constrains weights to a fixed range $[-c, c]$. This is a harsh constraint that forces weights to their boundary values, reducing the capacity of the network and leading to capacity saturation.
+    <br/>- <strong>Spectral Normalization:</strong> Scales the weight matrix of each layer by its largest singular value (spectral norm $\sigma(W)$), calculated using power iteration:
     $$W_{\text{SN}} = \frac{W}{\sigma(W)}$$
     This guarantees that the Lipschitz constant of each layer is at most 1, satisfying the Lipschitz condition smoothly without limiting the capacity of the network.
   </div>
@@ -2460,9 +2323,9 @@ loss.backward()
 <strong>Q4: Why does a zero-copy operation using `torch.from_numpy()` share memory, and what are the primary engineering risks associated with it?</strong>
 <br/><br/>
 <strong>A:</strong> `torch.from_numpy()` creates a PyTorch tensor that shares the underlying memory buffer of the NumPy array. This avoids copying data in RAM, making it highly efficient.
-    <br/>**Engineering Risks:**
-    <br/>1. **Side Effects:** Modifying the NumPy array immediately alters the PyTorch tensor, which can lead to silent bugs if the tensor is modified during backpropagation.
-    <br/>2. **Memory Leaks:** The underlying NumPy array cannot be garbage collected as long as the PyTorch tensor remains in memory, which can lead to memory bloat in long-running data pipelines.
+    <br/><strong>Engineering Risks:</strong>
+    <br/>1. <strong>Side Effects:</strong> Modifying the NumPy array immediately alters the PyTorch tensor, which can lead to silent bugs if the tensor is modified during backpropagation.
+    <br/>2. <strong>Memory Leaks:</strong> The underlying NumPy array cannot be garbage collected as long as the PyTorch tensor remains in memory, which can lead to memory bloat in long-running data pipelines.
   </div>
 <div class="interview">
 <strong>Q5: What is Mode Collapse in GANs, and how does WGAN-GP mathematically mitigate this failure mode?</strong>
@@ -2470,7 +2333,7 @@ loss.backward()
 <strong>A:</strong> Mode collapse occurs when the Generator discovers a small subset of the training distribution (a single "mode") that easily fools the Discriminator.
     Instead of learning to output diverse images, the Generator collapses to producing only a single type of output.
     <br/><br/>
-    **WGAN-GP** solves this by replacing the JS Divergence with the Wasserstein distance (Earth Mover's Distance).
+    <strong>WGAN-GP</strong> solves this by replacing the JS Divergence with the Wasserstein distance (Earth Mover's Distance).
     The Wasserstein distance provides smooth, continuous gradients everywhere, even when distributions do not overlap.
     This prevents the Discriminator from becoming too strong and saturating its outputs, maintaining a continuous gradient flow that guides the Generator to explore and cover the entire data distribution.
   </div>
@@ -2494,8 +2357,8 @@ loss.backward()
 <strong>Q8: Explain the difference between `model.zero_grad()` and `optimizer.zero_grad(set_to_none=True)` in terms of memory efficiency.</strong>
 <br/><br/>
 <strong>A:</strong> Both methods reset gradients to zero before backpropagation, but they handle memory differently:
-    <br/>- **`model.zero_grad()`:** Resets all parameter gradients to actual zero tensors. These tensors remain allocated in memory, meaning their memory footprint is not released.
-    <br/>- **`optimizer.zero_grad(set_to_none=True)`:** Sets the `.grad` attributes of all optimized parameters to `None`. This releases the memory allocated for gradient tensors, reducing memory usage and slightly speeding up subsequent operations.
+    <br/>- <strong>`model.zero_grad()`:</strong> Resets all parameter gradients to actual zero tensors. These tensors remain allocated in memory, meaning their memory footprint is not released.
+    <br/>- <strong>`optimizer.zero_grad(set_to_none=True)`:</strong> Sets the `.grad` attributes of all optimized parameters to `None`. This releases the memory allocated for gradient tensors, reducing memory usage and slightly speeding up subsequent operations.
   </div>
 <div class="interview">
 <strong>Q9: How does the Autograd engine handle memory management when we call `.backward()` multiple times?</strong>
@@ -2508,8 +2371,8 @@ loss.backward()
 <strong>Q10: What is the difference between Transpose Convolution and Bilinear Upsampling followed by a standard Convolution?</strong>
 <br/><br/>
 <strong>A:</strong> Both methods increase spatial resolution, but they use different approaches:
-    <br/>- **Transpose Convolution:** Uses learnable filters to project features into higher dimensions. While powerful, overlaps in strides can create grid-like checkerboard artifacts in generated images.
-    <br/>- **Bilinear Upsampling + Conv:** Uses fixed bilinear interpolation to resize features, followed by a standard convolution to learn spatial details. This is computationally simpler and reduces checkerboard artifacts, but has less capacity than transpose convolutions.
+    <br/>- <strong>Transpose Convolution:</strong> Uses learnable filters to project features into higher dimensions. While powerful, overlaps in strides can create grid-like checkerboard artifacts in generated images.
+    <br/>- <strong>Bilinear Upsampling + Conv:</strong> Uses fixed bilinear interpolation to resize features, followed by a standard convolution to learn spatial details. This is computationally simpler and reduces checkerboard artifacts, but has less capacity than transpose convolutions.
   </div>
 <div class="interview">
 <strong>Q11: Why is `inplace=True` utilized in LeakyReLU activations inside the Discriminator?</strong>
@@ -2530,15 +2393,15 @@ loss.backward()
 <strong>Q13: What is the difference between `state_dict()` and saving the entire model object using `torch.save(model)`?</strong>
 <br/><br/>
 <strong>A:</strong> Both approaches save the model, but they differ in portability:
-    <br/>- **`state_dict()`:** Saves only the learnable parameters (weights and biases) in a Python dictionary. This is highly portable and allows models to be loaded even if their class structure is modified.
-    <br/>- **`torch.save(model)`:** Serializes the entire model object using Python's pickle library. This binds the saved file to the specific file paths and directory structures of the training environment, making it fragile and prone to loading failures across different codebases.
+    <br/>- <strong>`state_dict()`:</strong> Saves only the learnable parameters (weights and biases) in a Python dictionary. This is highly portable and allows models to be loaded even if their class structure is modified.
+    <br/>- <strong>`torch.save(model)`:</strong> Serializes the entire model object using Python's pickle library. This binds the saved file to the specific file paths and directory structures of the training environment, making it fragile and prone to loading failures across different codebases.
   </div>
 <div class="interview">
 <strong>Q14: How does the choice of latent vector size (e.g. 100 vs. 512) affect Generator capacity and training stability?</strong>
 <br/><br/>
 <strong>A:</strong> The latent vector acts as the seed that the Generator expands into a high-dimensional image.
-    <br/>- **Small Latent Size (100):** Limits the variety of outputs the Generator can produce, reducing the diversity of generated images but making training faster and less prone to mode collapse.
-    <br/>- **Large Latent Size (512):** Increases the variety of outputs, allowing the Generator to capture complex patterns at the expense of higher memory usage and a higher risk of mode collapse.
+    <br/>- <strong>Small Latent Size (100):</strong> Limits the variety of outputs the Generator can produce, reducing the diversity of generated images but making training faster and less prone to mode collapse.
+    <br/>- <strong>Large Latent Size (512):</strong> Increases the variety of outputs, allowing the Generator to capture complex patterns at the expense of higher memory usage and a higher risk of mode collapse.
   </div>
 <div class="interview">
 <strong>Q15: Why is the choice of standard deviation `0.02` for weight initializations so critical in the DCGAN framework?</strong>
@@ -2560,10 +2423,10 @@ loss.backward()
     where the supremum is taken over all 1-Lipschitz continuous functions $f: \mathcal{X} \to \mathbb{R}$.
     <br/><br/>
 <strong>Step-by-Step Derivation Logic:</strong>
-<br/>1. **Primal Linear Program:** We frame the infimum as a linear optimization problem under marginal constraints.
-    <br/>2. **Lagrangian Formulation:** We construct the Lagrangian multiplier terms $\phi(x)$ and $\psi(y)$ to enforce the boundary constraints:
+<br/>1. <strong>Primal Linear Program:</strong> We frame the infimum as a linear optimization problem under marginal constraints.
+    <br/>2. <strong>Lagrangian Formulation:</strong> We construct the Lagrangian multiplier terms $\phi(x)$ and $\psi(y)$ to enforce the boundary constraints:
     $$\mathcal{L}(\gamma, \phi, \psi) = \int \|x-y\|\gamma(dx,dy) + \int \phi(x)\left(\mathbb{P}_r(dx) - \int \gamma(dx,dy)\right) + \int \psi(y)\left(\mathbb{P}_g(dy) - \int \gamma(dx,dy)\right)$$
-    <br/>3. **Dual Transformation:** By taking the infimum over non-negative transport plans $\gamma$, we find that the dual constraints require:
+    <br/>3. <strong>Dual Transformation:</strong> By taking the infimum over non-negative transport plans $\gamma$, we find that the dual constraints require:
     $$\phi(x) + \psi(y) \le \|x - y\| \quad \forall x,y$$
     To maximize the dual objective under this constraint, we set $\psi(y) = -\phi(y)$, which simplifies the condition to:
     $$\phi(x) - \phi(y) \le \|x - y\|$$
@@ -2573,24 +2436,24 @@ loss.backward()
 <strong>Q17: Explain the concept of the "Truncation Trick" in high-resolution generative models like BigGAN and StyleGAN.</strong>
 <br/><br/>
 <strong>A:</strong> The Truncation Trick is a simple yet powerful technique used to trade off output diversity for visual fidelity during inference:
-    <br/>- **Training:** The Generator is trained by drawing latent vectors $z$ from a standard normal distribution $\mathcal{N}(0, I)$ or a uniform space.
-    <br/>- **Inference:** Instead of drawing $z$ from the full normal distribution, we sample $z$ from a truncated normal distribution where values exceeding a threshold $\psi$ (e.g., $|z_i| &gt; \psi$) are rejected and resampled. Alternatively, StyleGAN applies truncation in the intermediate style space $\mathcal{W}$ using a linear interpolation:
+    <br/>- <strong>Training:</strong> The Generator is trained by drawing latent vectors $z$ from a standard normal distribution $\mathcal{N}(0, I)$ or a uniform space.
+    <br/>- <strong>Inference:</strong> Instead of drawing $z$ from the full normal distribution, we sample $z$ from a truncated normal distribution where values exceeding a threshold $\psi$ (e.g., $|z_i| &gt; \psi$) are rejected and resampled. Alternatively, StyleGAN applies truncation in the intermediate style space $\mathcal{W}$ using a linear interpolation:
     $$w' = \bar{w} + \psi(w - \bar{w})$$
     where $\bar{w}$ is the center of mass of the style space, and $\psi \in [0, 1]$ is the truncation scale.
-    <br/>- **Impact:** When $\psi$ is close to 0, the outputs are highly realistic but repetitive (high fidelity, low diversity). When $\psi$ is close to 1, the outputs are highly diverse but prone to rendering artifacts and visual anomalies (low fidelity, high diversity). This allows users to dynamically fine-tune outputs depending on quality thresholds.
+    <br/>- <strong>Impact:</strong> When $\psi$ is close to 0, the outputs are highly realistic but repetitive (high fidelity, low diversity). When $\psi$ is close to 1, the outputs are highly diverse but prone to rendering artifacts and visual anomalies (low fidelity, high diversity). This allows users to dynamically fine-tune outputs depending on quality thresholds.
   </div>
 <div class="interview">
 <strong>Q18: Formulate the functional difference between the gradients generated by standard Binary Cross Entropy (BCE) loss and Wasserstein loss.</strong>
 <br/><br/>
 <strong>A:</strong> The gradients differ fundamentally in their mathematical bounds and behavior:
-    <br/>- **BCE Loss Gradients:** Standard BCE loss uses logarithms ($\log(D(x))$ and $\log(1-D(G(z)))$). The derivative of the loss with respect to Discriminator activations scales inversely with classification scores ($1/x$). When the Discriminator is extremely confident (e.g. $D(G(z)) \approx 0$), the Generator gradients vanish to 0 under minimax loss, or saturate under non-saturating loss, leading to training deadlocks.
-    <br/>- **Wasserstein Loss Gradients:** Wasserstein loss uses simple linear difference values ($D(x) - D(G(z))$). The derivative of this loss function with respect to active parameters is constant ($\pm 1$), regardless of how strong or confident the Critic is. This guarantees continuous, smooth gradients throughout the training process, allowing the Critic to be trained to convergence without vanishing gradients.
+    <br/>- <strong>BCE Loss Gradients:</strong> Standard BCE loss uses logarithms ($\log(D(x))$ and $\log(1-D(G(z)))$). The derivative of the loss with respect to Discriminator activations scales inversely with classification scores ($1/x$). When the Discriminator is extremely confident (e.g. $D(G(z)) \approx 0$), the Generator gradients vanish to 0 under minimax loss, or saturate under non-saturating loss, leading to training deadlocks.
+    <br/>- <strong>Wasserstein Loss Gradients:</strong> Wasserstein loss uses simple linear difference values ($D(x) - D(G(z))$). The derivative of this loss function with respect to active parameters is constant ($\pm 1$), regardless of how strong or confident the Critic is. This guarantees continuous, smooth gradients throughout the training process, allowing the Critic to be trained to convergence without vanishing gradients.
   </div>
 <div class="interview">
 <strong>Q19: What is DiffAugment, and why is it critical when training GANs under extremely small target datasets?</strong>
 <br/><br/>
 <strong>A:</strong> Standard data augmentation in image classifiers is applied only to training inputs. However, in GANs, applying augmentations only to real images skews the target distribution, causing the Generator to generate augmented artifacts (e.g., generating cut-out shapes or weird color shifts).
-    DiffAugment solves this by applying identical differentiable augmentations (such as translations, color adjustments, and spatial cutouts) to **both** real images and generated images before passing them to the Discriminator:
+    DiffAugment solves this by applying identical differentiable augmentations (such as translations, color adjustments, and spatial cutouts) to <strong>both</strong> real images and generated images before passing them to the Discriminator:
     $$\min_G \max_D \mathbb{E}_{x \sim \mathbb{P}_r}[D(T(x))] - \mathbb{E}_{z \sim p_z}[D(T(G(z)))]$$
     where $T$ represents the differentiable transformation function. Since the augmentations are differentiable, gradients flow cleanly through the transformations back to the Generator, allowing stable GAN training with as few as 100 images without memorization.
   </div>
@@ -2598,8 +2461,8 @@ loss.backward()
 <strong>Q20: Why do we normalize real images to the range $[-1, 1]$ and use a `Tanh` activation in the final layer of the Generator?</strong>
 <br/><br/>
 <strong>A:</strong> Standardizing real input images to the range $[-1, 1]$ and matching this range in the Generator's final layer with a `Tanh` activation is crucial for stabilizing training:
-    <br/>- **Gradient Center:** The range $[-1, 1]$ is symmetric around zero. This centers the input activations, which prevents structural covariate shift and stabilizes optimization.
-    <br/>- **Gradient Flow:** `Tanh` has non-zero derivatives over a wide dynamic range, preventing saturation during training. Using standard $[0, 1]$ normalizations with a `Sigmoid` activation in the final layer of the Generator is more prone to early vanishing gradients, leading to dead pixel values in generated images.
+    <br/>- <strong>Gradient Center:</strong> The range $[-1, 1]$ is symmetric around zero. This centers the input activations, which prevents structural covariate shift and stabilizes optimization.
+    <br/>- <strong>Gradient Flow:</strong> `Tanh` has non-zero derivatives over a wide dynamic range, preventing saturation during training. Using standard $[0, 1]$ normalizations with a `Sigmoid` activation in the final layer of the Generator is more prone to early vanishing gradients, leading to dead pixel values in generated images.
   </div>
 <div class="interview">
 <strong>Q21: Why do style-based spatial models like StyleGAN replace Batch Normalization with Instance Normalization?</strong>
@@ -2611,8 +2474,8 @@ loss.backward()
 <strong>Q22: Why does the original Wasserstein GAN use weight clipping instead of standard momentum-based weight updates?</strong>
 <br/><br/>
 <strong>A:</strong> The original WGAN paper enforces 1-Lipschitz continuity on the Critic by clipping its weights to a rigid compact metric space $[-c, c]$ after each gradient step:
-    <br/>- **Lipschitz Bound:** Restricting the parameter values forces the function's derivatives to be bounded everywhere, guaranteeing Lipschitz compliance.
-    <br/>- **Drawbacks:** Weight clipping is a crude constraint. If the clipping threshold $c$ is too large, the Critic takes a long time to reach optimal parameter bounds. If $c$ is too small, weights saturate at the boundaries, turning the neural network into a simple, less expressive function and causing optimization failure. WGAN-GP replaces this with a dynamic gradient penalty constraint.
+    <br/>- <strong>Lipschitz Bound:</strong> Restricting the parameter values forces the function's derivatives to be bounded everywhere, guaranteeing Lipschitz compliance.
+    <br/>- <strong>Drawbacks:</strong> Weight clipping is a crude constraint. If the clipping threshold $c$ is too large, the Critic takes a long time to reach optimal parameter bounds. If $c$ is too small, weights saturate at the boundaries, turning the neural network into a simple, less expressive function and causing optimization failure. WGAN-GP replaces this with a dynamic gradient penalty constraint.
   </div>
 <h2 class="sh2">⚡ PyTorch Production Performance &amp; Optimization Guide</h2>
 <h3 class="sh3">1. Pinning Memory &amp; Asynchronous Transfers</h3>

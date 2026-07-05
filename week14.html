@@ -7,9 +7,6 @@
 <title>Week 14 — Transformers &amp; Attention | 135-Day AI/ML Roadmap</title>
 <meta content="Week 14 — Transformers &amp; Attention — Complete coursework, tasks, quizzes, and resources for Week 14 of the 135-Day AI/ML Roadmap." name="description"/>
 <link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%230d0f14'/&gt;&lt;text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'&gt;AI&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
-<link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
-<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer="" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 <link rel="stylesheet" href="course.css">
 <style>
 :root {
@@ -17,6 +14,9 @@
   --accent-sec-rgb: 180, 124, 252;
 }
 </style>
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
+<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer="" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
@@ -58,10 +58,7 @@
 <div class="sb-item" id="sb-95" onclick="goDay(95);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(95)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--purple)"></span>Day 95 — Transformers &amp; RoPE</div>
 <div class="sb-item" id="sb-96" onclick="goDay(96);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(96)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--orange)"></span>Day 96 — BERT &amp; GPT Theory</div>
 <div class="sb-item" id="sb-97" onclick="goDay(97);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(97)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--green)"></span>Day 97 — Tokenizer Mechanics</div>
-<div class="gotcha-box">
-<strong>⚠️ Gotcha: Tokenizer-Model Mismatch</strong>
-Always load the tokenizer that matches the exact model checkpoint. Using <code>bert-base-uncased</code> tokenizer with <code>bert-base-cased</code> model will produce wrong token IDs and silently degrade performance. The rule: <code>AutoTokenizer.from_pretrained()</code> must use the same model name as <code>AutoModel.from_pretrained()</code>.
-</div>
+
 
 <div class="sb-item" id="sb-98" onclick="goDay(98);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(98)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--pink)"></span>Day 98 — PEFT &amp; LoRA</div>
 <div class="sb-item" id="sb-99" onclick="goDay(99);closeSidebar()" onkeydown="if(event.key==='Enter')goDay(99)" role="button" tabindex="0"><span class="sb-dot" style="background:var(--teal)"></span>Day 99 — RAG Fundamentals: Retrieval Architecture</div>
@@ -165,7 +162,7 @@ Always load the tokenizer that matches the exact model checkpoint. Using <code>b
 <p>The unscaled attention scores are given by <em>S = $Q$ $K$^T</em>. If components of $Q$ and $K$ are independent random variables with mean 0 and variance 1, the dot product will have mean 0 and variance <em>$d_k$</em>. For a large <em>$d_k$</em> (e.g., 64), the variance is 64.</p>
 <p>Passing a vector with high variance into the Softmax function pushes the values to the tails of the exponential curve, where the derivative of softmax approaches zero. This causes <strong>gradient saturation</strong> and halts learning. To solve this, we scale by the standard deviation <em>√$d_k$</em>.</p>
 <div class="math-block">
-<span class="formula">$$Attention($Q$, $K$, $V$) = Softmax( ($Q$ $K$^T) / √$d_k$ ) $V$$$</span>
+<span class="formula">$$\text{Attention}(Q, K, V) = \text{Softmax}\left( \frac{QK^T}{\sqrt{d_k}} \right) V$$</span>
 </div>
 <div class="mermaid">
       graph TD
@@ -294,7 +291,8 @@ Always load the tokenizer that matches the exact model checkpoint. Using <code>b
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 94: Scale factor in Self-Attention\n# If embedding dim d_k is 64, what is the scale factor sqrt(d_k)?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 94: Scale factor in Self-Attention
+# If embedding dim d_k is 64, what is the scale factor sqrt(d_k)?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day94-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day94-p1', '8')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -448,30 +446,11 @@ tiled_attn <span class="op">=</span> <span class="fn">flash_attention_naive</spa
 <h2 class="sh2">🃏 Revision Flashcards — Day 94</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Why is the attention score scaled by 1/sqrt(d_k)?</div>
-<div class="fc-back">To prevent the dot products from growing large in high dimensions, which pushes softmax into regions with extremely small gradients (vanishing gradients).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What does the Query vector represent in attention?</div>
-<div class="fc-back">The token looking for information from other tokens.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What does the Key vector represent in attention?</div>
-<div class="fc-back">The token's characteristics used to match queries.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What does the Value vector represent in attention?</div>
-<div class="fc-back">The actual content retrieved when a query matches a key.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">FastAPI async?</div><div class="fc-back">Supports asynchronous request handling (async/await), allowing high concurrency for I/O bound tasks like model serving.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Container?</div><div class="fc-back">Standardized unit packaging application code and all system/Python dependencies to run identically everywhere.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">WSGI vs ASGI?</div><div class="fc-back">WSGI: Web Server Gateway Interface (synchronous). ASGI: Asynchronous Server Gateway Interface (async, supports WebSockets).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Image?</div><div class="fc-back">Read-only blueprint template with instructions to build a container environment (defined in a Dockerfile).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Pydantic Validation?</div><div class="fc-back">Python library for data parsing and validation using type hints, raising clear runtime errors for invalid input schemas.</div></div></div>
 </div>
 </div>
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
@@ -777,7 +756,8 @@ Attention Output = [6.7 + 0.66, 13.4 + 1.32] = [7.36, 14.72].</pre>
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 95: RoPE properties\n# Does RoPE use absolute or relative positional encoding mappings?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 95: RoPE properties
+# Does RoPE use absolute or relative positional encoding mappings?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day95-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day95-p1', 'relative')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -913,30 +893,11 @@ x_final <span class="op">=</span> x_split.<span class="fn">transpose</span>(<spa
 <h2 class="sh2">🃏 Revision Flashcards — Day 95</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">RoPE?</div>
-<div class="fc-back">Rotary Positional Embedding. Multiplies key/query vectors by rotation matrix to encode position.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Pre-LN vs Post-LN?</div>
-<div class="fc-back">Pre-LN puts LayerNorm inside residual path before attention, enabling stable training.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 95 fit in Week 14?</div>
-<div class="fc-back">It is a key day in Week 14 (Transformers, Self-Attention, BERT, GPT-2, nanoGPT).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">FastAPI async?</div><div class="fc-back">Supports asynchronous request handling (async/await), allowing high concurrency for I/O bound tasks like model serving.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Container?</div><div class="fc-back">Standardized unit packaging application code and all system/Python dependencies to run identically everywhere.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">WSGI vs ASGI?</div><div class="fc-back">WSGI: Web Server Gateway Interface (synchronous). ASGI: Asynchronous Server Gateway Interface (async, supports WebSockets).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Image?</div><div class="fc-back">Read-only blueprint template with instructions to build a container environment (defined in a Dockerfile).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Pydantic Validation?</div><div class="fc-back">Python library for data parsing and validation using type hints, raising clear runtime errors for invalid input schemas.</div></div></div>
 </div>
 </div>
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
@@ -1127,7 +1088,8 @@ sent_a <span class="op">=</span> <span class="str">"The patient was admitted to 
 sent_b <span class="op">=</span> <span class="str">"She needed urgent medical attention."</span>
 pair_enc <span class="op">=</span> <span class="fn">tokenizer</span>(sent_a, sent_b, padding<span class="op">=</span><span class="str">'max_length'</span>, max_length<span class="op">=</span><span class="num">24</span>,
                      truncation<span class="op">=</span><span class="kw">True</span>, return_tensors<span class="op">=</span><span class="str">'pt'</span>)
-<span class="bi">print</span>(<span class="str">"\\nPair Token Type IDs:"</span>, pair_enc[<span class="str">'token_type_ids'</span>])
+<span class="bi">print</span>(<span class="str">"\
+Pair Token Type IDs:"</span>, pair_enc[<span class="str">'token_type_ids'</span>])
 <span class="cm"># Sentence A tokens &amp;rarr; 0, Sentence B tokens &amp;rarr; 1</span>
 
 <span class="cm"># --- Run forward pass to get CLS representation ---</span>
@@ -1199,7 +1161,8 @@ model.<span class="fn">eval</span>()
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 96: Hugging Face map batch shape\n# dataset.map(fn, batched=True, batch_size=16) passes input batch shape of</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 96: Hugging Face map batch shape
+# dataset.map(fn, batched=True, batch_size=16) passes input batch shape of</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day96-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day96-p1', '16')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1344,30 +1307,11 @@ ref <span class="op">=</span> <span class="str">"the patient was admitted to hos
 <h2 class="sh2">🃏 Revision Flashcards — Day 96</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Hugging Face Datasets?</div>
-<div class="fc-back">Library optimized for streaming, caching, and tokenizing large text datasets with Arrow backend.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 96 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 96 fit in Week 14?</div>
-<div class="fc-back">It is a key day in Week 14 (Transformers, Self-Attention, BERT, GPT-2, nanoGPT).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Divides dot product to prevent logits from blowing up and causing vanishing gradients.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">FastAPI async?</div><div class="fc-back">Supports asynchronous request handling (async/await), allowing high concurrency for I/O bound tasks like model serving.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Container?</div><div class="fc-back">Standardized unit packaging application code and all system/Python dependencies to run identically everywhere.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">WSGI vs ASGI?</div><div class="fc-back">WSGI: Web Server Gateway Interface (synchronous). ASGI: Asynchronous Server Gateway Interface (async, supports WebSockets).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Image?</div><div class="fc-back">Read-only blueprint template with instructions to build a container environment (defined in a Dockerfile).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Pydantic Validation?</div><div class="fc-back">Python library for data parsing and validation using type hints, raising clear runtime errors for invalid input schemas.</div></div></div>
 </div>
 </div>
 <div class="callout" style="background:rgba(229,107,140,.05);border-left:3px solid var(--pink);padding:1rem;margin:1rem 0;font-size:13.5px;">
@@ -1561,7 +1505,8 @@ tokenizer.<span class="fn">save</span>(<span class="str">"custom-bpe.json"</span
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 97: SFT supervised learning loss\n# Loss function for predicting target sequence tokens</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 97: SFT supervised learning loss
+# Loss function for predicting target sequence tokens</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day97-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day97-p1', 'Cross-Entropy')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1653,9 +1598,12 @@ outputs <span class="op">=</span> <span class="fn">model</span>(**inputs)
 <span class="kw">from</span> transformers <span class="kw">import</span> PreTrainedTokenizerFast
 
 <span class="kw">with</span> <span class="bi">open</span>(<span class="str">"corpus.txt"</span>, <span class="str">"w"</span>) <span class="kw">as</span> f:
-    f.<span class="fn">write</span>(<span class="str">"Machine learning is a subset of artificial intelligence.\n"</span>)
-    f.<span class="fn">write</span>(<span class="str">"Deep learning models are based on neural networks.\n"</span>)
-    f.<span class="fn">write</span>(<span class="str">"Hugging Face is a library for natural language processing.\n"</span>)
+    f.<span class="fn">write</span>(<span class="str">"Machine learning is a subset of artificial intelligence.
+"</span>)
+    f.<span class="fn">write</span>(<span class="str">"Deep learning models are based on neural networks.
+"</span>)
+    f.<span class="fn">write</span>(<span class="str">"Hugging Face is a library for natural language processing.
+"</span>)
 
 tokenizer <span class="op">=</span> <span class="fn">Tokenizer</span>(<span class="fn">BPE</span>(unk_token<span class="op">=</span><span class="str">"[UNK]"</span>))
 tokenizer.normalizer <span class="op">=</span> normalizers.<span class="fn">Sequence</span>([normalizers.<span class="fn">NFKC</span>(), normalizers.<span class="fn">Lowercase</span>()])
@@ -1673,30 +1621,11 @@ fast_tokenizer <span class="op">=</span> <span class="fn">PreTrainedTokenizerFas
 <h2 class="sh2">🃏 Revision Flashcards — Day 97</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">SFT?</div>
-<div class="fc-back">Supervised Fine-Tuning. Training LLM on instruction-response pairs via token classification.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 97 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 97 fit in Week 14?</div>
-<div class="fc-back">It is a key day in Week 14 (Transformers, Self-Attention, BERT, GPT-2, nanoGPT).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Rotary Positional Embedding. Multiplies key/query vectors by rotation matrix to encode position.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">FastAPI async?</div><div class="fc-back">Supports asynchronous request handling (async/await), allowing high concurrency for I/O bound tasks like model serving.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Container?</div><div class="fc-back">Standardized unit packaging application code and all system/Python dependencies to run identically everywhere.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">WSGI vs ASGI?</div><div class="fc-back">WSGI: Web Server Gateway Interface (synchronous). ASGI: Asynchronous Server Gateway Interface (async, supports WebSockets).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Image?</div><div class="fc-back">Read-only blueprint template with instructions to build a container environment (defined in a Dockerfile).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Pydantic Validation?</div><div class="fc-back">Python library for data parsing and validation using type hints, raising clear runtime errors for invalid input schemas.</div></div></div>
 </div>
 </div>
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">
@@ -1899,7 +1828,8 @@ peft_model.<span class="fn">print_trainable_parameters</span>()
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 98: LoRA weight delta shape\n# B shape (4096, 8) and A shape (8, 4096). What is output dimension?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 98: LoRA weight delta shape
+# B shape (4096, 8) and A shape (8, 4096). What is output dimension?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day98-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day98-p1', '(4096, 4096)')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -2029,30 +1959,11 @@ loss.<span class="fn">backward</span>()
 <h2 class="sh2">🃏 Revision Flashcards — Day 98</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">LoRA?</div>
-<div class="fc-back">Low-Rank Adaptation. Decomposes weight updates into low-rank matrices B and A.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 98 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 98 fit in Week 14?</div>
-<div class="fc-back">It is a key day in Week 14 (Transformers, Self-Attention, BERT, GPT-2, nanoGPT).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Pre-LN puts LayerNorm inside residual path before attention, enabling stable training.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">FastAPI async?</div><div class="fc-back">Supports asynchronous request handling (async/await), allowing high concurrency for I/O bound tasks like model serving.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Container?</div><div class="fc-back">Standardized unit packaging application code and all system/Python dependencies to run identically everywhere.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">WSGI vs ASGI?</div><div class="fc-back">WSGI: Web Server Gateway Interface (synchronous). ASGI: Asynchronous Server Gateway Interface (async, supports WebSockets).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Image?</div><div class="fc-back">Read-only blueprint template with instructions to build a container environment (defined in a Dockerfile).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Pydantic Validation?</div><div class="fc-back">Python library for data parsing and validation using type hints, raising clear runtime errors for invalid input schemas.</div></div></div>
 </div>
 </div>
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">
@@ -2105,7 +2016,7 @@ loss.<span class="fn">backward</span>()
 <li><strong>LoRA</strong> decomposes weight updates as ΔW = BA where B and A are low-rank matrices. Only B and A are trained — the original weights stay frozen.</li>
 <li><strong>Rank r</strong> controls expressiveness vs parameter count. r=8-16 works for most tasks. Higher rank = more capacity, more parameters.</li>
 <li><strong>PEFT methods</strong> (LoRA, Adapters, Prefix Tuning) enable fine-tuning models with billions of parameters on a single GPU.</li>
-<li><strong>Merge weights</strong> after training: W_new = W + α/r · BA. This eliminates inference overhead — the merged model runs at original speed.</li>
+<li><strong>Merge weights</strong> after training: $W_{\text{new}} = W + \frac{\alpha}{r} \cdot BA$. This eliminates inference overhead — the merged model runs at original speed.</li>
 </ol>
 </div>
 <button class="complete-btn" id="btn-day-98" onclick="completeDay(98,150)">✓ Mark Day 98 Complete — Earn 150 XP</button>
@@ -2151,7 +2062,7 @@ loss.<span class="fn">backward</span>()
       subgraph Ingestion ["1. Document Ingestion"]
       Doc["Raw Documents"] --> Chunk["Document Chunker"]
       Chunk --> Embed["Embedding Model\nSentence-Transformers"]
-      Embed --> DB["(\"FAISS Vector DB\")"]
+      Embed --> DB[(FAISS Vector DB)]
       end
       subgraph Retrieval ["2. Retrieval & Generation"]
       UserQ["User Query"] --> QEmbed["Query Embedding"]
@@ -2224,7 +2135,8 @@ loss.<span class="fn">backward</span>()
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 99: Vector distance metric\n# Euclidean distance between orthogonal vectors of norm 1.0</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 99: Vector distance metric
+# Euclidean distance between orthogonal vectors of norm 1.0</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day99-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day99-p1', '1.414')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -2304,7 +2216,8 @@ query <span class="op">=</span> <span class="str">"How do we fetch context for L
 query_vector <span class="op">=</span> model.<span class="fn">encode</span>([query]).<span class="fn">astype</span>(<span class="str">'float32'</span>)
 
 distances, indices <span class="op">=</span> index.<span class="fn">search</span>(query_vector, k<span class="op">=</span><span class="num">2</span>)
-<span class="bi">print</span>(<span class="str">"\nQuery:"</span>, query)
+<span class="bi">print</span>(<span class="str">"
+Query:"</span>, query)
 <span class="kw">for</span> idx, dist <span class="kw">in</span> <span class="bi">zip</span>(indices[<span class="num">0</span>], distances[<span class="num">0</span>]):
     <span class="bi">print</span>(f"Match: '{sentences[idx]}' (L2 Distance: {dist:.4f})")
 </pre></div>
@@ -2351,42 +2264,27 @@ retrieved_chunk <span class="op">=</span> corpus[indices[<span class="num">0</sp
 tokenizer <span class="op">=</span> AutoTokenizer.<span class="fn">from_pretrained</span>(<span class="str">"gpt2"</span>)
 model <span class="op">=</span> AutoModelForCausalLM.<span class="fn">from_pretrained</span>(<span class="str">"gpt2"</span>)
 
-prompt <span class="op">=</span> f"Context: {retrieved_chunk}\nQuestion: {query}\nAnswer:"
+prompt <span class="op">=</span> f"Context: {retrieved_chunk}
+Question: {query}
+Answer:"
 inputs <span class="op">=</span> <span class="fn">tokenizer</span>(prompt, return_tensors<span class="op">=</span><span class="str">"pt"</span>)
 <span class="kw">with</span> torch.<span class="fn">no_grad</span>():
     outputs <span class="op">=</span> model.<span class="fn">generate</span>(**inputs, max_new_tokens<span class="op">=</span><span class="num">25</span>, pad_token_id<span class="op">=</span>tokenizer.eos_token_id)
 
-<span class="bi">print</span>(<span class="str">"\nGenerated Output:\n"</span>, tokenizer.<span class="fn">decode</span>(outputs[<span class="num">0</span>], skip_special_tokens<span class="op">=</span><span class="kw">True</span>))</pre></div>
+<span class="bi">print</span>(<span class="str">"
+Generated Output:
+"</span>, tokenizer.<span class="fn">decode</span>(outputs[<span class="num">0</span>], skip_special_tokens<span class="op">=</span><span class="kw">True</span>))</pre></div>
 </div>
 </div>
 </div>
 <h2 class="sh2">🃏 Revision Flashcards — Day 99</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">RAG?</div>
-<div class="fc-back">Retrieval Augmented Generation. Enhancing LLM queries by retrieving text from document database.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 99 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 99 fit in Week 14?</div>
-<div class="fc-back">It is a key day in Week 14 (Transformers, Self-Attention, BERT, GPT-2, nanoGPT).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Library optimized for streaming, caching, and tokenizing large text datasets with Arrow backend.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">FastAPI async?</div><div class="fc-back">Supports asynchronous request handling (async/await), allowing high concurrency for I/O bound tasks like model serving.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Container?</div><div class="fc-back">Standardized unit packaging application code and all system/Python dependencies to run identically everywhere.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">WSGI vs ASGI?</div><div class="fc-back">WSGI: Web Server Gateway Interface (synchronous). ASGI: Asynchronous Server Gateway Interface (async, supports WebSockets).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Image?</div><div class="fc-back">Read-only blueprint template with instructions to build a container environment (defined in a Dockerfile).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Pydantic Validation?</div><div class="fc-back">Python library for data parsing and validation using type hints, raising clear runtime errors for invalid input schemas.</div></div></div>
 </div>
 </div>
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">
@@ -2544,7 +2442,8 @@ inputs <span class="op">=</span> <span class="fn">tokenizer</span>(prompt, retur
 </div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 100: Capstone parameter count\n# If base parameters are 1B and LoRA trains 1M, percentage trained is</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 100: Capstone parameter count
+# If base parameters are 1B and LoRA trains 1M, percentage trained is</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day100-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day100-p1', '0.1%')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -2620,30 +2519,11 @@ demo <span class="op">=</span> gr.<span class="fn">Interface</span>(fn<span clas
 <h2 class="sh2">🃏 Revision Flashcards — Day 100</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Model Card?</div>
-<div class="fc-back">Standard documentation card explaining training datasets, architectures, and evaluation metrics.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 100 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 100 fit in Week 14?</div>
-<div class="fc-back">It is a key day in Week 14 (Transformers, Self-Attention, BERT, GPT-2, nanoGPT).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Supervised Fine-Tuning. Training LLM on instruction-response pairs via token classification.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">FastAPI async?</div><div class="fc-back">Supports asynchronous request handling (async/await), allowing high concurrency for I/O bound tasks like model serving.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Container?</div><div class="fc-back">Standardized unit packaging application code and all system/Python dependencies to run identically everywhere.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">WSGI vs ASGI?</div><div class="fc-back">WSGI: Web Server Gateway Interface (synchronous). ASGI: Asynchronous Server Gateway Interface (async, supports WebSockets).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Docker Image?</div><div class="fc-back">Read-only blueprint template with instructions to build a container environment (defined in a Dockerfile).</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Pydantic Validation?</div><div class="fc-back">Python library for data parsing and validation using type hints, raising clear runtime errors for invalid input schemas.</div></div></div>
 </div>
 </div>
 <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:0.5rem;margin-bottom:1rem;">

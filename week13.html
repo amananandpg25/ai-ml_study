@@ -21,9 +21,6 @@ This study portal delivers deep, production-grade training guides covering:
 <title>Week 13 — Natural Language Processing | 135-Day AI/ML Roadmap</title>
 <meta content="Week 13 — Natural Language Processing — Complete coursework, tasks, quizzes, and resources for Week 13 of the 135-Day AI/ML Roadmap." name="description"/>
 <link href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect width='32' height='32' rx='6' fill='%230d0f14'/&gt;&lt;text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%234fd1a5'&gt;AI&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
-<link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
-<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer="" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 <link rel="stylesheet" href="course.css">
 <style>
 :root {
@@ -31,6 +28,9 @@ This study portal delivers deep, production-grade training guides covering:
   --accent-sec-rgb: 229, 107, 140;
 }
 </style>
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet"/>
+<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer="" onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});" src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.2.0/dist/mermaid.min.js"></script>
@@ -103,7 +103,7 @@ This study portal delivers deep, production-grade training guides covering:
 <h1>NLP Preprocessing Pipeline</h1>
 <p>
       Natural language text is messy, highly unstructured, and contains infinite semantic variations. Before feeding text into mathematical deep learning architectures, we must standardise and structure it.
-      Today, we master the complete **NLP Preprocessing Pipeline**. We will examine the mechanics of **Tokenisation (Word, Sentence, Subword)**, clean noise using **Regular Expressions (Regex)**, and compare **Stemming (Porter) against Lemmatisation (spaCy)**.
+      Today, we master the complete <strong>NLP Preprocessing Pipeline</strong>. We will examine the mechanics of <strong>Tokenisation (Word, Sentence, Subword)</strong>, clean noise using <strong>Regular Expressions (Regex)</strong>, and compare <strong>Stemming (Porter) against Lemmatisation (spaCy)</strong>.
     </p>
 <div class="mermaid">
     graph LR
@@ -161,7 +161,7 @@ This study portal delivers deep, production-grade training guides covering:
 <h2 class="sh2">🧠 Theory &amp; Engineering Deep Dive</h2>
 <h3 class="sh3">1. Tokenisation Taxonomies</h3>
 <p>
-    Tokenisation breaks continuous text strings into individual semantic units called **tokens**.
+    Tokenisation breaks continuous text strings into individual semantic units called <strong>tokens</strong>.
     There are three main levels of granularity:
   </p>
 <ul class="prose-list">
@@ -209,28 +209,28 @@ This study portal delivers deep, production-grade training guides covering:
     The Porter stemmer operates in 5 consecutive phases of replacement rules. For example, Phase 1a defines:
   </p>
 <div class="math-block">
-<span class="formula">\begin{aligned}
+<span class="formula">$$\begin{aligned}
       \text{SSES} &amp;\rightarrow \text{SS} \quad (\text{e.g. caresses} \rightarrow \text{caress}) \\
       \text{IES} &amp;\rightarrow \text{I} \quad (\text{e.g. ponies} \rightarrow \text{poni}) \\
       \text{SS} &amp;\rightarrow \text{SS} \quad (\text{e.g. caress} \rightarrow \text{caress}) \\
       \text{S} &amp;\rightarrow \emptyset \quad (\text{e.g. cats} \rightarrow \text{cat})
-    \end{aligned}</span>
+    \end{aligned}$$</span>
 <span class="desc">Deterministic suffix chopping rules.</span>
 </div>
 <h3 class="sh3">4. Levenshtein (Edit) Distance Formulation</h3>
 <p>
-    During spell-checking and text normalisation, we measure the similarity of two strings $a$ and $b$ using the **Levenshtein Distance**. The distance between $a$ (of length $i$) and $b$ (of length $j$) is calculated using the recurrence relation:
+    During spell-checking and text normalisation, we measure the similarity of two strings $a$ and $b$ using the <strong>Levenshtein Distance</strong>. The distance between $a$ (of length $i$) and $b$ (of length $j$) is calculated using the recurrence relation:
   </p>
 <div class="math-block">
-<span class="formula">\text{lev}_{a,b}(i, j) = \begin{cases}
+<span class="formula">$$\text{lev}_{a,b}(i, j) = \begin{cases}
       \max(i, j) &amp; \text{if } \min(i, j) = 0, \\
       \min \begin{cases}
         \text{lev}_{a,b}(i-1, j) + 1 \\
         \text{lev}_{a,b}(i, j-1) + 1 \\
         \text{lev}_{a,b}(i-1, j-1) + [a_i \neq b_j]
       \end{cases} &amp; \text{otherwise.}
-    \end{cases}</span>
-<span class="desc">$Where $[a_i \neq b_j]$ is 0 if characters match, and 1 if they differ. This covers insertion, deletion, and substitution operations.$</span>
+    \end{cases}$$</span>
+<span class="desc">Where $[a_i \neq b_j]$ is 0 if characters match, and 1 if they differ. This covers insertion, deletion, and substitution operations.</span>
 </div>
 <h3 class="sh3">5. Production Python Preprocessing Pipeline</h3>
 <p>
@@ -315,7 +315,9 @@ final_corpus = spacy_preprocess_pipeline(cleaned_step)
 <div class="analogy">Raw NLP preprocessing bilkul ek gehu ki fasal ko saaf karne ki tarah hai. Jab gehu kheto se aata hai, usme mitti, kachra aur patthar (URLs, hashtags, HTML tags) hote hain. Tokenisation aur cleaning unhe saaf karti hai, aur lemmatisation har daane ko uske sabse shuddh form (lemma) me convert karti hai taaki aage chalkar hum uska behtareen aata (word vectors) bana sakein. Levenshtein distance spell check bilkul usi gehu ke size aur shape ko standard grains se compare karke defective pieces ko drop ya filter karne ke samaan hai.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 87: spaCy doc length\n# doc = nlp(\'AI is fun\')\n# print(len(doc))</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 87: spaCy doc length
+# doc = nlp('AI is fun')
+# print(len(doc))</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day87-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day87-p1', '3')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -376,30 +378,11 @@ final_corpus = spacy_preprocess_pipeline(cleaned_step)
 <h2 class="sh2">🃏 Revision Flashcards — Day 87</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">spaCy nlp object?</div>
-<div class="fc-back">The central pipeline containing tokenizer, morphologizer, parser, and NER loaded from models.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 87 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 87 fit in Week 13?</div>
-<div class="fc-back">It is a key day in Week 13 (Natural Language Processing, spaCy, Tokenization, POS Tagging).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Approximately 4 to 6 hours including exercises.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Transformer?</div><div class="fc-back">Sequence transduction model based entirely on attention mechanisms, eliminating recurrent steps for full parallelization.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Self-Attention?</div><div class="fc-back">Calculates dynamic correlation weights between all positions in a sequence to capture direct context dependencies.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Multi-Head Attention?</div><div class="fc-back">Computes self-attention multiple times in parallel with different weight projections to capture diverse relationships.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Positional Encoding?</div><div class="fc-back">Injects sinusoidal or learned position vectors into inputs to preserve sequence order information.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Layer Normalization?</div><div class="fc-back">Normalizes activations across features within a single training example, stabilizing network training.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -505,7 +488,7 @@ final_corpus = spacy_preprocess_pipeline(cleaned_step)
 <h1>Text Representation: BoW &amp; TF-IDF</h1>
 <p>
       Machine learning models cannot directly process text tokens; they require numerical vectors.
-      Today, we master two fundamental text vectorisation methodologies: **Bag of Words (BoW)** and **Term Frequency-Inverse Document Frequency (TF-IDF)**.
+      Today, we master two fundamental text vectorisation methodologies: <strong>Bag of Words (BoW)</strong> and <strong>Term Frequency-Inverse Document Frequency (TF-IDF)</strong>.
       We will study their mathematical formulations, analyze the curse of dimensionality in sparse representations, and implement an industrial-grade news classifier using Scikit-Learn.
     </p>
 <div class="meta-row">
@@ -536,14 +519,14 @@ final_corpus = spacy_preprocess_pipeline(cleaned_step)
 <h2 class="sh2">🧠 Theory &amp; Engineering Deep Dive</h2>
 <h3 class="sh3">1. Bag of Words (BoW) &amp; Sparsity Constraints</h3>
 <p>
-    The **Bag of Words (BoW)** representation maps a document to a vector of token occurrences.
+    The <strong>Bag of Words (BoW)</strong> representation maps a document to a vector of token occurrences.
     If the training corpus has a vocabulary size of $V = 50,000$ unique words, every single document is converted into a $50,000$-dimensional vector.
     Since most documents contain only 50-100 unique words, $99.9\%$ of the vector elements are zeros.
-    This creates severe **sparsity constraints**, bloating RAM usage and making computational weights highly fragile.
+    This creates severe <strong>sparsity constraints</strong>, bloating RAM usage and making computational weights highly fragile.
   </p>
 <h3 class="sh3">2. TF-IDF Mathematical Formulations</h3>
 <p>
-    To prevent extremely common words (like <code>"the"</code>, <code>"is"</code>, <code>"and"</code>) from dominating representations, **TF-IDF** scales occurrences down if they appear across many documents.
+    To prevent extremely common words (like <code>"the"</code>, <code>"is"</code>, <code>"and"</code>) from dominating representations, <strong>TF-IDF</strong> scales occurrences down if they appear across many documents.
     The exact equations are formulated as follows:
   </p>
 <div class="math-block">
@@ -560,16 +543,16 @@ final_corpus = spacy_preprocess_pipeline(cleaned_step)
 </div>
 <h3 class="sh3">3. Dimensionality Reduction: Latent Semantic Analysis (LSA)</h3>
 <p>
-    To resolve BoW sparsity and synonymy issues, we apply **Latent Semantic Analysis (LSA)**. LSA takes our sparse term-document matrix $X$ of size $V \times N$ and decomposes it into three matrices using **Singular Value Decomposition (SVD)**:
+    To resolve BoW sparsity and synonymy issues, we apply <strong>Latent Semantic Analysis (LSA)</strong>. LSA takes our sparse term-document matrix $X$ of size $V \times N$ and decomposes it into three matrices using <strong>Singular Value Decomposition (SVD)</strong>:
   </p>
 <div class="math-block">
 <span class="formula">$$X = U \Sigma V^T$$</span>
-<span class="desc">$Where $U$ ($V \times k$) represents term concepts, $\Sigma$ ($k \times k$) contains concept strengths, and $V^T$ ($k \times N$) holds document concepts, reducing variables to $k \ll V$ dense features.$</span>
+<span class="desc">Where $U$ ($V \times k$) represents term concepts, $\Sigma$ ($k \times k$) contains concept strengths, and $V^T$ ($k \times N$) holds document concepts, reducing variables to $k \ll V$ dense features.</span>
 </div>
 <h3 class="sh3">4. N-grams Context Extraction</h3>
 <p>
     Traditional BoW models treat words independently, losing all structural sequence.
-    **N-grams** capture immediate local context by grouping adjacent words:
+    <strong>N-grams</strong> capture immediate local context by grouping adjacent words:
   </p>
 <ul class="prose-list">
 <li><code>Unigrams (1-grams):</code> ["the", "quick", "brown"]</li>
@@ -621,7 +604,8 @@ classifier.fit(X, y)
 
 <span class="cm"># 4. Infer and generate evaluation reports</span>
 predictions = classifier.predict(X)
-<span class="bi">print</span>(<span class="str">"Classification Report:\\n"</span>, classification_report(y, predictions))
+<span class="bi">print</span>(<span class="str">"Classification Report:\
+"</span>, classification_report(y, predictions))
 <span class="bi">print</span>(<span class="str">"Vocabulary mapping shape:"</span>, X.shape)</pre>
 </div>
 <h3 class="sh3">6. Latent Semantic Analysis (LSA) in NumPy</h3>
@@ -656,12 +640,16 @@ VT_k = VT[:k, :]
 
 <span class="cm"># Reconstruct dense approximation</span>
 X_dense = U_k.dot(S_k).dot(VT_k)
-<span class="bi">print</span>(<span class="str">"\\nReconstructed Dense Concept Grid:\\n"</span>, X_dense)</pre>
+<span class="bi">print</span>(<span class="str">"\
+Reconstructed Dense Concept Grid:\
+"</span>, X_dense)</pre>
 </div>
 <div class="analogy">TF-IDF bilkul ek library indexer ki tarah kaam karta hai. Agar aap library me "science" shabd dhundhenge, to lagbhag har book me ye milega aur iska index weight (IDF) bahut low ho jayega. Par agar aap "quantum" ya "photosynthesis" dhundhenge, to ye sirf specific books me milega, isliye library indexer isko bada specific aur unique signal (high TF-IDF weight) banata hai taaki relevant books turant mil sakein. LSA SVD bilkul is directory me se overlap topics ko classify karke multiple books ke clusters (topics) create karne ke samaan hai.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 88: Named Entity Recognition\n# doc = nlp(\'Flipkart in India\')\n# print([ent.label_ for ent in doc.ents])</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 88: Named Entity Recognition
+# doc = nlp('Flipkart in India')
+# print([ent.label_ for ent in doc.ents])</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day88-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day88-p1', '['ORG', 'GPE']')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -722,30 +710,11 @@ X_dense = U_k.dot(S_k).dot(VT_k)
 <h2 class="sh2">🃏 Revision Flashcards — Day 88</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">NER?</div>
-<div class="fc-back">Named Entity Recognition. Locating and classifying entities (names, places, organizations) in text.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 88 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 88 fit in Week 13?</div>
-<div class="fc-back">It is a key day in Week 13 (Natural Language Processing, spaCy, Tokenization, POS Tagging).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Named Entity Recognition. Locating and classifying entities (names, places, organizations) in text.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Transformer?</div><div class="fc-back">Sequence transduction model based entirely on attention mechanisms, eliminating recurrent steps for full parallelization.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Self-Attention?</div><div class="fc-back">Calculates dynamic correlation weights between all positions in a sequence to capture direct context dependencies.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Multi-Head Attention?</div><div class="fc-back">Computes self-attention multiple times in parallel with different weight projections to capture diverse relationships.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Positional Encoding?</div><div class="fc-back">Injects sinusoidal or learned position vectors into inputs to preserve sequence order information.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Layer Normalization?</div><div class="fc-back">Normalizes activations across features within a single training example, stabilizing network training.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -845,8 +814,8 @@ X_dense = U_k.dot(S_k).dot(VT_k)
 <h1>Word Embeddings: Word2Vec &amp; GloVe</h1>
 <p>
       Sparse representations treat words as isolated points, ignoring semantic overlap (e.g. mapping "run" and "running" orthogonally).
-      Today, we master **Dense Word Embeddings**.
-      We will dissect the mathematical architectures of **Word2Vec (CBOW vs Skip-gram)**, learn **Negative Sampling** optimizations, examine the global matrix formulations of **GloVe (Global Vectors)**, and implement custom cosine similarity checks.
+      Today, we master <strong>Dense Word Embeddings</strong>.
+      We will dissect the mathematical architectures of <strong>Word2Vec (CBOW vs Skip-gram)</strong>, learn <strong>Negative Sampling</strong> optimizations, examine the global matrix formulations of <strong>GloVe (Global Vectors)</strong>, and implement custom cosine similarity checks.
     </p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 5 hours</span>
@@ -912,30 +881,30 @@ X_dense = U_k.dot(S_k).dot(VT_k)
 <h3 class="sh3">2. Skip-gram with Negative Sampling (SGNS) Formulation</h3>
 <p>
     Calculating full Softmax denominators over vocabulary $V$ (often 100k+ words) is computationally prohibitive.
-    **Negative Sampling** solves this by converting the multi-class problem into binary logistic classification.
+    <strong>Negative Sampling</strong> solves this by converting the multi-class problem into binary logistic classification.
     For a center word $w$ and context word $c$, the positive label is 1; for $k$ randomly sampled "negative" words $w_i$, the label is 0.
     The SGNS loss function is formulated as:
   </p>
 <div class="math-block">
 <span class="formula">$$\mathcal{L}_{\text{SGNS}} = -\log \sigma(v'_{w_O}^\top v_{w_I}) - \sum_{i=1}^k \mathbb{E}_{w_i \sim P_n(w)} \left[ \log \sigma(-v'_{w_i}^\top v_{w_I}) \right]$$</span>
-<span class="desc">$Where $v_{w_I}$ is the input vector of center word $w_I$, $v'$ is the output representation, and $P_n(w)$ is the noise distribution (vocabulary frequencies raised to the power of $\frac{3}{4}$ to boost rare word selection).$</span>
+<span class="desc">Where $v_{w_I}$ is the input vector of center word $w_I$, $v'$ is the output representation, and $P_n(w)$ is the noise distribution (vocabulary frequencies raised to the power of $\frac{3}{4}$ to boost rare word selection).</span>
 </div>
 <h3 class="sh3">3. Hierarchical Softmax Huffman Coding Tree</h3>
 <p>
-    Hierarchical Softmax structures vocabulary as a leaf-node binary **Huffman Tree**, where frequent words reside near the root and rare words deeper down. The probability of choosing a word $w$ is defined as path traversal multiplications:
+    Hierarchical Softmax structures vocabulary as a leaf-node binary <strong>Huffman Tree</strong>, where frequent words reside near the root and rare words deeper down. The probability of choosing a word $w$ is defined as path traversal multiplications:
   </p>
 <div class="math-block">
 <span class="formula">$$P(w \mid w_I) = \prod_{j=1}^{L(w)-1} \sigma\left( \text{ch}(n(w, j)) \cdot \theta_{n(w, j)}^\top v_{w_I} \right)$$</span>
-<span class="desc">$Where $L(w)$ is path length, $n(w, j)$ is node $j$ on the path, and $\text{ch}(n)$ maps left (+1) or right (-1) tree step choices. This scales search time logarithmically to $O(\log_2 V)$.$</span>
+<span class="desc">Where $L(w)$ is path length, $n(w, j)$ is node $j$ on the path, and $\text{ch}(n)$ maps left (+1) or right (-1) tree step choices. This scales search time logarithmically to $O(\log_2 V)$.</span>
 </div>
 <h3 class="sh3">4. GloVe: Global Vectors Formulation</h3>
 <p>
-    While Word2Vec trains on local sliding windows (ignoring global co-occurrences), **GloVe** trains directly on the global co-occurrence matrix $X$, where $X_{i,j}$ is the count of word $j$ appearing in the context of word $i$.
+    While Word2Vec trains on local sliding windows (ignoring global co-occurrences), <strong>GloVe</strong> trains directly on the global co-occurrence matrix $X$, where $X_{i,j}$ is the count of word $j$ appearing in the context of word $i$.
     The GloVe loss function is defined as:
   </p>
 <div class="math-block">
 <span class="formula">$$\mathcal{L}_{\text{GloVe}} = \sum_{i,j=1}^V f(X_{i,j}) \left( w_i^\top \tilde{w}_j + b_i + \tilde{b}_j - \log X_{i,j} \right)^2$$</span>
-<span class="desc">$Where $w_i, \tilde{w}_j$ are word vectors, $b_i, \tilde{b}_j$ are biases, and $f(x)$ is a weighted scaling function limiting the impact of extremely common co-occurrences.$</span>
+<span class="desc">Where $w_i, \tilde{w}_j$ are word vectors, $b_i, \tilde{b}_j$ are biases, and $f(x)$ is a weighted scaling function limiting the impact of extremely common co-occurrences.</span>
 </div>
 <h3 class="sh3">5. Training Word2Vec using Gensim</h3>
 <p>
@@ -975,7 +944,8 @@ model = Word2Vec(
 vector = model.wv[<span class="str">"learning"</span>]
 similar_words = model.wv.most_similar(<span class="str">"learning"</span>, topn=<span class="num">3</span>)
 
-<span class="bi">print</span>(<span class="str">"Embedding Vector for 'learning' (truncated to 5 dimensions):\\n"</span>, vector[:<span class="num">5</span>])
+<span class="bi">print</span>(<span class="str">"Embedding Vector for 'learning' (truncated to 5 dimensions):\
+"</span>, vector[:<span class="num">5</span>])
 <span class="bi">print</span>(<span class="str">"Words most similar to 'learning':"</span>, similar_words)</pre>
 </div>
 <h3 class="sh3">6. Embedding Similarity Calculations in pure NumPy</h3>
@@ -1025,7 +995,9 @@ best_word, best_sim = <span class="kw">None</span>, <span class="num">-1.0</span
 <div class="analogy">Continuous space embeddings bilkul ek digital 3D space ki tarah hain. Agar hum alag alag cheezo ko unke coordinates pe rakhein, to sabhi raaja, rani aur mahal ek specific sector (royal zone) me milenge, aur sabhi seb, kela aur santra dusre dur ke sector (fruit zone) me. Jab hum mathematical operations lagate hain (King - Man + Woman), to hum royal zone me 'man' ki direction se mud kar 'woman' ki direction me kadam badhate hain, jo hume direct 'Queen' ke coordinates ke bilkul paas la khada karta hai.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 89: spaCy textcat output format\n# doc.cats is a dictionary of categories.\n# What datatype is doc.cats?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 89: spaCy textcat output format
+# doc.cats is a dictionary of categories.
+# What datatype is doc.cats?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day89-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day89-p1', 'dict')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1085,30 +1057,11 @@ best_word, best_sim = <span class="kw">None</span>, <span class="num">-1.0</span
 <h2 class="sh2">🃏 Revision Flashcards — Day 89</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Text Categorization?</div>
-<div class="fc-back">Supervised text classification mapping input documents to discrete label categories.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 89 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 89 fit in Week 13?</div>
-<div class="fc-back">It is a key day in Week 13 (Natural Language Processing, spaCy, Tokenization, POS Tagging).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Supervised text classification mapping input documents to discrete label categories.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Transformer?</div><div class="fc-back">Sequence transduction model based entirely on attention mechanisms, eliminating recurrent steps for full parallelization.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Self-Attention?</div><div class="fc-back">Calculates dynamic correlation weights between all positions in a sequence to capture direct context dependencies.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Multi-Head Attention?</div><div class="fc-back">Computes self-attention multiple times in parallel with different weight projections to capture diverse relationships.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Positional Encoding?</div><div class="fc-back">Injects sinusoidal or learned position vectors into inputs to preserve sequence order information.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Layer Normalization?</div><div class="fc-back">Normalizes activations across features within a single training example, stabilizing network training.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -1214,7 +1167,7 @@ best_word, best_sim = <span class="kw">None</span>, <span class="num">-1.0</span
 <h1>Named Entity Recognition &amp; POS Tagging</h1>
 <p>
       Extracting meaning from text requires understanding syntax structures and identifying specific real-world objects.
-      Today, we master **Part-of-Speech (POS) Tagging**, **Named Entity Recognition (NER)**, and **Dependency Parsing**.
+      Today, we master <strong>Part-of-Speech (POS) Tagging</strong>, <strong>Named Entity Recognition (NER)</strong>, and <strong>Dependency Parsing</strong>.
       We will study how these syntactic properties are modeled, how multi-task neural networks label tokens, and construct a production-ready information extraction pipeline using spaCy.
     </p>
 <div class="meta-row">
@@ -1245,7 +1198,7 @@ best_word, best_sim = <span class="kw">None</span>, <span class="num">-1.0</span
 <h2 class="sh2">🧠 Theory &amp; Engineering Deep Dive</h2>
 <h3 class="sh3">1. Syntactic Foundations: POS Tagging</h3>
 <p>
-    **Part-of-Speech (POS) Tagging** labels each token with its grammatical category based on context.
+    <strong>Part-of-Speech (POS) Tagging</strong> labels each token with its grammatical category based on context.
     Modern systems employ two layer granularities:
   </p>
 <ul class="prose-list">
@@ -1257,8 +1210,8 @@ best_word, best_sim = <span class="kw">None</span>, <span class="num">-1.0</span
   </p>
 <h3 class="sh3">2. Named Entity Recognition (NER) &amp; BIO Formatting</h3>
 <p>
-    **Named Entity Recognition (NER)** identifies and classifies spans of text representing real-world entities.
-    Because entities can consist of multiple tokens (e.g., <code>"Google Inc."</code>), models represent boundaries using **BIO Tagging** (Begin, Inside, Outside):
+    <strong>Named Entity Recognition (NER)</strong> identifies and classifies spans of text representing real-world entities.
+    Because entities can consist of multiple tokens (e.g., <code>"Google Inc."</code>), models represent boundaries using <strong>BIO Tagging</strong> (Begin, Inside, Outside):
   </p>
 <table class="concept-table">
 <thead>
@@ -1313,7 +1266,7 @@ best_word, best_sim = <span class="kw">None</span>, <span class="num">-1.0</span
 </table>
 <h3 class="sh3">3. Dependency Parsing Structures</h3>
 <p>
-    **Dependency Parsing** maps the structural relationships between words to capture how information flows.
+    <strong>Dependency Parsing</strong> maps the structural relationships between words to capture how information flows.
     A root verb acts as the head, and other tokens attach via typed links like <code>nsubj</code> (nominal subject), <code>dobj</code> (direct object), and <code>amod</code> (adjectival modifier).
     This lets us extract exact actions: who did what to whom.
   </p>
@@ -1372,13 +1325,14 @@ doc = nlp(text)
 <span class="kw">for</span> ent <span class="kw">in</span> doc.ents:
     <span class="bi">print</span>(f<span class="str">"Entity: '{{ent.text}}' | Label: {{ent.label_}}"</span>)
 
-<span class="bi">print</span>(<span class="str">"\\nPOS &amp; Dependency parse trees:"</span>)
+<span class="bi">print</span>(<span class="str">"\
+POS &amp; Dependency parse trees:"</span>)
 <span class="kw">for</span> token <span class="kw">in</span> doc:
     <span class="bi">print</span>(f<span class="str">"Word: {{token.text:&lt;12}} | UPOS: {{token.pos_:&lt;6}} | Dep: {{token.dep_:&lt;8}} | Head: {{token.head.text}}"</span>)</pre>
 </div>
 <h3 class="sh3">5. Rules-based Phrase Matching using spaCy Matcher</h3>
 <p>
-    When Named Entity statistical models fail on highly proprietary terms, we leverage spaCy's token-based **Matcher** engine to build deterministic phrase filters:
+    When Named Entity statistical models fail on highly proprietary terms, we leverage spaCy's token-based <strong>Matcher</strong> engine to build deterministic phrase filters:
   </p>
 <div class="cb">
 <div class="cb-head"><span class="cb-lang">python — spacy_matcher.py</span><div class="cb-btns"><button class="copy-btn" onclick="copyCode(this)">copy</button><button class="run-btn" onclick="runCode(this)" style="margin-left: 4px;">Run</button></div></div>
@@ -1411,7 +1365,8 @@ matches = matcher(doc)
 <div class="analogy">Named Entity Recognition (NER) bilkul ek digital security checker ki tarah hai jo kisi boarding pass se details extract karta hai. Jab aap pass dekhte hain, to poore text me se security checker ka focus sirf 'PERSON' (yaani passenger ka naam), 'GPE' (yaani flight ki destination), aur 'DATE' (yaani departure time) par hota hai. Poori context string me se aisi valuable elements ko filter karke unka data sheet banana hi NER ka asly kaam hai.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 90: LDA Topic Word matrix shape\n# LDA with 5 topics over 1000 vocabulary words. Shape of components_:</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 90: LDA Topic Word matrix shape
+# LDA with 5 topics over 1000 vocabulary words. Shape of components_:</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day90-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day90-p1', '(5, 1000)')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1471,30 +1426,11 @@ matches = matcher(doc)
 <h2 class="sh2">🃏 Revision Flashcards — Day 90</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">LDA?</div>
-<div class="fc-back">Latent Dirichlet Allocation. Unsupervised generative model grouping documents into topics.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 90 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 90 fit in Week 13?</div>
-<div class="fc-back">It is a key day in Week 13 (Natural Language Processing, spaCy, Tokenization, POS Tagging).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Latent Dirichlet Allocation. Unsupervised generative model grouping documents into topics.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Transformer?</div><div class="fc-back">Sequence transduction model based entirely on attention mechanisms, eliminating recurrent steps for full parallelization.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Self-Attention?</div><div class="fc-back">Calculates dynamic correlation weights between all positions in a sequence to capture direct context dependencies.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Multi-Head Attention?</div><div class="fc-back">Computes self-attention multiple times in parallel with different weight projections to capture diverse relationships.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Positional Encoding?</div><div class="fc-back">Injects sinusoidal or learned position vectors into inputs to preserve sequence order information.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Layer Normalization?</div><div class="fc-back">Normalizes activations across features within a single training example, stabilizing network training.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -1600,8 +1536,8 @@ matches = matcher(doc)
 <h1>Text Classification &amp; Sequence Labeling</h1>
 <p>
       Many core NLP operations resolve to classification: either classifying whole documents (e.g. sentiment classification) or classifying individual tokens sequentially (e.g. Named Entity Recognition).
-      Today, we master both **Document Classification** and **Sequence Labeling** paradigms.
-      We will analyze the mathematics of **Conditional Random Fields (CRFs)** combined with LSTMs, dissect **F1 evaluation metrics**, and implement a custom sequence labeling network from scratch in PyTorch.
+      Today, we master both <strong>Document Classification</strong> and <strong>Sequence Labeling</strong> paradigms.
+      We will analyze the mathematics of <strong>Conditional Random Fields (CRFs)</strong> combined with LSTMs, dissect <strong>F1 evaluation metrics</strong>, and implement a custom sequence labeling network from scratch in PyTorch.
     </p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 5 hours</span>
@@ -1644,8 +1580,8 @@ matches = matcher(doc)
 <h3 class="sh3">2. Bidirectional LSTM-CRF Architecture</h3>
 <p>
     While a standard Softmax layer classifies each token independently, it fails to capture dependencies between adjacent labels (e.g. in NER, an <code>I-ORG</code> tag can never follow a <code>B-PER</code> tag).
-    A **Conditional Random Field (CRF)** layer solves this by modeling joint sequence probabilities globally.
-    A **BiLSTM-CRF** combines the contextual feature representation of a Bidirectional LSTM with the global sequence alignment constraints of a CRF.
+    A <strong>Conditional Random Field (CRF)</strong> layer solves this by modeling joint sequence probabilities globally.
+    A <strong>BiLSTM-CRF</strong> combines the contextual feature representation of a Bidirectional LSTM with the global sequence alignment constraints of a CRF.
     For an input sequence $x$ and a predicted label sequence $y$, the CRF score is calculated as:
   </p>
 <div class="math-block">
@@ -1662,7 +1598,7 @@ matches = matcher(doc)
 <h3 class="sh3">3. Numerical Stability: Log-Sum-Exp Trick</h3>
 <p>
     When calculating the denominator partition function $Z(x) = \sum_{y'} \exp(S(x, y'))$, exponentiating raw transition and emission additions easily triggers numerical overflow on floating-point hardware.
-    To ensure stable updates, we apply the **Log-Sum-Exp Trick**:
+    To ensure stable updates, we apply the <strong>Log-Sum-Exp Trick</strong>:
   </p>
 <div class="math-block">
 <span class="formula">$$\log \sum_i \exp(v_i) = m + \log \sum_i \exp(v_i - m) \quad \text{where } m = \max(v)$$</span>
@@ -1670,7 +1606,7 @@ matches = matcher(doc)
 </div>
 <h3 class="sh3">4. Classification Evaluation Metrics: Macro &amp; Micro F1</h3>
 <p>
-    For imbalanced text datasets, simple accuracy is a misleading metric. We must calculate Precision ($P$), Recall ($R$), and the **F1-Score**:
+    For imbalanced text datasets, simple accuracy is a misleading metric. We must calculate Precision ($P$), Recall ($R$), and the <strong>F1-Score</strong>:
   </p>
 <div class="math-block">
 <span class="formula">$$F_1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}} = \frac{2 \text{TP}}{2 \text{TP} + \text{FP} + \text{FN}}$$</span>
@@ -1774,7 +1710,8 @@ loss.backward()
 <div class="analogy">BiLSTM-CRF bilkul ek film shooting crew ki tarah kaam karta hai. BiLSTM camera crew hai jo har individual shot (token features) ko inspect karta hai par har scene ka independent choice leta hai. CRF director hai jo transition matrix ko dekh kar complete film output sequences check karta hai: 'Agar shot A action sequence hai, to shot B romantic song nahi ho sakta'. Direction rules (CRF transitions) camera outputs ko smooth sequence flow me convert karte hain.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 91: Word similarity\n# What is cosine similarity of identical word vectors?</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 91: Word similarity
+# What is cosine similarity of identical word vectors?</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day91-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day91-p1', '1.0')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -1835,30 +1772,11 @@ loss.backward()
 <h2 class="sh2">🃏 Revision Flashcards — Day 91</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">GloVe?</div>
-<div class="fc-back">Global Vectors for Word Representation. Unsupervised method training on global co-occurrence matrix.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 91 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 91 fit in Week 13?</div>
-<div class="fc-back">It is a key day in Week 13 (Natural Language Processing, spaCy, Tokenization, POS Tagging).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Global Vectors for Word Representation. Unsupervised method training on global co-occurrence matrix.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Transformer?</div><div class="fc-back">Sequence transduction model based entirely on attention mechanisms, eliminating recurrent steps for full parallelization.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Self-Attention?</div><div class="fc-back">Calculates dynamic correlation weights between all positions in a sequence to capture direct context dependencies.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Multi-Head Attention?</div><div class="fc-back">Computes self-attention multiple times in parallel with different weight projections to capture diverse relationships.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Positional Encoding?</div><div class="fc-back">Injects sinusoidal or learned position vectors into inputs to preserve sequence order information.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Layer Normalization?</div><div class="fc-back">Normalizes activations across features within a single training example, stabilizing network training.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -1963,9 +1881,9 @@ loss.backward()
 <div class="day-tag">WEEK 13 · DAY 92 · MONTH 4 — NATURAL LANGUAGE PROCESSING</div>
 <h1>Capstone Part 1: Fake News &amp; TextRank</h1>
 <p>
-      Today, we launch the massive **Month 4 NLP Capstone Project: Advanced News Analytics Engine**.
+      Today, we launch the massive <strong>Month 4 NLP Capstone Project: Advanced News Analytics Engine</strong>.
       This major engineering project is split into two phases: text verification (Fake News Detection) and semantic extraction (Extractive Summarisation).
-      We will analyze the mathematics of the **TextRank Graph Centrality Algorithm**, build a sentence cosine-similarity adjacency matrix from scratch in NumPy, and construct a fake news classifier pipeline.
+      We will analyze the mathematics of the <strong>TextRank Graph Centrality Algorithm</strong>, build a sentence cosine-similarity adjacency matrix from scratch in NumPy, and construct a fake news classifier pipeline.
     </p>
 <div class="meta-row">
 <span class="meta-badge g">⏱ 6 hours</span>
@@ -2000,14 +1918,14 @@ loss.backward()
   </p>
 <h3 class="sh3">2. TextRank: Graph Centrality for Sentences</h3>
 <p>
-    Unlike abstractive summarisation (which generates new text), **Extractive Summarisation** ranks existing sentences and extracts the top candidates.
-    **TextRank** (Mihalcea &amp; Tarau, 2004) frames a document as a graph where each sentence $S_i$ is a vertex.
-    An edge's weight represents the semantic **similarity** between sentences $S_i$ and $S_j$.
+    Unlike abstractive summarisation (which generates new text), <strong>Extractive Summarisation</strong> ranks existing sentences and extracts the top candidates.
+    <strong>TextRank</strong> (Mihalcea &amp; Tarau, 2004) frames a document as a graph where each sentence $S_i$ is a vertex.
+    An edge's weight represents the semantic <strong>similarity</strong> between sentences $S_i$ and $S_j$.
     The dynamic PageRank centrality score for sentence $S_i$ is iteratively computed as:
   </p>
 <div class="math-block">
 <span class="formula">$$\text{Score}(S_i) = (1 - d) + d \sum_{j \in \text{In}(S_i)} \frac{\text{Similarity}(S_i, S_j)}{\sum_{k \in \text{Out}(S_j)} \text{Similarity}(S_k, S_j)}$$</span>
-<span class="desc">$Where $d$ is the damping factor (typically set to 0.85) representing the probability of a reader randomly jumping to another sentence, and $\text{Similarity}(S_i, S_j)$ is the edge weight.$</span>
+<span class="desc">Where $d$ is the damping factor (typically set to 0.85) representing the probability of a reader randomly jumping to another sentence, and $\text{Similarity}(S_i, S_j)$ is the edge weight.</span>
 </div>
 <h3 class="sh3">3. Sentence Similarity Adjacency Formulation</h3>
 <p>
@@ -2077,12 +1995,14 @@ loss.backward()
 document = <span class="str">"The stock market experienced a huge surge in major tech shares. Tech earnings beat all Wall Street projections, and stock options climb. The Federal Reserve decided to hike interest rates by 25 basis points because of rising inflation metrics. Central banks are planning to implement stricter fiscal controls. Stricter regulation slows down small business expansion."</span>
 summary_text = extract_summary(document)
 <span class="bi">print</span>(<span class="str">"Original Text Size:"</span>, <span class="bi">len</span>(document))
-<span class="bi">print</span>(<span class="str">"Extracted Summary:\\n"</span>, summary_text)</pre>
+<span class="bi">print</span>(<span class="str">"Extracted Summary:\
+"</span>, summary_text)</pre>
 </div>
 <div class="analogy">TextRank extractive summariser bilkul ek group meeting me leaders chunne ki tarah hai. Har sentence ek employee hai. Agar sentence A aur sentence B ke beech aapas me ideas match karte hain (high overlap similarity), to wo ek dusre ko appreciate (vote) karte hain. PageRank centrality loop chala kar hum ye dekhte hain ki kis worker ko sabse zyada authoritative votes (idea overlap points) mile hain, aur usi popular lead worker (top ranked sentence) ko hum pure discussion ka summary head ghoshit kar dete hain.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 92: Hugging Face pipeline output\n# print(pipeline(\'sentiment-analysis\')(\'I love AI\')[0][\'label\'])</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 92: Hugging Face pipeline output
+# print(pipeline('sentiment-analysis')('I love AI')[0]['label'])</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day92-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day92-p1', 'POSITIVE')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -2142,30 +2062,11 @@ summary_text = extract_summary(document)
 <h2 class="sh2">🃏 Revision Flashcards — Day 92</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Hugging Face Hub?</div>
-<div class="fc-back">Central repository hosting model checkpoints, dataset cards, and spaces demos.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 92 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 92 fit in Week 13?</div>
-<div class="fc-back">It is a key day in Week 13 (Natural Language Processing, spaCy, Tokenization, POS Tagging).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Central repository hosting model checkpoints, dataset cards, and spaces demos.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Transformer?</div><div class="fc-back">Sequence transduction model based entirely on attention mechanisms, eliminating recurrent steps for full parallelization.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Self-Attention?</div><div class="fc-back">Calculates dynamic correlation weights between all positions in a sequence to capture direct context dependencies.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Multi-Head Attention?</div><div class="fc-back">Computes self-attention multiple times in parallel with different weight projections to capture diverse relationships.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Positional Encoding?</div><div class="fc-back">Injects sinusoidal or learned position vectors into inputs to preserve sequence order information.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Layer Normalization?</div><div class="fc-back">Normalizes activations across features within a single training example, stabilizing network training.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -2265,8 +2166,8 @@ summary_text = extract_summary(document)
 <div class="day-tag">WEEK 13 · DAY 93 · MONTH 4 — NATURAL LANGUAGE PROCESSING</div>
 <h1>Capstone Part 2: Gradio &amp; Benchmarking</h1>
 <p>
-      Today, we wrap up the **Month 4 NLP Capstone Project: Advanced News Analytics Engine**.
-      We will design and build a premium, multi-tab interactive web interface using **Gradio's Blocks API**.
+      Today, we wrap up the <strong>Month 4 NLP Capstone Project: Advanced News Analytics Engine</strong>.
+      We will design and build a premium, multi-tab interactive web interface using <strong>Gradio's Blocks API</strong>.
       Our application will house both the Fake News Detector and the Extractive Summariser under a single responsive dashboard.
       Finally, we will benchmark standard text classifiers against deep sequence networks, comparing training times, parameters scale, and validation latencies.
     </p>
@@ -2297,7 +2198,7 @@ summary_text = extract_summary(document)
 <h3 class="sh3">1. Web Architecture: Gradio Blocks API</h3>
 <p>
     Standard Gradio interfaces are highly rigid, offering simple input-output layouts.
-    **Gradio Blocks** allows us to write structured web applications using layout components like <code>gr.Tab</code>, <code>gr.Row</code>, and <code>gr.Column</code>.
+    <strong>Gradio Blocks</strong> allows us to write structured web applications using layout components like <code>gr.Tab</code>, <code>gr.Row</code>, and <code>gr.Column</code>.
     This lets us manage state, trigger complex callbacks, and apply custom styling properties to individual elements.
   </p>
 <h3 class="sh3">2. Execution Latency vs. Model Size Tradeoffs</h3>
@@ -2437,7 +2338,8 @@ with gr.Blocks(theme=gr.themes.Soft()) <span class="kw">as</span> demo:
 <div class="analogy">Gradio Blocks ka setup bilkul ek showroom layout ki tarah hota hai. Pehle standard Gradio me aapke paas sirf ek standard table box (rigid input-output) tha. Gradio Blocks aapko building architecture blocks deta hai jisse aap partitions khada karke specialized rooms (multi-tab dashboards) bana sakte hain, har product ko alag display panels (slider bars, columns) me show kar sakte hain taaki client (user) product ko interactive tareeqe se examine kar sake.</div>
 <div class="predict-block">
 <div class="predict-label">PREDICT THE OUTPUT</div>
-<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 93: Capstone classification shape\n# Classifier output nodes for 3-class classification</code></pre>
+<pre style="font-family:var(--font-mono); font-size:12.5px; background:rgba(0,0,0,0.15); padding:0.8rem; border-radius:6px; margin-bottom:0.8rem;"><code># Day 93: Capstone classification shape
+# Classifier output nodes for 3-class classification</code></pre>
 <div style="display:flex;gap:.8rem;margin-top:.8rem">
 <input aria-label="Enter prediction output" class="predict-input" id="day93-p1-input" placeholder="Your prediction..." type="text"/>
 <button class="predict-btn" onclick="checkPredict('day93-p1', '3')" style="background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:4px 12px; border-radius:6px; cursor:pointer;">Check</button>
@@ -2499,30 +2401,11 @@ with gr.Blocks(theme=gr.themes.Soft()) <span class="kw">as</span> demo:
 <h2 class="sh2">🃏 Revision Flashcards — Day 93</h2>
 <p class="flashcard-hint" style="font-size:10px; font-family:var(--font-mono); color:var(--muted); text-transform:uppercase; margin-bottom:8px;">CLICK EACH CARD TO FLIP ↓</p>
 <div class="flashcard-grid">
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">NLP Capstone goal?</div>
-<div class="fc-back">Build and deploy an end-to-end production classifier using spaCy or HuggingFace transformers.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">How is Day 93 structured?</div>
-<div class="fc-back">It combines theory, hands-on coding tasks, and quizzes.</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">Where does Day 93 fit in Week 13?</div>
-<div class="fc-back">It is a key day in Week 13 (Natural Language Processing, spaCy, Tokenization, POS Tagging).</div>
-</div>
-</div>
-<div class="flashcard" onclick="this.classList.toggle('flipped')" role="button" tabindex="0">
-<div class="fc-inner">
-<div class="fc-front">What is the recommended study time?</div>
-<div class="fc-back">Build and deploy an end-to-end production classifier using spaCy or HuggingFace transformers.</div>
-</div>
-</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Transformer?</div><div class="fc-back">Sequence transduction model based entirely on attention mechanisms, eliminating recurrent steps for full parallelization.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Self-Attention?</div><div class="fc-back">Calculates dynamic correlation weights between all positions in a sequence to capture direct context dependencies.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Multi-Head Attention?</div><div class="fc-back">Computes self-attention multiple times in parallel with different weight projections to capture diverse relationships.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Positional Encoding?</div><div class="fc-back">Injects sinusoidal or learned position vectors into inputs to preserve sequence order information.</div></div></div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front">Layer Normalization?</div><div class="fc-back">Normalizes activations across features within a single training example, stabilizing network training.</div></div></div>
 </div>
 </div>
 <div class="quiz-block">
@@ -2659,7 +2542,7 @@ X = vectorizer.fit_transform(docs_joined)</code></pre>
 <div class="day-tag">WEEK 13 · TOOLKIT · MONTH 4 — NATURAL LANGUAGE PROCESSING</div>
 <h1>Natural Language Processing Toolkit</h1>
 <p>
-      Welcome to the **Week 13 Natural Language Processing (NLP) Reference &amp; Playbook**.
+      Welcome to the <strong>Week 13 Natural Language Processing (NLP) Reference &amp; Playbook</strong>.
       This interactive resource is designed to help you quickly review terms, debug sequence shape mismatches, and master word embedding geometry.
       Explore the comprehensive glossary, study the technical flashcards, and use the troubleshooting guides to solve common engineering issues.
     </p>
@@ -2686,19 +2569,19 @@ X = vectorizer.fit_transform(docs_joined)</code></pre>
     </p>
 <h4>Q: What causes Exposure Bias in sequential models, and how do we resolve it?</h4>
 <p class="rc-sub">
-      A: Exposure Bias occurs because sequence decoders are trained under **Teacher Forcing** (which feeds perfect ground truth targets at each step), but during inference, the model must feed its own past predictions. Any early mistake shifts the context, leading to cascading errors. We mitigate this using **Scheduled Sampling**, slowly shifting from teacher forcing to model predictions during training.
+      A: Exposure Bias occurs because sequence decoders are trained under <strong>Teacher Forcing</strong> (which feeds perfect ground truth targets at each step), but during inference, the model must feed its own past predictions. Any early mistake shifts the context, leading to cascading errors. We mitigate this using <strong>Scheduled Sampling</strong>, slowly shifting from teacher forcing to model predictions during training.
     </p>
 </div>
 <h2 class="sh2">🧬 Sequence Alignment: Needleman-Wunsch Math</h2>
 <p>
-    In sequence preprocessing and text comparison, we compute global alignments between two token strings $A$ and $B$ using the **Needleman-Wunsch Algorithm**. The dynamic programming grid $F(i, j)$ is formulated as:
+    In sequence preprocessing and text comparison, we compute global alignments between two token strings $A$ and $B$ using the <strong>Needleman-Wunsch Algorithm</strong>. The dynamic programming grid $F(i, j)$ is formulated as:
   </p>
 <div class="math-block">
-<span class="formula">F(i, j) = \max \begin{cases}
+<span class="formula">$$F(i, j) = \max \begin{cases}
       F(i-1, j-1) + S(A_i, B_j) \\
       F(i-1, j) + d \\
       F(i, j-1) + d
-    \end{cases}</span>
+    \end{cases}$$</span>
 <span class="desc">Where $S(A_i, B_j)$ is the similarity match/mismatch score, and $d$ is a constant gap penalty parameter. This computes the optimal mathematical alignment of sentences.</span>
 </div>
 <h2 class="sh2">⚡ Interactive Flashcards</h2>
@@ -2813,7 +2696,7 @@ X = vectorizer.fit_transform(docs_joined)</code></pre>
 <h4>3. Issue: TextRank summarisation yields highly repetitive summaries</h4>
 <p>
 <strong>Symptom:</strong> Top-ranked extracted sentences are highly redundant (e.g. expressing the same fact in slightly different ways).
-      <br/><strong>Resolution:</strong> Apply a **Maximal Marginal Relevance (MMR)** filter. Once the top-1 sentence is selected, penalize the TextRank scores of remaining sentences by their similarity to the already-selected summary list, forcing diverse coverage.
+      <br/><strong>Resolution:</strong> Apply a <strong>Maximal Marginal Relevance (MMR)</strong> filter. Once the top-1 sentence is selected, penalize the TextRank scores of remaining sentences by their similarity to the already-selected summary list, forcing diverse coverage.
     </p>
 </div>
 </div><!-- /day-toolkit -->
